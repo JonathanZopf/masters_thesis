@@ -1,0 +1,267 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXFileReference section */
+		AB1F9F042F93A288003D57AE /* build_latex.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_latex.sh; sourceTree = "<group>"; };
+		AB1F9F0C2F93A288003D57AE /* university_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = university_logo.png; sourceTree = "<group>"; };
+		AB1F9F0F2F93A288003D57AE /* main.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = main.pdf; sourceTree = "<group>"; };
+		AB1F9F102F93A288003D57AE /* main.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.tex; sourceTree = "<group>"; };
+		AB1F9F112F93A288003D57AE /* references.bib */ = {isa = PBXFileReference; lastKnownFileType = text; path = references.bib; sourceTree = "<group>"; };
+		AB1F9F162F93A31B003D57AE /* title_page.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = title_page.tex; sourceTree = "<group>"; };
+		AB1F9F172F93AEEB003D57AE /* signature.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signature.jpg; sourceTree = "<group>"; };
+		AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = declaration_of_originality.tex; sourceTree = "<group>"; };
+		AB1F9F192F990B79003D57AE /* background.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = background.tex; sourceTree = "<group>"; };
+		AB1F9F1A2F990C51003D57AE /* introduction.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = introduction.tex; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AB1F9EFD2F93A223003D57AE = {
+			isa = PBXGroup;
+			children = (
+				AB1F9F042F93A288003D57AE /* build_latex.sh */,
+				AB1F9F0B2F93A288003D57AE /* chapters */,
+				AB1F9F0D2F93A288003D57AE /* images */,
+				AB1F9F0F2F93A288003D57AE /* main.pdf */,
+				AB1F9F102F93A288003D57AE /* main.tex */,
+				AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */,
+				AB1F9F162F93A31B003D57AE /* title_page.tex */,
+				AB1F9F112F93A288003D57AE /* references.bib */,
+			);
+			sourceTree = "<group>";
+		};
+		AB1F9F0B2F93A288003D57AE /* chapters */ = {
+			isa = PBXGroup;
+			children = (
+				AB1F9F1A2F990C51003D57AE /* introduction.tex */,
+				AB1F9F192F990B79003D57AE /* background.tex */,
+			);
+			path = chapters;
+			sourceTree = "<group>";
+		};
+		AB1F9F0D2F93A288003D57AE /* images */ = {
+			isa = PBXGroup;
+			children = (
+				AB1F9F172F93AEEB003D57AE /* signature.jpg */,
+				AB1F9F0C2F93A288003D57AE /* university_logo.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		AB1F9F122F93A2A9003D57AE /* Master's thesis */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = AB1F9F132F93A2A9003D57AE /* Build configuration list for PBXLegacyTarget "Master's thesis" */;
+			buildPhases = (
+			);
+			buildToolPath = build_latex.sh;
+			dependencies = (
+			);
+			name = "Master's thesis";
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = "Master's thesis";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		AB1F9EFE2F93A223003D57AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					AB1F9F122F93A2A9003D57AE = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+				};
+			};
+			buildConfigurationList = AB1F9F012F93A223003D57AE /* Build configuration list for PBXProject "Master's Thesis" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB1F9EFD2F93A223003D57AE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB1F9F122F93A2A9003D57AE /* Master's thesis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		AB1F9F022F93A223003D57AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+			};
+			name = Debug;
+		};
+		AB1F9F032F93A223003D57AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+			};
+			name = Release;
+		};
+		AB1F9F142F93A2A9003D57AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AB1F9F152F93A2A9003D57AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB1F9F012F93A223003D57AE /* Build configuration list for PBXProject "Master's Thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB1F9F022F93A223003D57AE /* Debug */,
+				AB1F9F032F93A223003D57AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB1F9F132F93A2A9003D57AE /* Build configuration list for PBXLegacyTarget "Master's thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB1F9F142F93A2A9003D57AE /* Debug */,
+				AB1F9F152F93A2A9003D57AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB1F9EFE2F93A223003D57AE /* Project object */;
+}

@@ -1,0 +1,63 @@
+\documentclass[12pt, a4paper, ngerman, oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[ngerman,english]{babel} % Support both German and English
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subfiles}
+\usepackage[table]{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{numprint}
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{appendix}
+\usepackage[most]{tcolorbox}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\graphicspath{{./images/}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
+    citecolor=black,
+}
+
+
+\begin{document}
+
+% Title page
+\include{title_page}
+\maketitle
+\newpage
+
+% Declaration of originality
+\include{declaration_of_originality}
+
+% Table of contents
+\tableofcontents
+\newpage
+
+% Start page numbering
+\pagenumbering{arabic}
+
+\subfile{chapters/introduction}
+\subfile{chapters/background}
+
+% Appendix
+\begin{appendix}
+\end{appendix}
+
+\printbibliography
+
+\end{document}
