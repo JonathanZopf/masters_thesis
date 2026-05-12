@@ -3,7 +3,7 @@
 set -e
 export PATH="/Library/TeX/texbin:$PATH"
 
-FILE="main.tex"
+FILE="solution_proposal_presentation/presentation.tex"
 
 latexmk -c
 

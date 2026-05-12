@@ -1,0 +1,306 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\definecolor{hszggreen}{RGB}{56, 142, 60}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Theme, Appearance and Frontpage %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Frankfurt}
+
+\title{Faithfulness in the Face of Confounding:\\ Shapley Concept Effects for LLM Explanations}
+\author{Jonathan Zopf}
+\date{\today}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\beamertemplatenavigationsymbolsempty
+% Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{ {./images/} }
+\setbeamercolor{bibliography entry note}{fg=black}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{section in head/foot}{bg=hszggreen!140, fg=white}
+\setbeamercolor{subsection in head/foot}{bg=hszggreen!70, fg=white}
+
+% Conditional headline: shows only on non-title pages
+\makeatletter
+\setbeamertemplate{headline}
+{%
+  \ifnum\c@framenumber=1
+    \vspace{0pt}
+  \else
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=3ex]{section in head/foot}
+      \insertnavigation{\paperwidth}
+    \end{beamercolorbox}
+  \fi
+}
+\makeatother
+
+\setbeamertemplate{headline}[shadow=false]
+\setbeamertemplate{subsection in head}[shadow=false]
+\setbeamertemplate{section in head}[shadow=false]
+\setbeamertemplate{frametitle}[default][colsep=-4bp,rounded=false,shadow=false]
+
+\setbeamercolor{structure}{fg=hszggreen}
+
+% Footline %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\mytext{C4F: Correlation-Controlled Causal Concept Faithfulness}
+\makeatother
+\setbeamertemplate{footline}
+{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{author in head/foot}%
+  \mytext
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\hfill\insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+\setbeamertemplate{logo}{}
+\vspace{0.8cm}
+\begin{center}
+\includegraphics[height=0.12\linewidth]{university_logo.png}
+\end{center}
+\maketitle
+\end{frame}
+
+% Logo Placement top right %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.822\paperwidth},\LenToUnit{0.844\paperheight}){#1}}}
+\AddToShipoutPictureFG{
+  \AtPagemyUpperLeft{{\includegraphics[height=0.7cm,keepaspectratio]{university_logo_white.png}}}
+}
+
+% Outline slide
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Problem}
+\begin{frame}{The Correlated Concept Problem}
+\textbf{Original Metric (Matton et al., 2025 \cite{mattonWalkTalkMeasuring2024}):} Causal Concept Faithfulness (CCF)
+\begin{itemize}
+  \item Assumes \emph{disentangled} concepts – no correlation.
+  \item \textbf{In reality, concepts often co‑vary!}
+\end{itemize}
+\bigskip
+Two critical manifestations:
+\begin{enumerate}
+  \item \textbf{Synergy:} Two concepts alone may not flip the answer, but \emph{together} they do.
+        \begin{itemize}
+          \item \textcolor{hszggreen}{Example:} Credit rating – “no employment” + “no property” jointly reject, but not always individually.
+        \end{itemize}
+  \item \textbf{Redundancy:} Concept $C_m$ is removed, but the LLM still infers it from $C_n$.
+        \begin{itemize}
+          \item \textcolor{hszggreen}{Example:} “Nationality” omitted, yet “Mother tongue = Hindi” $\Rightarrow$ “Indian”. Explanation never mentions nationality, but decision still depends on it.
+        \end{itemize}
+\end{enumerate}
+\medskip
+$\Rightarrow$ The original atomic CE underestimates true causal influence.
+\end{frame}
+
+\section{Requirements}
+\begin{frame}{What We Need}
+A new faithfulness metric must:
+\begin{enumerate}
+  \item \textbf{Handle correlations} – correctly attribute causal effects even when concepts interact.
+  \item \textbf{Backwards compatible} – produce exactly the original CCF scores when no correlations exist.
+  \item \textbf{Same output range} – $F(x) \in [-1,1]$ (Pearson correlation between CE and EE).
+  \item \textbf{Computationally feasible} – may increase cost, but stay within practical bounds.
+\end{enumerate}
+\medskip
+We call this extension \textbf{Correlation‑Controlled Causal Concept Faithfulness (C4F)}.
+\end{frame}
+
+\section{Shapley-CE}
+\subsection{The Oracle Assumption}
+\begin{frame}{Step 0: Assume a Correlation‑Detection Oracle}
+For a given question $x$ with concept set $\mathcal{C} = \{C_0,\dots,C_{q-1}\}$:
+\begin{itemize}
+  \item An oracle partitions $\mathcal{C}$ into disjoint \textbf{correlation groups} $S_1, S_2, \dots$ plus singleton (non‑correlated) concepts.
+  \item For any $C_m \notin \bigcup S_k$: use the original atomic CE.
+  \item For $C_m \in S_k$: we compute a \textbf{Shapley‑CE} based on the entire group $S_k$.
+\end{itemize}
+\vspace{0.5em}
+This selective approach keeps computation manageable. \\(Later we will discuss how to implement the oracle.)
+\end{frame}
+
+\subsection{Shapley CE Calculation}
+\begin{frame}{The Coalition Game on a Correlation Group $S$}
+Define a value function $v(T)$ for any subset $T \subseteq S$:
+\[
+v(T) = \frac{1}{|\text{alt}(T)|} \sum_{\text{alt}} D_{\mathrm{KL}}\!\Big(P_M(Y \mid x_{T \to \text{alt}}) \,\Big\|\, P_M(Y \mid x) \Big)
+\]
+$v(\emptyset)=0$. \quad It measures the joint effect of simultaneously swapping all concepts in $T$.
+
+\pause
+\textbf{Shapley value} for $C_m \in S$ \cite{molnarInterpretableMachineLearning2025}:
+\[
+\phi_m = \sum_{T \subseteq S \setminus \{m\}} \frac{|T|!\, (|S|-|T|-1)!}{|S|!} \big[ v(T \cup \{m\}) - v(T) \big]
+\]
+This is the average marginal contribution of $C_m$ across all possible orders of adding concepts.
+\end{frame}
+
+\begin{frame}{Why Shapley?}
+\begin{itemize}
+  \item \textbf{Fairness:} Splits the “interaction surplus” equally among all participants.
+  \item \textbf{Efficiency:} $\sum_{m\in S} \phi_m = v(S)$.
+  \item \textbf{Backwards compatibility:} Will yield the same value for non-correlated concepts as the original CE (proof later).
+\end{itemize}
+\end{frame}
+
+\subsection{Updated CE Pipeline}
+\begin{frame}{Constructing the New CE Vector}
+For question $x$ with $q$ concepts:
+\begin{enumerate}
+  \item Oracle partitions $\mathcal{C}$ into disjoint groups $S_1,\dots,S_k$ and singletons.
+  \item For each group $S$, generate a $2^{|S|}$ factorial counterfactual grid and compute $v(T)$ for all $T\subseteq S$.
+  \item Compute Shapley values $\phi_m$ for each $C_m\in S$.
+  \item For singleton concepts, compute the original atomic CE as before.
+  \item Assemble the final vector
+        \[
+        \mathbf{CE}_{\text{C4F}}(x) = \big[\, \text{either } \phi_m \text{ or } \mathrm{CE}_{\text{orig}}(x,C_m) \,\big]_{m=0}^{q-1}
+        \]
+\end{enumerate}
+\end{frame}
+
+\section{Practice}
+\begin{frame}{Illustrative Example: Synergy}
+\small
+\begin{itemize}
+  \item Question $x$ about credit approval, with three concepts:\\
+        \textbf{Employment} ($E$), \textbf{Savings} ($S$), \textbf{Personal Status} ($P$).
+  \item Oracle: $S_1 = \{E, S\}$ are moderately correlated and potentially synergistic; $P$ is independent.
+  \item The LLM’s true behaviour: rejection occurs most likely when \emph{both} $E$ and $S$ are bad.
+\end{itemize}
+\pause
+\begin{columns}[T]
+\column{0.45\textwidth}
+\textbf{Factorial grid for $S_1$:}\\[2pt]
+\begin{tabular}{c|c|c}
+& $S$ (orig.) & $S'$ (swapped) \\ \hline
+$E$ (orig.) & $(E,S)$ & $(E,S')$ \\
+$E'$ (swapped) & $(E',S)$ & $(E',S')$ \\ \hline
+\end{tabular}
+\column{0.55\textwidth}
+\textbf{Estimated $v$ values (KL effects):}
+\begin{itemize}
+  \item $v(\{E\}) = 0.2$
+  \item $v(\{S\}) = 0.2$
+  \item $v(\{E,S\}) = 0.9$
+\end{itemize}
+\end{columns}
+\pause
+\textbf{Shapley scores:}
+\[
+\phi_E = \tfrac12(0.2-0) + \tfrac12(0.9-0.2) = 0.45,\qquad
+\phi_S = \tfrac12(0.2-0) + \tfrac12(0.9-0.2) = 0.45
+\]
+$\Rightarrow$ The synergy is fairly split; each concept receives half of the joint effect.
+\end{frame}
+
+\begin{frame}{Singletons and Final Vector}
+\begin{itemize}
+  \item For $P$ (Personal Status): compute original atomic CE $\to$ some value $\mathrm{CE}_{\text{orig}}(P)$.
+  \item Final CE vector:
+        \[
+        \mathbf{CE}_{\text{C4F}} = [\,\phi_E,\; \phi_S,\; \mathrm{CE}_{\text{orig}}(P)\,] = [\,0.45,\; 0.45,\; \mathrm{CE}_{\text{orig}}(P)\,]
+        \]
+\end{itemize}
+\pause
+\medskip
+\textbf{Take‑away:} Without correlation handling, the original method would give $E$ and $S$ only their small independent effects (0.2 each), underestimating their true importance. C4F correctly captures the synergy.
+\end{frame}
+
+\section{Updating Remaining Metric}
+\begin{frame}{EE and Final Score – No Changes Needed}
+\vspace*{-0.3cm}
+\begin{itemize}
+  \item \textbf{Explanation‑Implied Effect (EE):} still defined as the probability that the explanation mentions the concept, detected by the auxiliary LLM.
+  \item Even when concepts are correlated, an explanation can mention them individually if they are truly influential.
+  \item If the model used both Gender and Age non‑additively, a faithful explanation would mention \emph{both}. The per‑concept EE captures that without modification.
+  \item \textbf{Faithfulness:} $F_{\text{C4F}}(x) = \mathrm{PCC}(\mathbf{CE}_{\text{C4F}}, \mathbf{EE})$, estimated via Bayesian hierarchical regression (same as original).
+\end{itemize}
+\medskip
+$\Rightarrow$ The entire pipeline remains identical except for how CE is computed for correlated groups.
+\end{frame}
+
+\section{Fulfilling Requirements}
+\begin{frame}{C4F Meets All Four Requirements}
+\begin{enumerate}
+  \item \textbf{Handles correlations} – Shapley values capture synergy, redundancy and independence \cite{ittnerFeatureSynergyRedundancy2021}.
+  \item \textbf{Backwards compatible} – If no correlations exist, $\phi_m = \mathrm{CE}_{\text{orig}}(C_m)$.
+  \item \textbf{Range $[-1,1]$} – PCC between two vectors, exactly as before.
+  \item \textbf{Feasible complexity} – Only compute Shapley for small groups ($|S|\le 4$); total counterfactuals increase but stay manageable. Example: 30 questions with at most 2–3 groups of size 2 $\rightarrow$ about $2\times$ the original CFs.
+\end{enumerate}
+\vspace{0.3cm}
+\pause
+\textbf{Proof sketch for backward compatibility:}
+If no interaction, $v(T) = \sum_{C_m\in T} v(\{m\})$, and the Shapley value $\phi_m = v(\{m\}) = \mathrm{CE}_{\text{orig}}(C_m)$. Hence the CE vector and the resulting PCC are identical.
+\end{frame}
+
+\section{Gatekeeper Oracle}
+\begin{frame}{How to Detect Correlated Concept Groups?}
+The “oracle” can be realised with several practical approaches:
+\begin{enumerate}
+  \item \textbf{Pointwise Mutual Information (PMI):} compute co‑occurrence of concept values across the dataset; high PMI $\Rightarrow$ group.
+  \item \textbf{Statistical tests:} ANOVA / $\chi^2$ on concept value co‑occurrences.
+  \item \textbf{Auxiliary LLM:} prompt an LLM to flag which concepts are likely correlated in meaning.
+\end{enumerate}
+\medskip
+In the thesis, we will compare these methods experimentally. For this presentation, we assume a reliable oracle exists.
+\medskip
+\textbf{Key rule:} Groups are kept disjoint and small ($|S|\le 4$) to limit the factorial explosion.
+\end{frame}
+
+\section{Evaluation}
+\begin{frame}{Experimental Setup}
+We re‑evaluate faithfulness on three datasets:
+\begin{itemize}
+  \item \textbf{BBQ (Social Bias)} – concepts mostly independent $\to$ scores should nearly match original CCF.
+  \item \textbf{MedQA (Medical QA)} – some high‑correlation questions (e.g. symptoms and diagnoses) $\to$ C4F reveals differences where original underestimates.
+  \item \textbf{German Credit} – tabular data with strong presumed correlations (e.g. ‘Gastarbeiter’ vs. ‘Beruf’) $\to$ large deviations expected; also eliminates need for many auxiliary LLM calls.
+\end{itemize}
+\medskip
+We also test robustness by increasing the number of questions.
+\end{frame}
+
+\section{Limitations}
+\begin{frame}{Limitations of C4F}
+\begin{itemize}
+  \item \textbf{Computational cost:} Shapley value requires $2^{|S|}$ joint interventions per group. Limiting $|S|\le 4$ keeps it feasible, but larger groups become expensive.
+  \item \textbf{Open edges \& transitivity:} Statistical correlation is not mathematically transitive. In practice however, for many social concepts (e.g., Nationality–Mother tongue–Race) transitivity can be assumed.
+  \item \textbf{Oracle quality:} The accuracy of the correlation detector directly affects the group partitioning. A too reluctant oracle misses correlation and skews the result, a too aggressive oracle increases the computing complexity.
+  \item \textbf{Factorial counterfactual generation:} Jointly swapping multiple concepts while preserving textual coherency of counterfactuals could introduce new challenges for the auxiliary LLM, but template‑based approaches help for tabular data.
+\end{itemize}
+\end{frame}
+
+\section*{}
+\begin{frame}[allowframebreaks]
+        \printbibliography
+\end{frame}
+
+\begin{frame}{}
+\centering
+\Large Thank you!\\
+\bigskip
+Questions?
+\end{frame}
+
+\end{document}
