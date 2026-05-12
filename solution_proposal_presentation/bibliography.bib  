@@ -1,0 +1,13 @@
+@inproceedings{mattonWalkTalkMeasuring2024,
+  title = {Walk the {{Talk}}? {{Measuring}} the {{Faithfulness}} of {{Large Language Model Explanations}}},
+  shorttitle = {Walk the {{Talk}}?},
+  author = {Matton, Katie and Ness, Robert and Guttag, John},
+  date = {2024-10-04},
+  url = {https://openreview.net/forum?id=4ub9gpx9xw},
+  urldate = {2026-04-24},
+  abstract = {Large language models (LLMs) are capable of generating *plausible* explanations of how they arrived at an answer to a question. However, these explanations can misrepresent the model's "reasoning" process, i.e., they can be *unfaithful*. This, in turn, can lead to over-trust and misuse. We introduce a new approach for measuring the faithfulness of LLM explanations. First, we provide a rigorous definition of faithfulness. Since LLM explanations mimic human explanations, they often reference high-level *concepts* in the input question that purportedly influenced the model. We define faithfulness in terms of the difference between the set of concepts that the LLM's *explanations imply* are influential and the set that *truly* are. Second, we present a novel method for estimating faithfulness that is based on: (1) using an auxiliary LLM to modify the values of concepts within model inputs to create realistic counterfactuals, and (2) using a hierarchical Bayesian model to quantify the causal effects of concepts at both the example- and dataset-level. Our experiments show that our method can be used to quantify and discover interpretable patterns of unfaithfulness. On a social bias task, we uncover cases where LLM explanations hide the influence of social bias. On a medical question answering task, we uncover cases where LLM explanations provide misleading claims about which pieces of evidence influenced the model's decisions.},
+  eventtitle = {The {{Thirteenth International Conference}} on {{Learning Representations}}},
+  langid = {english},
+  file = {/Users/jonathan/Zotero/storage/HNJLASLX/Matton et al. - 2024 - Walk the Talk Measuring the Faithfulness of Large Language Model Explanations.pdf}
+}
+
