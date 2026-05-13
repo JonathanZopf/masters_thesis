@@ -53,7 +53,7 @@
 \setbeamercolor{structure}{fg=hszggreen}
 
 % Footline %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand\mytext{C4F: Correlation-Controlled Causal Concept Faithfulness}
+\newcommand\mytext{4CF: Correlation-Controlled Causal Concept Faithfulness}
 \makeatother
 \setbeamertemplate{footline}
 {%
@@ -125,7 +125,7 @@ A new faithfulness metric must:
   \item \textbf{Computationally feasible} – may increase cost, but stay within practical bounds.
 \end{enumerate}
 \medskip
-We call this extension \textbf{Correlation‑Controlled Causal Concept Faithfulness (C4F)}.
+We call this extension \textbf{Correlation‑Controlled Causal Concept Faithfulness (4CF)}.
 \end{frame}
 
 \section{Shapley-CE}
@@ -175,19 +175,19 @@ For question $x$ with $q$ concepts:
   \item For singleton concepts, compute the original atomic CE as before.
   \item Assemble the final vector
         \[
-        \mathbf{CE}_{\text{C4F}}(x) = \big[\, \text{either } \phi_m \text{ or } \mathrm{CE}_{\text{orig}}(x,C_m) \,\big]_{m=0}^{q-1}
+        \mathbf{CE}_{\text{4CF}}(x) = \big[\, \text{either } \phi_m \text{ or } \mathrm{CE}_{\text{orig}}(x,C_m) \,\big]_{m=0}^{q-1}
         \]
 \end{enumerate}
 \end{frame}
 
-\section{Practice}
+\section{Example}
 \begin{frame}{Illustrative Example: Synergy}
 \small
 \begin{itemize}
   \item Question $x$ about credit approval, with three concepts:\\
         \textbf{Employment} ($E$), \textbf{Savings} ($S$), \textbf{Personal Status} ($P$).
-  \item Oracle: $S_1 = \{E, S\}$ are moderately correlated and potentially synergistic; $P$ is independent.
-  \item The LLM’s true behaviour: rejection occurs most likely when \emph{both} $E$ and $S$ are bad.
+  \item Oracle: $S_1 = \{E, S\}$ are correlated and synergistic; $P$ is independent.
+  \item The LLM’s true behavior: rejection occurs most likely when \emph{both} $E$ and $S$ are bad.
 \end{itemize}
 \pause
 \begin{columns}[T]
@@ -201,7 +201,7 @@ $E'$ (swapped) & $(E',S)$ & $(E',S')$ \\ \hline
 \column{0.55\textwidth}
 \textbf{Estimated $v$ values (KL effects):}
 \begin{itemize}
-  \item $v(\{E\}) = 0.2$
+  \item $v(\{E\}) = 0.1$
   \item $v(\{S\}) = 0.2$
   \item $v(\{E,S\}) = 0.9$
 \end{itemize}
@@ -209,10 +209,10 @@ $E'$ (swapped) & $(E',S)$ & $(E',S')$ \\ \hline
 \pause
 \textbf{Shapley scores:}
 \[
-\phi_E = \tfrac12(0.2-0) + \tfrac12(0.9-0.2) = 0.45,\qquad
-\phi_S = \tfrac12(0.2-0) + \tfrac12(0.9-0.2) = 0.45
+\phi_E = \tfrac12(0.1-0) + \tfrac12(0.9-0.2) = 0.4,\qquad
+\phi_S = \tfrac12(0.2-0) + \tfrac12(0.9-0.1) = 0.5
 \]
-$\Rightarrow$ The synergy is fairly split; each concept receives half of the joint effect.
+$\Rightarrow$ The synergy is fairly split; each concept receives half of the joint effect (+0.3).
 \end{frame}
 
 \begin{frame}{Singletons and Final Vector}
@@ -220,12 +220,12 @@ $\Rightarrow$ The synergy is fairly split; each concept receives half of the joi
   \item For $P$ (Personal Status): compute original atomic CE $\to$ some value $\mathrm{CE}_{\text{orig}}(P)$.
   \item Final CE vector:
         \[
-        \mathbf{CE}_{\text{C4F}} = [\,\phi_E,\; \phi_S,\; \mathrm{CE}_{\text{orig}}(P)\,] = [\,0.45,\; 0.45,\; \mathrm{CE}_{\text{orig}}(P)\,]
+        \mathbf{CE}_{\text{4CF}} = [\,\phi_E,\; \phi_S,\; \mathrm{CE}_{\text{orig}}(P)\,] = [\,0.45,\; 0.45,\; \mathrm{CE}_{\text{orig}}(P)\,]
         \]
 \end{itemize}
 \pause
 \medskip
-\textbf{Take‑away:} Without correlation handling, the original method would give $E$ and $S$ only their small independent effects (0.2 each), underestimating their true importance. C4F correctly captures the synergy.
+\textbf{Take‑away:} Without correlation handling, the original method would give $E$ and $S$ only their small independent effects (0.2 each), underestimating their true importance. 4CF correctly captures the synergy.
 \end{frame}
 
 \section{Updating Remaining Metric}
@@ -235,27 +235,61 @@ $\Rightarrow$ The synergy is fairly split; each concept receives half of the joi
   \item \textbf{Explanation‑Implied Effect (EE):} still defined as the probability that the explanation mentions the concept, detected by the auxiliary LLM.
   \item Even when concepts are correlated, an explanation can mention them individually if they are truly influential.
   \item If the model used both Gender and Age non‑additively, a faithful explanation would mention \emph{both}. The per‑concept EE captures that without modification.
-  \item \textbf{Faithfulness:} $F_{\text{C4F}}(x) = \mathrm{PCC}(\mathbf{CE}_{\text{C4F}}, \mathbf{EE})$, estimated via Bayesian hierarchical regression (same as original).
+  \item \textbf{Faithfulness:} $F_{\text{4CF}}(x) = \mathrm{PCC}(\mathbf{CE}_{\text{4CF}}, \mathbf{EE})$, estimated via Bayesian hierarchical regression (same as original).
 \end{itemize}
 \medskip
 $\Rightarrow$ The entire pipeline remains identical except for how CE is computed for correlated groups.
 \end{frame}
 
 \section{Fulfilling Requirements}
-\begin{frame}{C4F Meets All Four Requirements}
+\begin{frame}{4CF Meets All Four Requirements}
 \begin{enumerate}
   \item \textbf{Handles correlations} – Shapley values capture synergy, redundancy and independence \cite{ittnerFeatureSynergyRedundancy2021}.
-  \item \textbf{Backwards compatible} – If no correlations exist, $\phi_m = \mathrm{CE}_{\text{orig}}(C_m)$.
+  \item \textbf{Backwards compatible} – If no correlations exist, $\phi_m = \mathrm{CE}_{\text{orig}}(C_m)$. \hfill\textcolor{hszggreen}{(Proof $\to$ next slide)}
   \item \textbf{Range $[-1,1]$} – PCC between two vectors, exactly as before.
-  \item \textbf{Feasible complexity} – Only compute Shapley for small groups ($|S|\le 4$); total counterfactuals increase but stay manageable. Example: 30 questions with at most 2–3 groups of size 2 $\rightarrow$ about $2\times$ the original CFs.
+  \item \textbf{Feasible complexity} – Only compute Shapley for small groups ($|S|\le 4$); total counterfactuals increase but stay manageable.
 \end{enumerate}
-\vspace{0.3cm}
-\pause
-\textbf{Proof sketch for backward compatibility:}
-If no interaction, $v(T) = \sum_{C_m\in T} v(\{m\})$, and the Shapley value $\phi_m = v(\{m\}) = \mathrm{CE}_{\text{orig}}(C_m)$. Hence the CE vector and the resulting PCC are identical.
+\vspace{0.4cm}
 \end{frame}
 
-\section{Gatekeeper Oracle}
+\begin{frame}[shrink=20]{Backwards Compatibility Proof}
+\footnotesize
+\begin{figure}
+\textbf{Claim:} If concepts in a group $S$ are independent (no interaction), then $\phi_m = \mathrm{CE}_{\text{orig}}(x,C_m) = v(\{m\})$.
+\medskip
+
+\textbf{Step 1 – Shapley definition:}
+\[
+\phi_m = \sum_{T \subseteq S\setminus\{m\}} \frac{|T|!\,(|S|-|T|-1)!}{|S|!}\; \big[\,v(T\cup\{m\}) - v(T)\,\big]
+\]
+
+\textbf{Step 2 – Independence (additivity):}
+For any disjoint $A,B\subseteq S$, $v(A\cup B) = v(A) + v(B)$. Therefore
+\[
+v(T\cup\{m\}) - v(T) = v(\{m\}) \quad \forall\,T.
+\]
+
+\textbf{Step 3 – Substitute into the Shapley sum:}
+\[
+\phi_m = v(\{m\}) \cdot \underbrace{\sum_{T \subseteq S\setminus\{m\}} \frac{|T|!\,(|S|-|T|-1)!}{|S|!}}_{=1}.
+\]
+
+\textbf{Step 4 – The weights sum to 1:}
+The sum of the multinomial coefficients over all subsets equals $1$ (it’s a partition of all permutations of $S$).
+\[
+\sum_{k=0}^{|S|-1} \binom{|S|-1}{k} \frac{k!\,(|S|-k-1)!}{|S|!} = 1.
+\]
+
+\pause
+Hence $\phi_m = v(\{m\})$, which is exactly the original atomic CE. $\square$
+\medskip
+
+\textbf{Consequence:} When the oracle finds no correlations, $\mathbf{CE}_{\text{4CF}} = \mathbf{CE}_{\text{orig}}$, so $F_{\text{4CF}}(x) = F_{\text{orig}}(x)$. Also if the oracle falsely "gives" a non-correlated concept to Shapley-calculation, the CE-value is not distorted.
+
+\end{figure}
+\end{frame}
+
+\section{Oracle}
 \begin{frame}{How to Detect Correlated Concept Groups?}
 The “oracle” can be realised with several practical approaches:
 \begin{enumerate}
@@ -265,8 +299,6 @@ The “oracle” can be realised with several practical approaches:
 \end{enumerate}
 \medskip
 In the thesis, we will compare these methods experimentally. For this presentation, we assume a reliable oracle exists.
-\medskip
-\textbf{Key rule:} Groups are kept disjoint and small ($|S|\le 4$) to limit the factorial explosion.
 \end{frame}
 
 \section{Evaluation}
@@ -274,7 +306,7 @@ In the thesis, we will compare these methods experimentally. For this presentati
 We re‑evaluate faithfulness on three datasets:
 \begin{itemize}
   \item \textbf{BBQ (Social Bias)} – concepts mostly independent $\to$ scores should nearly match original CCF.
-  \item \textbf{MedQA (Medical QA)} – some high‑correlation questions (e.g. symptoms and diagnoses) $\to$ C4F reveals differences where original underestimates.
+  \item \textbf{MedQA (Medical QA)} – some high‑correlation questions (e.g. symptoms and diagnoses) $\to$ 4CF reveals differences where original underestimates.
   \item \textbf{German Credit} – tabular data with strong presumed correlations (e.g. ‘Gastarbeiter’ vs. ‘Beruf’) $\to$ large deviations expected; also eliminates need for many auxiliary LLM calls.
 \end{itemize}
 \medskip
@@ -282,7 +314,7 @@ We also test robustness by increasing the number of questions.
 \end{frame}
 
 \section{Limitations}
-\begin{frame}{Limitations of C4F}
+\begin{frame}{Limitations of 4CF}
 \begin{itemize}
   \item \textbf{Computational cost:} Shapley value requires $2^{|S|}$ joint interventions per group. Limiting $|S|\le 4$ keeps it feasible, but larger groups become expensive.
   \item \textbf{Open edges \& transitivity:} Statistical correlation is not mathematically transitive. In practice however, for many social concepts (e.g., Nationality–Mother tongue–Race) transitivity can be assumed.
