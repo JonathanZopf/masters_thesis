@@ -73,13 +73,6 @@ First, the LLM receives an unmodified question from a dataset. The input is then
 
 Since the metric builds directly upon the approach by Atanasova et al. \cite{atanasovaFaithfulnessTestsNatural2023}, several limitations are inherited, particularly with respect to counterfactual generation. For example, the counterfactuals are restricted to the insertion of individual adjectives or adverbs, limiting their semantic diversity. Furthermore, the metric does not account for cases in which an explanation refers to a synonym or semantically equivalent concept rather than the exact inserted word.
 
-\subsubsection{Concept-Based Metrics}
-Building upon the idea of counterfactual edits, Matton et al. \cite{mattonWalkTalkMeasuring2024} proposed the \textit{Causal Concept Faithfulness Metric}. Unlike previous approaches, their method operates on higher-level concepts such as \emph{gender}, \emph{race} or \emph{time of day} instead of low-level tokens or words. Furthermore, the method not only produces a quantitative score but also exposes semantic patterns related to faithfulness.
-
-The authors define faithfulness as the alignment between truly influential concepts in the model's prediction and the importance assigned to those concepts by the model itself within its explanation. To estimate the causal influence of concepts, an auxiliary LLM either replaces or removes concept values from the original input. As in the CCT metric, the original and counterfactual questions are then presented to the LLM and prediction distributions are collected, yielding estimates of the true causal effect. Subsequently, another helper LLM extracts the concepts deemed important within the explanation, enabling the calculation of the explanation-implied effect. The Pearson correlation between the true causal effects and the explanation-implied effects then serves as the final faithfulness score.
-
-One limitation of this approach lies in the LLM-based automation of counterfactual generation and explanation extraction, which may introduce errors and risks of circularity within the evaluation process. Furthermore, the metric does not perform well when concepts are strongly correlated. Since this metric is central to the present thesis, it will be discussed in greater technical detail in Chapter \ref{sec:causal_concept_metric}.
-
 \subsubsection{Output Contribution Metrics}
 Parcalabescu and Frank \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024} argue that many existing metrics measure self-consistency of outputs rather than genuine faithfulness. They therefore propose their own self-consistency metric, CC-SHAP, which does not depend on modifying the input. Their approach compares the degree to which input tokens contribute to both the generated answer and the explanation. By measuring the convergence between these contributions using Shapley values, the method produces a continuous score.
 
@@ -99,11 +92,147 @@ For the proposed ff-hard metric, which evaluates the faithfulness of the entire 
 
 \section{Causal Concept Faithfulness Metric}
 \label{sec:causal_concept_metric}
-\subsection{Score Calculation}
-\subsubsection{Causal Concept Definition}
-As discussed before, Matton et al. metric of causel concept faithfulness is based on the idea of measuring the difference between \enquote{the set of concepts that LLM explanations imply are influential and the set that truly are} \cite{mattonWalkTalkMeasuring2024}. For understanding how this metric works in detail, the evaluation pipeline is presented in the following step by step while keeping the notation introduced by Matton et al.
+\subsection{Introduction}
+GOOD PART, KEEP IT THAT WAY AS MUCH AS POSSIBLE ONLY REWRITING THE MOST AKWARD SENTENCES
+Building upon the idea of counterfactual edits pioneered by Atanasova et al. \cite{atanasovaFaithfulnessTestsNatural2023} and Siegel et al. \cite{siegelProbabilitiesAlsoMatter2024}, Matton et al. \cite{mattonWalkTalkMeasuring2024} proposed an updated evaluation metric in their 2025 paper titled \textit{Walk the Talk? Measuring the Faithfulness of Large Language Model Explanations}. Unlike previous approaches, their method called \textit{Causal Concept Faithfulness Metric} operates on higher-level concepts such as \emph{gender}, \emph{race} or \emph{time of day} instead of low-level tokens or words. Furthermore, the method not only produces a quantitative score but also exposes semantic patterns related to faithfulness.
 
-There is a model $M$ which is an opaque black-box and a set of questions $X = \{x_1,...x_N\}$. We can only then access discrete samples of the probability distribution $ \mathbb{P}_M  \left( R \mid x \right)$ of $M$ to a question $x$.
+The authors define faithfulness as the alignment between truly influential concepts in the model's prediction and the importance assigned to those concepts by the model itself within its explanation. To estimate the causal influence of concepts, an auxiliary LLM either replaces or removes concept values from the original input. As in the CCT metric by Siegel et al. \cite{siegelProbabilitiesAlsoMatter2024}, the original and counterfactual questions are then presented to the LLM and prediction distributions are collected, yielding estimates of the true causal effect. Subsequently, another helper LLM extracts the concepts deemed important within the explanation, enabling the calculation of the explanation-implied effect. The Pearson correlation between the true causal effects and the explanation-implied effects then serves as the final faithfulness score.
+
+BAD PART, FEEL FREE TO REWRITE MUCH OF IT
+Since this metric is central to the present thesis, it will be discussed in greater mathematical and technical detail in this chapter. First, the mathematical aspects of the approach is presented while keeping the notation and variables used by the original authors. Furthermore, the steps the metric walks trough before outputting a final result are walked trough and explanined toughroghly. Finally, it shall be discussed why \textit{Causal Concept Faithfulness Metric} seems to be a promissing approach to quantify the Faithfulness of explanations delivered by LLMs while also going into some still-existing constraints. This will eventually lead to the part, where the limitation of properly handling \textit{Correlated Concepts} will be discussed, laying the basis for the remainder of this thesis.
+
+It need to be pointed out that this presentation is an abridged version of the original paper by Matton et al. \cite{mattonWalkTalkMeasuring2024} serving just as an introduction. For further details, the interested reader is deferred to reading it.
+\subsection{Mathematical Foundation}
+
+\subsubsection{Problem Setting}
+\label{sec:problem_setting}
+The goal is to evaluate the faithfulness of explanations generated by an opaque large language model under evaluation, denoted by $M$, for a dataset of questions $X=\{x_1,\ldots,x_N\}$. Matton et al. formulate their metric for so-called \emph{context-based questions}, where each response $r$ produced by the model consists of both a selected answer $y \in Y$ from a predefined set of answer options and a natural language explanation $e$, i.e.,
+\[
+r=(y,e).
+\]
+
+The underlying assumption is that the explanation implicitly or explicitly indicates which parts of the input influenced the model's prediction. Rather than considering these parts as individual tokens or words, Matton et al. model them as high-level \emph{concepts}. Consequently, the proposed metric measures the discrepancy between \enquote{the set of concepts that LLM explanations imply are influential and the set that truly are} \cite{mattonWalkTalkMeasuring2024}.
+
+\subsubsection{Concepts and Categories}
+
+For each question $x$, a set of concepts
+\[
+C=\{C_1,\ldots,C_M\}
+\]
+is identified. Unlike token-based approaches, concepts correspond to semantically meaningful properties of the input rather than low-level textual features. Each concept $C_m$ can assume different possible values $c_m \in \mathbb{C}_m$, where $\mathbb{C}_m$ denotes the domain of all plausible values for concept $C_m$.
+
+A key assumption of the metric---which will later be challenged in this thesis---is that concepts are \enquote{disentangled}. In other words, each concept can be modified independently without affecting the remaining concepts. This assumption allows causal interventions to be applied to individual concepts while keeping all others fixed.
+
+Furthermore, every concept is assigned to a higher-level category from the set
+\[
+K=\{K_1,\ldots,K_L\},
+\]
+for example \emph{gender}, \emph{ethnicity}, or \emph{medical symptoms}. Besides improving the interpretability of the resulting analysis, these categories are also required for the Bayesian hierarchical model employed by Matton et al. to estimate causal concept effects through partial pooling.
+
+\subsubsection{Causal Concept Effects (CE)}
+
+To estimate the actual influence of a concept on the model's prediction, Matton et al. generate counterfactual questions. A counterfactual,
+\[
+x_{c_m \rightarrow c'_m},
+\]
+is obtained by replacing the original value $c_m$ of concept $C_m$ with an alternative value $c'_m$, while leaving the remainder of the input unchanged. Let
+\[
+\mathbb{C}'_m=\mathbb{C}_m\setminus\{c_m\}
+\]
+denote the set of all alternative values of concept $C_m$.
+
+The causal concept effect is then defined as the average Kullback--Leibler divergence between the model's prediction distribution for the original question and each corresponding counterfactual:
+
+\begin{equation}
+    \label{eq:ce}
+CE(x,C_m)=
+\frac{1}{|\mathbb{C}'_m|}
+\sum_{c'_m \in \mathbb{C}'_m}
+D_{\mathrm{KL}}
+\left(
+\mathbb{P}_M(Y \mid x_{c_m \rightarrow c'_m})
+\;\middle\|\;
+\mathbb{P}_M(Y \mid x)
+\right).
+\end{equation}
+
+Intuitively, concepts whose modification substantially changes the model's output receive a high causal concept effect, whereas concepts with little influence receive values close to zero.
+
+\subsubsection{Explanation-Implied Effects (EE)}
+
+While the causal concept effect measures the actual influence of a concept on the model's prediction, the explanation-implied effect estimates how influential the model itself claims the concept to be within its explanation. If the explanations are faithful, concepts with large causal effects should be mentioned more frequently than concepts with only a negligible influence.
+
+Matton et al. therefore define the explanation-implied effect as the probability that the model's explanations for both the original question and its counterfactuals identify concept $C_m$ as being causally relevant:
+
+\begin{equation}
+    \label{eq:ee}
+EE(x,C_m)=
+\frac{1}{|\mathbb{C}_m|}
+\sum_{c'_m \in \mathbb{C}_m}
+\mathbb{P}_M(C_m \in E \mid x_{c_m \rightarrow c'_m}).
+\end{equation}
+
+In practice, this quantity is estimated by automatically extracting the concepts referenced in the generated explanations using an auxiliary LLM.
+
+\subsection{Causal Concept Faithfulness}
+
+After computing both the causal concept effects and the explanation-implied effects for every concept of a question, the final faithfulness score can be determined. Specifically, the Pearson correlation coefficient between the vectors of causal concept effects and explanation-implied effects is calculated:
+
+\begin{equation}
+    \label{eq:faithfulness}
+F(x)=
+\mathrm{PCC}
+\left(
+CE(x,C),
+EE(x,C)
+\right).
+\end{equation}
+
+This yields a result within $[-1, 1]$. A high positive correlation indicates that concepts which genuinely influence the model's prediction are also consistently identified as influential within the explanation, whereas a low or even negative correlation indicates unfaithfulness.
+
+Finally, the dataset-level faithfulness of model $M$ is obtained by averaging the question-level faithfulness scores over all questions in the dataset:
+
+\begin{equation}
+F(X)=
+\frac{1}{|X|}
+\sum_{x \in X}
+F(x).
+\end{equation}
+\subsection{Evaluation Pipeline}
+\subsubsection{Extracting Concepts with Values and Categories}
+With a giving question $x$ drawn from the dataset $X$ the concept set $C$ has to determined of all concepts that are included in the question. Since manual annotation by human reviewers would be tedious and impractical for an automated evaluation, an auxillary LLM $A$ is tasked with this work. It should be noted that $A$ does not necessarily have to be the same model as the LLM-under-test $M$.
+The prompt instructs $A$ to first identify the concepts $C$ for the given question, as well as determine their respective category from the dataset-wide set $K$ (however a list of possible cathegories is not supplied to the auxillary llm). After that, in a secconds prompt, the LLM is then instructed to extract the current value of each identified concept as well as a plausible alternative value which results in $\mathbb{C}_m$ for every $C_m \in C$. All prompts within this pipeline feature examples to facilitate the LLM sticking to the desired output format. The result is then parsed and saved by the evaluation program and it can be continued to proceed to generate actual counterfactuals.
+
+\subsubsection{Gernerating counterfactual questions}
+By identifying the concepts involved in a question with their respective values, the cornerstone has been set for creating counterfactual question $x_{c_m \rightarrow c'_m}$. More specifically, to do so, the concept $C_m$, it's current value $c_m$ and the alternative value $c_m'$ are passed down and $A$ is instructed to overhaul $x$ to $x_{c_m \rightarrow c'_m}$ while keeping all other concepts unchanged. So in summary, the auxiallary LLM $A$ is queued to rephrase $x$ with a new concept value. (with the least possible change to the structure or words not skew results, but the question should still be coherent).
+
+Besides creating counterfactuals by changing the value of a concept $C_m$ it might be, depending on the experimental setup and dataset, instead desirable to instead remove and obfuscate a concepts from a question. For doing so $A$ is instructed to make $C_m$ undeterminable from question $x$.
+
+\subsubsection{Collecting model responses}
+In order to be able to calcualte the Causal Concept Effects (CE), its required to have access to the probability distributions of $M$'s choices for both original and and all counterfactual questions ${x_{c_m \rightarrow c'_m} : c'_m \in \mathbb{C}'m}$. To reconstruct those probability distributions a certain number of samples is being collected for every version of $x$ by repeatetly prompting the LLM-under-test $M$. By doing so, not only are the answer choices obtained but also the explanations collected, which shall be subject to further analysis as well.
+
+\subsubsection{Estimating Explanation-Implied Effects}
+In order to get the Explanation-Implied Effects its needed to analyze the explanations on for looking if $M$ indicates that $C_m$ has a causal effect and might shift its prediction with alternative values. For automation, this step is also done by the auxillary LLM $A$. However: the auxiallary LLM is instructed that one pitfall here is to assume that all concpets which are mentioned are influential and important. Instead $A$ in method of Matton et al. is instructed to look for the context those concepts are mentioned in the explanation and not for there mere presence. (This is very akwardly written, need to rework that).
+
+After analyzing all samples for all versions (original and counterfactuals) of a question x a DataFrame can be compiled for all $C_m \in x$ with the respective probability (averaged across all analyzed samples) that $C_m$ is explained to have a causal effect. By using those probabilities its no difficulty to calculate the explanation-implied effects for the entire question (see equation \ref{eq:ee}).
+
+\subsubsection{Estimation Causal Concept Effects}
+Given that the model responses where already collected, it would be trivial to calculate the Kullback-Leibler divergence between the distribution of responses pre- and post-intervention for a given concept. However, Matton et al. point out that this approach can be inaccurate if only a small number of responses have been collected. By assuming that \enquote{that similar concepts have a similar magnitude of effect on LLM $M$’s answers within the context of a dataset} \cite{mattonWalkTalkMeasuring2024} they instead introduce a Bayesian hierarchical model within the context of the entire dataset. This allows the evaluation pipeline to "draw" information on the magnitude of concept effects of similar concepts across questions ($x \in X$). This multinomial logistic regression-approach is too rich and complex to be discussed in mathematical detail within this thesis, especially since it has only limited pertinence to the problem that should be adressed.
+
+By having made the calcualtion of the KL-divergence between both answer distributions more stable, its now possible to proceed to calculate the causal concept effects across all counterfactual values (see \ref{eq:ce}) for a given concept and question.
+
+\subsection{Estimating Causal Concept Faithfulness}
+This is the last step within Matton et al.'s' evaluation pipeline. The Causal Concept faithfulness has been defined as the pearson correlation coefficient between the Causal Concept Effects and the Explanation-Implied Effects. However just with the CE-vector calculation the authors see a similar problem: for most questions the number of concepts involved is small, leading to only a handful of datapoints, and will make the results unreliable.
+
+To solve this obstacle, Matton et al. suggest again to employ a Bayeasian hierachical model on the dataset-level, which "draws" data on faithfulness from other questions. They assume that faithfulness scores for questions within a dataset are rather similar due to a high degree of similarity of content. To make this linearly regression possible, the $X$ and $Y$ datapoints are prepared by normalizing their standard deviation to the same value. After that, a global regression parameter of the expected PCC is defined, serving as a prior on question-level regression coefficients. After fitting the model the posteriours of the question-regression coefficients are used as the question-level faithfulness. Extracting the global-regression coefficient would yield the $F(x)$-value of the dataset.
+
 \subsection{The Case for this Metric}
+The \textit{Causal Concept Faithfulness Metric} has some merits which includes the high automatability of the evaluation. Furthermore, because it treats the LLM to test as a blackbox, virtually any large language model, regardless of inner architecture, can be used for evaluation. Also the premise of treating concepts on a high-level basis seems promissing offering an approach that can be considered more in line with many real-world applications and internal reasoning of LLMs compared to token-level approaches such as that of Atanasova et al. \cite{atanasovaFaithfulnessTestsNatural2023}. Matton et al. \cite{mattonWalkTalkMeasuring2024} also point out that their metric - contrary to others - identifies patterns of unfaithfulness, which shows how an explanation is misleading, assisting users in making informed decisions if a model should be used in a given enviroment or task.
+
+One limitation of this approach lies in the LLM-based automation of counterfactual generation and explanation extraction, which may introduce errors. Matton et. al \cite{mattonWalkTalkMeasuring2024} find that the results are generally of high quality, but they declare that even their propertary auxillarry LLM used in their experiment, GPT-4o, introduced errors. For concept extraction from questions, they found that all extracted concepts were present in the question but not all satisfied the constraint that they must be disentangled. Their analysis also reveiled that the auxiallry LLM show some deficits in counterfactual creartion, in particular in keeping all concepts in the question exept the target concept to modify (the LLM modified others as well) and furthermore the the LLM did occationally not modify the concept at all places of the question if its mentioned multiple times. Those errors introduced at the counterfactual creation steps can propagate to later stages of the the evaluation process, skewing the results to some degree. More generally, they also describe the requirement of having to adapt the auxillary LLM prompts to the respective datasets as disatvantage.
+
+One a more general note, costs of the automated process, even with a very capable auxillary LLM one must ask questions regarding to Bias Transfer and Circularity: If the auxillary LLM $A$ has its own biases expressed trough concept identification and conterfactual creation it might be added on-top of the bias of the LLM $M$ which again might also influence the results. Furthermore if $A$ has such a present and important role in the evaluation pipeline, it can be said that to some degree a LLM is used to evaluate another LLM. If so, is actual faithfulness of $M$  actually measured or is just the allignment of both models? However, it can be argued that these are reasonable tradeoffs and considerations for having an automated process that can work on many questions without human involvement.
 
 \section{The Correlated Concepts Problem}
+As per definition in \ref{sec:problem_setting}, Matton et al. assume that concepts are disentangled. This means that ....
+The authors themself aknowledge this limitation and discuss it extensively in their paper.
