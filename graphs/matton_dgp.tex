@@ -1,0 +1,70 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{amsmath}
+\begin{document}
+
+\begin{tikzpicture}[
+    >=Stealth,
+    font=\Large,
+    observed/.style={
+        draw,
+        rounded corners=3pt,
+        minimum width=1.6cm,
+        minimum height=0.9cm,
+        fill=blue!8,
+        thick
+    },
+    latent/.style={
+        draw,
+        diamond,
+        aspect=1.4,
+        dashed,
+        minimum size=1.2cm,
+        thick
+    },
+    group/.style={
+        draw,
+        dashed,
+        rounded corners,
+        inner sep=0.4cm
+    }
+]
+
+%------------------------------------------------
+% Nodes
+%------------------------------------------------
+
+\node[latent] (U) at (0,0) {$U$};
+
+\node[observed] (C1) at (3,2.4) {$C_1$};
+\node[observed] (C2) at (3,1.1) {$C_2$};
+\node              (dots) at (3,0) {$\vdots$};
+\node[observed] (CM) at (3,-1.1) {$C_M$};
+\node[observed] (V)  at (3,-2.4) {$V$};
+
+\node[group,fit=(C1)(C2)(dots)(CM)(V),
+      label=above:{Mediators}] (cov) {};
+
+\node[observed] (X) at (7,0) {$X$};
+
+\node[observed] (Y) at (10,0) {$Y$};
+
+\node[latent] (E) at (10,2.2) {$\mathcal{E}$};
+
+%------------------------------------------------
+% Edges
+%------------------------------------------------
+
+\foreach \n in {C1,C2,CM,V}
+    \draw[->] (U) -- (\n);
+
+\foreach \n in {C1,C2,CM,V}
+    \draw[->] (\n.east) -- (X.west);
+
+\draw[->] (X) -- (Y);
+
+\draw[->] (E) -- (Y);
+
+\end{tikzpicture}
+
+\end{document}

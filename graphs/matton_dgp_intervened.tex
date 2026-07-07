@@ -1,0 +1,104 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    >=Stealth,
+    font=\Large,
+    observed/.style={
+        draw,
+        rounded corners=3pt,
+        minimum width=1.6cm,
+        minimum height=0.9cm,
+        fill=blue!8,
+        thick
+    },
+    fixed/.style={
+        draw,
+        rounded corners=3pt,
+        minimum width=1.6cm,
+        minimum height=0.9cm,
+        fill=green!20,
+        thick
+    },
+    intervened/.style={
+        draw,
+        rounded corners=3pt,
+        minimum width=1.6cm,
+        minimum height=0.9cm,
+        fill=orange!35,
+        thick
+    },
+    latent/.style={
+        draw,
+        diamond,
+        aspect=1.4,
+        dashed,
+        minimum size=1.2cm,
+        thick
+    }
+]
+
+%------------------------------------------------
+% Mediators
+%------------------------------------------------
+
+\node[fixed] (C1) at (0,3.6) {$C_1$};
+\node[fixed] (C2) at (0,2.4) {$C_2$};
+
+\node (dots1) at (0,1.3) {$\vdots$};
+
+\node[intervened] (Cm) at (0,0.2) {$C_m$};
+
+\node (dots2) at (0,-0.9) {$\vdots$};
+
+\node[fixed] (CM) at (0,-2.0) {$C_M$};
+
+\node[fixed] (V) at (0,-3.4) {$V$};
+
+%------------------------------------------------
+% Outcome nodes
+%------------------------------------------------
+
+\node[observed] (X) at (4.5,0.2) {$X$};
+\node[observed] (Y) at (7.8,0.2) {$Y$};
+
+\node[latent] (E) at (7.8,2.4) {$\mathcal{E}$};
+
+%------------------------------------------------
+% Edges
+%------------------------------------------------
+
+\foreach \n in {C1,C2,CM,Cm,V}
+    \draw[->] (\n.east) -- (X.west);
+
+\draw[->] (X) -- (Y);
+\draw[->] (E) -- (Y);
+
+%------------------------------------------------
+% Legend
+%------------------------------------------------
+
+\node[fixed,
+      minimum width=0.8cm,
+      minimum height=0.45cm,
+      anchor=west] (L1) at (9.8,1.3) {};
+
+\node[anchor=west,font=\normalsize]
+    at ($(L1.east)+(0.3,0)$)
+    {Kept fixed (original value)};
+
+\node[intervened,
+      minimum width=0.8cm,
+      minimum height=0.45cm,
+      anchor=west] (L2) at (9.8,0.3) {};
+
+\node[anchor=west,font=\normalsize]
+    at ($(L2.east)+(0.3,0)$)
+    {Assigned a new value (intervention)};
+
+\end{tikzpicture}
+
+\end{document}

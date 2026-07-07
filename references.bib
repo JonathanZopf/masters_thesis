@@ -88,6 +88,24 @@
   abstract = {Large language models (LLMs) are trained to imitate humans to explain human decisions. However, do LLMs explain themselves? Can they help humans build mental models of how LLMs process different inputs? To answer these questions, we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model's outputs on diverse counterfactuals of the explained input. For example, if a model answers "yes" to the input question "Can eagles fly?" with the explanation "all birds can fly", then humans would infer from the explanation that it would also answer "yes" to the counterfactual input "Can penguins fly?". If the explanation is precise, then the model's answer should match humans' expectations. We implemented two metrics based on counterfactual simulatability: precision and generality. We generated diverse counterfactuals automatically using LLMs. We then used these metrics to evaluate state-of-the-art LLMs on two tasks: multi-hop factual reasoning and reward modeling. We found that LLMs' explanations have low precision and that precision does not correlate with plausibility. Thus, naively optimizing human approvals (e.g., RLHF) may be insufficient. Code is available at https://github.com/yandachen/CounterfactualSimulatability.}
 }
 
+@article{eberhardtInterventionsCausalInference2007,
+  title = {Interventions and {{Causal Inference}}},
+  author = {Eberhardt, Frederick and Scheines, Richard},
+  date = {2007},
+  journaltitle = {Philosophy of Science},
+  volume = {74},
+  number = {5},
+  eprint = {10.1086/525638},
+  eprinttype = {jstor},
+  pages = {981--995},
+  publisher = {[The University of Chicago Press, Philosophy of Science Association]},
+  issn = {0031-8248},
+  doi = {10.1086/525638},
+  url = {https://www.jstor.org/stable/10.1086/525638},
+  urldate = {2026-07-05},
+  abstract = {The literature on causal discovery has focused on interventions that involve randomly assigning values to a single variable. But such a randomized intervention is not the only possibility, nor is it always optimal. In some cases it is impossible or it would be unethical to perform such an intervention. We provide an account of ‘hard’ and ‘soft’ interventions and discuss what they can contribute to causal discovery. We also describe how the choice of the optimal intervention(s) depends heavily on the particular experimental setup and the assumptions that can be made.}
+}
+
 @inproceedings{farayolaFairnessAIPredicting2023,
   title = {Fairness of {{AI}} in {{Predicting}} the {{Risk}} of {{Recidivism}}: {{Review}} and {{Phase Mapping}} of {{AI Fairness Techniques}}},
   shorttitle = {Fairness of {{AI}} in {{Predicting}} the {{Risk}} of {{Recidivism}}},
@@ -489,6 +507,21 @@
   eventtitle = {Proceedings of the 62nd {{Annual Meeting}} of the {{Association}} for {{Computational Linguistics}} ({{Volume}} 1: {{Long Papers}})},
   langid = {english},
   file = {/Users/jonathan/Zotero/storage/8PRM5ID8/Parcalabescu and Frank - 2024 - On Measuring Faithfulness or Self-consistency of Natural Language Explanations.pdf}
+}
+
+@book{pearlCausality2009,
+  title = {Causality},
+  author = {Pearl, Judea},
+  date = {2009},
+  edition = {2},
+  publisher = {Cambridge University Press},
+  location = {Cambridge},
+  doi = {10.1017/CBO9780511803161},
+  url = {https://www.cambridge.org/core/books/causality/B0046844FAE10CBF274D4ACBDAEB5F5B},
+  urldate = {2026-07-05},
+  abstract = {Written by one of the preeminent researchers in the field, this book provides a comprehensive exposition of modern analysis of causation. It shows how causality has grown from a nebulous concept into a mathematical theory with significant applications in the fields of statistics, artificial intelligence, economics, philosophy, cognitive science, and the health and social sciences. Judea Pearl presents and unifies the probabilistic, manipulative, counterfactual, and structural approaches to causation and devises simple mathematical tools for studying the relationships between causal connections and statistical associations. Cited in more than 2,100 scientific publications, it continues to liberate scientists from the traditional molds of statistical thinking. In this revised edition, Judea Pearl elucidates thorny issues, answers readers' questions, and offers a panoramic view of recent advances in this field of research. Causality will be of interest to students and professionals in a wide variety of fields. Dr Judea Pearl has received the 2011 Rumelhart Prize for his leading research in Artificial Intelligence (AI) and systems from The Cognitive Science Society.},
+  isbn = {978-0-521-89560-6},
+  file = {/Users/jonathan/Zotero/storage/K7WWH9LE/B0046844FAE10CBF274D4ACBDAEB5F5B.html}
 }
 
 @report{phillipsFourPrinciplesExplainable2021,
