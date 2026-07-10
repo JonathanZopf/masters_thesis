@@ -1,1 +1,60 @@
 \chapter{Implementation}
+\section{Theoretical conception}
+\subsection{About Interaction}
+\label{sec:interaction_effects}
+Explain differenc in interaciton and correlation (in observational data), explain different types of interaction.
+
+\subsection{Desirada}
+Before any extention of the metric can be crafted, it is necessary to sit back and consider which desired properties the solution should exhibit. All properties listed are not optional, they are considered essential and neccessary for the resulting metric to have pratical value within the field of XAI. Other properties are not only about that, but also to make this metric an upgrade, to build on the solid foundation Matton et al. \cite{mattonWalkTalkMeasuring2024} have established and to be able to trace scientificly the improvements and effects on the results of this metric compared to the original.
+
+After careful considerration the following desirada have been selected:
+\begin{itemize}
+\item \textbf{Maintaining the strengths of \textit{Causal Concept Faithfulness}}: The original metric by Matton et al. is different from previous metrics by not only working on high-level concepts but also in being able to \emph{discover interpretable patterns of unfaithfulness}\cite{mattonWalkTalkMeasuring2024}. So asides from just returning a score the metric can show which concepts and which categories had which effect on the faithfulness result for a question or entire dataset. Since this is a killer-advantage its desired to keep this for the new metric as well.
+\item \textbf{Backwards compatibility}: As shown in \ref{sec:estimation_approaches} a bunch of estimation approaches for the faithfulness of LLM explanations have been established within the last years. In order to not further oversaturate this research field with a brand-new idea, the goal should be for faithfulness results to be backwards compatible to Matton et al's metric. This also aids retractability and comprehension. This means more specifically, that if \textit{correlation groups} that are jointly intervened on only have a size of one item in the metric extention, the Causal Concept Effect should be the exact same that of the Matton et al. metric, leading to identical Faithfulness values. Furthermore, when no interaction takes place within members of the same group, no additional effect should be registered, meaning the total causal effect of all concepts should equal the sum of their indivitual causal effects. This in pratice means too that CE scores remain identical in the new metric compared to the original where no interaction takes place.
+\item asdasd
+\end{itemize}
+
+\subsection{TODO TITLE!!!The remedy: measuring the joint effect}
+As discussed, conducting surgical interventions in every case is not feasable and will lead to problems with correlated concepts. There is a solution that is not hard to come by for the correlated concepts problem: To intervene on multiple concepts simultainiously. The do-calculus formalized by Pearl is defined to have build-in support joint interventions where multpile variables get assinged a new value \cite{shpitserIdentificationJointInterventional2006}. By doing so, one can calcualte the \emph{joint effect} a set of concepts have.
+
+Namely, where Matton et al. formalize the direct effect of concept $C_m$ within a certain question $x$ with the formula in the \emph{do}-calculus notation in \ref{eq:matton_direct_effect}. The variable names correspond to those introduced by Matton et al. and were explained in sections \ref{sec:causal_concept_metric} and \ref{sec:correlated_concepts}.
+
+\begin{equation}
+\label{eq:matton_direct_effect}
+\mathbb{E}_{\varepsilon}[Y \mid \text{do}(C_m = c'_m, \{C_i = c_i\}_{i \neq m}, V= v)] - \mathbb{E}_{\varepsilon}[Y \mid \text{do}(\{C_i = c_i\}_{i \in \{1, \dots, M\}},  V = v)]
+\end{equation}
+ 
+This formula in \ref{eq:matton_direct_effect} can be generalized to also allow support for multiple concepts. Let $M_{\Delta}\subseteq{1,...,M}$ be the set of concepts to calculate the \emph{joint effect} from, i.e. the set of concepts to assign to alternative values. The joint effect on the model’s answer distribution, keeping all non‑intervened concepts and the rest‑of‑question text $V$ fixed at their original values, is
+\begin{equation}
+\label{eq:matton_multi_direct_effect}
+\mathbb{E}_{\varepsilon}[Y \mid \text{do}(\{C_m = c'_m\}_{m \in M_{\Delta}}, \{C_i = c_i\}_{i \notin M_{\Delta}}, V= v)] - \mathbb{E}_{\varepsilon}[Y \mid \text{do}(\{C_i = c_i\}_{i \in \{1, \dots, M\}},  V = v)]
+\end{equation}.
+
+The do‑operator is defined for arbitrary sets of variables, so this extension is natural. When $M_{\Delta}={m}$ it reduces to equation \ref{eq:matton_direct_effect}.
+
+By implementing this generalized case into the causal graph, thats quite intuitive and we receive \ref{fig:dgp_joint_intervened}. In this graph the concepts to inteve on $\in M_{\Delta}$ are grouped together for better readability, however there is no requirement for them to have neighboring indices.
+
+\begin{figure}[ht]
+\centering
+\includestandalone[mode=buildnew, width=16cm]{graphs/dgp_joint_intervened}
+\caption{Causal graph under a joint intervention of concepts $C_i$ for $C_i \in M_{\Delta}$ for $M_{\Delta}$=${1,...,M}$, all other concepts $\not\in M_{\Delta}$ and $V$ remain fixed.}
+\label{fig:dgp_joint_intervened}
+\end{figure}
+
+It should be noted as before that, under the semantics of the \emph{do}-operator, all incoming causal edges to the intervened concept variables are removed \cite{pearlCausality2009}. Consequently, since all concepts and $V$ take part in the intervention (either by assinging a new value or by fixing its value) any causal dependencies within the mediators layer are eliminated in the manipulated graph. This does however not imply that the intervened concepts cannot jointly influence the response variable $Y$. Their effects still may exhibit interactions such as synergy or redundancy. By intervening on the entire set $M_{\Delta}$ simultaneously, the proposed joint effect therefore captures both the individual contributions of the intervened concepts and any interactions among them in their influence on $Y$.
+
+
+\section{Updating evaluation pipeline}
+\subsection{Correlation identification and joint-counterfactual creation}
+\subsection{Adapting the CE: Introducing Shapley Values into the mix}
+
+However, as discussed before, \ref{eq:matton_direct_effect} measuers the effect multiple concepts have. This is not analougious to the causal concept effect as defined in \ref{eq:ce} and would break compatibility.
+
+\subsection{Normalize Shapley-CE by correction}
+
+\subsection{Remaining evaluationn pipeline}
+
+\section{Analysis}
+\subsection{Differences between extention and original}
+\subsection{Check: are the Desirada fufilled?}
+\subsection{How is the metric extention expected to influence results}
