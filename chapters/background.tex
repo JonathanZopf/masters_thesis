@@ -74,6 +74,7 @@ First, the LLM receives an unmodified question from a dataset. The input is then
 Since the metric builds directly upon the approach by Atanasova et al. \cite{atanasovaFaithfulnessTestsNatural2023}, several limitations are inherited, particularly with respect to counterfactual generation. For example, the counterfactuals are restricted to the insertion of individual adjectives or adverbs, limiting their semantic diversity. Furthermore, the metric does not account for cases in which an explanation refers to a synonym or semantically equivalent concept rather than the exact inserted word.
 
 \subsubsection{Output Contribution Metrics}
+\label{sec:cc_shap}
 Parcalabescu and Frank \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024} argue that many existing metrics measure self-consistency of outputs rather than genuine faithfulness. They therefore propose their own self-consistency metric, CC-SHAP, which does not depend on modifying the input. Their approach compares the degree to which input tokens contribute to both the generated answer and the explanation. By measuring the convergence between these contributions using Shapley values, the method produces a continuous score.
 
 This approach offers several advantages. It avoids the need for input perturbations, does not require semantic evaluation of explanations, supports both CoT and ad-hoc explanations, reveals patterns of consistency and inconsistency at the token level, and does not require auxiliary AI models during evaluation. However, these benefits come at the cost of considerable computational overhead, which may exceed that of other approaches \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}.
@@ -233,7 +234,7 @@ After processing all explanations for both the original and counterfactual quest
 
 A straightforward approach to estimating causal concept effects would be to compute the Kullback--Leibler divergence directly from the empirical answer distributions before and after each intervention. However, Matton et al. argue that this estimate becomes unreliable when only a limited number of model responses are available.
 
-To address this issue, the authors introduce a Bayesian hierarchical model that operates across the entire dataset. The underlying assumption is that concepts belonging to similar semantic categories exhibit comparable effect magnitudes on the predictions of the LLM. Consequently, observations from related concepts and questions can be pooled, allowing more reliable estimates even when only a small number of responses has been collected for an individual question.
+To address this issue, the authors introduce a Bayesian hierarchical model that operates across the entire dataset. The underlying assumption is that concepts belonging to similar categories exhibit comparable effect magnitudes on the predictions of the LLM. Consequently, observations from related concepts and questions can be pooled, allowing more reliable estimates even when only a small number of responses has been collected for an individual question.
 
 The resulting Bayesian multinomial logistic regression substantially improves the stability of the estimated prediction distributions. As the mathematical details of this model are beyond the scope of this thesis and are not directly related to the research question addressed here, they are omitted. Based on the stabilized distributions, the causal concept effects can then be computed according to Equation~\ref{eq:ce}.
 
@@ -287,7 +288,7 @@ The effect of a surgical intervention on the causal graph is illustrated in Figu
 In summary, the \emph{disentanglement} assumption—that each concept can be modified independently without altering the other concepts or the rest of the question text—is introduced to enable the estimation of direct effects. It does not require the concepts to be independent in the original data; it only demands that the intervention itself be feasible in a way that leaves everything else unchanged.
 
 \subsection{The practical limit}
-
+\label{sec:pratical_limit}
 While disentanglement is theoretically coherent, several practical obstacles arise. First, it may be idealistic to assume that $V$ can be kept perfectly fixed under every intervention; certain concept changes might result in unnatural or incoherent phrasing if the surrounding text is left untouched.
 
 More importantly, in many real-world datasets concepts are correlated in the training data of the LLM. Matton et al.\ themselves acknowledge that when two concepts are strongly associated, intervening on one while holding the other constant can produce unreliable direct-effect estimates \cite{mattonWalkTalkMeasuring2024}. This problem becomes especially acute for removal-based counterfactuals: the LLM may be able to reconstruct the removed concept value from the remaining, unchanged concepts because it has learned to expect them to co-occur. For example, in a job application setting, an applicant’s gender may be easily inferred from their first name even if gender is explicitly removed.
@@ -296,4 +297,71 @@ Matton et al.\ illustrate the issue with a question from the MedQA dataset. They
 
 More generally, such reconstruction can cause the causal effect of a truly influential concept to be underestimated. This, in turn, may artificially widen the gap between the Causal Concept Effect and the Explanation-Implied Effect, potentially penalizing an otherwise faithful LLM with an unfairly low faithfulness score. Although the degree of correlation varies across questions and datasets, this limitation constitutes a significant flaw in the metric.
 
-With the correlated concepts problem clearly established, the remainder of this thesis focuses on constructing, implementing, and validating an extension of the \emph{Causal Concept Faithfulness Metric} that accounts for correlated concepts in the estimation of causal effects.
+\subsection{Interaction between Concepts}
+\label{sec:interaction_effects}
+The example by Matton et al.\ in which the model reconstructs a removed concept from another remaining concept, represents a form of \emph{interaction}. More specifically, concepts can interact in several different ways, expanding the \textit{Correlated Concept Problem} beyond surgical interventions. Information theory, and in particular its extension \emph{Partial Information Decomposition} (PID), distinguishes three fundamental interaction types describing how multiple source variables jointly contribute information about a target variable \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}. Furthermore, these interaction types have also been incorporated into the causal framework \cite{martinez-sanchezDecomposingCausalityIts2024}.
+
+For illustration, consider an initially masked question $x$ into which two concepts $C_i$ and $C_j$ are introduced. Throughout this subsection only, the values $c_i$ and $c_j$ denote the masked (i.e., absent) state of the corresponding concepts, whereas $c_i'$ and $c_j'$ denote arbitrary non-null values. Using the notation introduced in Section~\ref{sec:problem_setting}, the following intervention effects can be compared:
+
+\[
+CE(x,C_i), \qquad
+CE(x,C_j), \qquad
+CE(x,\{C_i,C_j\}),
+\]
+
+where $CE(x,\{C_i,C_j\})$ denotes the causal concept effect obtained by jointly intervening on both concepts, i.e., replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously. Depending on the relationship between these quantities, three interaction types can be distinguished \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}:
+
+\begin{itemize}
+    \item \textbf{Independence}\footnote{Within the PID literature the better established term is \emph{unique information}. Since the present discussion focuses on concepts whose effects do not depend on one another, the term \emph{Independence} is used instead.}:
+    
+    Each concept contributes information that cannot be inferred from the other concept. Consequently, the joint intervention effect equals the sum of the individual effects,
+    \[
+    CE(x,\{C_i,C_j\})
+    =
+    CE(x,C_i)+CE(x,C_j).
+    \]
+
+    \item \textbf{Redundancy}:
+    
+    Both concepts convey overlapping information. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
+    \[
+    CE(x,\{C_i,C_j\})
+    <
+    CE(x,C_i)+CE(x,C_j).
+    \]
+
+    \item \textbf{Synergy}:
+    
+    Additional information emerges only when both concepts are considered jointly, leading to a reinforcing effect. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
+    \[
+    CE(x,\{C_i,C_j\})
+    >
+    CE(x,C_i)+CE(x,C_j).
+    \]
+\end{itemize}
+
+The examples above are restricted to the interaction of two concepts for simplicity. In practice, multiple concepts may interact simultaneously, giving rise to substantially more complex information-sharing structures. Williams and Beer \cite{williamsNonnegativeDecompositionMultivariate2010} generalize Partial Information Decomposition to arbitrary numbers of variables and introduce corresponding partial information diagrams to represent these relationships.
+
+Moreover, the discussed examples describe the effect of \emph{introducing} concepts into an initially masked question. This formulation was chosen because it allows the three interaction types to be interpreted intuitively in terms of the additional information contributed by a concept. Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, however, estimate causal concept effects by \emph{removing} concepts from the original question. Under this complementary perspective, the inequalities for redundancy and synergy are reversed. Removing two redundant concepts jointly eliminates more information than removing either concept individually, yielding
+
+\[
+CE(x,\{C_i,C_j\})
+>
+CE(x,C_i)+CE(x,C_j),
+\]
+
+whereas removing two synergistic concepts results in
+
+\[
+CE(x,\{C_i,C_j\})
+<
+CE(x,C_i)+CE(x,C_j).
+\]
+
+Consequently, the MedQA example discussed by Matton et al., in which one removed concept can be reconstructed from another, is fully consistent with the interaction taxonomy presented above and represents an instance of redundancy under the removal interpretation.
+
+The relationship between correlation and interaction is subtle. When the total correlation of a system is zero, all variables behave independently. Conversely, maximal total correlation corresponds to complete redundancy \cite{watanabeInformationTheoreticalAnalysis1960}. Synergistic interactions, however, are fundamentally different: synergy neither requires statistical correlation nor is it precluded by its presence \cite{picaInvariantComponentsSynergy2017}. Correlation therefore captures only one particular form of interaction between concepts.
+
+To recapitulate, the original \emph{Causal Concept Faithfulness Metric} assumes that concepts can be intervened upon independently and therefore implicitly models only independent information. Redundant concepts violate this assumption because the influence of one concept can be reconstructed from another, while synergistic concepts require multiple concepts to be modified jointly before their full influence becomes observable. Consequently, the metric cannot reliably estimate causal concept effects whenever redundancy or synergy is present.
+
+With the correlated concepts problem established and the possible interaction types between concepts defined, the remainder of this thesis focuses on constructing, implementing, and validating an extension of the \emph{Causal Concept Faithfulness Metric} that accounts for correlated concepts during the estimation of causal concept effects.

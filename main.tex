@@ -6,6 +6,7 @@
 \usepackage[a4paper, total={6in, 9in}]{geometry}
 \usepackage[USenglish]{babel}
 \usepackage{listings}
+\usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subfiles}
 \usepackage[table]{xcolor}
@@ -23,6 +24,9 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{standalone}
+\usepackage[most]{tcolorbox}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit}
 
 
@@ -36,6 +40,16 @@
     filecolor=black,
     urlcolor=black,
     citecolor=black,
+}
+
+\newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{%
+  colback=gray!5!white,    % Background color (5% gray)
+  colframe=gray!75!black,  % Border color
+  fonttitle=\bfseries,     % Bold title
+  title=#1,                % Title text
+  arc=4mm,                 % Rounded corners
+  boxrule=0.5mm,           % Border thickness
+    title={Example \thetcbcounter},
 }
 
 
