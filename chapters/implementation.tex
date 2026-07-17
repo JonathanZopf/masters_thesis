@@ -128,94 +128,77 @@ An example how the oracle $\mathcal{O}(x, C, n_{max})$ is supposed to subdivide 
 \end{example_box}
 
 \subsubsection{Implementing an Oracle for Tabular Datasets}
-Unlike natural language datasets (such as BBQ and MedQA) which leverage an LLM-based oracle, tabular datasets possess a structured format that permits a deterministic, statistically grounded grouping pipeline. Instead of relying on LLM intuition, this pipeline identifies dependencies by computing pairwise non-parametric correlation coefficients and partitioning the concepts using a constrained, greedy graph-merging algorithm.
+Unlike natural language datasets that require an LLM-based oracle, tabular datasets feature a structured format that permits a deterministic, statistically grounded grouping pipeline. Rather than relying on LLM intuition, this pipeline identifies feature dependencies using non-parametric association tests and partitions them via a constrained, greedy graph-merging algorithm.
 
-There are multiple measures and tests of correlation such as the Pearson correlation, Spearman Rank Correlation and Kendall's Tau. However these tests are only designed to work with continuous data. However, for this use case it can not be assumed that all data of all columns can be ordered such as gender or birthplace, therefore it's not possible to calculate correlations with these. However, Cramér's $V$ is specifically designed to work with such nominal data, even if this means that continuous data must be converted into categorical groups (bins) before creating a contingency table and conducting the test. This is what is done first. Then, after calculating Cramér's $V$ for all possible relationships, only those with a significant link are retained. Finally, those correlations are intelligently put into an adapted version of Kruskal's algorithm to create groups with the strongest correlation while respecting the $n_{\max}$ constraint.
+While classical correlation measures (e.g., Pearson's $r$, Spearman's $\rho$, or Kendall's $\tau$) assume continuous or ordinal data, tabular features often include nominal variables (e.g., gender or birthplace) that lack natural ordering. To uniformly assess associations across mixed-type tabular columns, Cramér's $V$ is used, which is specifically designed for nominal data. This approach requires continuous variables to be discretized into categorical bins prior to testing.
 
-The mathematical pipeline is structured into four sequential phases: feature discretization, pairwise association testing, statistical filtering, and constrained disjoint-set agglomeration.
+The pipeline executes in four sequential phases:
 
-\subsubsection{Phase 1: Feature Discretization}
+\paragraph{Phase 1: Feature Discretization}
+To evaluate continuous and categorical variables uniformly, any continuous numeric feature is discretized into ordinal bins using equal-frequency (quantile) binning. This ensures downstream categorical association tests remain valid and resilient to outliers. Categorical features remain unchanged.
 
-To evaluate associations uniformly across both continuous and categorical variables using Cramér's $V$, any continuous numeric feature is discretized into ordinal bins. Equal-frequency (quantile) binning is applied, by which continuous variables are converted into discrete categorical variables, ensuring that downstream categorical association tests remain valid and are resilient to outliers. This procedure is applied independently to every continuous concept in the tabular dataset; categorical concepts are left unchanged.
-
-Let $Z$ be a continuous numeric concept vector of size $N$\footnote{Here $N$ denotes the number of rows (question instances) in the tabular dataset, consistent with $|X|=N$ as introduced in Section~\ref{sec:problem_setting}.}. The domain of $Z$ is partitioned into $q$ disjoint intervals, where $q = \min(4, |\mathcal{U}(Z)|)$ and $\mathcal{U}(Z)$ denotes the set of unique values of $Z$. The interval boundaries are given by the empirical quantiles of $Z$: let $Q_0 := \min(Z)$, $Q_q := \max(Z)$, and let $Q_1, \ldots, Q_{q-1}$ denote the empirical $\tfrac{1}{q}, \tfrac{2}{q}, \ldots, \tfrac{q-1}{q}$ quantiles of $Z$. The bins are then defined as
+Let $Z$ be a continuous numeric concept vector of size $N$ (the number of rows in the tabular dataset). The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ is the set of unique values of $Z$. Using empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as:
 \[
 I_r =
 \begin{cases}
 [Q_{r-1}, Q_r) & \text{for } r \in \{1, \dots, q-1\}, \\[2pt]
-[Q_{q-1}, Q_q] & \text{for } r = q,
+[Q_{q-1}, Q_q] & \text{for } r = q.
 \end{cases}
 \]
-so that every value of $Z$, including its maximum, is assigned to exactly one bin.
 
-\subsubsection{Phase 2: Pairwise Association Testing via Cramér's $V$}
-The procedure for calculating correlations via Cramér's $V$ loosely follows \cite{ben-shacharPhiFeiFo2023}.
+\paragraph{Phase 2: Pairwise Association Testing via Cramér's $V$}
+Following \cite{ben-shacharPhiFeiFo2023}, an $R_i \times R_j$ contingency table $\mathbf{O}$ is constructed for every pair of discretized concepts $(C_i, C_j)$, where $R_i := |\mathcal{U}(C_i)|$ and $R_j := |\mathcal{U}(C_j)|$. The entry $O_{u,v}$ represents the observed joint frequency of category $u$ of $C_i$ and category $v$ of $C_j$.
 
-For every pair of discretized concepts $(C_i, C_j)$, a contingency table (cross-tabulation matrix) $\mathbf{O}$ of size $R_i \times R_j$ is constructed, where $R_i := |\mathcal{U}(C_i)|$ and $R_j := |\mathcal{U}(C_j)|$ denote the number of unique (discretized) categories of $C_i$ and $C_j$, respectively. The entry $O_{u,v}$ represents the observed frequency of simultaneous occurrences of category $u$ of $C_i$ and category $v$ of $C_j$.
-
-First, Pearson's chi-squared ($\chi^2$) test of independence is performed. Under the null hypothesis $H_0$ that $C_i$ and $C_j$ are independent, the expected frequency $E_{u,v}$ for cell $(u,v)$ is computed as:
+Under the null hypothesis $H_0$ of independence, the expected frequency $E_{u,v}$ for cell $(u,v)$ is computed as:
 \[
 E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{n}
 \]
-where $n = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} O_{u,v}$ is the total sample size. The $\chi^2$ test statistic is defined as:
+where $n$ is the total sample size. The Pearson's chi-squared ($\chi^2$) statistic is defined as:
 \[
 \chi^2 = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} \frac{(O_{u,v} - E_{u,v})^2}{E_{u,v}}
 \]
-The statistical significance (the $p$-value, denoted $p_{i,j}$ for the pair $(C_i, C_j)$) is derived from the $\chi^2$ cumulative distribution function with degrees of freedom:
-\[
-\text{dof} = (R_i - 1)(R_j - 1)
-\]
-To quantify the strength of the association independently of the sample size and the dimensions of the contingency table, \textbf{Cramér's $V$}\footnote{The variable name for Cramér's $V$ used virtually everywhere is $V$. However, to avoid confusion with the $V$ in Section~\ref{sec:correlated_concepts} and Section~\ref{sec:joint_effect}, the association score will be denoted $A$ instead.} is computed. We write $A_{i,j} := A(C_i, C_j)$ for brevity:
+The statistical significance $p_{i,j}$ is derived from the $\chi^2$ cumulative distribution function with $\text{dof} = (R_i - 1)(R_j - 1)$ degrees of freedom.
+
+To quantify association strength independently of sample size and table dimensions, Cramér's $V$ is computed (denoted as $A$ to prevent notation conflict with the rest-of-question text $V$):
 \[
 A(C_i, C_j) = \sqrt{\frac{\chi^2}{n \cdot (\min(R_i, R_j) - 1)}}
 \]
-where $A(C_i, C_j) \in [0, 1]$. A value of $0$ indicates no association, while $1$ indicates a perfect association.
+where $A(C_i, C_j) \in [0, 1]$, with $0$ indicating independence and $1$ perfect association.
 
-\subsubsection{Phase 3: Association Filtering}
-To filter out weak or statistically spurious relationships, a pair $(C_i, C_j)$ is considered for grouping if and only if it satisfies a dual-threshold condition:
+\paragraph{Phase 3: Association Filtering}
+To eliminate weak or spurious relationships, a pair $(C_i, C_j)$ is retained if and only if it satisfies a dual-threshold condition:
 \begin{enumerate}
-    \item \textbf{Statistical Significance:} The $p$-value must fall below the significance threshold $\alpha$:
-    \[
-    p_{i,j} < \alpha \quad (\text{where } \alpha = 0.005)
-    \]
-    \item \textbf{Practical Significance (Effect Size):} The association strength must meet a minimum effect size threshold $A_{\min}$:
-    \[
-    A_{i,j} \ge A_{\min} \quad (\text{where } A_{\min} = 0.3)
-    \]
+    \item \textbf{Statistical Significance:} $p_{i,j} < \alpha \quad (\alpha = 0.005)$
+    \item \textbf{Effect Size:} $A_{i,j} \ge A_{\min} \quad (A_{\min} = 0.3)$
 \end{enumerate}
-Pairs that fail either condition are discarded. The surviving pairs are sorted in descending order of their Cramér's $A$ scores to form a prioritized queue of candidate merges:
+Surviving pairs are sorted by descending association strength to form a prioritized candidate queue:
 \[
 \mathcal{E} = \left\{ (C_i, C_j, A_{i,j}) \;\middle|\; p_{i,j} < \alpha \land A_{i,j} \ge A_{\min} \right\}
 \]
 
-\subsubsection{Phase 4: Constrained Maximum Spanning Forest Partitioning}
-Let $\mathcal{C} = \{C_1, \ldots, C_M\}$ denote the fixed, dataset-wide set of concepts for the tabular dataset (i.e., its columns). In contrast to the per-question concept set $C$ used for natural-language datasets in Section~\ref{sec:joint_counterfactual}, $\mathcal{C}$ is identical for every question $x$ drawn from the table, since concepts correspond directly and consistently to table columns.
+\paragraph{Phase 4: Constrained Maximum Spanning Forest Partitioning}
+Let $\mathcal{C} = \{C_1, \ldots, C_M\}$ be the static, dataset-wide set of concepts corresponding to the table columns. Unlike natural-language datasets, $\mathcal{C}$ remains identical for every instance $x$.
 
-The final phase partitions $\mathcal{C}$ into disjoint groups. This problem can be modeled as finding a \textbf{Constrained Maximum Spanning Forest} on an undirected graph $G = (\mathcal{C}, \mathcal{E}, W)$, where the edge weights are given by $w(C_i, C_j) = A(C_i, C_j)$.
-
-The partitioning is resolved using a modified Kruskal's algorithm \cite{kruskalShortestSpanningSubtree1956} with the hard component-size constraint ($n_{\max}$):
+The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on an undirected graph $G = (\mathcal{C}, \mathcal{E}, W)$, where edge weights are given by $w(C_i, C_j) = A(C_i, C_j)$. The partitioning is resolved via a modified Kruskal's algorithm constrained by a maximum component size ($n_{\max}$):
 
 \begin{algorithm}[H]
 \caption{Constrained Greedy Partitioning}\label{alg:greedy_merge}
 \begin{algorithmic}[1]
-\State \textbf{Initialize} the partition $\mathcal{P} \gets \{ \{C\} \mid C \in \mathcal{C} \}$ \Comment{Every concept is initially a singleton set}
-\State \textbf{Sort} $\mathcal{E}$ in descending order of edge weight $A_{i,j}$
+\State \textbf{Initialize} partition $\mathcal{P} \gets \{ \{C\} \mid C \in \mathcal{C} \}$ \Comment{All concepts start as singletons}
+\State \textbf{Sort} $\mathcal{E}$ descending by weight $A_{i,j}$
 \For{each edge $e = (C_i, C_j, A_{i,j}) \in \mathcal{E}$}
-    \State Find the set $P_a \in \mathcal{P}$ containing $C_i$
-    \State Find the set $P_b \in \mathcal{P}$ containing $C_j$
-    \If{$P_a \neq P_b$}
-        \If{$|P_a \cup P_b| \le n_{\max}$}
-            \State $\mathcal{P} \gets \left( \mathcal{P} \setminus \{P_a, P_b\} \right) \cup \{P_a \cup P_b\}$ \Comment{Merge the groups}
-        \EndIf
+    \State Find sets $P_a, P_b \in \mathcal{P}$ containing $C_i$ and $C_j$
+    \If{$P_a \neq P_b \land |P_a \cup P_b| \le n_{\max}$}
+        \State $\mathcal{P} \gets \left( \mathcal{P} \setminus \{P_a, P_b\} \right) \cup \{P_a \cup P_b\}$ \Comment{Merge groups}
     \EndIf
 \EndFor
 \State \textbf{return} $\mathcal{P}$
 \end{algorithmic}
 \end{algorithm}
 
-The resulting partition $\mathcal{P}$ constitutes the tabular-dataset counterpart to the oracle output $S$ introduced in Section~\ref{sec:joint_counterfactual}; formally, $S := \mathcal{P}$, computed once for the entire dataset rather than per question. Every subsequent step of the pipeline -- joint counterfactual generation (This section) and Shapley-based redistribution (Section~\ref{sec:shapley}) -- therefore proceeds identically to the natural-language case, with each correlation group $s \in S$ now given by a block $P \in \mathcal{P}$.
-
-\subsection{Putting Joined Interventions into pratice}
+The resulting partition $\mathcal{P}$ serves as the tabular oracle output $S := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps—joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley})—then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ utilized as a correlation group $s \in S$.
+ 
+\subsubsection{Putting Joined Interventions into pratice}
 With an oracle $\mathcal{O}(x, C, n_{\max})$ implemented that can group concepts to a set $S$ based either on an LLM's intuition or mathmatical evidence based on the dataset, it is now possible to intervene on the selected concepts. Because Matton et al.'s original metric already contain the proceedures needed to intervene on a concept, this code only needs to minimally adapted. Most notably, the counterfactual generator must be updated to be able to intervene on multiple concepts to enable the major rationale of measuring the joint effect those concepts have according to \ref{sec:joint_effect}.
 
 It is however not sufficient to mix all concepts in a correlation set $s \in S$ together to just intervene on them combined. Otherwise it would not be able to distinguish the \emph{contributions} (more on that in \ref{sec:shapley}) of indivitual concepts to the joint effect. But measuring the effect all concepts of the same set have together (the grand coalition) and then again the individual concepts on their own is not sufficient as well: If a set contains more than two concepts, a concept might for instance exhibit another behavior on its own or in the grand coalition compared to when its mixed with another concept as the example shows in \ref{ex:all_combinations_motivation}.
