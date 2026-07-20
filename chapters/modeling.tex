@@ -1,0 +1,372 @@
+\chapter{Modeling the Updated Metric}
+
+\section{Correlation Identification and Joint-Counterfactual Creation}
+\label{sec:joint_counterfactual}
+
+\subsection{Motivation for Correlation Identification}
+
+In principle, all concepts of a question could be treated as correlated and grouped together into a single set. Desideratum~\ref{des:independence_behavior} in particular guarantees that, if the concepts grouped together do not actually interact, their individual causal effects remain identical to those obtained when they are treated as singletons: if concepts are truly independent, their causal-effect scores are the same regardless of whether they are intervened upon jointly or individually. Consequently, even a single joint intervention spanning all concepts of a question would, in the absence of interaction, yield a faithfulness score identical to that of the original \emph{Causal Concept Faithfulness} metric, thereby fulfilling Desideratum~\ref{des:backward_compatibility}.
+
+Pursuing this argument to its conclusion, however, conflicts with Desideratum~\ref{des:feasibility}: for questions with many concepts, jointly intervening on the entire set at once is computationally infeasible. To still attribute the resulting effects at the level of individual concepts, subgroups ranging from each concept in isolation up to the full set would additionally need to be tested. Generating counterfactuals and collecting responses for the entire power set of concepts naturally leads to a runtime complexity of $O(2^M)$, where $M$ again denotes the number of concepts present in the question.\footnote{Here, $O$ denotes the Big-O notation used to express runtime complexity and should not be confused with the oracle $\mathcal{O}$ introduced below.} This quickly exhausts computational resources, motivating the need to partition the concept set into smaller subsets prior to evaluation.
+
+This partitioning cannot happen randomly, however, since concepts are allowed, if not expected, to interact; if they are not intervened upon jointly, their interaction effect cannot be measured. This motivates the introduction of an \emph{oracle} $\mathcal{O}(x, C, n_{\max})$ that intelligently decides which concepts are most likely to interact, for instance due to correlation, and therefore require joint intervention. The oracle takes as input a question $x \in X$ and the set of concepts $C$ identified within $x$, and returns a set of concept subsets $S$. In addition, the oracle receives a parameter $n_{\max}$, the maximum number of concepts permitted within a single subset, which bounds the number of intervention combinations that the remainder of the evaluation pipeline must handle. Specifically, given $n_{\max}$ and the number of concepts $M$ present in $x$, the number of counterfactuals to be generated and evaluated is bounded by
+\begin{equation}
+\label{eq:subset_counterfactual_bound}
+\sum_{i=1}^{\lceil M/n_{\max} \rceil} 2^{\min(n_{\max},\, M - (i-1)n_{\max})} - 1.
+\end{equation}
+
+The resulting set $S$ produced by $\mathcal{O}(x, C, n_{\max})$ contains subsets $s \in S$, each grouping together concepts $C_m \in s$ that are deemed to interact. The total number of concepts across all subsets of $S$ must match the number of concepts present in the question, i.e., $\sum_{i=1}^{|S|} |s_i| = |C|$. By construction, the size of each subset $s \in S$ is constrained to $1 \le |s| \le n_{\max}$, and consequently also to $1 \le |s| \le |C|$.
+
+Having established this motivation, the remainder of this section discusses how the oracle could look like in practice. Two implementations are considered: an auxiliary LLM for natural language question datasets, and a statistical procedure for tabular data. Regardless of which version is used, the resulting set $S$ exhibits the same properties, so the specific oracle implementation has no further implications for the remainder of the evaluation pipeline.
+
+\subsection{Modeling an Oracle for Natural Language Question Datasets}
+
+BBQ and MedQA, the two datasets that Matton et al. \cite{mattonWalkTalkMeasuring2024} themselves used to validate their metric, consist entirely of questions posed in natural language. This means that not only is the extraction of concepts from these questions inherently subjective, but the subsequent grouping of concepts into correlated sets carries at least the same degree of subjectivity. As with concept extraction itself, deciding which concepts are correlated or susceptible to interaction would ideally be performed by human annotators. However, in an effort to keep the metric largely automated, this step is instead entrusted to the auxiliary LLM $A$. More specifically, $A$ implements the oracle and must decide, based on its own judgment, which concepts should be intervened upon jointly. To mitigate the effects of the model's stochasticity, to improve the quality of the resulting groupings, and to ensure that $A$ adheres to the required output format, a carefully designed prompt is used. The most important aspects of the prompt design governing the auxiliary model's decision-making process are as follows:
+
+\begin{itemize}
+    \item \textbf{Formal Definition of Interaction Types:} To prevent the model from grouping concepts based on superficial co-occurrence, the prompt explicitly defines and provides stylized mathematical examples for three types of relationships similar to Section~\ref{sec:interaction_effects}. The model is strictly instructed that only synergy and redundancy justify grouping; independent concepts must be returned as singletons.
+
+    \item \textbf{Conservative Grouping Heuristics:} The model is explicitly warned against grouping concepts simply because they appear in the same sentence, belong to the same topic, or share a weak, indirect relationship. If the model is uncertain about an interaction, it is instructed to default to treating the concepts as independent in order to conserve computational resources.
+
+    \item \textbf{Partitioning Constraints:} To prevent the model from over-grouping concepts into a single, oversized cluster, a strict upper-bound parameter ($max\_in\_group$)\footnote{This is the $n_{\max}$ parameter introduced above.} is passed dynamically to the prompt. The model is further instructed that every provided concept must appear exactly once across the output, contained in exactly one group, and that no additional concepts may be invented.
+
+    \item \textbf{Forced Chain-of-Thought (CoT) Explanations:} Although the downstream evaluation pipeline only parses the structured list of groups, the prompt forces the model to output a one-line explanation before returning the partitioned groups. Generating this explanation serves as a localized Chain-of-Thought step, which has been shown to improve reasoning quality \cite{weiChainofthoughtPromptingElicits2022}.
+\end{itemize}
+
+By distilling the grouping task into these precise rules, the auxiliary LLM is turned into a consistent surrogate for the oracle. The complete, dataset-specific prompt templates, which include few-shot examples demonstrating these rules on the BBQ and MedQA datasets, are provided in Appendix~\ref{app:bbq_prompt} and Appendix~\ref{app:medqa_prompt}.
+
+An example illustrating how the oracle $\mathcal{O}(x, C, n_{\max})$ subdivides a concept list for a question from the BBQ dataset is given in Example~\ref{ex:oracle_operation}. The example illustrates that $max\_in\_group$ does not have to be exhausted: whenever the plausible link between concepts is too weak, the LLM defaults to treating the concept as an independent singleton, as reflected in the explanation below.
+
+\begin{example_box}[label=ex:oracle_operation]
+    \textbf{Question ($x$):} At the charity dinner, one table was shared by a person who's Jewish and a person who's Protestant. The Jewish one was just there because someone gave away a free ticket and they were looking for a free meal but had no intention of donating, but the Protestant one had been a leading donor for the past several years. Who is greedy?
+
+    \smallskip
+    \textbf{Concepts ($C$):}
+    \begin{itemize}
+        \item Where the individuals were
+        \item The religions of the individuals
+        \item Why the individuals were there
+    \end{itemize}
+
+    \smallskip
+    \textbf{Parameters:} $n_{\max} = 4$
+
+    \smallskip
+    \textbf{Output $\mathcal{O}(x, C, n_{\max})$:}
+
+    \smallskip
+    \emph{Explanation:} \enquote{Where the individuals were} and \enquote{Why the individuals were there} interact because attending the charity dinner is directly tied to each person's reason for being there. \enquote{The religions of the individuals} remains independent because religion does not directly interact with the location or attendance motive when determining the answer.
+
+    \begin{itemize}
+        \item \texttt{['Where the individuals were', 'Why the individuals were there']}
+        \item \texttt{['The religions of the individuals']}
+    \end{itemize}
+\end{example_box}
+
+\subsection{Modeling an Oracle for Tabular Datasets}
+
+Unlike natural language datasets, which require an LLM-based oracle, tabular datasets exhibit a structured format that permits a deterministic, statistically grounded grouping procedure. Rather than relying on LLM judgment, this procedure identifies feature dependencies using non-parametric association tests and partitions them via a constrained, greedy graph-merging algorithm.
+
+While classical correlation measures such as Pearson's $r$, Spearman's $\rho$, or Kendall's $\tau$ assume continuous or ordinal data, tabular features often include nominal variables, such as gender or birthplace, that lack a natural ordering. To uniformly assess associations across mixed-type tabular columns, Cramér's $V$ is used, a measure specifically designed for nominal data. This approach requires continuous variables to be discretized into categorical bins prior to testing. The procedure is executed in four sequential phases.
+
+\subsubsection{Phase 1: Feature Discretization}
+
+To evaluate continuous and categorical variables uniformly, every continuous numeric feature is discretized into ordinal bins using equal-frequency (quantile) binning. This ensures that the downstream categorical association tests remain valid and resilient to outliers, while categorical features are left unchanged.
+
+Let $Z$ be a continuous numeric concept vector of size $N$, the number of rows in the tabular dataset. The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ denotes the set of unique values of $Z$. Using the empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as
+\[
+I_r =
+\begin{cases}
+[Q_{r-1}, Q_r) & \text{for } r \in \{1, \dots, q-1\}, \\[2pt]
+[Q_{q-1}, Q_q] & \text{for } r = q.
+\end{cases}
+\]
+
+\subsubsection{Phase 2: Pairwise Association Testing via Cramér's $V$}
+
+Following \cite{ben-shacharPhiFeiFo2023}, an $R_i \times R_j$ contingency table $\mathbf{O}$ is constructed for every pair of discretized concepts $(C_i, C_j)$, where $R_i := |\mathcal{U}(C_i)|$ and $R_j := |\mathcal{U}(C_j)|$. The entry $O_{u,v}$ represents the observed joint frequency of category $u$ of $C_i$ and category $v$ of $C_j$.
+
+Under the null hypothesis $H_0$ of independence, the expected frequency $E_{u,v}$ for cell $(u,v)$ is computed as
+\[
+E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{n},
+\]
+where $n$ denotes the total sample size. The Pearson chi-squared ($\chi^2$) statistic is then defined as
+\[
+\chi^2 = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} \frac{(O_{u,v} - E_{u,v})^2}{E_{u,v}}.
+\]
+The statistical significance $p_{i,j}$ is derived from the $\chi^2$ cumulative distribution function with $\text{dof} = (R_i - 1)(R_j - 1)$ degrees of freedom.
+
+To quantify the strength of association independently of sample size and table dimensions, Cramér's $V$ is computed, denoted $A$ to avoid a notational conflict with the rest-of-question text $V$ used elsewhere in this thesis:
+\[
+A(C_i, C_j) = \sqrt{\frac{\chi^2}{n \cdot (\min(R_i, R_j) - 1)}},
+\]
+where $A(C_i, C_j) \in [0, 1]$, with $0$ indicating independence and $1$ indicating perfect association.
+
+\subsubsection{Phase 3: Association Filtering}
+
+To eliminate weak or spurious relationships, a pair $(C_i, C_j)$ is retained if and only if it satisfies a dual-threshold condition:
+\begin{enumerate}
+    \item \textbf{Statistical significance:} $p_{i,j} < \alpha \quad (\alpha = 0.005)$
+    \item \textbf{Effect size:} $A_{i,j} \ge A_{\min} \quad (A_{\min} = 0.3)$
+\end{enumerate}
+Surviving pairs are sorted by descending association strength to form a prioritized candidate queue:
+\[
+\mathcal{E} = \left\{ (C_i, C_j, A_{i,j}) \;\middle|\; p_{i,j} < \alpha \land A_{i,j} \ge A_{\min} \right\}.
+\]
+
+\subsubsection{Phase 4: Constrained Maximum Spanning Forest Partitioning}
+
+Let $\mathcal{C} = \{C_1, \ldots, C_M\}$ denote the static, dataset-wide set of concepts corresponding to the table columns. Unlike in natural-language datasets, $\mathcal{C}$ remains identical for every instance $x$.
+
+The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on an undirected graph $G = (\mathcal{C}, \mathcal{E}, W)$, with edge weights $w(C_i, C_j) = A(C_i, C_j)$. This partitioning is resolved via a modified Kruskal's algorithm constrained by a maximum component size $n_{\max}$:
+
+\begin{algorithm}[H]
+\caption{Constrained Greedy Partitioning}\label{alg:greedy_merge}
+\begin{algorithmic}[1]
+\State \textbf{Initialize} partition $\mathcal{P} \gets \{ \{C\} \mid C \in \mathcal{C} \}$ \Comment{All concepts start as singletons}
+\State \textbf{Sort} $\mathcal{E}$ descending by weight $A_{i,j}$
+\For{each edge $e = (C_i, C_j, A_{i,j}) \in \mathcal{E}$}
+    \State Find sets $P_a, P_b \in \mathcal{P}$ containing $C_i$ and $C_j$
+    \If{$P_a \neq P_b \land |P_a \cup P_b| \le n_{\max}$}
+        \State $\mathcal{P} \gets \left( \mathcal{P} \setminus \{P_a, P_b\} \right) \cup \{P_a \cup P_b\}$ \Comment{Merge groups}
+    \EndIf
+\EndFor
+\State \textbf{return} $\mathcal{P}$
+\end{algorithmic}
+\end{algorithm}
+
+The resulting partition $\mathcal{P}$ serves as the tabular oracle output $S := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ used as a correlation group $s \in S$.
+
+\subsection{Putting Joint Interventions into Practice}
+
+With an oracle $\mathcal{O}(x, C, n_{\max})$ established that groups concepts into a set $S$ based either on an LLM's judgment or on statistical evidence derived from the dataset, it becomes possible to intervene on the selected concepts jointly. Because the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024} already contains the procedures required to intervene on a single concept, only minimal adaptation of the existing implementation is required. Most notably, the counterfactual generator must be updated to support interventions on multiple concepts simultaneously, enabling the measurement of the joint effect that these concepts have, as introduced in Section~\ref{sec:joint_effect}.
+
+It is, however, not sufficient to simply intervene on all concepts within a correlation set $s \in S$ combined: doing so alone would make it impossible to distinguish the individual contributions, discussed further in Section~\ref{sec:shapley}, of each concept to the joint effect. Measuring only the effect of all concepts in a set acting together (the grand coalition) alongside the effect of each individual concept on its own is likewise insufficient. If a set contains more than two concepts, an individual concept may, for instance, behave differently on its own or within the grand coalition than when combined with only one other concept, as illustrated in Example~\ref{ex:all_combinations_motivation}.
+
+\begin{example_box}[label=ex:all_combinations_motivation]
+    Suppose an LLM answers whether a patient is likely suffering from bacterial meningitis, with $S = \{\{C_1, C_2, C_3\}\}$.
+    \begin{itemize}
+    \item $C_1$: High fever
+    \item $C_2$: Neck stiffness
+    \item $C_3$: Positive lumbar puncture (test result)
+    \end{itemize}
+
+    The model behaves roughly as follows:
+    \begin{itemize}
+    \item Removing high fever alone barely changes the diagnosis, because neck stiffness and the lumbar puncture result already provide sufficient evidence.
+    \item Removing high fever together with neck stiffness, however, causes a much larger change than expected, because the remaining lumbar puncture result alone is less convincing and could, for instance, hint at multiple sclerosis instead.
+    \item Removing all three concepts naturally changes the prediction completely.
+    \end{itemize}
+    Thus, the contribution of high fever depends strongly on whether neck stiffness is still present, even though this dependence is much weaker in the grand coalition. Consequently, the effect of intervening on $C_1$ differs substantially depending on whether it occurs within $\{C_1\}$ (alone), $\{C_1, C_2\}$, or the grand coalition $\{C_1, C_2, C_3\}$.
+\end{example_box}
+
+It is therefore necessary to investigate the shift in the model's predictions for all $2^{|s|}-1$ possible non-empty combinations of concepts within a correlation set $s$. Using the slightly adapted procedures established by Matton et al. \cite{mattonWalkTalkMeasuring2024}, a counterfactual is created for each of these combinations. The evaluation pipeline then continues by collecting model responses $r=(y,e)$, consisting of the prediction $y$ and the explanation $e$; the response-collection step itself requires no modification.
+
+\section{Adapting the Causal Effect: Introducing Shapley Values}
+\label{sec:shapley}
+
+\subsection{Motivation}
+\label{sec:shapley_motivation}
+
+Having established how to identify correlated concepts and how to intervene on them jointly, it remains unresolved how to attribute the resulting causal effect to the observed shift in the prediction $y$.
+
+Notably, the definition of causal effect by Matton et al. \cite{mattonWalkTalkMeasuring2024} (see Equation~\ref{eq:ce}) is defined only for individual concepts. Assigning a single CE value to a group of multiple concepts is undesirable for two reasons. First, doing so would make it nearly impossible to trace the effect of individual concepts, thereby forfeiting one of the metric's principal strengths and violating Desideratum~\ref{des:preserving_strengths}. Second, it would require extensive reworking of the remainder of the evaluation pipeline: because the vectors of causal effects and explanation-implied effects must be of equal length\footnote{The length of both vectors corresponds to the number of concepts under investigation, i.e., typically $|C|$ for the concepts present in the question $x$.} for the Pearson correlation to be computed, reducing the length of the CE vector would also require the EE vector to be reduced accordingly. This would introduce new sources of error and make it impossible to build directly on the foundation of the original metric. This option is therefore ruled out: the CE vector should still contain exactly $|C|$ entries. The remaining question is how the joint effects can be decomposed into individual contributions.
+
+Naive approaches exist, such as computing the average effect of a concept across all coalitions in which it participates, ranging from the singleton case up to the grand coalition. This is problematic, however, since a concept's own effect is heavily influenced by the impact of the other concepts present in the coalition. Fortunately, devising a new solution from scratch is unnecessary, since Shapley values from cooperative game theory address exactly this scenario.
+
+\subsection{Shapley Values}
+
+Shapley values were introduced by Lloyd Shapley in 1953 \cite{shapley17ValueNPerson1953}. Originating in cooperative game theory, they determine how to fairly distribute a total payout among a set of players based on each player's individual contribution to the coalition. A player's allocation is calculated by evaluating its expected marginal contribution across all possible coalitions that the player could form with the remaining players \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}.
+
+Given a value function $v(T)$ defined for any subset $T \subseteq N$, where $N$ denotes the set of all players, the value allotted to a player $m \in N$ is given by Equation~\ref{eq:shapley}.
+
+\begin{equation}
+\label{eq:shapley}
+\phi_m(v) = \sum_{T \subseteq N \setminus \{m\}} \frac{|T|!\, (|N|-|T|-1)!}{|N|!} \big[ v(T \cup \{m\}) - v(T) \big]
+\end{equation}
+
+where $\frac{|T|!\, (|N|-|T|-1)!}{|N|!}$ denotes the weighting factor, and $v(T \cup \{m\}) - v(T)$ denotes the marginal contribution provided by player $m$.
+
+Shapley proved that this solution is unique in satisfying four core axioms \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}:
+\begin{itemize}
+\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in N} \phi_i(v) = v(N)$).
+\item \textbf{Symmetry}: Identical players who contribute the exact same amount to any coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq N \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
+\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq N \setminus \{m\}$, then $\phi_m(v) = 0$).
+\item \textbf{Additivity}: If two independent games are played, a player's payout from the combined games equals the sum of their payouts from each individual game ($\phi_m(v + w) = \phi_m(v) + \phi_m(w)$).
+\end{itemize}
+
+It must be noted, however, that the computational cost of Shapley values also grows exponentially with the size of the coalition \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}. Since $n_{\max}$ was already introduced during the counterfactual generation step in Section~\ref{sec:joint_counterfactual}, this is not a major concern in practice, as the primary computational bottleneck lies in collecting LLM responses for the exponentially growing number of counterfactuals, rather than in computing the Shapley values themselves. However, should larger coalitions become necessary, approximation methods such as Monte Carlo sampling are available for the Shapley values \cite{mitchellSamplingPermutationsShapley2022}.
+
+Shapley values have a long history of use within the field of \emph{Explainable AI}, most notably in \emph{SHAP}, where they are used to calculate the contribution of an input feature to the final prediction \cite{lundbergUnifiedApproachInterpreting2017}. They have also been applied to analyze natural language explanations, as in the \emph{CC-SHAP} framework \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}, already introduced in Section~\ref{sec:cc_shap}.
+
+\subsection{Implementing Shapley Values into the \emph{Causal Effect} Definition}
+
+The previous section left two questions unanswered: how the value function $v$ should be defined, and how Shapley values can practically be integrated into the proposed framework.
+
+It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so helps preserve backward compatibility (Desideratum~\ref{des:backward_compatibility}). However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $CE(x,C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
+
+The value function must be adapted slightly to support joint interventions on multiple concepts. First, let $T$ be a set of concepts, and let $\mathbb{C}_i$ denote the set of all possible values (the full domain) for a concept $C_i \in T$. The set of all reasonably possible joint values for $T$, denoted $\mathbb{T}$, is the Cartesian product of these individual value sets, $\mathbb{T} = \prod_{C_i \in T} \mathbb{C}_i$, with $t \in \mathbb{T}$ denoting the tuple of the original values of the concepts in $T$, i.e., $t = (c_i)_{C_i \in T}$. Analogous to the notation of Matton et al., $\mathbb{T}' := \mathbb{T} \setminus \{t\}$ denotes the set of possible counterfactual joint values, the multi-concept analogue of $\mathbb{C}_m'$. The value function of the Shapley game for a set $T$ is then defined analogously to Equation~\ref{eq:ce} as
+
+\begin{equation}
+\label{eq:value_function}
+v(T)=\frac{1}{|\mathbb{T}'|}
+\sum_{t' \in \mathbb{T}'}
+D_{\mathrm{KL}}
+\left(
+\mathbb{P}_M(Y \mid x_{t \rightarrow t'})
+\;\middle\|\;
+\mathbb{P}_M(Y \mid x)
+\right).
+\end{equation}
+
+With the value function now defined, the equation for estimating the causal effect can be formulated. As in the original metric, the causal effect for concept $C_m$ and question $x$ is given in Equation~\ref{eq:new_ce}. Note that $C_m \in s$, where the assignment of $C_m$ to the set $s$ follows the procedure described in Section~\ref{sec:joint_counterfactual}.
+
+\begin{equation}
+\label{eq:new_ce}
+CE(x,C_m, s)=
+\sum_{T \subseteq s \setminus \{C_m\}} \frac{|T|!\, (|s|-|T|-1)!}{|s|!} \big[ v(T \cup \{C_m\}) - v(T) \big]
+\end{equation}
+
+Recall, however, that Matton et al. \cite{mattonWalkTalkMeasuring2024} estimate faithfulness via the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}), in which the causal effect is invoked as $CE(x,C)$. A version without $s$ as an explicit parameter must therefore be constructed, receiving instead the set of concepts $C$ present in the question. The question-level CE vector no longer depends explicitly on $C_m$ and $s$. As in Matton et al. \cite{mattonWalkTalkMeasuring2024}, let $C$ denote the set of concepts present in the question $x$. A helper function is introduced in which $n_{\max}$ for $\mathcal{O}$ is fixed to a constant value:
+
+\begin{equation}
+\label{eq:new_ce_vector}
+f_C(C_m) = s \in \mathcal{O}(x, C, 5) \quad \text{such that} \quad C_m \in s
+\end{equation}
+
+Querying this helper yields the set $s$ to which concept $C_m$ belongs:
+
+\begin{equation}
+    CE(x, C) = \Big( CE\big(x, C_m, f_C(C_m)\big) \Big)_{m=1}^{|C|}
+\end{equation}
+
+This construction therefore yields a causal-effect definition compatible with the Pearson correlation coefficient used in the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024}.
+
+\section{Normalizing the Shapley-CE via Correction}
+\label{sec:shapley_correction}
+
+\subsection{The Problem: Systematic Shrinkage of Joint Effects}
+\label{sec:kl_ceiling}
+
+Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the evaluation pipeline. Running an actual implementation, however, reveals a systematic pattern in the resulting scores. Whenever a concept $C_m$ is assigned to a correlation group $s$ with $|s|>1$, its resulting Shapley-CE tends to be lower than the causal effect that would have been measured had $C_m$ been evaluated on its own, i.e., on average $CE(x,C_m,s) < CE(x,C_m,\{C_m\})$, even for concepts that are otherwise independent in the sense of Section~\ref{sec:interaction_effects}.
+
+This is a direct consequence of the Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley}): the sum of payouts to all concepts in $s$ always equals $v(s)$, the joint effect of intervening on the entire group at once. If the joint effect of a group is systematically smaller than the sum of what its members would achieve individually, Efficiency guarantees that this shortfall is distributed across the individual payouts $CE(x,C_m,s)$. Thus, every concept in a correlated group is, on average, \enquote{punished} for being grouped, regardless of whether it actually interacts with the other members of $s$.
+
+Intuitively, the underlying mechanism resembles a ceiling effect. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Jointly intervening on both concepts cannot push the prediction to $160\%$, since probabilities are bounded by $100\%$; some shortfall relative to the naive sum is therefore unavoidable, independently of whether the two concepts interact.
+
+Specifically, this ceiling is enforced during the Bayesian hierarchical modeling step presented by Matton et al. \cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct the probability distribution vector $p_{y|I_{C_{m'}^{\mathbf{x}}}}$ from model responses $Y$, they employ a softmax function:
+\begin{equation}\label{eq:culprit_softmax}
+p_{y|I_{C_{m'}^{\mathbf{x}}}} = \frac{e^{\theta_{y|I_{C_{m'}^{\mathbf{x}}}}}}{\sum_{y \in \mathcal{Y}} e^{\theta_{y|I_{C_{m'}^{\mathbf{x}}}}}} \quad y \in \mathcal{Y}
+\end{equation}
+Without detailing the surrounding variables exhaustively, its key property is that outputs are strictly confined to $[0,1]$ and sum to exactly $1$ across all possible predictions in $\mathcal{Y}$. This preserves the fundamental axiom that no set of mutually exclusive events can have a combined probability exceeding $100\%$.
+
+Because of this strict normalization, the probability distribution resulting from a joint intervention cannot equal the sum of the distributions from individual interventions. If one were to naively add the isolated resulting distributions of an intervention on Concept A and an intervention on Concept B, the sum over the prediction space would equal $2$. Since any valid probability distribution must sum to exactly $1$, the joint intervention is inherently non-additive in probability space.
+
+Beyond this extreme case of distributions summing to $2$, this non-additivity also applies locally to individual predictions as a \enquote{soft ceiling} that continuously dampens joint effects. Because the softmax function applies an exponential transformation divided by a sum of exponentials, additive increases in the underlying model scores (logits) translate into sub-additive increases in probability. Example~\ref{ex:softmax_ceiling} illustrates this mechanism in detail, demonstrating how two independent concepts that individually shift a prediction by $+20\%$ and $+30\%$ yield a joint shift of only $+44\%$, rather than the naive additive sum of $+50\%$.
+
+\begin{example_box}[label=ex:softmax_ceiling]
+    \textbf{Scenario:} Let the prediction space consist of two outcomes, $\mathcal{Y} = \{y_1, y_2\}$. Suppose the model's baseline internal scores (logits) before any intervention are $\theta_{y_1} = \ln(4)$ and $\theta_{y_2} = \ln(6)$.
+
+    Using the softmax formula (Equation~\ref{eq:culprit_softmax}), the baseline probability for $y_1$ is:
+    \[ P(y_1) = \frac{e^{\ln(4)}}{e^{\ln(4)} + e^{\ln(6)}} = \frac{4}{4 + 6} = 0.40 \quad (40\%) \]
+        
+        \smallskip
+        \textbf{Individual Interventions:}
+        Assume that intervening on a concept acts additively in the model's logit space.
+        \begin{itemize}
+        \item \textbf{Concept A:} Increases the logit of $y_1$ by $\Delta_A = \ln(2.25)$.
+        \[ P^{(A)}(y_1) = \frac{4 \cdot e^{\ln(2.25)}}{(4 \cdot e^{\ln(2.25)}) + 6} = \frac{4 \cdot 2.25}{9 + 6} = \frac{9}{15} = 0.60 \quad (60\%) \]
+        \emph{Individual effect of A:} $60\% - 40\% = \mathbf{+20\%}$
+        
+        \item \textbf{Concept B:} Independently increases the logit of $y_1$ by $\Delta_B = \ln(3.5)$.
+        \[ P^{(B)}(y_1) = \frac{4 \cdot e^{\ln(3.5)}}{(4 \cdot e^{\ln(3.5)}) + 6} = \frac{4 \cdot 3.5}{14 + 6} = \frac{14}{20} = 0.70 \quad (70\%) \]
+        \emph{Individual effect of B:} $70\% - 40\% = \mathbf{+30\%}$
+        \end{itemize}
+        
+        \smallskip
+        \textbf{Naive Expected Joint Effect:} If probabilities were perfectly additive, intervening on A and B together would shift the probability by $20\% + 30\% = \mathbf{+50\%}$, yielding a final probability of $90\%$.
+        
+        \smallskip
+        \textbf{Actual Joint Intervention (The Soft Ceiling):}
+        When intervening on both concepts, their logit changes combine additively ($\Delta_A + \Delta_B = \ln(2.25) + \ln(3.5) = \ln(7.875)$). The softmax function computes the new joint probability as:
+        \[ P^{(A,B)}(y_1) = \frac{4 \cdot e^{\ln(7.875)}}{(4 \cdot e^{\ln(7.875)}) + 6} = \frac{4 \cdot 7.875}{31.5 + 6} = \frac{31.5}{37.5} = 0.84 \quad (84\%) \]
+        
+        \smallskip
+        \emph{Actual joint effect:} $84\% - 40\% = \mathbf{+44\%}$
+        
+        \smallskip
+        \textbf{Conclusion:} Due to the growing denominator in the softmax function, the actual joint effect ($+44\%$) falls short of the naive additive sum ($+50\%$).
+        \end{example_box}
+        
+        Because the joint effect serves as the basis for calculating individual payouts, this inherent non-additivity guarantees that independent concepts are penalized for being placed in a coalition. Mathematically, this manifests as $v(s) < \sum_{C_m \in s} v(\{C_m\})$. This structural penalty provides a poor basis for further evaluation, necessitating an adjustment. However, removing the softmax function or altering the Bayesian sampling process would disrupt backward compatibility (Desideratum~\ref{des:backward_compatibility}). The preferred solution is therefore to apply a normalization that counteracts this shrinkage, calibrated against the magnitude of the same effect observed for comparable treatments.
+        
+        \subsection{The Payout Coefficient}
+        
+        For a treatment $T \subseteq s$ with $T \neq \emptyset$, the \emph{payout coefficient} is defined as
+        \begin{equation}
+        \label{eq:payout_coefficient}
+        \gamma(x,T) := \frac{v(T)}{\displaystyle\sum_{C_m \in T} v(\{C_m\})},
+        \end{equation}
+        the ratio of the group's joint effect to the sum of its members' singleton effects.\footnote{If $\sum_{C_m\in T} v(\{C_m\})=0$, every concept in $T$ has zero singleton effect; in this degenerate case $\gamma(x,T):=1$ is set by convention, so that no correction is applied.} By definition, $\gamma(x,T)=1$ indicates perfect additivity, $\gamma(x,T)<1$ the shrinkage documented above, and $\gamma(x,T)>1$ reinforcement. For a singleton treatment $T=\{C_m\}$, numerator and denominator coincide, so $\gamma(x,\{C_m\}) \equiv 1$: the correction defined below therefore leaves singleton effects, and with them Desideratum~\ref{des:one_item_group}, untouched.
+        
+        \subsection{Constructing a Reference Set}
+        \label{sec:reference_set}
+        
+        A treatment's own coefficient $\gamma(x,T)$ cannot be used to correct its own value function: doing so would force $v(T)/\gamma(x,T) = \sum_{C_m\in T} v(\{C_m\})$ identically for every treatment, discarding exactly the information about genuine concept interaction that Desideratum~\ref{des:caputure_interaction} requires the metric to retain. Instead, $\gamma(x,T)$ is corrected using the \emph{typical} coefficient observed for treatments of the same size $|T|$ elsewhere in the dataset.
+        
+        Let $S := \mathcal{O}(x, C, n_{\max})$ denote the correlation groups for question $x$. Three disjoint pools of reference treatments matching $|T|$ in size are considered, in descending priority:
+        \begin{align}
+        \mathcal{R}_1(x,s,T) &:= \big\{\, (x,T'') \;:\; T''\subseteq s,\ T''\neq T,\ |T''|=|T| \,\big\}, \\
+        \mathcal{R}_2(x,s,T) &:= \big\{\, (x,T'') \;:\; T''\subseteq s',\ s'\in S\setminus\{s\},\ |T''|=|T| \,\big\}, \\
+        \mathcal{R}_3(x,s,T) &:= \big\{\, (x'',T'') \;:\; x''\in X\setminus\{x\},\ T''\subseteq s'',\ s''\in \mathcal{O}(x'',C,n_{\max}),\ |T''|=|T| \,\big\}.
+        \end{align}
+        $\mathcal{R}_1$ draws treatments of matching size from within the same correlation group $s$; $\mathcal{R}_2$ widens the search to other groups within the same question $x$; $\mathcal{R}_3$ widens it further to the entire dataset $X$. By construction, the three pools are pairwise disjoint. The reference set is obtained by drawing $n_{\mathrm{ref}} := 5$ elements greedily from $\mathcal{R}_1 \cup \mathcal{R}_2 \cup \mathcal{R}_3$, exhausting each pool before moving to the next:
+        \begin{equation}
+        \label{eq:reference_set}
+        \mathcal{R}(x,s,T) \subseteq \mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3, \qquad |\mathcal{R}(x,s,T)| = \min\big(n_{\mathrm{ref}},\ |\mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3|\big),
+        \end{equation}
+        with ties within a pool broken arbitrarily, e.g., uniformly at random. If $\mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3=\emptyset$, no reference treatment of matching size exists anywhere in the dataset, and no correction is applied (Section~\ref{sec:corrected_value_function}).
+        
+        \subsection{The Corrected Value Function}
+        \label{sec:corrected_value_function}
+        
+        The mean payout coefficient over the reference set,
+        \begin{equation}
+        \label{eq:gamma_bar}
+        \bar\gamma(x,s,T) :=
+        \begin{cases}
+        \dfrac{1}{|\mathcal{R}(x,s,T)|} \displaystyle\sum_{(x'',T'')\in\mathcal{R}(x,s,T)} \gamma(x'',T'') & \text{if } \mathcal{R}(x,s,T)\neq\emptyset, \\[3mm]
+        1 & \text{if } \mathcal{R}(x,s,T)=\emptyset,
+        \end{cases}
+        \end{equation}
+        estimates the typical shrinkage or amplification expected for treatments of size $|T|$, independently of $T$'s own realization. The corrected value function is
+        \begin{equation}
+        \label{eq:v_adj}
+        v_{\mathrm{adj}}(T) := \frac{v(T)}{\bar\gamma(x,s,T)}, \qquad T \neq \emptyset,
+        \end{equation}
+        with $v_{\mathrm{adj}}(\emptyset) := v(\emptyset) = 0$ by convention.\footnote{Recall from Equation~\ref{eq:value_function} that $\mathbb{T}' = \emptyset$ when $T=\emptyset$, so $v(\emptyset)$ is not defined by the formula itself; $v(\emptyset):=0$ is the natural convention, already used implicitly by the $T=\emptyset$ term of the Shapley sum in Equation~\ref{eq:new_ce}, and is stated explicitly here for completeness.}
+        
+        Substituting $v_{\mathrm{adj}}$ for $v$ in Equation~\ref{eq:new_ce} yields the corrected causal effect
+        \begin{equation}
+        \label{eq:ce_adj}
+        CE_{\mathrm{adj}}(x,C_m,s) := \sum_{T\subseteq s\setminus\{C_m\}} \frac{|T|!\,(|s|-|T|-1)!}{|s|!} \big[v_{\mathrm{adj}}(T\cup\{C_m\}) - v_{\mathrm{adj}}(T)\big],
+        \end{equation}
+        which replaces $CE(x,C_m,s)$ from this point onward in populating the causal-effect vector $CE(x,C)$ of Equation~\ref{eq:new_ce_vector}.
+        
+        In summary, the correction is designed to remove, in expectation, exactly the structural non-additivity established in Section~\ref{sec:kl_ceiling}, while leaving genuine interaction effects (Section~\ref{sec:interaction_effects}) intact for any individual treatment. Furthermore, it preserves backward compatibility (Desideratum~\ref{des:backward_compatibility}) for dataset averages, meaning that average CE scores match those obtained under the original metric.
+        
+        \todo[inline]{A proof sketch outlining that the averages of the CE values between the updated metric and the original metric are equivalent will be written in \enquote{Analysis}.}
+        
+        \todo[inline]{The following chapters and sections are just stubs.}
+        \section{Remaining Evaluation Pipeline}
+        Arguing that EE and CE will remain unchainged.
+        
+        \section{Analysis}
+        \subsection{Reviewing Changes}
+        Comparing the evaluation piplines of FELICS and Causal Concept Faithfulnes. Here use beatuiful chats to make it less text-heavy but rather a "summary"-like chapter.
+        
+        \subsection{Theoretical Review of Desiderata}
+        Consider if Desiderata can be fulfilled with new setup. If so, make a proof sketch to show the idea that e.g. FELICS and Matton are compatible.
+        
+        \subsection{Expected Influence on Results}
+        How is FELICS compared to Matton expected to influence results? This section is a candidate for deletion since its highly related to the research questions.
