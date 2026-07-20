@@ -72,7 +72,6 @@ With this framework for the metric extension the problem is broken down to subpr
 
 The metric extension proposed in this thesis will from now on be referred to as \textbf{FELICS} (\textbf{F}aithfulness \textbf{E}stimation \textbf{L}everaging \textbf{I}nteracting \textbf{C}oncept \textbf{S}ets). The name reflects the central idea of the proposed approach: estimating explanation faithfulness by explicitly modeling interactions between sets of concepts rather than treating concepts as independent.
 
-
 \section{Updating evaluation pipeline}
 \subsection{Correlation identification and joint-counterfactual creation}
 \label{sec:joint_counterfactual}
@@ -286,6 +285,7 @@ CE(x,C_m, s)=
 
 However to Matton et al. recall the faithfulness estimation via the pearson correlation coeficient \ref{eq:faithfulness} where the CE is called by $CE(x,C)$. Therefore a version without $s$ as a parameter has to be crafted but receives the set of concepts. The question-level CE-vector gets rid of $C_m$ and $s$. Analoge to Matton et al. let $C$ be the set of concepts present in the question $x$. Assume we have a helper where $n_{max}$ for $\mathcal{O}$ now gets a constant value.
 \begin{equation}
+\label{eq:new_ce_vector}
 f_C(C_m) = s \in \mathcal{O}(x, C, 5) \quad \text{such that} \quad C_m \in s
 \end{equation}
 
@@ -295,11 +295,101 @@ Queriying the helper gives us the the set $s$ where concept $C_m$ belongs to.
 \end{equation}
 Therefore its posible to build a CE definition that matches Mattons original for the pearson correlation coeficient.
 \subsection{Normalize Shapley-CE by correction}
-\subsubsection{Motivation / Problem}
-TLDR; Concepts that are grouped together in BBQ by default are between additive,independent. By default because of shapleys fairness \footnote{not sure about that} property, the sum of payouts equals the kldiv of the grand coalition. This punishes on average concepts that were grouped together.
-\subsubsection{Calculating t-score}
-Now called somethign else.
-\subsubsection{Calculating adjusted kldiv}
+\subsubsection{Problem}
+Tecnically, by defining the new CE equation in \ref{eq:new_ce} or \ref{eq:new_ce_vector} the evaluation pipeline is complete. Running it in an actual implementation however will yield noticable results: CE scores are lower within \emph{FELICS} than with \emph{Causal Concept Faithfulness} by Matton et al. More in detail: once a concept is put in a set $s$ to be intervened on jointly, it's resulting CE is lower than if the same concept would be treated alone.
+
+On review this makes sense: the updated CE in \ref{eq:new_ce} allots the contribution via Shapley valeus to the concept. This phenomenon is a direct consequence of the \emph{Efficiency} property of Shapley values: The sum of the payouts to all players matches that of the grand coalition where all concepts are intervened on jointly. If the total effect of all concepts intervened on is lower than the sum of the individual effect concepts this exact phenomenon can be observed. Using the updated equation for the \emph{causal effect} in \ref{eq:new_ce} which itself relies on the new shapley-value function \ref{eq:value_function} it can be shown intuitively and mathmatically that this bias exists.
+
+Imagine Concept 1 is a very strong feature. When intervened on it increases the chance of $M$ choosing prediction $b$ over $a$ from $50\%$ to $80\%$. Concept 2 is also infuential, shifting the prediction of $b$ from $50\%$ to $80\%$ as well. If now both are intervened on together the change of having the prediction $b$ will certainly not be at $110\%$ since this is not possible since probabilities are capped at $100\%$. Therefore there is a certain loss, even though both concepts are fully independent. 
+
+More specifaclly the bayesian hieracical modelling step which Matton et al. present in chapter C.2 of their paper for reconstructing the probability distribution vector $p_{x \mid \text{IC}_{m'}^{x}}$ from model responses $Y$ they use a \emph{softmax} function which is shown in \ref{eq:culprit_softmax}.
+
+\begin{equation}
+\label{eq:culprit_softmax}
+p_{y|I_{C_{m'}^{\mathbf{x}}}} = \frac{e^{\theta_{y|I_{C_{m'}^{\mathbf{x}}}}}}{\sum_{y \in \mathcal{Y}} e^{\theta_{y|I_{C_{m'}^{\mathbf{x}}}}}} \quad y \in \mathcal{Y}
+\end{equation}
+
+Without extensivly introducing the meaning of the sorounding symbols and variables, it can be said that it's output represents the likelihood of a specific prediction, strictly ranging from 0 to 1, with all outputs perfectly summing up to 1. This ensures that the intuitive property of probabilities (as discussed before) is kept that no event can have a higher chance of $100\%$.
+
+To formalize this intuition, we can mathematically prove that the probability distribution resulting from a joint intervention cannot equal the sum of the distributions from the singular interventions.
+
+\textbf{Theorem.} Let $p^{(1)}$ and $p^{(2)}$ denote the probability distributions over the prediction space $\mathcal{Y}$ resulting from singular interventions on Concept 1 and Concept 2, respectively. Let $p^{(1,2)}$ be the distribution resulting from the joint intervention on both concepts. It holds that $p^{(1,2)} \neq p^{(1)} + p^{(2)}$.
+
+\textbf{Proof.} By the axiomatic definition of probability, any valid distribution over the mutually exclusive outcomes in $\mathcal{Y}$ must sum to exactly $1$. Because the model's outputs are strictly normalized (as ensured by the softmax function in Equation \ref{eq:culprit_softmax}), we have:
+\begin{equation}
+    \sum_{y \in \mathcal{Y}} p^{(1)}_y = 1, \quad \sum_{y \in \mathcal{Y}} p^{(2)}_y = 1, \quad \text{and} \quad \sum_{y \in \mathcal{Y}} p^{(1,2)}_y = 1
+\end{equation}
+
+Assume for the sake of contradiction that the joint distribution is perfectly additive, meaning $p^{(1,2)}_y = p^{(1)}_y + p^{(2)}_y$ for all $y \in \mathcal{Y}$. Summing both sides over the entire prediction space yields:
+\begin{align}
+    \sum_{y \in \mathcal{Y}} p^{(1,2)}_y &= \sum_{y \in \mathcal{Y}} \left( p^{(1)}_y + p^{(2)}_y \right) \\
+    \sum_{y \in \mathcal{Y}} p^{(1,2)}_y &= \sum_{y \in \mathcal{Y}} p^{(1)}_y + \sum_{y \in \mathcal{Y}} p^{(2)}_y \\
+    1 &= 1 + 1 \\
+    1 &\neq 2
+\end{align}
+
+This contradiction demonstrates that summing the resulting probability distributions of individual interventions inherently violates the fundamental bounds of probability. Therefore, $p^{(1,2)} \neq p^{(1)} + p^{(2)}$, meaning the joint intervention is strictly non-additive in probability space. \hfill $\blacksquare$
+
+Since the joint effect is the basis for calculating the effects means that its for certain that concepts that are independ are "punished" for being in a coalition. Or mathmatically, $Make formula here$. This is no good basis for further work, so an adjusted is needed.
+
+However removing the softmax function and changing the bayesian sampling process would disrupt backwards compatibility (\ref{des:backwards_compatibility}). Therefore the ideal way is too not remove the culprit but to work around the unwanted behavior.
+
+Therefore the following plan: using the effect estimation with the original bayesian regression by Matton et al and then normalizing the value for intervention groups with multiple items to counter this described phenomenon. More specifically, a intervention-specific \emph{Payout Coefficient} is calculated and then ...
+
+\subsubsection{Calculating Payout Coeefficient}
+As the first step of this result normaization, the Payout coefficient is being determined for each intervention. Its the ratio of the joint effect all concept modifications have together, compared to the sum of their indivitual atomic contributions. Formally its defined with $T$ being the set of concepts to modify in this treatment.
+\begin{equation}
+\label{eq:payout_coefficient}
+\gamma_p(x, T) = \frac{
+D_{\mathrm{KL}}
+\left(
+\mathbb{P}_M(Y \mid x_{t \rightarrow t'})
+\;\middle\|\;
+\mathbb{P}_M(Y \mid x)
+\right)
+}{\sum{t in T}
+D_{\mathrm{KL}}
+\left(
+\mathbb{P}_M(Y \mid x_{t \rightarrow t'})
+\;\middle\|\;
+\mathbb{P}_M(Y \mid x)
+\right)}
+\end{equation}
+
+\subsubsection{Calculating adjusted KL Div}
+Having a value $\gamma_p(x, T)$ enables to know the degree to which the joint intervention of the concepts differ from the individual impact they'd have on their own. This value then is used to adjust the KL divergence an intervention brings.
+
+However, not the $\gamma_p(x, T)$ of the own intervention $T$ is taken, because this would make no sense. Rather, its of interest how the effect of this intervention is compared to other interventions in the dataset. Therfore a mean of $5$ Payout Coefficients is used, where datapoints are drawn by three additional criteria. However the prime criteria which cannot be skipped and is always the case is that the number of intervened concepts in the intervention always matches. So if we are looking for datapoints for $T$ and will draw from $U$ then $|T| = |U|$ otherwise we have to skip it. If one the three criteria can not supply all datapoints still needed, it goes down to the next cathegory to have a wider offering of values.
+
+Descending priority... The mathmatical notation here is a total disaster.
+\begin{enumerate}
+\item Other Intervention is in the same correlaiton group. This shows that $U$ is also the result of the same correlation subgroup $s$ as determined by the oracle, sharing major similarities. Mathmatically: $|T| = |U| and s yields T and s yields U$
+\item Other Intervention is of the same question $x$. $|T| = |U| and x \in T and x \in U$
+\item Other Intervention is of same dataset $X$. $|T| = |U| and x \in X \in T and x \in X \in U$
+\end{enumerate}
+
+Then when the reference Payout Coefficients are gathered, their average is divided agains the origin KL div for the intervention, adjusting its effect.
+
+\begin{equation}
+\label{eq:adjusted_kl_div}
+D_{\mathrm{KL_{adj}} =
+D_{\mathrm{KL}
+\left(
+\mathbb{P}_M(Y \mid x_{t \rightarrow t'})
+\;\middle\|\;
+\mathbb{P}_M(Y \mid x)
+\right) * \gamma_p(x, T)
+}
+\end{equation}
+
+In short this normalization process ensures that the effect of all joint interventions on average is exact that of the axiomatic interventions on a dataset-level. This assumes that concepts grouped in the oracle are independent or at least synergistic and redundant effects each cancel each out on the dataset level, but first ensures entire backwards-compatibility \ref{des:backwards_compatibility} and also it ensures that concepts are not systemetcially "punished" for being put in a correlation group with others (as discuessed in the motivation part of this chapter).
+
+SHOW THE AVERAGE EFFECT OF THIS AS DESCRIPED IN A MATHMATICAL MANNER!!!
+
+Now the adjusted kl div formula from \ref{eq:adjusted_kl_div} is just inserted into the value function, which itself is used for \emph{Causal concept} estimation.
+
+TODO!!! SHOWING THE UPDATED value FUNCTION HERE WITH USIGN ADJUSTED KL
+
 \subsection{Remaining evaluationn pipeline}
 Explain that now the alingment between EE and CE is still measured. However the CE definiton got changed to be based on the adjusted kldiv for each concept. Also explain why EE did not get reworked in any way.
 
