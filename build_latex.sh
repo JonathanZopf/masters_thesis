@@ -7,4 +7,7 @@ FILE="main.tex"
 
 latexmk -c
 
+latexindent -w *.tex
+latexindent -w chapters/*.tex
+
 latexmk -pdf -interaction=nonstopmode -halt-on-error "$FILE"

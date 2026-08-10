@@ -1,0 +1,53 @@
+\begin{motivating_example_box}[label=moe:interacting_concepts]{Interacting Concepts}
+    % Upper Half: Introduce Political Priorities
+\scriptsize
+A new concept is introduced called \textbf{Political Priorities} which closely aligns with \emph{Party}. All other input concepts remain the same as in Motivating Example \ref{moe:unfaithfulness}.
+
+\vspace{8pt}
+
+\begin{minipage}[t]{0.48\textwidth}
+\tikz[baseline=-2pt] \fill[color_a] (0,0) circle (4pt); \textbf{Candidate A}
+\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+\color{gray}
+\item[Party:] The Greens (Center-left)
+\normalcolor
+\item[Political Priorities:] Climate preservation, Mobility transition, Minority rights, Social welfare
+\end{description}
+\end{minipage}%
+\hfill%
+\begin{minipage}[t]{0.48\textwidth}
+\tikz[baseline=-2pt] \fill[color_b] (0,0) circle (4pt); \textbf{Candidate B}
+\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+\color{gray}
+\item[Party:] CDU (Center-right)
+\normalcolor
+\item[Political Priorities:] Domestic security, Value conservatism, Tax cuts, Bureaucracy reduction
+\end{description}
+\end{minipage}
+
+% Dotted line separator
+\tcblower
+
+% Lower Half: Centered Vertical Bar Charts Side-by-Side
+\centering
+\vspace{4pt}
+
+{\small\bfseries Distributions of \emph{Voting Recommendations} by \texttt{gpt-oss:120b} ($n=100$)}
+\vspace{8pt}
+
+\newcolumntype{T}{>{\adjustbox{valign=t}\bgroup}c<{\egroup}}
+\begin{tabular}{TTTT}
+% Chart 1
+\stackedbar{100}{0}{color_a}{color_b}{A}{B}{Original} &
+% Chart 2
+\stackedbar{99}{1}{color_a}{color_b}{A}{B}{Party Removed} &
+% Chart 3
+\stackedbar{32}{68}{color_a}{color_b}{A}{B}{Political Priorities\\ Removed} &
+% Chart 4
+\stackedbar{6}{86}{color_a}{color_b}{A}{B}{Both Removed}\\[6pt]
+\end{tabular}
+
+
+\vspace{2pt}
+
+\end{motivating_example_box}

@@ -21,14 +21,18 @@
 \usepackage{hyperref}
 \usepackage{appendix}
 \usepackage[most]{tcolorbox}
+\tcbuselibrary{most}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{standalone}
-\usepackage[most]{tcolorbox}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{todonotes}
-\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{titlesec}
+
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit,positioning,shapes.multipart,backgrounds}
 
 
 \usepackage[style=ieee-alphabetic]{biblatex}
@@ -43,7 +47,8 @@
     citecolor=black,
 }
 
-\newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{%
+\newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{
+breakable,
   colback=gray!5!white,    % Background color (5% gray)
   colframe=gray!75!black,  % Border color
   fonttitle=\bfseries,     % Bold title
@@ -53,6 +58,40 @@
     title={Example \thetcbcounter},
 }
 
+\newtcolorbox[auto counter]{motivating_example_box}[2][]{
+  colback=Orchid!5!white,
+  colframe=Orchid!75!black,
+  fonttitle=\bfseries,
+  title={\textit{Motivating Example \thetcbcounter}: }#2,
+  arc=4mm,
+  boxrule=0.5mm,
+  width=\textwidth,
+  before=\noindent,
+  #1 % Passes options such as label=... directly to tcolorbox
+}
+
+\newtcolorbox[auto counter,number within=chapter]{math_box}[1][]{
+breakable,
+  colback=cyan!5!white,    % Background color (5% gray)
+  colframe=cyan!75!black,  % Border color
+  fonttitle=\bfseries,     % Bold title
+  title=#1,                % Title text
+  arc=4mm,                 % Rounded corners
+  boxrule=0.5mm,           % Border thickness
+    title={Mathematical Demonstration \thetcbcounter},
+}
+
+\newtcolorbox[auto counter,number within=chapter]{hypothesis_box}[1][]{
+breakable,
+  colback=green!5!white,    % Background color (5% gray)
+  colframe=green!75!black,  % Border color
+  fonttitle=\bfseries,     % Bold title
+  arc=4mm,                 % Rounded corners
+  boxrule=0.5mm,           % Border thickness
+}
+
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{0.4cm}{}
 
 \begin{document}
 
@@ -76,7 +115,9 @@
 \subfile{chapters/problem_identification}
 \subfile{chapters/theoretical_conception}
 \subfile{chapters/modeling}
+\subfile{chapters/evaluation}
 \subfile{chapters/remaining_chapters}
+\subfile{chapters/appendix}
 
 % Appendix
 \begin{appendix}

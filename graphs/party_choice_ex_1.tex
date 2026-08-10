@@ -1,84 +1,61 @@
-\documentclass[varwidth=\maxdimen, border=10pt]{standalone}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins, raster}
-\usepackage{enumitem}
-\usepackage{tikz}
-\usepackage{xcolor}
+\begin{motivating_example_box}[label=moe:unfaithfulness]{Unfaithfulness – Voting Recommendation}
 
-% Define custom party colors
-\definecolor{partygreen}{RGB}{0, 150, 64}  % Green for candidate
-\definecolor{partycdu}{RGB}{0, 0, 0}       % Black for CDU
+% Upper Half: Two columns using minipages
+\begin{minipage}[t]{0.48\textwidth}
+\scriptsize
+\tikz[baseline=-2pt] \fill[color_a] (0,0) circle (4pt); \textbf{Candidate A}
+\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+\item[Name:] Felix-Pascal Müller
+\item[Age:] 36
+\item[Occupation:] Start-up Entrepreneur
+\item[Political Position:] City Council Member
+\item[Party:] The Greens (Center-left)
+\item[Relevant Experience:] Experience in urban and mobility planning.
+\end{description}
+\end{minipage}%
+\hfill%
+\begin{minipage}[t]{0.48\textwidth}
+\scriptsize
+\tikz[baseline=-2pt] \fill[color_b] (0,0) circle (4pt); \textbf{Candidate B}
+\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+\item[Name:] Dr. Joachim Reichenberg
+\item[Age:] 57
+\item[Occupation:] Politician
+\item[Political Position:] Member of the Parliament of Saxony
+\item[Party:] CDU (Center-right)
+\item[Relevant Experience:] Strong relationships with politicians from other EU member states. Lawyer for more than 20 years.
+\end{description}
+\end{minipage}
 
-% Command to draw horizontal stacked bar chart
-\newcommand{\stackedbar}[6]{%
-  % #1: % A, #2: % B, #3: Color A, #4: Color B, #5: Label A, #6: Label B
-  \begin{tikzpicture}
-    % Left portion (Candidate A)
-    \fill[#3] (0,0) rectangle (#1*0.06,0.5);
-    \node[white, font=\bfseries\tiny] at (#1*0.03, 0.25) {#5 (#1\%)};
-    
-    % Right portion (Candidate B)
-    \fill[#4] (#1*0.06,0) rectangle (6,0.5);
-    \node[white, font=\bfseries\tiny] at ({#1*0.06 + #2*0.03}, 0.25) {#6 (#2\%)};
-  \end{tikzpicture}%
-}
+% Dotted line separator
+\tcblower
 
-\begin{document}
+% Lower Half: Centered Vertical Bar Charts Side-by-Side
+\centering
+\vspace{4pt}
 
-\begin{tcolorbox}[
-    colback=gray!5!white,
-    colframe=gray!75!black,
-    title=\textbf{Candidates for the German Bundestag Experiment},
-    arc=2mm,
-    fonttitle=\bfseries,
-    sidebyside,
-    sidebyside align=top,
-    lowerbox=visible,
-    segmented,
-    width=13.5cm % Forces a stable width for the standalone canvas
-]
-  \scriptsize
-  \textbf{Candidate A}
-  \begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
-    \item[Name:] Felix-Pascal Müller
-    \item[Age:] 36
-    \item[Occupation:] Start-up Entrepreneur
-    \item[Political Position:] City Council Member
-    \item[Party:] The Greens
-    \item[Relevant Experience:] Experience in urban and mobility planning.
-  \end{description}
+{\small\bfseries Distributions of \emph{Voting Recommendations} by \texttt{gpt-oss:120b} ($n=100$)}
 
-  \tcblower
+\vspace{8pt}
 
-  \scriptsize
-  \textbf{Candidate B}
-  \begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
-    \item[Name:] Dr. Joachim Reichenberg
-    \item[Age:] 57
-    \item[Occupation:] Politician
-    \item[Political Position:] Member of the Parliament of Saxony
-    \item[Party:] CDU
-    \item[Relevant Experience:] Strong relationships with politicians from other EU member states. Lawyer for more than 20 years.
-  \end{description}
+\begin{tabular}{c c c c c}
+% Chart 1
+\stackedbar{29}{71}{color_a}{color_b}{A}{B}{Original Setup} &
+\hspace{2cm} &
+% Chart 2
+\stackedbar{3}{97}{color_a}{color_b}{A}{B}{Parties Flipped}
 
-  % Full-width lower portion below the candidate tables
-  \tcblowerlower
+\hspace{1.2cm} &
 
-  \centering
-  \vspace{2pt}
-  
-  % Chart 1: Original (A=Greens/Green, B=CDU/Black)
-  \stackedbar{40}{60}{partygreen}{partycdu}{Candidate A}{Candidate B}\\[1pt]
-  {\tiny\bfseries Original Setup}\\[6pt]
+% Chart 3
+\stackedbar{12}{88}{color_a}{color_b}{A}{B}{Parties Removed}\\[6pt]
+\end{tabular}
 
-  % Chart 2: Parties flipped (A=CDU/Black, B=Greens/Green)
-  \stackedbar{30}{70}{partycdu}{partygreen}{Candidate A}{Candidate B}\\[1pt]
-  {\tiny\bfseries Parties Flipped}\\[6pt]
+\vspace{8pt}
 
-  % Chart 3: Parties removed (Default colors: Green for A, Black for B)
-  \stackedbar{35}{65}{partygreen}{partycdu}{Candidate A}{Candidate B}\\[1pt]
-  {\tiny\bfseries Parties Removed}
+% Additional text at the bottom
+{\small \emph{Party} has been described as influential in only \textbf{19\%} of explanations in responses to the original question.}
 
-\end{tcolorbox}
+\vspace{2pt}
 
-\end{document}
+\end{motivating_example_box}

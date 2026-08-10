@@ -1,0 +1,42 @@
+% Define neutral candidate colors
+\definecolor{color_a}{named}{Periwinkle}
+\definecolor{color_b}{named}{Fuchsia}
+
+% Updated Command to draw vertical stacked bar charts with A on top, B below
+\newcommand{\stackedbar}[7]{%
+  % #1: % A, #2: % B, #3: Color A, #4: Color B, #5: Label A, #6: Label B, #7: Chart Section Title
+  \begin{tikzpicture}
+    % Bottom Portion (Candidate B)
+    \fill[#4] (0,0) rectangle (1.8, {#2*0.034});
+    
+    % Candidate B Label (only if B > 0%)
+    \pgfmathparse{int(#2 > 0)}
+    \ifnum\pgfmathresult=1
+      \pgfmathparse{int(#2 < 10)}
+      \ifnum\pgfmathresult=1
+        \draw[#4, thick] (1.8, {#2*0.017}) -- (2.2, {#2*0.017});
+        \node[text=black, font=\bfseries\tiny, anchor=west] at (2.3, {#2*0.017}) {#6 (#2\%)};
+      \else
+        \node[white, font=\bfseries\tiny] at (0.9, {#2*0.0175}) {#6 (#2\%)};
+      \fi
+    \fi
+    
+    % Top Portion (Candidate A)
+    \fill[#3] (0, {#2*0.034}) rectangle (1.8, 3.4);
+    
+    % Candidate A Label (only if A > 0%)
+    \pgfmathparse{int(#1 > 0)}
+    \ifnum\pgfmathresult=1
+      \pgfmathparse{int(#1 < 10)}
+      \ifnum\pgfmathresult=1
+        \draw[#3, thick] (1.8, {#2*0.034 + #1*0.017}) -- (2.2, {#2*0.034 + #1*0.017});
+        \node[text=black, font=\bfseries\tiny, anchor=west] at (2.3, {#2*0.034 + #1*0.017}) {#5 (#1\%)};
+      \else
+        \node[white, font=\bfseries\tiny] at (0.9, {#2*0.034 + #1*0.0175}) {#5 (#1\%)};
+      \fi
+    \fi
+
+    % Section Label (Chart Title)
+    \node[font=\tiny\bfseries, align=center, anchor=north, inner xsep=0pt] at (0.9, -0.2) {#7};
+  \end{tikzpicture}%
+}
