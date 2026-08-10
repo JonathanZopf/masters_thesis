@@ -1,0 +1,84 @@
+\documentclass[varwidth=\maxdimen, border=10pt]{standalone}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, raster}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Define custom party colors
+\definecolor{partygreen}{RGB}{0, 150, 64}  % Green for candidate
+\definecolor{partycdu}{RGB}{0, 0, 0}       % Black for CDU
+
+% Command to draw horizontal stacked bar chart
+\newcommand{\stackedbar}[6]{%
+  % #1: % A, #2: % B, #3: Color A, #4: Color B, #5: Label A, #6: Label B
+  \begin{tikzpicture}
+    % Left portion (Candidate A)
+    \fill[#3] (0,0) rectangle (#1*0.06,0.5);
+    \node[white, font=\bfseries\tiny] at (#1*0.03, 0.25) {#5 (#1\%)};
+    
+    % Right portion (Candidate B)
+    \fill[#4] (#1*0.06,0) rectangle (6,0.5);
+    \node[white, font=\bfseries\tiny] at ({#1*0.06 + #2*0.03}, 0.25) {#6 (#2\%)};
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\begin{tcolorbox}[
+    colback=gray!5!white,
+    colframe=gray!75!black,
+    title=\textbf{Candidates for the German Bundestag Experiment},
+    arc=2mm,
+    fonttitle=\bfseries,
+    sidebyside,
+    sidebyside align=top,
+    lowerbox=visible,
+    segmented,
+    width=13.5cm % Forces a stable width for the standalone canvas
+]
+  \scriptsize
+  \textbf{Candidate A}
+  \begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+    \item[Name:] Felix-Pascal Müller
+    \item[Age:] 36
+    \item[Occupation:] Start-up Entrepreneur
+    \item[Political Position:] City Council Member
+    \item[Party:] The Greens
+    \item[Relevant Experience:] Experience in urban and mobility planning.
+  \end{description}
+
+  \tcblower
+
+  \scriptsize
+  \textbf{Candidate B}
+  \begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
+    \item[Name:] Dr. Joachim Reichenberg
+    \item[Age:] 57
+    \item[Occupation:] Politician
+    \item[Political Position:] Member of the Parliament of Saxony
+    \item[Party:] CDU
+    \item[Relevant Experience:] Strong relationships with politicians from other EU member states. Lawyer for more than 20 years.
+  \end{description}
+
+  % Full-width lower portion below the candidate tables
+  \tcblowerlower
+
+  \centering
+  \vspace{2pt}
+  
+  % Chart 1: Original (A=Greens/Green, B=CDU/Black)
+  \stackedbar{40}{60}{partygreen}{partycdu}{Candidate A}{Candidate B}\\[1pt]
+  {\tiny\bfseries Original Setup}\\[6pt]
+
+  % Chart 2: Parties flipped (A=CDU/Black, B=Greens/Green)
+  \stackedbar{30}{70}{partycdu}{partygreen}{Candidate A}{Candidate B}\\[1pt]
+  {\tiny\bfseries Parties Flipped}\\[6pt]
+
+  % Chart 3: Parties removed (Default colors: Green for A, Black for B)
+  \stackedbar{35}{65}{partygreen}{partycdu}{Candidate A}{Candidate B}\\[1pt]
+  {\tiny\bfseries Parties Removed}
+
+\end{tcolorbox}
+
+\end{document}
