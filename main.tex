@@ -40,6 +40,7 @@
 \usepackage{nomencl}
 \usepackage{chngcntr}
 
+
 \usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit,positioning,shapes.multipart,backgrounds}
 
 \usepackage[style=ieee-alphabetic]{biblatex}
@@ -114,10 +115,10 @@ breakable,
   colback=gray!5!white,
   colframe=gray!75!black,
   fonttitle=\bfseries,
-  title=#1,
   arc=4mm,
   boxrule=0.5mm,
     title={Example \thetcbcounter},
+#1
 }
 
 \newtcolorbox[auto counter]{motivating_example_box}[2][]{
@@ -125,7 +126,7 @@ breakable,
   colback=Orchid!5!white,
   colframe=Orchid!75!black,
   fonttitle=\bfseries,
-  title={\textit{Motivating Example \thetcbcounter}: }#2,
+  title={Motivating Example \thetcbcounter: }\textit{#2},
   arc=4mm,
   boxrule=0.5mm,
   width=\textwidth,
@@ -138,10 +139,10 @@ breakable,
   colback=cyan!5!white,
   colframe=cyan!75!black,
   fonttitle=\bfseries,
-  title=#1,
   arc=4mm,
   boxrule=0.5mm,
     title={Mathematical Demonstration \thetcbcounter},
+#1
 }
 
 \newtcolorbox[auto counter,number within=chapter]{hypothesis_box}[1][]{
@@ -179,12 +180,8 @@ breakable,
 \subfile{chapters/modeling}
 \subfile{chapters/evaluation}
 \subfile{chapters/remaining_chapters}
+
+\printbibliography[heading=bibintoc]
 \subfile{chapters/appendix}
-
-% Appendix
-\begin{appendix}
-\end{appendix}
-
-\printbibliography
 
 \end{document}

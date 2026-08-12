@@ -1,0 +1,105 @@
+\chapter{Examples}
+\label{app:examples}
+\section*{Effects of Normalization on Pearson Correlation}
+\begin{example_box}[label=ex:payout_normalization_correlation]
+    \textbf{Demonstration:} Payout normalization can alter the Pearson correlation between \emph{CE} and \emph{EE} vectors.
+
+    \smallskip
+    \textbf{Setup:} Consider a minimal dataset with three questions $x_1, x_2, x_3$ and five concepts $C_1, \dots, C_5$. The oracle groups concepts as follows:
+    \begin{itemize}
+        \item $x_1$: $s_1 = \{C_1, C_2\}$ (redundant pair, $v(\{C_1, C_2\}) = 1.5 < v(\{C_1\}) + v(\{C_2\}) = 2$)
+        \item $x_2$: $s_2 = \{C_3, C_4\}$ (less redundant pair, $v(\{C_3, C_4\}) = 1.8 < v(\{C_3\}) + v(\{C_4\}) = 2$)
+        \item $x_3$: $s_3 = \{C_5\}$ (singleton)
+    \end{itemize}
+    The value functions for all singleton treatments satisfy $v(\{C_m\}) = 1$ for $m \in \{1, 2, 3, 4\}$ and $v(\{C_5\}) = 2$. The reference set for size-$1$ treatments is $\mathcal{R}_1 = \{\{C_1\}, \{C_2\}, \{C_3\}, \{C_4\}, \{C_5\}\}$, yielding
+    \begin{equation*}
+        \gamma(x, \{C_m\}) = \frac{v(\{C_m\})}{v(\{C_m\})} = 1 \quad \Rightarrow \quad \bar\gamma(\cdot, \cdot, \{C_m\}) = 1.
+    \end{equation*}
+    For size-$2$ treatments, $\mathcal{R}_2 = \{\{C_1, C_2\}, \{C_3, C_4\}\}$ gives
+    \begin{equation*}
+        \bar\gamma(\cdot, \cdot, \{C_1, C_2\}) = \bar\gamma(\cdot, \cdot, \{C_3, C_4\}) = \frac{1}{2}\left(\frac{1.5}{2} + \frac{1.8}{2}\right) = 0.825.
+    \end{equation*}
+
+    \smallskip
+    \textbf{Original Metric (Matton et al.):} All concepts are treated as singletons, so
+    \begin{equation*}
+        \boldsymbol{CE}_{\text{original}} = \left[\,v(\{C_1\}),\, v(\{C_2\}),\, v(\{C_3\}),\, v(\{C_4\}),\, v(\{C_5\})\,\right] = \left[1,\, 1,\, 1,\, 1,\, 2\right].
+    \end{equation*}
+
+    \smallskip
+    \textbf{FELICS with Normalization:} For $s_1 = \{C_1, C_2\}$ and $s_2 = \{C_3, C_4\}$, the normalized value functions are
+    \begin{align*}
+        v_{\text{adj}}(\{C_1\})      & = v(\{C_1\}) / 1 = 1,                    \\
+        v_{\text{adj}}(\{C_1, C_2\}) & = v(\{C_1, C_2\}) / 0.825 \approx 1.818.
+    \end{align*}
+    By the Shapley efficiency axiom, $\sum_{C_m \in s} CE_{\text{adj}}(x, C_m, s) = v_{\text{adj}}(s)$. Thus, for $s_1$:
+    \begin{align*}
+        CE_{\text{adj}}(x_1, C_1, s_1) & = 0.5 \cdot (v_{\text{adj}}(\{C_1\}) - 0) + 0.5 \cdot (v_{\text{adj}}(\{C_1, C_2\}) - v_{\text{adj}}(\{C_2\})) \\
+                                       & = 0.5 \cdot 1 + 0.5 \cdot (1.818 - 1) \approx 0.909,                                                           \\
+        CE_{\text{adj}}(x_1, C_2, s_1) & \approx 0.909,
+    \end{align*}
+    and analogously $CE_{\text{adj}}(x_2, C_3, s_2) = CE_{\text{adj}}(x_2, C_4, s_2) \approx 1.091$. For the singleton $s_3$, $CE_{\text{adj}}(x_3, C_5, s_3) = v_{\text{adj}}(\{C_5\}) = 2$. Hence,
+    \begin{equation*}
+        \boldsymbol{CE}_{\text{adj}} = \left[0.909,\, 0.909,\, 1.091,\, 1.091,\, 2\right].
+    \end{equation*}
+
+    \smallskip
+    \textbf{Explanation-Implied Effects:} Assume the LLM’s explanations yield
+    \begin{equation*}
+        \boldsymbol{EE} = \left[1.0,\, 0.5,\, 1.0,\, 1.0,\, 2.0\right].
+    \end{equation*}
+
+    \smallskip
+    \textbf{Pearson Correlation Computation:} For both vectors, $\mu_{\boldsymbol{EE}} = 1.1$. The original metric gives
+    \begin{align*}
+        \mu_{\boldsymbol{CE}_{\text{original}}}                        & = \frac{1+1+1+1+2}{5} = 1.2,                                                \\
+        \text{cov}(\boldsymbol{CE}_{\text{original}}, \boldsymbol{EE}) & = \frac{1}{5}\sum_{i=1}^5 (CE_{\text{original},i} - 1.2)(EE_i - 1.1) = 0.9, \\
+        \text{var}(\boldsymbol{CE}_{\text{original}})                  & = \frac{1}{5}\sum_{i=1}^5 (CE_{\text{original},i} - 1.2)^2 = 0.8,           \\
+        \text{var}(\boldsymbol{EE})                                    & = \frac{1}{5}\sum_{i=1}^5 (EE_i - 1.1)^2 = 1.19,                            \\
+        \text{PCC}_{\text{original}}                                   & = \frac{0.9}{\sqrt{0.8 \cdot 1.19}} \approx 0.923.
+    \end{align*}
+    For FELICS, $\mu_{\boldsymbol{CE}_{\text{adj}}} = 1.2$ (dataset-level average preserved), but
+    \begin{align*}
+        \text{cov}(\boldsymbol{CE}_{\text{adj}}, \boldsymbol{EE}) & = \frac{1}{5}\sum_{i=1}^5 (CE_{\text{adj},i} - 1.2)(EE_i - 1.1) \approx 0.9455, \\
+        \text{var}(\boldsymbol{CE}_{\text{adj}})                  & \approx 0.8332,                                                                 \\
+        \text{PCC}_{\text{adj}}                                   & \approx \frac{0.9455}{\sqrt{0.8332 \cdot 1.19}} \approx 0.946.
+    \end{align*}
+
+    \smallskip
+    \textbf{Conclusion:} Although $\mu_{\boldsymbol{CE}_{\text{adj}}} = \mu_{\boldsymbol{CE}_{\text{original}}}$ (dataset-level backward compatibility), the covariance and variance terms differ due to the non-uniform scaling of $\boldsymbol{CE}$ across group boundaries. Thus, $\text{PCC}_{\text{adj}} \neq \text{PCC}_{\text{original}}$, proving that the faithfulness score is not guaranteed to be preserved.
+\end{example_box}
+
+\section*{Softmax-Ceiling in FELICS in Practice}
+\begin{example_box}[label=ex:softmax_ceiling]
+    \textbf{Scenario:} Let the prediction space consist of two outcomes, $\mathcal{Y} = \{y_1, y_2\}$. Suppose the model's baseline internal scores (logits) before any intervention are $\theta_{y_1} = \ln(4)$ and $\theta_{y_2} = \ln(6)$.
+
+    Using the softmax formula (Equation~\ref{eq:culprit_softmax}), the baseline probability for $y_1$ is:
+    \begin{equation} P(y_1) = \frac{e^{\ln(4)}}{e^{\ln(4)} + e^{\ln(6)}} = \frac{4}{4 + 6} = 0.40 \quad (40\%) \end{equation}
+
+    \smallskip
+    \textbf{Individual Interventions:}
+    Assume that intervening on a concept acts additively in the model's logit space.
+    \begin{itemize}
+        \item \textbf{Concept A:} Increases the logit of $y_1$ by $\Delta_A = \ln(2.25)$.
+              \begin{equation} P^{(A)}(y_1) = \frac{4 \cdot e^{\ln(2.25)}}{(4 \cdot e^{\ln(2.25)}) + 6} = \frac{4 \cdot 2.25}{9 + 6} = \frac{9}{15} = 0.60 \quad (60\%) \end{equation}
+              \emph{Individual effect of A:} $60\% - 40\% = \mathbf{+20\%}$
+
+        \item \textbf{Concept B:} Independently increases the logit of $y_1$ by $\Delta_B = \ln(3.5)$.
+              \begin{equation} P^{(B)}(y_1) = \frac{4 \cdot e^{\ln(3.5)}}{(4 \cdot e^{\ln(3.5)}) + 6} = \frac{4 \cdot 3.5}{14 + 6} = \frac{14}{20} = 0.70 \quad (70\%) \end{equation}
+              \emph{Individual effect of B:} $70\% - 40\% = \mathbf{+30\%}$
+    \end{itemize}
+
+    \smallskip
+    \textbf{Naive Expected Joint Effect:} If probabilities were perfectly additive, intervening on A and B together would shift the probability by $20\% + 30\% = \mathbf{+50\%}$, yielding a final probability of $90\%$.
+
+    \smallskip
+    \textbf{Actual Joint Intervention (The Soft Ceiling):}
+    When intervening on both concepts, their logit changes combine additively ($\Delta_A + \Delta_B = \ln(2.25) + \ln(3.5) = \ln(7.875)$). The softmax function computes the new joint probability as:
+    \begin{equation} P^{(A,B)}(y_1) = \frac{4 \cdot e^{\ln(7.875)}}{(4 \cdot e^{\ln(7.875)}) + 6} = \frac{4 \cdot 7.875}{31.5 + 6} = \frac{31.5}{37.5} = 0.84 \quad (84\%) \end{equation}
+
+    \smallskip
+    \emph{Actual joint effect:} $84\% - 40\% = \mathbf{+44\%}$
+
+    \smallskip
+    \textbf{Conclusion:} Due to the growing denominator in the softmax function, the actual joint effect ($+44\%$) falls short of the naive additive sum ($+50\%$).
+\end{example_box}

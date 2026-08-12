@@ -1,0 +1,216 @@
+\chapter{Mathematical Demonstrations}
+\label{app:mathematical_demonstrations}
+\section*{Equality of Causal Effect between FELICS singleton-groups and Original Metric}
+\begin{math_box}[label=ma:one_item_group]
+    Let the correlation group consist of exactly one concept,
+    \begin{equation}
+        s=\{C_m\}.
+    \end{equation}
+
+    The payout coefficient introduced in Section~\ref{sec:shapley_correction} becomes
+
+    \begin{equation}
+        \gamma(x,s)
+        =
+        \frac{v(s)}
+        {\sum_{C_i\in s}v(\{C_i\})}
+        =
+        \frac{v(\{C_m\})}
+        {v(\{C_m\})}
+        =1.
+    \end{equation}
+
+    Since the reference set used to compute the correction factor
+    $\bar\gamma(x,s,T)$ is restricted to sets of identical treatment size,
+    the only admissible reference size is likewise $|T|=1$. Consequently,
+
+    \begin{equation}
+        \bar\gamma(x,s,T)=1,
+    \end{equation}
+
+    and the normalized value function reduces to
+
+    \begin{equation}
+        v_{\mathrm{adj}}(T)
+        =
+        \frac{v(T)}
+        {\bar\gamma(x,s,T)}
+        =
+        v(T).
+    \end{equation}
+
+    The adjusted causal effect is then obtained from the Shapley formulation
+
+    \begin{equation}
+        CE_{\mathrm{adj}}(x,C_m,s)
+        =
+        \sum_{T\subseteq s\setminus\{C_m\}}
+        \frac{|T|!(|s|-|T|-1)!}{|s|!}
+        \left[
+            v_{\mathrm{adj}}(T\cup\{C_m\})
+            -
+            v_{\mathrm{adj}}(T)
+            \right].
+    \end{equation}
+
+    Since $s=\{C_m\}$, the only admissible coalition is the empty set,
+    $T=\emptyset$. The weighting coefficient therefore simplifies to
+
+    \begin{equation}
+        \frac{0!(1-0-1)!}{1!}=1,
+    \end{equation}
+
+    and using the convention $v_{\mathrm{adj}}(\emptyset)=0$,
+
+    \begin{equation}
+        CE_{\mathrm{adj}}(x,C_m,s)
+        =
+        v_{\mathrm{adj}}(\{C_m\}).
+    \end{equation}
+
+    Because no normalization is applied for singleton groups,
+
+    \begin{equation}
+        v_{\mathrm{adj}}(\{C_m\})
+        =
+        v(\{C_m\}),
+    \end{equation}
+
+    which is exactly the value function underlying the causal-effect definition of Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Therefore,
+
+    \begin{equation}
+        CE_{\mathrm{adj}}(x,C_m,\{C_m\})
+        =
+        CE_{\mathrm{Matton}}(x,C_m)
+    \end{equation}
+
+    showing that \emph{FELICS} reduces exactly to the original CE every correlation group contains only a single concept. Because the definitions of the explanation implied effect and faithfulness (see Equations~\ref{eq:ee} and \ref{eq:faithfulness})  are unchanged, both metrics are equivalent in this scenario.
+\end{math_box}
+
+\section*{No Additional Causal Effect for Independent Concepts in FELICS}
+\begin{math_box}[label=ma:independence_behavior]
+    Assume a correlation group $s$ whose concepts are independent relative to the
+    dataset. By definition of the normalization introduced in
+    Section~\ref{sec:shapley_correction}, this corresponds to
+
+    \begin{equation}
+        \bar\gamma(x,s,s)=\gamma(x,s).
+    \end{equation}
+
+    The adjusted value of the grand coalition therefore becomes
+
+    \begin{equation}
+        v_{\mathrm{adj}}(s)
+        =
+        \frac{v(s)}
+        {\gamma(x,s)}.
+    \end{equation}
+
+    Substituting the definition of the payout coefficient,
+
+    \begin{equation}
+        \gamma(x,s)
+        =
+        \frac{v(s)}
+        {\sum_{C_i\in s}v(\{C_i\})},
+    \end{equation}
+
+    yields
+
+    \begin{equation}
+        v_{\mathrm{adj}}(s)
+        =
+        \sum_{C_i\in s}v(\{C_i\}).
+    \end{equation}
+
+    Hence, after normalization, the value assigned to the grand coalition equals the
+    sum of the individual atomic intervention effects.
+
+    Assume furthermore that every concept contributes independently to every
+    coalition. Then the marginal contribution of a concept is identical in every
+    coalition in which it appears,
+
+    \begin{equation}
+        v_{\mathrm{adj}}(T\cup\{C_m\})
+        -
+        v_{\mathrm{adj}}(T)
+        =
+        v(\{C_m\}),
+        \qquad
+        \forall\,T\subseteq s\setminus\{C_m\}.
+    \end{equation}
+
+    Since the Shapley weights form a partition of unity,
+
+    \begin{equation}
+        \sum_{T\subseteq s\setminus\{C_m\}}
+        \frac{|T|!(|s|-|T|-1)!}{|s|!}
+        =
+        1,
+    \end{equation}
+
+    the adjusted causal effect reduces to
+
+    \begin{equation}
+        CE_{\mathrm{adj}}(x,C_m,s)
+        =
+        v(\{C_m\}).
+    \end{equation}
+
+    Finally, $v(\{C_m\})$ is precisely the KL-divergence-based intervention value
+    used by Matton et al.~\cite{mattonWalkTalkMeasuring2024} to define the causal
+    effect of an individual concept (see Equation~\ref{eq:ce}). Consequently,
+
+    \begin{equation}
+        CE_{\mathrm{adj}}(x,C_m,s)
+        =
+        CE_{\mathrm{Matton}}(x,C_m),
+    \end{equation}
+
+    showing that no additional causal effect is attributed to correlation groups
+    whose concepts behave independently relative to the dataset.
+\end{math_box}
+
+\section*{CE Dataset-Average Preservation}
+\begin{math_box}[label=ma:dataset_average_preservation]
+    \textbf{Claim:} The dataset-level average of all Causal Effect values computed by FELICS is \emph{approximately} equal to that of Matton et al.'s original metric:
+    \begin{equation*}
+        \frac{1}{N_C} \sum_{x \in X} \sum_{C_m \in C(x)} CE_{\text{adj}}(x, C_m, s) \approx \frac{1}{N_C} \sum_{x \in X} \sum_{C_m \in C(x)} v(\{C_m\}).
+    \end{equation*}
+    Here, $N_C$ is the total number of concepts, $C(x)$ are the concepts in question $x$, and $s$ is the correlation group containing $C_m$.
+
+    \smallskip
+    \textbf{Intuition:} The payout-normalization step is designed to compensate for the \emph{soft ceiling effect} (Section~\ref{sec:kl_ceiling}), which systematically reduces joint effects $v(s)$ relative to the sum of singleton effects $\sum_{C_m \in s} v(\{C_m\})$. If this compensation is applied consistently across the dataset, the \emph{total causal influence} attributed to all concepts should remain approximately unchanged, preserving the overall scale of CE values.
+
+    \smallskip
+    \textbf{Simplifying Assumptions for Demonstration:} To illustrate why approximate equality is plausible, two idealized conditions will be relied on that do not hold universally but capture the \emph{typical} behavior of the reference-set construction:
+    \begin{enumerate}
+        \item \textbf{Representative Reference Sets:} The reference set $\mathcal{R}(x,s,s)$ (Equations~\ref{eq:R_1}--\ref{eq:R_3}) is treated as a \emph{representative sample} of all groups of size $|s|$ in the dataset. In practice, $\mathcal{R}(x,s,s)$ contains at most $5$ elements, drawn prioritized by proximity (same group $\rightarrow$ same question $\rightarrow$ same dataset). For large datasets, this sample is approximately representative of the population of size-$|s|$ groups.
+
+        \item \textbf{Symmetry of Payout Coefficients:} The payout coefficients $\gamma(x',s')$ for groups of the same size are are assumed to be \emph{exchangeable}, i.e., their distribution is invariant to permutation. This allows us to treat $\bar\gamma(x,s,s)$ as an estimate of a global average $\bar\gamma_k$ for size-$k$ groups.
+    \end{enumerate}
+    The assumptions above are sufficient to justify the \emph{approximate} preservation expected to be observed in practice.
+
+    \smallskip
+    \textbf{Demonstration Under Assumptions:} For any group $s$, the Shapley \emph{efficiency axiom} gives
+    \begin{equation}
+        \label{eq:shapley_efficiency_approx}
+        \sum_{C_m \in s} CE_{\text{adj}}(x, C_m, s) = v_{\text{adj}}(s) = \frac{v(s)}{\bar\gamma(x,s,s)}.
+    \end{equation}
+    Under Assumption~(1), $\bar\gamma(x,s,s) \approx \bar\gamma_k$, where $\bar\gamma_k$ is the average payout coefficient for all size-$k$ groups:
+    \begin{equation*}
+        \bar\gamma_k := \frac{1}{|{\mathcal G}_k|} \sum_{s' \in {\mathcal G}_k} \frac{v(s')}{\sum_{C_m \in s'} v(\{C_m\})}.
+    \end{equation*}
+    Here, ${\mathcal G}_k$ denotes the set of all size-$k$ groups (distinct from the graph $G$ in Section~\ref{sec:joint_counterfactual}). Substituting into Equation~\ref{eq:shapley_efficiency_approx}:
+    \begin{align*}
+        \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} CE_{\text{adj}}(x, C_m, s) & = \sum_{s \in {\mathcal G}_k} \frac{v(s)}{\bar\gamma(x,s,s)} \approx \sum_{s \in {\mathcal G}_k} \frac{v(s)}{\bar\gamma_k}                                    \\
+                                                                                & = \frac{1}{\bar\gamma_k} \sum_{s \in {\mathcal G}_k} v(s) = \frac{1}{\bar\gamma_k} \cdot \bar\gamma_k \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} v(\{C_m\}) \\
+                                                                                & = \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} v(\{C_m\}).
+    \end{align*}
+    The second equality follows from the definition of $\bar\gamma_k$: multiplying $\bar\gamma_k$ by the sum of all $v(s)$ for $s \in {\mathcal G}_k$ yields the sum of all $\sum_{C_m \in s} v(\{C_m\})$. Summing over all group sizes $k$:
+    \begin{align*}
+        \sum_{x \in X} \sum_{s \in S(x)} \sum_{C_m \in s} CE_{\text{adj}}(x, C_m, s) & \approx \sum_{x \in X} \sum_{s \in S(x)} \sum_{C_m \in s} v(\{C_m\}) \\
+                                                                                     & = \sum_{x \in X} \sum_{C_m \in C(x)} v(\{C_m\}).
+    \end{align*}
+    Dividing by $N_C$ preserves the approximation, showing that the dataset-level averages are approximately equal. The error introduced by the simplifications diminishes as the dataset grows and the reference sets become more representative.
+\end{math_box}

@@ -1,53 +1,31 @@
-\begin{motivating_example_box}[label=moe:interacting_concepts]{Interacting Concepts}
-    % Upper Half: Introduce Political Priorities
-\scriptsize
-A new concept is introduced called \textbf{Political Priorities} which closely aligns with \emph{Party}. All other input concepts remain the same as in Motivating Example \ref{moe:unfaithfulness}.
+\chapter{Motivating Example Setup}
+\section*{Background}
+In order to illustrate how unfaithfulness can manifest itself in practice, a special scenario was designed in which the LLM was expected to exhibit unfaithful behavior. Previous research has shown that most mainstream LLMs tend to lean toward the left of the political spectrum \cite{rozadoPoliticalPreferencesLLMs2024}. These results have also been replicated for the German party landscape by Rettenberger \cite{rettenbergerAssessingPoliticalBias2025}, who found, on average, high agreement rates with the left-center party \enquote{DIE GRÜNEN} (the Greens), while the highly influential party \enquote{CDU}, which is considered conservative, received below-average agreement rates.
 
-\vspace{8pt}
+\section*{Basic Setup}
+Building on this premise, the LLM was tasked with making a recommendation in favor of exactly one of two candidates for a fictional German federal election \enquote{based on which candidate would, according to the information provided, be expected to benefit voters in Germany the most}. Both candidates are purely fictional. Candidate B was designed to appear as the more experienced politician, whereas Candidate A appears to be more of a newcomer to national politics. Therefore, it is arguable that Candidate B has the stronger profile when political aspects are disregarded. This makes the decision between the two candidates non-random and not necessarily equally distributed once \emph{Party} (and \emph{Political Priorities} in the second run) are removed, which is preferable for the purpose of this demonstration. The prompt with which the LLM was queried can be found in Part~\ref{app:prompts} of this appendix.
 
-\begin{minipage}[t]{0.48\textwidth}
-\tikz[baseline=-2pt] \fill[color_a] (0,0) circle (4pt); \textbf{Candidate A}
-\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
-\color{gray}
-\item[Party:] The Greens (Center-left)
-\normalcolor
-\item[Political Priorities:] Climate preservation, Mobility transition, Minority rights, Social welfare
-\end{description}
-\end{minipage}%
-\hfill%
-\begin{minipage}[t]{0.48\textwidth}
-\tikz[baseline=-2pt] \fill[color_b] (0,0) circle (4pt); \textbf{Candidate B}
-\begin{description}[style=unboxed,leftmargin=0cm,itemsep=2pt]
-\color{gray}
-\item[Party:] CDU (Center-right)
-\normalcolor
-\item[Political Priorities:] Domestic security, Value conservatism, Tax cuts, Bureaucracy reduction
-\end{description}
-\end{minipage}
+Even though the bias identified in Rettenberger's findings \cite{rettenbergerAssessingPoliticalBias2025} was more pronounced when using German, English was chosen as the prompt language for this experimental setup to make the motivating example accessible to a broader audience. Furthermore, although the far-right party \enquote{AfD} exhibited the lowest alignment with virtually every tested model \cite{rettenbergerAssessingPoliticalBias2025} and would therefore serve well as a contrasting case for the predictions, it seems plausible that the party's controversial nature would lead to the concept \emph{Party Affiliation} being mentioned much more frequently. This could reduce the likelihood of the LLM acting unfaithfully, although this assumption would need to be further substantiated with empirical data. Therefore, the candidates were chosen to be members of \enquote{the Greens} and \enquote{CDU}, respectively.
 
-% Dotted line separator
-\tcblower
+The candidate profile versions supplied to the model as interventions were chosen intuitively, based on which modifications appeared most likely to shift predictions and provoke unfaithful explanations. Interventions on other concepts, such as \emph{Age} or \emph{Relevant Experience}, would also be interesting, but were not performed in order to preserve the scope of the example.
 
-% Lower Half: Centered Vertical Bar Charts Side-by-Side
-\centering
-\vspace{4pt}
+The experiment was run on \texttt{gpt-oss:120b} using **$n=100$** collected samples for each combination. The choice of this model was rather arbitrary and pragmatically motivated by the model's ability to be deployed on local hardware.
 
-{\small\bfseries Distributions of \emph{Voting Recommendations} by \texttt{gpt-oss:120b} ($n=100$)}
-\vspace{8pt}
+The code used for the experiment can be found in the repository containing the FELICS implementation.
 
-\newcolumntype{T}{>{\adjustbox{valign=t}\bgroup}c<{\egroup}}
-\begin{tabular}{TTTT}
-% Chart 1
-\stackedbar{100}{0}{color_a}{color_b}{A}{B}{Original} &
-% Chart 2
-\stackedbar{99}{1}{color_a}{color_b}{A}{B}{Party Removed} &
-% Chart 3
-\stackedbar{32}{68}{color_a}{color_b}{A}{B}{Political Priorities\\ Removed} &
-% Chart 4
-\stackedbar{6}{86}{color_a}{color_b}{A}{B}{Both Removed}\\[6pt]
-\end{tabular}
+\section*{Explanation Extraction}
+\emph{Causal Concept Faithfulness} by Matton et al.~\cite{mattonWalkTalkMeasuring2024} and FELICS both extract the concepts described as influential for a decision from the natural language explanation using an auxiliary LLM. However, to reduce the effort required to set up this simple experiment, the evaluated LLM itself was asked to provide a list of the influential concepts alongside the explanation, making it possible to parse the list directly from the generated output. The alignment between the list and the corresponding explanation was verified by human reviewers.
 
+Only the list of influential concepts for the original samples was used for further processing, because all concepts can only be mentioned in the original version of the prompt.
 
-\vspace{2pt}
+\section*{Second Run}
+Beyond demonstrating the occurrence of unfaithful explanations, the experiment was modified by introducing \emph{Political Priorities}. Both candidates were assigned a short list of main points, such as \enquote{Climate Preservation} for the left-center candidate and \enquote{Tax Cuts} for the center-right candidate, which closely align with the main ideologies of the respective parties. By doing so, a practical example was constructed in which intervening on one concept alone is insufficient to measure its effect because another concept remains present and provides a hint toward the removed concept.
 
-\end{motivating_example_box}
+To illustrate that \emph{Party} still contributes significantly to the prediction even though its removal alone causes barely any shift, both concepts were removed simultaneously in the fourth tested combination.
+
+\section*{Key Findings and Interpretation}
+As shown in Chapter~\ref{sec:introduction}, the LLM exhibited moderate unfaithfulness in the first example. This was demonstrated by removing the \emph{Party} aspect from both candidate profiles and by swapping the party affiliations in another run. The further substantial reduction in decisions in favor of Candidate A once the parties were reintroduced with their affiliations flipped, from 12% to 3%, illustrates even more clearly the degree to which the model disfavors the \enquote{CDU} party.
+
+A further analysis of the samples collected for the original setup showed that \emph{Party} was mentioned in explanations substantially more often when the left-leaning Candidate A was selected. This may indicate that the LLM does not actually list the decisive factors in this setup, but instead justifies its decision post hoc. Rerunning the experiment with a slightly modified prompt would be necessary to evaluate the extent of this phenomenon.
+
+In the second run, it is striking how little the removal of \emph{Party} influences the model once \emph{Political Priorities} are provided. This suggests that the LLM may not actually prefer the parties themselves, but rather the political ideologies and agendas with which they are associated. This is consistent with much of the existing research \cite{rozadoPoliticalPreferencesLLMs2024, rettenbergerAssessingPoliticalBias2025}, in which LLMs are typically confronted with questions and decisions that are subsequently mapped to political parties, for example, based on voting records or party statements.
