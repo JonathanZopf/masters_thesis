@@ -1,4 +1,7 @@
 \chapter{Motivating Example Setup}
+\label{app:motivating_example_setup}
+This appendix documents the experimental setup behind the motivating examples presented in the introduction. It describes the scenario design, prompt and sampling choices, explanation extraction, modified second run, and the principal observations used in the main text.
+
 \section*{Background}
 In order to illustrate the how unfaithfulness can manifest itself in practice, a special scenario was designed where the LLM was expected to be unfaithful. Past research has shown that most mainstream-LLM tend be leaning left of the political spectrum \cite{rozadoPoliticalPreferencesLLMs2024}. Those results also have been replicated for the party landscape in Germany by Rettenberger \cite{rettenbergerAssessingPoliticalBias2025}, where on average high agreement rates with the left-center \enquote{DIE GRÜNEN} (the greens) where scored, while the very-influential party \enquote{CDU}, which is considered conservative, had below-average results.
 
@@ -24,7 +27,7 @@ Beyond showing the appearance of unfaithful explanations, the experiment was mod
 To illustrate that \emph{Party} still contributes significant to the prediction even though it causes barely any shift when removed alone, both concepts where removed simultaniously in the fourth tested combination.
 
 \section*{Key Findings and Interpretation}
-As shown in Chapter \ref{sec:introduction}, the LLM showed moderate unfaithfulness in the first example, which was proven by removing the \emph{Party} aspect from both candidates profile and swapping the affiliation in another run. The further major reduction in decisions in favor of Candidate A once parties where reintroduced but flipped (from 12 perc to 3 per) illustrates even more the degree the model dislikes the \enquote{CDU} party.
+As shown in Chapter \ref{sec:introduction}, the LLM showed moderate unfaithfulness in the first example, which was proven by removing the \emph{Party} aspect from both candidates profile and swapping the affiliation in another run. The further major reduction in decisions in favor of Candidate A once parties where reintroduced but flipped (from 12\% to 3\%) illustrates even more the degree the model dislikes the \enquote{CDU} party.
 
 A further analysis on the samples collected for the original showed that \emph{Party} was mentioned in explanations much more when the left-leaning Candidate A was actually selected. This could also hint at the LLM not actually listing the decisive factors in this setup but post-hoc justifying the decision. Rerunning the experiment with a slightly modified prompt is needed to evaluate the scale of this phenomenon.
 

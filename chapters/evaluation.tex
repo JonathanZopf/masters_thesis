@@ -1,6 +1,6 @@
 \chapter{Evaluation Methodology}
 \label{ch:evaluation_methodology}
-The preceding chapters have modeled the proposed extension \emph{FELICS} from a purely theoretical standpoint: not only were the desiderata guiding its design established, but its behavior was also formalized and, in several cases, mathematically demonstrated to satisfy these desiderata. However, it remains to be shown whether the metric behaves in practice as its theoretical construction suggests. To this end, a thorough evaluation is conducted against a reference implementation, in which several central research questions are addressed and the resulting data and findings are processed and visualized.
+The preceding chapters have modeled the proposed extension \emph{FELICS} from a purely theoretical standpoint: not only were the principles guiding its design established in Chapter~\ref{sec:conception}, but its behavior was also formalized and, in several cases, mathematically demonstrated (Chapter~\ref{sec:modeling_updated_metric}). However, it remains to be shown whether the metric behaves in practice as its theoretical construction suggests. To this end, a thorough evaluation is conducted against a reference implementation, in which several central research questions are addressed and the resulting data and findings are processed and visualized.
 
 \section{Research Questions}
 \label{sec:research_questions}
@@ -29,6 +29,8 @@ To empirically evaluate the efficacy, theoretical soundness, and practical impli
 \end{enumerate}
 
 \section{Evaluation Settings}
+The research questions are investigated under a common set of implementation and sampling decisions. The following subsections document the exact settings used to make the experiments reproducible and their results comparable.
+
 \subsection{Reference Implementation}
 \label{sec:reference_implementation}
 Thus far, \emph{FELICS} has only been modeled mathematically, without an accompanying executable implementation. However, an implementation is required to automatically gather empirical data and to allow fellow researchers to use the FELICS pipeline without having to reimplement it themselves. A \emph{reference implementation} was therefore developed, building largely upon the same code base as the original implementation by Matton et al. \cite{mattonWalkTalkMeasuring2024} and introducing changes only where appropriate and necessary. It is available at \texttt{https://github.com/JonathanZopf/FELICS}. For comparison, the evaluation is additionally run against the original implementation, available at \texttt{https://github.com/kmatton/walk-the-talk}.
@@ -72,9 +74,9 @@ The relationship between concept correlation and the resulting CE difference is 
 
 \begin{hypothesis_box}
 	For each dataset $X \in \{\text{BBQ}, \text{MedQA}\}$ and evaluated model $M$: for every question $x$ with concept set $C$, define the correlation strength under configuration $n_{\max}$ as
-	\[
+	\begin{equation}
 		\kappa(x, n_{\max}) := \frac{1}{|C|} \sum_{s \,\in\, \mathcal{O}(x,C,n_{\max})} \ \sum_{\emptyset \neq T \subseteq s} |T|,
-	\]
+	\end{equation}
 	i.e., the total number of concept-occurrences across all treatments evaluated for $x$, normalized by the number of concepts $|C|$. Note that $\kappa(x,1)=1$ for every question, since every correlation group is a singleton under the atomic configuration. Let $\Delta\kappa(x) := |\kappa(x,4) - \kappa(x,1)|$ denote the difference in correlation strength between the joint and atomic configurations, and let $\Delta CE(x) := |\overline{CE}_{\mathrm{adj}}(x,4) - \overline{CE}_{\mathrm{adj}}(x,1)|$ denote the absolute difference between the mean adjusted Shapley CE across all concepts of $x$, computed under both configurations. Assemble a table with one row per question containing $\Delta\kappa(x)$ and $\Delta CE(x)$, and compute the Pearson correlation between both columns using a one-sided test (alternative: greater). The hypothesis is considered supported for a given dataset and model if $r \ge 0.10$ and $p \le 0.10$. Repeat the procedure independently for each dataset and model, and, in a second pass, substitute the question-level faithfulness score $F(x)$ for $\overline{CE}_{\mathrm{adj}}(x,n_{\max})$ to test the analogous effect on faithfulness. Fixing the joint configuration to $n_{\max}=4$ for BBQ and MedQA is a reasonable choice: a smaller value would restrict the oracle's ability to form larger correlation groups and thus bias the analysis toward the null hypothesis, whereas $n_{\max}$ must nonetheless be kept identical across all questions of a dataset to keep $\Delta\kappa(x)$ comparable. This hypothesis cannot be tested on New German Credit, however, since its oracle produces a single, dataset-wide partition of concepts (Section~\ref{sec:oracle_tabular}) rather than a per-question grouping. Consequently, $\kappa(x, n_{\max})$ would be identical for every question in the dataset, leaving no variance in $\Delta\kappa(x)$ against which to correlate $\Delta CE(x)$.
 \end{hypothesis_box}
 
@@ -90,9 +92,9 @@ Rank preservation is evaluated on the BBQ, MedQA, and New German Credit datasets
 
 \begin{hypothesis_box}
 	For each dataset $X \in \{\text{BBQ}, \text{MedQA}, \text{New German Credit}\}$, evaluated model $M$, and oracle configuration---$n_{\max}=1$, included as a sanity check since $CE_{\mathrm{raw}}$ and $CE_{\mathrm{adj}}$ coincide trivially for singleton groups, and the joint configuration ($n_{\max}=4$ for BBQ and MedQA, $n_{\max}=3$ for New German Credit)---collect, for every concept-level observation, the raw Shapley causal effect
-	\[
+	\begin{equation}
 		CE_{\mathrm{raw}}(x,C_m,s) := \phi_m(v)
-	\]
+	\end{equation}
 	obtained from Equation~\ref{eq:shapley} using the unadjusted value function $v$, alongside the adjusted Shapley causal effect $CE_{\mathrm{adj}}(x,C_m,s)$ obtained from Equation~\ref{eq:ce_adj}. Compute the Spearman rank correlation $\rho$ between both columns using a one-sided test (alternative: greater). The hypothesis is considered supported for a given dataset, model, and configuration if $\rho \ge 0.9$ and $p \le 0.05$.
 \end{hypothesis_box}
 

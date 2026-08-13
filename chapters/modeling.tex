@@ -1,7 +1,10 @@
 \chapter{Modeling the Updated Metric}
 \label{sec:modeling_updated_metric}
+This chapter translates the conceptual solution developed in Chapter \ref{sec:conception} into a complete mathematical specification for \emph{FELICS}. It describes how interacting concepts are identified and jointly intervened upon in greater detail, how their effects are attributed using Shapley values, why systematic scale distortions occur and how they are corrected, and which parts of the original evaluation pipeline remain unchanged.
+
 \section{Correlation Identification and Joint-Counterfactual Creation}
 \label{sec:joint_counterfactual}
+Accounting for concept interactions first requires deciding which concepts should be evaluated together and then generating the necessary joint interventions. This section develops an oracle for that grouping task in both natural-language and tabular settings before describing how its output determines the set of counterfactual questions.
 
 \subsection{Motivation for Correlation Identification}
 
@@ -33,7 +36,7 @@ BBQ and MedQA, the two datasets that Matton et al. \cite{mattonWalkTalkMeasuring
 	\item \textbf{Forced Chain-of-Thought (CoT) Explanations:} Although the downstream evaluation pipeline only parses the structured list of groups, the prompt forces the model to output a one-line explanation before returning the partitioned groups. Generating this explanation serves as a localized Chain-of-Thought step, which has been shown to improve reasoning quality \cite{weiChainofthoughtPromptingElicits2022}.
 \end{itemize}
 
-By distilling the grouping task into these precise rules, the auxiliary LLM is turned into a consistent surrogate for the oracle. The complete, dataset-specific prompt templates, which include few-shot examples demonstrating these rules on the BBQ and MedQA datasets, are provided in Appendix~\ref{app:bbq_prompt} and Appendix~\ref{app:medqa_prompt}.
+By distilling the grouping task into these precise rules, the auxiliary LLM is turned into a consistent surrogate for the oracle. The complete, dataset-specific prompt templates, which include few-shot examples demonstrating these rules on the BBQ and MedQA datasets, are provided in Appendix~\ref{app:prompts}.
 
 An example illustrating how the oracle $\mathcal{O}(x, C, n_{\max})$ subdivides a concept list for a question from the BBQ dataset is given in Example~\ref{ex:oracle_operation}. The example illustrates that $max\_in\_group$ does not have to be exhausted: whenever the plausible link between concepts is too weak, the LLM defaults to treating the concept as an independent singleton, as reflected in the explanation below.
 
@@ -77,7 +80,7 @@ Let $Z$ be a continuous numeric concept vector of size $N$, the number of rows i
 \begin{equation}
 	I_r =
 	\begin{cases}
-		[Q_{r-1}, Q_r) & \text{for } r \in \{1, \dots, q-1\}, \\begin{equation}2pt]
+		[Q_{r-1}, Q_r) & \text{for } r \in \{1, \dots, q-1\}, \\[2pt]
 		[Q_{q-1}, Q_q] & \text{for } r = q.
 	\end{cases}
 \end{equation}
@@ -164,6 +167,7 @@ It is therefore necessary to investigate the shift in the model's predictions fo
 
 \section{Shapley Values for Causal Effect Calculation}
 \label{sec:shapley}
+Joint interventions produce effects for sets of concepts, whereas the original metric and its explanation-implied effects operate at the level of individual concepts. This section uses Shapley values to bridge these levels by distributing each joint effect among the participating concepts in a principled manner.
 
 \subsection{Motivation}
 \label{sec:shapley_motivation}
@@ -250,6 +254,7 @@ This construction therefore yields a causal-effect definition compatible with th
 
 \section{Normalizing the Causal Effect}
 \label{sec:shapley_correction}
+The direct Shapley formulation introduces a systematic scale difference between effects estimated for singleton and multi-concept groups. This section identifies the source of that distortion and develops a payout-coefficient correction intended to make the resulting causal effects comparable while retaining genuine interaction effects.
 
 \subsection{Systematic Shrinkage of Joint Effects}
 \label{sec:kl_ceiling}
@@ -344,6 +349,7 @@ For example, two concepts may each have only a minor individual influence on the
 Since the EE estimation remains unchanged, the final faithfulness estimation can likewise be adopted without modification. This applies both to the formal definition based on the \emph{Pearson Correlation Coefficient} (Equation~\ref{eq:faithfulness}) and to the practical estimation using \emph{Bayesian Hierarchical Modelling}, as proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Furthermore, the computation of \emph{Dataset-Level Faithfulness} (Equation~\ref{eq:dataset_faithfulness}) is unaffected. By restricting all modifications to the estimation of causal effects, \emph{FELICS} builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
 
 \section{Post-Modeling Assessment}
+With the formal construction of \emph{FELICS} complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the desiderata established earlier, and derives the effects expected from the new formulation before empirical evaluation.
 
 \subsection{Reviewing Changes}
 
@@ -422,9 +428,9 @@ Since the original framework by Matton et al.~\cite{mattonWalkTalkMeasuring2024}
 
 \subsubsection{Effects on CE Scores}
 The relationship between $CE_{\text{adj}}$ and $CE_{\text{original}}$ is governed by the payout coefficient $\gamma$ relative to the reference-set average $\bar\gamma$. For a pair of concepts $C_i, C_j$ in a group $s = \{C_i, C_j\}$, where
-\begin{equation*}
+\begin{equation}
 	\gamma(C_i, C_j) = \frac{v(\{C_i, C_j\})}{v(\{C_i\}) + v(\{C_j\})},
-\end{equation*}
+\end{equation}
 the following cases are distinguished:
 
 \begin{itemize}

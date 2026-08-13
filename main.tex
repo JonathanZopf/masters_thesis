@@ -154,6 +154,41 @@ breakable,
   boxrule=0.5mm,
 }
 
+\newtcblisting[auto counter,number within=chapter]{promptbox}[1][]{
+  enhanced,
+  breakable,
+  listing only,
+  listing engine=listings,
+  colback=gray!4!white,
+  colframe=gray!65!black,
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.4mm,
+  title={Prompt \thetcbcounter},
+  left=4mm,
+  right=4mm,
+  top=2mm,
+  bottom=2mm,
+  listing options={
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    breakindent=0pt,
+    upquote=true,
+    inputencoding=utf8,
+    literate=
+      {ü}{{\"u}}1
+      {•}{{\textbullet\ }}1
+      {→}{{$\rightarrow$\ }}1
+      {–}{{--}}1
+      {’}{{'}}1
+  },
+  #1
+}
+
 \begin{document}
 
 % Title page
@@ -166,7 +201,15 @@ breakable,
 
 % Table of contents
 \tableofcontents
-\newpage
+\clearpage
+
+% Lists and notation overview
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+
+\input{list_of_symbols}
+\clearpage
 
 \pagestyle{fancy}
 
