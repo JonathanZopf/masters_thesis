@@ -57,37 +57,28 @@ For illustration, consider an initially masked question $x$ into which two conce
 	CE(x,\{C_i,C_j\}),
 \end{equation}
 
-where $CE(x,\{C_i,C_j\})$ denotes the causal concept effect obtained by jointly intervening on both concepts, i.e., replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously. Depending on the relationship between these quantities, three interaction types can be distinguished \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}:
+where $CE(x,\{C_i,C_j\})$ denotes the causal concept effect obtained by jointly intervening on both concepts, i.e., replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously. Depending on the relationship between these quantities, three interaction types can be distinguished \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}.
 
-\begin{itemize}
-	\item \textbf{Independence}\footnote{Within the PID literature the better established term is \emph{unique information}. Since the present discussion focuses on concepts whose effects do not depend on one another, the term \emph{Independence} is used instead.}:
+\subsection{Independence}
+\emph{Independence} means that each concept contributes information that cannot be inferred from the other concept. Consequently, the joint intervention effect equals the sum of the individual effects,
+\begin{equation}
+	CE(x,\{C_i,C_j\}) = CE(x,C_i)+CE(x,C_j).
+\end{equation}
+Within the PID literature the better established term is \emph{unique information}. Since the present discussion focuses on concepts whose effects do not depend on one another, the term \emph{Independence} is used instead.
 
-	      Each concept contributes information that cannot be inferred from the other concept. Consequently, the joint intervention effect equals the sum of the individual effects,
-	      \begin{equation}
-		      CE(x,\{C_i,C_j\})
-		      =
-		      CE(x,C_i)+CE(x,C_j).
-	      \end{equation}
+\subsection{Redundancy}
+When concepts are \emph{redundant}, both convey overlapping information. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
+\begin{equation}
+	CE(x,\{C_i,C_j\}) < CE(x,C_i)+CE(x,C_j).
+\end{equation}
 
-	\item \textbf{Redundancy}:
+\subsection{Synergy}
+In a \emph{synergistic} interaction, additional information emerges only when both concepts are considered jointly, leading to a reinforcing effect. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
+\begin{equation}
+	CE(x,\{C_i,C_j\}) > CE(x,C_i)+CE(x,C_j).
+\end{equation}
 
-	      Both concepts convey overlapping information. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
-	      \begin{equation}
-		      CE(x,\{C_i,C_j\})
-		      <
-		      CE(x,C_i)+CE(x,C_j).
-	      \end{equation}
-
-	\item \textbf{Synergy}:
-
-	      Additional information emerges only when both concepts are considered jointly, leading to a reinforcing effect. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
-	      \begin{equation}
-		      CE(x,\{C_i,C_j\})
-		      >
-		      CE(x,C_i)+CE(x,C_j).
-	      \end{equation}
-\end{itemize}
-
+\subsection{Implications for Causal Concept Effects}
 The examples above are restricted to the interaction of two concepts for simplicity. In practice, multiple concepts may interact simultaneously, giving rise to substantially more complex information-sharing structures. Williams and Beer \cite{williamsNonnegativeDecompositionMultivariate2010} generalize Partial Information Decomposition to arbitrary numbers of variables and introduce corresponding partial information diagrams to represent these relationships.
 
 Moreover, the discussed examples describe the effect of \emph{introducing} concepts into an initially masked question. This formulation was chosen because it allows the three interaction types to be interpreted intuitively in terms of the additional information contributed by a concept. Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, however, estimate causal concept effects by \emph{removing} concepts from the original question. Under this complementary perspective, the inequalities for redundancy and synergy are reversed. Removing two redundant concepts jointly eliminates more information than removing either concept individually, yielding

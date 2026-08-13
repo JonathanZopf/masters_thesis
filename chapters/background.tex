@@ -23,12 +23,14 @@ It has also been noted that different audiences perceive and consume explanation
 \subsection{Aspects and Dimensions}
 \label{sec:aspects_and_dimensions}
 Herrera \cite{herreraMakingSenseUnsensible2025} points out that, whereas traditional AI models usually follow fixed deterministic rules when generating explanations, LLMs complicate this process due to their more complex and advanced capabilities. The author therefore proposes four dimensions of explainability for large language models:
-\begin{itemize}
-	\item \textbf{Faithfulness}: Faithfulness describes whether the explanation corresponds to the internal reasoning of the model \cite{jacoviFaithfullyInterpretableNLP2020}.
-	\item \textbf{Truthfulness}: Truthfulness describes whether the explanation conforms to real-world facts derived from an external authoritative reference. A truthful explanation does not contain factual errors, omissions, or distortions \cite{herreraMakingSenseUnsensible2025}.
-	\item \textbf{Plausibility}: Plausibility describes the degree to which an explanation is convincing and appears reasonable to humans \cite{zhuExplanationEraLarge2024, jacoviFaithfullyInterpretableNLP2020}.
-	\item \textbf{Contrastivity}: Contrastivity measures how well the explanation highlights differences between competing pieces of information. In classification tasks, an XAI system with high contrastivity clearly outlines \textit{why} it selected one class over another \cite{herreraMakingSenseUnsensible2025, mershaUnifiedFrameworkNovel2025, stepinSurveyContrastiveCounterfactual2021}.
-\end{itemize}
+
+\noindent\textbf{Faithfulness.} Faithfulness describes whether the explanation corresponds to the internal reasoning of the model \cite{jacoviFaithfullyInterpretableNLP2020}.
+
+\noindent\textbf{Truthfulness.} By contrast, truthfulness describes whether the explanation conforms to real-world facts derived from an external authoritative reference. A truthful explanation does not contain factual errors, omissions, or distortions \cite{herreraMakingSenseUnsensible2025}.
+
+\noindent\textbf{Plausibility.} Plausibility describes the degree to which an explanation is convincing and appears reasonable to humans \cite{zhuExplanationEraLarge2024, jacoviFaithfullyInterpretableNLP2020}.
+
+\noindent\textbf{Contrastivity.} Finally, contrastivity measures how well the explanation highlights differences between competing pieces of information. In classification tasks, an XAI system with high contrastivity clearly outlines \textit{why} it selected one class over another \cite{herreraMakingSenseUnsensible2025, mershaUnifiedFrameworkNovel2025, stepinSurveyContrastiveCounterfactual2021}.
 
 It should be noted that there is still no broad scientific consensus within the XAI community regarding which aspects are essential for an explanation to be considered good, since descriptions, terminology, and definitions of these factors vary considerably \cite{phillipsFourPrinciplesExplainable2021, aliExplainableArtificialIntelligence2023, lopesXAISystemsEvaluation2022, mershaUnifiedFrameworkNovel2025}. This issue is further amplified by regulatory and standardization frameworks, which remain comparatively vague in this regard \cite{RegulationEU20242024, ISOIECTR}. Nevertheless, Herrera's \cite{herreraMakingSenseUnsensible2025} desiderata of faithfulness and plausibility in particular are supported by other literature, including \cite{jacoviFaithfullyInterpretableNLP2020, zhuExplanationEraLarge2024, turpinLanguageModelsDont2023}. Other authors, such as Lopes et al. \cite{lopesXAISystemsEvaluation2022}, refer to faithfulness as \emph{fidelity} and divide plausibility into several human-centered sub-aspects.
 
