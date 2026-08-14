@@ -10,6 +10,8 @@
 \usepackage{enumitem}
 \newcommand{\desref}[1]{Desideratum~\ref{#1}}
 \newcommand{\desrefs}[2]{Desiderata~\ref{#1} and~\ref{#2}}
+\newcommand{\rqref}[1]{Research Question~\ref{#1}}
+\newcommand{\rqrefs}[2]{Research Questions~\ref{#1} and~\ref{#2}}
 \usepackage{caption}
 \usepackage{subfiles}
 \usepackage[table]{xcolor}
@@ -113,7 +115,7 @@
 
 % Custom tcolorbox environments
 \newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{
-breakable,
+  breakable,
   colback=gray!5!white,
   colframe=gray!75!black,
   fonttitle=\bfseries,
@@ -124,7 +126,7 @@ breakable,
 }
 
 \newtcolorbox[auto counter]{motivating_example_box}[2][]{
-breakable,
+  breakable,
   colback=Orchid!5!white,
   colframe=Orchid!75!black,
   fonttitle=\bfseries,
@@ -132,12 +134,11 @@ breakable,
   arc=4mm,
   boxrule=0.5mm,
   width=\textwidth,
-  before=\noindent,
   #1
 }
 
 \newtcolorbox[auto counter,number within=chapter]{math_box}[1][]{
-breakable,
+  breakable,
   colback=cyan!5!white,
   colframe=cyan!75!black,
   fonttitle=\bfseries,
@@ -145,15 +146,6 @@ breakable,
   boxrule=0.5mm,
     title={Mathematical Demonstration \thetcbcounter},
 #1
-}
-
-\newtcolorbox[auto counter,number within=chapter]{hypothesis_box}[1][]{
-breakable,
-  colback=green!5!white,
-  colframe=green!75!black,
-  fonttitle=\bfseries,
-  arc=4mm,
-  boxrule=0.5mm,
 }
 
 \newtcblisting[auto counter,number within=chapter]{promptbox}[1][]{
@@ -193,30 +185,37 @@ breakable,
 
 \begin{document}
 
+% Front matter uses Roman page numbers. The title and declaration pages are
+% counted but do not display their page numbers.
+\pagenumbering{roman}
+\pagestyle{empty}
+
 % Title page
 \include{title_page}
 \maketitle
+% The report class resets the counter within \maketitle. Continue the Roman
+% sequence with the declaration as page ii.
+\setcounter{page}{2}
 \newpage
 
 % Declaration of originality
 \include{declaration_of_originality}
 
 % Table of contents
+\pagestyle{plain}
 \tableofcontents
 \clearpage
 
 % Lists and notation overview
-\addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
 \clearpage
 
 \input{list_of_symbols}
 \clearpage
 
-\pagestyle{fancy}
-
-% Start page numbering
+% Main matter starts with Arabic page 1, as is conventional for a thesis.
 \pagenumbering{arabic}
+\pagestyle{fancy}
 
 \subfile{chapters/introduction}
 \subfile{chapters/background}
