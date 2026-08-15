@@ -2,38 +2,38 @@
 \label{sec:conception}
 Having established the problem the metric by Matton et al.\ \cite{mattonWalkTalkMeasuring2024} faces in practice, this chapter derives the conceptual basis of the proposed solution. It first formulates the requirements that an extension of the original metric should satisfy and then develops joint interventions as the central mechanism for measuring interacting concept effects.
 
-\section{Desiderata}
-\label{sec:desiderata}
-Before extending the metric, it is first necessary to establish the properties that the proposed solution should satisfy. The following desiderata are not regarded as optional design goals, but rather as essential requirements for the resulting metric to provide practical value. Beyond addressing the limitations identified in Chapter~\ref{sec:correlated_concepts}, these requirements also ensure that the proposed method remains a meaningful extension of the \emph{Causal Concept Faithfulness Metric} introduced by Matton et al.\ \cite{mattonWalkTalkMeasuring2024}. Preserving compatibility with the original framework furthermore enables a scientifically grounded comparison between both metrics and allows observed improvements or behavioral differences to be attributed to the proposed modifications rather than unrelated implementation choices.
+\section{Requirements}
+\label{sec:requirements}
+Before extending the metric, it is first necessary to establish the properties that the proposed solution should satisfy. The following requirements are not regarded as optional design goals, but rather as essential properties for the resulting metric to provide practical value. Beyond addressing the limitations identified in Chapter~\ref{sec:correlated_concepts}, these requirements also ensure that the proposed method remains a meaningful extension of the \emph{Causal Concept Faithfulness Metric} introduced by Matton et al.\ \cite{mattonWalkTalkMeasuring2024}. Preserving compatibility with the original framework furthermore enables a scientifically grounded comparison between both metrics and allows observed improvements or behavioral differences to be attributed to the proposed modifications rather than unrelated implementation choices.
 
-Based on these considerations, six desiderata have been identified. Backward compatibility is represented by two separate requirements: compatibility for singleton groups and compatibility for groups of independent concepts.
+Based on these considerations, six requirements have been identified. Backward compatibility is represented by two separate requirements: compatibility for singleton groups and compatibility for groups of independent concepts.
 
 \begin{enumerate}[
-		label=\textbf{D\arabic*},
-		ref=D\arabic*,
+		label=\textbf{R\arabic*},
+		ref=R\arabic*,
 		wide=0pt,
 		leftmargin=0pt
 	]
-	\item \label{des:preserving_strengths} \textbf{Preserving the strengths of the \emph{Causal Concept Faithfulness Metric}}:
+	\item \label{req:preserving_strengths} \textbf{Preserving the strengths of the \emph{Causal Concept Faithfulness Metric}}:
 	      Compared to previous faithfulness metrics, the approach of Matton et al.\ \cite{mattonWalkTalkMeasuring2024} operates on high-level semantic concepts and is also capable of identifying \enquote{interpretable patterns of unfaithfulness} \cite{mattonWalkTalkMeasuring2024}. Rather than merely producing a single numerical faithfulness score, the metric reveals which concepts and semantic categories contribute to unfaithful explanations for individual questions as well as entire datasets. Since those factors represent the principal strength of the original method, they should be preserved by the proposed extension.
 
-	\item \label{des:one_item_group} \textbf{Singleton-group compatibility}:
+	\item \label{req:one_item_group} \textbf{Singleton-group compatibility}:
 	      As demonstrated in Section~\ref{sec:estimation_approaches}, numerous approaches for estimating the faithfulness of LLM explanations have recently been proposed. Instead of introducing a fundamentally different metric, the goal is therefore to remain compatible with the framework of Matton et al. \cite{mattonWalkTalkMeasuring2024} whenever possible. More specifically, if every \emph{correlation group} contains only a single concept, the proposed extension should reduce exactly to the original metric. In this case, the estimated Causal Concept Effects and, consequently, the resulting faithfulness scores should be identical.
 
-	\item \label{des:independence_behavior} \textbf{Independence compatibility}:
-	      If concepts within a correlation group are fully independent, no additional causal effect should be attributed to the group. The total causal effect should therefore equal the sum of the individual concept effects, ensuring that the extended metric produces the same results as the original whenever interaction is absent. Together with \desref{des:one_item_group}, this requirement facilitates direct comparisons between FELICS and the original approach and improves the interpretability and reproducibility of experimental results.
+	\item \label{req:independence_behavior} \textbf{Independence compatibility}:
+	      If concepts within a correlation group are fully independent, no additional causal effect should be attributed to the group. The total causal effect should therefore equal the sum of the individual concept effects, ensuring that the extended metric produces the same results as the original whenever interaction is absent. Together with \reqref{req:one_item_group}, this requirement facilitates direct comparisons between FELICS and the original approach and improves the interpretability and reproducibility of experimental results.
 
-	\item \label{des:no_surgical} \textbf{Avoiding the assumption of surgical interventions}:
+	\item \label{req:no_surgical} \textbf{Avoiding the assumption of surgical interventions}:
 	      As argued in Section~\ref{sec:pratical_limit}, the assumption that every concept can be intervened upon independently constitutes the principal limitation of the original metric. The proposed extension should therefore no longer rely on the existence of surgical interventions. Instead, whenever there is reason to assume that a concept cannot be meaningfully intervened upon in isolation, the evaluation procedure should explicitly account for this limitation.
 
-	\item \label{des:caputure_interaction} \textbf{Correctly capturing interaction effects}:
+	\item \label{req:caputure_interaction} \textbf{Correctly capturing interaction effects}:
 	      Relaxing the assumption of surgical interventions makes it possible to model interactions between concepts explicitly. As established in Section~\ref{sec:interaction_effects}, concepts may exhibit independent, redundant, or synergistic relationships. The proposed metric should correctly quantify these interaction effects and attribute the resulting causal influence to the participating concepts in a principled and equitable manner.
 
-	\item \label{des:feasibility} \textbf{Maintaining computational feasibility}:
+	\item \label{req:feasibility} \textbf{Maintaining computational feasibility}:
 	      Matton et al.~\cite{mattonWalkTalkMeasuring2024} note that practical evaluation is constrained by computational cost, requiring their experiments to be conducted on only a subset of the available benchmark questions \cite{mattonWalkTalkMeasuring2024}. Although improving computational efficiency is not a primary objective of this thesis, the proposed extension should remain computationally feasible in practice. The modified evaluation pipeline should therefore avoid introducing prohibitive computational overhead, allowing realistically sized datasets—or at least representative subsets thereof—to be evaluated within a reasonable amount of time without compromising the quality of the resulting estimates.
 \end{enumerate}
 
-In summary, \desref{des:preserving_strengths} preserves the principal strengths of the original \emph{Causal Concept Faithfulness Metric}, while \desrefs{des:one_item_group}{des:independence_behavior} establish backward compatibility for singleton groups and independent concepts. \desrefs{des:no_surgical}{des:caputure_interaction} directly address the two central aspects of the \emph{Correlated Concepts Problem}. Finally, \desref{des:feasibility} ensures that these improvements remain practically applicable. Based on these requirements, an updated evaluation pipeline can now be derived.
+In summary, \reqref{req:preserving_strengths} preserves the principal strengths of the original \emph{Causal Concept Faithfulness Metric}, while \reqrefs{req:one_item_group}{req:independence_behavior} establish backward compatibility for singleton groups and independent concepts. \reqrefs{req:no_surgical}{req:caputure_interaction} directly address the two central aspects of the \emph{Correlated Concepts Problem}. Finally, \reqref{req:feasibility} ensures that these improvements remain practically applicable. Based on these requirements, an updated evaluation pipeline can now be derived.
 
 
 \section{Core Idea: Measuring the Joint Effect}
@@ -65,7 +65,7 @@ This formulation can be generalized to support interventions on multiple concept
 		V = v)].
 \end{equation}
 
-Since the \emph{do}-operator is defined for arbitrary sets of intervention variables, this expression represents a direct generalization of Equation~\ref{eq:matton_direct_effect}. The original formulation is recovered as the special case $M_{\Delta}=\{m\}$, thereby satisfying the singleton-group compatibility requirement of \desref{des:one_item_group}, introduced in Section~\ref{sec:desiderata}.
+Since the \emph{do}-operator is defined for arbitrary sets of intervention variables, this expression represents a direct generalization of Equation~\ref{eq:matton_direct_effect}. The original formulation is recovered as the special case $M_{\Delta}=\{m\}$, thereby satisfying the singleton-group compatibility specified by \reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}.
 
 The corresponding intervention is illustrated in Figure~\ref{fig:dgp_joint_intervened}. For clarity, the intervened concepts are depicted as a contiguous block, although the indices contained in $M_{\Delta}$ need not be consecutive.
 
@@ -78,4 +78,4 @@ The corresponding intervention is illustrated in Figure~\ref{fig:dgp_joint_inter
 
 As in the single-concept intervention considered by Matton et al. \cite{mattonWalkTalkMeasuring2024}, the semantics of the \emph{do}-operator remove all incoming causal edges to the intervened variables \cite{pearlCausality2009}. Since every concept and the variable $V$ participate in the intervention---either through value replacement or by being fixed to their original values---all causal dependencies within the mediator layer are removed in the manipulated graph. This does not imply, however, that the intervened concepts influence the response variable $Y$ independently. Their effects on $Y$ may still exhibit interactions such as redundancy or synergy. By intervening on the entire set $M_{\Delta}$ simultaneously, the proposed formulation therefore captures both the individual effects of the intervened concepts and their interaction effects on the model's prediction.
 
-Introducing the joint effect reduces the \emph{Correlated Concepts Problem} to two remaining challenges. First, an oracle is required to determine which concepts should be grouped together for joint intervention. The proposed oracle is introduced in Section~\ref{sec:joint_counterfactual}. Second, the measured joint effect must be redistributed to the participating concepts while preserving compatibility with the original metric and maintaining concept-level interpretability. This redistribution is addressed using Shapley values in Section~\ref{sec:shapley}. The following chapter describes the resulting modifications to the evaluation pipeline in detail and demonstrates how they satisfy the desiderata introduced in the previous section.
+Introducing the joint effect reduces the \emph{Correlated Concepts Problem} to two remaining challenges. First, an oracle is required to determine which concepts should be grouped together for joint intervention. The proposed oracle is introduced in Section~\ref{sec:joint_counterfactual}. Second, the measured joint effect must be redistributed to the participating concepts while preserving compatibility with the original metric and maintaining concept-level interpretability. This redistribution is addressed using Shapley values in Section~\ref{sec:shapley}. The following chapter describes the resulting modifications to the evaluation pipeline in detail and demonstrates how they satisfy the requirements introduced in the previous section.
