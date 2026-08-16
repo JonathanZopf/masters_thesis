@@ -41,12 +41,12 @@ In summary, \reqref{req:preserving_strengths} preserves the principal strengths 
 
 As established in the previous section, the objective of the proposed metric extension is to remove the \emph{disentanglement assumption} while explicitly accounting for interaction effects between concepts. A natural consequence of this objective is that multiple concepts must be intervened upon simultaneously whenever their effects are expected to interact. Fortunately, this extension is directly supported by Pearl's \emph{do}-calculus, which permits interventions on arbitrary sets of variables rather than only individual variables \cite{shpitserIdentificationJointInterventional2006}. Consequently, the \emph{joint effect} of multiple concepts can be estimated within the same causal framework as the original metric.
 
-Matton et al. \cite{mattonWalkTalkMeasuring2024} define the direct effect of a single concept $C_m$ for a question $x$ using the following expression in \emph{do}-calculus notation:
+Matton et al. \cite{mattonWalkTalkMeasuring2024} define the direct effect of a single concept $C_m$ for a question $\mathbf{x}$ using the following expression in \emph{do}-calculus notation:
 
 \begin{equation}
 	\label{eq:matton_direct_effect}
-	\mathbb{E}_{\varepsilon}[Y \mid \text{do}(C_m = c'_m, \{C_i = c_i\}_{i \neq m}, V = v)] -
-	\mathbb{E}_{\varepsilon}[Y \mid \text{do}(\{C_i = c_i\}_{i \in \{1,\dots,M\}}, V = v)]
+	\mathbb{E}_{\mathcal{E}}[Y \mid \text{do}(C_m = c'_m, \{C_i = c_i\}_{i \neq m}, V = v)] -
+	\mathbb{E}_{\mathcal{E}}[Y \mid \text{do}(\{C_i = c_i\}_{i \in \{1,\dots,M\}}, V = v)]
 \end{equation}
 
 The notation corresponds to the mathematical framework introduced by Matton et al. \cite{mattonWalkTalkMeasuring2024} and discussed in Sections~\ref{sec:causal_concept_metric} and \ref{sec:correlated_concepts}.
@@ -55,12 +55,12 @@ This formulation can be generalized to support interventions on multiple concept
 
 \begin{equation}
 	\label{eq:matton_multi_direct_effect}
-	\mathbb{E}_{\varepsilon}[Y \mid
+	\mathbb{E}_{\mathcal{E}}[Y \mid
 		\text{do}(\{C_m = c'_m\}_{m \in M_{\Delta}},
 		\{C_i = c_i\}_{i \notin M_{\Delta}},
 		V = v)]
 	-
-	\mathbb{E}_{\varepsilon}[Y \mid
+	\mathbb{E}_{\mathcal{E}}[Y \mid
 		\text{do}(\{C_i = c_i\}_{i \in \{1,\dots,M\}},
 		V = v)].
 \end{equation}
