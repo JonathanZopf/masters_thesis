@@ -173,7 +173,7 @@ Intuitively, concepts whose modification substantially changes the model's outpu
 
 While the causal concept effect measures the actual influence of a concept on the model's prediction, the explanation-implied effect estimates how influential the model itself claims the concept to be within its explanation. If the explanations are faithful, concepts with large causal effects should be mentioned more frequently than concepts with only a negligible influence.
 
-Matton et al. \cite{mattonWalkTalkMeasuring2024} therefore define the explanation-implied effect as the probability that the model's explanations for both the original question and its counterfactuals identify concept $C_m$ as being causally relevant:
+Matton et al. \cite{mattonWalkTalkMeasuring2024} therefore define the explanation-implied effect as the probability that the model's explanations for both the original question and its counterfactuals identify concept $C_m$ as being causally relevant. Let $E$ denote the set-valued random variable containing the concepts judged causally relevant in a generated explanation. The explanation-implied effect is then
 
 \begin{equation}
 	\label{eq:ee}
@@ -199,7 +199,7 @@ After computing both the causal concept effects and the explanation-implied effe
 	\right).
 \end{equation}
 
-This yields a result within $[-1, 1]$. A high positive correlation indicates that concepts which genuinely influence the model's prediction are also consistently identified as influential within the explanation, whereas a low or even negative correlation indicates unfaithfulness.
+Provided that both vectors contain at least two components and neither vector is constant, the Pearson correlation coefficient is defined and lies within $[-1,1]$. If either vector has zero variance, or if fewer than two paired components are available, the coefficient is undefined. A high positive correlation indicates that concepts which genuinely influence the model's prediction are also consistently identified as influential within the explanation, whereas a low or even negative correlation indicates unfaithfulness.
 
 Finally, the dataset-level faithfulness of model $\mathcal{M}$ is obtained by averaging the question-level faithfulness scores over all questions in the dataset:
 

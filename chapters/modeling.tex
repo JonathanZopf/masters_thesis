@@ -18,7 +18,15 @@ This partitioning cannot happen randomly, however, since concepts are allowed, i
 	\sum_{i=1}^{\lceil M/n_{\max} \rceil} 2^{\min(n_{\max},\, M - (i-1)n_{\max})} - 1.
 \end{equation}
 
-The resulting set $\mathbf{S}$ produced by $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ contains subsets $s \in \mathbf{S}$, each grouping together concepts $C_m \in s$ that are deemed to interact. The total number of concepts across all subsets of $\mathbf{S}$ must match the number of concepts present in the question, i.e., $\sum_{i=1}^{|\mathbf{S}|} |s_i| = |\mathbf{C}|$. By construction, the size of each subset $s \in \mathbf{S}$ is constrained to $1 \le |s| \le n_{\max}$, and consequently also to $1 \le |s| \le |\mathbf{C}|$.
+The resulting set $\mathbf{S}$ produced by $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ contains subsets $s \in \mathbf{S}$, each grouping together concepts $C_m \in s$ that are deemed to interact. Formally, $\mathbf{S}$ is a partition of $\mathbf{C}$ and therefore satisfies
+\begin{equation}
+	\bigcup_{s\in\mathbf{S}}s=\mathbf{C},
+	\qquad
+	s_i\cap s_j=\emptyset\ \text{for all distinct }s_i,s_j\in\mathbf{S},
+	\qquad
+	1\leq |s|\leq n_{\max}\ \text{for every }s\in\mathbf{S}.
+\end{equation}
+Consequently, every concept occurs in exactly one correlation group, no concept is duplicated across groups, and $\sum_{s\in\mathbf{S}}|s|=|\mathbf{C}|$.
 
 Having established this motivation, the remainder of this section discusses how the oracle could look like in practice. Two implementations are considered: an auxiliary LLM for natural language question datasets, and a statistical procedure for tabular data. Regardless of which version is used, the resulting set $\mathbf{S}$ exhibits the same properties, so the specific oracle implementation has no further implications for the remainder of the evaluation pipeline.
 
@@ -115,7 +123,7 @@ Surviving pairs are sorted by descending association strength to form a prioriti
 
 Let $\mathcal{C} = \{C_1, \ldots, C_M\}$ denote the static, dataset-wide set of concepts corresponding to the table columns. Unlike in natural-language datasets, $\mathcal{C}$ remains identical for every instance $\mathbf{x}$.
 
-The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on an undirected graph $G = (\mathcal{C}, \mathcal{L}, W)$, with edge weights $w(C_i, C_j) = A(C_i, C_j)$. This partitioning is resolved via a modified Kruskal's algorithm constrained by a maximum component size $n_{\max}$:
+The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on the undirected weighted graph $G = (\mathcal{C}, \mathcal{L})$. Each element $(C_i,C_j,A_{i,j})\in\mathcal{L}$ represents an edge between $C_i$ and $C_j$ whose weight is their association strength $A_{i,j}=A(C_i,C_j)$. This partitioning is resolved via a modified Kruskal's algorithm constrained by a maximum component size $n_{\max}$:
 
 \begin{algorithm}[H]
 	\caption{Constrained Greedy Partitioning}\label{alg:greedy_merge}
@@ -132,7 +140,7 @@ The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Ma
 	\end{algorithmic}
 \end{algorithm}
 
-The resulting partition $\mathcal{P}$ serves as the tabular oracle output $\mathbf{S} := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ used as a correlation group $s \in \mathbf{S}$.
+The resulting partition $\mathcal{P}$ serves as the tabular oracle output $\mathbf{S} := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ used as a correlation group $s \in \mathbf{S}$. The resulting groups should be interpreted as candidates for interaction rather than proof of causal interaction: pairwise association provides an observable heuristic for prioritizing joint interventions, but association alone neither establishes interaction in the model's response nor captures every possible higher-order interaction.
 
 \subsection{Putting Joint Interventions into Practice}
 
@@ -176,20 +184,20 @@ Naive approaches exist, such as computing the average effect of a concept across
 
 Shapley values were introduced by Lloyd Shapley in 1953 \cite{shapley17ValueNPerson1953}. Originating in cooperative game theory, they determine how to fairly distribute a total payout among a set of players based on each player's individual contribution to the coalition. A player's allocation is calculated by evaluating its expected marginal contribution across all possible coalitions that the player could form with the remaining players \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}.
 
-Given a value function $v(T)$ defined for any subset $T \subseteq N$, where $N$ denotes the set of all players, the value allotted to a player $m \in N$ is given by Equation~\ref{eq:shapley}.
+Given a value function $v(T)$ defined for any subset $T \subseteq P$, where $P$ denotes the set of all players, the value allotted to a player $m \in P$ is given by Equation~\ref{eq:shapley}.
 
 \begin{equation}
 	\label{eq:shapley}
-	\phi_m(v) = \sum_{T \subseteq N \setminus \{m\}} \frac{|T|!\, (|N|-|T|-1)!}{|N|!} \big[ v(T \cup \{m\}) - v(T) \big]
+	\phi_m(v) = \sum_{T \subseteq P \setminus \{m\}} \frac{|T|!\, (|P|-|T|-1)!}{|P|!} \big[ v(T \cup \{m\}) - v(T) \big]
 \end{equation}
 
-where $\frac{|T|!\, (|N|-|T|-1)!}{|N|!}$ denotes the weighting factor, and $v(T \cup \{m\}) - v(T)$ denotes the marginal contribution provided by player $m$.
+where $\frac{|T|!\, (|P|-|T|-1)!}{|P|!}$ denotes the weighting factor, and $v(T \cup \{m\}) - v(T)$ denotes the marginal contribution provided by player $m$.
 
 Shapley proved that this solution is unique in satisfying four core axioms \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}:
 \begin{itemize}
-	\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in N} \phi_i(v) = v(N)$).
-	\item \textbf{Symmetry}: Identical players who contribute the exact same amount to any coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq N \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
-	\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq N \setminus \{m\}$, then $\phi_m(v) = 0$).
+	\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in P} \phi_i(v) = v(P)$).
+	\item \textbf{Symmetry}: Identical players who contribute the exact same amount to any coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq P \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
+	\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq P \setminus \{m\}$, then $\phi_m(v) = 0$).
 	\item \textbf{Additivity}: If two independent games are played, a player's payout from the combined games equals the sum of their payouts from each individual game ($\phi_m(v + w) = \phi_m(v) + \phi_m(w)$).
 \end{itemize}
 
@@ -203,11 +211,15 @@ The previous section left two questions unanswered: how the value function $v$ s
 
 It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so supports \reqrefs{req:one_item_group}{req:independence_behavior}, formulated in Section~\ref{sec:requirements}. However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $\mathrm{CE}(\mathbf{x},C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
 
-The value function must be adapted slightly to support joint interventions on multiple concepts. First, let $T$ be a set of concepts, and let $\mathbb{C}_i$ denote the set of all possible values (the full domain) for a concept $C_i \in T$. The corresponding \emph{joint-value domain}, denoted by $\mathbb{T}$, is the Cartesian product of these individual value sets, $\mathbb{T} = \prod_{C_i \in T} \mathbb{C}_i$. Thus, $t \in \mathbb{T}$ denotes the tuple of the original values of the concepts in $T$, i.e., $t = (c_i)_{C_i \in T}$. Analogous to the notation of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, $\mathbb{T}' := \mathbb{T} \setminus \{t\}$ denotes the set of possible counterfactual joint values, the multi-concept analogue of $\mathbb{C}_m'$. The value function of the Shapley game for a set $T$ is then defined analogously to Equation~\ref{eq:ce} as
+The value function must be adapted slightly to support joint interventions on multiple concepts. First, let $T$ be a set of concepts, and let $\mathbb{C}_i$ denote the set of all possible values (the full domain) for a concept $C_i \in T$. The corresponding \emph{joint-value domain}, denoted by $\mathbb{T}$, is the Cartesian product of these individual value sets, $\mathbb{T} = \prod_{C_i \in T} \mathbb{C}_i$. Thus, $t \in \mathbb{T}$ denotes the tuple of the original values of the concepts in $T$, i.e., $t = (c_i)_{C_i \in T}$. The counterfactual joint-value domain is defined as
+\begin{equation}
+	\mathbb{T}' := \prod_{C_i\in T}\left(\mathbb{C}_i\setminus\{c_i\}\right).
+\end{equation}
+Consequently, every tuple $t'=(c_i')_{C_i\in T}\in\mathbb{T}'$ changes the value of every concept in $T$. This makes $v_{\mathbf{x}}(T)$ the effect of intervening on exactly the coalition $T$: partial interventions are represented by the value functions of the corresponding smaller coalitions. This distinction is required for the Shapley marginal contribution $v_{\mathbf{x}}(T\cup\{C_m\})-v_{\mathbf{x}}(T)$ to compare coalitions whose members are all actively intervened upon. The question-specific value function is then defined analogously to Equation~\ref{eq:ce} as
 
 \begin{equation}
 	\label{eq:value_function}
-	v(T) =
+	v_{\mathbf{x}}(T) =
 	\begin{cases}
 		\frac{1}{|\mathbb{T}'|}
 		\sum_{t' \in \mathbb{T}'}
@@ -228,7 +240,7 @@ With the value function now defined, the equation for estimating the causal effe
 \begin{equation}
 	\label{eq:new_ce}
 	\mathrm{CE}(\mathbf{x},C_m, s)=
-	\sum_{T \subseteq s \setminus \{C_m\}} \frac{|T|!\, (|s|-|T|-1)!}{|s|!} \big[ v(T \cup \{C_m\}) - v(T) \big]
+	\sum_{T \subseteq s \setminus \{C_m\}} \frac{|T|!\, (|s|-|T|-1)!}{|s|!} \big[ v_{\mathbf{x}}(T \cup \{C_m\}) - v_{\mathbf{x}}(T) \big]
 \end{equation}
 
 Recall, however, that Matton et al. \cite{mattonWalkTalkMeasuring2024} estimate faithfulness via the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}), in which the causal effect is invoked as $\mathbf{CE}(\mathbf{x},\mathbf{C})$. A version without $s$ as an explicit parameter must therefore be constructed, receiving instead the set of concepts $\mathbf{C}$ present in the question. The question-level CE vector no longer depends explicitly on $C_m$ and $s$. As in Matton et al. \cite{mattonWalkTalkMeasuring2024}, let $\mathbf{C}$ denote the set of concepts present in the question $\mathbf{x}$. A helper function is introduced in which $n_{\max}$ for $\mathcal{O}$ is fixed to a constant value:
@@ -257,37 +269,37 @@ The direct Shapley formulation introduces a systematic scale difference between 
 
 Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the evaluation pipeline. Running an actual implementation, however, reveals a systematic pattern in the resulting scores. Whenever a concept $C_m$ is assigned to a correlation group $s$ with $|s|>1$, its resulting Shapley-CE tends to be lower than the causal effect that would have been measured had $C_m$ been evaluated on its own, i.e., on average $\mathrm{CE}(\mathbf{x},C_m,s) < \mathrm{CE}(\mathbf{x},C_m,\{C_m\})$, even for concepts that are otherwise independent in the sense of Section~\ref{sec:interaction_effects}.
 
-This is a direct consequence of the Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley}): the sum of payouts to all concepts in $s$ always equals $v(s)$, the joint effect of intervening on the entire group at once. If the joint effect of a group is systematically smaller than the sum of what its members would achieve individually, Efficiency guarantees that this shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Thus, every concept in a correlated group is, on average, \enquote{punished} for being grouped, regardless of whether it actually interacts with the other members of $s$.
+The Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley}) makes the scale of the joint value relevant to every allocated effect: the sum of payouts to all concepts in $s$ equals $v_{\mathbf{x}}(s)$, the joint effect of intervening on the entire group at once. Whenever this joint value is smaller than the sum of the corresponding singleton values, the shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Empirically, this pattern occurs systematically on average in the considered setting, although its direction and magnitude may differ for individual groups, particularly when genuine redundancy or synergy is present.
 
-Intuitively, the underlying mechanism resembles a ceiling effect. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Jointly intervening on both concepts cannot push the prediction to $160\%$, since probabilities are bounded by $100\%$; some shortfall relative to the naive sum is therefore unavoidable, independently of whether the two concepts interact.
+Intuitively, probability space does not permit direct addition of separately normalized outputs. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Adding the two resulting probabilities would yield $160\%$, while adding the two isolated shifts to the baseline would yield $110\%$; neither is a valid probability. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space, but does not by itself determine whether the resulting KL-based joint effect is smaller or larger than the sum of singleton effects.
 
-Specifically, this ceiling is enforced during the Bayesian hierarchical modeling step presented by Matton et al. \cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct the probability distribution vector $\mathbf{p}_{y\mid I_{C_{m'}^{\mathbf{x}}}}$ from sampled realizations of the answer variable $Y$, they employ a softmax function. Each scalar component of that vector is assembled as
+One structural source of this non-additivity is the Bayesian hierarchical modeling step presented by Matton et al. \cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct a probability distribution vector from sampled realizations of the answer variable $Y$, they employ a softmax function. Let $I$ denote the intervention condition under which responses are sampled, and let $\theta_{y\mid I}$ denote the latent logit assigned to answer option $y$ under that condition. Each scalar probability component is assembled as
 \begin{equation}\label{eq:culprit_softmax}
-	p_{y\mid I_{C_{m'}^{\mathbf{x}}}} = \frac{e^{\theta_{y\mid I_{C_{m'}^{\mathbf{x}}}}}}{\sum_{y \in \mathcal{Y}} e^{\theta_{y\mid I_{C_{m'}^{\mathbf{x}}}}}} \quad y \in \mathcal{Y}
+	p_{y\mid I} = \frac{e^{\theta_{y\mid I}}}{\sum_{y' \in \mathcal{Y}} e^{\theta_{y'\mid I}}}, \qquad y \in \mathcal{Y},
 \end{equation}
-Without detailing the surrounding variables exhaustively, its key property is that outputs are strictly confined to $[0,1]$ and sum to exactly $1$ across all possible predictions in $\mathcal{Y}$. This preserves the fundamental axiom that no set of mutually exclusive events can have a combined probability exceeding $100\%$.
+and the complete vector is $\mathbf{p}_{I}:=(p_{y\mid I})_{y\in\mathcal{Y}}$. Its key property is that the components are strictly confined to $[0,1]$ and sum to exactly $1$ across all possible predictions in $\mathcal{Y}$. This preserves the fundamental axiom that no set of mutually exclusive events can have a combined probability exceeding $100\%$.
 
 Because of this strict normalization, the probability distribution resulting from a joint intervention cannot equal the sum of the distributions from individual interventions. If one were to naively add the isolated resulting distributions of an intervention on Concept A and an intervention on Concept B, the sum over the prediction space would equal $2$. Since any valid probability distribution must sum to exactly $1$, the joint intervention is inherently non-additive in probability space.
 
-Beyond this extreme case of distributions summing to $2$, this non-additivity also applies locally to individual predictions as a \enquote{soft ceiling} that continuously dampens joint effects. Because the softmax function applies an exponential transformation divided by a sum of exponentials, additive increases in the underlying model scores (logits) translate into sub-additive increases in probability. Example~\ref{ex:softmax_ceiling} of Appendix~\ref{app:examples} illustrates this mechanism in detail, demonstrating how two independent concepts that individually shift a prediction by $+20\%$ and $+30\%$ yield a joint shift of only $+44\%$, rather than the naive additive sum of $+50\%$.
+Beyond this extreme case of distributions summing to $2$, the nonlinear mapping from logits to probabilities means that additive changes in logit space need not remain additive in probability space. Example~\ref{ex:softmax_ceiling} of Appendix~\ref{app:examples} illustrates one sub-additive instance of this mechanism, in which two independent concepts that individually shift a prediction by $+20\%$ and $+30\%$ yield a joint shift of only $+44\%$, rather than the naive additive sum of $+50\%$. This example does not establish universal sub-additivity: depending on the intervention and on genuine concept interactions, a joint effect may also equal or exceed the sum of singleton effects.
 
-Because the joint effect serves as the basis for calculating individual payouts, this inherent non-additivity guarantees that independent concepts are penalized for being placed in a coalition. Mathematically, this manifests as $v(s) < \sum_{C_m \in s} v(\{C_m\})$. This structural penalty provides a poor basis for further evaluation, necessitating an adjustment. However, removing the softmax function or altering the Bayesian sampling process would conflict with \reqrefs{req:one_item_group}{req:independence_behavior}, formulated in Section~\ref{sec:requirements}. The preferred solution is therefore to apply a normalization that counteracts this shrinkage, calibrated against the magnitude of the same effect observed for comparable treatments.
+Because the joint effect serves as the basis for calculating individual payouts, systematic non-additivity can create a reference-relative scale difference between singleton and multi-concept treatments. The observed average tendency $v_{\mathbf{x}}(s)<\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ motivates a normalization, but is not imposed as a universal inequality. Rather than removing the softmax function or altering the Bayesian sampling process, the proposed normalization estimates the typical non-additivity of comparable treatments and adjusts against that reference level.
 
 \subsection{Introducing Payout Coefficient}
 
 For a treatment $T \subseteq s$ with $T \neq \emptyset$, the \emph{payout coefficient} is defined as
 \begin{equation}
 	\label{eq:payout_coefficient}
-	\gamma(\mathbf{x},T) := \frac{v(T)}{\displaystyle\sum_{C_m \in T} v(\{C_m\})},
+	\gamma(\mathbf{x},T) := \frac{v_{\mathbf{x}}(T)}{\displaystyle\sum_{C_m \in T} v_{\mathbf{x}}(\{C_m\})},
 \end{equation}
-the ratio of the group's joint effect to the sum of its members' singleton effects. If $\sum_{C_m\in T} v(\{C_m\})=0$, every concept in $T$ has zero singleton effect; in this degenerate case $\gamma(\mathbf{x},T):=1$ is set by convention, so that no correction is applied.
+the ratio of the group's joint effect to the sum of its members' singleton effects. If $\sum_{C_m\in T} v_{\mathbf{x}}(\{C_m\})=0$, every concept in $T$ has zero singleton effect; in this degenerate case $\gamma(\mathbf{x},T):=1$ is set by convention, so that no correction is applied.
 
 By definition, $\gamma(\mathbf{x},T)=1$ indicates perfect additivity, $\gamma(\mathbf{x},T)<1$ the shrinkage documented above, and $\gamma(\mathbf{x},T)>1$ reinforcement. For a singleton treatment $T=\{C_m\}$, numerator and denominator coincide, so $\gamma(\mathbf{x},\{C_m\}) \equiv 1$: the correction defined below therefore leaves singleton effects unchanged, as required by \reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}.
 
 \subsection{Constructing a Reference Set}
 \label{sec:reference_set}
 
-A treatment's own coefficient $\gamma(\mathbf{x},T)$ cannot be used to correct its own value function: doing so would force $v(T)/\gamma(\mathbf{x},T) = \sum_{C_m\in T} v(\{C_m\})$ identically for every treatment, discarding exactly the information about genuine concept interaction that \reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the metric to retain. Instead, $\gamma(\mathbf{x},T)$ is corrected using the \emph{typical} coefficient observed for treatments of the same size $|T|$ elsewhere in the dataset.
+A treatment's own coefficient $\gamma(\mathbf{x},T)$ cannot be used to correct its own value function: doing so would force $v_{\mathbf{x}}(T)/\gamma(\mathbf{x},T) = \sum_{C_m\in T} v_{\mathbf{x}}(\{C_m\})$ identically for every treatment, discarding exactly the information about genuine concept interaction that \reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the metric to retain. Instead, $\gamma(\mathbf{x},T)$ is corrected using the \emph{typical} coefficient observed for treatments of the same size $|T|$ elsewhere in the dataset.
 
 Let $\mathbf{S} := \mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ denote the correlation groups for question $\mathbf{x}$. Three disjoint pools of reference treatments matching $|T|$ in size are considered, in descending priority:
 \begin{align}
@@ -316,25 +328,36 @@ The mean payout coefficient over the reference set,
 		1                                                                                                                                      & \text{if } \mathcal{R}(\mathbf{x},s,T)=\emptyset,
 	\end{cases}
 \end{equation}
-estimates the typical shrinkage or amplification expected for treatments of size $|T|$, independently of $T$'s own realization. The corrected value function is
+estimates the typical shrinkage or amplification expected for treatments of size $|T|$, independently of $T$'s own realization. This reference level also permits a distinction between two notions of independence. \emph{Absolute additivity} means $\gamma(\mathbf{x},T)=1$, whereas \emph{reference-relative independence} means
+\begin{equation}
+	\gamma(\mathbf{x},T)=\bar\gamma(\mathbf{x},s,T).
+\end{equation}
+The latter does not assert that the joint effect is absolutely additive; it states that the treatment exhibits the level of non-additivity typical of equally sized reference treatments. Values below or above $\bar\gamma(\mathbf{x},s,T)$ indicate greater shrinkage or reinforcement, respectively, relative to that reference level.
+
+To prevent division by a numerically degenerate reference coefficient, let $\varepsilon:=0.01$ denote a small fixed threshold. The corrected question-specific value function is
 \begin{equation}
 	\label{eq:v_adj}
-	v_{\mathrm{adj}}(T) := \frac{v(T)}{\bar\gamma(\mathbf{x},s,T)}, \qquad T \neq \emptyset,
+	v_{\mathrm{adj},\mathbf{x}}(T) :=
+	\begin{cases}
+		\dfrac{v_{\mathbf{x}}(T)}{\bar\gamma(\mathbf{x},s,T)} & \text{if }T\neq\emptyset\text{ and }\bar\gamma(\mathbf{x},s,T)>\varepsilon,         \\
+		v_{\mathbf{x}}(T)                                     & \text{if }T\neq\emptyset\text{ and }0\leq\bar\gamma(\mathbf{x},s,T)\leq\varepsilon, \\
+		0                                                     & \text{if }T=\emptyset.
+	\end{cases}
 \end{equation}
-with $v_{\mathrm{adj}}(\emptyset) := v(\emptyset) = 0$ due to the special case for $T=\emptyset$ in Equation~\ref{eq:value_function}.
+Thus, no normalization is applied when the reference estimate is too close to zero to support stable division. The threshold is fixed before evaluation and reported with the experimental configuration.
 
-Substituting $v_{\mathrm{adj}}$ for $v$ in Equation~\ref{eq:new_ce} yields the corrected causal effect
+Substituting $v_{\mathrm{adj},\mathbf{x}}$ for $v_{\mathbf{x}}$ in Equation~\ref{eq:new_ce} yields the corrected causal effect
 \begin{equation}
 	\label{eq:ce_adj}
-	\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s) := \sum_{T\subseteq s\setminus\{C_m\}} \frac{|T|!\,(|s|-|T|-1)!}{|s|!} \big[v_{\mathrm{adj}}(T\cup\{C_m\}) - v_{\mathrm{adj}}(T)\big],
+	\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s) := \sum_{T\subseteq s\setminus\{C_m\}} \frac{|T|!\,(|s|-|T|-1)!}{|s|!} \big[v_{\mathrm{adj},\mathbf{x}}(T\cup\{C_m\}) - v_{\mathrm{adj},\mathbf{x}}(T)\big],
 \end{equation}
 which replaces $\mathrm{CE}(\mathbf{x},C_m,s)$ from this point onward in populating the causal-effect vector $\mathbf{CE}(\mathbf{x},\mathbf{C})$ of Equation~\ref{eq:new_ce_vector}.
 
-In summary, the correction is designed to remove, in expectation, exactly the structural non-additivity established in Section~\ref{sec:kl_ceiling}, while leaving genuine interaction effects (Section~\ref{sec:interaction_effects}) intact for any individual treatment. Furthermore, it supports \reqrefs{req:one_item_group}{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, by preserving the original metric's dataset-average CE score.
+In summary, the correction is designed to reduce the systematic, reference-relative scale distortion observed for multi-concept treatments while retaining deviations that may reflect interaction effects (Section~\ref{sec:interaction_effects}). Under the simplifying assumptions stated in Math Box~\ref{ma:dataset_average_preservation}, it is additionally intended to approximately preserve the original metric's dataset-average CE score.
 
 \section{Remaining Evaluation Pipeline}
 \label{sec:remaining_pipeline}
-The previous sections introduced the modified formulation of the \emph{Causal Effect} (Equation~\ref{eq:ce_adj}), which is now computed using Shapley values. Furthermore, the underlying value function was extended to compensate for the systematic underestimation of joint concept effects discussed in Section~\ref{sec:shapley_correction}.
+The previous sections introduced the modified formulation of the \emph{Causal Effect} (Equation~\ref{eq:ce_adj}), which is now computed using Shapley values. Furthermore, the underlying value function was extended to compensate for the systematic, reference-relative scale difference observed for joint concept effects and discussed in Section~\ref{sec:shapley_correction}.
 
 After the CE vector has been computed, two major stages remain in the evaluation pipeline proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}: estimating the \emph{Explanation Implied Effect} (EE) and computing the final faithfulness score from the relationship between both vectors. Fortunately, neither of these components requires any modification.
 
@@ -376,9 +399,9 @@ At this stage, the conceptual design of \emph{FELICS} is complete, whereas its e
 
 \subsubsection{\ref{req:independence_behavior} Independence Compatibility}
 
-\reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, considers the more general case in which concepts are grouped together but remain mutually independent. Strictly speaking, this requirement cannot be satisfied exactly, since the probability normalization imposed by the softmax function introduces the ceiling effect discussed in Section~\ref{sec:kl_ceiling}. Consequently, even perfectly independent concepts do not generally satisfy $v(s)=\sum_{C_m\in s}v(\{C_m\})$.
+\reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, considers the more general case in which concepts are grouped together but remain mutually independent. The nonlinear mapping from logits to probabilities discussed in Section~\ref{sec:kl_ceiling} means that even concepts without a substantive interaction need not satisfy $v_{\mathbf{x}}(s)=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ exactly.
 
-The normalization proposed in Section~\ref{sec:shapley_correction} therefore compensates for this systematic shrinkage only in a relative sense. A correlation group behaves independently whenever its payout coefficient equals the expected payout coefficient of equally sized groups within the dataset. In other words, the items in the group are independent if around half of equal-sized references interact more synergistically and the other half more redundantly. Under this practically attainable notion of independence, no additional interaction effect is attributed to the group, and the resulting causal-effect estimates coincide with those of the original metric, as demonstrated in Math Box~\ref{ma:independence_behavior} of Appendix~\ref{app:mathematical_demonstrations}.
+The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative independence}: a correlation group is neutral relative to the dataset when its payout coefficient equals the expected payout coefficient of equally sized reference treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under the additional reference-relative additivity assumptions stated in Math Box~\ref{ma:independence_behavior} of Appendix~\ref{app:mathematical_demonstrations}, no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
 
 \subsubsection{\ref{req:no_surgical} Avoiding the Assumption of Surgical Interventions}
 
@@ -390,7 +413,7 @@ Instead of intervening on individual concepts exclusively, \emph{FELICS} perform
 
 \reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the proposed framework to distinguish between independent, redundant, and synergistic interactions and to attribute their causal effects accordingly, based on the interaction types established in Section~\ref{sec:interaction_effects}.
 
-This property follows directly from the demonstration in Math Box~\ref{ma:independence_behavior}. If a correlation group behaves independently relative to the dataset, its payout coefficient equals the expected payout coefficient for groups of identical size,
+This property follows under the assumptions of Math Box~\ref{ma:independence_behavior}. If a correlation group exhibits reference-relative independence, its payout coefficient equals the expected payout coefficient for groups of identical size,
 \begin{equation}
 	\bar\gamma(\mathbf{x},s,s)=\gamma(\mathbf{x},s),
 \end{equation}
@@ -427,26 +450,26 @@ Since the original framework by Matton et al.~\cite{mattonWalkTalkMeasuring2024}
 \subsubsection{Effects on CE Scores}
 The relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ is governed by the payout coefficient $\gamma$ relative to the reference-set average $\bar\gamma$. For a pair of concepts $C_i, C_j$ in a group $s = \{C_i, C_j\}$, where
 \begin{equation}
-	\gamma(C_i, C_j) = \frac{v(\{C_i, C_j\})}{v(\{C_i\}) + v(\{C_j\})},
+	\gamma\bigl(\mathbf{x},\{C_i,C_j\}\bigr) = \frac{v_{\mathbf{x}}(\{C_i,C_j\})}{v_{\mathbf{x}}(\{C_i\}) + v_{\mathbf{x}}(\{C_j\})},
 \end{equation}
 three cases can be distinguished.
 
-\noindent\textbf{Redundancy ($\gamma(C_i, C_j) < \bar\gamma$).} The joint effect is smaller than the sum of singleton effects. When concepts are \emph{added} to a question, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, meaning that Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} metric overestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, meaning that the original metric underestimates them.
+\noindent\textbf{Reference-relative redundancy ($\gamma(\mathbf{x},\{C_i,C_j\}) < \bar\gamma(\mathbf{x},s,s)$).} The joint effect is smaller relative to its singleton effects than for the reference treatments. When concepts are \emph{added} to a question, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, meaning that Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} metric overestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, meaning that the original metric underestimates them.
 
-\noindent\textbf{Synergy ($\gamma(C_i, C_j) > \bar\gamma$).} The joint effect exceeds the sum of singleton effects. When concepts are \emph{added}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, so the original metric underestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$, and the original metric instead overestimates them.
+\noindent\textbf{Reference-relative synergy ($\gamma(\mathbf{x},\{C_i,C_j\}) > \bar\gamma(\mathbf{x},s,s)$).} The joint effect is larger relative to its singleton effects than for the reference treatments. When concepts are \emph{added}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, so the original metric underestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$, and the original metric instead overestimates them.
 
-\noindent\textbf{Independence ($\gamma(C_i, C_j) = \bar\gamma$).} The joint effect equals the sum of singleton effects. In this case, $\mathrm{CE}_{\text{adj}} = \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, and FELICS matches Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric.
+\noindent\textbf{Reference-relative independence ($\gamma(\mathbf{x},\{C_i,C_j\}) = \bar\gamma(\mathbf{x},s,s)$).} The treatment exhibits the level of non-additivity typical of its references; this does not require absolute additivity. Under the compatibility assumptions stated in Math Box~\ref{ma:independence_behavior}, $\mathrm{CE}_{\text{adj}} = \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, and FELICS matches Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric.
 
 \subsubsection{Value-Replacement Interventions}
 When concept values are \emph{modified} rather than added or removed, the relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ depends on the direction of the effect. If concepts $C_i$ and $C_j$ exhibit minor influence before intervention but major individual influence afterward while also interacting redundantly post-intervention, Matton’s metric overestimates their effect ($\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$). Conversely, if their influence is major before intervention but minor after being changed on their own, again with redundant behavior after intervention, Matton’s metric underestimates ($\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$). This sign inversion mirrors the behavior observed for addition vs. removal interventions.
 
 However, value-based interventions introduce additional complexity: modifying a concept’s value may create contradictory information in the question (e.g., changing nationality from \texttt{Japanese} to \texttt{Indian} while retaining \texttt{Japanese} as the mother tongue). Such inconsistencies can obscure the measurement of causal effects, making it hard to predict the generalized impact of multi-concept modifications.
 
-Despite these intervention-specific variations, the dataset-level average of all CE values is expected to remain approximately equal between both metric. This approximation holds because the reference-set construction ensures that each group has a comparable probability of being included in reference sets for other groups, and the Shapley \emph{efficiency property} guarantees that no causal influence is systematically lost or gained. A formal demonstration of this approximation is provided in Math Box~\ref{ma:dataset_average_preservation} of Appendix~\ref{app:mathematical_demonstrations}.
+Despite these intervention-specific variations, the dataset-level average of all CE values is intended to remain approximately equal between both metrics under the simplifying assumptions stated in Math Box~\ref{ma:dataset_average_preservation} of Appendix~\ref{app:mathematical_demonstrations}.
 
 \subsubsection{Effects on Faithfulness Scores}
 As established in Section~\ref{sec:remaining_pipeline}, the definition of Explanation-Implied Effect (EE) remains entirely unchanged between FELICS and the \emph{Causal Concept Faithfulness} metric. Consequently, the EE vectors are identical for both metrics.
 
 The faithfulness score, however, is still determined by the Pearson correlation coefficient between the CE and EE vectors. Since Pearson correlation depends on the magnitudes of the data points (unlike rank-based metrics such as Spearman), and the individual CE values may differ between FELICS and Matton’s metric, the resulting faithfulness scores are not guaranteed to be equal. In fact, whenever interactions are present, the alignment between CE and EE vectors generally changes, except in the rare case where widening gaps for some concepts are exactly offset by narrowing gaps for others. This behavior is illustrated in example~\ref{ex:payout_normalization_correlation} of Appendix~\ref{app:examples}.
 
-Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} are guaranteed to yield identical faithfulness scores: when every correlation group contains exactly one concept and when all concepts are entirely independent.
+Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} yield identical faithfulness scores under their respective assumptions: when every correlation group contains exactly one concept and when every group satisfies the reference-relative additivity conditions stated in Math Box~\ref{ma:independence_behavior}.

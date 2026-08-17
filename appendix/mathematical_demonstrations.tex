@@ -1,6 +1,6 @@
 \chapter{Mathematical Demonstrations}
 \label{app:mathematical_demonstrations}
-This appendix provides supporting derivations for properties of \emph{FELICS} referenced in the main text. The demonstrations address the singleton special case, the treatment of independent concepts, and the preservation of the dataset-average causal effect.
+This appendix provides supporting derivations for properties of \emph{FELICS} referenced in the main text. The demonstrations address the singleton special case, compatibility under reference-relative additivity, and the intended preservation of the dataset-average causal effect.
 
 \section*{Equality of Causal Effect between FELICS singleton-groups and Original Metric}
 \begin{math_box}[label=ma:one_item_group]
@@ -14,11 +14,11 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     \begin{equation}
         \gamma(\mathbf{x},s)
         =
-        \frac{v(s)}
-        {\sum_{C_i\in s}v(\{C_i\})}
+        \frac{v_{\mathbf{x}}(s)}
+        {\sum_{C_i\in s}v_{\mathbf{x}}(\{C_i\})}
         =
-        \frac{v(\{C_m\})}
-        {v(\{C_m\})}
+        \frac{v_{\mathbf{x}}(\{C_m\})}
+        {v_{\mathbf{x}}(\{C_m\})}
         =1.
     \end{equation}
 
@@ -33,12 +33,12 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     and the normalized value function reduces to
 
     \begin{equation}
-        v_{\mathrm{adj}}(T)
+        v_{\mathrm{adj},\mathbf{x}}(T)
         =
-        \frac{v(T)}
+        \frac{v_{\mathbf{x}}(T)}
         {\bar\gamma(\mathbf{x},s,T)}
         =
-        v(T).
+        v_{\mathbf{x}}(T).
     \end{equation}
 
     The adjusted causal effect is then obtained from the Shapley formulation
@@ -49,9 +49,9 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \sum_{T\subseteq s\setminus\{C_m\}}
         \frac{|T|!(|s|-|T|-1)!}{|s|!}
         \left[
-            v_{\mathrm{adj}}(T\cup\{C_m\})
+            v_{\mathrm{adj},\mathbf{x}}(T\cup\{C_m\})
             -
-            v_{\mathrm{adj}}(T)
+            v_{\mathrm{adj},\mathbf{x}}(T)
             \right].
     \end{equation}
 
@@ -62,20 +62,20 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \frac{0!(1-0-1)!}{1!}=1,
     \end{equation}
 
-    and using the convention $v_{\mathrm{adj}}(\emptyset)=0$,
+    and using the convention $v_{\mathrm{adj},\mathbf{x}}(\emptyset)=0$,
 
     \begin{equation}
         \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
         =
-        v_{\mathrm{adj}}(\{C_m\}).
+        v_{\mathrm{adj},\mathbf{x}}(\{C_m\}).
     \end{equation}
 
     Because no normalization is applied for singleton groups,
 
     \begin{equation}
-        v_{\mathrm{adj}}(\{C_m\})
+        v_{\mathrm{adj},\mathbf{x}}(\{C_m\})
         =
-        v(\{C_m\}),
+        v_{\mathbf{x}}(\{C_m\}),
     \end{equation}
 
     which is exactly the value function underlying the causal-effect definition of Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Therefore,
@@ -89,55 +89,56 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     showing that \emph{FELICS} reduces exactly to the original CE every correlation group contains only a single concept. Because the definitions of the explanation implied effect and faithfulness (see Equations~\ref{eq:ee} and \ref{eq:faithfulness})  are unchanged, both metrics are equivalent in this scenario.
 \end{math_box}
 
-\section*{No Additional Causal Effect for Independent Concepts in FELICS}
+\section*{Compatibility under Reference-Relative Additivity}
 \begin{math_box}[label=ma:independence_behavior]
-    Assume a correlation group $s$ whose concepts are independent relative to the
-    dataset. By definition of the normalization introduced in
-    Section~\ref{sec:shapley_correction}, this corresponds to
+    Assume a correlation group $s$ that satisfies \emph{reference-relative
+    additivity}: for every non-empty coalition $T\subseteq s$, its payout
+    coefficient equals the reference coefficient for treatments of the same size,
 
     \begin{equation}
-        \bar\gamma(\mathbf{x},s,s)=\gamma(\mathbf{x},s).
+        \bar\gamma(\mathbf{x},s,T)=\gamma(\mathbf{x},T)>\varepsilon,
+        \qquad \forall\,\emptyset\neq T\subseteq s.
     \end{equation}
 
-    The adjusted value of the grand coalition therefore becomes
+    This is a sufficient condition for the reference-relative independence
+    introduced in Section~\ref{sec:shapley_correction}; it is distinct from
+    absolute additivity, which would require $\gamma(\mathbf{x},T)=1$. Under this
+    assumption, the adjusted value of any non-empty coalition becomes
 
     \begin{equation}
-        v_{\mathrm{adj}}(s)
+        v_{\mathrm{adj},\mathbf{x}}(T)
         =
-        \frac{v(s)}
-        {\gamma(\mathbf{x},s)}.
+        \frac{v_{\mathbf{x}}(T)}
+        {\gamma(\mathbf{x},T)}.
     \end{equation}
 
     Substituting the definition of the payout coefficient,
 
     \begin{equation}
-        \gamma(\mathbf{x},s)
+        \gamma(\mathbf{x},T)
         =
-        \frac{v(s)}
-        {\sum_{C_i\in s}v(\{C_i\})},
+        \frac{v_{\mathbf{x}}(T)}
+        {\sum_{C_i\in T}v_{\mathbf{x}}(\{C_i\})},
     \end{equation}
 
     yields
 
     \begin{equation}
-        v_{\mathrm{adj}}(s)
+        v_{\mathrm{adj},\mathbf{x}}(T)
         =
-        \sum_{C_i\in s}v(\{C_i\}).
+        \sum_{C_i\in T}v_{\mathbf{x}}(\{C_i\}).
     \end{equation}
 
-    Hence, after normalization, the value assigned to the grand coalition equals the
-    sum of the individual atomic intervention effects.
-
-    Assume furthermore that every concept contributes independently to every
-    coalition. Then the marginal contribution of a concept is identical in every
-    coalition in which it appears,
+    Hence, after normalization, every coalition value equals the sum of its
+    members' singleton intervention effects. The marginal contribution of a concept
+    is therefore identical in every coalition in which it appears,
 
     \begin{equation}
-        v_{\mathrm{adj}}(T\cup\{C_m\})
+        v_{\mathrm{adj},\mathbf{x}}(T\cup\{C_m\})
         -
-        v_{\mathrm{adj}}(T)
+        v_{\mathrm{adj},\mathbf{x}}(T)
         =
-        v(\{C_m\}),
+        v_{\mathbf{x}}(\{C_m\}),
         \qquad
         \forall\,T\subseteq s\setminus\{C_m\}.
     \end{equation}
@@ -156,10 +157,10 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     \begin{equation}
         \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
         =
-        v(\{C_m\}).
+        v_{\mathbf{x}}(\{C_m\}).
     \end{equation}
 
-    Finally, $v(\{C_m\})$ is precisely the KL-divergence-based intervention value
+    Finally, $v_{\mathbf{x}}(\{C_m\})$ is precisely the KL-divergence-based intervention value
     used by Matton et al.~\cite{mattonWalkTalkMeasuring2024} to define the causal
     effect of an individual concept (see Equation~\ref{eq:ce}). Consequently,
 
@@ -169,12 +170,13 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m),
     \end{equation}
 
-    showing that no additional causal effect is attributed to correlation groups
-    whose concepts behave independently relative to the dataset.
+    showing compatibility with the original metric for groups satisfying the stated
+    reference-relative additivity assumptions.
 \end{math_box}
 
 \section*{CE Dataset-Average Preservation}
 \begin{math_box}[label=ma:dataset_average_preservation]
+	\todo[inline]{Revisit this demonstration before final submission. The current arithmetic mean of payout-coefficient ratios does not justify the ratio-of-sums identity used below. A valid replacement may require a ratio-of-aggregate-effects (equivalently, singleton-effect-weighted) reference coefficient or substantially stronger assumptions. The question-specific subscripts of the value functions in this demonstration should be synchronized when the proof is reformulated.}
     \textbf{Claim:} The dataset-level average of all Causal Effect values computed by FELICS is \emph{approximately} equal to that of Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric:
     \begin{equation}
         \frac{1}{N_C} \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) \approx \frac{1}{N_C} \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} v(\{C_m\}).
@@ -182,7 +184,7 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     Here, $N_C$ is the total number of concepts, $\mathbf{C}(\mathbf{x})$ are the concepts in question $\mathbf{x}$, and $s$ is the correlation group containing $C_m$.
 
     \smallskip
-    \textbf{Intuition:} The payout-normalization step is designed to compensate for the \emph{soft ceiling effect} (Section~\ref{sec:kl_ceiling}), which systematically reduces joint effects $v(s)$ relative to the sum of singleton effects $\sum_{C_m \in s} v(\{C_m\})$. If this compensation is applied consistently across the dataset, the \emph{total causal influence} attributed to all concepts should remain approximately unchanged, preserving the overall scale of CE values.
+    \textbf{Intuition:} The payout-normalization step is designed to compensate for the systematic, reference-relative scale difference discussed in Section~\ref{sec:kl_ceiling}. If this compensation is applied consistently across the dataset, the \emph{total causal influence} attributed to all concepts should remain approximately unchanged, preserving the overall scale of CE values under the assumptions below.
 
     \smallskip
     \textbf{Simplifying Assumptions for Demonstration:} To illustrate why approximate equality is plausible, two idealized conditions will be relied on that do not hold universally but capture the \emph{typical} behavior of the reference-set construction:
@@ -214,5 +216,5 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \sum_{\mathbf{x} \in \mathbf{X}} \sum_{s \in \mathbf{S}(\mathbf{x})} \sum_{C_m \in s} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) & \approx \sum_{\mathbf{x} \in \mathbf{X}} \sum_{s \in \mathbf{S}(\mathbf{x})} \sum_{C_m \in s} v(\{C_m\}) \\
                                                                                      & = \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} v(\{C_m\}).
     \end{align}
-    Dividing by $N_C$ preserves the approximation, showing that the dataset-level averages are approximately equal. The error introduced by the simplifications diminishes as the dataset grows and the reference sets become more representative.
+    Dividing by $N_C$ preserves the approximation, showing that the dataset-level averages are approximately equal under the stated assumptions.
 \end{math_box}
