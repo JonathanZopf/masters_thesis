@@ -167,9 +167,9 @@ It is, however, not sufficient to simply intervene on all concepts within a corr
 
 It is therefore necessary to investigate the shift in the model's predictions for all $2^{|s|}-1$ possible non-empty combinations of concepts within a correlation set $s$. Using the slightly adapted procedures established by Matton et al. \cite{mattonWalkTalkMeasuring2024}, a counterfactual is created for each of these combinations. The evaluation pipeline then continues by collecting model responses $r=(y,e)$, consisting of the prediction $y$ and the explanation $e$; the response-collection step itself requires no modification.
 
-\section{Shapley Values for Causal Effect Calculation}
+\section{Shapley-Based Causal Effect Calculation}
 \label{sec:shapley}
-Joint interventions produce effects for sets of concepts, whereas the original metric and its explanation-implied effects operate at the level of individual concepts. This section uses Shapley values to bridge these levels by distributing each joint effect among the participating concepts in a principled manner.
+Joint interventions produce effects for sets of concepts, whereas the original metric and its explanation-implied effects operate at the level of individual concepts. This section applies the Shapley-value foundation established in Section~\ref{sec:shapley_fundamentals} to bridge these levels. It first motivates their role within FELICS and then specifies the value function required to distribute a joint causal effect among the participating concepts.
 
 \subsection{Motivation}
 \label{sec:shapley_motivation}
@@ -180,34 +180,9 @@ Notably, the definition of causal effect by Matton et al. \cite{mattonWalkTalkMe
 
 Naive approaches exist, such as computing the average effect of a concept across all coalitions in which it participates, ranging from the singleton case up to the grand coalition. This is problematic, however, since a concept's own effect is heavily influenced by the impact of the other concepts present in the coalition. Fortunately, devising a new solution from scratch is unnecessary, since Shapley values from cooperative game theory address exactly this scenario.
 
-\subsection{Fundamentals on Shapley Values}
-
-Shapley values were introduced by Lloyd Shapley in 1953 \cite{shapley17ValueNPerson1953}. Originating in cooperative game theory, they determine how to fairly distribute a total payout among a set of players based on each player's individual contribution to the coalition. A player's allocation is calculated by evaluating its expected marginal contribution across all possible coalitions that the player could form with the remaining players \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}.
-
-Given a value function $v(T)$ defined for any subset $T \subseteq P$, where $P$ denotes the set of all players, the value allotted to a player $m \in P$ is given by Equation~\ref{eq:shapley}.
-
-\begin{equation}
-	\label{eq:shapley}
-	\phi_m(v) = \sum_{T \subseteq P \setminus \{m\}} \frac{|T|!\, (|P|-|T|-1)!}{|P|!} \big[ v(T \cup \{m\}) - v(T) \big]
-\end{equation}
-
-where $\frac{|T|!\, (|P|-|T|-1)!}{|P|!}$ denotes the weighting factor, and $v(T \cup \{m\}) - v(T)$ denotes the marginal contribution provided by player $m$.
-
-Shapley proved that this solution is unique in satisfying four core axioms \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}:
-\begin{itemize}
-	\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in P} \phi_i(v) = v(P)$).
-	\item \textbf{Symmetry}: Identical players who contribute the exact same amount to any coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq P \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
-	\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq P \setminus \{m\}$, then $\phi_m(v) = 0$).
-	\item \textbf{Additivity}: If two independent games are played, a player's payout from the combined games equals the sum of their payouts from each individual game ($\phi_m(v + w) = \phi_m(v) + \phi_m(w)$).
-\end{itemize}
-
-It must be noted, however, that the computational cost of Shapley values also grows exponentially with the size of the coalition \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}. Since $n_{\max}$ was already introduced during the counterfactual generation step in Section~\ref{sec:joint_counterfactual}, this is not a major concern in practice, as the primary computational bottleneck lies in collecting LLM responses for the exponentially growing number of counterfactuals, rather than in computing the Shapley values themselves. However, should larger coalitions become necessary, approximation methods such as Monte Carlo sampling are available for the Shapley values \cite{mitchellSamplingPermutationsShapley2022}.
-
-Shapley values have a long history of use within the field of \emph{Explainable AI}, most notably in \emph{SHAP}, where they are used to calculate the contribution of an input feature to the final prediction \cite{lundbergUnifiedApproachInterpreting2017}. They have also been applied to analyze natural language explanations, as in the \emph{CC-SHAP} framework \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}, already introduced in Section~\ref{sec:cc_shap}.
-
 \subsection{Implementing Shapley Values into the Causal Effect}
 
-The previous section left two questions unanswered: how the value function $v$ should be defined, and how Shapley values can practically be integrated into the proposed framework.
+With the general Shapley formulation already defined in Equation~\ref{eq:shapley}, two application-specific questions remain: how the value function $v$ should be defined for causal effects, and how the resulting allocation can be integrated into FELICS.
 
 It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so supports \reqrefs{req:one_item_group}{req:independence_behavior}, formulated in Section~\ref{sec:requirements}. However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $\mathrm{CE}(\mathbf{x},C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
 
@@ -269,7 +244,7 @@ The direct Shapley formulation introduces a systematic scale difference between 
 
 Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the evaluation pipeline. Running an actual implementation, however, reveals a systematic pattern in the resulting scores. Whenever a concept $C_m$ is assigned to a correlation group $s$ with $|s|>1$, its resulting Shapley-CE tends to be lower than the causal effect that would have been measured had $C_m$ been evaluated on its own, i.e., on average $\mathrm{CE}(\mathbf{x},C_m,s) < \mathrm{CE}(\mathbf{x},C_m,\{C_m\})$, even for concepts that are otherwise independent in the sense of Section~\ref{sec:interaction_effects}.
 
-The Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley}) makes the scale of the joint value relevant to every allocated effect: the sum of payouts to all concepts in $s$ equals $v_{\mathbf{x}}(s)$, the joint effect of intervening on the entire group at once. Whenever this joint value is smaller than the sum of the corresponding singleton values, the shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Empirically, this pattern occurs systematically on average in the considered setting, although its direction and magnitude may differ for individual groups, particularly when genuine redundancy or synergy is present.
+The Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley_fundamentals}) makes the scale of the joint value relevant to every allocated effect: the sum of payouts to all concepts in $s$ equals $v_{\mathbf{x}}(s)$, the joint effect of intervening on the entire group at once. Whenever this joint value is smaller than the sum of the corresponding singleton values, the shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Empirically, this pattern occurs systematically on average in the considered setting, although its direction and magnitude may differ for individual groups, particularly when genuine redundancy or synergy is present.
 
 Intuitively, probability space does not permit direct addition of separately normalized outputs. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Adding the two resulting probabilities would yield $160\%$, while adding the two isolated shifts to the baseline would yield $110\%$; neither is a valid probability. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space, but does not by itself determine whether the resulting KL-based joint effect is smaller or larger than the sum of singleton effects.
 
