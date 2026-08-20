@@ -1,6 +1,6 @@
 \chapter*{List of Symbols}
 
-The notation below summarizes the symbols used throughout the mathematical development of the thesis. Where a symbol is overloaded in the source literature, its meaning is determined by the surrounding context.
+The notation below summarizes the symbols used throughout the mathematical development of the thesis.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} p{0.72\textwidth}@{}}
 	\textbf{Symbol}                                & \textbf{Meaning}                                                                                                      \\
@@ -18,7 +18,7 @@ The notation below summarizes the symbols used throughout the mathematical devel
 	$\mathbf{x}$                                   & An observed question from $\mathbf{X}$.                                                                               \\
 	$\mathbf{x}_{t\rightarrow t'}$                 & Counterfactual question obtained by replacing the original concept-value tuple $t$ with $t'$.                         \\
 	$N$                                            & Number of questions or observations in a dataset.                                                                     \\
-	$P$                                            & Generic set of players in the Shapley-value formulation.                                                              \\
+	$\mathbf{P}$                                   & Generic set of players in the Shapley-value formulation.                                                              \\
 	$N_C$                                          & Total number of concepts across a dataset.                                                                            \\
 	$\mathcal{Y}$                                  & Set of possible answer options for a question.                                                                        \\
 	$Y$                                            & Categorical random variable representing the answer selected by the evaluated model.                                  \\
@@ -72,13 +72,14 @@ The notation below summarizes the symbols used throughout the mathematical devel
 	$\mathbf{p}_{I}$                               & Probability vector formed from the scalar components $p_{y\mid I}$ over $y\in\mathcal{Y}$.                            \\
 	$D_{\mathrm{KL}}(P\|Q)$                        & Kullback--Leibler divergence from distribution $Q$ to distribution $P$.                                               \\
 	$\gamma(\mathbf{x},T)$                         & Payout coefficient of treatment $T$ for question $\mathbf{x}$.                                                        \\
-	$\bar{\gamma}(\mathbf{x},s,T)$                 & Reference-set average payout coefficient for treatment $T$ within group $s$ of question $\mathbf{x}$.                 \\
+	$\bar{\gamma}(\mathbf{x},s,T)$                 & Singleton-weighted reference coefficient for treatment $T$ within group $s$ of question $\mathbf{x}$.                 \\
 	$\varepsilon$                                  & Stability threshold ($0.01$) below which payout-coefficient normalization is not applied.                             \\
-	$\mathcal{R}$                                  & Reference set used to estimate the average payout coefficient.                                                        \\
+	$\mathcal{R}$                                  & Reference set used to estimate the singleton-weighted reference coefficient.                                          \\
 	$\kappa(\mathbf{x},n_{\max})$                  & Correlation-strength proxy used in the empirical evaluation.                                                          \\
 	$\rho$                                         & Spearman rank-correlation coefficient.                                                                                \\
 	$\theta_{y\mid I}$                             & Latent model score or logit for answer option $y$ under intervention condition $I$.                                   \\
 	$\mathcal{E}$                                  & Unobserved stochasticity of the evaluated model.                                                                      \\
-	$\tau$                                         & Numerical tolerance used for deterministic implementation-agreement checks.                                           \\
+	$\mathrm{PCC}_{\Delta}$                       & Pearson correlation coefficient used to test the association between evaluation differences.                          \\
+	$\eta_{\mathrm{tol}}$                         & Numerical tolerance used for deterministic implementation-agreement checks.                                           \\
 	$\delta_{\mathrm{CE}},\delta_{\mathcal{F}}$    & Prespecified equivalence margins for relative CE differences and absolute faithfulness differences.                   \\
 \end{longtable}

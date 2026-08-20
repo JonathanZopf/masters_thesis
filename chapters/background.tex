@@ -103,22 +103,22 @@ The preceding review shows that Shapley values are a recurring technique in XAI 
 
 Shapley values were introduced by Lloyd Shapley in 1953 \cite{shapley17ValueNPerson1953}. Originating in cooperative game theory, they determine how to fairly distribute a total payout among a set of players based on each player's individual contribution to the coalition. A player's allocation is calculated by evaluating its expected marginal contribution across all possible coalitions that the player could form with the remaining players \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}.
 
-Given a value function $v(T)$ defined for any subset $T \subseteq P$, where $P$ denotes the set of all players, the value allotted to a player $m \in P$ is
+Given a value function $v(T)$ defined for any subset $T \subseteq \mathbf{P}$, where $\mathbf{P}$ denotes the set of all players, the value allotted to a player $m \in \mathbf{P}$ is
 
 \begin{equation}
 	\label{eq:shapley}
-	\phi_m(v) = \sum_{T \subseteq P \setminus \{m\}} \frac{|T|!\, (|P|-|T|-1)!}{|P|!} \big[ v(T \cup \{m\}) - v(T) \big].
+	\phi_m(v) = \sum_{T \subseteq \mathbf{P} \setminus \{m\}} \frac{|T|!\, (|\mathbf{P}|-|T|-1)!}{|\mathbf{P}|!} \big[ v(T \cup \{m\}) - v(T) \big].
 \end{equation}
 
-Here, $\frac{|T|!\, (|P|-|T|-1)!}{|P|!}$ weights the coalition, while $v(T \cup \{m\}) - v(T)$ is player $m$'s marginal contribution to it. Shapley proved that this solution is unique in satisfying four core axioms \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}:
+Here, $\frac{|T|!\, (|\mathbf{P}|-|T|-1)!}{|\mathbf{P}|!}$ weights the coalition, while $v(T \cup \{m\}) - v(T)$ is player $m$'s marginal contribution to it. Shapley proved that this solution is unique in satisfying four core axioms \cite{shapley17ValueNPerson1953, mitchellSamplingPermutationsShapley2022, parcalabescuMeasuringFaithfulnessSelfconsistency2024}:
 \begin{itemize}
-	\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in P} \phi_i(v) = v(P)$).
-	\item \textbf{Symmetry}: Identical players who contribute the same amount to every coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq P \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
-	\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq P \setminus \{m\}$, then $\phi_m(v) = 0$).
+	\item \textbf{Efficiency}: The sum of the individual values equals the total value created by the grand coalition ($\sum_{i \in \mathbf{P}} \phi_i(v) = v(\mathbf{P})$).
+	\item \textbf{Symmetry}: Identical players who contribute the same amount to every coalition receive identical payouts (if $v(T \cup \{i\}) = v(T \cup \{j\})$ for all $T \subseteq \mathbf{P} \setminus \{i, j\}$, then $\phi_i(v) = \phi_j(v)$).
+	\item \textbf{Dummy}: A player who adds zero value to every coalition receives zero payout (if $v(T \cup \{m\}) - v(T) = 0$ for all $T \subseteq \mathbf{P} \setminus \{m\}$, then $\phi_m(v) = 0$).
 	\item \textbf{Additivity}: If two independent games are combined, a player's payout from the combined game equals the sum of its payouts from the individual games ($\phi_m(v + w) = \phi_m(v) + \phi_m(w)$).
 \end{itemize}
 
-The exact computation grows exponentially with the number of players because it considers every subset of $P$ \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}. Approximation methods such as Monte Carlo sampling can be used when larger coalitions make exact computation impractical \cite{mitchellSamplingPermutationsShapley2022}.
+The exact computation grows exponentially with the number of players because it considers every subset of $\mathbf{P}$ \cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024}. Approximation methods such as Monte Carlo sampling can be used when larger coalitions make exact computation impractical \cite{mitchellSamplingPermutationsShapley2022}.
 
 \section{Terminology Adopted in This Thesis}
 \label{sec:applying_definitions}
@@ -292,7 +292,7 @@ The final stage of the evaluation pipeline estimates the causal concept faithful
 
 To overcome this limitation, Matton et al. \cite{mattonWalkTalkMeasuring2024} again employ a Bayesian hierarchical model at the dataset level. The model assumes that questions within the same dataset exhibit similar degrees of explanation faithfulness, allowing statistical strength to be shared across questions. Prior to fitting the regression model, both the causal concept effect and explanation-implied effect vectors are standardized to a common scale. A global regression coefficient is then introduced as a prior for the question-specific regression coefficients. After Bayesian inference, the posterior estimates of the question-level coefficients correspond to the faithfulness scores $\mathcal{F}(\mathbf{x})$, while the posterior of the global regression coefficient represents the overall dataset-level faithfulness score.
 
-Figure~\ref{fig:matton_evaluation_pipeline} consolidates the individual stages described above into a single overview. It emphasizes the two parallel quantities at the center of the metric: model answers are used to estimate causal effects, while natural-language explanations are used to estimate explanation-implied effects. Their alignment then determines the final faithfulness estimate. The annotations provide orientation regarding the principal assumptions of the pipeline without anticipating the detailed problem analysis developed in the following chapter. 
+Figure~\ref{fig:matton_evaluation_pipeline} consolidates the individual stages described above into a single overview. It emphasizes the two parallel quantities at the center of the metric: model answers are used to estimate causal effects, while natural-language explanations are used to estimate explanation-implied effects. Their alignment then determines the final faithfulness estimate. The annotations provide orientation regarding the principal assumptions of the pipeline without anticipating the detailed problem analysis developed in the following chapter.
 
 \begin{figure}[p]
 	\centering

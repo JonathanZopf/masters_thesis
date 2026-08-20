@@ -7,42 +7,18 @@ This appendix collects worked examples that complement the formal development of
     \textbf{Demonstration:} Payout normalization can alter the Pearson correlation between \emph{CE} and \emph{EE} vectors.
 
     \smallskip
-    \textbf{Setup:} Consider a minimal dataset with three questions $\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3$ and five concepts $C_1, \dots, C_5$. The oracle groups concepts as follows:
-    \begin{itemize}
-        \item $\mathbf{x}_1$: $s_1 = \{C_1, C_2\}$ (redundant pair, $v_{\mathbf{x}_1}(\{C_1, C_2\}) = 1.5 < v_{\mathbf{x}_1}(\{C_1\}) + v_{\mathbf{x}_1}(\{C_2\}) = 2$)
-        \item $\mathbf{x}_2$: $s_2 = \{C_3, C_4\}$ (less redundant pair, $v_{\mathbf{x}_2}(\{C_3, C_4\}) = 1.8 < v_{\mathbf{x}_2}(\{C_3\}) + v_{\mathbf{x}_2}(\{C_4\}) = 2$)
-        \item $\mathbf{x}_3$: $s_3 = \{C_5\}$ (singleton)
-    \end{itemize}
-    The value functions for all singleton treatments satisfy $v_{\mathbf{x}_1}(\{C_1\})=v_{\mathbf{x}_1}(\{C_2\})=v_{\mathbf{x}_2}(\{C_3\})=v_{\mathbf{x}_2}(\{C_4\})=1$ and $v_{\mathbf{x}_3}(\{C_5\})=2$. The reference set for size-$1$ treatments is $\mathcal{R}_1 = \{\{C_1\}, \{C_2\}, \{C_3\}, \{C_4\}, \{C_5\}\}$, yielding
-    \begin{equation}
-        \gamma(\mathbf{x}, \{C_m\}) = \frac{v_{\mathbf{x}}(\{C_m\})}{v_{\mathbf{x}}(\{C_m\})} = 1 \quad \Rightarrow \quad \bar\gamma(\cdot, \cdot, \{C_m\}) = 1.
-    \end{equation}
-    For size-$2$ treatments, $\mathcal{R}_2 = \{\{C_1, C_2\}, \{C_3, C_4\}\}$ gives
-    \begin{equation}
-        \bar\gamma(\cdot, \cdot, \{C_1, C_2\}) = \bar\gamma(\cdot, \cdot, \{C_3, C_4\}) = \frac{1}{2}\left(\frac{1.5}{2} + \frac{1.8}{2}\right) = 0.825.
-    \end{equation}
-
-    \smallskip
-    \textbf{Original Metric (Matton et al.~\cite{mattonWalkTalkMeasuring2024}):} All concepts are treated as singletons, so
-    \begin{equation}
-        \mathbf{CE}_{\mathrm{Matton}} = \left[\,v_{\mathbf{x}_1}(\{C_1\}),\, v_{\mathbf{x}_1}(\{C_2\}),\, v_{\mathbf{x}_2}(\{C_3\}),\, v_{\mathbf{x}_2}(\{C_4\}),\, v_{\mathbf{x}_3}(\{C_5\})\,\right] = \left[1,\, 1,\, 1,\, 1,\, 2\right].
-    \end{equation}
-
-    \smallskip
-    \textbf{FELICS with Normalization:} For $s_1 = \{C_1, C_2\}$ and $s_2 = \{C_3, C_4\}$, the normalized value functions are
+    \textbf{Setup:} Consider five concepts evaluated using the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} and using FELICS. The underlying answer-distribution changes are held fixed. To isolate the statistical consequence of normalization, the adjusted values are assumed directly rather than derived from particular joint interventions, reference sets, or payout coefficients. Suppose the two methods produce
     \begin{align}
-        v_{\mathrm{adj},\mathbf{x}_1}(\{C_1\})      & = v_{\mathbf{x}_1}(\{C_1\}) / 1 = 1,                    \\
-        v_{\mathrm{adj},\mathbf{x}_1}(\{C_1, C_2\}) & = v_{\mathbf{x}_1}(\{C_1, C_2\}) / 0.825 \approx 1.818.
+        \mathbf{CE}_{\mathrm{Matton}} & = \left[1,\,1,\,1,\,1,\,2\right], \\
+        \mathbf{CE}_{\mathrm{adj}}    & = \left[1.1,\,0.8,\,0.9,\,0.8,\,2.4\right].
     \end{align}
-    By the Shapley efficiency axiom, $\sum_{C_m \in s} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) = v_{\mathrm{adj},\mathbf{x}}(s)$. Thus, for $s_1$:
-    \begin{align}
-        \mathrm{CE}_{\text{adj}}(\mathbf{x}_1, C_1, s_1) & = 0.5 \cdot (v_{\mathrm{adj},\mathbf{x}_1}(\{C_1\}) - 0) + 0.5 \cdot (v_{\mathrm{adj},\mathbf{x}_1}(\{C_1, C_2\}) - v_{\mathrm{adj},\mathbf{x}_1}(\{C_2\})) \\
-                                       & = 0.5 \cdot 1 + 0.5 \cdot (1.818 - 1) \approx 0.909,                                                           \\
-        \mathrm{CE}_{\text{adj}}(\mathbf{x}_1, C_2, s_1) & \approx 0.909,
-    \end{align}
-    and analogously $\mathrm{CE}_{\text{adj}}(\mathbf{x}_2, C_3, s_2) = \mathrm{CE}_{\text{adj}}(\mathbf{x}_2, C_4, s_2) \approx 1.091$. For the singleton $s_3$, $\mathrm{CE}_{\text{adj}}(\mathbf{x}_3, C_5, s_3) = v_{\mathrm{adj},\mathbf{x}_3}(\{C_5\}) = 2$. Hence,
+    Both vectors have the same total causal-effect mass and therefore the same mean:
     \begin{equation}
-        \mathbf{CE}_{\text{adj}} = \left[0.909,\, 0.909,\, 1.091,\, 1.091,\, 2\right].
+        \sum_{i=1}^{5}\mathrm{CE}_{\mathrm{Matton},i}
+        =\sum_{i=1}^{5}\mathrm{CE}_{\mathrm{adj},i}=6,
+        \qquad
+        \mu_{\mathbf{CE}_{\mathrm{Matton}}}
+        =\mu_{\mathbf{CE}_{\mathrm{adj}}}=1.2.
     \end{equation}
 
     \smallskip
@@ -52,23 +28,22 @@ This appendix collects worked examples that complement the formal development of
     \end{equation}
 
     \smallskip
-    \textbf{Pearson Correlation Computation:} For both vectors, $\mu_{\mathbf{EE}} = 1.1$. The original metric gives
+    \textbf{Pearson Correlation Computation:} The explanation-effect vector has mean $\mu_{\mathbf{EE}}=1.1$. For the original metric,
     \begin{align}
-        \mu_{\mathbf{CE}_{\mathrm{Matton}}}                        & = \frac{1+1+1+1+2}{5} = 1.2,                                                \\
         \operatorname{cov}(\mathbf{CE}_{\mathrm{Matton}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)(\mathrm{EE}_i - 1.1) = 0.18, \\
-        \operatorname{var}(\mathbf{CE}_{\mathrm{Matton}})                  & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)^2 = 0.16,           \\
-        \operatorname{var}(\mathbf{EE})                                    & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{EE}_i - 1.1)^2 = 0.24,                            \\
-        \mathrm{PCC}_{\mathrm{Matton}}                                   & = \frac{0.18}{\sqrt{0.16 \cdot 0.24}} \approx 0.919.
+        \operatorname{var}(\mathbf{CE}_{\mathrm{Matton}})              & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)^2 = 0.16, \\
+        \operatorname{var}(\mathbf{EE})                                 & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{EE}_i - 1.1)^2 = 0.24, \\
+        \mathrm{PCC}_{\mathrm{Matton}}                                  & = \frac{0.18}{\sqrt{0.16 \cdot 0.24}} \approx 0.919.
     \end{align}
-    For FELICS, $\mu_{\mathbf{CE}_{\text{adj}}} = 1.2$ (dataset-level average preserved), but
+    For the assumed normalized FELICS vector,
     \begin{align}
-        \operatorname{cov}(\mathbf{CE}_{\text{adj}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\text{adj},i} - 1.2)(\mathrm{EE}_i - 1.1) \approx 0.1891, \\
-        \operatorname{var}(\mathbf{CE}_{\text{adj}})                  & \approx 0.1666,                                                                 \\
-        \mathrm{PCC}_{\text{adj}}                                   & \approx \frac{0.1891}{\sqrt{0.1666 \cdot 0.24}} \approx 0.946.
+        \operatorname{cov}(\mathbf{CE}_{\mathrm{adj}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{adj},i} - 1.2)(\mathrm{EE}_i - 1.1) = 0.28, \\
+        \operatorname{var}(\mathbf{CE}_{\mathrm{adj}})              & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{adj},i} - 1.2)^2 = 0.372, \\
+        \mathrm{PCC}_{\mathrm{adj}}                                 & = \frac{0.28}{\sqrt{0.372 \cdot 0.24}} \approx 0.937.
     \end{align}
 
     \smallskip
-    \textbf{Conclusion:} Although $\mu_{\mathbf{CE}_{\text{adj}}} = \mu_{\mathbf{CE}_{\mathrm{Matton}}}$ (dataset-level backward compatibility), the covariance and variance terms differ due to the non-uniform scaling of $\mathbf{CE}$ across group boundaries. Thus, $\mathrm{PCC}_{\mathrm{adj}} \neq \mathrm{PCC}_{\mathrm{Matton}}$, proving that the faithfulness score is not guaranteed to be preserved.
+    \textbf{Conclusion:} Although normalization preserves the sum and mean of the CE values in this example, it changes how the values are distributed around that mean. Consequently, both the CE variance and its covariance with $\mathbf{EE}$ change, yielding $\mathrm{PCC}_{\mathrm{adj}}\approx0.937$ instead of $\mathrm{PCC}_{\mathrm{Matton}}\approx0.919$. Equality of the aggregate CE score therefore does not imply equality of the resulting Pearson faithfulness score.
 \end{example_box}
 
 \section*{Softmax-Ceiling in FELICS in Practice}

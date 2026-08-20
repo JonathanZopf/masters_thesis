@@ -294,20 +294,33 @@ with ties within a pool broken arbitrarily, e.g., uniformly at random. If $\math
 \subsection{Correcting the Causal Effect Value Function}
 \label{sec:corrected_value_function}
 
-The mean payout coefficient over the reference set,
+The \emph{singleton-weighted reference coefficient} is formed by dividing the
+aggregate joint effect of the reference treatments by their aggregate singleton
+effect:
 \begin{equation}
 	\label{eq:gamma_bar}
 	\bar\gamma(\mathbf{x},s,T) :=
 	\begin{cases}
-		\dfrac{1}{|\mathcal{R}(\mathbf{x},s,T)|} \displaystyle\sum_{(\mathbf{x}'',T'')\in\mathcal{R}(\mathbf{x},s,T)} \gamma(\mathbf{x}'',T'') & \text{if } \mathcal{R}(\mathbf{x},s,T)\neq\emptyset, \\
-		1                                                                                                                                      & \text{if } \mathcal{R}(\mathbf{x},s,T)=\emptyset,
+		\dfrac{\displaystyle\sum_{(\mathbf{x}'',T'')\in\mathcal{R}(\mathbf{x},s,T)}v_{\mathbf{x}''}(T'')}
+		{\displaystyle\sum_{(\mathbf{x}'',T'')\in\mathcal{R}(\mathbf{x},s,T)}\sum_{C_i\in T''}v_{\mathbf{x}''}(\{C_i\})}
+		  & \text{if the denominator is positive}, \\
+		1 & \text{otherwise}.
 	\end{cases}
 \end{equation}
-estimates the typical shrinkage or amplification expected for treatments of size $|T|$, independently of $T$'s own realization. This reference level also permits a distinction between two notions of independence. \emph{Absolute additivity} means $\gamma(\mathbf{x},T)=1$, whereas \emph{reference-relative independence} means
+For non-degenerate reference treatments, this is equivalently a weighted average
+of their payout coefficients, with weights given by their total singleton effects.
+It therefore estimates the reference-relative shrinkage or amplification for
+treatments of size $|T|$ without allowing references with negligible singleton
+effects to receive the same influence as references carrying substantially more
+effect mass. If no reference exists or the aggregate singleton denominator is
+zero, the coefficient is set to $1$, so no normalization is applied. This
+reference level also permits a distinction between two notions of independence.
+\emph{Absolute additivity} means $\gamma(\mathbf{x},T)=1$, whereas
+\emph{reference-relative independence} means
 \begin{equation}
 	\gamma(\mathbf{x},T)=\bar\gamma(\mathbf{x},s,T).
 \end{equation}
-The latter does not assert that the joint effect is absolutely additive; it states that the treatment exhibits the level of non-additivity typical of equally sized reference treatments. Values below or above $\bar\gamma(\mathbf{x},s,T)$ indicate greater shrinkage or reinforcement, respectively, relative to that reference level.
+The latter does not assert that the joint effect is absolutely additive; it states that the treatment exhibits the singleton-weighted level of non-additivity represented by equally sized reference treatments. Values below or above $\bar\gamma(\mathbf{x},s,T)$ indicate greater shrinkage or reinforcement, respectively, relative to that reference level.
 
 To prevent division by a numerically degenerate reference coefficient, let $\varepsilon:=0.01$ denote a small fixed threshold. The corrected question-specific value function is
 \begin{equation}
@@ -376,7 +389,7 @@ At this stage, the conceptual design of \emph{FELICS} is complete, whereas its e
 
 \reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, considers the more general case in which concepts are grouped together but remain mutually independent. The nonlinear mapping from logits to probabilities discussed in Section~\ref{sec:kl_ceiling} means that even concepts without a substantive interaction need not satisfy $v_{\mathbf{x}}(s)=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ exactly.
 
-The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative independence}: a correlation group is neutral relative to the dataset when its payout coefficient equals the expected payout coefficient of equally sized reference treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under the additional reference-relative additivity assumptions stated in Math Box~\ref{ma:independence_behavior} of Appendix~\ref{app:mathematical_demonstrations}, no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
+The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative independence}: a correlation group is neutral relative to the dataset when its payout coefficient equals the singleton-weighted reference coefficient of equally sized treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under the additional reference-relative additivity assumptions stated in Math Box~\ref{ma:independence_behavior} of Appendix~\ref{app:mathematical_demonstrations}, no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
 
 \subsubsection{\ref{req:no_surgical} Avoiding the Assumption of Surgical Interventions}
 
@@ -388,11 +401,11 @@ Instead of intervening on individual concepts exclusively, \emph{FELICS} perform
 
 \reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the proposed framework to distinguish between independent, redundant, and synergistic interactions and to attribute their causal effects accordingly, based on the interaction types established in Section~\ref{sec:interaction_effects}.
 
-This property follows under the assumptions of Math Box~\ref{ma:independence_behavior}. If a correlation group exhibits reference-relative independence, its payout coefficient equals the expected payout coefficient for groups of identical size,
+This property follows under the assumptions of Math Box~\ref{ma:independence_behavior}. If a correlation group exhibits reference-relative independence, its payout coefficient equals the singleton-weighted reference coefficient for treatments of identical size,
 \begin{equation}
 	\bar\gamma(\mathbf{x},s,s)=\gamma(\mathbf{x},s),
 \end{equation}
-causing the adjusted causal effects to reduce to those of the original metric. Conversely, if a correlation group exhibits stronger redundancy or synergy than comparable groups, its payout coefficient deviates from this expected value,
+causing the adjusted causal effects to reduce to those of the original metric. Conversely, if a correlation group exhibits stronger redundancy or synergy than comparable groups, its payout coefficient deviates from this reference value,
 \begin{equation}
 	\bar\gamma(\mathbf{x},s,s)\neq\gamma(\mathbf{x},s).
 \end{equation}
@@ -423,7 +436,7 @@ Whether \reqref{req:feasibility} is satisfied ultimately depends on what is cons
 Since the original framework by Matton et al.~\cite{mattonWalkTalkMeasuring2024} cannot reliably handle concepts acting in a redundant or synergistic manner, their true causal effect is not captured. The influence exerted by \emph{FELICS} on CE results relative to the \emph{Causal Concept Faithfulness} metric is determined by the intervention mode, as discussed in Section~\ref{sec:interaction_effects}.
 
 \subsubsection{Effects on CE Scores}
-The relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ is governed by the payout coefficient $\gamma$ relative to the reference-set average $\bar\gamma$. For a pair of concepts $C_i, C_j$ in a group $s = \{C_i, C_j\}$, where
+The relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ is governed by the payout coefficient $\gamma$ relative to the singleton-weighted reference coefficient $\bar\gamma$. For a pair of concepts $C_i, C_j$ in a group $s = \{C_i, C_j\}$, where
 \begin{equation}
 	\gamma\bigl(\mathbf{x},\{C_i,C_j\}\bigr) = \frac{v_{\mathbf{x}}(\{C_i,C_j\})}{v_{\mathbf{x}}(\{C_i\}) + v_{\mathbf{x}}(\{C_j\})},
 \end{equation}

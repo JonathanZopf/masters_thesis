@@ -93,7 +93,8 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
 \begin{math_box}[label=ma:independence_behavior]
     Assume a correlation group $s$ that satisfies \emph{reference-relative
     additivity}: for every non-empty coalition $T\subseteq s$, its payout
-    coefficient equals the reference coefficient for treatments of the same size,
+    coefficient equals the singleton-weighted reference coefficient for treatments
+    of the same size,
 
     \begin{equation}
         \bar\gamma(\mathbf{x},s,T)=\gamma(\mathbf{x},T)>\varepsilon,
@@ -176,45 +177,166 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
 
 \section*{CE Dataset-Average Preservation}
 \begin{math_box}[label=ma:dataset_average_preservation]
-	\todo[inline]{Revisit this demonstration before final submission. The current arithmetic mean of payout-coefficient ratios does not justify the ratio-of-sums identity used below. A valid replacement may require a ratio-of-aggregate-effects (equivalently, singleton-effect-weighted) reference coefficient or substantially stronger assumptions. The question-specific subscripts of the value functions in this demonstration should be synchronized when the proof is reformulated.}
-    \textbf{Claim:} The dataset-level average of all Causal Effect values computed by FELICS is \emph{approximately} equal to that of Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric:
+    \textbf{Claim:} The singleton-weighted reference coefficient, formed as a
+    ratio of aggregate joint effects to aggregate singleton effects, preserves the dataset-level average Causal Effect
+    exactly when it is computed over the complete population of equally sized
+    correlation groups. A finite, target-excluding reference set provides an approximate
+    estimator of this coefficient under the assumptions stated below. Consequently,
+    the FELICS average is expected to approximate that of Matton et
+    al.'s~\cite{mattonWalkTalkMeasuring2024} original metric:
     \begin{equation}
-        \frac{1}{N_C} \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) \approx \frac{1}{N_C} \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} v(\{C_m\}).
+        \frac{1}{N_C}
+        \sum_{\mathbf{x}\in\mathbf{X}}
+        \sum_{s\in\mathbf{S}(\mathbf{x})}
+        \sum_{C_m\in s}
+        \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
+        \approx
+        \frac{1}{N_C}
+        \sum_{\mathbf{x}\in\mathbf{X}}
+        \sum_{C_m\in\mathbf{C}(\mathbf{x})}
+        v_{\mathbf{x}}(\{C_m\}).
     \end{equation}
-    Here, $N_C$ is the total number of concepts, $\mathbf{C}(\mathbf{x})$ are the concepts in question $\mathbf{x}$, and $s$ is the correlation group containing $C_m$.
+    Here, $N_C$ is the total number of concepts, $\mathbf{C}(\mathbf{x})$
+    is the question-specific concept set, and $\mathbf{S}(\mathbf{x})$ is its
+    partition into correlation groups.
 
     \smallskip
-    \textbf{Intuition:} The payout-normalization step is designed to compensate for the systematic, reference-relative scale difference discussed in Section~\ref{sec:kl_ceiling}. If this compensation is applied consistently across the dataset, the \emph{total causal influence} attributed to all concepts should remain approximately unchanged, preserving the overall scale of CE values under the assumptions below.
+    \textbf{Aggregate-Preserving Population Coefficient:} For a fixed treatment
+    size $k$, define the population
+    \begin{equation}
+        \mathcal{G}_k
+        :=
+        \{(\mathbf{x},s)\mid \mathbf{x}\in\mathbf{X},\,
+        s\in\mathbf{S}(\mathbf{x}),\,|s|=k\}.
+    \end{equation}
+    For each $q=(\mathbf{x},s)\in\mathcal{G}_k$, let
+    \begin{equation}
+        a_q:=v_{\mathbf{x}}(s),
+        \qquad
+        b_q:=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\}),
+        \qquad
+        \gamma_q:=\frac{a_q}{b_q},
+    \end{equation}
+    where $b_q>0$. The demonstration concerns non-degenerate group sizes $k$ for
+    which the coefficient defined below also satisfies $g_k>\varepsilon$. The
+    size-specific coefficient that preserves the aggregate is
+    \begin{equation}
+        \label{eq:aggregate_preserving_gamma}
+        g_k
+        :=
+        \frac{\sum_{q\in\mathcal{G}_k}a_q}
+             {\sum_{q\in\mathcal{G}_k}b_q}
+        =
+        \frac{\sum_{q\in\mathcal{G}_k}b_q\gamma_q}
+             {\sum_{q\in\mathcal{G}_k}b_q}.
+    \end{equation}
+    Thus, $g_k$ is a singleton-effect-weighted average of the payout
+    coefficients, rather than their ordinary arithmetic mean.
 
     \smallskip
-    \textbf{Simplifying Assumptions for Demonstration:} To illustrate why approximate equality is plausible, two idealized conditions will be relied on that do not hold universally but capture the \emph{typical} behavior of the reference-set construction:
+    \textbf{Exact Preservation for the Population Coefficient:} Suppose that
+    every group $s$ of size $k$ is normalized using $g_k$. By Shapley efficiency,
+    \begin{equation}
+        \label{eq:shapley_efficiency_aggregate}
+        \sum_{C_m\in s}
+        \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
+        =v_{\mathrm{adj},\mathbf{x}}(s)
+        =\frac{v_{\mathbf{x}}(s)}{g_k}.
+    \end{equation}
+    Equation~\ref{eq:shapley_efficiency_aggregate} applies to every
+    $(\mathbf{x},s)\in\mathcal{G}_k$. Summing both sides over this population
+    therefore yields
+    \begin{equation}
+        \label{eq:aggregate_shapley_sum}
+        \begin{aligned}
+            &\sum_{(\mathbf{x},s)\in\mathcal{G}_k}
+            \left[
+                \sum_{C_m\in s}
+                \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
+            \right] \\
+            &\qquad=
+            \sum_{(\mathbf{x},s)\in\mathcal{G}_k}
+            \frac{v_{\mathbf{x}}(s)}{g_k}
+            =
+            \frac{1}{g_k}
+            \sum_{(\mathbf{x},s)\in\mathcal{G}_k}v_{\mathbf{x}}(s).
+        \end{aligned}
+    \end{equation}
+    The last equality is valid because $g_k$ depends only on the common group
+    size $k$ and is consequently constant with respect to the summation over
+    $(\mathbf{x},s)$.
+
+    To make the substitution from
+    Equation~\ref{eq:aggregate_preserving_gamma} explicit, abbreviate the
+    aggregate joint- and singleton-effect masses by
+    \begin{equation*}
+        A_k
+        :=\sum_{(\mathbf{x},s)\in\mathcal{G}_k}v_{\mathbf{x}}(s),
+        \qquad
+        B_k
+        :=\sum_{(\mathbf{x},s)\in\mathcal{G}_k}
+        \sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\}).
+    \end{equation*}
+    Equation~\ref{eq:aggregate_preserving_gamma} then states
+    $g_k=A_k/B_k$. Since the non-degeneracy assumptions give $A_k>0$ and
+    $B_k>0$, the right-hand side of
+    Equation~\ref{eq:aggregate_shapley_sum} becomes
+    \begin{equation}
+        \label{eq:aggregate_preservation_size_k}
+        \frac{1}{g_k}A_k
+        =\frac{1}{A_k/B_k}A_k
+        =\frac{B_k}{A_k}A_k
+        =B_k
+        =\sum_{(\mathbf{x},s)\in\mathcal{G}_k}
+        \sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\}).
+    \end{equation}
+    Combining Equations~\ref{eq:aggregate_shapley_sum} and
+    \ref{eq:aggregate_preservation_size_k} proves exact aggregate preservation
+    for groups of size $k$.
+
+    Since $\mathbf{S}(\mathbf{x})$ partitions $\mathbf{C}(\mathbf{x})$,
+    summing this identity over all treatment sizes and dividing by $N_C$ yields
+    exact equality of the two dataset averages.
+
+    \smallskip
+    \textbf{Singleton-Weighted Reference Coefficient:} The finite-reference
+    version of the coefficient is the following ratio of aggregates:
+    \begin{equation}
+        \label{eq:aggregate_reference_estimator}
+        \bar\gamma(\mathbf{x},s,T)
+        :=
+        \frac{
+            \displaystyle
+            \sum_{(\mathbf{x}'',T'')\in\mathcal{R}(\mathbf{x},s,T)}
+            v_{\mathbf{x}''}(T'')
+        }{
+            \displaystyle
+            \sum_{(\mathbf{x}'',T'')\in\mathcal{R}(\mathbf{x},s,T)}
+            \sum_{C_i\in T''}v_{\mathbf{x}''}(\{C_i\})
+        }.
+    \end{equation}
+    For non-degenerate references, this is equivalent to weighting each payout
+    coefficient by the corresponding treatment's aggregate singleton effect.
+
+    \smallskip
+    \textbf{Assumptions Made:}
     \begin{enumerate}
-        \item \textbf{Representative Reference Sets:} The reference set $\mathcal{R}(\mathbf{x},s,s)$ (Equations~\ref{eq:R_1}--\ref{eq:R_3}) is treated as a \emph{representative sample} of all groups of size $|s|$ in the dataset. In practice, $\mathcal{R}(\mathbf{x},s,s)$ contains at most $5$ elements, drawn prioritized by proximity (same group $\rightarrow$ same question $\rightarrow$ same dataset). For large datasets, this sample is approximately representative of the population of size-$|s|$ groups.
+        \item For a target of size
+        $k$, the reference set is representative of $\mathcal{G}_k$ with respect
+        to both the joint effects $a_q$ and singleton-effect totals $b_q$.
 
-        \item \textbf{Symmetry of Payout Coefficients:} The payout coefficients $\gamma(\mathbf{x}',s')$ for groups of the same size are are assumed to be \emph{exchangeable}, i.e., their distribution is invariant to permutation. This allows to treat $\bar\gamma(\mathbf{x},s,s)$ as an estimate of a global average $\bar\gamma_k$ for size-$k$ groups.
+        \item The aggregate singleton-effect
+        denominator in Equation~\ref{eq:aggregate_reference_estimator} is positive
+        and sufficiently far from zero, and the resulting coefficient exceeds
+        $\varepsilon$ from Section~\ref{sec:corrected_value_function}. Degenerate size groups and reference sets invoke the
+        unadjusted-value fallback and lie outside the preservation claim.
+
+        \item The selected references provide enough
+        coverage for their aggregate ratio to approximate the complete-population
+        ratio $g_k$.
     \end{enumerate}
-    The assumptions above are sufficient to justify the \emph{approximate} preservation expected to be observed in practice.
-
-    \smallskip
-    \textbf{Demonstration Under Assumptions:} For any group $s$, the Shapley \emph{efficiency axiom} gives
-    \begin{equation}
-        \label{eq:shapley_efficiency_approx}
-        \sum_{C_m \in s} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) = v_{\text{adj}}(s) = \frac{v(s)}{\bar\gamma(\mathbf{x},s,s)}.
-    \end{equation}
-    Under Assumption~(1), $\bar\gamma(\mathbf{x},s,s) \approx \bar\gamma_k$, where $\bar\gamma_k$ is the average payout coefficient for all size-$k$ groups:
-    \begin{equation}
-        \bar\gamma_k := \frac{1}{|{\mathcal G}_k|} \sum_{s' \in {\mathcal G}_k} \frac{v(s')}{\sum_{C_m \in s'} v(\{C_m\})}.
-    \end{equation}
-    Here, ${\mathcal G}_k$ denotes the set of all size-$k$ groups (distinct from the graph $G$ in Section~\ref{sec:joint_counterfactual}). Substituting into Equation~\ref{eq:shapley_efficiency_approx}:
-    \begin{align}
-        \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) & = \sum_{s \in {\mathcal G}_k} \frac{v(s)}{\bar\gamma(\mathbf{x},s,s)} \approx \sum_{s \in {\mathcal G}_k} \frac{v(s)}{\bar\gamma_k}                                    \\
-                                                                                & = \frac{1}{\bar\gamma_k} \sum_{s \in {\mathcal G}_k} v(s) = \frac{1}{\bar\gamma_k} \cdot \bar\gamma_k \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} v(\{C_m\}) \\
-                                                                                & = \sum_{s \in {\mathcal G}_k} \sum_{C_m \in s} v(\{C_m\}).
-    \end{align}
-    The second equality follows from the definition of $\bar\gamma_k$: multiplying $\bar\gamma_k$ by the sum of all $v(s)$ for $s \in {\mathcal G}_k$ yields the sum of all $\sum_{C_m \in s} v(\{C_m\})$. Summing over all group sizes $k$:
-    \begin{align}
-        \sum_{\mathbf{x} \in \mathbf{X}} \sum_{s \in \mathbf{S}(\mathbf{x})} \sum_{C_m \in s} \mathrm{CE}_{\text{adj}}(\mathbf{x}, C_m, s) & \approx \sum_{\mathbf{x} \in \mathbf{X}} \sum_{s \in \mathbf{S}(\mathbf{x})} \sum_{C_m \in s} v(\{C_m\}) \\
-                                                                                     & = \sum_{\mathbf{x} \in \mathbf{X}} \sum_{C_m \in \mathbf{C}(\mathbf{x})} v(\{C_m\}).
-    \end{align}
-    Dividing by $N_C$ preserves the approximation, showing that the dataset-level averages are approximately equal under the stated assumptions.
+    Under these conditions,
+    $\bar\gamma(\mathbf{x},s,s)\approx g_{|s|}$. Replacing $g_{|s|}$ in
+    Equation~\ref{eq:shapley_efficiency_aggregate} with this target-specific
+    estimate turns the exact population identity into an approximation.
 \end{math_box}
