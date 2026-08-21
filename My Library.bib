@@ -935,6 +935,23 @@
   abstract = {We study the problem of attributing the prediction of a deep network to its input features, a problem previously studied by several other works. We identify two fundamental axioms— Sensitivity and Implementation Invariance that attribution methods ought to satisfy. We show that they are not satisfied by most known attribution methods, which we consider to be a fundamental weakness of those methods. We use the axioms to guide the design of a new attribution method called Integrated Gradients. Our method requires no modification to the original network and is extremely simple to implement; it just needs a few calls to the standard gradient operator. We apply this method to a couple of image models, a couple of text models and a chemistry model, demonstrating its ability to debug networks, to extract rules from a network, and to enable users to engage with models better.}
 }
 
+@inproceedings{suzgunChallengingBIGBenchTasks2023,
+  title = {Challenging {{BIG-Bench Tasks}} and {{Whether Chain-of-Thought Can Solve Them}}},
+  booktitle = {Findings of the {{Association}} for {{Computational Linguistics}}: {{ACL}} 2023},
+  author = {Suzgun, Mirac and Scales, Nathan and Schärli, Nathanael and Gehrmann, Sebastian and Tay, Yi and Chung, Hyung Won and Chowdhery, Aakanksha and Le, Quoc and Chi, Ed and Zhou, Denny and Wei, Jason},
+  editor = {Rogers, Anna and Boyd-Graber, Jordan and Okazaki, Naoaki},
+  date = {2023-07},
+  pages = {13003--13051},
+  publisher = {Association for Computational Linguistics},
+  location = {Toronto, Canada},
+  doi = {10.18653/v1/2023.findings-acl.824},
+  url = {https://aclanthology.org/2023.findings-acl.824/},
+  urldate = {2026-08-20},
+  abstract = {BIG-Bench (Srivastava et al., 2022) is a diverse evaluation suite that focuses on tasks believed to be beyond the capabilities of current language models. Language models have already made good progress on this benchmark, with the best model in the BIG-Bench paper outperforming average reported human-rater results on 65\% of the BIG-Bench tasks via few-shot prompting. But on what tasks do language models fall short of average human-rater performance, and are those tasks actually unsolvable by current language models? In this work, we focus on a suite of 23 challenging BIG-Bench tasks which we call BIG-Bench Hard (BBH). These are the tasks for which prior language model evaluations did not outperform the average human-rater. We find that applying chain-of-thought (CoT) prompting to BBH tasks enables PaLM to surpass the average human-rater performance on 10 of the 23 tasks, and Codex (code-davinci-002) to surpass the average human-rater performance on 17 of the 23 tasks. Since many tasks in BBH require multi-step reasoning, few-shot prompting without CoT, as done in the BIG-Bench evaluations (Srivastava et al., 2022), substantially underestimates the best performance and capabilities of language models, which is better captured via CoT prompting. As further analysis, we explore the interaction between CoT and model scale on BBH, finding that CoT enables emergent task performance on several BBH tasks with otherwise flat scaling curves.},
+  eventtitle = {Findings 2023},
+  file = {/Users/jonathan/Zotero/storage/NA37PFPX/Suzgun et al. - 2023 - Challenging BIG-Bench Tasks and Whether Chain-of-Thought Can Solve Them.pdf}
+}
+
 @inproceedings{szymanskiDisentanglingStakeholderRole2025,
   title = {Disentangling {{Stakeholder Role}} and {{Expertise}} in {{User-Centered Explainable AI}}},
   booktitle = {Proceedings of the 33rd {{ACM Conference}} on {{User Modeling}}, {{Adaptation}} and {{Personalization}}},

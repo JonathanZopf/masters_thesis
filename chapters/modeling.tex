@@ -1,14 +1,15 @@
 \chapter{Modeling the Updated Metric}
 \label{sec:modeling_updated_metric}
-This chapter translates the conceptual solution developed in Chapter \ref{sec:conception} into a complete mathematical specification for \emph{FELICS}. It describes how interacting concepts are identified and jointly intervened upon in greater detail, how their effects are attributed using Shapley values, why systematic scale distortions occur and how they are corrected, and which parts of the original evaluation pipeline remain unchanged.
+Introducing the joint effect in Section~\ref{sec:joint_effect} reduces the \emph{Correlated Concepts Problem} to three remaining challenges. First, an oracle is required to determine which concepts should be grouped together for joint intervention. Second, the measured joint effect must be redistributed to the participating concepts while preserving compatibility with the original metric and maintaining concept-level interpretability. Finally, a normalization has to be applied for joint interventions causal effect estimation due to the nature of the softmax function used within the Bayesian hierarchical modeling.
+
+In summary, this chapter translates the conceptual solution developed in Chapter \ref{sec:conception} into a complete mathematical specification for \emph{FELICS}. It describes how interacting concepts are identified and jointly intervened upon in greater detail, how their effects are attributed using Shapley values, why systematic scale distortions occur and how they are corrected, and which parts of the original evaluation pipeline remain unchanged.
 
 \section{Correlation Identification and Joint-Counterfactual Creation}
 \label{sec:joint_counterfactual}
-Accounting for concept interactions first requires deciding which concepts should be evaluated together and then generating the necessary joint interventions. This section develops an oracle for that grouping task in both natural-language and tabular settings before describing how its output determines the set of counterfactual questions.
+Accounting for concept interactions first requires deciding which concepts should be evaluated together and then generating the necessary joint interventions. This section conceptualizes an oracle for that grouping task in both natural-language and tabular settings before describing how its output determines the set of counterfactual questions.
 
 \subsection{Motivation for Correlation Identification}
-
-In principle, all concepts of a question could be treated as correlated and grouped together into a single set. In particular, \reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, requires their individual causal effects to remain identical to those obtained when they are treated as singletons if the grouped concepts do not actually interact. Consequently, even a single joint intervention spanning all concepts of a question would, in the absence of interaction, yield a faithfulness score identical to that of the original \emph{Causal Concept Faithfulness} metric, thereby fulfilling this independence-compatibility requirement.
+In principle, all concepts of a question could be treated as correlated and grouped together into a single set. In particular, \reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, demands their individual causal effects to remain identical to those obtained when they are treated as singletons if the grouped concepts do not actually interact. Consequently, even a single joint intervention spanning all concepts of a question would, in the absence of interaction, yield a faithfulness score identical to that of the original \emph{Causal Concept Faithfulness} metric, thereby fulfilling this independence-compatibility requirement.
 
 Pursuing this argument to its conclusion, however, conflicts with \reqref{req:feasibility}, also introduced in Section~\ref{sec:requirements}: for questions with many concepts, jointly intervening on the entire set at once is computationally infeasible. To still attribute the resulting effects at the level of individual concepts, subgroups ranging from each concept in isolation up to the full set would additionally need to be tested. Generating counterfactuals and collecting responses for the entire power set of concepts naturally leads to a runtime complexity of $O(2^M)$, where $M$ again denotes the number of concepts present in the question. This quickly exhausts computational resources, motivating the need to partition the concept set into smaller subsets prior to evaluation.
 
@@ -18,17 +19,17 @@ This partitioning cannot happen randomly, however, since concepts are allowed, i
 	\sum_{i=1}^{\lceil M/n_{\max} \rceil} 2^{\min(n_{\max},\, M - (i-1)n_{\max})} - 1.
 \end{equation}
 
-The resulting set $\mathbf{S}$ produced by $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ contains subsets $s \in \mathbf{S}$, each grouping together concepts $C_m \in s$ that are deemed to interact. Formally, $\mathbf{S}$ is a partition of $\mathbf{C}$ and therefore satisfies
+The resulting set $\mathbf{S}$ produced by $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ contains subsets $s \in \mathbf{S}$, each grouping together concepts $C_m \in s$ that are deemed to interact. $s$ will from here on referred to as a \emph{correlation group}. Formally, $\mathbf{S}$ is a partition of $\mathbf{C}$ and therefore satisfies
 \begin{equation}
 	\bigcup_{s\in\mathbf{S}}s=\mathbf{C},
 	\qquad
-	s_i\cap s_j=\emptyset\ \text{for all distinct }s_i,s_j\in\mathbf{S},
+	s_i\cap s_j=\emptyset\ \text{for all }s_i,s_j\in\mathbf{S},
 	\qquad
 	1\leq |s|\leq n_{\max}\ \text{for every }s\in\mathbf{S}.
 \end{equation}
 Consequently, every concept occurs in exactly one correlation group, no concept is duplicated across groups, and $\sum_{s\in\mathbf{S}}|s|=|\mathbf{C}|$.
 
-Having established this motivation, the remainder of this section discusses how the oracle could look like in practice. Two implementations are considered: an auxiliary LLM for natural language question datasets, and a statistical procedure for tabular data. Regardless of which version is used, the resulting set $\mathbf{S}$ exhibits the same properties, so the specific oracle implementation has no further implications for the remainder of the evaluation pipeline.
+Having established this motivation, the remainder of this section discusses how the oracle could look like in detail. Two models are considered: an auxiliary LLM for natural language question datasets, and a statistical procedure for tabular data. Regardless of which version is used, the resulting set $\mathbf{S}$ has to exhibit the same properties, so the specific oracle implementation has no further implications for the remainder of the evaluation pipeline.
 
 \subsection{Modeling Oracle for Natural Language Questions}
 
@@ -38,13 +39,13 @@ BBQ and MedQA, the two datasets that Matton et al. \cite{mattonWalkTalkMeasuring
 
 \noindent\textbf{Conservative grouping heuristics.} The model is explicitly warned against grouping concepts simply because they appear in the same sentence, belong to the same topic, or share a weak, indirect relationship. If the model is uncertain about an interaction, it is instructed to default to treating the concepts as independent in order to conserve computational resources.
 
-\noindent\textbf{Partitioning constraints.} To prevent the model from over-grouping concepts into a single, oversized cluster, a strict upper-bound parameter ($max\_in\_group$), which corresponds to the $n_{\max}$ parameter introduced above, is passed dynamically to the prompt. The model is further instructed that every provided concept must appear exactly once across the output, contained in exactly one group, and that no additional concepts may be invented.
+\noindent\textbf{Partitioning constraints.} To prevent the model from over-grouping concepts into a single, oversized cluster, the strict upper-bound parameter ($n_{\max}$) is passed dynamically to the prompt. The model is further instructed that every provided concept must appear exactly once across the output, contained in exactly one group, and that no additional concepts may be invented.
 
 \noindent\textbf{Forced Chain-of-Thought (CoT) explanations.} Although the downstream evaluation pipeline only parses the structured list of groups, the prompt forces the model to output a one-line explanation before returning the partitioned groups. Generating this explanation serves as a localized Chain-of-Thought step, which has been shown to improve reasoning quality \cite{weiChainofthoughtPromptingElicits2022}.
 
 By distilling the grouping task into these precise rules, the auxiliary LLM is turned into a consistent surrogate for the oracle. The complete, dataset-specific prompt templates, which include few-shot examples demonstrating these rules on the BBQ and MedQA datasets, are provided in Appendix~\ref{app:prompts}.
 
-An example illustrating how the oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ subdivides a concept list for a question from the BBQ dataset is given in Example~\ref{ex:oracle_operation}. The example illustrates that $max\_in\_group$ does not have to be exhausted: whenever the plausible link between concepts is too weak, the LLM defaults to treating the concept as an independent singleton, as reflected in the explanation below.
+An example illustrating how the oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ subdivides a concept list for a question from the BBQ dataset is given in Example~\ref{ex:oracle_operation}. The example demonstrates that $n_{\max}$ does not have to be exhausted: whenever the plausible link between concepts is too weak, the LLM defaults to treating the concept as an independent singleton, as reflected in the explanation below. Because of it's illustrative nature, this example was reused in the BBQ version of the oracle prompt.
 
 \begin{example_box}[label=ex:oracle_operation]
 	\textbf{Question ($\mathbf{x}$):} At the charity dinner, one table was shared by a person who's Jewish and a person who's Protestant. The Jewish one was just there because someone gave away a free ticket and they were looking for a free meal but had no intention of donating, but the Protestant one had been a leading donor for the past several years. Who is greedy?
@@ -105,7 +106,7 @@ where $n$ denotes the total sample size. The Pearson chi-squared ($\chi^2$) stat
 \end{equation}
 The statistical significance $p_{i,j}$ is derived from the $\chi^2$ cumulative distribution function with $\text{dof} = (R_i - 1)(R_j - 1)$ degrees of freedom.
 
-To quantify the strength of association independently of sample size and table dimensions, Cramér's $V$ is computed, denoted $A$ to avoid a notational conflict with the rest-of-question text $V$ used elsewhere in this thesis:
+To quantify the strength of association independently of sample size and table dimensions, Cramér's $V$ is calculated, denoted $A$ to signify association strenght:
 \begin{equation}
 	A(C_i, C_j) = \sqrt{\frac{\chi^2}{n \cdot (\min(R_i, R_j) - 1)}},
 \end{equation}
@@ -126,7 +127,7 @@ Let $\mathcal{C} = \{C_1, \ldots, C_M\}$ denote the static, dataset-wide set of 
 The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on the undirected weighted graph $G = (\mathcal{C}, \mathcal{L})$. Each element $(C_i,C_j,A_{i,j})\in\mathcal{L}$ represents an edge between $C_i$ and $C_j$ whose weight is their association strength $A_{i,j}=A(C_i,C_j)$. This partitioning is resolved via a modified Kruskal's algorithm constrained by a maximum component size $n_{\max}$:
 
 \begin{algorithm}[H]
-	\caption{Constrained Greedy Partitioning}\label{alg:greedy_merge}
+	\caption{Constrained Greedy Partitioning of Strongest Correlations}\label{alg:greedy_merge}
 	\begin{algorithmic}[1]
 		\State \textbf{Initialize} partition $\mathcal{P} \gets \{ \{C_i\} \mid C_i \in \mathcal{C} \}$ \Comment{All concepts start as singletons}
 		\State \textbf{Sort} $\mathcal{L}$ descending by weight $A_{i,j}$
@@ -140,7 +141,7 @@ The partitioning of $\mathcal{C}$ is modeled as finding a \textbf{Constrained Ma
 	\end{algorithmic}
 \end{algorithm}
 
-The resulting partition $\mathcal{P}$ serves as the tabular oracle output $\mathbf{S} := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ used as a correlation group $s \in \mathbf{S}$. The resulting groups should be interpreted as candidates for interaction rather than proof of causal interaction: pairwise association provides an observable heuristic for prioritizing joint interventions, but association alone neither establishes interaction in the model's response nor captures every possible higher-order interaction.
+The resulting partition $\mathcal{P}$ serves as the tabular oracle output $\mathbf{S} := \mathcal{P}$, which is computed once for the entire dataset. Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each block $P \in \mathcal{P}$ used as a correlation group $s \in \mathbf{S}$. The resulting groups should only be interpreted as candidates for interaction: pairwise association provides an observable heuristic for prioritizing joint interventions, but association alone neither establishes interaction in the model's response nor captures every possible interaction.
 
 \subsection{Putting Joint Interventions into Practice}
 

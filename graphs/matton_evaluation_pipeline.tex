@@ -41,15 +41,15 @@
 \node[phaseTitle, anchor=west] at (-11.5,-9.3) {2 \quad COLLECT MODEL RESPONSES};
 
 % --- PHASE 3 (Red) ---
-\node[node branch, phase3] (probability) at (3.5,-12.65) {Estimate answer distributions\\[-1pt] \scriptsize Bayesian hierarchical model};
-\node[node branch, phase3] (mentions) at (-3.5,-12.65) {Identify causally relevant concepts\\[-1pt] \scriptsize Auxiliary LLM $\mathcal{A}$};
+\node[node branch, phase3] (probability) at (-3.5,-12.65) {Estimate answer distributions\\[-1pt] \scriptsize Bayesian hierarchical model};
+\node[node branch, phase3] (mentions) at (3.5,-12.65) {Identify causally relevant concepts\\[-1pt] \scriptsize Auxiliary LLM $\mathcal{A}$};
 \draw[flow] (observations.south) -- ++(0,-0.55) -| (mentions.north);
 \draw[flow] (observations.south) -- ++(0,-0.55) -| (probability.north);
 \node[data, anchor=east] at (-1.15,-11.45) {Answers};
 \node[data, anchor=west] at (1.15,-11.45) {Explanations};
 
-\node[node branch, phase3] (ce) at (3.5,-14.95) {Compare original and counterfactual distributions\\[-1pt] \scriptsize Average $D_{\mathrm{KL}}$ $\rightarrow$ Causal Effect (CE)};
-\node[node branch, phase3] (ee) at (-3.5,-14.95) {Aggregate attributed concept importance\\[-1pt] \scriptsize Explanation-Implied Effect (EE)};
+\node[node branch, phase3] (ce) at (-3.5,-14.95) {Compare original and counterfactual distributions\\[-1pt] \scriptsize Average $D_{\mathrm{KL}}$ $\rightarrow$ Causal Effect (CE)};
+\node[node branch, phase3] (ee) at (3.5,-14.95) {Aggregate attributed concept importance\\[-1pt] \scriptsize Explanation-Implied Effect (EE)};
 \draw[flow] (mentions) -- (ee);
 \draw[flow] (probability) -- (ce);
 
