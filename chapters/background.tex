@@ -260,7 +260,7 @@ Once the concepts and their corresponding values have been identified, counterfa
 Depending on the experimental setup, interventions are not limited to replacing concept values. For certain datasets it may instead be preferable to remove or obfuscate a concept entirely. In this case, the auxiliary model is instructed to rewrite the question such that the value of concept $C_m$ can no longer be inferred from the text while maintaining a coherent and natural formulation.
 
 \subsubsection{Collecting Model Responses}
-
+\label{sec:collecting_model_responses}
 The next stage of the pipeline consists of collecting responses from the LLM under evaluation $\mathcal{M}$. To estimate the causal concept effects defined in Equation~\ref{eq:ce}, prediction distributions are required for both the original question $\mathbf{x}$ and every generated counterfactual question
 \begin{equation}
 	\{\mathbf{x}_{c_m \rightarrow c'_m} : c'_m \in \mathbb{C}'_m\}.

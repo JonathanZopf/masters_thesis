@@ -9,6 +9,7 @@ In summary, this chapter translates the conceptual solution developed in Chapter
 Accounting for concept interactions first requires deciding which concepts should be evaluated together and then generating the necessary joint interventions. This section conceptualizes an oracle for that grouping task in both natural-language and tabular settings before describing how its output determines the set of counterfactual questions.
 
 \subsection{Motivation for Correlation Identification}
+\label{sec:correlation_identification_motivation}
 In principle, all concepts of a question could be treated as correlated and grouped together into a single set. In particular, \reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, demands their individual causal effects to remain identical to those obtained when they are treated as singletons if the grouped concepts do not actually interact. Consequently, even a single joint intervention spanning all concepts of a question would, in the absence of interaction, yield a faithfulness score identical to that of the original \emph{Causal Concept Faithfulness} metric, thereby fulfilling this independence-compatibility requirement.
 
 Pursuing this argument to its conclusion, however, conflicts with \reqref{req:feasibility}, also introduced in Section~\ref{sec:requirements}: for questions with many concepts, jointly intervening on the entire set at once is computationally infeasible. To still attribute the resulting effects at the level of individual concepts, subgroups ranging from each concept in isolation up to the full set would additionally need to be tested. Generating counterfactuals and collecting responses for the entire power set of concepts naturally leads to a runtime complexity of $O(2^M)$, where $M$ again denotes the number of concepts present in the question. This quickly exhausts computational resources, motivating the need to partition the concept set into smaller subsets prior to evaluation.
@@ -77,13 +78,17 @@ An example illustrating how the oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\
 \label{sec:oracle_tabular}
 Unlike natural language datasets, which require an LLM-based oracle, tabular datasets exhibit a structured format that permits a deterministic, statistically grounded grouping procedure. Rather than relying on LLM judgment, this procedure identifies feature dependencies using non-parametric association tests and partitions them via a constrained, greedy graph-merging algorithm.
 
+\subsubsection{Assumptions about Tabular Datasets}
+
+The tabular setting assumes a fixed and complete dataset schema. Each feature column corresponds to exactly one concept $C_m$, and every concept corresponds to exactly one feature column. Each row represents one dataset instance and provides the structured information from which one natural-language question is generated. Because all rows contain all feature columns and no values are missing, every generated question has the same dataset-wide concept set $\mathcal{C}=\{C_1,\ldots,C_M\}$. Pairwise associations between concepts are therefore estimated across all rows of the complete table. Consequently, the association graph and the resulting partition of $\mathcal{C}$ are computed once for the entire dataset rather than separately for each question.
+
 While classical correlation measures such as Pearson's $r$, Spearman's $\rho$, or Kendall's $\tau$ assume continuous or ordinal data, tabular features often include nominal variables, such as gender or birthplace, that lack a natural ordering. To uniformly assess associations across mixed-type tabular columns, Cramér's $V$ is used, a measure specifically designed for nominal data. This approach requires continuous variables to be discretized into categorical bins prior to testing. The procedure is executed in four sequential phases.
 
 \subsubsection{Phase 1: Feature Discretization}
 
 To evaluate continuous and categorical variables uniformly, every continuous numeric feature is discretized into ordinal bins using equal-frequency (quantile) binning. This ensures that the downstream categorical association tests remain valid and resilient to outliers, while categorical features are left unchanged.
 
-Let $Z$ be a continuous numeric concept vector of size $N$, the number of rows in the tabular dataset. The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ denotes the set of unique values of $Z$. Using the empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as
+Let $Z$ be a continuous numeric vector representing all values of a concept $C_m$ with size $N$, the number of rows in the tabular dataset. The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ denotes the set of unique values of $Z$. Using the empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as
 \begin{equation}
 I_r =
 \begin{cases}
@@ -100,7 +105,7 @@ Under the null hypothesis $H_0$ of independence, the expected frequency $E_{u,v}
 \begin{equation}
 	E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{n},
 \end{equation}
-where $n$ denotes the total sample size. The Pearson chi-squared ($\chi^2$) statistic is then defined as
+where $n:=\sum_{u=1}^{R_i}\sum_{v=1}^{R_j}O_{u,v}$ denotes the number of rows represented in the contingency table. Under the completeness assumption stated above, both concept columns contain a value in every row, so $n$ equals the total number of rows in the dataset. The Pearson chi-squared ($\chi^2$) statistic is then defined as
 \begin{equation}
 	\chi^2 = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} \frac{(O_{u,v} - E_{u,v})^2}{E_{u,v}}.
 \end{equation}
@@ -114,7 +119,7 @@ where $A(C_i, C_j) \in [0, 1]$, with $0$ indicating independence and $1$ indicat
 
 \subsubsection{Phase 3: Association Filtering}
 
-To eliminate weak or spurious relationships, a pair $(C_i, C_j)$ is retained if and only if its association is statistically significant, $p_{i,j} < \alpha$ with $\alpha = 0.005$, and its effect size satisfies $A_{i,j} \ge A_{\min}$ with $A_{\min} = 0.3$.
+To eliminate weak or spurious relationships, a pair $(C_i, C_j)$ is retained if and only if its association is statistically significant, $p_{i,j} < \alpha$ with $\alpha = 0.001$, and its effect size satisfies $A_{i,j} \ge A_{\min}$ with $A_{\min} = 0.3$.
 Surviving pairs are sorted by descending association strength to form a prioritized candidate queue:
 \begin{equation}
 	\mathcal{L} = \left\{ (C_i, C_j, A_{i,j}) \;\middle|\; p_{i,j} < \alpha \land A_{i,j} \ge A_{\min} \right\}.
@@ -145,9 +150,9 @@ The resulting partition $\mathcal{P}$ serves as the tabular oracle output $\math
 
 \subsection{Putting Joint Interventions into Practice}
 
-With an oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ established that groups concepts into a set $\mathbf{S}$ based either on an LLM's judgment or on statistical evidence derived from the dataset, it becomes possible to intervene on the selected concepts jointly. Because the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024} already contains the procedures required to intervene on a single concept, only minimal adaptation of the existing implementation is required. Most notably, the counterfactual generator must be updated to support interventions on multiple concepts simultaneously, enabling the measurement of the joint effect that these concepts have, as introduced in Section~\ref{sec:joint_effect}.
+With an oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ established that groups concepts into a set $\mathbf{S}$ based either on an LLM's judgment or on statistical evidence derived from the dataset, it becomes possible to intervene on the selected concepts jointly. Because the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024} already contains the procedures required to intervene on a single concept, only minimal adaptation of the existing implementation is required. Most notably, the counterfactual generator must be updated to support interventions on multiple concepts simultaneously, enabling the measurement of the joint effect that these concepts have, as introduced in Section~\ref{sec:joint_effect}. In order to do so, the counterfactual generation prompts for the auxilary LLM $\mathcal{A}$ have been slightly adapted from the original by Matton et al. \cite{mattonWalkTalkMeasuring2024} to feature examples where multiple concepts are requested to be changed or removed. They can be found in Appendix \label{app:prompts}.
 
-It is, however, not sufficient to simply intervene on all concepts within a correlation set $s \in \mathbf{S}$ combined: doing so alone would make it impossible to distinguish the individual contributions, discussed further in Section~\ref{sec:shapley}, of each concept to the joint effect. Measuring only the effect of all concepts in a set acting together (the grand coalition) alongside the effect of each individual concept on its own is likewise insufficient. If a set contains more than two concepts, an individual concept may, for instance, behave differently on its own or within the grand coalition than when combined with only one other concept, as illustrated in Example~\ref{ex:all_combinations_motivation}.
+It is, however, not sufficient to simply intervene on all concepts within a correlation set $s \in \mathbf{S}$ combined: doing so alone would make it impossible to distinguish the individual contributions, discussed further in Section~\ref{sec:shapley}, of each concept to the joint effect. Measuring only the effect of all concepts in a set acting together (the grand coalition) alongside the effect of each individual concept on its own is likewise insufficient. If a set contains more than two concepts, an individual concept may, for instance, behave differently on its own or within the grand coalition than when combined with only one other concept, as illustrated in Example~\ref{ex:all_combinations_motivation} for a hypothetical setting.
 
 \begin{example_box}[label=ex:all_combinations_motivation]
 	Suppose an LLM answers whether a patient is likely suffering from bacterial meningitis, with $\mathbf{S} = \{\{C_1, C_2, C_3\}\}$.
@@ -166,7 +171,9 @@ It is, however, not sufficient to simply intervene on all concepts within a corr
 	Thus, the contribution of high fever depends strongly on whether neck stiffness is still present, even though this dependence is much weaker in the grand coalition. Consequently, the effect of intervening on $C_1$ differs substantially depending on whether it occurs within $\{C_1\}$ (alone), $\{C_1, C_2\}$, or the grand coalition $\{C_1, C_2, C_3\}$.
 \end{example_box}
 
-It is therefore necessary to investigate the shift in the model's predictions for all $2^{|s|}-1$ possible non-empty combinations of concepts within a correlation set $s$. Using the slightly adapted procedures established by Matton et al. \cite{mattonWalkTalkMeasuring2024}, a counterfactual is created for each of these combinations. The evaluation pipeline then continues by collecting model responses $r=(y,e)$, consisting of the prediction $y$ and the explanation $e$; the response-collection step itself requires no modification.
+It is therefore necessary to investigate the shift in the model's predictions for all $2^{|s|}$ possible combinations of concepts within a correlation set $s$. Using the slightly adapted procedures established by Matton et al. \cite{mattonWalkTalkMeasuring2024}, a counterfactual is created for each of these combinations.
+
+The evaluation pipeline then continues by collecting model responses $r=(y,e)$, consisting of the prediction $y$ and the explanation $e$; the response-collection step itself requires no modification from the original presented before in Section \ref{sec:collecting_model_responses}.
 
 \section{Shapley-Based Causal Effect Calculation}
 \label{sec:shapley}
@@ -175,15 +182,13 @@ Joint interventions produce effects for sets of concepts, whereas the original m
 \subsection{Motivation}
 \label{sec:shapley_motivation}
 
-Having established how to identify correlated concepts and how to intervene on them jointly, it remains unresolved how to attribute the resulting causal effect to the observed shift in the prediction $y$.
-
-Notably, the definition of causal effect by Matton et al. \cite{mattonWalkTalkMeasuring2024} (see Equation~\ref{eq:ce}) is defined only for individual concepts. Assigning a single CE value to a group of multiple concepts is undesirable for two reasons. First, doing so would make it nearly impossible to trace the effect of individual concepts, thereby forfeiting one of the metric's principal strengths and violating \reqref{req:preserving_strengths}, introduced in Section~\ref{sec:requirements}. Second, it would require extensive reworking of the remainder of the evaluation pipeline: because the vectors of causal effects and explanation-implied effects must be of equal length (both are supposed to match the number of concepts under investigation ($|\mathbf{C}|$)) for the Pearson correlation to be computed, reducing the length of the CE vector would also require the EE vector to be reduced accordingly. This would introduce new sources of error and make it impossible to build directly on the foundation of the original metric. This option is therefore ruled out: the CE vector should still contain exactly $|\mathbf{C}|$ entries. The remaining question is how the joint effects can be decomposed into individual contributions.
+The definition of causal effect by Matton et al. \cite{mattonWalkTalkMeasuring2024} (see Equation~\ref{eq:ce}) is defined only for individual concepts. Assigning a single CE value to a group of multiple concepts is undesirable for two reasons. First, doing so would make it nearly impossible to trace the effect of individual concepts, thereby forfeiting one of the metric's principal strengths and violating \reqref{req:preserving_strengths}, introduced in Section~\ref{sec:requirements}. Second, it would require extensive reworking of the remainder of the evaluation pipeline: because the vectors of causal effects and explanation-implied effects must be of equal length (both are supposed to match the number of concepts under investigation) for the Pearson correlation to be computed, reducing the length of the CE vector would also require the EE vector to be reduced accordingly. This would introduce new sources of error and make it impossible to build directly on the foundation of the original metric. This option is therefore ruled out: the CE vector should still contain exactly $|\mathbf{C}|$ entries. The remaining question is how the joint effects can be decomposed into individual contributions.
 
 Naive approaches exist, such as computing the average effect of a concept across all coalitions in which it participates, ranging from the singleton case up to the grand coalition. This is problematic, however, since a concept's own effect is heavily influenced by the impact of the other concepts present in the coalition. Fortunately, devising a new solution from scratch is unnecessary, since Shapley values from cooperative game theory address exactly this scenario.
 
 \subsection{Implementing Shapley Values into the Causal Effect}
 
-With the general Shapley formulation already defined in Equation~\ref{eq:shapley}, two application-specific questions remain: how the value function $v$ should be defined for causal effects, and how the resulting allocation can be integrated into FELICS.
+With the general Shapley formulation for alloting payout between "players" already defined in Equation~\ref{eq:shapley}, two application-specific questions remain: how the value function $v$ should be defined for causal effects, and how the resulting allocation can be integrated into FELICS.
 
 It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so supports \reqrefs{req:one_item_group}{req:independence_behavior}, formulated in Section~\ref{sec:requirements}. However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $\mathrm{CE}(\mathbf{x},C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
 
@@ -211,7 +216,7 @@ Consequently, every tuple $t'=(c_i')_{C_i\in T}\in\mathbb{T}'$ changes the value
 
 Note that the Shapley function depends on the value function being called with an empty set of "players", which is formalized in the equation above for clarity.
 
-With the value function now defined, the equation for estimating the causal effect can be formulated. As in the original metric, the causal effect for concept $C_m$ and question $\mathbf{x}$ is given in Equation~\ref{eq:new_ce}. Note that $C_m \in s$, where the assignment of $C_m$ to the set $s$ follows the procedure described in Section~\ref{sec:joint_counterfactual}.
+With the value function now defined, the equation for estimating the causal effect can be formulated. As in the original metric, the causal effect for concept $C_m$ and question $\mathbf{x}$ is given in Equation~\ref{eq:new_ce} under the new rule $C_m \in s$ (from Section~\ref{sec:joint_counterfactual})
 
 \begin{equation}
 	\label{eq:new_ce}
@@ -219,7 +224,7 @@ With the value function now defined, the equation for estimating the causal effe
 	\sum_{T \subseteq s \setminus \{C_m\}} \frac{|T|!\, (|s|-|T|-1)!}{|s|!} \big[ v_{\mathbf{x}}(T \cup \{C_m\}) - v_{\mathbf{x}}(T) \big]
 \end{equation}
 
-Recall, however, that Matton et al. \cite{mattonWalkTalkMeasuring2024} estimate faithfulness via the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}), in which the causal effect is invoked as $\mathbf{CE}(\mathbf{x},\mathbf{C})$. A version without $s$ as an explicit parameter must therefore be constructed, receiving instead the set of concepts $\mathbf{C}$ present in the question. The question-level CE vector no longer depends explicitly on $C_m$ and $s$. As in Matton et al. \cite{mattonWalkTalkMeasuring2024}, let $\mathbf{C}$ denote the set of concepts present in the question $\mathbf{x}$. A helper function is introduced in which $n_{\max}$ for $\mathcal{O}$ is fixed to a constant value:
+Recall, however, that Matton et al. \cite{mattonWalkTalkMeasuring2024} estimate faithfulness via the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}), in which the causal effect is invoked as the vector $\mathbf{CE}(\mathbf{x},\mathbf{C})$. A version without $s$ as an explicit parameter must therefore be constructed, receiving instead the set of concepts $\mathbf{C}$ present in the question. The question-level CE vector no longer depends explicitly on $C_m$ and $s$. As in Matton et al. \cite{mattonWalkTalkMeasuring2024}, let $\mathbf{C}$ denote the set of concepts present in the question $\mathbf{x}$. A helper function is introduced in which $n_{\max}$ for $\mathcal{O}$ is fixed to a constant value:
 
 \begin{equation}
 	\label{eq:new_ce_vector}
@@ -234,7 +239,7 @@ Querying this helper yields the set $s$ to which concept $C_m$ belongs:
 	\mathbf{CE}(\mathbf{x}, \mathbf{C}) = \Big( \mathrm{CE}\big(\mathbf{x}, C_m, f_{\mathbf{C}}(C_m)\big) \Big)_{m=1}^{|\mathbf{C}|}
 \end{equation}
 
-This construction therefore yields a causal-effect definition compatible with the Pearson correlation coefficient used in the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024}.
+This construction therefore yields a causal-effect definition compatible with the Pearson correlation coefficient used in the original metric of Matton et al. \cite{mattonWalkTalkMeasuring2024}. In summary, even though the CE scalar definition in Equation~\ref{eq:new_ce} has introduced $s$ as an extra parameter, the vector definition in Equation~\ref{eq:new_ce_vector} does not and integrates into the framework seamlessly.
 
 \section{Normalizing the Causal Effect}
 \label{sec:shapley_correction}
@@ -243,13 +248,13 @@ The direct Shapley formulation introduces a systematic scale difference between 
 \subsection{Systematic Shrinkage of Joint Effects}
 \label{sec:kl_ceiling}
 
-Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the evaluation pipeline. Running an actual implementation, however, reveals a systematic pattern in the resulting scores. Whenever a concept $C_m$ is assigned to a correlation group $s$ with $|s|>1$, its resulting Shapley-CE tends to be lower than the causal effect that would have been measured had $C_m$ been evaluated on its own, i.e., on average $\mathrm{CE}(\mathbf{x},C_m,s) < \mathrm{CE}(\mathbf{x},C_m,\{C_m\})$, even for concepts that are otherwise independent in the sense of Section~\ref{sec:interaction_effects}.
+Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the evaluation pipeline. Running an actual implementation, however, reveals a systematic pattern in the resulting scores. Whenever a concept $C_m$ is assigned to a correlation group $s$ with $|s|>1$, its resulting Shapley-CE tends to be lower than the causal effect that would have been measured had $C_m$ been evaluated on its own, i.e., on average $\mathrm{CE}(\mathbf{x},C_m,s) < \mathrm{CE}(\mathbf{x},C_m,\{C_m\})$. This is likely not the result of any interaction effect: Even if concepts are randomly assigned to the correlation groups, which is supposed to ensure independence according to Section~\ref{sec:interaction_effects}, the phenomenon persists.
 
 The Shapley \emph{Efficiency} axiom (Section~\ref{sec:shapley_fundamentals}) makes the scale of the joint value relevant to every allocated effect: the sum of payouts to all concepts in $s$ equals $v_{\mathbf{x}}(s)$, the joint effect of intervening on the entire group at once. Whenever this joint value is smaller than the sum of the corresponding singleton values, the shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Empirically, this pattern occurs systematically on average in the considered setting, although its direction and magnitude may differ for individual groups, particularly when genuine redundancy or synergy is present.
 
-Intuitively, probability space does not permit direct addition of separately normalized outputs. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Adding the two resulting probabilities would yield $160\%$, while adding the two isolated shifts to the baseline would yield $110\%$; neither is a valid probability. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space, but does not by itself determine whether the resulting KL-based joint effect is smaller or larger than the sum of singleton effects.
+Intuitively, probability space does not permit direct addition of separately normalized outputs. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Adding the two resulting probabilities would yield $160\%$, while adding the two isolated shifts to the baseline would yield $110\%$; neither is a valid probability. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space.
 
-One structural source of this non-additivity is the Bayesian hierarchical modeling step presented by Matton et al. \cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct a probability distribution vector from sampled realizations of the answer variable $Y$, they employ a softmax function. Let $I$ denote the intervention condition under which responses are sampled, and let $\theta_{y\mid I}$ denote the latent logit assigned to answer option $y$ under that condition. Each scalar probability component is assembled as
+One major structural source of this non-additivity is the Bayesian hierarchical modeling step presented by Matton et al. \cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct a probability distribution vector from sampled realizations of the answer variable $Y$, they employ a softmax function. Let $I$ denote the intervention condition under which responses are sampled, and let $\theta_{y\mid I}$ denote the logit assigned to answer option $y$ under that condition. Each scalar probability component is assembled as
 \begin{equation}\label{eq:culprit_softmax}
 	p_{y\mid I} = \frac{e^{\theta_{y\mid I}}}{\sum_{y' \in \mathcal{Y}} e^{\theta_{y'\mid I}}}, \qquad y \in \mathcal{Y},
 \end{equation}
@@ -261,7 +266,7 @@ Beyond this extreme case of distributions summing to $2$, the nonlinear mapping 
 
 Because the joint effect serves as the basis for calculating individual payouts, systematic non-additivity can create a reference-relative scale difference between singleton and multi-concept treatments. The observed average tendency $v_{\mathbf{x}}(s)<\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ motivates a normalization, but is not imposed as a universal inequality. Rather than removing the softmax function or altering the Bayesian sampling process, the proposed normalization estimates the typical non-additivity of comparable treatments and adjusts against that reference level.
 
-\subsection{Introducing Payout Coefficient}
+\subsection{Introducing the Payout Coefficient}
 
 For a treatment $T \subseteq s$ with $T \neq \emptyset$, the \emph{payout coefficient} is defined as
 \begin{equation}
@@ -270,14 +275,14 @@ For a treatment $T \subseteq s$ with $T \neq \emptyset$, the \emph{payout coeffi
 \end{equation}
 the ratio of the group's joint effect to the sum of its members' singleton effects. If $\sum_{C_m\in T} v_{\mathbf{x}}(\{C_m\})=0$, every concept in $T$ has zero singleton effect; in this degenerate case $\gamma(\mathbf{x},T):=1$ is set by convention, so that no correction is applied.
 
-By definition, $\gamma(\mathbf{x},T)=1$ indicates perfect additivity, $\gamma(\mathbf{x},T)<1$ the shrinkage documented above, and $\gamma(\mathbf{x},T)>1$ reinforcement. For a singleton treatment $T=\{C_m\}$, numerator and denominator coincide, so $\gamma(\mathbf{x},\{C_m\}) \equiv 1$: the correction defined below therefore leaves singleton effects unchanged, as required by \reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}.
+By definition, $\gamma(\mathbf{x},T)=1$ indicates perfect additivity, $\gamma(\mathbf{x},T)<1$ shrinkage and $\gamma(\mathbf{x},T)>1$ reinforcement. For a singleton treatment $T=\{C_m\}$, numerator and denominator coincide, so $\gamma(\mathbf{x},\{C_m\}) = 1$: the correction defined below therefore leaves singleton effects unchanged, as required by \reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}.
 
 \subsection{Constructing a Reference Set}
 \label{sec:reference_set}
 
 A treatment's own coefficient $\gamma(\mathbf{x},T)$ cannot be used to correct its own value function: doing so would force $v_{\mathbf{x}}(T)/\gamma(\mathbf{x},T) = \sum_{C_m\in T} v_{\mathbf{x}}(\{C_m\})$ identically for every treatment, discarding exactly the information about genuine concept interaction that \reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the metric to retain. Instead, $\gamma(\mathbf{x},T)$ is corrected using the \emph{typical} coefficient observed for treatments of the same size $|T|$ elsewhere in the dataset.
 
-Let $\mathbf{S} := \mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ denote the correlation groups for question $\mathbf{x}$. Three disjoint pools of reference treatments matching $|T|$ in size are considered, in descending priority:
+Recalling the setting established in Section \ref{sec:correlation_identification_motivation}, let $\mathbf{S} := \mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ denote the superset of correlation groups $s \in \mathbf{S}$ for question $\mathbf{x}$. Three disjoint pools of reference treatments matching $|T|$ in size are then considered, in descending priority:
 \begin{align}
 	\mathcal{R}_1(\mathbf{x},s,T) & := \big\{\, (\mathbf{x},T'') \;:\; T''\subseteq s,\ T''\neq T,\ |T''|=|T| \,\big\}, \label{eq:R_1}
 	\\
@@ -290,7 +295,7 @@ $\mathcal{R}_1$ draws treatments of matching size from within the same correlati
 	\label{eq:reference_set}
 	\mathcal{R}(\mathbf{x},s,T) \subseteq \mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3, \qquad |\mathcal{R}(\mathbf{x},s,T)| = \min\big(n_{\mathrm{ref}},\ |\mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3|\big),
 \end{equation}
-with ties within a pool broken arbitrarily, e.g., uniformly at random. If $\mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3=\emptyset$, no reference treatment of matching size exists anywhere in the dataset, and no correction is applied (Section~\ref{sec:corrected_value_function}).
+with all items within a pool having the same priority, meaing they are randomly picked. If $\mathcal{R}_1\cup\mathcal{R}_2\cup\mathcal{R}_3=\emptyset$, no reference treatment of matching size exists anywhere in the dataset, and no correction is applied (Section~\ref{sec:corrected_value_function}).
 
 \subsection{Correcting the Causal Effect Value Function}
 \label{sec:corrected_value_function}
@@ -323,7 +328,7 @@ reference level also permits a distinction between two notions of independence.
 \end{equation}
 The latter does not assert that the joint effect is absolutely additive; it states that the treatment exhibits the singleton-weighted level of non-additivity represented by equally sized reference treatments. Values below or above $\bar\gamma(\mathbf{x},s,T)$ indicate greater shrinkage or reinforcement, respectively, relative to that reference level.
 
-To prevent division by a numerically degenerate reference coefficient, let $\varepsilon:=0.01$ denote a small fixed threshold. The corrected question-specific value function is
+This singleton-weighted reference coefficient is then used to define the corrected value function. To prevent division by a numerically degenerate reference coefficient, let $\varepsilon:=0.01$ denote a small fixed threshold. The question-specific value function is
 \begin{equation}
 	\label{eq:v_adj}
 	v_{\mathrm{adj},\mathbf{x}}(T) :=
@@ -342,7 +347,7 @@ Substituting $v_{\mathrm{adj},\mathbf{x}}$ for $v_{\mathbf{x}}$ in Equation~\ref
 \end{equation}
 which replaces $\mathrm{CE}(\mathbf{x},C_m,s)$ from this point onward in populating the causal-effect vector $\mathbf{CE}(\mathbf{x},\mathbf{C})$ of Equation~\ref{eq:new_ce_vector}.
 
-In summary, the correction is designed to reduce the systematic, reference-relative scale distortion observed for multi-concept treatments while retaining deviations that may reflect interaction effects (Section~\ref{sec:interaction_effects}). Under the simplifying assumptions stated in Math Box~\ref{ma:dataset_average_preservation}, it is additionally intended to approximately preserve the original metric's dataset-average CE score.
+In summary, the correction is designed to reduce the systematic, reference-relative scale distortion observed for multi-concept treatments while retaining deviations that may reflect interaction effects (Section~\ref{sec:interaction_effects}). Provided that same-sized references adequately represent the population's joint and aggregate singleton effects and yield non-degenerate coefficients, the correction is additionally intended to approximately preserve the original metric's dataset-average CE score, as established in Math Demo~\ref{ma:dataset_average_preservation} in Appendix~\ref{app:mathematical_demonstrations}.
 
 \section{Remaining Evaluation Pipeline}
 \label{sec:remaining_pipeline}
@@ -352,12 +357,12 @@ After the CE vector has been computed, two major stages remain in the evaluation
 
 The computation of the EE vector remains unchanged because the output of the modified causal-effect estimation is still defined on a per-concept basis. Consequently, the adjusted CE vector is fully compatible with the inputs and outputs expected by the original EE estimation procedure. Although \emph{FELICS} explicitly models interactions between concepts, the objective of the EE vector remains identical: estimating which concepts the evaluated LLM considers influential enough to mention in its explanation.
 
-For example, two concepts may each have only a minor individual influence on the prediction while jointly producing a substantial change due to a synergistic interaction. In this case, neither concept would be expected to appear frequently in explanations when considered individually, whereas both should be referenced once their combined effect becomes significant. Likewise, in a redundant setting, both concepts should still be mentioned whenever their joint contribution remains important for the prediction. Conversely, if one concept contributes only marginally to the coalition's overall effect, it should also appear less frequently in the explanation. Consequently, the alignment between causal effects and explanation-implied effects remains an appropriate indicator of explanation faithfulness.
+For example, two concepts may each have only a minor individual influence on the prediction while jointly producing a substantial change due to a synergistic interaction. In this case, neither concept would be expected to appear frequently in explanations when considered individually, whereas both should be referenced once their combined effect becomes significant. Likewise, in a redundant setting, both concepts should still be mentioned whenever their joint contribution remains important for the prediction. Conversely, if one concept contributes only marginally to the coalition's overall effect, it should also appear less frequently in the explanation. In summary, the alignment between causal effects and explanation-implied effects remains an appropriate indicator of explanation faithfulness.
 
 Since the EE estimation remains unchanged, the final faithfulness estimation can likewise be adopted without modification. This applies both to the formal definition based on the \emph{Pearson Correlation Coefficient} (Equation~\ref{eq:faithfulness}) and to the practical estimation using \emph{Bayesian Hierarchical Modelling}, as proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Furthermore, the computation of \emph{Dataset-Level Faithfulness} (Equation~\ref{eq:dataset_faithfulness}) is unaffected. By restricting all modifications to the estimation of causal effects, \emph{FELICS} builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
 
 \section{Post-Modeling Assessment}
-With the formal construction of \emph{FELICS} complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the requirements established earlier, and derives the effects expected from the new formulation before empirical evaluation.
+With the formal construction of \emph{FELICS} complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the requirements established earlier in Section \ref{sec:requirements}, and derives the effects expected from the new formulation before empirical evaluation.
 
 \subsection{Reviewing Changes}
 
@@ -380,57 +385,39 @@ At this stage, the conceptual design of \emph{FELICS} is complete, whereas its e
 
 \subsubsection{\ref{req:preserving_strengths} Preserving the strengths of the \emph{Causal Concept Faithfulness Metric}}
 
-\reqref{req:preserving_strengths}, introduced in Section~\ref{sec:requirements}, requires the proposed extension to retain the principal strengths of the metric proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. These strengths stem from its operation on high-level semantic concepts rather than individual tokens and from its ability to estimate causal and explanation-implied effects for every concept separately. Since \emph{FELICS} retains this concept-based representation and continues to compute both the CE and EE vectors on a per-concept basis, these strengths are preserved without modification.
+\reqref{req:preserving_strengths} requires the proposed extension to retain the principal strengths of the metric proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. These strengths stem from its operation on high-level semantic concepts rather than individual tokens and from its ability to estimate causal and explanation-implied effects for every concept separately. Since \emph{FELICS} retains this concept-based representation and continues to compute both the CE and EE vectors on a per-concept basis, these strengths are preserved without modification.
 
 \subsubsection{\ref{req:one_item_group} Singleton-Group Compatibility}
 
-\reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}, states that whenever every correlation group contains exactly one concept, the resulting causal-effect estimates should be identical to those obtained by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. This follows directly from the properties of the normalization factor and the Shapley-value formulation, as demonstrated in Math Box~\ref{ma:one_item_group}.
+\reqref{req:one_item_group} states that whenever every correlation group contains exactly one concept, the resulting causal-effect estimates should be identical to those obtained by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. This follows directly from the properties of the normalization factor and the Shapley-value formulation, as established in Math Demo~\ref{ma:one_item_group} in Appendix~\ref{app:mathematical_demonstrations}.
 
 \subsubsection{\ref{req:independence_behavior} Independence Compatibility}
 
-\reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, considers the more general case in which concepts are grouped together but remain mutually independent. The nonlinear mapping from logits to probabilities discussed in Section~\ref{sec:kl_ceiling} means that even concepts without a substantive interaction need not satisfy $v_{\mathbf{x}}(s)=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ exactly.
+\reqref{req:independence_behavior} considers the more general case in which concepts are grouped together but remain mutually independent. The nonlinear mapping from logits to probabilities discussed in Section~\ref{sec:kl_ceiling} means that even concepts without a substantive interaction need not satisfy $v_{\mathbf{x}}(s)=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ exactly.
 
-The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative independence}: a correlation group is neutral relative to the dataset when its payout coefficient equals the singleton-weighted reference coefficient of equally sized treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under the additional reference-relative additivity assumptions stated in Math Box~\ref{ma:independence_behavior} of Appendix~\ref{app:mathematical_demonstrations}, no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
+The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative independence}: a correlation group is neutral relative to the dataset when its payout coefficient equals the singleton-weighted reference coefficient of equally sized treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under the additional reference-relative additivity assumptions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}, no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
 
 \subsubsection{\ref{req:no_surgical} Avoiding the Assumption of Surgical Interventions}
 
-\reqref{req:no_surgical}, introduced in Section~\ref{sec:requirements}, requires the proposed extension to avoid assuming that \emph{surgical interventions} are always possible. The original metric proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024} fundamentally relies on this assumption, although, as discussed in Section~\ref{sec:pratical_limit}, it does not hold in many practical scenarios where concepts are inherently correlated. Consequently, removing this assumption constituted one of the primary design goals of \emph{FELICS}.
+\reqref{req:no_surgical} requires the proposed extension to avoid assuming that \emph{surgical interventions} are always possible. The original metric proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024} fundamentally relies on this assumption, although, as discussed in Section~\ref{sec:pratical_limit}, it does not hold in some practical scenarios where concepts are inherently correlated.
 
-Instead of intervening on individual concepts exclusively, \emph{FELICS} performs joint interventions whenever concepts belong to the same correlation group. This principle was introduced in Section~\ref{sec:joint_effect}. Assuming that the oracle correctly identifies concepts that cannot be meaningfully intervened upon in isolation, the framework no longer depends on the existence of surgical interventions. Therefore, \reqref{req:no_surgical} can be regarded as fulfilled.
+\emph{FELICS} reduces its exclusive reliance on surgical singleton interventions by additionally evaluating joint interventions over correlated concepts. However, it does not eliminate the assumption entirely: the Shapley-value calculation still requires singleton coalition values $v_{\mathbf{x}}(\{C_m\})$, obtained by intervening on one concept while leaving the remaining concepts unchanged. These interventions may remain non-surgical when correlated concepts allow the modified information to be reconstructed. \emph{FELICS} can incorporate the jointly observed effect into its final attribution, but it cannot guarantee that every underlying coalition value is estimated from a surgical intervention. Consequently, \reqref{req:no_surgical} is only partially satisfied.
 
 \subsubsection{\ref{req:caputure_interaction} Correctly Capturing Interaction Effects}
 
-\reqref{req:caputure_interaction}, introduced in Section~\ref{sec:requirements}, requires the proposed framework to distinguish between independent, redundant, and synergistic interactions and to attribute their causal effects accordingly, based on the interaction types established in Section~\ref{sec:interaction_effects}.
+\reqref{req:caputure_interaction} requires the proposed framework to distinguish between independent, redundant, and synergistic interactions and to attribute their causal effects accordingly, based on the interaction types established in Section~\ref{sec:interaction_effects}.
 
-This property follows under the assumptions of Math Box~\ref{ma:independence_behavior}. If a correlation group exhibits reference-relative independence, its payout coefficient equals the singleton-weighted reference coefficient for treatments of identical size,
-\begin{equation}
-	\bar\gamma(\mathbf{x},s,s)=\gamma(\mathbf{x},s),
-\end{equation}
-causing the adjusted causal effects to reduce to those of the original metric. Conversely, if a correlation group exhibits stronger redundancy or synergy than comparable groups, its payout coefficient deviates from this reference value,
-\begin{equation}
-	\bar\gamma(\mathbf{x},s,s)\neq\gamma(\mathbf{x},s).
-\end{equation}
-As a consequence, the normalization either decreases or increases the adjusted coalition value before the Shapley-value attribution is performed. Redundant interactions therefore satisfy
-\begin{equation}
-	\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
-	<
-	\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m),
-\end{equation}
-whereas synergistic interactions satisfy
-\begin{equation}
-	\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)
-	>
-	\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m).
-\end{equation}
-The proposed framework thus behaves consistently with the intended interpretation of interaction effects and can therefore be argued to satisfy \reqref{req:caputure_interaction}.
+\emph{FELICS} extends the original metric by evaluating joint interventions and distributing their effects through Shapley values. It can therefore represent coalition effects that cannot be observed from singleton interventions alone. However, the subsequent normalization compares a treatment's payout coefficient $\gamma(\mathbf{x},T)$ with the coefficient $\bar\gamma(\mathbf{x},s,T)$ of comparable reference treatments rather than with the absolute-additivity baseline $1$. Consequently, the resulting categories are reference-relative: an absolutely redundant treatment with $\gamma(\mathbf{x},T)<1$ may appear synergistic relative to a still more redundant reference population, while an absolutely synergistic treatment may analogously appear redundant relative to more synergistic references.
+
+The framework can thus identify whether a treatment is more redundant or synergistic than the dataset-specific reference level, but it cannot generally recover the absolute interaction taxonomy defined in Section~\ref{sec:interaction_effects}. Consequently, \reqref{req:caputure_interaction} is only partially satisfied.
 
 \subsubsection{\ref{req:feasibility} Maintaining Computational Feasibility}
 
 \reqref{req:feasibility}, introduced in Section~\ref{sec:requirements}, requires the proposed extension to remain computationally feasible, since it would provide little practical benefit if its computational cost increased to an impractical level.
 
-Introducing joint interventions naturally increases the number of counterfactual questions that must be generated. In the worst case, evaluating every possible concept combination would require an exponential number of LLM calls. To limit this growth, the oracle introduced in Section~\ref{sec:joint_counterfactual} groups together only those concepts for which joint interventions are considered necessary. Furthermore, the mandatory upper bound $n_{\max}$ ensures that the number of generated interventions never exceeds the limit established in Equation~\ref{eq:subset_counterfactual_bound}.
+As dicussed before in Section \ref{sec:correlation_identification_motivation}, joint interventions naturally increases the number of counterfactual questions that must be generated. In the worst case, evaluating every possible concept combination would require an exponential number of LLM calls. To limit this growth, the oracle introduced in Section~\ref{sec:joint_counterfactual} groups together only those concepts for which joint interventions are considered necessary. Furthermore, the mandatory upper bound $n_{\max}$ ensures that the number of generated interventions never exceeds the limit established in Equation~\ref{eq:subset_counterfactual_bound}.
 
-Whether \reqref{req:feasibility} is satisfied ultimately depends on what is considered computationally feasible in practice. Nevertheless, it can reasonably be argued that the proposed framework fulfills this requirement. Although \emph{FELICS} is necessarily more computationally expensive than the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, this additional cost is restricted to questions containing correlated concepts. The combination of oracle-guided correlation detection and the hard upper bound on intervention size provides a principled trade-off between computational cost and modeling accuracy.
+Whether \reqref{req:feasibility} is satisfied ultimately depends on what is considered computationally feasible in practice. Nevertheless, it can reasonably be argued that the proposed framework fulfills this requirement. Although \emph{FELICS} is necessarily more computationally expensive than the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, this additional cost is restricted to questions containing presumed correlated concepts. The combination of oracle-guided correlation detection and the hard upper bound on intervention size provides a principled trade-off between computational cost and modeling accuracy.
 
 \subsection{Anticipated Effects}
 \label{sec:influence}
@@ -447,18 +434,55 @@ three cases can be distinguished.
 
 \noindent\textbf{Reference-relative synergy ($\gamma(\mathbf{x},\{C_i,C_j\}) > \bar\gamma(\mathbf{x},s,s)$).} The joint effect is larger relative to its singleton effects than for the reference treatments. When concepts are \emph{added}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, so the original metric underestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$, and the original metric instead overestimates them.
 
-\noindent\textbf{Reference-relative independence ($\gamma(\mathbf{x},\{C_i,C_j\}) = \bar\gamma(\mathbf{x},s,s)$).} The treatment exhibits the level of non-additivity typical of its references; this does not require absolute additivity. Under the compatibility assumptions stated in Math Box~\ref{ma:independence_behavior}, $\mathrm{CE}_{\text{adj}} = \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, and FELICS matches Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric.
+\noindent\textbf{Reference-relative independence ($\gamma(\mathbf{x},\{C_i,C_j\}) = \bar\gamma(\mathbf{x},s,s)$).} The treatment exhibits the level of non-additivity typical of its references; this does not require absolute additivity. Under the compatibility assumptions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}, $\mathrm{CE}_{\text{adj}} = \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, and FELICS matches Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} original metric.
 
 \subsubsection{Value-Replacement Interventions}
 When concept values are \emph{modified} rather than added or removed, the relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ depends on the direction of the effect. If concepts $C_i$ and $C_j$ exhibit minor influence before intervention but major individual influence afterward while also interacting redundantly post-intervention, Matton’s metric overestimates their effect ($\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$). Conversely, if their influence is major before intervention but minor after being changed on their own, again with redundant behavior after intervention, Matton’s metric underestimates ($\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$). This sign inversion mirrors the behavior observed for addition vs. removal interventions.
 
 However, value-based interventions introduce additional complexity: modifying a concept’s value may create contradictory information in the question (e.g., changing nationality from \texttt{Japanese} to \texttt{Indian} while retaining \texttt{Japanese} as the mother tongue). Such inconsistencies can obscure the measurement of causal effects, making it hard to predict the generalized impact of multi-concept modifications.
 
-Despite these intervention-specific variations, the dataset-level average of all CE values is intended to remain approximately equal between both metrics under the simplifying assumptions stated in Math Box~\ref{ma:dataset_average_preservation} of Appendix~\ref{app:mathematical_demonstrations}.
+Despite these intervention-specific variations, the dataset-level average of all CE values is intended to remain approximately equal between both metrics under the simplifying assumptions stated in Math Demo~\ref{ma:dataset_average_preservation} in Appendix~\ref{app:mathematical_demonstrations}.
 
 \subsubsection{Effects on Faithfulness Scores}
 As established in Section~\ref{sec:remaining_pipeline}, the definition of Explanation-Implied Effect (EE) remains entirely unchanged between FELICS and the \emph{Causal Concept Faithfulness} metric. Consequently, the EE vectors are identical for both metrics.
 
 The faithfulness score, however, is still determined by the Pearson correlation coefficient between the CE and EE vectors. Since Pearson correlation depends on the magnitudes of the data points (unlike rank-based metrics such as Spearman), and the individual CE values may differ between FELICS and Matton’s metric, the resulting faithfulness scores are not guaranteed to be equal. In fact, whenever interactions are present, the alignment between CE and EE vectors generally changes, except in the rare case where widening gaps for some concepts are exactly offset by narrowing gaps for others. This behavior is illustrated in example~\ref{ex:payout_normalization_correlation} of Appendix~\ref{app:examples}.
 
-Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} yield identical faithfulness scores under their respective assumptions: when every correlation group contains exactly one concept and when every group satisfies the reference-relative additivity conditions stated in Math Box~\ref{ma:independence_behavior}.
+Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} yield identical faithfulness scores under their respective assumptions: when every correlation group contains exactly one concept and when every group satisfies the reference-relative additivity conditions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}.
+
+\subsection{Anticipated Effects}
+\label{sec:influence}
+
+The effect of FELICS on causal-effect estimates depends on a treatment's payout coefficient relative to comparable reference treatments. These comparisons describe deviations from dataset-typical non-additivity, not absolute redundancy or synergy as defined in Section~\ref{sec:interaction_effects}.
+
+\subsubsection{Effects on CE Scores}
+
+For a two-concept group $s=\{C_i,C_j\}$ with a non-degenerate reference coefficient, the difference between FELICS and the original singleton estimate ($\mathrm{CE}_{\mathrm{Matton}}$) is
+
+\begin{equation}
+	\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_i,s)
+	-
+	\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_i)
+	=
+	\frac{v_{\mathbf{x}}(\{C_i\})+v_{\mathbf{x}}(\{C_j\})}{2}
+	\left(
+	\frac{\gamma(\mathbf{x},s)}
+	{\bar\gamma(\mathbf{x},s,s)}
+	-1
+	\right).
+\end{equation}
+
+Consequently, $\gamma(\mathbf{x},s)<\bar\gamma(\mathbf{x},s,s)$ produces reference-relative shrinkage, whereas $\gamma(\mathbf{x},s)>\bar\gamma(\mathbf{x},s,s)$ produces reference-relative reinforcement. For larger groups, each concept's result depends on all Shapley marginal contributions and cannot generally be inferred from the grand-coalition coefficient alone.
+
+Even though the magnitude and direction of the difference between the CE values produces the original by Matton et al. \cite{mattonWalkTalkMeasuring2024} and FELICS for certain concepts can not be generally predicted beforehand,the dataset-level average of all CE values is intended to remain approximately equal between both metrics under the simplifying assumptions stated in Math Demo~\ref{ma:dataset_average_preservation} in Appendix~\ref{app:mathematical_demonstrations}.
+
+\subsubsection{Value-Replacement Interventions}
+When concept values are \emph{modified} rather than added or removed, the relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ is still subject to the same reference-relative interpretation.
+However, value-based interventions introduce additional complexity: modifying a concept’s value may create contradictory information in the question (e.g., changing nationality from \texttt{Japanese} to \texttt{Indian} while retaining \texttt{Japanese} as the mother tongue). Such inconsistencies can obscure the measurement of causal effects, making it hard to predict the generalized impact of multi-concept modifications.
+
+\subsubsection{Effects on Faithfulness Scores}
+As established in Section~\ref{sec:remaining_pipeline}, the definition of Explanation-Implied Effect (EE) remains entirely unchanged between FELICS and the \emph{Causal Concept Faithfulness} metric. Consequently, the EE vectors are identical for both metrics.
+
+The faithfulness score, however, is still determined by the Pearson correlation coefficient between the CE and EE vectors. Since Pearson correlation depends on the magnitudes of the data points (unlike rank-based metrics such as Spearman), and the individual CE values may differ between FELICS and Matton’s metric, the resulting faithfulness scores are not guaranteed to be equal. In fact, whenever interactions are present, the alignment between CE and EE vectors generally changes, except in the rare case where widening gaps for some concepts are exactly offset by narrowing gaps for others. This behavior is illustrated in example~\ref{ex:payout_normalization_correlation} of Appendix~\ref{app:examples}.
+
+Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} yield identical faithfulness scores under their respective assumptions: when every correlation group contains exactly one concept and when every group satisfies the reference-relative additivity conditions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}.
