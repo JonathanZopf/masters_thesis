@@ -1,0 +1,283 @@
+dataset,raw_category,high_level_category,assigned_by
+bbq,action,Actions & behavior,OpenAI Codex large language model
+bbq,action/attitude,Intentions & attitudes,OpenAI Codex large language model
+bbq,action/object,Actions & behavior,OpenAI Codex large language model
+bbq,action/statement,Actions & behavior,OpenAI Codex large language model
+bbq,activity,Actions & behavior,OpenAI Codex large language model
+bbq,age,Demographics,OpenAI Codex large language model
+bbq,appearance,Demographics,OpenAI Codex large language model
+bbq,attitude/opinion,Intentions & attitudes,OpenAI Codex large language model
+bbq,behavior,Actions & behavior,OpenAI Codex large language model
+bbq,challenge,Events & situations,OpenAI Codex large language model
+bbq,communication,Topics & communication,OpenAI Codex large language model
+bbq,concern,Intentions & attitudes,OpenAI Codex large language model
+bbq,demographic information,Demographics,OpenAI Codex large language model
+bbq,details,Other details,OpenAI Codex large language model
+bbq,emotion,Emotions & reactions,OpenAI Codex large language model
+bbq,environment,Setting & time,OpenAI Codex large language model
+bbq,event,Events & situations,OpenAI Codex large language model
+bbq,experience,Events & situations,OpenAI Codex large language model
+bbq,family status,Relationships & family,OpenAI Codex large language model
+bbq,family structure,Relationships & family,OpenAI Codex large language model
+bbq,gender,Demographics,OpenAI Codex large language model
+bbq,intention,Intentions & attitudes,OpenAI Codex large language model
+bbq,intention/emotion,Emotions & reactions,OpenAI Codex large language model
+bbq,interaction,Actions & behavior,OpenAI Codex large language model
+bbq,interest/hobby,Intentions & attitudes,OpenAI Codex large language model
+bbq,intimacy,Relationships & family,OpenAI Codex large language model
+bbq,knowledge/uncertainty,Intentions & attitudes,OpenAI Codex large language model
+bbq,location,Setting & time,OpenAI Codex large language model
+bbq,location/event,Setting & time,OpenAI Codex large language model
+bbq,name,Identity & roles,OpenAI Codex large language model
+bbq,preference,Intentions & attitudes,OpenAI Codex large language model
+bbq,question,Topics & communication,OpenAI Codex large language model
+bbq,reaction/feeling,Emotions & reactions,OpenAI Codex large language model
+bbq,relationship,Relationships & family,OpenAI Codex large language model
+bbq,relationship status,Relationships & family,OpenAI Codex large language model
+bbq,relationship type,Relationships & family,OpenAI Codex large language model
+bbq,role,Identity & roles,OpenAI Codex large language model
+bbq,sexual orientation,Demographics,OpenAI Codex large language model
+bbq,sexuality,Demographics,OpenAI Codex large language model
+bbq,situation,Events & situations,OpenAI Codex large language model
+bbq,source,Topics & communication,OpenAI Codex large language model
+bbq,time,Setting & time,OpenAI Codex large language model
+bbq,topic,Topics & communication,OpenAI Codex large language model
+bbq,topic of conversation,Topics & communication,OpenAI Codex large language model
+bbq,topic of discussion,Topics & communication,OpenAI Codex large language model
+bbq,topic of interest,Topics & communication,OpenAI Codex large language model
+medqa,ECG findings,Diagnostic tests,OpenAI Codex large language model
+medqa,adherence,Medication & adherence,OpenAI Codex large language model
+medqa,adjacent anatomy risk,Anatomy & localization,OpenAI Codex large language model
+medqa,affect,Mental health & cognition,OpenAI Codex large language model
+medqa,age,Demographics,OpenAI Codex large language model
+medqa,allergy history,Medical history,OpenAI Codex large language model
+medqa,anatomic location,Anatomy & localization,OpenAI Codex large language model
+medqa,anatomical location,Anatomy & localization,OpenAI Codex large language model
+medqa,anatomical structures,Anatomy & localization,OpenAI Codex large language model
+medqa,anthropometric data,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,appearance,Physical examination,OpenAI Codex large language model
+medqa,audiometry findings,Diagnostic tests,OpenAI Codex large language model
+medqa,autonomic/GI‑urinary symptoms,Symptoms,OpenAI Codex large language model
+medqa,behavior,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,behavioral change,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,behavioral observations,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,biopsy findings,Laboratory & pathology,OpenAI Codex large language model
+medqa,bleeding pattern,Symptoms,OpenAI Codex large language model
+medqa,bowel symptoms,Symptoms,OpenAI Codex large language model
+medqa,cardiac exam,Physical examination,OpenAI Codex large language model
+medqa,cardiac exam findings,Physical examination,OpenAI Codex large language model
+medqa,care setting,Care context,OpenAI Codex large language model
+medqa,clinical course,Timing & course,OpenAI Codex large language model
+medqa,clinical diagnosis,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,clinical response,Treatment & response,OpenAI Codex large language model
+medqa,clinical setting,Care context,OpenAI Codex large language model
+medqa,cognition,Mental health & cognition,OpenAI Codex large language model
+medqa,cognitive function,Mental health & cognition,OpenAI Codex large language model
+medqa,cognitive observation,Mental health & cognition,OpenAI Codex large language model
+medqa,collateral history,Medical history,OpenAI Codex large language model
+medqa,congenital anomalies,Medical history,OpenAI Codex large language model
+medqa,congenital malformation,Medical history,OpenAI Codex large language model
+medqa,current symptoms,Symptoms,OpenAI Codex large language model
+medqa,derived‑metric,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,diagnosis,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,diagnosis/medical condition,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,diagnostic consideration,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,diagnostic studies,Diagnostic tests,OpenAI Codex large language model
+medqa,diagnostic test,Diagnostic tests,OpenAI Codex large language model
+medqa,diagnostic test findings,Diagnostic tests,OpenAI Codex large language model
+medqa,diagnostic test – audiology,Diagnostic tests,OpenAI Codex large language model
+medqa,diagnostic test – ophthalmology,Diagnostic tests,OpenAI Codex large language model
+medqa,diagnostic‑test,Diagnostic tests,OpenAI Codex large language model
+medqa,diet,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,diet/beverage,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,differential diagnosis,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,differential‑diagnosis/exclusion,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,disease control history,Medical history,OpenAI Codex large language model
+medqa,disease course,Timing & course,OpenAI Codex large language model
+medqa,eating‑disorder history,Mental health & cognition,OpenAI Codex large language model
+medqa,electrocardiogram findings,Diagnostic tests,OpenAI Codex large language model
+medqa,environmental exposure,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,environmental factors,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,family history,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,follow-up findings,Timing & course,OpenAI Codex large language model
+medqa,functional limitation,Symptoms,OpenAI Codex large language model
+medqa,gastrointestinal symptom,Symptoms,OpenAI Codex large language model
+medqa,gender,Demographics,OpenAI Codex large language model
+medqa,general appearance,Physical examination,OpenAI Codex large language model
+medqa,gestational age,Reproductive history,OpenAI Codex large language model
+medqa,health‑care utilization,Care context,OpenAI Codex large language model
+medqa,health‑care‑setting,Care context,OpenAI Codex large language model
+medqa,hematology smear findings,Laboratory & pathology,OpenAI Codex large language model
+medqa,imaging finding,Imaging,OpenAI Codex large language model
+medqa,imaging findings,Imaging,OpenAI Codex large language model
+medqa,imaging studies,Imaging,OpenAI Codex large language model
+medqa,infarct location,Imaging,OpenAI Codex large language model
+medqa,infarct type,Imaging,OpenAI Codex large language model
+medqa,initial management,Treatment & response,OpenAI Codex large language model
+medqa,laboratory findings,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory test result,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory – acid‑base,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory – electrolytes,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory – hematology,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory – liver function,Laboratory & pathology,OpenAI Codex large language model
+medqa,laboratory – renal function,Laboratory & pathology,OpenAI Codex large language model
+medqa,laterality,Anatomy & localization,OpenAI Codex large language model
+medqa,lifestyle,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,living situation,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,marital status,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,mass characteristic,Anatomy & localization,OpenAI Codex large language model
+medqa,mass characteristics,Anatomy & localization,OpenAI Codex large language model
+medqa,mass location,Anatomy & localization,OpenAI Codex large language model
+medqa,maternal age,Reproductive history,OpenAI Codex large language model
+medqa,maternal gender,Reproductive history,OpenAI Codex large language model
+medqa,medical history,Medical history,OpenAI Codex large language model
+medqa,medical intervention,Treatment & response,OpenAI Codex large language model
+medqa,medication,Medication & adherence,OpenAI Codex large language model
+medqa,medication adherence,Medication & adherence,OpenAI Codex large language model
+medqa,medication change,Medication & adherence,OpenAI Codex large language model
+medqa,medication compliance,Medication & adherence,OpenAI Codex large language model
+medqa,medication history,Medication & adherence,OpenAI Codex large language model
+medqa,menstrual bleeding severity,Reproductive history,OpenAI Codex large language model
+medqa,menstrual history,Reproductive history,OpenAI Codex large language model
+medqa,menstrual pattern,Reproductive history,OpenAI Codex large language model
+medqa,menstrual timing,Reproductive history,OpenAI Codex large language model
+medqa,mental health,Mental health & cognition,OpenAI Codex large language model
+medqa,mental status,Mental health & cognition,OpenAI Codex large language model
+medqa,microbiology – carbohydrate fermentation,Laboratory & pathology,OpenAI Codex large language model
+medqa,microbiology – gram stain/motility,Laboratory & pathology,OpenAI Codex large language model
+medqa,microbiology – oxidase test,Laboratory & pathology,OpenAI Codex large language model
+medqa,motor deficit,Neurologic function,OpenAI Codex large language model
+medqa,mucocutaneous exam,Physical examination,OpenAI Codex large language model
+medqa,myocardial infarction type,Imaging,OpenAI Codex large language model
+medqa,negative symptom findings,Symptoms,OpenAI Codex large language model
+medqa,nerve involvement,Neurologic function,OpenAI Codex large language model
+medqa,neurologic assessment,Neurologic function,OpenAI Codex large language model
+medqa,neurologic deficit,Neurologic function,OpenAI Codex large language model
+medqa,neurologic exam,Neurologic function,OpenAI Codex large language model
+medqa,neurologic findings,Neurologic function,OpenAI Codex large language model
+medqa,neurologic symptom,Neurologic function,OpenAI Codex large language model
+medqa,neurological exam,Neurologic function,OpenAI Codex large language model
+medqa,neurological examination,Neurologic function,OpenAI Codex large language model
+medqa,new medication exposure,Medication & adherence,OpenAI Codex large language model
+medqa,obesity,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,obstetric history,Reproductive history,OpenAI Codex large language model
+medqa,obstetric/gynecologic history,Reproductive history,OpenAI Codex large language model
+medqa,occupation,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,ocular findings,Diagnostic tests,OpenAI Codex large language model
+medqa,ophthalmologic findings,Diagnostic tests,OpenAI Codex large language model
+medqa,orientation,Mental health & cognition,OpenAI Codex large language model
+medqa,pain characteristics,Symptoms,OpenAI Codex large language model
+medqa,pain severity,Symptoms,OpenAI Codex large language model
+medqa,pathology findings,Laboratory & pathology,OpenAI Codex large language model
+medqa,patient behavior,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,patient concerns,Care context,OpenAI Codex large language model
+medqa,patient perception/body image,Mental health & cognition,OpenAI Codex large language model
+medqa,pelvic symptom,Symptoms,OpenAI Codex large language model
+medqa,physical characteristics,Physical examination,OpenAI Codex large language model
+medqa,physical examination,Physical examination,OpenAI Codex large language model
+medqa,physical examination finding,Physical examination,OpenAI Codex large language model
+medqa,physical examination findings,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam anatomical relationship,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam auscultation,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam characteristic,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam finding,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam maneuver response,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam measurement,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam of testes,Physical examination,OpenAI Codex large language model
+medqa,physical‑exam positional response,Physical examination,OpenAI Codex large language model
+medqa,polysomnography‑finding,Diagnostic tests,OpenAI Codex large language model
+medqa,pregnancy outcome,Reproductive history,OpenAI Codex large language model
+medqa,pregnancy status,Reproductive history,OpenAI Codex large language model
+medqa,prenatal care,Reproductive history,OpenAI Codex large language model
+medqa,presenting symptom,Symptoms,OpenAI Codex large language model
+medqa,presenting symptoms,Symptoms,OpenAI Codex large language model
+medqa,preventive health goal,Care context,OpenAI Codex large language model
+medqa,pre‑hospital treatment,Treatment & response,OpenAI Codex large language model
+medqa,prior diagnosis,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,prior medical care,Care context,OpenAI Codex large language model
+medqa,prior treatment,Treatment & response,OpenAI Codex large language model
+medqa,prodromal symptoms,Symptoms,OpenAI Codex large language model
+medqa,provisional diagnosis,Diagnosis & reasoning,OpenAI Codex large language model
+medqa,psychiatric diagnosis,Mental health & cognition,OpenAI Codex large language model
+medqa,psychiatric history,Mental health & cognition,OpenAI Codex large language model
+medqa,psychiatric symptom,Mental health & cognition,OpenAI Codex large language model
+medqa,psychological symptoms,Mental health & cognition,OpenAI Codex large language model
+medqa,pulmonary exam,Physical examination,OpenAI Codex large language model
+medqa,pulmonary symptom,Symptoms,OpenAI Codex large language model
+medqa,race/ethnicity,Demographics,OpenAI Codex large language model
+medqa,rash characteristics,Symptoms,OpenAI Codex large language model
+medqa,rash distribution,Anatomy & localization,OpenAI Codex large language model
+medqa,rash morphology,Symptoms,OpenAI Codex large language model
+medqa,rash onset/location,Anatomy & localization,OpenAI Codex large language model
+medqa,rash progression,Timing & course,OpenAI Codex large language model
+medqa,reason for visit,Care context,OpenAI Codex large language model
+medqa,recent activity,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,recent trauma,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,recent travel,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,rectal exam finding,Physical examination,OpenAI Codex large language model
+medqa,reproductive history,Reproductive history,OpenAI Codex large language model
+medqa,risk factor,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,sensory deficit – pain/temperature,Neurologic function,OpenAI Codex large language model
+medqa,sensory deficit – proprioception,Neurologic function,OpenAI Codex large language model
+medqa,sensory distribution,Neurologic function,OpenAI Codex large language model
+medqa,sensory examination,Neurologic function,OpenAI Codex large language model
+medqa,sex,Demographics,OpenAI Codex large language model
+medqa,sexual health,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,sexual history,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,sexual symptom,Symptoms,OpenAI Codex large language model
+medqa,skeletal radiographic finding,Imaging,OpenAI Codex large language model
+medqa,skin examination,Physical examination,OpenAI Codex large language model
+medqa,sleep assessment,Symptoms,OpenAI Codex large language model
+medqa,sleep quality,Symptoms,OpenAI Codex large language model
+medqa,sleep‑duration,Timing & course,OpenAI Codex large language model
+medqa,sleep‑quality,Symptoms,OpenAI Codex large language model
+medqa,sleep‑symptom,Symptoms,OpenAI Codex large language model
+medqa,social history,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,social history – alcohol,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,social history – tobacco,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,social/family context,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,socioeconomic status,Demographics,OpenAI Codex large language model
+medqa,sphincter tone,Neurologic function,OpenAI Codex large language model
+medqa,stone composition,Laboratory & pathology,OpenAI Codex large language model
+medqa,substance use,"Family, social & lifestyle",OpenAI Codex large language model
+medqa,suicide risk,Mental health & cognition,OpenAI Codex large language model
+medqa,symptom,Symptoms,OpenAI Codex large language model
+medqa,symptom characteristics,Symptoms,OpenAI Codex large language model
+medqa,symptom duration,Timing & course,OpenAI Codex large language model
+medqa,symptom impact,Symptoms,OpenAI Codex large language model
+medqa,symptom location,Anatomy & localization,OpenAI Codex large language model
+medqa,symptom onset,Timing & course,OpenAI Codex large language model
+medqa,symptom onset/duration,Timing & course,OpenAI Codex large language model
+medqa,symptom presentation,Symptoms,OpenAI Codex large language model
+medqa,symptom quality,Symptoms,OpenAI Codex large language model
+medqa,symptom severity,Symptoms,OpenAI Codex large language model
+medqa,symptom status,Symptoms,OpenAI Codex large language model
+medqa,symptom timeline,Timing & course,OpenAI Codex large language model
+medqa,symptom type,Symptoms,OpenAI Codex large language model
+medqa,symptom variability,Timing & course,OpenAI Codex large language model
+medqa,symptoms,Symptoms,OpenAI Codex large language model
+medqa,systemic symptom,Symptoms,OpenAI Codex large language model
+medqa,systemic symptoms,Symptoms,OpenAI Codex large language model
+medqa,temporal context,Timing & course,OpenAI Codex large language model
+medqa,temporal relationship,Timing & course,OpenAI Codex large language model
+medqa,time course,Timing & course,OpenAI Codex large language model
+medqa,timing of symptoms,Timing & course,OpenAI Codex large language model
+medqa,trauma history,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,travel history,"Risk, exposure & trauma",OpenAI Codex large language model
+medqa,treatment,Treatment & response,OpenAI Codex large language model
+medqa,treatment context,Treatment & response,OpenAI Codex large language model
+medqa,treatment plan,Treatment & response,OpenAI Codex large language model
+medqa,treatment refusal/compliance,Treatment & response,OpenAI Codex large language model
+medqa,treatment response,Treatment & response,OpenAI Codex large language model
+medqa,treatment timeline,Treatment & response,OpenAI Codex large language model
+medqa,urinalysis findings,Laboratory & pathology,OpenAI Codex large language model
+medqa,urinary symptom,Symptoms,OpenAI Codex large language model
+medqa,urinary symptoms,Symptoms,OpenAI Codex large language model
+medqa,vascular exam findings,Physical examination,OpenAI Codex large language model
+medqa,vital sign – blood pressure,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,vital sign – heart rate,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,vital sign – temperature,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,vital signs,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,vital‑signs,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,vital‑signs – historical,Vitals & anthropometrics,OpenAI Codex large language model
+medqa,weight change,Vitals & anthropometrics,OpenAI Codex large language model

@@ -1,0 +1,84 @@
+\section{Effect of Interaction Modeling on Faithfulness}
+\label{sec:results-faithfulness-increase}
+
+\definecolor{HypFourPoints}{HTML}{2878B5}
+\definecolor{HypFourIdentity}{HTML}{E37A26}
+
+% #1 title, #2 data, #3 axis minimum, #4 axis maximum, #5 sample size.
+\newcommand{\HypFourIdentityPlot}[5]{%
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    {\small\bfseries #1\par}
+    \vspace{0.1em}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=5.55cm,
+        height=5.55cm,
+        scale only axis,
+        xmin=#3,
+        xmax=#4,
+        ymin=#3,
+        ymax=#4,
+        xlabel={$\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})$},
+        ylabel={$\mathcal{F}_{\mathrm{joint}}(\mathbf{x})$},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+      ]
+        \addplot[
+          only marks,mark=*,mark size=1.8pt,
+          draw=HypFourPoints,fill=HypFourPoints,fill opacity=0.68,
+        ] table[col sep=comma,x=atomic_faithfulness,y=joint_faithfulness] {#2};
+        \addplot[HypFourIdentity,very thick,dashed,domain=#3:#4,samples=2] {x};
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-0.2em}
+    {\scriptsize Paired questions: $n=#5$\par}
+  \end{minipage}%
+}
+
+\begin{figure}[p]
+  \centering
+  \HypFourIdentityPlot{BBQ --- GPT-OSS 120B}%
+    {data/rq4/bbq_gptoss.csv}{-0.95}{0.60}{30}
+  \hfill
+  \HypFourIdentityPlot{BBQ --- Mistral Medium 3.5}%
+    {data/rq4/bbq_mistral.csv}{-0.35}{0.60}{30}
+
+  \par\vspace{1.1em}
+  \HypFourIdentityPlot{MedQA --- GPT-OSS 120B}%
+    {data/rq4/medqa_gptoss.csv}{-0.30}{0.30}{29}
+  \hfill
+  \HypFourIdentityPlot{MedQA --- Mistral Medium 3.5}%
+    {data/rq4/medqa_mistral.csv}{-0.25}{0.55}{24}
+
+  \caption[Atomic and joint faithfulness identity plots for BBQ and MedQA]{
+  Question-level atomic and interaction-aware faithfulness for BBQ and MedQA.
+  The dashed orange line denotes exact identity; points above it favor the
+  joint Shapley-based formulation.}
+  \label{fig:hyp4-identity-plots-natural-language}
+\end{figure}
+
+\begin{figure}[p]
+  \ContinuedFloat
+  \centering
+  \HypFourIdentityPlot{New German Credit --- GPT-OSS 120B}%
+    {data/rq4/new_german_credit_gptoss.csv}{0.05}{0.45}{30}
+  \hfill
+  \HypFourIdentityPlot{New German Credit --- Mistral Medium 3.5}%
+    {data/rq4/new_german_credit_mistral.csv}{-0.40}{0.35}{30}
+
+  \caption[]{Question-level atomic and interaction-aware faithfulness for New
+  German Credit (continued). Natural-language datasets use $n_{\max}=4$ and
+  New German Credit uses $n_{\max}=3$ for the joint interventions.}
+  \label{fig:hyp4-identity-plots}
+\end{figure}
+
+\HypothesisTestResults[label=hyp:hyp4-results]
+  {Paired one-sided Wilcoxon signed-rank tests for
+  \rqref{rq:faithfulness_increase}. The alternative is
+  $\mathcal{F}_{\mathrm{joint}}>\mathcal{F}_{\mathrm{atomic}}$; support requires
+  $p\leq0.05$.}
+  {data/rq4/hypothesis_test_results.csv}

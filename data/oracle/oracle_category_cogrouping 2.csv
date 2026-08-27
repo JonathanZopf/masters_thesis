@@ -1,0 +1,462 @@
+dataset,row_category,column_category,co_grouped_pairs,eligible_pairs,co_grouping_percent
+bbq,Actions & behavior,Actions & behavior,4,11,36.363636
+bbq,Actions & behavior,Demographics,14,66,21.212121
+bbq,Actions & behavior,Emotions & reactions,0,3,0.000000
+bbq,Actions & behavior,Events & situations,0,5,0.000000
+bbq,Actions & behavior,Identity & roles,2,3,66.666667
+bbq,Actions & behavior,Intentions & attitudes,1,5,20.000000
+bbq,Actions & behavior,Other details,0,0,
+bbq,Actions & behavior,Relationships & family,4,28,14.285714
+bbq,Actions & behavior,Setting & time,1,19,5.263158
+bbq,Actions & behavior,Topics & communication,1,8,12.500000
+bbq,Demographics,Actions & behavior,14,66,21.212121
+bbq,Demographics,Demographics,6,39,15.384615
+bbq,Demographics,Emotions & reactions,3,6,50.000000
+bbq,Demographics,Events & situations,1,14,7.142857
+bbq,Demographics,Identity & roles,0,5,0.000000
+bbq,Demographics,Intentions & attitudes,6,18,33.333333
+bbq,Demographics,Other details,0,1,0.000000
+bbq,Demographics,Relationships & family,4,70,5.714286
+bbq,Demographics,Setting & time,0,37,0.000000
+bbq,Demographics,Topics & communication,18,42,42.857143
+bbq,Emotions & reactions,Actions & behavior,0,3,0.000000
+bbq,Emotions & reactions,Demographics,3,6,50.000000
+bbq,Emotions & reactions,Emotions & reactions,0,0,
+bbq,Emotions & reactions,Events & situations,0,2,0.000000
+bbq,Emotions & reactions,Identity & roles,0,0,
+bbq,Emotions & reactions,Intentions & attitudes,0,0,
+bbq,Emotions & reactions,Other details,0,0,
+bbq,Emotions & reactions,Relationships & family,0,4,0.000000
+bbq,Emotions & reactions,Setting & time,0,2,0.000000
+bbq,Emotions & reactions,Topics & communication,1,3,33.333333
+bbq,Events & situations,Actions & behavior,0,5,0.000000
+bbq,Events & situations,Demographics,1,14,7.142857
+bbq,Events & situations,Emotions & reactions,0,2,0.000000
+bbq,Events & situations,Events & situations,0,1,0.000000
+bbq,Events & situations,Identity & roles,0,3,0.000000
+bbq,Events & situations,Intentions & attitudes,0,2,0.000000
+bbq,Events & situations,Other details,0,0,
+bbq,Events & situations,Relationships & family,0,5,0.000000
+bbq,Events & situations,Setting & time,0,3,0.000000
+bbq,Events & situations,Topics & communication,0,6,0.000000
+bbq,Identity & roles,Actions & behavior,2,3,66.666667
+bbq,Identity & roles,Demographics,0,5,0.000000
+bbq,Identity & roles,Emotions & reactions,0,0,
+bbq,Identity & roles,Events & situations,0,3,0.000000
+bbq,Identity & roles,Identity & roles,0,0,
+bbq,Identity & roles,Intentions & attitudes,0,1,0.000000
+bbq,Identity & roles,Other details,0,0,
+bbq,Identity & roles,Relationships & family,0,2,0.000000
+bbq,Identity & roles,Setting & time,0,3,0.000000
+bbq,Identity & roles,Topics & communication,0,3,0.000000
+bbq,Intentions & attitudes,Actions & behavior,1,5,20.000000
+bbq,Intentions & attitudes,Demographics,6,18,33.333333
+bbq,Intentions & attitudes,Emotions & reactions,0,0,
+bbq,Intentions & attitudes,Events & situations,0,2,0.000000
+bbq,Intentions & attitudes,Identity & roles,0,1,0.000000
+bbq,Intentions & attitudes,Intentions & attitudes,0,0,
+bbq,Intentions & attitudes,Other details,0,0,
+bbq,Intentions & attitudes,Relationships & family,0,11,0.000000
+bbq,Intentions & attitudes,Setting & time,0,3,0.000000
+bbq,Intentions & attitudes,Topics & communication,1,7,14.285714
+bbq,Other details,Actions & behavior,0,0,
+bbq,Other details,Demographics,0,1,0.000000
+bbq,Other details,Emotions & reactions,0,0,
+bbq,Other details,Events & situations,0,0,
+bbq,Other details,Identity & roles,0,0,
+bbq,Other details,Intentions & attitudes,0,0,
+bbq,Other details,Other details,0,0,
+bbq,Other details,Relationships & family,0,1,0.000000
+bbq,Other details,Setting & time,0,0,
+bbq,Other details,Topics & communication,0,1,0.000000
+bbq,Relationships & family,Actions & behavior,4,28,14.285714
+bbq,Relationships & family,Demographics,4,70,5.714286
+bbq,Relationships & family,Emotions & reactions,0,4,0.000000
+bbq,Relationships & family,Events & situations,0,5,0.000000
+bbq,Relationships & family,Identity & roles,0,2,0.000000
+bbq,Relationships & family,Intentions & attitudes,0,11,0.000000
+bbq,Relationships & family,Other details,0,1,0.000000
+bbq,Relationships & family,Relationships & family,1,4,25.000000
+bbq,Relationships & family,Setting & time,1,14,7.142857
+bbq,Relationships & family,Topics & communication,3,30,10.000000
+bbq,Setting & time,Actions & behavior,1,19,5.263158
+bbq,Setting & time,Demographics,0,37,0.000000
+bbq,Setting & time,Emotions & reactions,0,2,0.000000
+bbq,Setting & time,Events & situations,0,3,0.000000
+bbq,Setting & time,Identity & roles,0,3,0.000000
+bbq,Setting & time,Intentions & attitudes,0,3,0.000000
+bbq,Setting & time,Other details,0,0,
+bbq,Setting & time,Relationships & family,1,14,7.142857
+bbq,Setting & time,Setting & time,0,0,
+bbq,Setting & time,Topics & communication,0,11,0.000000
+bbq,Topics & communication,Actions & behavior,1,8,12.500000
+bbq,Topics & communication,Demographics,18,42,42.857143
+bbq,Topics & communication,Emotions & reactions,1,3,33.333333
+bbq,Topics & communication,Events & situations,0,6,0.000000
+bbq,Topics & communication,Identity & roles,0,3,0.000000
+bbq,Topics & communication,Intentions & attitudes,1,7,14.285714
+bbq,Topics & communication,Other details,0,1,0.000000
+bbq,Topics & communication,Relationships & family,3,30,10.000000
+bbq,Topics & communication,Setting & time,0,11,0.000000
+bbq,Topics & communication,Topics & communication,0,2,0.000000
+medqa,Anatomy & localization,Anatomy & localization,7,8,87.500000
+medqa,Anatomy & localization,Care context,0,9,0.000000
+medqa,Anatomy & localization,Demographics,2,27,7.407407
+medqa,Anatomy & localization,Diagnosis & reasoning,0,0,
+medqa,Anatomy & localization,Diagnostic tests,0,0,
+medqa,Anatomy & localization,"Family, social & lifestyle",0,0,
+medqa,Anatomy & localization,Imaging,2,4,50.000000
+medqa,Anatomy & localization,Laboratory & pathology,1,8,12.500000
+medqa,Anatomy & localization,Medical history,0,2,0.000000
+medqa,Anatomy & localization,Medication & adherence,0,3,0.000000
+medqa,Anatomy & localization,Mental health & cognition,0,1,0.000000
+medqa,Anatomy & localization,Neurologic function,0,16,0.000000
+medqa,Anatomy & localization,Physical examination,3,25,12.000000
+medqa,Anatomy & localization,Reproductive history,0,4,0.000000
+medqa,Anatomy & localization,"Risk, exposure & trauma",0,3,0.000000
+medqa,Anatomy & localization,Symptoms,2,12,16.666667
+medqa,Anatomy & localization,Timing & course,0,14,0.000000
+medqa,Anatomy & localization,Treatment & response,0,2,0.000000
+medqa,Anatomy & localization,Vitals & anthropometrics,0,12,0.000000
+medqa,Care context,Anatomy & localization,0,9,0.000000
+medqa,Care context,Care context,0,6,0.000000
+medqa,Care context,Demographics,0,101,0.000000
+medqa,Care context,Diagnosis & reasoning,0,6,0.000000
+medqa,Care context,Diagnostic tests,0,13,0.000000
+medqa,Care context,"Family, social & lifestyle",0,42,0.000000
+medqa,Care context,Imaging,1,22,4.545455
+medqa,Care context,Laboratory & pathology,2,44,4.545455
+medqa,Care context,Medical history,1,31,3.225806
+medqa,Care context,Medication & adherence,1,16,6.250000
+medqa,Care context,Mental health & cognition,0,14,0.000000
+medqa,Care context,Neurologic function,0,12,0.000000
+medqa,Care context,Physical examination,0,57,0.000000
+medqa,Care context,Reproductive history,0,19,0.000000
+medqa,Care context,"Risk, exposure & trauma",0,5,0.000000
+medqa,Care context,Symptoms,3,69,4.347826
+medqa,Care context,Timing & course,3,23,13.043478
+medqa,Care context,Treatment & response,2,11,18.181818
+medqa,Care context,Vitals & anthropometrics,1,42,2.380952
+medqa,Demographics,Anatomy & localization,2,27,7.407407
+medqa,Demographics,Care context,0,101,0.000000
+medqa,Demographics,Demographics,3,75,4.000000
+medqa,Demographics,Diagnosis & reasoning,0,16,0.000000
+medqa,Demographics,Diagnostic tests,0,32,0.000000
+medqa,Demographics,"Family, social & lifestyle",2,94,2.127660
+medqa,Demographics,Imaging,1,54,1.851852
+medqa,Demographics,Laboratory & pathology,0,121,0.000000
+medqa,Demographics,Medical history,0,85,0.000000
+medqa,Demographics,Medication & adherence,0,57,0.000000
+medqa,Demographics,Mental health & cognition,0,52,0.000000
+medqa,Demographics,Neurologic function,2,36,5.555556
+medqa,Demographics,Physical examination,3,155,1.935484
+medqa,Demographics,Reproductive history,0,40,0.000000
+medqa,Demographics,"Risk, exposure & trauma",0,18,0.000000
+medqa,Demographics,Symptoms,0,191,0.000000
+medqa,Demographics,Timing & course,0,65,0.000000
+medqa,Demographics,Treatment & response,0,40,0.000000
+medqa,Demographics,Vitals & anthropometrics,0,119,0.000000
+medqa,Diagnosis & reasoning,Anatomy & localization,0,0,
+medqa,Diagnosis & reasoning,Care context,0,6,0.000000
+medqa,Diagnosis & reasoning,Demographics,0,16,0.000000
+medqa,Diagnosis & reasoning,Diagnosis & reasoning,0,0,
+medqa,Diagnosis & reasoning,Diagnostic tests,1,8,12.500000
+medqa,Diagnosis & reasoning,"Family, social & lifestyle",0,5,0.000000
+medqa,Diagnosis & reasoning,Imaging,0,1,0.000000
+medqa,Diagnosis & reasoning,Laboratory & pathology,1,15,6.666667
+medqa,Diagnosis & reasoning,Medical history,0,3,0.000000
+medqa,Diagnosis & reasoning,Medication & adherence,0,0,
+medqa,Diagnosis & reasoning,Mental health & cognition,0,3,0.000000
+medqa,Diagnosis & reasoning,Neurologic function,0,0,
+medqa,Diagnosis & reasoning,Physical examination,1,8,12.500000
+medqa,Diagnosis & reasoning,Reproductive history,0,0,
+medqa,Diagnosis & reasoning,"Risk, exposure & trauma",0,0,
+medqa,Diagnosis & reasoning,Symptoms,5,15,33.333333
+medqa,Diagnosis & reasoning,Timing & course,2,6,33.333333
+medqa,Diagnosis & reasoning,Treatment & response,2,9,22.222222
+medqa,Diagnosis & reasoning,Vitals & anthropometrics,0,10,0.000000
+medqa,Diagnostic tests,Anatomy & localization,0,0,
+medqa,Diagnostic tests,Care context,0,13,0.000000
+medqa,Diagnostic tests,Demographics,0,32,0.000000
+medqa,Diagnostic tests,Diagnosis & reasoning,1,8,12.500000
+medqa,Diagnostic tests,Diagnostic tests,6,8,75.000000
+medqa,Diagnostic tests,"Family, social & lifestyle",5,21,23.809524
+medqa,Diagnostic tests,Imaging,0,0,
+medqa,Diagnostic tests,Laboratory & pathology,2,17,11.764706
+medqa,Diagnostic tests,Medical history,0,10,0.000000
+medqa,Diagnostic tests,Medication & adherence,0,3,0.000000
+medqa,Diagnostic tests,Mental health & cognition,0,1,0.000000
+medqa,Diagnostic tests,Neurologic function,2,2,100.000000
+medqa,Diagnostic tests,Physical examination,0,16,0.000000
+medqa,Diagnostic tests,Reproductive history,0,0,
+medqa,Diagnostic tests,"Risk, exposure & trauma",0,2,0.000000
+medqa,Diagnostic tests,Symptoms,3,30,10.000000
+medqa,Diagnostic tests,Timing & course,3,10,30.000000
+medqa,Diagnostic tests,Treatment & response,0,2,0.000000
+medqa,Diagnostic tests,Vitals & anthropometrics,2,20,10.000000
+medqa,"Family, social & lifestyle",Anatomy & localization,0,0,
+medqa,"Family, social & lifestyle",Care context,0,42,0.000000
+medqa,"Family, social & lifestyle",Demographics,2,94,2.127660
+medqa,"Family, social & lifestyle",Diagnosis & reasoning,0,5,0.000000
+medqa,"Family, social & lifestyle",Diagnostic tests,5,21,23.809524
+medqa,"Family, social & lifestyle","Family, social & lifestyle",2,45,4.444444
+medqa,"Family, social & lifestyle",Imaging,1,8,12.500000
+medqa,"Family, social & lifestyle",Laboratory & pathology,3,86,3.488372
+medqa,"Family, social & lifestyle",Medical history,2,32,6.250000
+medqa,"Family, social & lifestyle",Medication & adherence,1,16,6.250000
+medqa,"Family, social & lifestyle",Mental health & cognition,2,30,6.666667
+medqa,"Family, social & lifestyle",Neurologic function,2,7,28.571429
+medqa,"Family, social & lifestyle",Physical examination,2,48,4.166667
+medqa,"Family, social & lifestyle",Reproductive history,1,6,16.666667
+medqa,"Family, social & lifestyle","Risk, exposure & trauma",0,4,0.000000
+medqa,"Family, social & lifestyle",Symptoms,5,72,6.944444
+medqa,"Family, social & lifestyle",Timing & course,2,22,9.090909
+medqa,"Family, social & lifestyle",Treatment & response,0,6,0.000000
+medqa,"Family, social & lifestyle",Vitals & anthropometrics,0,51,0.000000
+medqa,Imaging,Anatomy & localization,2,4,50.000000
+medqa,Imaging,Care context,1,22,4.545455
+medqa,Imaging,Demographics,1,54,1.851852
+medqa,Imaging,Diagnosis & reasoning,0,1,0.000000
+medqa,Imaging,Diagnostic tests,0,0,
+medqa,Imaging,"Family, social & lifestyle",1,8,12.500000
+medqa,Imaging,Imaging,4,8,50.000000
+medqa,Imaging,Laboratory & pathology,9,40,22.500000
+medqa,Imaging,Medical history,3,15,20.000000
+medqa,Imaging,Medication & adherence,0,8,0.000000
+medqa,Imaging,Mental health & cognition,3,10,30.000000
+medqa,Imaging,Neurologic function,0,11,0.000000
+medqa,Imaging,Physical examination,8,19,42.105263
+medqa,Imaging,Reproductive history,1,21,4.761905
+medqa,Imaging,"Risk, exposure & trauma",1,4,25.000000
+medqa,Imaging,Symptoms,10,35,28.571429
+medqa,Imaging,Timing & course,0,8,0.000000
+medqa,Imaging,Treatment & response,1,8,12.500000
+medqa,Imaging,Vitals & anthropometrics,1,29,3.448276
+medqa,Laboratory & pathology,Anatomy & localization,1,8,12.500000
+medqa,Laboratory & pathology,Care context,2,44,4.545455
+medqa,Laboratory & pathology,Demographics,0,121,0.000000
+medqa,Laboratory & pathology,Diagnosis & reasoning,1,15,6.666667
+medqa,Laboratory & pathology,Diagnostic tests,2,17,11.764706
+medqa,Laboratory & pathology,"Family, social & lifestyle",3,86,3.488372
+medqa,Laboratory & pathology,Imaging,9,40,22.500000
+medqa,Laboratory & pathology,Laboratory & pathology,8,149,5.369128
+medqa,Laboratory & pathology,Medical history,3,14,21.428571
+medqa,Laboratory & pathology,Medication & adherence,3,14,21.428571
+medqa,Laboratory & pathology,Mental health & cognition,0,17,0.000000
+medqa,Laboratory & pathology,Neurologic function,0,13,0.000000
+medqa,Laboratory & pathology,Physical examination,13,77,16.883117
+medqa,Laboratory & pathology,Reproductive history,0,12,0.000000
+medqa,Laboratory & pathology,"Risk, exposure & trauma",0,14,0.000000
+medqa,Laboratory & pathology,Symptoms,1,72,1.388889
+medqa,Laboratory & pathology,Timing & course,1,14,7.142857
+medqa,Laboratory & pathology,Treatment & response,1,65,1.538462
+medqa,Laboratory & pathology,Vitals & anthropometrics,3,141,2.127660
+medqa,Medical history,Anatomy & localization,0,2,0.000000
+medqa,Medical history,Care context,1,31,3.225806
+medqa,Medical history,Demographics,0,85,0.000000
+medqa,Medical history,Diagnosis & reasoning,0,3,0.000000
+medqa,Medical history,Diagnostic tests,0,10,0.000000
+medqa,Medical history,"Family, social & lifestyle",2,32,6.250000
+medqa,Medical history,Imaging,3,15,20.000000
+medqa,Medical history,Laboratory & pathology,3,14,21.428571
+medqa,Medical history,Medical history,4,20,20.000000
+medqa,Medical history,Medication & adherence,8,40,20.000000
+medqa,Medical history,Mental health & cognition,2,17,11.764706
+medqa,Medical history,Neurologic function,0,17,0.000000
+medqa,Medical history,Physical examination,0,31,0.000000
+medqa,Medical history,Reproductive history,1,35,2.857143
+medqa,Medical history,"Risk, exposure & trauma",0,8,0.000000
+medqa,Medical history,Symptoms,2,68,2.941176
+medqa,Medical history,Timing & course,2,20,10.000000
+medqa,Medical history,Treatment & response,1,12,8.333333
+medqa,Medical history,Vitals & anthropometrics,1,49,2.040816
+medqa,Medication & adherence,Anatomy & localization,0,3,0.000000
+medqa,Medication & adherence,Care context,1,16,6.250000
+medqa,Medication & adherence,Demographics,0,57,0.000000
+medqa,Medication & adherence,Diagnosis & reasoning,0,0,
+medqa,Medication & adherence,Diagnostic tests,0,3,0.000000
+medqa,Medication & adherence,"Family, social & lifestyle",1,16,6.250000
+medqa,Medication & adherence,Imaging,0,8,0.000000
+medqa,Medication & adherence,Laboratory & pathology,3,14,21.428571
+medqa,Medication & adherence,Medical history,8,40,20.000000
+medqa,Medication & adherence,Medication & adherence,1,7,14.285714
+medqa,Medication & adherence,Mental health & cognition,0,14,0.000000
+medqa,Medication & adherence,Neurologic function,0,12,0.000000
+medqa,Medication & adherence,Physical examination,1,22,4.545455
+medqa,Medication & adherence,Reproductive history,0,8,0.000000
+medqa,Medication & adherence,"Risk, exposure & trauma",0,6,0.000000
+medqa,Medication & adherence,Symptoms,2,38,5.263158
+medqa,Medication & adherence,Timing & course,2,14,14.285714
+medqa,Medication & adherence,Treatment & response,0,7,0.000000
+medqa,Medication & adherence,Vitals & anthropometrics,1,33,3.030303
+medqa,Mental health & cognition,Anatomy & localization,0,1,0.000000
+medqa,Mental health & cognition,Care context,0,14,0.000000
+medqa,Mental health & cognition,Demographics,0,52,0.000000
+medqa,Mental health & cognition,Diagnosis & reasoning,0,3,0.000000
+medqa,Mental health & cognition,Diagnostic tests,0,1,0.000000
+medqa,Mental health & cognition,"Family, social & lifestyle",2,30,6.666667
+medqa,Mental health & cognition,Imaging,3,10,30.000000
+medqa,Mental health & cognition,Laboratory & pathology,0,17,0.000000
+medqa,Mental health & cognition,Medical history,2,17,11.764706
+medqa,Mental health & cognition,Medication & adherence,0,14,0.000000
+medqa,Mental health & cognition,Mental health & cognition,4,16,25.000000
+medqa,Mental health & cognition,Neurologic function,0,9,0.000000
+medqa,Mental health & cognition,Physical examination,3,14,21.428571
+medqa,Mental health & cognition,Reproductive history,0,0,
+medqa,Mental health & cognition,"Risk, exposure & trauma",0,2,0.000000
+medqa,Mental health & cognition,Symptoms,5,42,11.904762
+medqa,Mental health & cognition,Timing & course,0,16,0.000000
+medqa,Mental health & cognition,Treatment & response,3,22,13.636364
+medqa,Mental health & cognition,Vitals & anthropometrics,3,23,13.043478
+medqa,Neurologic function,Anatomy & localization,0,16,0.000000
+medqa,Neurologic function,Care context,0,12,0.000000
+medqa,Neurologic function,Demographics,2,36,5.555556
+medqa,Neurologic function,Diagnosis & reasoning,0,0,
+medqa,Neurologic function,Diagnostic tests,2,2,100.000000
+medqa,Neurologic function,"Family, social & lifestyle",2,7,28.571429
+medqa,Neurologic function,Imaging,0,11,0.000000
+medqa,Neurologic function,Laboratory & pathology,0,13,0.000000
+medqa,Neurologic function,Medical history,0,17,0.000000
+medqa,Neurologic function,Medication & adherence,0,12,0.000000
+medqa,Neurologic function,Mental health & cognition,0,9,0.000000
+medqa,Neurologic function,Neurologic function,13,16,81.250000
+medqa,Neurologic function,Physical examination,6,9,66.666667
+medqa,Neurologic function,Reproductive history,0,7,0.000000
+medqa,Neurologic function,"Risk, exposure & trauma",0,6,0.000000
+medqa,Neurologic function,Symptoms,11,44,25.000000
+medqa,Neurologic function,Timing & course,0,12,0.000000
+medqa,Neurologic function,Treatment & response,0,0,
+medqa,Neurologic function,Vitals & anthropometrics,2,28,7.142857
+medqa,Physical examination,Anatomy & localization,3,25,12.000000
+medqa,Physical examination,Care context,0,57,0.000000
+medqa,Physical examination,Demographics,3,155,1.935484
+medqa,Physical examination,Diagnosis & reasoning,1,8,12.500000
+medqa,Physical examination,Diagnostic tests,0,16,0.000000
+medqa,Physical examination,"Family, social & lifestyle",2,48,4.166667
+medqa,Physical examination,Imaging,8,19,42.105263
+medqa,Physical examination,Laboratory & pathology,13,77,16.883117
+medqa,Physical examination,Medical history,0,31,0.000000
+medqa,Physical examination,Medication & adherence,1,22,4.545455
+medqa,Physical examination,Mental health & cognition,3,14,21.428571
+medqa,Physical examination,Neurologic function,6,9,66.666667
+medqa,Physical examination,Physical examination,31,94,32.978723
+medqa,Physical examination,Reproductive history,1,10,10.000000
+medqa,Physical examination,"Risk, exposure & trauma",1,12,8.333333
+medqa,Physical examination,Symptoms,16,95,16.842105
+medqa,Physical examination,Timing & course,1,45,2.222222
+medqa,Physical examination,Treatment & response,2,21,9.523810
+medqa,Physical examination,Vitals & anthropometrics,10,64,15.625000
+medqa,Reproductive history,Anatomy & localization,0,4,0.000000
+medqa,Reproductive history,Care context,0,19,0.000000
+medqa,Reproductive history,Demographics,0,40,0.000000
+medqa,Reproductive history,Diagnosis & reasoning,0,0,
+medqa,Reproductive history,Diagnostic tests,0,0,
+medqa,Reproductive history,"Family, social & lifestyle",1,6,16.666667
+medqa,Reproductive history,Imaging,1,21,4.761905
+medqa,Reproductive history,Laboratory & pathology,0,12,0.000000
+medqa,Reproductive history,Medical history,1,35,2.857143
+medqa,Reproductive history,Medication & adherence,0,8,0.000000
+medqa,Reproductive history,Mental health & cognition,0,0,
+medqa,Reproductive history,Neurologic function,0,7,0.000000
+medqa,Reproductive history,Physical examination,1,10,10.000000
+medqa,Reproductive history,Reproductive history,3,32,9.375000
+medqa,Reproductive history,"Risk, exposure & trauma",0,0,
+medqa,Reproductive history,Symptoms,5,57,8.771930
+medqa,Reproductive history,Timing & course,2,8,25.000000
+medqa,Reproductive history,Treatment & response,0,0,
+medqa,Reproductive history,Vitals & anthropometrics,0,46,0.000000
+medqa,"Risk, exposure & trauma",Anatomy & localization,0,3,0.000000
+medqa,"Risk, exposure & trauma",Care context,0,5,0.000000
+medqa,"Risk, exposure & trauma",Demographics,0,18,0.000000
+medqa,"Risk, exposure & trauma",Diagnosis & reasoning,0,0,
+medqa,"Risk, exposure & trauma",Diagnostic tests,0,2,0.000000
+medqa,"Risk, exposure & trauma","Family, social & lifestyle",0,4,0.000000
+medqa,"Risk, exposure & trauma",Imaging,1,4,25.000000
+medqa,"Risk, exposure & trauma",Laboratory & pathology,0,14,0.000000
+medqa,"Risk, exposure & trauma",Medical history,0,8,0.000000
+medqa,"Risk, exposure & trauma",Medication & adherence,0,6,0.000000
+medqa,"Risk, exposure & trauma",Mental health & cognition,0,2,0.000000
+medqa,"Risk, exposure & trauma",Neurologic function,0,6,0.000000
+medqa,"Risk, exposure & trauma",Physical examination,1,12,8.333333
+medqa,"Risk, exposure & trauma",Reproductive history,0,0,
+medqa,"Risk, exposure & trauma","Risk, exposure & trauma",0,1,0.000000
+medqa,"Risk, exposure & trauma",Symptoms,2,17,11.764706
+medqa,"Risk, exposure & trauma",Timing & course,1,5,20.000000
+medqa,"Risk, exposure & trauma",Treatment & response,0,1,0.000000
+medqa,"Risk, exposure & trauma",Vitals & anthropometrics,0,11,0.000000
+medqa,Symptoms,Anatomy & localization,2,12,16.666667
+medqa,Symptoms,Care context,3,69,4.347826
+medqa,Symptoms,Demographics,0,191,0.000000
+medqa,Symptoms,Diagnosis & reasoning,5,15,33.333333
+medqa,Symptoms,Diagnostic tests,3,30,10.000000
+medqa,Symptoms,"Family, social & lifestyle",5,72,6.944444
+medqa,Symptoms,Imaging,10,35,28.571429
+medqa,Symptoms,Laboratory & pathology,1,72,1.388889
+medqa,Symptoms,Medical history,2,68,2.941176
+medqa,Symptoms,Medication & adherence,2,38,5.263158
+medqa,Symptoms,Mental health & cognition,5,42,11.904762
+medqa,Symptoms,Neurologic function,11,44,25.000000
+medqa,Symptoms,Physical examination,16,95,16.842105
+medqa,Symptoms,Reproductive history,5,57,8.771930
+medqa,Symptoms,"Risk, exposure & trauma",2,17,11.764706
+medqa,Symptoms,Symptoms,35,89,39.325843
+medqa,Symptoms,Timing & course,13,58,22.413793
+medqa,Symptoms,Treatment & response,5,28,17.857143
+medqa,Symptoms,Vitals & anthropometrics,2,113,1.769912
+medqa,Timing & course,Anatomy & localization,0,14,0.000000
+medqa,Timing & course,Care context,3,23,13.043478
+medqa,Timing & course,Demographics,0,65,0.000000
+medqa,Timing & course,Diagnosis & reasoning,2,6,33.333333
+medqa,Timing & course,Diagnostic tests,3,10,30.000000
+medqa,Timing & course,"Family, social & lifestyle",2,22,9.090909
+medqa,Timing & course,Imaging,0,8,0.000000
+medqa,Timing & course,Laboratory & pathology,1,14,7.142857
+medqa,Timing & course,Medical history,2,20,10.000000
+medqa,Timing & course,Medication & adherence,2,14,14.285714
+medqa,Timing & course,Mental health & cognition,0,16,0.000000
+medqa,Timing & course,Neurologic function,0,12,0.000000
+medqa,Timing & course,Physical examination,1,45,2.222222
+medqa,Timing & course,Reproductive history,2,8,25.000000
+medqa,Timing & course,"Risk, exposure & trauma",1,5,20.000000
+medqa,Timing & course,Symptoms,13,58,22.413793
+medqa,Timing & course,Timing & course,1,5,20.000000
+medqa,Timing & course,Treatment & response,2,10,20.000000
+medqa,Timing & course,Vitals & anthropometrics,1,27,3.703704
+medqa,Treatment & response,Anatomy & localization,0,2,0.000000
+medqa,Treatment & response,Care context,2,11,18.181818
+medqa,Treatment & response,Demographics,0,40,0.000000
+medqa,Treatment & response,Diagnosis & reasoning,2,9,22.222222
+medqa,Treatment & response,Diagnostic tests,0,2,0.000000
+medqa,Treatment & response,"Family, social & lifestyle",0,6,0.000000
+medqa,Treatment & response,Imaging,1,8,12.500000
+medqa,Treatment & response,Laboratory & pathology,1,65,1.538462
+medqa,Treatment & response,Medical history,1,12,8.333333
+medqa,Treatment & response,Medication & adherence,0,7,0.000000
+medqa,Treatment & response,Mental health & cognition,3,22,13.636364
+medqa,Treatment & response,Neurologic function,0,0,
+medqa,Treatment & response,Physical examination,2,21,9.523810
+medqa,Treatment & response,Reproductive history,0,0,
+medqa,Treatment & response,"Risk, exposure & trauma",0,1,0.000000
+medqa,Treatment & response,Symptoms,5,28,17.857143
+medqa,Treatment & response,Timing & course,2,10,20.000000
+medqa,Treatment & response,Treatment & response,6,10,60.000000
+medqa,Treatment & response,Vitals & anthropometrics,3,31,9.677419
+medqa,Vitals & anthropometrics,Anatomy & localization,0,12,0.000000
+medqa,Vitals & anthropometrics,Care context,1,42,2.380952
+medqa,Vitals & anthropometrics,Demographics,0,119,0.000000
+medqa,Vitals & anthropometrics,Diagnosis & reasoning,0,10,0.000000
+medqa,Vitals & anthropometrics,Diagnostic tests,2,20,10.000000
+medqa,Vitals & anthropometrics,"Family, social & lifestyle",0,51,0.000000
+medqa,Vitals & anthropometrics,Imaging,1,29,3.448276
+medqa,Vitals & anthropometrics,Laboratory & pathology,3,141,2.127660
+medqa,Vitals & anthropometrics,Medical history,1,49,2.040816
+medqa,Vitals & anthropometrics,Medication & adherence,1,33,3.030303
+medqa,Vitals & anthropometrics,Mental health & cognition,3,23,13.043478
+medqa,Vitals & anthropometrics,Neurologic function,2,28,7.142857
+medqa,Vitals & anthropometrics,Physical examination,10,64,15.625000
+medqa,Vitals & anthropometrics,Reproductive history,0,46,0.000000
+medqa,Vitals & anthropometrics,"Risk, exposure & trauma",0,11,0.000000
+medqa,Vitals & anthropometrics,Symptoms,2,113,1.769912
+medqa,Vitals & anthropometrics,Timing & course,1,27,3.703704
+medqa,Vitals & anthropometrics,Treatment & response,3,31,9.677419
+medqa,Vitals & anthropometrics,Vitals & anthropometrics,13,39,33.333333

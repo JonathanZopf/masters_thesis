@@ -1,0 +1,70 @@
+\section{Preservation of Concept Rankings}
+\label{sec:results-ranking-preservation}
+
+\HypothesisTestResults[label=hyp:hyp3-results]
+  {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
+  hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
+  {data/rq3/hypothesis_test_results.csv}
+
+% #1 title, #2 CSV file, #3 exact count, #4 total count, #5 exact percentage.
+\newcommand{\HypThreeExceptionTable}[5]{%
+  \begin{minipage}[t]{0.315\textwidth}
+    \centering
+    {\scriptsize\bfseries #1\par}
+    {\fontsize{6.5}{7.0}\selectfont
+      Exact: $#3/#4$ questions ($#5\%$)\par}
+    \vspace{0.2em}
+    {\fontsize{6.2}{6.8}\selectfont
+      \setlength{\tabcolsep}{3.2pt}
+      \renewcommand{\arraystretch}{0.88}
+      \pgfplotstabletypeset[
+        col sep=comma,
+        columns={index,rho,p_value},
+        columns/index/.style={
+          column name={\textbf{Index}},
+          column type={r},
+          string type,
+        },
+        columns/rho/.style={
+          column name={\textbf{$\rho$}},
+          column type={S[table-format=1.3,round-mode=places,round-precision=3]},
+          string type,
+        },
+        columns/p_value/.style={
+          column name={\textbf{one-sided $p$}},
+          column type={S[table-format=1.3e-2]},
+          string type,
+        },
+        every head row/.style={before row=\hline,after row=\hline},
+        every last row/.style={after row=\hline},
+      ]{#2}\par}
+  \end{minipage}%
+}
+
+\begin{table}[p]
+  \centering
+  \HypThreeExceptionTable{BBQ\\GPT-OSS 120B}%
+    {data/rq3/bbq_gptoss_imperfect_rows.csv}{20}{30}{66.7}
+  \hfill
+  \HypThreeExceptionTable{BBQ\\Mistral Medium 3.5}%
+    {data/rq3/bbq_mistral_imperfect_rows.csv}{19}{30}{63.3}
+  \hfill
+  \HypThreeExceptionTable{MedQA\\GPT-OSS 120B}%
+    {data/rq3/medqa_gptoss_imperfect_rows.csv}{12}{29}{41.4}
+
+  \par\vspace{1.2em}
+  \HypThreeExceptionTable{MedQA\\Mistral Medium 3.5}%
+    {data/rq3/medqa_mistral_imperfect_rows.csv}{10}{24}{41.7}
+  \hfill
+  \HypThreeExceptionTable{New German Credit\\GPT-OSS 120B}%
+    {data/rq3/new_german_credit_gptoss_imperfect_rows.csv}{2}{30}{6.7}
+  \hfill
+  \HypThreeExceptionTable{New German Credit\\Mistral Medium 3.5}%
+    {data/rq3/new_german_credit_mistral_imperfect_rows.csv}{0}{30}{0.0}
+
+  \caption[Questions without exact concept-ranking preservation]{Questions for
+  which raw and adjusted concept rankings are not identical. Only questions
+  with $\rho<1$ are included; the percentages report exact preservation over
+  all questions in the respective combination.}
+  \label{tab:hyp3-question-exceptions}
+\end{table}

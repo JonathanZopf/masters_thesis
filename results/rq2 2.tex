@@ -1,0 +1,63 @@
+\section{Validation against the Original Implementation}
+\label{sec:results-original-validation}
+
+% RQ2 preset: square axes, fixed faithfulness columns, and dashed identity line.
+% #1 sample size, #2 plot-specific keys.
+\newcommand{\HypTwoIdentityPlot}[2]{%
+  \ResultScatterPlot{x column=matton_faithfulness,
+    y column=felics_faithfulness,
+    x label={$\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$},
+    y label={$\mathcal{F}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+    line slope=1,
+    line intercept=0,
+    line style=dashed,
+    minipage width=0.47\textwidth,
+    plot width=5.55cm,
+    plot height=5.55cm,
+    mark size=1.8pt,
+    below skip=-0.2em,
+    scale only axis=true,
+    text below={Shared questions: $n=#1$},
+    #2
+  }%
+}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoIdentityPlot{28}{title={BBQ --- GPT-OSS 120B},
+    data=data/rq2/bbq_gptoss.csv,
+    xmin=-1.1, xmax=0.65,
+    ymin=-1.1, ymax=0.65
+  }
+  \hfill
+  \HypTwoIdentityPlot{30}{title={BBQ --- Mistral Medium 3.5},
+    data=data/rq2/bbq_mistral.csv,
+    xmin=-0.4, xmax=0.65,
+    ymin=-0.4, ymax=0.65
+  }
+
+  \par\vspace{1.1em}
+  \HypTwoIdentityPlot{29}{title={MedQA --- GPT-OSS 120B},
+    data=data/rq2/medqa_gptoss.csv,
+    xmin=-0.4, xmax=0.5,
+    ymin=-0.4, ymax=0.5
+  }
+  \hfill
+  \HypTwoIdentityPlot{4}{title={MedQA --- Mistral Medium 3.5},
+    data=data/rq2/medqa_mistral.csv,
+    xmin=-0.3, xmax=0.35,
+    ymin=-0.3, ymax=0.35
+  }
+
+  \caption[Identity plots for the completed RQ2 comparisons]{Question-level
+  faithfulness produced by FELICS with $n_{\max}=1$ and the original Matton
+  implementation for the four completed natural-language comparisons. The
+  dashed orange line denotes exact identity.}
+  \label{fig:hyp2-identity-natural-language}
+\end{figure}
+
+\HypothesisTestResults[label=hyp:hyp2-results]
+  {Validation tests for \rqref{rq:convergence}. The reported TOST $p$-value is
+  the larger of the two one-sided component $p$-values; equivalence requires it
+  to be below $\alpha=0.05$.}
+  {data/rq2/hypothesis_test_results.csv}
