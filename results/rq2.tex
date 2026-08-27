@@ -1,0 +1,114 @@
+\section{Validation against the Original Implementation}
+\label{sec:results-original-validation}
+
+\definecolor{HypTwoPoints}{HTML}{2878B5}
+\definecolor{HypTwoIdentity}{HTML}{E37A26}
+
+% #1 title, #2 data, #3 axis minimum, #4 axis maximum, #5 sample size,
+% #6 optional annotation drawn inside the axis.
+\newcommand{\HypTwoIdentityPlot}[6]{%
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    {\small\bfseries #1\par}
+    \vspace{0.1em}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=5.55cm,
+        height=5.55cm,
+        scale only axis,
+        xmin=#3,
+        xmax=#4,
+        ymin=#3,
+        ymax=#4,
+        xlabel={$\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$},
+        ylabel={$\mathcal{F}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+        clip=false,
+      ]
+        \addplot[
+          only marks,mark=*,mark size=1.8pt,
+          draw=HypTwoPoints,fill=HypTwoPoints,fill opacity=0.68,
+        ] table[col sep=comma,x=matton_faithfulness,y=felics_faithfulness] {#2};
+        \addplot[HypTwoIdentity,very thick,dashed,domain=#3:#4,samples=2] {x};
+        #6
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-0.2em}
+    {\scriptsize Shared questions: $n=#5$\par}
+  \end{minipage}%
+}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoIdentityPlot{BBQ --- GPT-OSS 120B}%
+    {data/rq2/bbq_gptoss.csv}{-1.1}{0.65}{28}{}
+  \hfill
+  \HypTwoIdentityPlot{BBQ --- Mistral Medium 3.5}%
+    {data/rq2/bbq_mistral.csv}{-0.4}{0.65}{30}{}
+
+  \par\vspace{1.1em}
+  \HypTwoIdentityPlot{MedQA --- GPT-OSS 120B}%
+    {data/rq2/medqa_gptoss.csv}{-0.4}{0.5}{29}{}
+  \hfill
+  \HypTwoIdentityPlot{MedQA --- Mistral Medium 3.5}%
+    {data/rq2/medqa_mistral.csv}{-0.3}{0.35}{4}{}
+
+  \caption[Identity plots for the completed RQ2 comparisons]{Question-level
+  faithfulness produced by FELICS with $n_{\max}=1$ and the original Matton
+  implementation for the four completed natural-language comparisons. The
+  dashed orange line denotes exact identity.}
+  \label{fig:hyp2-identity-natural-language}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoIdentityPlot{New German Credit\\GPT-OSS 120B}%
+    {data/rq2/new_german_credit_gptoss.csv}{-0.3}{0.4}{30}{%
+      \node[anchor=north,align=center,font=\scriptsize\bfseries,text=BrickRed,
+        fill=white,fill opacity=0.9,text opacity=1,draw=BrickRed,rounded corners,
+        inner sep=2.5pt] at (rel axis cs:0.5,0.96)
+        {PLACEHOLDER\\NOT AN EXPERIMENTAL RESULT};}
+  \hfill
+  \HypTwoIdentityPlot{New German Credit\\Mistral Medium 3.5}%
+    {data/rq2/new_german_credit_mistral.csv}{-0.3}{0.4}{30}{%
+      \node[anchor=north,align=center,font=\scriptsize\bfseries,text=BrickRed,
+        fill=white,fill opacity=0.9,text opacity=1,draw=BrickRed,rounded corners,
+        inner sep=2.5pt] at (rel axis cs:0.5,0.96)
+        {PLACEHOLDER\\NOT AN EXPERIMENTAL RESULT};}
+
+  \caption[Placeholder identity plots for New German Credit]{Reserved identity
+  plots for New German Credit. FELICS scores are shown with synthetic Matton
+  coordinates to preview the final visualization; these panels are placeholders
+  and are excluded from hypothesis testing.}
+  \label{fig:hyp2-identity-placeholder}
+\end{figure}
+
+\begin{hypothesis_test_results_box}
+  \centering
+  \captionof{table}{Validation tests for \rqref{rq:convergence}. The reported
+  TOST $p$-value is the larger of the two one-sided component $p$-values;
+  equivalence requires it to be below $\alpha=0.05$.}
+  \label{tab:hyp2-results}
+  \small
+  \setlength{\tabcolsep}{3.7pt}
+  \renewcommand{\arraystretch}{1.12}
+  \rowcolors{2}{Goldenrod!9!white}{white}
+  \begin{tabular}{@{}llccccc@{}}
+    \hline
+    \textbf{Dataset} & \textbf{Model} & \textbf{$n$} & \textbf{Exact?} &
+    \textbf{$p_{\mathrm{CE}}$} & \textbf{$p_{\mathcal{F}}$} & \textbf{Supported?} \\
+    \hline
+    BBQ & GPT-OSS 120B & 28 & No & $0.9851$ & $0.1723$ & \hypothesisnotsupported\ No \\
+    BBQ & Mistral Medium 3.5 & 30 & No & $0.9121$ & $0.3532$ & \hypothesisnotsupported\ No \\
+    MedQA & GPT-OSS 120B & 29 & No & $0.9675$ & $0.0413$ & \hypothesisnotsupported\ No \\
+    MedQA & Mistral Medium 3.5 & 4 & No & $0.6140$ & $0.4495$ & \hypothesisnotsupported\ No \\
+    New German Credit & GPT-OSS 120B & -- & TODO & -- & -- & \textcolor{BrickRed}{\bfseries TODO} \\
+    New German Credit & Mistral Medium 3.5 & -- & TODO & -- & -- & \textcolor{BrickRed}{\bfseries TODO} \\
+    \hline
+  \end{tabular}
+\end{hypothesis_test_results_box}
+

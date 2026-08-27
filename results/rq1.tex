@@ -1,0 +1,123 @@
+\section{Correlation Strength and Changes in Causal Effects}
+\definecolor{HypOnePoints}{HTML}{2878B5}
+\definecolor{HypOneTrend}{HTML}{E37A26}
+
+% #1 title, #2 data, #3 y column, #4 y label, #5 r, #6 CI lower,
+% #7 regression expression, #8 xmax, #9 ymax.
+\newcommand{\HypOneScatter}[9]{%
+  \begin{minipage}[t]{0.485\textwidth}
+    \centering
+    {\small\bfseries #1\par}
+    \vspace{0.1em}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=\linewidth,
+        height=5.45cm,
+        xmin=0,
+        xmax=#8,
+        ymin=0,
+        ymax=#9,
+        xlabel={$\Delta\kappa(\mathbf{x})$},
+        ylabel={#4},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+        clip=true,
+      ]
+        \addplot[
+          only marks,mark=*,mark size=1.65pt,
+          draw=HypOnePoints,fill=HypOnePoints,fill opacity=0.68,
+        ] table[col sep=comma,x=diff_correlation_strength,y=#3] {#2};
+        \addplot[HypOneTrend,very thick,domain=0:#8,samples=2] {#7};
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-0.25em}
+    {\scriptsize Pearson $r=#5$; one-sided 95\% CI $[#6,\,1.000]$\par}
+  \end{minipage}%
+}
+
+\begin{figure}[p]
+  \centering
+  \HypOneScatter{GPT-OSS 120B --- $\Delta\mathrm{CE}$}%
+    {data/rq1/bbq_gptoss.csv}{mean_absolute_ce_diff}
+    {$\Delta\mathrm{CE}(\mathbf{x})$}{-0.072}{-0.370}
+    {0.03447061 - 0.01059422*x}{2.3}{0.22}
+  \hfill
+  \HypOneScatter{GPT-OSS 120B --- $\Delta\mathcal{F}$}%
+    {data/rq1/bbq_gptoss.csv}{faithfulness_diff}
+    {$\Delta\mathcal{F}(\mathbf{x})$}{-0.094}{-0.389}
+    {0.07318031 - 0.02850756*x}{2.3}{0.36}
+
+  \par\vspace{1.1em}
+  \HypOneScatter{Mistral Medium 3.5 --- $\Delta\mathrm{CE}$}%
+    {data/rq1/bbq_mistral.csv}{mean_absolute_ce_diff}
+    {$\Delta\mathrm{CE}(\mathbf{x})$}{-0.025}{-0.329}
+    {0.03229516 - 0.002708218*x}{2.3}{0.22}
+  \hfill
+  \HypOneScatter{Mistral Medium 3.5 --- $\Delta\mathcal{F}$}%
+    {data/rq1/bbq_mistral.csv}{faithfulness_diff}
+    {$\Delta\mathcal{F}(\mathbf{x})$}{-0.204}{-0.481}
+    {0.1053721 - 0.04677214*x}{2.3}{0.36}
+
+  \caption{Relationship between increased oracle-derived correlation strength and
+  changes in causal effects or question-level faithfulness for BBQ ($n=30$ in each
+  panel). Blue points are questions and orange lines are least-squares fits.}
+  \label{fig:hyp1-bbq-scatterplots}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \HypOneScatter{GPT-OSS 120B --- $\Delta\mathrm{CE}$}%
+    {data/rq1/medqa_gptoss.csv}{mean_absolute_ce_diff}
+    {$\Delta\mathrm{CE}(\mathbf{x})$}{0.316}{0.005}
+    {-0.0001643535 + 0.0007084861*x}{8}{0.015}
+  \hfill
+  \HypOneScatter{GPT-OSS 120B --- $\Delta\mathcal{F}$}%
+    {data/rq1/medqa_gptoss.csv}{faithfulness_diff}
+    {$\Delta\mathcal{F}(\mathbf{x})$}{0.029}{-0.286}
+    {0.02601607 + 0.0005016058*x}{8}{0.145}
+
+  \par\vspace{1.1em}
+  \HypOneScatter{Mistral Medium 3.5 --- $\Delta\mathrm{CE}$}%
+    {data/rq1/medqa_mistral.csv}{mean_absolute_ce_diff}
+    {$\Delta\mathrm{CE}(\mathbf{x})$}{0.145}{-0.210}
+    {0.001526782 + 0.0001777338*x}{8}{0.015}
+  \hfill
+  \HypOneScatter{Mistral Medium 3.5 --- $\Delta\mathcal{F}$}%
+    {data/rq1/medqa_mistral.csv}{faithfulness_diff}
+    {$\Delta\mathcal{F}(\mathbf{x})$}{-0.207}{-0.515}
+    {0.04395996 - 0.004762752*x}{8}{0.145}
+
+  \caption{Relationship between increased oracle-derived correlation strength and
+  changes in causal effects or question-level faithfulness for MedQA. The GPT-OSS
+  panels contain 29 questions and the Mistral panels contain 24. Blue points are
+  questions and orange lines are least-squares fits.}
+  \label{fig:hyp1-medqa-scatterplots}
+\end{figure}
+
+\begin{hypothesis_test_results_box}
+  \centering
+  \captionof{table}{One-sided Pearson tests for \rqref{rq:correlation_diff}. A
+  combination supports the hypothesis when $r\geq0.10$ and $p\leq0.10$.}
+  \label{tab:hyp1-results}
+  \small
+  \setlength{\tabcolsep}{4.2pt}
+  \renewcommand{\arraystretch}{1.12}
+  \rowcolors{2}{Goldenrod!9!white}{white}
+  \begin{tabular}{@{}llcrrc@{}}
+    \hline
+    \textbf{Dataset} & \textbf{Model} & \textbf{Outcome} & \textbf{$r$} & \textbf{$p$} & \textbf{Supported?} \\
+    \hline
+    BBQ & GPT-OSS 120B & $\Delta\mathrm{CE}$ & $-0.072$ & $0.6466$ & \hypothesisnotsupported\ No \\
+    BBQ & GPT-OSS 120B & $\Delta\mathcal{F}$ & $-0.094$ & $0.6898$ & \hypothesisnotsupported\ No \\
+    BBQ & Mistral Medium 3.5 & $\Delta\mathrm{CE}$ & $-0.025$ & $0.5527$ & \hypothesisnotsupported\ No \\
+    BBQ & Mistral Medium 3.5 & $\Delta\mathcal{F}$ & $-0.204$ & $0.8606$ & \hypothesisnotsupported\ No \\
+    MedQA & GPT-OSS 120B & $\Delta\mathrm{CE}$ & $0.316$ & $0.0472$ & \hypothesissupported\ Yes \\
+    MedQA & GPT-OSS 120B & $\Delta\mathcal{F}$ & $0.029$ & $0.4410$ & \hypothesisnotsupported\ No \\
+    MedQA & Mistral Medium 3.5 & $\Delta\mathrm{CE}$ & $0.145$ & $0.2499$ & \hypothesisnotsupported\ No \\
+    MedQA & Mistral Medium 3.5 & $\Delta\mathcal{F}$ & $-0.207$ & $0.8345$ & \hypothesisnotsupported\ No \\
+    \hline
+  \end{tabular}
+\end{hypothesis_test_results_box}

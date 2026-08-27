@@ -43,9 +43,13 @@
 \usepackage{fancyhdr}
 \usepackage{nomencl}
 \usepackage{chngcntr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics}
+\usepackage{tikzviolinplots}
 
 
-\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit,positioning,shapes.multipart,backgrounds}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit,positioning,shapes.multipart,backgrounds,external}
 
 \usepackage[style=ieee-alphabetic]{biblatex}
 \addbibresource{references.bib}
@@ -183,6 +187,31 @@
   #1
 }
 
+\newtcolorbox{hypothesis_test_results_box}[1][]{
+  enhanced,
+  breakable,
+  colback=Goldenrod!7!white,
+  colframe=Goldenrod!70!black,
+  fonttitle=\bfseries,
+  title={Hypothesis Test Results},
+  arc=2mm,
+  boxrule=0.5mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  #1
+}
+
+\newcommand{\hypothesissupported}{%
+  \tikz[baseline=-0.65ex]\node[circle,fill=ForestGreen,inner sep=1.15pt,
+    text=white,font=\scriptsize\bfseries] {$\checkmark$};%
+}
+\newcommand{\hypothesisnotsupported}{%
+  \tikz[baseline=-0.65ex]\node[circle,fill=BrickRed,inner sep=1.15pt,
+    text=white,font=\scriptsize\bfseries] {$\times$};%
+}
+
 \begin{document}
 
 % Front matter uses Roman page numbers. The title and declaration pages are
@@ -223,7 +252,9 @@
 \subfile{chapters/theoretical_conception}
 \subfile{chapters/modeling}
 \subfile{chapters/evaluation}
-\subfile{chapters/remaining_chapters}
+\subfile{chapters/results}
+\subfile{chapters/discussion}
+\subfile{chapters/conclusion}
 
 \printbibliography[heading=bibintoc]
 \subfile{chapters/appendix}
