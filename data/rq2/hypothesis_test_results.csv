@@ -1,0 +1,5 @@
+dataset,model,n,exact,p_ce,p_faithfulness,supported
+BBQ,GPT-OSS 120B,28,false,0.9851,0.1723,false
+BBQ,Mistral Medium 3.5,30,false,0.9121,0.3532,false
+MedQA,GPT-OSS 120B,29,false,0.9675,0.0413,false
+MedQA,Mistral Medium 3.5,4,false,0.614,0.4495,false

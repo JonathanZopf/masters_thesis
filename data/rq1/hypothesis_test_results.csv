@@ -1,0 +1,9 @@
+dataset,model,outcome,r,p,supported
+BBQ,GPT-OSS 120B,delta_ce,-0.072,0.6466,false
+BBQ,GPT-OSS 120B,delta_faithfulness,-0.094,0.6898,false
+BBQ,Mistral Medium 3.5,delta_ce,-0.025,0.5527,false
+BBQ,Mistral Medium 3.5,delta_faithfulness,-0.204,0.8606,false
+MedQA,GPT-OSS 120B,delta_ce,0.316,0.0472,true
+MedQA,GPT-OSS 120B,delta_faithfulness,0.029,0.441,false
+MedQA,Mistral Medium 3.5,delta_ce,0.145,0.2499,false
+MedQA,Mistral Medium 3.5,delta_faithfulness,-0.207,0.8345,false

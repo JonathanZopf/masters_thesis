@@ -187,30 +187,7 @@
   #1
 }
 
-\newtcolorbox{hypothesis_test_results_box}[1][]{
-  enhanced,
-  breakable,
-  colback=Goldenrod!7!white,
-  colframe=Goldenrod!70!black,
-  fonttitle=\bfseries,
-  title={Hypothesis Test Results},
-  arc=2mm,
-  boxrule=0.5mm,
-  left=3mm,
-  right=3mm,
-  top=2mm,
-  bottom=2mm,
-  #1
-}
-
-\newcommand{\hypothesissupported}{%
-  \tikz[baseline=-0.65ex]\node[circle,fill=ForestGreen,inner sep=1.15pt,
-    text=white,font=\scriptsize\bfseries] {$\checkmark$};%
-}
-\newcommand{\hypothesisnotsupported}{%
-  \tikz[baseline=-0.65ex]\node[circle,fill=BrickRed,inner sep=1.15pt,
-    text=white,font=\scriptsize\bfseries] {$\times$};%
-}
+\input{graphs/results/hypothesis_test_results}
 
 \begin{document}
 

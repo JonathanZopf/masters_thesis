@@ -1,0 +1,97 @@
+\chapter{LLM-Based Oracle Category Normalization}
+\label{app:oracle-category-normalization}
+
+The natural-language oracle returned 46 distinct category labels for BBQ and 236 for
+MedQA. Orthographic normalization alone reduced the MedQA vocabulary only to 222 labels
+and did not reduce the BBQ vocabulary. To obtain interpretable co-grouping heatmaps, an
+\textbf{OpenAI Codex large language model} assigned every raw label to exactly one
+dataset-specific high-level category. This is an analytical post-processing step and
+not an output of the FELICS auxiliary oracle.
+
+The assignment followed a fixed rubric. First, capitalization, Unicode dash variants,
+spacing, grammatical number, and obvious synonymous forms were treated as equivalent.
+Second, each label was assigned according to its primary semantic role. Composite or
+ambiguous labels were assigned to the most specific applicable family; no label was
+duplicated across families. Third, the resulting mapping was frozen and applied
+identically to both evaluated models and all examples. The large language model saw
+only the raw category label during assignment: concept texts, group memberships,
+model outputs, and calculated co-grouping rates were not used. Consequently, the
+normalization cannot be interpreted as an independently validated clinical or social
+science taxonomy. The complete auditable mapping is stored in
+\texttt{data/oracle\_category\_mapping.csv}, and the augmented concept-level data are
+stored in \texttt{data/oracle\_assignments\_normalized.csv}.
+
+Let $\pi(x,y)$ denote an unordered pair. For normalized categories $a$ and $b$,
+the displayed co-grouping rate is
+\begin{equation}
+  r_{ab}=
+  \frac{\sum_{q}\sum_{i<j}
+    \mathbb{1}[\pi(A_{qi},A_{qj})=\pi(a,b)]\,
+    \mathbb{1}[G_{qi}=G_{qj}]}
+  {\sum_{q}\sum_{i<j}
+    \mathbb{1}[\pi(A_{qi},A_{qj})=\pi(a,b)]},
+\end{equation}
+where $q$ indexes a question/model run, $A_{qi}$ is the normalized category of concept
+$i$, and $G_{qi}$ is its oracle group. Pairs are never formed across questions or runs. A cell is undefined when
+its denominator is zero and is shown in gray.
+
+\section*{BBQ category families}
+
+\begingroup\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}p{0.62\textwidth}@{}}
+\hline
+\textbf{High-level category} & \textbf{Assignment scope} \\
+\hline
+\endfirsthead
+\hline
+\textbf{High-level category} & \textbf{Assignment scope} \\
+\hline
+\endhead
+Demographics & Age, gender, sexual orientation or sexuality, appearance, and general demographic descriptors. \\
+Relationships \& family & Relationships and their status or type, family structure or status, and intimacy. \\
+Actions \& behavior & Actions, activities, behavior, interaction, and action-related statements or objects. \\
+Topics \& communication & Topics of conversation or interest, communication, questions, and information sources. \\
+Intentions \& attitudes & Intentions, preferences, attitudes or opinions, interests, concerns, and uncertainty. \\
+Emotions \& reactions & Emotions, feelings, reactions, and mixed intention/emotion labels. \\
+Setting \& time & Locations, environments, time, and mixed location/event labels. \\
+Events \& situations & Events, situations, experiences, and challenges. \\
+Identity \& roles & Names and social or narrative roles. \\
+Other details & Non-specific detail labels that could not be assigned more narrowly. \\
+\hline
+\end{longtable}
+\endgroup
+
+\section*{MedQA category families}
+
+\begingroup\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.31\textwidth}p{0.62\textwidth}@{}}
+\hline
+\textbf{High-level category} & \textbf{Assignment scope} \\
+\hline
+\endfirsthead
+\hline
+\textbf{High-level category} & \textbf{Assignment scope} \\
+\hline
+\endhead
+Demographics & Age, sex or gender, race/ethnicity, and socioeconomic status. \\
+Symptoms & Presenting, systemic, organ-specific, pain, rash, sleep, and other symptom descriptions. \\
+Timing \& course & Onset, duration, chronology, progression, follow-up, and temporal relationships. \\
+Medical history & General medical, allergy, congenital, collateral, and disease-control history. \\
+Family, social \& lifestyle & Family and social history, behavior, diet, occupation, living situation, lifestyle, and substance use. \\
+Reproductive history & Obstetric, gynecologic, menstrual, pregnancy, prenatal, gestational, and reproductive information. \\
+Medication \& adherence & Medication exposure or history, medication changes, adherence, and compliance. \\
+Treatment \& response & Management, interventions, treatment plans or timelines, and clinical response. \\
+Vitals \& anthropometrics & Vital signs, anthropometric measurements, body weight, obesity, and derived measurements. \\
+Physical examination & General and system-specific examinations, appearance, maneuvers, measurements, and examination findings. \\
+Laboratory \& pathology & Laboratory panels, microbiology, urinalysis, biopsy, pathology, and specimen findings. \\
+Imaging & Imaging and radiographic findings, including infarct localization or type. \\
+Diagnostic tests & Non-imaging diagnostic studies such as ECG, audiometry, polysomnography, and ophthalmologic testing. \\
+Anatomy \& localization & Anatomical structure, location, laterality, distribution, and localized mass descriptors. \\
+Neurologic function & Neurologic examination, sensory or motor deficits, nerve involvement, and related function. \\
+Mental health \& cognition & Mental status, cognition, psychiatric or psychological information, affect, and suicide risk. \\
+Diagnosis \& reasoning & Diagnoses, provisional or differential diagnoses, and diagnostic considerations. \\
+Care context & Reason for visit, care setting or utilization, prior care, prevention goals, and patient concerns. \\
+Risk, exposure \& trauma & Risk factors, environmental exposure, trauma, travel, and potentially relevant recent activity. \\
+\hline
+\end{longtable}
+\endgroup

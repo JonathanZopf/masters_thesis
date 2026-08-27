@@ -1,0 +1,77 @@
+% Shared presentation component for hypothesis-test summaries.
+% Usage: \HypothesisTestResults[<tcolorbox options>]{<introductory text>}{<CSV path>}
+
+\newcommand{\hypothesissupported}{%
+  \tikz[baseline=-0.65ex]\node[circle,fill=ForestGreen,inner sep=1.15pt,
+    text=white,font=\scriptsize\bfseries] {$\checkmark$};%
+}
+\newcommand{\hypothesisnotsupported}{%
+  \tikz[baseline=-0.65ex]\node[circle,fill=BrickRed,inner sep=1.15pt,
+    text=white,font=\scriptsize\bfseries] {$\times$};%
+}
+
+\newtcolorbox[auto counter,number within=chapter]{hypothesis_test_results_box}[1][]{
+  enhanced,
+  breakable,
+  colback=Goldenrod!7!white,
+  colframe=Goldenrod!70!black,
+  fonttitle=\bfseries,
+  title={Hypothesis Test Results \thetcbcounter},
+  arc=2mm,
+  boxrule=0.5mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  #1
+}
+
+\newcommand{\hypothesisresultref}[1]{Hypothesis Test Results~\ref{#1}}
+
+\pgfplotstableset{
+  hypothesis results/.style={
+    col sep=comma,
+    trim cells=true,
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+    every even row/.style={before row={\rowcolor{Goldenrod!9!white}}},
+    columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
+    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+    columns/outcome/.style={
+      column name={\textbf{Outcome}},column type=c,string type,
+      string replace={delta_ce}{$\Delta\mathrm{CE}$},
+      string replace={delta_faithfulness}{$\Delta\mathcal{F}$}
+    },
+    columns/r/.style={column name={\textbf{$r$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/rho/.style={column name={\textbf{$\rho$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/n/.style={column name={\textbf{$n$}},column type=r,fixed,precision=0},
+    columns/v/.style={column name={\textbf{$V$}},column type=r,fixed,precision=0},
+    columns/p/.style={column name={\textbf{$p$}},column type=r,fixed,fixed zerofill,precision=4},
+    columns/p_scientific/.style={column name={\textbf{$p$}},column type=r,sci,sci zerofill,precision=2},
+    columns/p_ce/.style={column name={\textbf{$p_{\mathrm{CE}}$}},column type=r,fixed,fixed zerofill,precision=4},
+    columns/p_faithfulness/.style={column name={\textbf{$p_{\mathcal{F}}$}},column type=r,fixed,fixed zerofill,precision=4},
+    columns/exact/.style={
+      column name={\textbf{Exact?}},column type=c,string type,
+      string replace={true}{Yes},
+      string replace={false}{No}
+    },
+    columns/supported/.style={
+      column name={\textbf{Supported?}},column type=c,string type,
+      string replace={true}{\hypothesissupported\ Yes},
+      string replace={false}{\hypothesisnotsupported\ No}
+    }
+  }
+}
+
+\NewDocumentCommand{\HypothesisTestResults}{O{} m m}{%
+  \begin{hypothesis_test_results_box}[#1]
+    \centering
+    {\small #2\par}
+    \vspace{0.7em}
+    {\small
+      \setlength{\tabcolsep}{3.7pt}%
+      \renewcommand{\arraystretch}{1.12}%
+      \pgfplotstabletypeset[hypothesis results]{#3}%
+    }
+  \end{hypothesis_test_results_box}%
+}

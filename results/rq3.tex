@@ -1,28 +1,10 @@
 \section{Preservation of Concept Rankings}
 \label{sec:results-ranking-preservation}
 
-\begin{hypothesis_test_results_box}
-  \centering
-  \captionof{table}{One-sided Spearman tests for \rqref{rq:ranking}. A
-  combination supports the hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
-  \label{tab:hyp3-results}
-  \small
-  \setlength{\tabcolsep}{5.0pt}
-  \renewcommand{\arraystretch}{1.12}
-  \rowcolors{2}{Goldenrod!9!white}{white}
-  \begin{tabular}{@{}llrrc@{}}
-    \hline
-    \textbf{Dataset} & \textbf{Model} & \textbf{$\rho$} & \textbf{$p$} & \textbf{Supported?} \\
-    \hline
-    BBQ & GPT-OSS 120B & $0.944$ & $2.68\times10^{-67}$ & \hypothesissupported\ Yes \\
-    BBQ & Mistral Medium 3.5 & $0.903$ & $8.66\times10^{-52}$ & \hypothesissupported\ Yes \\
-    MedQA & GPT-OSS 120B & $0.983$ & $5.93\times10^{-323}$ & \hypothesissupported\ Yes \\
-    MedQA & Mistral Medium 3.5 & $0.939$ & $6.68\times10^{-121}$ & \hypothesissupported\ Yes \\
-    New German Credit & GPT-OSS 120B & $0.913$ & $4.87\times10^{-142}$ & \hypothesissupported\ Yes \\
-    New German Credit & Mistral Medium 3.5 & $0.909$ & $1.30\times10^{-138}$ & \hypothesissupported\ Yes \\
-    \hline
-  \end{tabular}
-\end{hypothesis_test_results_box}
+\HypothesisTestResults[label=hyp:hyp3-results]
+  {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
+  hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
+  {data/rq3/hypothesis_test_results.csv}
 
 % #1 title, #2 CSV file, #3 exact count, #4 total count, #5 exact percentage.
 \newcommand{\HypThreeExceptionTable}[5]{%

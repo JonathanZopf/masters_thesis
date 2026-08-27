@@ -76,28 +76,9 @@
   \label{fig:hyp4-identity-plots}
 \end{figure}
 
-\begin{hypothesis_test_results_box}
-  \centering
-  \captionof{table}{Paired one-sided Wilcoxon signed-rank tests for
+\HypothesisTestResults[label=hyp:hyp4-results]
+  {Paired one-sided Wilcoxon signed-rank tests for
   \rqref{rq:faithfulness_increase}. The alternative is
   $\mathcal{F}_{\mathrm{joint}}>\mathcal{F}_{\mathrm{atomic}}$; support requires
   $p\leq0.05$.}
-  \label{tab:hyp4-results}
-  \small
-  \setlength{\tabcolsep}{5.2pt}
-  \renewcommand{\arraystretch}{1.12}
-  \rowcolors{2}{Goldenrod!9!white}{white}
-  \begin{tabular}{@{}llcccc@{}}
-    \hline
-    \textbf{Dataset} & \textbf{Model} & \textbf{$n$} & \textbf{$V$} &
-    \textbf{$p$} & \textbf{Supported?} \\
-    \hline
-    BBQ & GPT-OSS 120B & 30 & 199 & $0.2514$ & \hypothesisnotsupported\ No \\
-    BBQ & Mistral Medium 3.5 & 30 & 292 & $0.8897$ & \hypothesisnotsupported\ No \\
-    MedQA & GPT-OSS 120B & 29 & 202 & $0.3787$ & \hypothesisnotsupported\ No \\
-    MedQA & Mistral Medium 3.5 & 24 & 192 & $0.8854$ & \hypothesisnotsupported\ No \\
-    New German Credit & GPT-OSS 120B & 30 & 370 & $0.9983$ & \hypothesisnotsupported\ No \\
-    New German Credit & Mistral Medium 3.5 & 30 & 130 & $0.0173$ & \hypothesissupported\ Yes \\
-    \hline
-  \end{tabular}
-\end{hypothesis_test_results_box}
+  {data/rq4/hypothesis_test_results.csv}

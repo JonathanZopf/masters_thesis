@@ -1,0 +1,7 @@
+dataset,model,n,v,p,supported
+BBQ,GPT-OSS 120B,30,199,0.2514,false
+BBQ,Mistral Medium 3.5,30,292,0.8897,false
+MedQA,GPT-OSS 120B,29,202,0.3787,false
+MedQA,Mistral Medium 3.5,24,192,0.8854,false
+New German Credit,GPT-OSS 120B,30,370,0.9983,false
+New German Credit,Mistral Medium 3.5,30,130,0.0173,true

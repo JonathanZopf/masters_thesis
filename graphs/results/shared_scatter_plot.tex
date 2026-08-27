@@ -1,0 +1,132 @@
+% Reusable two-dimensional result plot.
+% Callers provide data and presentation details through named keys so that
+% result sections only need to define their local conventions.
+\definecolor{ResultScatterPoints}{HTML}{2878B5}
+\definecolor{ResultScatterLine}{HTML}{E37A26}
+
+\newif\ifResultScatterScaleOnlyAxis
+
+\pgfkeys{
+  /result scatter/.is family,
+  /result scatter/.cd,
+  title/.store in=\ResultScatterTitle,
+  data/.store in=\ResultScatterData,
+  x column/.store in=\ResultScatterXColumn,
+  y column/.store in=\ResultScatterYColumn,
+  x label/.store in=\ResultScatterXLabel,
+  y label/.store in=\ResultScatterYLabel,
+  text below/.store in=\ResultScatterTextBelow,
+  xmin/.store in=\ResultScatterXMin,
+  xmax/.store in=\ResultScatterXMax,
+  ymin/.store in=\ResultScatterYMin,
+  ymax/.store in=\ResultScatterYMax,
+  line slope/.store in=\ResultScatterLineSlope,
+  line intercept/.store in=\ResultScatterLineIntercept,
+  line style/.store in=\ResultScatterLineStyle,
+  minipage width/.store in=\ResultScatterMinipageWidth,
+  plot width/.store in=\ResultScatterPlotWidth,
+  plot height/.store in=\ResultScatterPlotHeight,
+  mark size/.store in=\ResultScatterMarkSize,
+  below skip/.store in=\ResultScatterBelowSkip,
+  title gap/.store in=\ResultScatterTitleGap,
+  x tick precision/.store in=\ResultScatterXTickPrecision,
+  y tick precision/.store in=\ResultScatterYTickPrecision,
+  scale only axis/.is if=ResultScatterScaleOnlyAxis,
+}
+
+\newcommand{\ResultScatterPlot}[1]{%
+  \begingroup
+  \pgfkeys{/result scatter/.cd,
+    title={},
+    data={},
+    x column={},
+    y column={},
+    x label={},
+    y label={},
+    text below={},
+    xmin=0,
+    xmax=1,
+    ymin=0,
+    ymax=1,
+    line slope=1,
+    line intercept=0,
+    line style=solid,
+    minipage width=0.485\textwidth,
+    plot width=\linewidth,
+    plot height=5.45cm,
+    mark size=1.65pt,
+    below skip=-0.25em,
+    title gap=2mm,
+    x tick precision=3,
+    y tick precision=3,
+    scale only axis=false,#1
+  }%
+  \begin{minipage}[t]{\ResultScatterMinipageWidth}
+    \centering
+    \ifResultScatterScaleOnlyAxis
+      \pgfplotsset{result scatter sizing/.style={scale only axis}}
+    \else
+      \pgfplotsset{result scatter sizing/.style={}}
+    \fi
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=\ResultScatterPlotWidth,
+        height=\ResultScatterPlotHeight,
+        result scatter sizing,
+        title={\ResultScatterTitle},
+        title style={
+          at={(axis description cs:0.5,1)},
+          anchor=south,
+          yshift=\ResultScatterTitleGap,
+          font=\small\bfseries,
+        },
+        xmin=\ResultScatterXMin,
+        xmax=\ResultScatterXMax,
+        ymin=\ResultScatterYMin,
+        ymax=\ResultScatterYMax,
+        xlabel={\ResultScatterXLabel},
+        ylabel={\ResultScatterYLabel},
+        scaled x ticks=false,
+        scaled y ticks=false,
+        xticklabel style={
+          font=\scriptsize,
+          /pgf/number format/fixed,
+          /pgf/number format/precision=\ResultScatterXTickPrecision,
+        },
+        yticklabel style={
+          font=\scriptsize,
+          /pgf/number format/fixed,
+          /pgf/number format/precision=\ResultScatterYTickPrecision,
+        },
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+        clip=true,
+      ]
+        \addplot[
+          only marks,
+          mark=*,
+          mark size=\ResultScatterMarkSize,
+          draw=ResultScatterPoints,
+          fill=ResultScatterPoints,
+          fill opacity=0.68,
+        ] table[
+          col sep=comma,
+          x=\ResultScatterXColumn,
+          y=\ResultScatterYColumn
+        ] {\ResultScatterData};
+        \addplot[
+          ResultScatterLine,
+          very thick,
+          \ResultScatterLineStyle,
+          domain=\ResultScatterXMin:\ResultScatterXMax,
+          samples=2
+        ] {\ResultScatterLineIntercept + \ResultScatterLineSlope*x};
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{\ResultScatterBelowSkip}
+    {\scriptsize \ResultScatterTextBelow\par}
+  \end{minipage}%
+  \endgroup
+}
