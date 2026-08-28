@@ -1,3 +1,34 @@
 \section{Evolution of Question-Level Faithfulness}
-\input{graphs/results/summary}
+
+% Read the compiler's HOME path.  The graph is enabled only on Jonathan's
+% machine; Overleaf and other environments do not have "jonathan" in HOME.
+\makeatletter
+\begingroup\endlinechar=-1\relax
+  \everyeof{\noexpand}%
+  \edef\x{\endgroup
+    \def\noexpand\thesishomepath{%
+      \@@input|"kpsewhich --var-value=HOME" }}\x
+\makeatother
+
+\newif\ifthesislocalbuild
+\ExplSyntaxOn
+\exp_args:NV \tl_if_in:nnTF \thesishomepath { jonathan }
+  { \thesislocalbuildtrue }
+  { \thesislocalbuildfalse }
+\ExplSyntaxOff
+
+\ifthesislocalbuild
+  \input{graphs/results/summary}
+\else
+  \typeout{Non-local build detected: skipping graphs/results/summary.tex}
+  \begin{tcolorbox}[
+    colback=orange!12,
+    colframe=orange!80!black,
+    fonttitle=\bfseries,
+    title={Compilation warning}
+  ]
+    This part of the document cannot be compiled on Overleaf and has therefore
+    been omitted from this build.
+  \end{tcolorbox}
+\fi
 \FloatBarrier
