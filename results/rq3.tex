@@ -1,10 +1,7 @@
 \section{Preservation of Concept Rankings}
 \label{sec:results-ranking-preservation}
 
-\HypothesisTestResults[label=hyp:hyp3-results]
-  {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
-  hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
-  {data/rq3/hypothesis_test_results.csv}
+One major departure of FELICS from the original metric by Matton et al.\ \cite{mattonWalkTalkMeasuring2024} is the normalization of the Shapley causal effects described in Section~\ref{sec:shapley_correction}. Research Question~\ref{rq:ranking}, introduced in Section~\ref{sec:research_questions}, evaluates whether this normalization substantially changes the relative ranking of concepts. For each dataset--model combination, the rankings before and after normalization are compared using Spearman's rank-correlation coefficient $\rho$. Table~\ref{tab:hyp3-question-exceptions} lists questions for which the rankings are not identical, indicated by $\rho<1$.
 
 % #1 title, #2 CSV file, #3 exact count, #4 total count, #5 exact percentage.
 \newcommand{\HypThreeExceptionTable}[5]{%
@@ -68,3 +65,10 @@
   all questions in the respective combination.}
   \label{tab:hyp3-question-exceptions}
 \end{table}
+
+Table~\ref{tab:hyp3-question-exceptions} contains several questions without exact rank preservation, especially for New German Credit where nearly all questions have flipped. Still, all dataset--model combinations meet the prespecified criterion of $\rho\geq0.90$ and $p\leq0.05$, as documented in Box~\ref{hyp:hyp3-results}. The results therefore support a strong positive association between the raw and normalized concept rankings at the aggregate level. They do not imply exact preservation for every question, but they provide no indication of a broad structural reordering of which concepts are estimated to be most causally influential.
+
+\HypothesisTestResults[label=hyp:hyp3-results]
+  {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
+  hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
+  {data/rq3/hypothesis_test_results.csv}

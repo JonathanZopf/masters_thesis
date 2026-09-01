@@ -3,12 +3,12 @@
 
 Tables~\ref{tab:oracle-bbq}--\ref{tab:oracle-credit} summarize the partitions produced
 for the joint configurations. Since both evaluated models use \texttt{gpt-oss:120b} as
-the auxiliary model, their independently generated partitions are pooled. The
+the auxiliary model $A$, their independently generated partitions are pooled. The
 counterfactual multiplier is
 $\sum_{s\in\mathcal{S}}(2^{|s|}-1)/|\mathbf{C}|$, relative to one atomic
 counterfactual per concept. Counterfactual counts refer to successfully written files;
 the multiplier instead reflects the complete oracle partitions and is therefore not
-reduced by later generation failures.
+reduced by later generation failures. \emph{Concepts grouped} denotes the percentage of concepts assigned to non-singleton groups. All values are aggregated across the two runs with different evaluation models $M$.
 
 \begingroup
 \setlength{\tabcolsep}{3pt}
@@ -80,40 +80,30 @@ reduced by later generation failures.
 
 The natural-language results contain many more singleton groups than the tabular
 partition, although roughly half of the concepts in both BBQ and MedQA still occur in
-non-singleton groups. MedQA question~362 produced no partition in either model run and
-is excluded rather than counted as an empty output. Two observed MedQA groups contained
-five and six concepts, respectively, exceeding the nominal value of $n_{\max}=4$; the
-table reports the partitions that were actually consumed by the pipeline. BBQ's oracle
-partitions imply 349 counterfactuals, of which 342 were written successfully.
-
-In the tables, \emph{valid outputs} counts runs with a partition; \emph{mean group
-    size} averages across pooled groups; and the size rows give their distribution.
-\emph{Singleton groups} is the share of size-one groups; \emph{concepts grouped} is the
-share of concepts in larger groups. \emph{Counterfactuals} counts written files; \emph{increase over
-    atomic} divides the count implied by the complete partition by one per concept.
+non-singleton groups. Two anomalous MedQA groups contained
+five and six concepts, respectively, exceeding the imposed value of $n_{\max}=4$. BBQ's oracle
+partitions imply 349 counterfactuals, of which 342 were parsed and written successfully.
 
 For Figure~\ref{fig:oracle-category-heatmaps}, an OpenAI Codex large language model
 mapped the 46 raw BBQ and 236 raw MedQA labels to 10 and 19 high-level categories. It
 used only the labels, with one fixed mapping across all runs, and did not see group
 membership or calculated rates. Appendix~\ref{app:oracle-category-normalization}
-documents the method and definitions; \texttt{data/oracle\_category\_mapping.csv}
-retains every assignment.
+documents the method and definitions. This aggregation makes the resulting heat map easier to interpret.
 
-Each cell is the percentage of eligible, within-question concept pairs placed in the
-same group, pooling both models. Gray cells have no eligible pair. This conditional rate
-also prevents frequent categories from dominating merely because they occur more often.
+Each cell is the percentage of within-question concept pairs placed in the
+same group, pooling both models. Gray denotes that no pair from
+the two categories co-occurred in an evaluated question. The use of conditional percentages prevents frequent categories from dominating solely because they occur more often.
 \input{graphs/results/oracle_grouping_heatmap}
 \FloatBarrier
 Figure~\ref{fig:german-credit-grouping-final} shows the deterministic tabular oracle's
 partition, reused for every New German Credit item: three groups of three concepts, one
-pair, and one singleton.
+pair, and one singleton. This partition represents the final state of the grouping algorithm in Algorithm~\ref{alg:greedy_merge}. Node colors identify the five final groups, thick green edges
+are the accepted merge edges, and thin gray edges show other statistically retained
+pairwise associations. Edge labels report Cram\'er's $V$.
 
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.84\textwidth,height=0.34\textheight,keepaspectratio]{german_credit_grouping.png}
-  \caption{Final state of the constrained greedy grouping algorithm for New German
-  Credit at $n_{\max}=3$. Node colors identify the five final groups, thick green edges
-  are the accepted merge edges, and thin gray edges show other statistically retained
-  pairwise associations. Edge labels report Cram\'er's $V$.}
+  \caption{Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max}=3$.}
   \label{fig:german-credit-grouping-final}
 \end{figure}

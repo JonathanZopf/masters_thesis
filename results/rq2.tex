@@ -1,5 +1,8 @@
 \section{Validation against the Original Implementation}
 \label{sec:results-original-validation}
+Research Question~\ref{rq:convergence} examines whether FELICS and the original \emph{Causal Concept Faithfulness} metric by Matton et al.\ \cite{mattonWalkTalkMeasuring2024} yield equivalent empirical results when FELICS is restricted to $n_{\max}=1$. Under this restriction, concepts are intervened on only as singletons. The comparison uses independently sampled runs of the two implementations. For BBQ and MedQA, these runs may extract different concepts from the same question. New German Credit has a fixed feature-derived concept set, but the two implementations use different value modifications for their singleton counterfactuals. Establishing empirical equivalence would provide evidence that FELICS reproduces the behavior of the original metric in the singleton setting under these experimental conditions.
+
+Figures~\ref{fig:hyp2-identity-natural-language} and~\ref{fig:hyp2-identity-credit} compare the question-level faithfulness scores produced by the two implementations. Each point represents a shared question, with its position determined by the faithfulness scores assigned by the original implementation and FELICS. The dashed orange identity line denotes exact agreement. All panels use the same range of $[-1,1]$ on both axes, allowing deviations from the identity line to be compared directly across datasets and models.
 
 % RQ2 preset: square axes, fixed faithfulness columns, and dashed identity line.
 % #1 sample size, #2 plot-specific keys.
@@ -26,38 +29,89 @@
   \centering
   \HypTwoIdentityPlot{28}{title={BBQ --- GPT-OSS 120B},
     data=data/rq2/bbq_gptoss.csv,
-    xmin=-1.1, xmax=0.65,
-    ymin=-1.1, ymax=0.65
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
   }
   \hfill
   \HypTwoIdentityPlot{30}{title={BBQ --- Mistral Medium 3.5},
     data=data/rq2/bbq_mistral.csv,
-    xmin=-0.4, xmax=0.65,
-    ymin=-0.4, ymax=0.65
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
   }
 
   \par\vspace{1.1em}
   \HypTwoIdentityPlot{29}{title={MedQA --- GPT-OSS 120B},
     data=data/rq2/medqa_gptoss.csv,
-    xmin=-0.4, xmax=0.5,
-    ymin=-0.4, ymax=0.5
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
   }
   \hfill
   \HypTwoIdentityPlot{4}{title={MedQA --- Mistral Medium 3.5},
     data=data/rq2/medqa_mistral.csv,
-    xmin=-0.3, xmax=0.35,
-    ymin=-0.3, ymax=0.35
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
   }
 
   \caption[Identity plots for the completed RQ2 comparisons]{Question-level
   faithfulness produced by FELICS with $n_{\max}=1$ and the original Matton
-  implementation for the four completed natural-language comparisons. The
-  dashed orange line denotes exact identity.}
+  implementation for the four natural-language comparisons.}
   \label{fig:hyp2-identity-natural-language}
 \end{figure}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoIdentityPlot{30}{title={New German Credit --- GPT-OSS 120B},
+    data=data/rq2/new_german_credit_gptoss.csv,
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
+  }
+  \hfill
+  \HypTwoIdentityPlot{30}{title={New German Credit --- Mistral Medium 3.5},
+    data=data/rq2/new_german_credit_mistral.csv,
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1
+  }
+
+  \caption[Identity plots for the New German Credit RQ2 comparisons]{Question-level
+  faithfulness produced by FELICS with $n_{\max}=1$ and the tabular adaptation
+  of the Matton implementation for New German Credit.}
+  \label{fig:hyp2-identity-credit}
+\end{figure}
+
+Applying the TOST procedure defined in Section~\ref{sec:analysis_procedures} yields the $p$-values reported in Box~\ref{hyp:hyp2-results}. None of the six dataset--model combinations establishes equivalence for both question-averaged causal effects and faithfulness within the prespecified margins. For New German Credit with GPT-OSS 120B, faithfulness falls within the equivalence margin ($p=0.0002$), but CE does not ($p=0.8749$). With Mistral Medium 3.5, neither CE ($p=1.0000$) nor faithfulness ($p=0.9985$) is equivalent. Consequently, the available data do not provide sufficient evidence of empirical equivalence between the two implementations.
 
 \HypothesisTestResults[label=hyp:hyp2-results]
   {Validation tests for \rqref{rq:convergence}. The reported TOST $p$-value is
   the larger of the two one-sided component $p$-values; equivalence requires it
   to be below $\alpha=0.05$.}
   {data/rq2/hypothesis_test_results.csv}
+
+Failure to establish equivalence does not, by itself, demonstrate that the implementations differ statistically or practically. To examine the complementary hypothesis, two-sided one-sample $t$-tests were applied to the same paired-difference vectors used by the TOST procedure. The null hypothesis for these tests is a mean paired difference of zero. Table~\ref{tab:hyp2-difference-tests} reports the unadjusted results, where positive mean differences indicate larger values for FELICS.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}
+  \label{tab:hyp2-difference-tests}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.1}
+  \pgfplotstabletypeset[
+    col sep=comma,
+    trim cells=true,
+    columns={dataset,model,n_ce,mean_ce_difference,p_ce,mean_faithfulness_difference,p_faithfulness},
+    columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
+    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+    columns/n_ce/.style={column name={\textbf{$n$}},column type=r,fixed,precision=0},
+    columns/mean_ce_difference/.style={column name={\textbf{$\bar d_{\mathrm{CE}}$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/p_ce/.style={column name={\textbf{$p_{\mathrm{CE}}$}},column type=r,fixed,fixed zerofill,precision=4},
+    columns/mean_faithfulness_difference/.style={column name={\textbf{$\bar d_{\mathcal{F}}$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/p_faithfulness/.style={column name={\textbf{$p_{\mathcal{F}}$}},column type=r,fixed,fixed zerofill,precision=4},
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+    every even row/.style={before row={\rowcolor{gray!8}}},
+  ]{data/rq2/difference_test_results.csv}
+\end{table}
+
+At the nominal $\alpha=0.05$ level, the CE differences are statistically significant for BBQ with GPT-OSS 120B ($p=0.0113$), MedQA with GPT-OSS 120B ($p=0.0206$), and New German Credit with Mistral Medium 3.5 ($p<0.0001$). The faithfulness differences are significant for both New German Credit comparisons ($p<0.0001$), but not for BBQ or MedQA. New German Credit with Mistral Medium 3.5 is therefore the only dataset--model combination with a statistically significant difference in both outcomes.
+
+This New German Credit result must be interpreted in light of the intervention inputs. Although its feature-derived concept set is fixed, the two evaluated pipelines do not construct identical counterfactuals: the tabular Matton adaptation replaces a feature with another plausible value, whereas the FELICS atomic run marks the intervened feature as unavailable. The comparison therefore changes both implementation and intervention semantics. It cannot serve as a deterministic implementation-agreement check, and its failure does not contradict the theoretical singleton-group compatibility result. More generally, the evidence does not establish empirical equivalence under the evaluated runs, so Research Question~\ref{rq:convergence} cannot be answered affirmatively from these results.

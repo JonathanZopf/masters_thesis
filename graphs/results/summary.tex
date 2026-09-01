@@ -1,35 +1,34 @@
 \definecolor{FelicsAtomic}{HTML}{2878B5}
 \definecolor{FelicsJoint}{HTML}{E37A26}
 
-\newcount\faithfulnessvaluecount
-\newcount\faithfulnessvaluerow
-\def\faithfulnessvaluesum{0}
+\def\FaithfulnessDatasetEstimateFile{data/summary/dataset_faithfulness_estimates.csv}
+\pgfplotstableread[col sep=comma]{\FaithfulnessDatasetEstimateFile}%
+  \faithfulnessdatasetestimatetable
 
-% #3 receives the arithmetic mean of the requested question-level CSV column.
-% The displayed value is therefore calculated from exactly the plotted points.
-\newcommand{\FaithfulnessMeanFromColumn}[3]{%
-  \IfFileExists{#1}{}{%
-    \PackageError{felics-rainclouds}{Project-local faithfulness data not found: #1}%
-      {Ensure that the raincloud CSV files are present in the data directory.}%
-  }%
-  \pgfplotstableread[col sep=comma]{#1}\faithfulnessmeantable
-  \pgfplotstablegetrowsof{\faithfulnessmeantable}%
-  \pgfmathtruncatemacro{\faithfulnessvaluelast}{\pgfplotsretval-1}%
-  \global\faithfulnessvaluecount=0
-  \gdef\faithfulnessvaluesum{0}%
-  \faithfulnessvaluerow=0
-  \loop\ifnum\faithfulnessvaluerow<\numexpr\faithfulnessvaluelast+1\relax
-    \pgfplotstablegetelem{\the\faithfulnessvaluerow}{#2}\of\faithfulnessmeantable
-    \pgfmathparse{\faithfulnessvaluesum+(\pgfplotsretval)}%
-    \global\let\faithfulnessvaluesum\pgfmathresult
-    \global\advance\faithfulnessvaluecount by 1
-    \advance\faithfulnessvaluerow by 1
+% Look up the two posterior dataset-level estimates for a panel id.
+% #1 panel id, #2 atomic result macro, #3 joint result macro.
+\newcount\faithfulnessestimaterow
+\newif\iffaithfulnessestimatefound
+\newcommand{\FaithfulnessDatasetEstimates}[3]{%
+  \global\faithfulnessestimatefoundfalse
+  \pgfplotstablegetrowsof{\faithfulnessdatasetestimatetable}%
+  \pgfmathtruncatemacro{\faithfulnessestimatelast}{\pgfplotsretval-1}%
+  \faithfulnessestimaterow=0
+  \loop\ifnum\faithfulnessestimaterow<\numexpr\faithfulnessestimatelast+1\relax
+    \pgfplotstablegetelem{\the\faithfulnessestimaterow}{panel_id}\of\faithfulnessdatasetestimatetable
+    \edef\faithfulnessestimatepanel{\pgfplotsretval}%
+    \ifnum\pdfstrcmp{\faithfulnessestimatepanel}{#1}=0\relax
+      \pgfplotstablegetelem{\the\faithfulnessestimaterow}{atomic_dataset_faithfulness}\of\faithfulnessdatasetestimatetable
+      \xdef#2{\pgfplotsretval}%
+      \pgfplotstablegetelem{\the\faithfulnessestimaterow}{joint_dataset_faithfulness}\of\faithfulnessdatasetestimatetable
+      \xdef#3{\pgfplotsretval}%
+      \global\faithfulnessestimatefoundtrue
+    \fi
+    \advance\faithfulnessestimaterow by 1
   \repeat
-  \ifnum\faithfulnessvaluecount>0
-    \pgfmathparse{\faithfulnessvaluesum/\the\faithfulnessvaluecount}%
-    \xdef#3{\pgfmathresult}%
-  \else
-    \PackageError{felics-rainclouds}{No question-level values found in column #2 of #1}{}%
+  \iffaithfulnessestimatefound\else
+    \PackageError{felics-rainclouds}{No dataset estimate found for panel #1}%
+      {Add the panel id and its estimates to \FaithfulnessDatasetEstimateFile.}%
   \fi
 }
 
@@ -69,12 +68,13 @@
   % A CSV content change produces a new externalized filename. pgf/TikZ's
   % own MD5 check additionally invalidates the panel when its drawing code changes.
   \edef\FaithfulnessDataHash{\pdfmdfivesum file {#2}}%
-  \tikzsetnextfilename{faithfulness-#3-\FaithfulnessDataHash}%
+  \edef\FaithfulnessEstimateHash{\pdfmdfivesum file {\FaithfulnessDatasetEstimateFile}}%
+  \tikzsetnextfilename{faithfulness-#3-\FaithfulnessDataHash-\FaithfulnessEstimateHash}%
   \begin{tikzpicture}
     % Keep table processing inside the externalized picture. Cached panels
-    % therefore skip both mean calculation and KDE generation on later passes.
-    \FaithfulnessMeanFromColumn{#2}{atomic_faithfulness}{\AtomicFaithfulnessMean}%
-    \FaithfulnessMeanFromColumn{#2}{interaction_faithfulness}{\JointFaithfulnessMean}%
+    % therefore skip both estimate lookup and KDE generation on later passes.
+    \FaithfulnessDatasetEstimates{#3}%
+      {\AtomicDatasetFaithfulness}{\JointDatasetFaithfulness}%
     % Use tikzviolinplots only for its native TeX KDE calculation.  The package
     % always draws a violin after computing \violin@kde, so clip those helper
     % axes to an empty region while retaining the computed table.
@@ -145,14 +145,16 @@
           {#2};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsAtomic]
         at (axis cs:-.95,5.72) {Atomic};
-      \node[anchor=west,font=\scriptsize,text=FelicsAtomic]
+      \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,5.72)
-        {Mean: \pgfmathprintnumber[fixed,precision=2]{\AtomicFaithfulnessMean}};
+        {$\mathcal{F}(\mathbf{X})=
+          \pgfmathprintnumber[fixed,precision=3]{\AtomicDatasetFaithfulness}$};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsJoint]
         at (axis cs:-.95,2.98) {Joint};
-      \node[anchor=west,font=\scriptsize,text=FelicsJoint]
+      \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,2.98)
-        {Mean: \pgfmathprintnumber[fixed,precision=2]{\JointFaithfulnessMean}};
+        {$\mathcal{F}(\mathbf{X})=
+          \pgfmathprintnumber[fixed,precision=3]{\JointDatasetFaithfulness}$};
     \end{axis}
   \end{tikzpicture}%
   \end{minipage}%
@@ -187,7 +189,7 @@
     {data/summary/question_level_faithfulness_credit_mistral.csv}%
     {credit-mistral}%
 
-  \caption{Question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run. Each raincloud combines an upper half-kernel-density estimate (cloud), one point per evaluated question (rain), and a horizontal boxplot (umbrella). The displayed means are arithmetic means calculated directly from those question-level points. Atomic scores, calculated from \texttt{atomic\_kl\_div}, are blue; interaction-aware scores, calculated from \texttt{adjusted\_shapley\_kl\_div}, are orange. The dashed line marks zero; all panels use the same horizontal scale. BBQ and MedQA use $n_{\max}=4$, while New German Credit uses $n_{\max}=3$. The plotted values are stored in project-local CSV files so the figure can be compiled without the FELICS experiment directory.}
+  \caption{Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}
   \label{fig:question-level-faithfulness-rainclouds}
 \end{figure}
 \tikzexternaldisable

@@ -1,6 +1,10 @@
 \section{Effect of Interaction Modeling on Faithfulness}
 \label{sec:results-faithfulness-increase}
 
+Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. Because the vertical axis of the identity plots represents interaction-aware faithfulness, points above the identity line indicate higher faithfulness under the joint formulation.
+
+Figures~\ref{fig:hyp4-identity-plots-natural-language} and~\ref{fig:hyp4-identity-plots} show the paired question-level estimates. For the natural-language datasets BBQ and MedQA, the points are concentrated around the identity line, indicating broadly similar atomic and interaction-aware estimates. The New German Credit panels exhibit a less pronounced correspondence between the two formulations.
+
 \definecolor{HypFourPoints}{HTML}{2878B5}
 \definecolor{HypFourIdentity}{HTML}{E37A26}
 
@@ -42,21 +46,20 @@
 \begin{figure}[p]
   \centering
   \HypFourIdentityPlot{BBQ --- GPT-OSS 120B}%
-    {data/rq4/bbq_gptoss.csv}{-0.95}{0.60}{30}
+    {data/rq4/bbq_gptoss.csv}{-1}{1}{30}
   \hfill
   \HypFourIdentityPlot{BBQ --- Mistral Medium 3.5}%
-    {data/rq4/bbq_mistral.csv}{-0.35}{0.60}{30}
+    {data/rq4/bbq_mistral.csv}{-1}{1}{30}
 
   \par\vspace{1.1em}
   \HypFourIdentityPlot{MedQA --- GPT-OSS 120B}%
-    {data/rq4/medqa_gptoss.csv}{-0.30}{0.30}{29}
+    {data/rq4/medqa_gptoss.csv}{-1}{1}{29}
   \hfill
   \HypFourIdentityPlot{MedQA --- Mistral Medium 3.5}%
-    {data/rq4/medqa_mistral.csv}{-0.25}{0.55}{24}
+    {data/rq4/medqa_mistral.csv}{-1}{1}{24}
 
   \caption[Atomic and joint faithfulness identity plots for BBQ and MedQA]{
-  Question-level atomic and interaction-aware faithfulness for BBQ and MedQA.
-  The dashed orange line denotes exact identity; points above it favor the
+  Question-level atomic and interaction-aware faithfulness for BBQ and MedQA. Points above the identity line favor the
   joint Shapley-based formulation.}
   \label{fig:hyp4-identity-plots-natural-language}
 \end{figure}
@@ -65,20 +68,22 @@
   \ContinuedFloat
   \centering
   \HypFourIdentityPlot{New German Credit --- GPT-OSS 120B}%
-    {data/rq4/new_german_credit_gptoss.csv}{0.05}{0.45}{30}
+    {data/rq4/new_german_credit_gptoss.csv}{-1}{1}{30}
   \hfill
   \HypFourIdentityPlot{New German Credit --- Mistral Medium 3.5}%
-    {data/rq4/new_german_credit_mistral.csv}{-0.40}{0.35}{30}
+    {data/rq4/new_german_credit_mistral.csv}{-1}{1}{30}
 
-  \caption[]{Question-level atomic and interaction-aware faithfulness for New
-  German Credit (continued). Natural-language datasets use $n_{\max}=4$ and
-  New German Credit uses $n_{\max}=3$ for the joint interventions.}
+  \caption[]{Question-level atomic and joint faithfulness for New
+  German Credit (continued).}
   \label{fig:hyp4-identity-plots}
 \end{figure}
+
+The paired one-sided Wilcoxon signed-rank tests did not provide evidence of systematically higher interaction-aware faithfulness for five of the six dataset–model combinations. Only New German Credit evaluated with Mistral Medium 3.5 yielded a statistically significant result. Overall, the results therefore do not reveal a consistent improvement in faithfulness across datasets and models when joint interventions are considered.
 
 \HypothesisTestResults[label=hyp:hyp4-results]
   {Paired one-sided Wilcoxon signed-rank tests for
   \rqref{rq:faithfulness_increase}. The alternative is
   $\mathcal{F}_{\mathrm{joint}}>\mathcal{F}_{\mathrm{atomic}}$; support requires
-  $p\leq0.05$.}
+  $p\leq0.05$. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count questions with
+  positive, negative, and zero paired differences, respectively.}
   {data/rq4/hypothesis_test_results.csv}

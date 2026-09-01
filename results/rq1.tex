@@ -1,4 +1,8 @@
 \section{Correlation Strength and Changes in Causal Effects}
+Research Question~\ref{rq:correlation_diff}, introduced in Section~\ref{sec:research_questions}, examines whether joint interventions have a greater effect when the concepts within a question are more strongly correlated. Specifically, it asks whether the differences in question-averaged causal effects and question-level faithfulness between the joint and atomic formulations increase with correlation strength. As described in Section~\ref{sec:analysis_procedures}, correlation strength is operationalized by $\Delta\kappa$, which is derived from the sizes of the correlation groups relative to the number of concepts.
+
+Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} show the relationship between correlation strength and the differences in causal effects and faithfulness. Each blue point represents one question, and the orange line is the least-squares linear fit. For most dataset--model combinations, the points exhibit no clear positive pattern; the estimated associations are weak or negative.
+
 % RQ1 preset: fixed dimensions, x variable, solid fitted line, and test summary.
 % #1 Pearson r, #2 confidence-interval lower bound, #3 plot-specific keys.
 \newcommand{\HypOneScatter}[3]{%
@@ -59,8 +63,7 @@
   }
 
   \caption{Relationship between increased oracle-derived correlation strength and
-  changes in causal effects or question-level faithfulness for BBQ ($n=30$ in each
-  panel). Blue points are questions and orange lines are least-squares fits.}
+  changes in causal effects or question-level faithfulness for BBQ.}
   \label{fig:hyp1-bbq-scatterplots}
 \end{figure}
 
@@ -108,12 +111,11 @@
   }
 
   \caption{Relationship between increased oracle-derived correlation strength and
-  changes in causal effects or question-level faithfulness for MedQA. The GPT-OSS
-  panels contain 29 questions and the Mistral panels contain 24. Blue points are
-  questions and orange lines are least-squares fits.}
+  changes in causal effects or question-level faithfulness for MedQA.}
   \label{fig:hyp1-medqa-scatterplots}
 \end{figure}
 
+The correlation tests in Box~\ref{hyp:hyp1-results} identify only one supported association: for MedQA evaluated with \texttt{gpt-oss:120b}, $\Delta\kappa$ is significantly positively correlated with the difference in question-averaged causal effects. None of the other dataset--model and outcome combinations meet the prespecified decision criterion. The results therefore do not provide consistent evidence that larger correlation groups are associated with greater changes in causal effects or faithfulness when joint interventions replace atomic interventions.
 \HypothesisTestResults[label=hyp:hyp1-results]
   {One-sided Pearson tests for \rqref{rq:correlation_diff}. A combination
   supports the hypothesis when $r\geq0.10$ and $p\leq0.10$.}

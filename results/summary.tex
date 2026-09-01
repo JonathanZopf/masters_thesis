@@ -1,5 +1,9 @@
 \section{Evolution of Question-Level Faithfulness}
 
+As a gentle introduction to the results chapter, Figure~\ref{fig:question-level-faithfulness-rainclouds} shows how the distribution of question-level faithfulness changes when interaction effects are incorporated into FELICS. Each panel combines a density estimate (cloud), one point per evaluated question (rain), and a horizontal boxplot (umbrella). The data are drawn from a joint FELICS run with $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit. Using the same joint run for both variants keeps the identified concepts and the underlying generated samples fixed. The atomic scores in blue use causal-effect vectors from \texttt{atomic\_kl\_div}, which measures the effect of intervening on each concept individually. The interaction-aware scores in orange use \texttt{adjusted\_shapley\_kl\_div}, in which jointly measured interaction effects are attributed to concepts via normalized Shapley values.
+
+The value $\mathcal{F}(\mathbf{X})$ printed beside each distribution is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the plotted question-level estimates. This is the global regression-coefficient estimate described in Matton et al.'s evaluation pipeline; see Section~\ref{sec:matton_evaluation_pipeline}. The center line of each boxplot, by contrast, denotes the median of the displayed question-level posterior estimates.
+
 % Read the compiler's HOME path.  The graph is enabled only on Jonathan's
 % machine; Overleaf and other environments do not have "jonathan" in HOME.
 \makeatletter
