@@ -37,17 +37,17 @@ The notation below summarizes the symbols used throughout the mathematical devel
 	$U$                                            & Unobserved state-of-the-world variable in the causal graph.                                                                              \\
 	$V$                                            & Aspects of a question not represented by its extracted concepts.                                                                         \\
 	$M_{\Delta}$                                   & Index set of concepts changed by a joint intervention.                                                                                   \\
-	$s$                                            & One correlation group containing concepts that are evaluated jointly.                                                                    \\
-	$\mathbf{S}$                                   & Partition of a question's concepts into correlation groups.                                                                              \\
-	$\mathbf{S}(\mathbf{x})$                       & Correlation-group partition associated with question $\mathbf{x}$ in dataset-level expressions.                                          \\
+	$s$                                            & One candidate interaction group containing concepts that are evaluated jointly.                                                         \\
+	$\mathbf{S}$                                   & Partition of a question's concepts into candidate interaction groups.                                                                   \\
+	$\mathbf{S}(\mathbf{x})$                       & Candidate-interaction-group partition associated with question $\mathbf{x}$ in dataset-level expressions.                              \\
 	$S$                                            & Number of responses sampled per original or counterfactual question.                                                                     \\
-	$T$                                            & Treatment or coalition, represented as a subset of a correlation group.                                                                  \\
+	$T$                                            & Treatment or coalition, represented as a subset of a candidate interaction group.                                                       \\
 	$\mathbb{T}$                                   & Cartesian product of the value domains of the concepts in treatment $T$.                                                                 \\
 	$\mathbb{T}'$                                  & Counterfactual joint-value domain in which every concept belonging to treatment $T$ changes value.                                       \\
 	$t,t'$                                         & Original and counterfactual joint concept-value tuples.                                                                                  \\
-	$n_{\max}$                                     & Maximum permitted number of concepts in one correlation group.                                                                           \\
+	$n_{\max}$                                     & Maximum permitted number of concepts in one candidate interaction group.                                                                \\
 	$n_{\mathrm{ref}}$                             & Maximum number of treatments included in a reference set.                                                                                \\
-	$\mathcal{O}(\mathbf{x},\mathbf{C},n_{\max})$  & Oracle that partitions a question's concepts into correlation groups.                                                                    \\
+	$\mathcal{O}(\mathbf{x},\mathbf{C},n_{\max})$  & Oracle that partitions a question's concepts into candidate interaction groups.                                                         \\
 	$Z$                                            & Continuous feature vector prior to discretization by the tabular oracle.                                                                 \\
 	$q$                                            & Number of quantile bins used to discretize a continuous feature.                                                                         \\
 	$Q_r$                                          & Empirical quantile defining a discretization boundary.                                                                                   \\
@@ -76,7 +76,7 @@ The notation below summarizes the symbols used throughout the mathematical devel
 	$\bar{\gamma}(\mathbf{x},s,T)$                 & Singleton-weighted reference coefficient for treatment $T$ within group $s$ of question $\mathbf{x}$.                                    \\
 	$\varepsilon$                                  & Stability threshold ($0.01$) below which payout-coefficient normalization is not applied.                                                \\
 	$\mathcal{R}$                                  & Reference set used to estimate the singleton-weighted reference coefficient.                                                             \\
-	$\kappa(\mathbf{x},n_{\max})$                  & Correlation-strength proxy used in the empirical evaluation.                                                                             \\
+	$\kappa(\mathbf{x},n_{\max})$                  & Interaction-presumption strength derived from the oracle partition and its implied treatments.                                          \\
 	$\rho$                                         & Spearman rank-correlation coefficient.                                                                                                   \\
 	$\theta_{y\mid I}$                             & Latent model score or logit for answer option $y$ under intervention condition $I$.                                                      \\
 	$\mathcal{E}$                                  & Unobserved stochasticity of the evaluated model.                                                                                         \\

@@ -4,7 +4,7 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
 
 \section*{Equality of Causal Effect between FELICS singleton-groups and Original Metric}
 \begin{math_box}[label=ma:one_item_group]
-    Let the correlation group consist of exactly one concept,
+    Let the candidate interaction group consist of exactly one concept,
     \begin{equation}
         s=\{C_m\}.
     \end{equation}
@@ -86,12 +86,12 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m)
     \end{equation}
 
-    showing that \emph{FELICS} reduces exactly to the original CE every correlation group contains only a single concept. Because the definitions of the explanation implied effect and faithfulness (see Equations~\ref{eq:ee} and \ref{eq:faithfulness})  are unchanged, both metrics are equivalent in this scenario.
+    showing that \emph{FELICS} reduces exactly to the original CE when every candidate interaction group contains only a single concept. Because the definitions of the explanation-implied effect and faithfulness (see Equations~\ref{eq:ee} and \ref{eq:faithfulness}) are unchanged, both metrics are equivalent in this scenario.
 \end{math_box}
 
 \section*{Compatibility under Reference-Relative Additivity}
 \begin{math_box}[label=ma:independence_behavior]
-    Assume a correlation group $s$ that satisfies \emph{reference-relative
+    Assume a candidate interaction group $s$ that satisfies \emph{reference-relative
     additivity}: for every non-empty coalition $T\subseteq s$, its payout
     coefficient equals the singleton-weighted reference coefficient for treatments
     of the same size,
@@ -101,7 +101,7 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
         \qquad \forall\,\emptyset\neq T\subseteq s.
     \end{equation}
 
-    This is a sufficient condition for the reference-relative independence
+    This is a sufficient condition for the reference-relative additivity
     introduced in Section~\ref{sec:shapley_correction}; it is distinct from
     absolute additivity, which would require $\gamma(\mathbf{x},T)=1$. Under this
     assumption, the adjusted value of any non-empty coalition becomes
@@ -180,7 +180,7 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     \textbf{Claim:} The singleton-weighted reference coefficient, formed as a
     ratio of aggregate joint effects to aggregate singleton effects, preserves the dataset-level average Causal Effect
     exactly when it is computed over the complete population of equally sized
-    correlation groups. A finite, target-excluding reference set provides an approximate
+    candidate interaction groups. A finite, target-excluding reference set provides an approximate
     estimator of this coefficient under the assumptions stated below. Consequently,
     the FELICS average is expected to approximate that of Matton et
     al.'s~\cite{mattonWalkTalkMeasuring2024} original metric:
@@ -198,7 +198,7 @@ This appendix provides supporting derivations for properties of \emph{FELICS} re
     \end{equation}
     Here, $N_C$ is the total number of concepts, $\mathbf{C}(\mathbf{x})$
     is the question-specific concept set, and $\mathbf{S}(\mathbf{x})$ is its
-    partition into correlation groups.
+    partition into candidate interaction groups.
 
     \smallskip
     \textbf{Aggregate-Preserving Population Coefficient:} For a fixed treatment

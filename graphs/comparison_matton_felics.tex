@@ -39,7 +39,7 @@
 \draw[arrow] (extract) -- (altvals);
 \node[data, right] at (\colShared, -3.25) {Concepts};
 
-\node[felics] (correl) at (\colFelics, -4.5) {Determine Correlations\\ \scriptsize Aux. LLM / Statistics};
+\node[felics] (correl) at (\colFelics, -4.5) {Presume Interactions\\ \scriptsize Aux. LLM / Associations};
 \draw[arrow] (extract.east) -| (correl.north);
 \node[data, above] at (4.75, -2.6) {Concepts};
 
@@ -47,9 +47,9 @@
 \draw[arrow] (extract.west) -| (matton_set.north);
 \node[data, above] at (-4.75, -2.6) {Concepts};
 
-\node[felics] (felics_set) at (\colFelics, -7) {Determine Intervention Sets\\ \scriptsize (power set of correlation set)};
+\node[felics] (felics_set) at (\colFelics, -7) {Determine Intervention Sets\\ \scriptsize (power set of candidate group)};
 \draw[arrow] (correl.south) -- (felics_set.north);
-\node[data, right] at (\colFelics, -5.75) {Correlation Sets};
+\node[data, right] at (\colFelics, -5.75) {Candidate Interaction Groups};
 
 \node[matton] (matton_reph) at (\colMatton, -9.5) {Rephrase Question\\ \scriptsize Aux. LLM \textbullet\ Insert single val};
 \draw[arrow] (matton_set.south) -- (matton_reph.north);

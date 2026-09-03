@@ -47,7 +47,7 @@ More generally, such reconstruction can cause the causal effect of a truly influ
 
 \section{Interaction between Concepts}
 \label{sec:interaction_effects}
-The example by Matton et al.\ \cite{mattonWalkTalkMeasuring2024} in which the model reconstructs a removed concept from another remaining concept, represents a form of \emph{interaction}. More specifically, concepts can interact in several different ways, expanding the \textit{Correlated Concept Problem} beyond surgical interventions. Information theory, and in particular its extension \emph{Partial Information Decomposition} (PID), distinguishes three fundamental interaction types describing how multiple source variables jointly contribute information about a target variable \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}. Furthermore, these interaction types have also been incorporated into the causal framework \cite{martinez-sanchezDecomposingCausalityIts2024}.
+The example by Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, in which the model reconstructs a removed concept from another remaining concept, represents a redundancy-like interaction with respect to the model's answer. More generally, concepts can affect a response additively, redundantly, or synergistically, expanding the \textit{Correlated Concept Problem} beyond the feasibility of surgical interventions. This terminology is motivated by information theory and, in particular, \emph{Partial Information Decomposition} (PID), which decomposes how multiple source variables jointly provide information about a target variable \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}. PID is normally defined using information-theoretic quantities, whereas the function $J_{\mathbf{x}}$ introduced below is based on changes in the evaluated model's answer distribution. The three information-theoretic categories are therefore mapped here to additive, subadditive, and superadditive relationships between intervention effects; they are not claimed to constitute a formal PID of the model output. Related information-sharing categories have also been incorporated into causal frameworks \cite{martinez-sanchezDecomposingCausalityIts2024}.
 
 For illustration, consider an initially masked question $\mathbf{x}$ into which two concepts $C_i$ and $C_j$ are introduced. Throughout this section only, the values $c_i$ and $c_j$ denote the masked (i.e., absent) state of the corresponding concepts, whereas $c_i'$ and $c_j'$ denote arbitrary non-null values. For the conceptual classification developed here, let $J_{\mathbf{x}}(T)$ denote the effect on the evaluated model's answer distribution of simultaneously intervening on every concept in a non-empty set $T$. For a singleton set, this notation coincides with the Causal Concept Effect introduced in Section~\ref{sec:problem_setting}:
 
@@ -55,19 +55,19 @@ For illustration, consider an initially masked question $\mathbf{x}$ into which 
 	J_{\mathbf{x}}(\{C_m\}) := \mathrm{CE}(\mathbf{x},C_m).
 \end{equation}
 
-Thus, $J_{\mathbf{x}}(\{C_i,C_j\})$ denotes the joint effect obtained by replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously, while $J_{\mathbf{x}}(\{C_i\})$ and $J_{\mathbf{x}}(\{C_j\})$ denote the corresponding individual effects. At this point, $J_{\mathbf{x}}$ is an abstract joint-intervention effect used only to describe interaction types. The formal construction of joint interventions is deferred to Section~\ref{sec:joint_effect}, and FELICS's corresponding question-specific value function is defined later in Equation~\ref{eq:value_function}. Depending on the relationship between these quantities, three interaction types can be distinguished \cite{williamsNonnegativeDecompositionMultivariate2010, kolchinskyNovelApproachPartial2022}.
+Thus, $J_{\mathbf{x}}(\{C_i,C_j\})$ denotes the joint effect obtained by replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously, while $J_{\mathbf{x}}(\{C_i\})$ and $J_{\mathbf{x}}(\{C_j\})$ denote the corresponding individual effects. At this point, $J_{\mathbf{x}}$ is an abstract joint-intervention effect used only to describe response-level interaction regimes. The formal construction of joint interventions is deferred to Section~\ref{sec:joint_effect}, and FELICS's corresponding question-specific value function is defined later in Equation~\ref{eq:value_function}. Depending on the relationship between these quantities, three regimes can be distinguished.
 
-\subsection{Independence}
-\emph{Independence} means that each concept contributes information that cannot be inferred from the other concept. Consequently, the joint intervention effect equals the sum of the individual effects,
+\subsection{Additivity}
+Under \emph{additivity}, the joint intervention effect equals the sum of the individual intervention effects,
 \begin{equation}
 	J_{\mathbf{x}}(\{C_i,C_j\}) = J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
-Within the PID literature the better established term is \emph{unique information}. Since the present discussion focuses on concepts whose effects do not depend on one another, the term \emph{Independence} is used instead.
+This equality expresses an absence of interaction on the chosen effect scale. It does not imply that $C_i$ and $C_j$ are statistically independent in the data; associated inputs may have additive effects on the response, and statistically independent inputs may nevertheless exhibit a non-additive response-level interaction.
 
 As a simplified credit-scoring example, the number of recent credit inquiries and the requested loan duration could contribute approximately independent evidence.
 
 \subsection{Redundancy}
-When concepts are \emph{redundant}, both convey overlapping information. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
+In the mapped, response-level sense used here, concepts exhibit \emph{redundancy-like} behavior when their individual effects overlap. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
 \begin{equation}
 	J_{\mathbf{x}}(\{C_i,C_j\}) < J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
@@ -75,7 +75,7 @@ When concepts are \emph{redundant}, both convey overlapping information. Introdu
 In the credit-scoring example, homeownership and the absence of monthly rent may provide redundant information about housing expenses.
 
 \subsection{Synergy}
-In a \emph{synergistic} interaction, additional information emerges only when both concepts are considered jointly, leading to a reinforcing effect. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
+In a \emph{synergy-like} interaction, an additional effect emerges only when both concepts are considered jointly. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
 \begin{equation}
 	J_{\mathbf{x}}(\{C_i,C_j\}) > J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
@@ -85,7 +85,7 @@ High income and low existing debt may exhibit synergy within the credit-scoring 
 \subsection{Implications for Causal Concept Effects}
 The examples above are restricted to the interaction of two concepts for simplicity. In practice, multiple concepts may interact simultaneously, giving rise to substantially more complex information-sharing structures. Williams and Beer \cite{williamsNonnegativeDecompositionMultivariate2010} generalize Partial Information Decomposition to arbitrary numbers of variables and introduce corresponding partial information diagrams to represent these relationships.
 
-Moreover, the discussed examples describe the effect of \emph{introducing} concepts into an initially masked question. This formulation was chosen because it allows the three interaction types to be interpreted intuitively in terms of the additional information contributed by a concept. Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, however, estimate causal concept effects by \emph{removing} concepts from the original question. Under this complementary perspective, the inequalities for redundancy and synergy are reversed. Removing two redundant concepts jointly eliminates more information than removing either concept individually, yielding
+Moreover, the discussed examples describe the effect of \emph{introducing} concepts into an initially masked question. This formulation was chosen because it allows the three response-level regimes to be interpreted intuitively in terms of the additional effect contributed by a concept. Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, however, estimate causal concept effects by \emph{removing} concepts from the original question. Under this complementary perspective, the inequalities for redundancy-like and synergy-like behavior are reversed. Removing two concepts with redundant information jointly eliminates more information than removing either concept individually, yielding
 
 \begin{equation}
 	J_{\mathbf{x}}(\{C_i,C_j\})
@@ -101,10 +101,10 @@ whereas removing two synergistic concepts results in
 	J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
 
-Consequently, the MedQA example discussed by Matton et al. \cite{mattonWalkTalkMeasuring2024}, in which one removed concept can be reconstructed from another, is fully consistent with the interaction taxonomy presented above and represents an instance of redundancy under the removal interpretation.
+Consequently, the MedQA example discussed by Matton et al. \cite{mattonWalkTalkMeasuring2024}, in which one removed concept can be reconstructed from another, is consistent with redundancy-like behavior under the removal interpretation.
 
-The relationship between correlation and interaction is subtle. When the total correlation of a system is zero, all variables behave independently. Conversely, maximal total correlation corresponds to complete redundancy \cite{watanabeInformationTheoreticalAnalysis1960}. Synergistic interactions, however, are fundamentally different: synergy neither requires statistical correlation nor is it precluded by its presence \cite{picaInvariantComponentsSynergy2017}. Correlation therefore captures only one particular form of interaction between concepts.
+Statistical association and response-level interaction must be distinguished. Association concerns the joint distribution of the concepts: observing one concept may make the value of another more predictable. Interaction, as used in this thesis, concerns their effects on a response variable: the effect of intervening on one concept may depend on whether or how another concept is intervened upon, with the evaluated model's answer distribution serving as the response. Strong association between concepts can indicate the possibility of redundant information and may therefore serve as a useful screening proxy for redundancy-like effects. It does not, however, establish redundancy or interaction with respect to the model output. Conversely, response-level interaction---particularly synergy---may occur without observable pairwise association between the concepts \cite{picaInvariantComponentsSynergy2017}.
 
-To recapitulate, the original \emph{Causal Concept Faithfulness Metric} assumes that concepts can be intervened upon independently and therefore implicitly models only independent information. Redundant concepts violate this assumption because the influence of one concept can be reconstructed from another, while synergistic concepts require multiple concepts to be modified jointly before their full influence becomes observable. Consequently, the metric cannot reliably estimate causal concept effects whenever redundancy or synergy is present.
+To recapitulate, the original \emph{Causal Concept Faithfulness Metric} assumes that each concept can be intervened upon surgically while the remaining input is held fixed and evaluates only singleton intervention effects. Redundancy-like relationships can undermine the intended intervention because the removed information may be reconstructed from another concept, while synergy-like effects may become observable only when multiple concepts are modified jointly. Consequently, singleton interventions may not reliably characterize causal concept effects when such response-level interactions are present.
 
-With the correlated concepts problem established and the possible interaction types between concepts defined, the remainder of this thesis focuses on constructing and validating an extension of the \emph{Causal Concept Faithfulness Metric} that accounts for correlated concepts during the estimation of causal concept effects.
+With the correlated concepts problem established and the response-level interaction regimes operationalized, the remainder of this thesis focuses on constructing and validating an extension of the \emph{Causal Concept Faithfulness Metric} that evaluates plausible concept interactions during the estimation of causal concept effects.
