@@ -87,3 +87,47 @@ The paired one-sided Wilcoxon signed-rank tests did not provide evidence of syst
   $p\leq0.05$. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count questions with
   positive, negative, and zero paired differences, respectively.}
   {data/rq4/hypothesis_test_results.csv}
+
+Because failure to establish an increase does not imply a decrease, a
+complementary directional analysis tests the opposite alternative,
+$\mathcal{F}_{\mathrm{joint}}<\mathcal{F}_{\mathrm{atomic}}$, using the same
+paired one-sided Wilcoxon signed-rank procedure. Table~\ref{tab:hyp4-lower-tests}
+reports these exploratory, unadjusted tests. The paired difference is defined as
+$d=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$, so a negative
+median difference indicates lower interaction-aware faithfulness.
+
+\begin{table}[htbp]
+  \centering
+  \caption[Complementary tests for lower interaction-aware faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether interaction-aware faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count positive, negative, and zero values of $d$, respectively. Evidence in the specified direction requires $p\leq0.05$.}
+  \label{tab:hyp4-lower-tests}
+  \small
+  \setlength{\tabcolsep}{3.2pt}
+  \renewcommand{\arraystretch}{1.1}
+  \pgfplotstabletypeset[
+    col sep=comma,
+    trim cells=true,
+    columns={dataset,model,n,median_difference,n_positive,n_negative,n_zero,p,supported},
+    columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
+    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+    columns/n/.style={column name={\textbf{$n$}},column type=r,fixed,precision=0},
+    columns/median_difference/.style={column name={\textbf{$\widetilde d$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/n_positive/.style={column name={\textbf{$n_{+}$}},column type=r,fixed,precision=0},
+    columns/n_negative/.style={column name={\textbf{$n_{-}$}},column type=r,fixed,precision=0},
+    columns/n_zero/.style={column name={\textbf{$n_{0}$}},column type=r,fixed,precision=0},
+    columns/p/.style={column name={\textbf{$p$}},column type=r,fixed,fixed zerofill,precision=4},
+    columns/supported/.style={
+      column name={\textbf{Lower?}},column type=c,string type,
+      string replace={true}{Yes},
+      string replace={false}{No}
+    },
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+    every even row/.style={before row={\rowcolor{gray!8}}},
+  ]{data/rq4/lower_faithfulness_test_results.csv}
+\end{table}
+
+At the nominal $\alpha=0.05$ level, the analysis provides evidence of lower
+interaction-aware faithfulness only for New German Credit with GPT-OSS 120B
+($p=0.0019$). None of the other five dataset--model combinations supports this
+directional alternative. The complementary results therefore do not indicate
+that modeling interactions generally lowers measured faithfulness.
