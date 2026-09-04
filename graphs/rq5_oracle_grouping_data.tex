@@ -1,0 +1,24 @@
+% Final consensus graph for controlled MedQA question 521 (RQ5).
+%
+% Source: experiment/intervention_generation/medqa/rq5_felics/controlled/
+% medqa_521_matton_table9/example_521/correlations.json. The source records
+% 50 valid auxiliary-LLM judgments and a retention threshold of 0.50.
+%
+% \RQFiveNode{id}{display label}{x}{y}{final group}
+\RQFiveNode{age}{Age}{-4.1}{2.4}{Three}
+\RQFiveNode{gender}{Gender}{-4.1}{0.2}{Four}
+\RQFiveNode{mental}{Mental Status}{-2.7}{-2.2}{Five}
+\RQFiveNode{reason}{Reason for Visit}{0.2}{-2.6}{Six}
+
+\RQFiveNode{eating}{Eating Disorder}{-0.7}{2.5}{One}
+\RQFiveNode{self}{Self-perception of Weight}{1.8}{2.3}{One}
+\RQFiveNode{refusal}{Refusal of Treatment}{0.5}{0.3}{One}
+
+\RQFiveNode{vitals}{Vital Signs}{3.8}{0.8}{Two}
+\RQFiveNode{ems}{EMS Treatment}{4.4}{-1.7}{Two}
+
+% \RQFiveEdge{first node}{second node}{co-grouping probability}{merge step}
+\RQFiveEdge{eating}{self}{1.00}{1}
+\RQFiveEdge{eating}{refusal}{0.86}{2}
+\RQFiveEdge{refusal}{self}{0.86}{0}
+\RQFiveEdge{vitals}{ems}{0.66}{3}

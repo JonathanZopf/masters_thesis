@@ -1,0 +1,107 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usetikzlibrary{backgrounds}
+
+% Set this before including the data to show an intermediate greedy state.
+% At step k, accepted merge edges 1,...,k are highlighted. The default is the
+% final state. Node fills deliberately retain the final partition colors so the
+% file can also be reused as a partition overview.
+\providecommand{\CreditGroupingStep}{7}
+
+\definecolor{creditGroupOne}{HTML}{E15759}
+\definecolor{creditGroupTwo}{HTML}{F28E2B}
+\definecolor{creditGroupThree}{HTML}{76B7B2}
+\definecolor{creditGroupFour}{HTML}{59A14F}
+\definecolor{creditGroupFive}{HTML}{4E79A7}
+\definecolor{creditAccepted}{HTML}{17823B}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1cm,
+  y=1cm,
+  credit node/.style={
+    draw=black!65,
+    rounded corners=2pt,
+    line width=0.55pt,
+    minimum height=8mm,
+    text width=19mm,
+    align=center,
+    inner sep=2.5pt,
+    font=\sffamily\scriptsize\bfseries,
+    text=black
+  },
+  retained edge/.style={draw=black!30, line width=0.55pt},
+  accepted edge/.style={draw=creditAccepted, line width=2.1pt},
+  edge value/.style={
+    midway,
+    sloped,
+    allow upside down,
+    fill=white,
+    fill opacity=0.88,
+    text opacity=1,
+    inner sep=0.7pt,
+    font=\sffamily\tiny,
+    text=black!75
+  }
+]
+
+% The data records call these two renderer commands. Styling and graph data
+% therefore remain independent and can be overridden in later figures.
+\newcommand{\CreditNode}[5]{%
+  \expandafter\gdef\csname CreditNodeLabel@#1\endcsname{#2}%
+  \node[credit node, fill=creditGroup#5!72] (#1) at (#3,#4) {#2};%
+}
+
+\newcommand{\CreditEdge}[5]{%
+  \ifnum#4=0
+    \draw[retained edge] (#1) -- (#2)
+      node[edge value, pos=#5] {#3};%
+  \else
+    \ifnum#4>\CreditGroupingStep
+      \draw[retained edge] (#1) -- (#2)
+        node[edge value, pos=#5] {#3};%
+    \else
+      \draw[accepted edge] (#1) -- (#2)
+        node[edge value, pos=#5, text=creditAccepted!70!black,
+             font=\sffamily\tiny\bfseries] {#3};%
+    \fi
+  \fi
+}
+
+% Create nodes first, then draw all edges on the background layer. Loading the
+% records twice keeps a single source of truth while ensuring that crossing
+% edges never obscure node labels.
+\let\CreditNodeRenderer\CreditNode
+\let\CreditEdgeRenderer\CreditEdge
+\renewcommand{\CreditEdge}[5]{}%
+\input{graphs/german_credit_grouping_data}
+\begin{scope}[on background layer]
+  \renewcommand{\CreditNode}[5]{}%
+  \let\CreditEdge\CreditEdgeRenderer
+  \input{graphs/german_credit_grouping_data}
+\end{scope}
+
+% Compact legend. The node swatches denote membership in the final partition,
+% not an additional statistic.
+\node[anchor=west, font=\sffamily\scriptsize] at (-6.0,-5.0) {Final groups:};
+\foreach \x/\group/\label in {
+  -4.05/One/$s_1$,
+  -3.10/Two/$s_2$,
+  -2.15/Three/$s_3$,
+  -1.20/Four/$s_4$,
+  -0.25/Five/$s_5$
+}{
+  \node[draw=black!55, fill=creditGroup\group!72, rounded corners=1pt,
+        minimum width=5mm, minimum height=3mm, inner sep=0pt] at (\x,-5.0) {};
+  \node[anchor=west, font=\sffamily\tiny] at (\x+0.32,-5.0) {\label};
+}
+\draw[accepted edge] (1.45,-5.0) -- (2.25,-5.0)
+  node[anchor=west, font=\sffamily\scriptsize, text=black] at (2.42,-5.0)
+  {accepted merge};
+\draw[retained edge] (4.35,-5.0) -- (5.15,-5.0)
+  node[anchor=west, font=\sffamily\scriptsize, text=black] at (5.32,-5.0)
+  {other retained association};
+
+\end{tikzpicture}
+\end{document}

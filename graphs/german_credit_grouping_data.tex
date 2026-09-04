@@ -1,0 +1,55 @@
+% Data for the New German Credit association graph.
+%
+% Source: FELICS data/new_german_credit/data.csv, processed as in
+% src/intervention_generation/tabular_intervention_generator.py with
+% p < 0.01, Cramer's V >= 0.5, and n_max = 3. Values are rounded only for
+% display. The final argument of \CreditEdge is the greedy merge step; zero
+% marks a retained association that was not selected for the spanning forest.
+%
+% Keeping the records separate from the renderer allows the same graph to be
+% reused with another \CreditGroupingStep or alternative edge styles.
+
+% \CreditNode{id}{label}{x}{y}{final group}
+\CreditNode{income}{Household Income}{-0.8}{4.0}{One}
+\CreditNode{liquid}{Liquid Assets}{2.7}{3.4}{One}
+\CreditNode{schufa}{SCHUFA Score (\%)}{1.1}{-2.4}{One}
+
+\CreditNode{amount}{Credit Amount}{3.9}{0.9}{Two}
+\CreditNode{purpose}{Credit Purpose}{1.5}{-0.2}{Two}
+\CreditNode{term}{Credit Term (Months)}{3.8}{-3.8}{Two}
+
+\CreditNode{realestate}{Real Estate Value}{-0.9}{0.8}{Three}
+\CreditNode{ownhouse}{Lives in Own House}{3.0}{-1.4}{Three}
+\CreditNode{age}{Applicant Age}{-2.1}{-3.8}{Three}
+
+\CreditNode{job}{Job Category}{-4.0}{2.4}{Four}
+\CreditNode{debt}{Monthly Debt Burden}{-5.0}{-1.3}{Four}
+
+\CreditNode{householdsize}{Household Size}{6.2}{1.2}{Five}
+
+% \CreditEdge{first node}{second node}{Cramer's V}{merge step}{label position}
+\CreditEdge{realestate}{ownhouse}{0.90}{1}{0.55}
+\CreditEdge{income}{liquid}{0.71}{2}{0.54}
+\CreditEdge{amount}{term}{0.68}{3}{0.55}
+\CreditEdge{amount}{purpose}{0.65}{4}{0.48}
+\CreditEdge{debt}{job}{0.61}{5}{0.48}
+\CreditEdge{schufa}{liquid}{0.60}{6}{0.48}
+\CreditEdge{age}{ownhouse}{0.59}{7}{0.55}
+
+\CreditEdge{term}{purpose}{0.64}{0}{0.46}
+\CreditEdge{income}{amount}{0.61}{0}{0.55}
+\CreditEdge{income}{job}{0.59}{0}{0.46}
+\CreditEdge{purpose}{job}{0.58}{0}{0.52}
+\CreditEdge{job}{ownhouse}{0.57}{0}{0.52}
+\CreditEdge{purpose}{realestate}{0.57}{0}{0.47}
+\CreditEdge{liquid}{realestate}{0.56}{0}{0.48}
+\CreditEdge{income}{purpose}{0.56}{0}{0.47}
+\CreditEdge{age}{purpose}{0.56}{0}{0.52}
+\CreditEdge{amount}{liquid}{0.55}{0}{0.43}
+\CreditEdge{age}{realestate}{0.55}{0}{0.52}
+\CreditEdge{purpose}{liquid}{0.55}{0}{0.45}
+\CreditEdge{job}{realestate}{0.54}{0}{0.54}
+\CreditEdge{job}{liquid}{0.53}{0}{0.48}
+\CreditEdge{purpose}{ownhouse}{0.52}{0}{0.53}
+\CreditEdge{income}{realestate}{0.52}{0}{0.52}
+\CreditEdge{income}{schufa}{0.50}{0}{0.58}

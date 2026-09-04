@@ -1,0 +1,52 @@
+% Reusable panel renderer for the New German Credit greedy-merge trace.
+% #1: number of accepted merge steps already processed (0--7)
+% #2: panel title
+\definecolor{creditTraceAccepted}{HTML}{17823B}
+\newcommand{\CreditGroupingStage}[2]{%
+  \begin{tikzpicture}[
+    x=0.47cm,
+    y=0.47cm,
+    credit stage node/.style={
+      draw=black!60,
+      fill=black!7,
+      rounded corners=1.5pt,
+      line width=0.45pt,
+      minimum height=5.5mm,
+      text width=15mm,
+      align=center,
+      inner sep=1.5pt,
+      font=\sffamily\tiny\bfseries
+    },
+    pending stage edge/.style={draw=black!22,line width=0.35pt},
+    accepted stage edge/.style={draw=creditTraceAccepted,line width=1.35pt},
+    current stage edge/.style={draw=orange!85!black,line width=1.8pt}
+  ]
+    \node[font=\small\bfseries,anchor=south] at (0.6,4.75) {#2};
+
+    \newcommand{\CreditNode}[5]{%
+      \node[credit stage node] (##1) at (##3,##4) {##2};%
+    }
+    \newcommand{\CreditEdge}[5]{}%
+    \input{graphs/german_credit_grouping_data}
+
+    \begin{scope}[on background layer]
+      \renewcommand{\CreditNode}[5]{}%
+      \renewcommand{\CreditEdge}[5]{%
+        \ifnum##4=0
+          \draw[pending stage edge] (##1) -- (##2);%
+        \else
+          \ifnum##4>#1
+            \draw[pending stage edge] (##1) -- (##2);%
+          \else
+            \ifnum##4=#1
+              \draw[current stage edge] (##1) -- (##2);%
+            \else
+              \draw[accepted stage edge] (##1) -- (##2);%
+            \fi
+          \fi
+        \fi
+      }
+      \input{graphs/german_credit_grouping_data}
+    \end{scope}
+  \end{tikzpicture}%
+}

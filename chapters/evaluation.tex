@@ -119,9 +119,9 @@ where the final equality follows from the singleton compatibility of the correct
 This reuse also provides a controlled comparison. For each question, the identified concept set, original-response samples, singleton-counterfactual samples, and all other preprocessing decisions are identical between the atomic and interaction-aware variants. Moreover, a single explanation-implied-effect vector $\mathbf{EE}(\mathbf{x},\mathbf{C})$ is held fixed. The two paired faithfulness estimates are therefore
 \begin{align}
 	\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})
-	&:=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right),\\
+	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right), \\
 	\mathcal{F}_{\mathrm{joint}}(\mathbf{x})
-	&:=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{adj}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
+	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{adj}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
 \end{align}
 Any difference between them is consequently attributable to the inclusion and attribution of joint causal effects rather than to stochastic variation in concept extraction, counterfactual generation, model responses, or EE estimation.
 

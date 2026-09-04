@@ -1,7 +1,7 @@
 dataset,model,n,exact,p_ce,p_faithfulness,supported
-BBQ,GPT-OSS 120B,28,false,0.9851,0.1723,false
-BBQ,Mistral Medium 3.5,30,false,0.9121,0.3532,false
-MedQA,GPT-OSS 120B,29,false,0.9675,0.0413,false
-MedQA,Mistral Medium 3.5,4,false,0.614,0.4495,false
-New German Credit,GPT-OSS 120B,30,false,0.8749,0.0002,false
-New German Credit,Mistral Medium 3.5,30,false,1.0000,0.9985,false
+BBQ,GPT-OSS 120B,28,false,0.9851,0.3697,false
+BBQ,Mistral Medium 3.5,30,false,0.9121,0.281,false
+MedQA,GPT-OSS 120B,29,false,0.9675,0.0179,false
+MedQA,Mistral Medium 3.5,24,false,1,0.0907,false
+New German Credit,GPT-OSS 120B,30,false,0.8749,0.9273,false
+New German Credit,Mistral Medium 3.5,30,false,1,0.2791,false

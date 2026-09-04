@@ -100,10 +100,13 @@ partition, reused for every New German Credit item: three groups of three concep
 pair, and one singleton. This partition represents the final state of the grouping algorithm in Algorithm~\ref{alg:greedy_merge}. Node colors identify the five final groups, thick green edges
 are the accepted merge edges, and thin gray edges show other statistically retained
 pairwise associations. Edge labels report Cram\'er's $V$.
+The initialization and all seven accepted merge steps are documented in
+Appendix~\ref{app:oracle-partition-details}; the corresponding retained-edge
+strengths are reported in Table~\ref{tab:credit-associations}.
 
 \begin{figure}[p]
   \centering
-  \includegraphics[width=0.84\textwidth,height=0.34\textheight,keepaspectratio]{german_credit_grouping.png}
+  \includestandalone[mode=buildnew,width=\textwidth,height=0.48\textheight,keepaspectratio]{graphs/german_credit_grouping}
   \caption{Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max}=3$.}
   \label{fig:german-credit-grouping-final}
 \end{figure}
