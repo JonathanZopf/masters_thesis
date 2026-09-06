@@ -119,32 +119,49 @@
 \contentsline {subsection}{\numberline {8.2.1}Why no dataset-wide analysis are possible}{83}{subsection.8.2.1}%
 \contentsline {subsection}{\numberline {8.2.2}Representative examples of change}{83}{subsection.8.2.2}%
 \contentsline {subsubsection}{New German Credit example 4: a threshold effect}{83}{subsubsection*.64}%
-\contentsline {subsubsection}{BBQ Question 24 - syngergetic effect with unclear cause}{83}{subsubsection*.65}%
+\contentsline {subsubsection}{BBQ Question 24 - syngergetic effect with unclear cause}{84}{subsubsection*.65}%
 \contentsline {subsubsection}{BBQ Question 29 - barely any interaction}{84}{subsubsection*.66}%
 \contentsline {subsubsection}{BBQ example 18: redundant concepts created by decomposition}{85}{subsubsection*.67}%
 \contentsline {subsection}{\numberline {8.2.3}Consequences for the faithfulness score}{85}{subsection.8.2.3}%
 \contentsline {section}{\numberline {8.3}Why hypotheses were not uniformly supported}{86}{section.8.3}%
 \contentsline {subsection}{\numberline {8.3.1}Interaction-Presumption Strength and Changes in Causal Effects}{86}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Effect of Interaction Modeling on Faithfulness}{86}{subsection.8.3.2}%
-\contentsline {section}{\numberline {8.4}Limitations of the experimental evaluation}{87}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Limitations FELICS}{89}{section.8.5}%
-\contentsline {subsection}{\numberline {8.5.1}Interaction Presumption Does Not Establish Response-Level Interaction}{89}{subsection.8.5.1}%
-\contentsline {subsection}{\numberline {8.5.2}Loss of Interaction Effects across Candidate Interaction Groups}{89}{subsection.8.5.2}%
-\contentsline {subsection}{\numberline {8.5.3}Subjective aspects auxillary LLM decisions}{90}{subsection.8.5.3}%
-\contentsline {subsection}{\numberline {8.5.4}Counterfactual Edits even harder if multiple concepts are changed}{90}{subsection.8.5.4}%
-\contentsline {subsection}{\numberline {8.5.5}Explenation-Implied effects estimation: no distingution between different degrees of declared effect}{91}{subsection.8.5.5}%
-\contentsline {subsection}{\numberline {8.5.6}Circular Bias Transfer and Model Allignment}{91}{subsection.8.5.6}%
-\contentsline {subsection}{\numberline {8.5.7}FELICS only works within a particular faitfhulenss definition}{91}{subsection.8.5.7}%
-\contentsline {subsection}{\numberline {8.5.8}Counterfactual explanations and the EE estimand}{92}{subsection.8.5.8}%
-\contentsline {subsection}{\numberline {8.5.9}Dataset normalization still distorts results}{92}{subsection.8.5.9}%
-\contentsline {section}{\numberline {8.6}Future work}{93}{section.8.6}%
-\contentsline {chapter}{\numberline {9}Conclusion}{94}{chapter.9}%
-\contentsline {chapter}{Bibliography}{95}{chapter*.69}%
-\contentsline {chapter}{\numberline {A}Motivating Example Setup}{103}{appendix.A}%
-\contentsline {chapter}{\numberline {B}LLM-Based Oracle Category Normalization}{105}{appendix.B}%
-\contentsline {chapter}{\numberline {C}Detailed Oracle Partitioning Traces}{107}{appendix.C}%
-\contentsline {section}{\numberline {C.1}New German Credit}{107}{section.C.1}%
-\contentsline {section}{\numberline {C.2}RQ5 Motivating MedQA Example}{111}{section.C.2}%
-\contentsline {chapter}{\numberline {D}Examples}{112}{appendix.D}%
-\contentsline {chapter}{\numberline {E}Mathematical Demonstrations}{115}{appendix.E}%
-\contentsline {chapter}{\numberline {F}Prompts}{120}{appendix.F}%
+\contentsline {subsection}{\numberline {8.3.2}Validation against the Original Implementation}{86}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Preservation of Concept Rankings}{88}{subsection.8.3.3}%
+\contentsline {subsection}{\numberline {8.3.4}Effect of Interaction Modeling on Faithfulness}{88}{subsection.8.3.4}%
+\contentsline {subsection}{\numberline {8.3.5}Resolution of the Motivating Underestimation Example}{89}{subsection.8.3.5}%
+\contentsline {section}{\numberline {8.4}Requirements revisited}{89}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Limitations of the experimental evaluation}{90}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Limitations FELICS}{92}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Interaction Presumption Does Not Establish Response-Level Interaction}{92}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}Loss of Interaction Effects across Candidate Interaction Groups}{93}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}Subjective aspects auxillary LLM decisions}{93}{subsection.8.6.3}%
+\contentsline {subsection}{\numberline {8.6.4}Counterfactual Edits even harder if multiple concepts are changed}{93}{subsection.8.6.4}%
+\contentsline {subsection}{\numberline {8.6.5}Explenation-Implied effects estimation: no distingution between different degrees of declared effect}{94}{subsection.8.6.5}%
+\contentsline {subsection}{\numberline {8.6.6}Circular Bias Transfer and Model Allignment}{95}{subsection.8.6.6}%
+\contentsline {subsection}{\numberline {8.6.7}FELICS only works within a particular faitfhulenss definition}{95}{subsection.8.6.7}%
+\contentsline {subsection}{\numberline {8.6.8}Counterfactual explanations and the EE estimand}{95}{subsection.8.6.8}%
+\contentsline {subsection}{\numberline {8.6.9}Dataset normalization still distorts results}{96}{subsection.8.6.9}%
+\contentsline {section}{\numberline {8.7}Future work}{96}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Further understanding of FELICS}{96}{subsection.8.7.1}%
+\contentsline {subsubsection}{Repeat experiment with more samples}{96}{subsubsection*.68}%
+\contentsline {subsubsection}{Conduct experiment with other datasets}{97}{subsubsection*.69}%
+\contentsline {subsubsection}{Conduct experiment with other models}{97}{subsubsection*.70}%
+\contentsline {subsubsection}{Evaluate requirements with further experiments}{97}{subsubsection*.71}%
+\contentsline {subsubsection}{Deeper interaction analyisis}{97}{subsubsection*.72}%
+\contentsline {subsection}{\numberline {8.7.2}Research and Improvements on Oracle}{97}{subsection.8.7.2}%
+\contentsline {subsubsection}{Benchmarking of Oracle Interaction Miss}{97}{subsubsection*.73}%
+\contentsline {subsection}{\numberline {8.7.3}Adaptive selection of \(n_{\max }\)}{98}{subsection.8.7.3}%
+\contentsline {subsubsection}{Comparing Performance between natural language and tabular oracle}{98}{subsubsection*.74}%
+\contentsline {subsection}{\numberline {8.7.4}Use graded rather than binary EE judgments}{98}{subsection.8.7.4}%
+\contentsline {subsection}{\numberline {8.7.5}Develop and examine alternatives to current normalization}{99}{subsection.8.7.5}%
+\contentsline {subsection}{\numberline {8.7.6}Make reference implementation more robust in parsing responses}{99}{subsection.8.7.6}%
+\contentsline {chapter}{\numberline {9}Conclusion}{100}{chapter.9}%
+\contentsline {chapter}{Bibliography}{101}{chapter*.75}%
+\contentsline {chapter}{\numberline {A}Motivating Example Setup}{109}{appendix.A}%
+\contentsline {chapter}{\numberline {B}LLM-Based Oracle Category Normalization}{111}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Detailed Oracle Partitioning Traces}{113}{appendix.C}%
+\contentsline {section}{\numberline {C.1}New German Credit}{113}{section.C.1}%
+\contentsline {section}{\numberline {C.2}RQ5 Motivating MedQA Example}{117}{section.C.2}%
+\contentsline {chapter}{\numberline {D}Examples}{118}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Mathematical Demonstrations}{121}{appendix.E}%
+\contentsline {chapter}{\numberline {F}Prompts}{126}{appendix.F}%

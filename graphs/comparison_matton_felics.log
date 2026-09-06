@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  28 AUG 2026 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  6 SEP 2026 14:42
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -420,8 +420,7 @@ LaTeX Info: Redefining \] on input line 2951.
 ) (/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count319
-)
-No file graphs/comparison_matton_felics.aux.
+) (./graphs/comparison_matton_felics.aux)
 \openout1 = `graphs/comparison_matton_felics.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -1282,7 +1281,7 @@ l.144 \end{tikzpicture}
 Things are pretty mixed up, but I think the worst is over.
 
 
-Overfull \hbox (142.06342pt too wide) in paragraph at lines 144--145
+Overfull \hbox (194.02127pt too wide) in paragraph at lines 144--145
 [][] 
  []
 
@@ -1301,10 +1300,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 13869 strings out of 467525
- 283255 string characters out of 5418982
- 676289 words of memory out of 5000000
- 42524 multiletter control sequences out of 15000+600000
+ 13872 strings out of 467525
+ 283375 string characters out of 5418982
+ 676291 words of memory out of 5000000
+ 42525 multiletter control sequences out of 15000+600000
  635404 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,7n,121p,432b,748s stack positions out of 10000i,1000n,20000p,200000b,200000s

@@ -25,9 +25,9 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{108}{figure.caption.70}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{109}{figure.caption.71}%
-\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{111}{figure.caption.72}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{114}{figure.caption.76}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{115}{figure.caption.77}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{117}{figure.caption.78}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

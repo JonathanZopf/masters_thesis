@@ -127,7 +127,9 @@ median difference indicates lower interaction-aware faithfulness.
 \end{table}
 
 At the nominal $\alpha=0.05$ level, the analysis provides evidence of lower
-interaction-aware faithfulness only for New German Credit with GPT-OSS 120B
-($p=0.0019$). None of the other five dataset--model combinations supports this
-directional alternative. The complementary results therefore do not indicate
-that modeling interactions generally lowers measured faithfulness.
+interaction-aware faithfulness for BBQ with both GPT-OSS 120B ($p=0.0402$) and
+Mistral Medium 3.5 ($p=0.0288$). None of the other four dataset--model
+combinations supports this directional alternative. In particular, the result
+for New German Credit with GPT-OSS 120B is no longer significant ($p=0.2022$).
+The complementary results therefore indicate a dataset-specific decrease for
+BBQ, not a general decrease across the evaluation.

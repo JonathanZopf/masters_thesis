@@ -42,7 +42,7 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
   }
 \end{table}
 
-The interaction-aware estimate increases the credited causal effect of the eating-disorder concept for both evaluated models: from $0.018$ to $0.021$ for GPT-OSS 120B and from $0.129$ to $0.145$ for Mistral Medium 3.5. This is consistent with the direction predicted in \rqref{rq:motivating_example}. The corresponding result for self-perception of weight, however, moves in the opposite direction, decreasing from $0.021$ to $0.013$ for GPT-OSS 120B and from $0.181$ to $0.087$ for Mistral Medium 3.5. The hypothesis requires the corrected estimate to increase for both motivating concepts and across all evaluated models. It is therefore only partially supported and cannot be accepted as stated.
+The interaction-aware estimate increases the credited causal effect of the eating-disorder concept for both evaluated models: from $0.018$ to $0.029$ for GPT-OSS 120B and from $0.129$ to $0.145$ for Mistral Medium 3.5. This is consistent with the direction predicted in \rqref{rq:motivating_example}. The corresponding result for self-perception of weight, however, moves in the opposite direction, decreasing from $0.021$ to $0.017$ for GPT-OSS 120B and from $0.181$ to $0.033$ for Mistral Medium 3.5. The hypothesis requires the corrected estimate to increase for both motivating concepts and across all evaluated models. It is therefore only partially supported and cannot be accepted as stated.
 
 \definecolor{HypFiveOne}{HTML}{1B9E77}
 \definecolor{HypFiveTwo}{HTML}{D95F02}
@@ -71,9 +71,11 @@ The interaction-aware estimate increases the credited causal effect of the eatin
       \begin{axis}[
         width=5.55cm,height=5.55cm,scale only axis,
         xmin=0,xmax=#4,ymin=0,ymax=#4,
+        scaled ticks=false,
         xlabel={$\mathrm{CE}_{\mathrm{atomic}}$},
         ylabel={$\mathrm{CE}_{\mathrm{joint}}$},
-        tick label style={font=\scriptsize},label style={font=\scriptsize},
+        tick label style={font=\scriptsize,/pgf/number format/fixed,/pgf/number format/precision=2},
+        label style={font=\scriptsize},
         grid=major,grid style={gray!18},axis line style={gray!60},
       ]
         \addplot[ResultScatterLine,very thick,dashed,domain=0:#4,samples=2] {x};
@@ -93,7 +95,7 @@ The interaction-aware estimate increases the credited causal effect of the eatin
 
 \begin{figure}[p]
   \centering
-  \HypFiveIdentityPlot{GPT-OSS 120B}{gpt_atomic}{gpt_joint}{0.45}
+  \HypFiveIdentityPlot{GPT-OSS 120B}{gpt_atomic}{gpt_joint}{0.05}
   \hfill
   \HypFiveIdentityPlot{Mistral Medium 3.5}{mistral_atomic}{mistral_joint}{0.45}
 
@@ -110,9 +112,9 @@ The interaction-aware estimate increases the credited causal effect of the eatin
   \label{fig:hyp5-concept-identity}
 \end{figure}
 
-Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift all concepts in a common direction. The largest positive shift occurs for refusal of treatment under Mistral Medium 3.5 ($\Delta\mathrm{CE}=0.077$), whereas self-perception has the largest negative shift ($\Delta\mathrm{CE}=-0.094$). Concepts assigned to singleton groups remain on the identity line by construction.
+Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift all concepts in a common direction. Note that the two panels deliberately use different axis scales because the GPT-OSS 120B effects are substantially smaller: its axes extend to $0.05$, whereas the Mistral Medium 3.5 axes extend to $0.45$. The largest positive shift occurs for refusal of treatment under Mistral Medium 3.5 ($\Delta\mathrm{CE}=0.070$), whereas self-perception has the largest negative shift ($\Delta\mathrm{CE}=-0.148$). Concepts assigned to singleton groups remain on the identity line by construction.
 
-Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior means change only slightly and every 90\% credible interval contains zero. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
+Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5, while every 90\% credible interval contains zero. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
 
 \begin{table}[htbp]
   \centering

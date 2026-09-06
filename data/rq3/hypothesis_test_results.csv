@@ -1,7 +1,7 @@
 dataset,model,rho,p_scientific,supported
-BBQ,GPT-OSS 120B,0.944,2.68e-67,true
-BBQ,Mistral Medium 3.5,0.903,8.66e-52,true
-MedQA,GPT-OSS 120B,0.983,5.93e-323,true
-MedQA,Mistral Medium 3.5,0.939,6.68e-121,true
-New German Credit,GPT-OSS 120B,0.913,4.87e-142,true
-New German Credit,Mistral Medium 3.5,0.909,1.30e-138,true
+BBQ,GPT-OSS 120B,0.937,2.2250738585072014e-308,true
+BBQ,Mistral Medium 3.5,0.903,2.2250738585072014e-308,true
+MedQA,GPT-OSS 120B,0.938,2.2250738585072014e-308,true
+MedQA,Mistral Medium 3.5,0.963,2.2250738585072014e-308,true
+New German Credit,GPT-OSS 120B,0.875,2.2250738585072014e-308,false
+New German Credit,Mistral Medium 3.5,0.821,2.2250738585072014e-308,false

@@ -41,20 +41,20 @@ One major departure of FELICS from the original metric by Matton et al.\ \cite{m
 \begin{table}[p]
   \centering
   \HypThreeExceptionTable{BBQ\\GPT-OSS 120B}%
-    {data/rq3/bbq_gptoss_imperfect_rows.csv}{20}{30}{66.7}
+    {data/rq3/bbq_gptoss_imperfect_rows.csv}{21}{30}{70.0}
   \hfill
   \HypThreeExceptionTable{BBQ\\Mistral Medium 3.5}%
-    {data/rq3/bbq_mistral_imperfect_rows.csv}{19}{30}{63.3}
+    {data/rq3/bbq_mistral_imperfect_rows.csv}{21}{30}{70.0}
   \hfill
   \HypThreeExceptionTable{MedQA\\GPT-OSS 120B}%
-    {data/rq3/medqa_gptoss_imperfect_rows.csv}{12}{29}{41.4}
+    {data/rq3/medqa_gptoss_imperfect_rows.csv}{6}{29}{20.7}
 
   \par\vspace{1.2em}
   \HypThreeExceptionTable{MedQA\\Mistral Medium 3.5}%
-    {data/rq3/medqa_mistral_imperfect_rows.csv}{10}{24}{41.7}
+    {data/rq3/medqa_mistral_imperfect_rows.csv}{7}{24}{29.2}
   \hfill
   \HypThreeExceptionTable{New German Credit\\GPT-OSS 120B}%
-    {data/rq3/new_german_credit_gptoss_imperfect_rows.csv}{2}{30}{6.7}
+    {data/rq3/new_german_credit_gptoss_imperfect_rows.csv}{0}{30}{0.0}
   \hfill
   \HypThreeExceptionTable{New German Credit\\Mistral Medium 3.5}%
     {data/rq3/new_german_credit_mistral_imperfect_rows.csv}{0}{30}{0.0}
@@ -66,9 +66,11 @@ One major departure of FELICS from the original metric by Matton et al.\ \cite{m
   \label{tab:hyp3-question-exceptions}
 \end{table}
 
-Table~\ref{tab:hyp3-question-exceptions} contains several questions without exact rank preservation, especially for New German Credit where nearly all questions have flipped. Still, all dataset--model combinations meet the prespecified criterion of $\rho\geq0.90$ and $p\leq0.05$, as documented in Box~\ref{hyp:hyp3-results}. The results therefore support a strong positive association between the raw and normalized concept rankings at the aggregate level. They do not imply exact preservation for every question, but they provide no indication of a broad structural reordering of which concepts are estimated to be most causally influential.
+Table~\ref{tab:hyp3-question-exceptions} contains several questions without exact rank preservation. The four natural-language dataset--model combinations retain aggregate correlations above the prespecified threshold of $\rho\geq0.90$, as documented in Box~\ref{hyp:hyp3-results}. Both New German Credit combinations fall below that threshold, with $\rho=0.875$ for GPT-OSS 120B and $\rho=0.821$ for Mistral Medium 3.5, and no question preserves its ranking exactly. The results therefore support strong aggregate rank preservation for BBQ and MedQA, but not for New German Credit, where the corrected normalization produces a broader reordering of the concepts.
 
 \HypothesisTestResults[label=hyp:hyp3-results]
   {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
-  hypothesis when $\rho\geq0.90$ and $p\leq0.05$.}
+  hypothesis when $\rho\geq0.90$ and $p\leq0.05$. All computed $p$-values
+  underflowed to zero; $2.23\times10^{-308}$ denotes that numerical underflow
+  bound rather than an exact value.}
   {data/rq3/hypothesis_test_results.csv}
