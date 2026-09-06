@@ -1,0 +1,237 @@
+\documentclass[12pt, a4paper USenglish, oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[USenglish]{babel}
+\usepackage{standalone}
+
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{enumitem}
+\newcommand{\reqref}[1]{Requirement~\ref{#1}}
+\newcommand{\reqrefs}[2]{Requirements~\ref{#1} and~\ref{#2}}
+\newcommand{\rqref}[1]{Research Question~\ref{#1}}
+\newcommand{\rqrefs}[2]{Research Questions~\ref{#1} and~\ref{#2}}
+\usepackage{caption}
+\usepackage{subfiles}
+\usepackage[table]{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{numprint}
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{placeins}
+\usepackage{setspace}
+\usepackage{appendix}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{most}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{todonotes}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{titlesec}
+\usepackage{esint}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{nomencl}
+\usepackage{chngcntr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics}
+\usepackage{tikzviolinplots}
+
+
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,decorations.pathmorphing,calc,shapes.geometric,fit,positioning,shapes.multipart,backgrounds,external}
+
+\usepackage[style=ieee-alphabetic]{biblatex}
+\addbibresource{references.bib}
+\usepackage{hyperref}
+
+\geometry{
+ a4paper,
+ left=24mm,
+ top=24mm,
+ right=24mm,
+ bottom=24mm,
+ includehead
+}
+
+\graphicspath{{./images/}}
+
+
+% Header/footer styling
+\newcommand{\changefont}{%
+    \fontsize{9}{11}\selectfont
+}
+
+% Strip default styling and force uppercase for chapters
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\MakeUppercase{\chaptername\ \thechapter: #1}}{\MakeUppercase{\chaptername\ \thechapter: #1}}%
+}
+
+% Strip default styling from sections so they match the formatting
+\renewcommand{\sectionmark}[1]{%
+  \markright{\MakeUppercase{\thesection\ #1}}%
+}
+
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% Apply \changefont globally to the entire header line
+\fancyhead[L]{\changefont\rightmark}
+
+% Title formatting
+\titleformat{\chapter}[display]
+  {\normalfont}
+  {\large\bfseries\chaptertitlename\ \thechapter}
+  {0cm}
+  {\LARGE\bfseries}
+
+
+
+\titleformat{\section}
+  {\normalfont\fontsize{14}{16}\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{16}\bfseries}{\thesubsection}{1em}{}
+
+
+\titlespacing*{\chapter}{0pt}{0pt}{8pt}
+\titlespacing*{\section}{0pt}{8pt}{8pt}
+
+% Hyperref settings
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
+    citecolor=black,
+}
+
+
+% Custom tcolorbox environments
+\newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{
+  breakable,
+  colback=gray!5!white,
+  colframe=gray!75!black,
+  fonttitle=\bfseries,
+  arc=4mm,
+  boxrule=0.5mm,
+    title={Example \thetcbcounter},
+#1
+}
+
+\newtcolorbox[auto counter]{motivating_example_box}[2][]{
+  breakable,
+  colback=Orchid!5!white,
+  colframe=Orchid!75!black,
+  fonttitle=\bfseries,
+  title={Motivating Example \thetcbcounter: }\textit{#2},
+  arc=4mm,
+  boxrule=0.5mm,
+  width=\textwidth,
+  #1
+}
+
+\newtcolorbox[auto counter,number within=chapter]{math_box}[1][]{
+  breakable,
+  colback=cyan!5!white,
+  colframe=cyan!75!black,
+  fonttitle=\bfseries,
+  arc=4mm,
+  boxrule=0.5mm,
+    title={Mathematical Demonstration \thetcbcounter},
+#1
+}
+
+\newtcblisting[auto counter,number within=chapter]{promptbox}[1][]{
+  enhanced,
+  breakable,
+  listing only,
+  listing engine=listings,
+  colback=gray!4!white,
+  colframe=gray!65!black,
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.4mm,
+  title={Prompt \thetcbcounter},
+  left=4mm,
+  right=4mm,
+  top=2mm,
+  bottom=2mm,
+  listing options={
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    breakindent=0pt,
+    upquote=true,
+    inputencoding=utf8,
+    literate=
+      {ü}{{\"u}}1
+      {•}{{\textbullet\ }}1
+      {→}{{$\rightarrow$\ }}1
+      {–}{{--}}1
+      {’}{{'}}1
+  },
+  #1
+}
+
+\begin{document}
+
+% Front matter uses Roman page numbers. The title and declaration pages are
+% counted but do not display their page numbers.
+\pagenumbering{roman}
+\pagestyle{empty}
+
+% Title page
+\include{title_page}
+\maketitle
+% The report class resets the counter within \maketitle. Continue the Roman
+% sequence with the declaration as page ii.
+\setcounter{page}{2}
+\newpage
+
+% Declaration of originality
+\include{declaration_of_originality}
+
+% Table of contents
+\pagestyle{plain}
+\tableofcontents
+\clearpage
+
+% Lists and notation overview
+\listoffigures
+\clearpage
+
+\input{list_of_symbols}
+\clearpage
+
+% Main matter starts with Arabic page 1, as is conventional for a thesis.
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\subfile{chapters/introduction}
+\subfile{chapters/background}
+\subfile{chapters/problem_identification}
+\subfile{chapters/theoretical_conception}
+\subfile{chapters/modeling}
+\subfile{chapters/evaluation}
+\subfile{chapters/results}
+\subfile{chapters/discussion}
+\subfile{chapters/conclusion}
+
+\printbibliography[heading=bibintoc]
+\subfile{chapters/appendix}
+
+\end{document}

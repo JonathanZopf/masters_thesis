@@ -1,0 +1,68 @@
+\section*{Statement on the Use of Generative AI}
+
+\begingroup
+\small
+\setlength{\parskip}{0.35em}
+
+During the preparation of this thesis, generative artificial intelligence was
+used at different stages for a limited set of supporting tasks. The tool used
+was OpenAI Codex with the GPT-5.6 Sol large language model.
+
+Generative AI was used for the following purposes:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em,topsep=0.25em,parsep=0pt]
+  \item correcting spelling, grammar, and orthographic errors in existing text;
+  \item improving the readability and flow of existing text without
+        introducing new substantive arguments;
+  \item assisting in the discovery of potentially relevant research
+        publications;
+  \item supporting the formatting of text, headings, formulas, and other
+        document elements based on specifications or prototypes provided by
+        the author;
+  \item helping to ensure consistent use of mathematical notation and symbols
+        throughout the thesis;
+  \item generating and refining LaTeX-native graphs and illustrations from
+        data, requirements, and visual prototypes provided by the author;
+  \item performing one limited data-normalization task for the heatmap
+        presented in Appendix~B, in which related category labels were
+        consolidated to reduce the number of rows and columns; and
+  \item assisting with occasional technical debugging and with the
+        implementation of specified procedures in R and in the FELICS
+        reference implementation.
+\end{itemize}
+
+All methodological decisions, including the conceptualization and development
+of the FELICS framework, the experimental design, and the execution of the
+experiments, were made and carried out by the author. Generative AI was not used
+to:
+
+\begin{itemize}[leftmargin=1.5em,itemsep=0.1em,topsep=0.25em,parsep=0pt]
+  \item generate original substantive academic prose;
+  \item serve as a source of scientific evidence or extract findings from
+        research publications beyond providing an initial overview;
+  \item conceptualize or develop the FELICS framework;
+  \item make methodological decisions or independently design or conduct the
+        experiments; or
+  \item formulate interpretations, conclusions, or substantive scientific
+        claims.
+\end{itemize}
+
+All AI-assisted outputs were independently reviewed and verified by the author.
+Generated code was examined manually and tested through execution. Publications
+suggested through AI assistance were checked against the original sources.
+Numerical and graphical outputs were compared with their underlying
+experimental data. Where appropriate, independently generated visualizations---
+for example, plots produced in R directly from the experimental data---were used
+to verify the values and structure of AI-assisted LaTeX-native plots.
+
+No confidential, personal, or otherwise sensitive data, and no non-public
+third-party copyrighted material, was submitted to the external AI service.
+Prompts and individual instances of AI use are not reproduced because
+generative AI was employed repeatedly for the narrowly defined supporting tasks
+listed above rather than as a source of academic content.
+
+The author assumes full responsibility for the accuracy, integrity, and final
+content of this thesis, including its text, sources, software, analyses,
+figures, interpretations, and conclusions.
+
+\endgroup
