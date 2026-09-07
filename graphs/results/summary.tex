@@ -64,7 +64,7 @@
   \begin{minipage}[t]{.495\textwidth}
   \centering
   {\small\bfseries #1\par}
-  \vspace{.15em}
+  \vspace{.35em}
   % A CSV content change produces a new externalized filename. pgf/TikZ's
   % own MD5 check additionally invalidates the panel when its drawing code changes.
   \edef\FaithfulnessDataHash{\pdfmdfivesum file {#2}}%
@@ -82,17 +82,17 @@
     \clip (0,0) rectangle (0,0);
     \violinsetoptions[scaled,reverseaxis]{
       width=8.55cm,
-      height=5.05cm,
+      height=5.40cm,
       overlay,
       xmin=-1,
       xmax=1,
-      ymin=.15,
-      ymax=6.2,
+      ymin=.10,
+      ymax=7.25,
       axis lines=none,
     }
-    \violinplot[col sep=comma,index=atomic_faithfulness,relative position=4.5,color=white,label={},samples=30]{#2}
+    \violinplot[col sep=comma,index=atomic_faithfulness,relative position=5.05,color=white,label={},samples=30]{#2}
     \FaithfulnessCaptureCurrentKDE{\AtomicFaithfulnessKDE}
-    \violinplot[col sep=comma,index=interaction_faithfulness,relative position=2.1,color=white,label={},samples=30]{#2}
+    \violinplot[col sep=comma,index=interaction_faithfulness,relative position=1.65,color=white,label={},samples=30]{#2}
     \FaithfulnessCaptureCurrentKDE{\JointFaithfulnessKDE}
     \end{scope}
     \FaithfulnessMaterializeKDE{\AtomicFaithfulnessKDE}{\AtomicFaithfulnessKDETable}
@@ -101,11 +101,11 @@
     \pgfresetboundingbox
     \begin{axis}[
       width=8.55cm,
-      height=5.15cm,
+      height=5.55cm,
       xmin=-1,
       xmax=1,
-      ymin=.15,
-      ymax=6.2,
+      ymin=.10,
+      ymax=7.25,
       axis x line*=bottom,
       axis y line=none,
       xtick={-1,-.5,0,.5,1},
@@ -116,43 +116,43 @@
       clip=true,
     ]
       \addplot[gray!55,densely dashed,thin]
-        coordinates {(0,.42) (0,5.48)};
+        coordinates {(0,.42) (0,6.35)};
       \addplot[draw=FelicsAtomic,fill=FelicsAtomic,fill opacity=.48]
-        table[x=list,y expr=4.62+1.9*(\thisrow{kdecol}-4.5)]
+        table[x=list,y expr=5.15+1.6*(\thisrow{kdecol}-5.05)]
           {\AtomicFaithfulnessKDETable};
       \addplot[only marks,mark=*,mark size=1.15pt,
         draw=FelicsAtomic,fill=FelicsAtomic,fill opacity=.62,
-        y filter/.expression={3.84+.16*(mod(\coordindex*7,11)/10-.5)}]
-        table[col sep=comma,x=atomic_faithfulness,y expr=3.84]
+        y filter/.expression={4.35+.16*(mod(\coordindex*7,11)/10-.5)}]
+        table[col sep=comma,x=atomic_faithfulness,y expr=4.35]
           {#2};
-      \addplot+[boxplot={draw direction=x,draw position=3.56},
+      \addplot+[boxplot={draw direction=x,draw position=4.02},
         mark=none,draw=FelicsAtomic,fill=FelicsAtomic,fill opacity=.32,
         thick,boxplot/box extend=.18]
         table[col sep=comma,y=atomic_faithfulness]
           {#2};
       \addplot[draw=FelicsJoint,fill=FelicsJoint,fill opacity=.48]
-        table[x=list,y expr=1.80+1.9*(\thisrow{kdecol}-2.1)]
+        table[x=list,y expr=1.75+1.6*(\thisrow{kdecol}-1.65)]
           {\JointFaithfulnessKDETable};
       \addplot[only marks,mark=*,mark size=1.15pt,
         draw=FelicsJoint,fill=FelicsJoint,fill opacity=.66,
-        y filter/.expression={1.02+.16*(mod(\coordindex*7,11)/10-.5)}]
-        table[col sep=comma,x=interaction_faithfulness,y expr=1.02]
+        y filter/.expression={.92+.16*(mod(\coordindex*7,11)/10-.5)}]
+        table[col sep=comma,x=interaction_faithfulness,y expr=.92]
           {#2};
-      \addplot+[boxplot={draw direction=x,draw position=.48},
+      \addplot+[boxplot={draw direction=x,draw position=.55},
         mark=none,draw=FelicsJoint,fill=FelicsJoint,fill opacity=.34,
         thick,solid,boxplot/box extend=.18]
         table[col sep=comma,y=interaction_faithfulness]
           {#2};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsAtomic]
-        at (axis cs:-.95,5.72) {Atomic};
+        at (axis cs:-.95,6.80) {Atomic};
       \node[anchor=west,font=\scriptsize,text=black]
-        at (axis cs:-.55,5.72)
+        at (axis cs:-.55,6.80)
         {$\mathcal{F}(\mathbf{X})=
           \pgfmathprintnumber[fixed,precision=3]{\AtomicDatasetFaithfulness}$};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsJoint]
-        at (axis cs:-.95,2.98) {Joint};
+        at (axis cs:-.95,3.40) {Joint};
       \node[anchor=west,font=\scriptsize,text=black]
-        at (axis cs:-.55,2.98)
+        at (axis cs:-.55,3.40)
         {$\mathcal{F}(\mathbf{X})=
           \pgfmathprintnumber[fixed,precision=3]{\JointDatasetFaithfulness}$};
     \end{axis}

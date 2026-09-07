@@ -4,6 +4,8 @@ As an introduction to the results chapter, Figure~\ref{fig:question-level-faithf
 
 The value $\mathcal{F}(\mathbf{X})$ printed beside each distribution is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the plotted question-level estimates. This is the global regression-coefficient estimate described in Matton et al.'s evaluation pipeline; see Section~\ref{sec:matton_evaluation_pipeline}. The center line of each boxplot, by contrast, denotes the median of the displayed question-level posterior estimates.
 
+The analogous raincloud distributions of question-averaged CE are provided in Appendix~\ref{app:ce-shift-rainclouds}. Their centers change only modestly relative to the scale of each dataset, although the distributional spread changes visibly for BBQ and New German Credit. The limited shifts in faithfulness shown here therefore do not imply that the underlying concept-level causal effects remain unchanged.
+
 % Read the compiler's HOME path.  The graph is enabled only on Jonathan's
 % machine; Overleaf and other environments do not have "jonathan" in HOME.
 \makeatletter

@@ -1,0 +1,70 @@
+% Appendix counterpart to the faithfulness identity plots in RQ2.
+\input{graphs/results/shared_scatter_plot}
+
+\newcommand{\HypTwoCeIdentityPlot}[2]{%
+  \ResultScatterPlot{x column=matton_ce,
+    y column=felics_ce,
+    x label={$\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})$},
+    y label={$\overline{\mathrm{CE}}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+    line slope=1,
+    line intercept=0,
+    line style=dashed,
+    minipage width=0.47\textwidth,
+    plot width=5.55cm,
+    plot height=5.55cm,
+    mark size=1.8pt,
+    below skip=-0.2em,
+    scale only axis=true,
+    text below={Shared questions: $n=#1$},
+    #2
+  }%
+}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoCeIdentityPlot{28}{title={BBQ --- GPT-OSS 120B},
+    data=data/rq2/bbq_gptoss_ce.csv,
+    xmin=0, xmax=.8,
+    ymin=0, ymax=.8
+  }
+  \hfill
+  \HypTwoCeIdentityPlot{30}{title={BBQ --- Mistral Medium 3.5},
+    data=data/rq2/bbq_mistral_ce.csv,
+    xmin=0, xmax=.8,
+    ymin=0, ymax=.8
+  }
+
+  \par\vspace{1.1em}
+  \HypTwoCeIdentityPlot{29}{title={MedQA --- GPT-OSS 120B},
+    data=data/rq2/medqa_gptoss_ce.csv,
+    xmin=0, xmax=.25,
+    ymin=0, ymax=.25
+  }
+  \hfill
+  \HypTwoCeIdentityPlot{24}{title={MedQA --- Mistral Medium 3.5},
+    data=data/rq2/medqa_mistral_ce.csv,
+    xmin=0, xmax=.25,
+    ymin=0, ymax=.25
+  }
+
+  \caption[CE identity plots for the natural-language RQ2 comparisons]{Question-averaged causal effects produced by FELICS with $n_{\max}=1$ and the original Matton implementation for the natural-language comparisons. The average is taken across the concepts retained for each question in the respective run.}
+  \label{fig:appendix-rq2-ce-natural-language}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \HypTwoCeIdentityPlot{30}{title={New German Credit --- GPT-OSS 120B},
+    data=data/rq2/new_german_credit_gptoss_ce.csv,
+    xmin=0, xmax=1.1,
+    ymin=0, ymax=1.1
+  }
+  \hfill
+  \HypTwoCeIdentityPlot{30}{title={New German Credit --- Mistral Medium 3.5},
+    data=data/rq2/new_german_credit_mistral_ce.csv,
+    xmin=0, xmax=1.1,
+    ymin=0, ymax=1.1
+  }
+
+  \caption[CE identity plots for the New German Credit RQ2 comparisons]{Question-averaged causal effects produced by FELICS with $n_{\max}=1$ and the tabular adaptation of the Matton implementation for New German Credit.}
+  \label{fig:appendix-rq2-ce-credit}
+\end{figure}

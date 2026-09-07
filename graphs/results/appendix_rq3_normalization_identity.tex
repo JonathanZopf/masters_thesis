@@ -1,0 +1,86 @@
+\definecolor{NormalizationIdentityPoints}{HTML}{2878B5}
+\definecolor{NormalizationIdentityLine}{HTML}{E37A26}
+
+% #1 title, #2 data, #3 minimum, #4 maximum, #5 observations, #6 rho.
+\newcommand{\NormalizationIdentityPlot}[6]{%
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    {\small\bfseries #1\par}
+    \vspace{0.1em}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=5.55cm,
+        height=5.55cm,
+        scale only axis,
+        xmin=#3,
+        xmax=#4,
+        ymin=#3,
+        ymax=#4,
+        xlabel={$\mathrm{CE}_{\mathrm{raw}}$},
+        ylabel={$\mathrm{CE}_{\mathrm{adjusted}}$},
+        scaled x ticks=false,
+        scaled y ticks=false,
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+        clip=true,
+      ]
+        \addplot[
+          only marks,
+          mark=*,
+          mark size=0.95pt,
+          draw=NormalizationIdentityPoints,
+          draw opacity=0.36,
+          fill=NormalizationIdentityPoints,
+          fill opacity=0.30,
+        ] table[
+          col sep=comma,
+          x=raw_ce,
+          y=adjusted_ce
+        ] {#2};
+        \addplot[
+          NormalizationIdentityLine,
+          very thick,
+          dashed,
+          domain=#3:#4,
+          samples=2
+        ] {x};
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-0.2em}
+    {\scriptsize Concept observations: $n=#5$; Spearman $\rho=#6$\par}
+  \end{minipage}%
+}
+
+\begin{figure}[p]
+  \centering
+  \NormalizationIdentityPlot{BBQ --- GPT-OSS 120B}%
+    {data/appendix/rq3_normalization_identity/bbq_gptoss.csv}{-0.3}{1.1}{137}{0.937}
+  \hfill
+  \NormalizationIdentityPlot{BBQ --- Mistral Medium 3.5}%
+    {data/appendix/rq3_normalization_identity/bbq_mistral.csv}{-0.3}{1.1}{137}{0.903}
+
+  \par\vspace{1.1em}
+  \NormalizationIdentityPlot{MedQA --- GPT-OSS 120B}%
+    {data/appendix/rq3_normalization_identity/medqa_gptoss.csv}{-0.05}{0.6}{435}{0.938}
+  \hfill
+  \NormalizationIdentityPlot{MedQA --- Mistral Medium 3.5}%
+    {data/appendix/rq3_normalization_identity/medqa_mistral.csv}{-0.05}{0.6}{257}{0.963}
+
+  \caption[Concept-level effects before and after normalization]{Concept-level raw and adjusted Shapley causal effects for BBQ and MedQA. Each translucent point represents one concept in one question. The dashed line denotes unchanged CE magnitude; darker regions indicate overlapping observations.}
+  \label{fig:appendix-rq3-normalization-natural-language}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \NormalizationIdentityPlot{New German Credit --- GPT-OSS 120B}%
+    {data/appendix/rq3_normalization_identity/new_german_credit_gptoss.csv}{-1}{2.7}{360}{0.875}
+  \hfill
+  \NormalizationIdentityPlot{New German Credit --- Mistral Medium 3.5}%
+    {data/appendix/rq3_normalization_identity/new_german_credit_mistral.csv}{-1}{2.7}{360}{0.821}
+
+  \caption[Concept-level normalization effects for New German Credit]{Concept-level raw and adjusted Shapley causal effects for New German Credit. Broader displacement from the identity line complements the lower rank correlations reported for Research Question~\ref{rq:ranking}.}
+  \label{fig:appendix-rq3-normalization-credit}
+\end{figure}

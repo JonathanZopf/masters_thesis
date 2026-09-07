@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  7 SEP 2026 01:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  7 SEP 2026 16:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1787,7 +1787,8 @@ LaTeX Warning: Label `sec:influence' multiply defined.
 (./results/rq2.aux) (./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
-(./appendix/oracle_partition_details.aux) (./appendix/examples.aux)
+(./appendix/oracle_partition_details.aux)
+(./appendix/additional_result_visualizations.aux) (./appendix/examples.aux)
 (./appendix/mathematical_demonstrations.aux) (./appendix/prompts.aux
 
 LaTeX Warning: Label `app:prompts' multiply defined.
@@ -1940,7 +1941,7 @@ Package hyperref Info: Link coloring ON on input line 193.
 \openout2 = `title_page.aux'.
 
  (./title_page.tex)
-<images/university_logo.png, id=505, 200.8081pt x 59.40573pt>
+<images/university_logo.png, id=537, 200.8081pt x 59.40573pt>
 File: images/university_logo.png Graphic file (type png)
 <use images/university_logo.png>
 Package pdftex.def Info: images/university_logo.png  used on input line 205.
@@ -2011,7 +2012,7 @@ ogo.png>]
 
 
 (./declaration_of_originality.tex
-<images/signature.jpg, id=514, 1118.1775pt x 363.3575pt>
+<images/signature.jpg, id=546, 1118.1775pt x 363.3575pt>
 File: images/signature.jpg Graphic file (type jpg)
 <use images/signature.jpg>
 Package pdftex.def Info: images/signature.jpg  used on input line 5.
@@ -2037,13 +2038,13 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 
 
-] [5])
+] [5]
+[6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
+cal/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
-
-[6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
-cal/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] (./main.lof
+ [7] (./main.lof
 Overfull \hbox (12.93503pt too wide) in paragraph at lines 14--14
  \T1/lmr/m/n/12 aware causal ef-fects from the same joint FELICS run on dif-fer
 -ent dataset/model 
@@ -2061,15 +2062,15 @@ Overfull \hbox (16.20915pt too wide) in paragraph at lines 18--18
 raction-presumption strength 
  []
 
-)
+[8
+
+
+{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}])
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
- [7
 
-
-{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-(./list_of_symbols.tex
+[9] (./list_of_symbols.tex
 Underfull \hbox (badness 1867) in paragraph at lines 19--20
 []|\T1/lmr/m/n/12 Counterfactual ques-tion ob-tained by re-plac-ing the orig-i-
 nal
@@ -2093,12 +2094,12 @@ on-
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [8
+ignored: Infinite glue shrinkage found in box being split [10
 
 
 ]
-ignored: Infinite glue shrinkage found in box being split [9]) [10] (./chapters/introdu
-ction.tex
+ignored: Infinite glue shrinkage found in box being split [11]) [12] (./chapters/introd
+uction.tex
 Chapter 1.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
 .
@@ -2148,7 +2149,7 @@ ed by Atanasova et al. [[][]ACL+23[][]]
 [13] [14] [15] [16] [17]
 Package standalone Info: generated file graphs/matton_evaluation_pipeline.pdf n
 ewer then source file graphs/matton_evaluation_pipeline.tex on input line 298.
-<graphs/matton_evaluation_pipeline.pdf, id=1109, 517.34981pt x 620.73103pt>
+<graphs/matton_evaluation_pipeline.pdf, id=1173, 517.34981pt x 620.73103pt>
 File: graphs/matton_evaluation_pipeline.pdf Graphic file (type pdf)
 <use graphs/matton_evaluation_pipeline.pdf>
 Package pdftex.def Info: graphs/matton_evaluation_pipeline.pdf  used on input l
@@ -2159,7 +2160,7 @@ ine 298.
 Chapter 3.
 Package standalone Info: generated file graphs/matton_dgp.pdf newer then source
  file graphs/matton_dgp.tex on input line 12.
-<graphs/matton_dgp.pdf, id=1215, 353.8008pt x 162.97989pt>
+<graphs/matton_dgp.pdf, id=1281, 353.8008pt x 162.97989pt>
 File: graphs/matton_dgp.pdf Graphic file (type pdf)
 <use graphs/matton_dgp.pdf>
 Package pdftex.def Info: graphs/matton_dgp.pdf  used on input line 12.
@@ -2169,7 +2170,7 @@ Package pdftex.def Info: graphs/matton_dgp.pdf  used on input line 12.
  <./graphs/matton_dgp.pdf>]
 Package standalone Info: generated file graphs/matton_dgp_intervened.pdf newer 
 then source file graphs/matton_dgp_intervened.tex on input line 31.
-<graphs/matton_dgp_intervened.pdf, id=1264, 341.50186pt x 252.00047pt>
+<graphs/matton_dgp_intervened.pdf, id=1328, 341.50186pt x 252.00047pt>
 File: graphs/matton_dgp_intervened.pdf Graphic file (type pdf)
 <use graphs/matton_dgp_intervened.pdf>
 Package pdftex.def Info: graphs/matton_dgp_intervened.pdf  used on input line 3
@@ -2195,7 +2196,7 @@ mm/m/it/12 ; V \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 v\OT1/lmr/m/n/12 )] \OMS/lmsy
 
 Package standalone Info: generated file graphs/dgp_joint_intervened.pdf newer t
 hen source file graphs/dgp_joint_intervened.tex on input line 74.
-<graphs/dgp_joint_intervened.pdf, id=1379, 376.08205pt x 325.97786pt>
+<graphs/dgp_joint_intervened.pdf, id=1443, 376.08205pt x 325.97786pt>
 File: graphs/dgp_joint_intervened.pdf Graphic file (type pdf)
 <use graphs/dgp_joint_intervened.pdf>
 Package pdftex.def Info: graphs/dgp_joint_intervened.pdf  used on input line 74
@@ -2216,7 +2217,7 @@ Overfull \hbox (0.39104pt too wide) detected at line 292
 [41] [42] [43]
 Package standalone Info: generated file graphs/comparison_matton_felics.pdf new
 er then source file graphs/comparison_matton_felics.tex on input line 375.
-<graphs/comparison_matton_felics.pdf, id=1575, 614.295pt x 794.97pt>
+<graphs/comparison_matton_felics.pdf, id=1640, 614.295pt x 794.97pt>
 File: graphs/comparison_matton_felics.pdf Graphic file (type pdf)
 <use graphs/comparison_matton_felics.pdf>
 Package pdftex.def Info: graphs/comparison_matton_felics.pdf  used on input lin
@@ -2466,7 +2467,7 @@ See the caption package documentation for explanation.
 ] [64]
 Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
  then source file graphs/german_credit_grouping.tex on input line 109.
-<graphs/german_credit_grouping.pdf, id=1870, 420.16574pt x 284.17468pt>
+<graphs/german_credit_grouping.pdf, id=1936, 420.16574pt x 284.17468pt>
 File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
 <use graphs/german_credit_grouping.pdf>
 Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
@@ -2518,13 +2519,13 @@ PGFPlots: reading {data/rq2/medqa_gptoss.csv}
 PGFPlots: reading {data/rq2/medqa_mistral.csv}
 PGFPlots: reading {data/rq2/new_german_credit_gptoss.csv}
 
-Overfull \hbox (18.80211pt too wide) in paragraph at lines 67--67
+Overfull \hbox (18.80211pt too wide) in paragraph at lines 69--69
  [][] 
  []
 
 PGFPlots: reading {data/rq2/new_german_credit_mistral.csv}
 
-Overfull \hbox (35.52446pt too wide) in paragraph at lines 73--73
+Overfull \hbox (35.52446pt too wide) in paragraph at lines 75--75
  [][] 
  []
 
@@ -2534,32 +2535,32 @@ PGFPlots: reading {data/rq2/difference_test_results.csv}
 
 
 
-] [71] [72]) [73]
+] [71]) [72] [73]
 \openout2 = `results/rq3.aux'.
 
  (./results/rq3.tex
-LaTeX Font Info:    Calculating math sizes for size <6.5> on input line 44.
+LaTeX Font Info:    Calculating math sizes for size <6.5> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6.5> on input line 44.
+(Font)              <6.5> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <4.54997> on input line 44.
+(Font)              <4.54997> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <3.25> on input line 44.
+(Font)              <3.25> on input line 46.
 PGFPlots: reading {data/rq3/bbq_gptoss_imperfect_rows.csv}
-LaTeX Font Info:    Calculating math sizes for size <6.2> on input line 44.
+LaTeX Font Info:    Calculating math sizes for size <6.2> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6.2> on input line 44.
+(Font)              <6.2> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <4.33997> on input line 44.
+(Font)              <4.33997> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <3.09999> on input line 44.
+(Font)              <3.09999> on input line 46.
 PGFPlots: reading {data/rq3/bbq_mistral_imperfect_rows.csv}
 PGFPlots: reading {data/rq3/medqa_gptoss_imperfect_rows.csv}
 PGFPlots: reading {data/rq3/medqa_mistral_imperfect_rows.csv}
 PGFPlots: reading {data/rq3/new_german_credit_gptoss_imperfect_rows.csv}
 PGFPlots: reading {data/rq3/new_german_credit_mistral_imperfect_rows.csv}
 
-Overfull \hbox (5.97032pt too wide) detected at line 60
+Overfull \hbox (5.97032pt too wide) detected at line 62
 $\OMS/lmsy/m/n/6.2 ^^@\OT1/lmr/m/n/6.2 0$
  []
 
@@ -2615,61 +2616,227 @@ PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
 ]
 [80] [81]) (./chapters/discussion.tex
 Chapter 8.
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 7.
+
+Overfull \hbox (5.16595pt too wide) in paragraph at lines 7--7
+[][][]\T1/lmr/m/n/12 General 
+ []
+
+
+Overfull \hbox (4.75029pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 ^^PStrong 
+ []
+
+
+Overfull \hbox (1.16013pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 dancy^^Q 
+ []
+
+
+Overfull \hbox (3.4542pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 change, 
+ []
+
+
+Overfull \hbox (14.55019pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 reference- 
+ []
+
+
+Overfull \hbox (6.3914pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 relative, 
+ []
+
+
+Overfull \hbox (28.91309pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 redundancy- 
+ []
+
+
+Overfull \hbox (6.39206pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 additive 
+ []
+
+
+Overfull \hbox (1.23466pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 thresh- 
+ []
+
+
+Overfull \hbox (5.16595pt too wide) in paragraph at lines 7--7
+[][][]\T1/lmr/m/n/12 General 
+ []
+
+
+Overfull \hbox (4.75029pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 ^^PStrong 
+ []
+
+
+Overfull \hbox (1.16013pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 dancy^^Q 
+ []
+
+
+Overfull \hbox (3.4542pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 change, 
+ []
+
+
+Overfull \hbox (14.55019pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 reference- 
+ []
+
+
+Overfull \hbox (6.3914pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 relative, 
+ []
+
+
+Overfull \hbox (28.91309pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 redundancy- 
+ []
+
+
+Overfull \hbox (6.39206pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 additive 
+ []
+
+
+Overfull \hbox (1.23466pt too wide) in paragraph at lines 7--7
+\T1/lmr/m/n/12 thresh- 
+ []
+
+
+Overfull \hbox (7.52365pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 FELICS 
+ []
+
+
+Overfull \hbox (5.73929pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 through 
+ []
+
+
+Overfull \hbox (9.56056pt too wide) in paragraph at lines 15--15
+\OML/lmm/m/it/12 v[]\OT1/lmr/m/n/12 (\OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 C[]\OMS
+/lmsy/m/n/12 g\OT1/lmr/m/n/12 )$ 
+ []
+
+
+Overfull \hbox (9.32979pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 Shapley- 
+ []
+
+
+Overfull \hbox (17.48895pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 attributed 
+ []
+
+
+Overfull \hbox (34.8528pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 ized/adjusted 
+ []
+
+
+Overfull \hbox (7.52365pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 FELICS 
+ []
+
+
+Overfull \hbox (5.73929pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 through 
+ []
+
+
+Overfull \hbox (9.56056pt too wide) in paragraph at lines 15--15
+\OML/lmm/m/it/12 v[]\OT1/lmr/m/n/12 (\OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 C[]\OMS
+/lmsy/m/n/12 g\OT1/lmr/m/n/12 )$ 
+ []
+
+
+Overfull \hbox (9.32979pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 Shapley- 
+ []
+
+
+Overfull \hbox (17.48895pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 attributed 
+ []
+
+
+Overfull \hbox (34.8528pt too wide) in paragraph at lines 15--15
+\T1/lmr/m/n/12 ized/adjusted 
+ []
+
+
+LaTeX Warning: Marginpar on page 82 moved.
+
+
+LaTeX Warning: Citation '' on page 82 undefined on input line 24.
+
 [82
 
 
 
 ] [83] [84]
 
-LaTeX Warning: Citation '' on page 85 undefined on input line 84.
+LaTeX Warning: Citation '' on page 85 undefined on input line 98.
 
-
-Overfull \hbox (8.263pt too wide) in paragraph at lines 89--92
+[85]
+Overfull \hbox (8.263pt too wide) in paragraph at lines 103--106
 []\T1/lmr/m/n/12 The phe-nomenon of faith-ful-ness also shows when look-ing at 
 in-di-vid-ual ques-tions. FELICS
  []
 
-[85] [86] [87]
+[86] [87]
 
-LaTeX Warning: Citation '' on page 88 undefined on input line 130.
+LaTeX Warning: Citation '' on page 88 undefined on input line 144.
 
 [88]
 
-LaTeX Warning: Citation '' on page 89 undefined on input line 133.
+LaTeX Warning: Citation '' on page 89 undefined on input line 147.
 
 
-LaTeX Warning: Citation '' on page 89 undefined on input line 135.
+LaTeX Warning: Citation '' on page 89 undefined on input line 149.
 
-[89] [90] [91] [92] [93] [94] [95]
+[89] [90] [91] [92] [93] [94] [95] [96]
 
-LaTeX Warning: Citation '' on page 96 undefined on input line 197.
-
-[96]
-
-LaTeX Warning: Citation '' on page 97 undefined on input line 203.
+LaTeX Warning: Citation '' on page 97 undefined on input line 212.
 
 
-LaTeX Warning: Citation '' on page 97 undefined on input line 205.
+LaTeX Warning: Citation '' on page 97 undefined on input line 212.
+
+
+LaTeX Warning: Citation '' on page 97 undefined on input line 235.
 
 [97]
 
+LaTeX Warning: Citation '' on page 98 undefined on input line 243.
+
+
+LaTeX Warning: Citation '' on page 98 undefined on input line 245.
+
+[98]
+
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 210.
+(hyperref)                removing `math shift' on input line 250.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 210.
+(hyperref)                removing `subscript' on input line 250.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\max' on input line 210.
+(hyperref)                removing `\max' on input line 250.
 
 
-LaTeX Warning: Citation '' on page 98 undefined on input line 215.
+LaTeX Warning: Citation '' on page 99 undefined on input line 255.
 
-[98]) (./chapters/conclusion.tex [99]
+[99]) (./chapters/conclusion.tex [100]
 Chapter 9.
-) [100
+) [101
 
 ]
 
@@ -2682,7 +2849,7 @@ Overfull \hbox (30.2811pt too wide) in paragraph at lines 240--240
 es 2014/90/EU,
  []
 
-[101
+[102
 
 ]
 Overfull \hbox (3.75975pt too wide) in paragraph at lines 240--240
@@ -2696,19 +2863,19 @@ Overfull \hbox (6.74373pt too wide) in paragraph at lines 240--240
 O/IEC TR 29119-11:2020,^^Q
  []
 
-[102] [103]
+[103] [104]
 Overfull \hbox (3.87361pt too wide) in paragraph at lines 240--240
 []\T1/lmr/m/n/12 Á. Martínez-Sánchez, G. Ar-ranz, and A. Lozano-Durán, ^^P  De-
 com-pos-ing causal-
  []
 
-[104]
+[105]
 Overfull \hbox (0.94969pt too wide) in paragraph at lines 240--240
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-consistency
  []
 
-[105]
+[106]
 Overfull \hbox (13.06743pt too wide) in paragraph at lines 240--240
 \T1/lmr/m/n/12 Learn-ing for Sci-en-tific In-sights and Dis-cov-er-ies,^^Q \T1/
 lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 , vol. 8, pp. 42 200^^U
@@ -2720,31 +2887,31 @@ Overfull \hbox (5.1381pt too wide) in paragraph at lines 240--240
 E Ac-cess\T1/lmr/m/n/12 , vol. 9, pp. 11 974^^U12 001, Jan. 1,
  []
 
-[106] [107]
+[107] [108]
 
 Package biblatex Warning: No driver for 'legislation'.
 (biblatex)                Using fallback driver on input line 240.
 
-(./chapters/appendix.tex [108]
+(./chapters/appendix.tex [109]
 \openout2 = `appendix/motivational_example_setup.aux'.
 
  (./appendix/motivational_example_setup.tex
 Appendix A.
-[109
+[110
 
 
-]) [110]
+]) [111]
 \openout2 = `appendix/oracle_category_normalization.aux'.
 
  (./appendix/oracle_category_normalization.tex
 Appendix B.
 
-ignored: Infinite glue shrinkage found in box being split [111
+ignored: Infinite glue shrinkage found in box being split [112
 
 
 
 
-]) [112]
+]) [113]
 \openout2 = `appendix/oracle_partition_details.aux'.
 
  (./appendix/oracle_partition_details.tex
@@ -2771,19 +2938,19 @@ File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [113
+(./graphs/german_credit_grouping_data.tex) [114
 
 
 
 
-] [114] [115]
+] [115] [116]
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [116
+(./graphs/german_credit_grouping_data.tex) [117
 
 ]
 Package standalone Info: generated file graphs/rq5_oracle_grouping.pdf newer th
 en source file graphs/rq5_oracle_grouping.tex on input line 108.
-<graphs/rq5_oracle_grouping.pdf, id=2411, 325.68474pt x 198.81679pt>
+<graphs/rq5_oracle_grouping.pdf, id=2490, 325.68474pt x 198.81679pt>
 File: graphs/rq5_oracle_grouping.pdf Graphic file (type pdf)
 <use graphs/rq5_oracle_grouping.pdf>
 Package pdftex.def Info: graphs/rq5_oracle_grouping.pdf  used on input line 108
@@ -2791,39 +2958,269 @@ Package pdftex.def Info: graphs/rq5_oracle_grouping.pdf  used on input line 108
 (pdftex.def)             Requested size: 359.55634pt x 219.49394pt.
 
 (./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex)
-) [117
+) [118
 
  <./graphs/rq5_oracle_grouping.pdf>]
+\openout2 = `appendix/additional_result_visualizations.aux'.
+
+
+(./appendix/additional_result_visualizations.tex
+Appendix D.
+(./graphs/results/appendix_ce_rainclouds.tex
+\cekderow=\count614
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+Package pgfplots info on input line 116: boxplot: got lower quartile=4.2568625e
+-2
+Package pgfplots info on input line 116: boxplot: got median=6.4890144e-2
+Package pgfplots info on input line 116: boxplot: got upper quartile=1.1671411e
+-1
+Package pgfplots info on input line 116: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 116: boxplot: got lower whisker=1.459758447
+8906326e-2
+Package pgfplots info on input line 116: boxplot: got upper whisker=2.232541562
+9893539e-1
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_gptoss.csv}
+Package pgfplots info on input line 116: boxplot: got lower quartile=3.155017e-
+2
+Package pgfplots info on input line 116: boxplot: got median=5.9593178e-2
+Package pgfplots info on input line 116: boxplot: got upper quartile=8.7574713e
+-2
+Package pgfplots info on input line 116: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 116: boxplot: got lower whisker=1.303674187
+304776e-2
+Package pgfplots info on input line 116: boxplot: got upper whisker=8.762651453
+288374e-2
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+Package pgfplots info on input line 119: boxplot: got lower quartile=4.6055247e
+-2
+Package pgfplots info on input line 119: boxplot: got median=8.2180875e-2
+Package pgfplots info on input line 119: boxplot: got upper quartile=2.2104163e
+-1
+Package pgfplots info on input line 119: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 119: boxplot: got lower whisker=1.670314173
+679795e-2
+Package pgfplots info on input line 119: boxplot: got upper whisker=4.308609042
+316675e-1
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/bbq_mistral.csv}
+Package pgfplots info on input line 119: boxplot: got lower quartile=4.6295859e
+-2
+Package pgfplots info on input line 119: boxplot: got median=8.3012569e-2
+Package pgfplots info on input line 119: boxplot: got upper quartile=1.4054144e
+-1
+Package pgfplots info on input line 119: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 119: boxplot: got lower whisker=1.876247159
+5366734e-2
+Package pgfplots info on input line 119: boxplot: got upper whisker=2.808391544
+816051e-1
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+Package pgfplots info on input line 123: boxplot: got lower quartile=3.85298321
+8368692e-3
+Package pgfplots info on input line 123: boxplot: got median=5.481895685935459e
+-3
+Package pgfplots info on input line 123: boxplot: got upper quartile=9.09453678
+711235e-3
+Package pgfplots info on input line 123: boxplot: got sample size=2.9e1
+Package pgfplots info on input line 123: boxplot: got lower whisker=1.674876128
+5830308e-3
+Package pgfplots info on input line 123: boxplot: got upper whisker=1.162034907
+6110812e-2
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_gptoss.csv}
+Package pgfplots info on input line 123: boxplot: got lower quartile=3.69113113
+5601602e-3
+Package pgfplots info on input line 123: boxplot: got median=5.266431640268221e
+-3
+Package pgfplots info on input line 123: boxplot: got upper quartile=9.21422543
+4846818e-3
+Package pgfplots info on input line 123: boxplot: got sample size=2.9e1
+Package pgfplots info on input line 123: boxplot: got lower whisker=1.645440729
+3900433e-3
+Package pgfplots info on input line 123: boxplot: got upper whisker=1.238682575
+1236985e-2
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+Package pgfplots info on input line 126: boxplot: got lower quartile=6.6141086e
+-3
+Package pgfplots info on input line 126: boxplot: got median=8.4373083e-3
+Package pgfplots info on input line 126: boxplot: got upper quartile=1.1548032e
+-2
+Package pgfplots info on input line 126: boxplot: got sample size=2.4e1
+Package pgfplots info on input line 126: boxplot: got lower whisker=5.668266894
+644729e-4
+Package pgfplots info on input line 126: boxplot: got upper whisker=1.379164996
+3726085e-2
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/medqa_mistral.csv}
+Package pgfplots info on input line 126: boxplot: got lower quartile=6.8331908e
+-3
+Package pgfplots info on input line 126: boxplot: got median=8.7414388e-3
+Package pgfplots info on input line 126: boxplot: got upper quartile=9.7979912e
+-3
+Package pgfplots info on input line 126: boxplot: got sample size=2.4e1
+Package pgfplots info on input line 126: boxplot: got lower whisker=2.589729181
+3459147e-3
+Package pgfplots info on input line 126: boxplot: got upper whisker=1.347216532
+6812701e-2
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+Package pgfplots info on input line 130: boxplot: got lower quartile=6.8724632e
+-2
+Package pgfplots info on input line 130: boxplot: got median=1.406847e-1
+Package pgfplots info on input line 130: boxplot: got upper quartile=2.3446033e
+-1
+Package pgfplots info on input line 130: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 130: boxplot: got lower whisker=5.549951409
+9210466e-2
+Package pgfplots info on input line 130: boxplot: got upper whisker=4.629427976
+9062996e-1
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_gptoss.csv}
+Package pgfplots info on input line 130: boxplot: got lower quartile=1.4948158e
+-1
+Package pgfplots info on input line 130: boxplot: got median=1.9431934e-1
+Package pgfplots info on input line 130: boxplot: got upper quartile=2.9189671e
+-1
+Package pgfplots info on input line 130: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 130: boxplot: got lower whisker=7.182778701
+449238e-2
+Package pgfplots info on input line 130: boxplot: got upper whisker=4.721455778
+5322697e-1
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+Package pgfplots info on input line 133: boxplot: got lower quartile=3.6297676e
+-1
+Package pgfplots info on input line 133: boxplot: got median=4.5300864e-1
+Package pgfplots info on input line 133: boxplot: got upper quartile=5.7955803e
+-1
+Package pgfplots info on input line 133: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 133: boxplot: got lower whisker=2.027793830
+8815158e-1
+Package pgfplots info on input line 133: boxplot: got upper whisker=6.971678584
+814072e-1
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shifts/new_german_credit_mistral.csv}
+Package pgfplots info on input line 133: boxplot: got lower quartile=4.1865079e
+-1
+Package pgfplots info on input line 133: boxplot: got median=4.7691551e-1
+Package pgfplots info on input line 133: boxplot: got upper quartile=5.7128743e
+-1
+Package pgfplots info on input line 133: boxplot: got sample size=3.0e1
+Package pgfplots info on input line 133: boxplot: got lower whisker=2.435340014
+466364e-1
+Package pgfplots info on input line 133: boxplot: got upper whisker=6.765453513
+33394e-1
+) [119
+
+
+
+
+] [120]
+(./graphs/results/appendix_rq2_ce_identity.tex
+(./graphs/results/shared_scatter_plot.tex)
+PGFPlots: reading {data/rq2/bbq_gptoss_ce.csv}
+PGFPlots: reading {data/rq2/bbq_mistral_ce.csv}
+PGFPlots: reading {data/rq2/medqa_gptoss_ce.csv}
+PGFPlots: reading {data/rq2/medqa_mistral_ce.csv}
+PGFPlots: reading {data/rq2/new_german_credit_gptoss_ce.csv}
+
+Overfull \hbox (13.70264pt too wide) in paragraph at lines 60--60
+ [][] 
+ []
+
+PGFPlots: reading {data/rq2/new_german_credit_mistral_ce.csv}
+
+Overfull \hbox (35.52446pt too wide) in paragraph at lines 66--66
+ [][] 
+ []
+
+) [121] [122] [123] (./graphs/results/appendix_ce_shift_identity.tex
+PGFPlots: reading {data/appendix/ce_shift_identity/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/ce_shift_identity/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/ce_shift_identity/medqa_gptoss.csv}
+
+Overfull \hbox (14.2899pt too wide) in paragraph at lines 87--87
+ [][] 
+ []
+
+PGFPlots: reading {data/appendix/ce_shift_identity/medqa_mistral.csv}
+
+Overfull \hbox (14.2899pt too wide) in paragraph at lines 91--91
+ [][] 
+ []
+
+PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_gptoss.csv
+}
+PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_mistral.cs
+v}
+) [124
+
+] [125] [126] (./graphs/results/appendix_rq3_normalization_identity.tex
+PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_gptoss.csv}
+PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_mistral.csv}
+PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_gptoss.csv}
+PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_mistral.csv}
+PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_g
+ptoss.csv}
+PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_m
+istral.csv}
+)
+[127
+
+] [128] [129] (./graphs/results/appendix_rq3_credit_concept_delta.tex
+PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_gpt
+oss.csv}
+PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_mis
+tral.csv}
+))
+[130]
 \openout2 = `appendix/examples.aux'.
 
  (./appendix/examples.tex
-Appendix D.
+Appendix E.
 
 Overfull \hbox (9.98933pt too wide) in paragraph at lines 3--4
 \T1/lmr/m/n/12 This ap-pendix col-lects worked ex-am-ples that com-ple-ment the
  for-mal de-vel-op-ment of \T1/lmr/m/it/12 FELICS\T1/lmr/m/n/12 . 
  []
 
-[118
+[131
 
 
 
 
-] [119]) [120]
+
+] [132]) [133]
 \openout2 = `appendix/mathematical_demonstrations.aux'.
 
  (./appendix/mathematical_demonstrations.tex
-Appendix E.
-[121
+Appendix F.
+[134
 
 
 
 
-] [122] [123] [124]) [125]
+] [135] [136] [137]) [138]
 \openout2 = `appendix/prompts.aux'.
 
  (./appendix/prompts.tex
-Appendix F.
+Appendix G.
 \g__tcobox_out_iow=\write9
 \openout9 = `main.listing'.
 
@@ -2833,39 +3230,40 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-[126
+[139
 
 
 
 
-] [127]
+] [140]
 \openout9 = `main.listing'.
 
  (./main.listing)
 \openout9 = `main.listing'.
 
- (./main.listing) [128] [129] [130] [131]
+ (./main.listing) [141] [142] [143] [144]
 \openout9 = `main.listing'.
 
 
-(./main.listing) [132] [133] [134] [135] [136]
+(./main.listing) [145] [146] [147] [148] [149]
 \openout9 = `main.listing'.
 
- (./main.listing) [137] [138]
-[139] [140]
+ (./main.listing) [150] [151]
+[152] [153]
 \openout9 = `main.listing'.
 
- (./main.listing) [141] [142] [143]
+ (./main.listing) [154] [155] [156]
 \openout9 = `main.listing'.
 
- (./main.listing) [144] [145]
-[146] [147]) [148]) (./main.aux (./title_page.aux)
+ (./main.listing) [157] [158]
+[159] [160]) [161]) (./main.aux (./title_page.aux)
 (./declaration_of_originality.aux) (./statement_on_generative_ai.aux)
 (./results/summary.aux) (./results/oracle.aux) (./results/rq1.aux)
 (./results/rq2.aux) (./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
-(./appendix/oracle_partition_details.aux) (./appendix/examples.aux)
+(./appendix/oracle_partition_details.aux)
+(./appendix/additional_result_visualizations.aux) (./appendix/examples.aux)
 (./appendix/mathematical_demonstrations.aux) (./appendix/prompts.aux))
  ***********
 LaTeX2e <2025-11-01>
@@ -2876,16 +3274,16 @@ L3 programming layer <2020/03/25>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 02DBA899B079242AA1ECCA4BAC98C305;26711.
+(rerunfilecheck)             Checksum: F23C42990AF270F320508D9C7DB408BF;28873.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 98695 strings out of 467525
- 2256838 string characters out of 5418982
- 3523890 words of memory out of 5000000
- 125020 multiletter control sequences out of 15000+600000
+ 127058 strings out of 467525
+ 2868424 string characters out of 5418982
+ 3975530 words of memory out of 5000000
+ 153310 multiletter control sequences out of 15000+600000
  845741 words of font info for 209 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,19n,121p,2575b,3037s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2935,10 +3333,10 @@ ve/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-di
 st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (158 pages, 1593403 bytes).
+Output written on main.pdf (173 pages, 1826662 bytes).
 PDF statistics:
- 3780 PDF objects out of 4296 (max. 8388607)
- 3418 compressed objects within 35 object streams
- 1259 named destinations out of 1440 (max. 500000)
- 1122 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3930 PDF objects out of 4296 (max. 8388607)
+ 3551 compressed objects within 36 object streams
+ 1292 named destinations out of 1440 (max. 500000)
+ 1186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

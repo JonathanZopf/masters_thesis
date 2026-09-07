@@ -17,7 +17,7 @@
 \contentsline {figure}{\numberline {7.4}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for BBQ.}}{68}{figure.caption.52}%
 \contentsline {figure}{\numberline {7.5}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for MedQA.}}{69}{figure.caption.53}%
 \contentsline {figure}{\numberline {7.6}{\ignorespaces Identity plots for the completed RQ2 comparisons}}{71}{figure.caption.54}%
-\contentsline {figure}{\numberline {7.7}{\ignorespaces Identity plots for the New German Credit RQ2 comparisons}}{72}{figure.caption.55}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Identity plots for the New German Credit RQ2 comparisons}}{73}{figure.caption.55}%
 \contentsline {figure}{\numberline {7.8}{\ignorespaces Atomic and joint faithfulness identity plots for BBQ and MedQA}}{77}{figure.caption.58}%
 \contentsline {figure}{\numberline {7.9}{\ignorespaces Atomic and joint causal effects for the motivating MedQA example}}{80}{figure.caption.62}%
 \addvspace {10\p@ }
@@ -25,9 +25,18 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{114}{figure.caption.76}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{115}{figure.caption.77}%
-\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{117}{figure.caption.78}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{115}{figure.caption.78}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{116}{figure.caption.79}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{118}{figure.caption.80}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{120}{figure.caption.82}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{122}{figure.caption.83}%
+\contentsline {figure}{\numberline {D.3}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{123}{figure.caption.84}%
+\contentsline {figure}{\numberline {D.4}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{125}{figure.caption.85}%
+\contentsline {figure}{\numberline {D.5}{\ignorespaces Question-level CE agreement for New German Credit}}{126}{figure.caption.86}%
+\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{128}{figure.caption.87}%
+\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{129}{figure.caption.88}%
+\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{130}{figure.caption.89}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

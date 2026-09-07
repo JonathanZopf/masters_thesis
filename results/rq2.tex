@@ -4,6 +4,8 @@ Research Question~\ref{rq:convergence} examines whether FELICS and the original 
 
 Figures~\ref{fig:hyp2-identity-natural-language} and~\ref{fig:hyp2-identity-credit} compare the question-level faithfulness scores produced by the two implementations. Each point represents a shared question, with its position determined by the faithfulness scores assigned by the original implementation and FELICS. The dashed orange identity line denotes exact agreement. All panels use the same range of $[-1,1]$ on both axes, allowing deviations from the identity line to be compared directly across datasets and models.
 
+Appendix Figures~\ref{fig:appendix-rq2-ce-natural-language} and~\ref{fig:appendix-rq2-ce-credit} provide the corresponding identity plots for question-averaged CE. They show dataset- and model-dependent deviations from the identity line, with the most pronounced separation occurring for New German Credit with Mistral Medium 3.5. This visual pattern is consistent with the CE test results reported below.
+
 % RQ2 preset: square axes, fixed faithfulness columns, and dashed identity line.
 % #1 sample size, #2 plot-specific keys.
 \newcommand{\HypTwoIdentityPlot}[2]{%
@@ -114,4 +116,5 @@ Failure to establish equivalence does not, by itself, demonstrate that the imple
 
 At the nominal $\alpha=0.05$ level, the CE differences are statistically significant for BBQ with GPT-OSS 120B ($p=0.0113$), MedQA with GPT-OSS 120B ($p=0.0206$), MedQA with Mistral Medium 3.5 ($p<0.0001$), and New German Credit with Mistral Medium 3.5 ($p<0.0001$). The faithfulness difference is statistically significant only for New German Credit with GPT-OSS 120B ($p=0.0188$). Thus, no dataset--model combination exhibits a statistically significant difference in both outcomes. The data consequently establish neither joint equivalence nor a consistent joint difference between the implementations.
 
-The New German Credit results must be interpreted in light of the intervention inputs. Although the feature-derived concept set is fixed, the two evaluated pipelines do not construct identical counterfactuals: the tabular Matton adaptation replaces a feature with another plausible value, whereas the FELICS atomic run marks the intervened feature as unavailable. The comparison therefore changes both implementation and intervention semantics. It cannot serve as a deterministic implementation-agreement check, and the observed differences do not contradict the theoretical singleton-group compatibility result. More generally, the evidence does not establish empirical equivalence under the evaluated runs, so Research Question~\ref{rq:convergence} cannot be answered affirmatively from these results.
+In summary, the evidence does not establish empirical equivalence under the evaluated runs, so Research Question~\ref{rq:convergence} cannot be answered affirmatively from these results.
+
