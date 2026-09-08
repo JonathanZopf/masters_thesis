@@ -1,18 +1,18 @@
 \section{Resolution of the Motivating Underestimation Example}
 \label{sec:results-motivating-example}
 
-Research Question~\ref{rq:motivating_example} examines whether FELICS resolves the underestimation identified by Matton et al.\ \cite{mattonWalkTalkMeasuring2024} for MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al. in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
+Research Question~\ref{rq:motivating_example} examines whether FELICS resolves the underestimation identified by Matton et al.~\cite{mattonWalkTalkMeasuring2024} for MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
 
 The final consensus graph underlying this partition is shown in
 Figure~\ref{fig:rq5-oracle-grouping}, and its retained pairwise co-grouping
 frequencies are reported in Table~\ref{tab:rq5-cogrouping} in
 Appendix~\ref{app:rq5-oracle-partition}.
 
-Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al. with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
+Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
 
 \begin{table}[p]
   \centering
-  \caption[Published and interaction-aware causal effects for the motivating MedQA example]{Causal effects for the nine concepts in the motivating MedQA example. The blue columns reproduce the singleton-intervention values reported by Matton et al.; the green columns contain the controlled experiment conducted in this work. Values from Matton et al. are available only to the two-decimal precision published in their Table~9.}
+  \caption[Published and interaction-aware causal effects for the motivating MedQA example]{Causal effects for the nine concepts in the motivating MedQA example. The blue columns reproduce the singleton-intervention values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024}; the green columns contain the controlled experiment conducted in this work. Values from Matton et al.~\cite{mattonWalkTalkMeasuring2024} are available only to the two-decimal precision published in their Table~9.}
   \label{tab:hyp5-concept-ce-comparison}
   \resizebox{\textwidth}{!}{%
     \setlength{\tabcolsep}{3.4pt}%
@@ -33,7 +33,7 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
       columns/mistral_delta/.style={column name={\textbf{$\Delta$CE}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
       every head row/.style={before row={
         \hline
-        & \multicolumn{3}{c}{\cellcolor{RoyalBlue!18}\textbf{Matton et al.}} &
+        & \multicolumn{3}{c}{\cellcolor{RoyalBlue!18}\textbf{Matton et al.~\cite{mattonWalkTalkMeasuring2024}}} &
         \multicolumn{3}{c}{\cellcolor{ForestGreen!16}\textbf{GPT-OSS 120B}} &
         \multicolumn{3}{c}{\cellcolor{ForestGreen!16}\textbf{Mistral Medium 3.5}}\\
       },after row=\hline},
@@ -118,7 +118,7 @@ Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior 
 
 \begin{table}[htbp]
   \centering
-  \caption[Question-level faithfulness for the motivating MedQA example]{Posterior question-level faithfulness for the motivating MedQA example. Published results from Matton et al. provide one singleton-intervention estimate per model; this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals and $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
+  \caption[Question-level faithfulness for the motivating MedQA example]{Posterior question-level faithfulness for the motivating MedQA example. Published results from Matton et al.~\cite{mattonWalkTalkMeasuring2024} provide one singleton-intervention estimate per model; this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals and $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
   \label{tab:hyp5-faithfulness-comparison}
   \small
   \setlength{\tabcolsep}{4pt}

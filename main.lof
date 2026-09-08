@@ -3,12 +3,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Overview of the evaluation pipeline proposed by Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{19}{figure.caption.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The data generating process for original dataset questions and model responses, as assumed by Matton et al.\ \blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{21}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The data generating process for original dataset questions and model responses, as assumed by Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{21}{figure.caption.23}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Causal graph under a surgical intervention on concept $C_m$; all other concepts and $V$ remain fixed.}}{22}{figure.caption.24}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Causal graph under a joint intervention on the concepts $C_i$ with $i \in M_{\Delta }$. All remaining concepts ($i \notin M_{\Delta }$) and the rest-of-question text $V$ remain fixed.}}{30}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Causal graph under a joint intervention on the concepts $C_i$ with $i \in M_{\Delta }$. All remaining concepts ($i \notin M_{\Delta }$) and the rest-of-question text $V$ remain fixed.}}{29}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Comparison of the evaluation pipeline between Matton et al.\ \blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} (left) and the proposed \emph {FELICS} framework (right) with highlighted modifications.}}{45}{figure.caption.31}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Comparison of the evaluation pipeline between Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} (left) and the proposed FELICS framework (right) with highlighted modifications.}}{45}{figure.caption.31}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {7.1}{\ignorespaces Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}}{62}{figure.caption.49}%

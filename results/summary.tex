@@ -2,26 +2,9 @@
 
 As an introduction to the results chapter, Figure~\ref{fig:question-level-faithfulness-rainclouds} shows how the distribution of question-level faithfulness changes when interaction effects are incorporated into FELICS. Each panel combines a density estimate (cloud), one point per evaluated question (rain), and a horizontal boxplot (umbrella). The data are drawn from a joint FELICS run with $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit. The atomic and interaction-aware estimates form the controlled comparison defined in Section~\ref{sec:controlled_atomic_baseline}: both use the same identified concepts, sampled responses, and explanation-implied-effect vector, but differ in whether the CE vector is constructed exclusively from singleton treatments or through the adjusted Shapley attribution of joint effects.
 
-The value $\mathcal{F}(\mathbf{X})$ printed beside each distribution is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the plotted question-level estimates. This is the global regression-coefficient estimate described in Matton et al.'s evaluation pipeline; see Section~\ref{sec:matton_evaluation_pipeline}. The center line of each boxplot, by contrast, denotes the median of the displayed question-level posterior estimates.
+The value $\mathcal{F}(\mathbf{X})$ printed beside each distribution is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the plotted question-level estimates. This is the global regression-coefficient estimate described in the evaluation pipeline of Matton et al.~\cite{mattonWalkTalkMeasuring2024}; see Section~\ref{sec:matton_evaluation_pipeline}. The center line of each boxplot, by contrast, denotes the median of the displayed question-level posterior estimates.
 
 The analogous raincloud distributions of question-averaged CE are provided in Appendix~\ref{app:ce-shift-rainclouds}. Their centers change only modestly relative to the scale of each dataset, although the distributional spread changes visibly for BBQ and New German Credit. The limited shifts in faithfulness shown here therefore do not imply that the underlying concept-level causal effects remain unchanged.
-
-% Read the compiler's HOME path.  The graph is enabled only on Jonathan's
-% machine; Overleaf and other environments do not have "jonathan" in HOME.
-\makeatletter
-\begingroup\endlinechar=-1\relax
-  \everyeof{\noexpand}%
-  \edef\x{\endgroup
-    \def\noexpand\thesishomepath{%
-      \@@input|"kpsewhich --var-value=HOME" }}\x
-\makeatother
-
-\newif\ifthesislocalbuild
-\ExplSyntaxOn
-\exp_args:NV \tl_if_in:nnTF \thesishomepath { jonathan }
-  { \thesislocalbuildtrue }
-  { \thesislocalbuildfalse }
-\ExplSyntaxOff
 
 \ifthesislocalbuild
   \input{graphs/results/summary}
