@@ -8,5 +8,4 @@
 	\include{appendix/examples}
 	\include{appendix/mathematical_demonstrations}
 	\include{appendix/prompts}
-	\include{appendix/reproducibility}
 \end{appendix}

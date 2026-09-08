@@ -1,0 +1,43 @@
+\chapter{Additional Result Visualizations}
+\label{app:additional-result-visualizations}
+
+This appendix provides distributional and observation-level views that complement the principal result figures. Each figure states whether its unit of analysis is a question, a question--concept observation, or a concept aggregated across questions.
+
+\section{Causal-Effect Shifts under Joint Interventions}
+\label{app:ce-shift-rainclouds}
+
+Figure~\ref{fig:appendix-ce-shift-rainclouds} complements the faithfulness distributions in Figure~\ref{fig:question-level-faithfulness-rainclouds}. For each question, the plotted value is the arithmetic mean of the concept-level CE values. The atomic and interaction-aware values originate from the same joint FELICS run: the former averages \texttt{atomic\_kl\_div}, whereas the latter averages \texttt{adjusted\_shapley\_kl\_div}. Thus, concepts, responses, and explanation-implied effects are held fixed within each comparison.
+
+\input{graphs/results/appendix_ce_rainclouds}
+\FloatBarrier
+
+\section{CE Agreement between Implementations}
+\label{app:rq2-ce-identity}
+
+Figures~\ref{fig:appendix-rq2-ce-natural-language} and~\ref{fig:appendix-rq2-ce-credit} complement the faithfulness identity plots used to answer Research Question~\ref{rq:convergence}. Each point corresponds to a question available in both independently sampled runs. Its coordinates are the question-level means used by the CE equivalence and paired-difference tests: the mean \texttt{kl\_div} from the Matton implementation and the mean \texttt{adjusted\_shapley\_kl\_div} from FELICS with $n_{\max}=1$.
+
+\input{graphs/results/appendix_rq2_ce_identity}
+\FloatBarrier
+
+\section{Question-Level CE Agreement under Joint Attribution}
+\label{app:ce-shift-identity}
+
+Figures~\ref{fig:appendix-ce-shift-identity-natural-language} and~\ref{fig:appendix-ce-shift-identity-credit} provide a paired robustness view of the CE distributions in Figure~\ref{fig:appendix-ce-shift-rainclouds}. Each point represents one question from the same joint FELICS run. Its coordinates are the question-level means of \texttt{atomic\_kl\_div} and \texttt{adjusted\_shapley\_kl\_div}; marker area increases with the number of concepts contributing to both means. The identity line therefore shows whether questions with high atomic CE also retain high interaction-aware CE.
+
+The upper-tail questions generally remain comparatively high under both attribution methods. The marker sizes do not reveal a consistent tendency for questions with more concepts to have larger mean CE; for New German Credit, the concept count is fixed and cannot account for the observed variation.
+
+\input{graphs/results/appendix_ce_shift_identity}
+\FloatBarrier
+
+\section{Concept-Level Effects of Shapley Normalization}
+\label{app:rq3-normalization-identity}
+
+Figures~\ref{fig:appendix-rq3-normalization-natural-language} and~\ref{fig:appendix-rq3-normalization-credit} complement the rank-correlation analysis for Research Question~\ref{rq:ranking}. Each point is one concept in one question, with the raw Shapley CE on the horizontal axis and the adjusted Shapley CE after normalization on the vertical axis. These identity plots visualize changes in CE magnitude rather than constituting additional rank-preservation tests.
+
+Figure~\ref{fig:appendix-rq3-credit-concept-delta} summarizes the New German Credit adjustments by concept. For each of the 12 shared concepts, $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{adjusted}}-\mathrm{CE}_{\mathrm{raw}}$ is averaged across the 30 evaluated questions. This aggregation identifies concepts that are affected disproportionately on average while retaining the observation-level view in Figure~\ref{fig:appendix-rq3-normalization-credit}.
+
+For GPT-OSS 120B, the largest mean increases occur for Household Income, Liquid Assets, and SCHUFA Score. For Mistral Medium 3.5, the positive adjustment is distributed more broadly across the concepts, while Household Size remains unchanged on average.
+
+\input{graphs/results/appendix_rq3_normalization_identity}
+\FloatBarrier
+\input{graphs/results/appendix_rq3_credit_concept_delta}
