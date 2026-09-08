@@ -1,0 +1,13 @@
+\chapter{Results}
+\label{sec:results}
+\input{graphs/results/shared_scatter_plot}
+The results were obtained using the FELICS reference implementation and the original implementation by Matton et al.\ \cite{mattonWalkTalkMeasuring2024}, following the methodology specified in Chapter~\ref{ch:evaluation_methodology}. The evaluation covers three datasets and two models. The results provide an overview of the empirical behavior of both metrics and address the five research questions introduced in Section~\ref{sec:research_questions}. The corresponding hypothesis tests were conducted as specified in Section~\ref{sec:analysis_procedures}, and their outcomes are summarized in research-hypothesis boxes.
+
+The chapter begins with a graphical summary of how FELICS behaves when joint interventions are introduced. It then examines the oracle behavior on natural-language and tabular datasets before addressing each research question through statistical tests and graphical analyses.
+\include{results/summary}
+\include{results/oracle}
+\include{results/rq1}
+\include{results/rq2}
+\include{results/rq3}
+\include{results/rq4}
+\include{results/rq5}

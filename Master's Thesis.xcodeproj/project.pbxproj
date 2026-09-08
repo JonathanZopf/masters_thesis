@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXFileReference section */
+		AB0FD359304FFA5C0005EE4C /* discussion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = discussion.tex; sourceTree = "<group>"; };
+		AB1F9F042F93A288003D57AE /* build_latex.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_latex.sh; sourceTree = "<group>"; };
+		AB1F9F0C2F93A288003D57AE /* university_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = university_logo.png; sourceTree = "<group>"; };
+		AB1F9F102F93A288003D57AE /* main.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.tex; sourceTree = "<group>"; };
+		AB1F9F112F93A288003D57AE /* references.bib */ = {isa = PBXFileReference; lastKnownFileType = text; path = references.bib; sourceTree = "<group>"; };
+		AB1F9F162F93A31B003D57AE /* title_page.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = title_page.tex; sourceTree = "<group>"; };
+		AB1F9F172F93AEEB003D57AE /* signature.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signature.jpg; sourceTree = "<group>"; };
+		AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = declaration_of_originality.tex; sourceTree = "<group>"; };
+		AB1F9F192F990B79003D57AE /* background.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = background.tex; sourceTree = "<group>"; };
+		AB1F9F1A2F990C51003D57AE /* introduction.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = introduction.tex; sourceTree = "<group>"; };
+		AB350DCC30406DE1001A29B5 /* results.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = results.tex; sourceTree = "<group>"; };
+		AB350DCE30406E27001A29B5 /* conclusion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = conclusion.tex; sourceTree = "<group>"; };
+		AB350DDB3040816C001A29B5 /* german_credit_grouping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = german_credit_grouping.png; sourceTree = "<group>"; };
+		AB350DEA3040A15C001A29B5 /* oracle.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = oracle.tex; sourceTree = "<group>"; };
+		AB350DEC3040A15C001A29B5 /* rq1.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = rq1.tex; sourceTree = "<group>"; };
+		AB350DEE3040A15C001A29B5 /* summary.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = summary.tex; sourceTree = "<group>"; };
+		AB350DF63040A37B001A29B5 /* rq2.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = rq2.tex; sourceTree = "<group>"; };
+		AB350E043040A5BB001A29B5 /* rq3.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = rq3.tex; sourceTree = "<group>"; };
+		AB350E1E3040AA16001A29B5 /* rq4.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = rq4.tex; sourceTree = "<group>"; };
+		AB350E1F3040AA1E001A29B5 /* rq5.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = rq5.tex; sourceTree = "<group>"; };
+		AB350E343040BED8001A29B5 /* oracle_category_normalization.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = oracle_category_normalization.tex; sourceTree = "<group>"; };
+		AB7367B93029344200166695 /* party_choice_ex_1.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = party_choice_ex_1.tex; sourceTree = "<group>"; };
+		AB7367BA302A033C00166695 /* party_choice_ex_2.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = party_choice_ex_2.tex; sourceTree = "<group>"; };
+		AB7367BB302A236700166695 /* party_choice_helpers.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = party_choice_helpers.tex; sourceTree = "<group>"; };
+		AB7367C3302B334000166695 /* quick_build_latex.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = quick_build_latex.sh; sourceTree = "<group>"; };
+		AB7367C5302B7AA600166695 /* examples.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = examples.tex; sourceTree = "<group>"; };
+		AB7367C6302B7AC600166695 /* prompts.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = prompts.tex; sourceTree = "<group>"; };
+		AB7367C7302B805F00166695 /* mathematical_demonstrations.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = mathematical_demonstrations.tex; sourceTree = "<group>"; };
+		AB7367C8302B80D900166695 /* motivational_example_setup.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = motivational_example_setup.tex; sourceTree = "<group>"; };
+		AB7367C9302CB3C900166695 /* main.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = main.pdf; sourceTree = SOURCE_ROOT; };
+		AB7984F22FB27DE800CF88F7 /* presentation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = presentation.pdf; sourceTree = "<group>"; };
+		AB8F504D3015445C0011161D /* appendix.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = appendix.tex; sourceTree = "<group>"; };
+		AB923232301A8DF500F3635D /* evaluation.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = evaluation.tex; sourceTree = "<group>"; };
+		ABC9C0A130418B8A00D58CF3 /* statement_on_generative_ai.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = statement_on_generative_ai.tex; sourceTree = "<group>"; };
+		ABD435B6303374B5003CE91E /* matton_evaluation_pipeline.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_evaluation_pipeline.tex; sourceTree = "<group>"; };
+		ABD8FE32300EC1ED003F7187 /* problem_identification.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem_identification.tex; sourceTree = "<group>"; };
+		ABD8FE34300EC6D7003F7187 /* theoretical_conception.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = theoretical_conception.tex; sourceTree = "<group>"; };
+		ABD8FE3930101AE3003F7187 /* comparison_matton_felics.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = comparison_matton_felics.tex; sourceTree = "<group>"; };
+		ABDE70852FFBA7F8000D7D5D /* modeling.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = modeling.tex; sourceTree = "<group>"; };
+		ABDE70872FFC0CFC000D7D5D /* matton_dgp.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_dgp.tex; sourceTree = "<group>"; };
+		ABDE70882FFD3C71000D7D5D /* matton_dgp_intervened.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_dgp_intervened.tex; sourceTree = "<group>"; };
+		ABDE70892FFEB849000D7D5D /* dgp_joint_intervened.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = dgp_joint_intervened.tex; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		AB350DCF30406EB9001A29B5 /* results */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = results;
+			sourceTree = "<group>";
+		};
+		AB350DD23040703D001A29B5 /* data */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = data;
+			sourceTree = "<group>";
+		};
+		AB7984EA2FB27A9600CF88F7 /* solution_proposal_presentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = solution_proposal_presentation;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXGroup section */
+		AB1F9EFD2F93A223003D57AE = {
+			isa = PBXGroup;
+			children = (
+				AB350DD23040703D001A29B5 /* data */,
+				AB7367C9302CB3C900166695 /* main.pdf */,
+				AB7367C4302B7A7900166695 /* appendix */,
+				ABDE70862FFC0CD8000D7D5D /* graphs */,
+				AB7984EA2FB27A9600CF88F7 /* solution_proposal_presentation */,
+				AB1F9F042F93A288003D57AE /* build_latex.sh */,
+				AB7367C3302B334000166695 /* quick_build_latex.sh */,
+				AB350DEF3040A15C001A29B5 /* results */,
+				AB1F9F0B2F93A288003D57AE /* chapters */,
+				AB1F9F0D2F93A288003D57AE /* images */,
+				AB1F9F102F93A288003D57AE /* main.tex */,
+				AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */,
+				ABC9C0A130418B8A00D58CF3 /* statement_on_generative_ai.tex */,
+				AB1F9F162F93A31B003D57AE /* title_page.tex */,
+				AB1F9F112F93A288003D57AE /* references.bib */,
+				AB7984F22FB27DE800CF88F7 /* presentation.pdf */,
+			);
+			sourceTree = "<group>";
+		};
+		AB1F9F0B2F93A288003D57AE /* chapters */ = {
+			isa = PBXGroup;
+			children = (
+				AB0FD359304FFA5C0005EE4C /* discussion.tex */,
+				AB350DCE30406E27001A29B5 /* conclusion.tex */,
+				AB350DCC30406DE1001A29B5 /* results.tex */,
+				AB923232301A8DF500F3635D /* evaluation.tex */,
+				ABD8FE34300EC6D7003F7187 /* theoretical_conception.tex */,
+				ABD8FE32300EC1ED003F7187 /* problem_identification.tex */,
+				ABDE70852FFBA7F8000D7D5D /* modeling.tex */,
+				AB1F9F1A2F990C51003D57AE /* introduction.tex */,
+				AB1F9F192F990B79003D57AE /* background.tex */,
+				AB8F504D3015445C0011161D /* appendix.tex */,
+			);
+			path = chapters;
+			sourceTree = "<group>";
+		};
+		AB1F9F0D2F93A288003D57AE /* images */ = {
+			isa = PBXGroup;
+			children = (
+				AB350DDB3040816C001A29B5 /* german_credit_grouping.png */,
+				AB1F9F172F93AEEB003D57AE /* signature.jpg */,
+				AB1F9F0C2F93A288003D57AE /* university_logo.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		AB350DEF3040A15C001A29B5 /* results */ = {
+			isa = PBXGroup;
+			children = (
+				AB350E1F3040AA1E001A29B5 /* rq5.tex */,
+				AB350E1E3040AA16001A29B5 /* rq4.tex */,
+				AB350E043040A5BB001A29B5 /* rq3.tex */,
+				AB350DF63040A37B001A29B5 /* rq2.tex */,
+				AB350DEA3040A15C001A29B5 /* oracle.tex */,
+				AB350DEC3040A15C001A29B5 /* rq1.tex */,
+				AB350DEE3040A15C001A29B5 /* summary.tex */,
+			);
+			path = results;
+			sourceTree = "<group>";
+		};
+		AB7367C4302B7A7900166695 /* appendix */ = {
+			isa = PBXGroup;
+			children = (
+				AB350E343040BED8001A29B5 /* oracle_category_normalization.tex */,
+				AB7367C8302B80D900166695 /* motivational_example_setup.tex */,
+				AB7367C7302B805F00166695 /* mathematical_demonstrations.tex */,
+				AB7367C6302B7AC600166695 /* prompts.tex */,
+				AB7367C5302B7AA600166695 /* examples.tex */,
+			);
+			path = appendix;
+			sourceTree = "<group>";
+		};
+		ABDE70862FFC0CD8000D7D5D /* graphs */ = {
+			isa = PBXGroup;
+			children = (
+				AB350DCF30406EB9001A29B5 /* results */,
+				ABD435B6303374B5003CE91E /* matton_evaluation_pipeline.tex */,
+				AB7367BB302A236700166695 /* party_choice_helpers.tex */,
+				AB7367BA302A033C00166695 /* party_choice_ex_2.tex */,
+				AB7367B93029344200166695 /* party_choice_ex_1.tex */,
+				ABD8FE3930101AE3003F7187 /* comparison_matton_felics.tex */,
+				ABDE70892FFEB849000D7D5D /* dgp_joint_intervened.tex */,
+				ABDE70882FFD3C71000D7D5D /* matton_dgp_intervened.tex */,
+				ABDE70872FFC0CFC000D7D5D /* matton_dgp.tex */,
+			);
+			path = graphs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		AB1F9F122F93A2A9003D57AE /* Master's thesis */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = AB1F9F132F93A2A9003D57AE /* Build configuration list for PBXLegacyTarget "Master's thesis" */;
+			buildPhases = (
+			);
+			buildToolPath = build_latex.sh;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "Master's thesis";
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = "Master's thesis";
+		};
+		AB7367BD302B283700166695 /* Master's thesis Preview */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = AB7367BE302B283700166695 /* Build configuration list for PBXLegacyTarget "Master's thesis Preview" */;
+			buildPhases = (
+			);
+			buildToolPath = quick_build_latex.sh;
+			dependencies = (
+			);
+			name = "Master's thesis Preview";
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = "Master's thesis Preview";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		AB1F9EFE2F93A223003D57AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					AB1F9F122F93A2A9003D57AE = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					AB7367BD302B283700166695 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = AB1F9F012F93A223003D57AE /* Build configuration list for PBXProject "Master's Thesis" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB1F9EFD2F93A223003D57AE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB1F9F122F93A2A9003D57AE /* Master's thesis */,
+				AB7367BD302B283700166695 /* Master's thesis Preview */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		AB1F9F022F93A223003D57AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+			};
+			name = Debug;
+		};
+		AB1F9F032F93A223003D57AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+			};
+			name = Release;
+		};
+		AB1F9F142F93A2A9003D57AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AB1F9F152F93A2A9003D57AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		AB7367BF302B283700166695 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AB7367C0302B283700166695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MFGZK5Y3Q3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB1F9F012F93A223003D57AE /* Build configuration list for PBXProject "Master's Thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB1F9F022F93A223003D57AE /* Debug */,
+				AB1F9F032F93A223003D57AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB1F9F132F93A2A9003D57AE /* Build configuration list for PBXLegacyTarget "Master's thesis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB1F9F142F93A2A9003D57AE /* Debug */,
+				AB1F9F152F93A2A9003D57AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB7367BE302B283700166695 /* Build configuration list for PBXLegacyTarget "Master's thesis Preview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB7367BF302B283700166695 /* Debug */,
+				AB7367C0302B283700166695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB1F9EFE2F93A223003D57AE /* Project object */;
+}

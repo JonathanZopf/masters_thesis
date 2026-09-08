@@ -1,0 +1,138 @@
+\definecolor{CeAtomic}{HTML}{2878B5}
+\definecolor{CeJoint}{HTML}{E37A26}
+
+% tikzviolinplots computes each KDE in \violin@kde. Preserve the KDE before
+% the second violin overwrites it, following the summary raincloud figure.
+\newcount\cekderow
+\makeatletter
+\newcommand{\CeCaptureCurrentKDE}[1]{%
+  \pgfplotstablegetrowsof{\violin@kde}%
+  \pgfmathtruncatemacro{\cekdelast}{\pgfplotsretval-1}%
+  \global\def#1{list kdecol\\}%
+  \cekderow=0
+  \loop\ifnum\cekderow<\numexpr\cekdelast+1\relax
+    \pgfplotstablegetelem{\the\cekderow}{list}\of\violin@kde
+    \edef\cekdevalue{\pgfplotsretval}%
+    \pgfplotstablegetelem{\the\cekderow}{kdecol}\of\violin@kde
+    \xdef#1{#1\cekdevalue\space\pgfplotsretval\\}%
+    \advance\cekderow by 1
+  \repeat
+}
+\newcommand{\CeMaterializeKDE}[2]{%
+  \begingroup
+  \edef\celoadtable{%
+    \endgroup
+    \noexpand\pgfplotstableread[row sep=\noexpand\\]%
+      {\expandafter\unexpanded\expandafter{#1}}\noexpand#2}%
+  \celoadtable
+}
+\makeatother
+
+% #1 panel title, #2 CSV, #3 file-safe id, #4 x maximum, #5 x ticks,
+% #6 tick precision. The two models use the same scale within each dataset.
+\newcommand{\CeRaincloudPanel}[6]{%
+  \begin{minipage}[t]{.495\textwidth}
+  \centering
+  {\small\bfseries #1\par}
+  \vspace{.35em}
+  \edef\CeDataHash{\pdfmdfivesum file {#2}}%
+  \tikzsetnextfilename{ce-shift-#3-\CeDataHash}%
+  \begin{tikzpicture}
+    \begin{scope}
+    \clip (0,0) rectangle (0,0);
+    \violinsetoptions[scaled,reverseaxis]{
+      width=8.55cm,
+      height=5.40cm,
+      overlay,
+      xmin=0,
+      xmax=#4,
+      ymin=.10,
+      ymax=7.25,
+      axis lines=none,
+    }
+    \violinplot[col sep=comma,index=atomic_ce,relative position=5.05,
+      color=white,label={},samples=30]{#2}
+    \CeCaptureCurrentKDE{\AtomicCeKDE}
+    \violinplot[col sep=comma,index=interaction_ce,relative position=1.65,
+      color=white,label={},samples=30]{#2}
+    \CeCaptureCurrentKDE{\JointCeKDE}
+    \end{scope}
+    \CeMaterializeKDE{\AtomicCeKDE}{\AtomicCeKDETable}
+    \CeMaterializeKDE{\JointCeKDE}{\JointCeKDETable}
+
+    \pgfresetboundingbox
+    \begin{axis}[
+      width=8.55cm,
+      height=5.55cm,
+      xmin=0,
+      xmax=#4,
+      ymin=.10,
+      ymax=7.25,
+      axis x line*=bottom,
+      axis y line=none,
+      xtick={#5},
+      scaled ticks=false,
+      tick label style={/pgf/number format/fixed,
+        /pgf/number format/precision=#6},
+      xmajorgrids=true,
+      grid style={gray!18},
+      clip=true,
+    ]
+      \addplot[draw=CeAtomic,fill=CeAtomic,fill opacity=.48]
+        table[x=list,y expr=5.15+1.6*(\thisrow{kdecol}-5.05)]
+          {\AtomicCeKDETable};
+      \addplot[only marks,mark=*,mark size=1.15pt,
+        draw=CeAtomic,fill=CeAtomic,fill opacity=.62,
+        y filter/.expression={4.35+.16*(mod(\coordindex*7,11)/10-.5)}]
+        table[col sep=comma,x=atomic_ce,y expr=4.35]{#2};
+      \addplot+[boxplot={draw direction=x,draw position=4.02},
+        mark=none,draw=CeAtomic,fill=CeAtomic,fill opacity=.32,
+        thick,boxplot/box extend=.18]
+        table[col sep=comma,y=atomic_ce]{#2};
+      \addplot[draw=CeJoint,fill=CeJoint,fill opacity=.48]
+        table[x=list,y expr=1.75+1.6*(\thisrow{kdecol}-1.65)]
+          {\JointCeKDETable};
+      \addplot[only marks,mark=*,mark size=1.15pt,
+        draw=CeJoint,fill=CeJoint,fill opacity=.66,
+        y filter/.expression={.92+.16*(mod(\coordindex*7,11)/10-.5)}]
+        table[col sep=comma,x=interaction_ce,y expr=.92]{#2};
+      \addplot+[boxplot={draw direction=x,draw position=.55},
+        mark=none,draw=CeJoint,fill=CeJoint,fill opacity=.34,
+        thick,solid,boxplot/box extend=.18]
+        table[col sep=comma,y=interaction_ce]{#2};
+      \node[anchor=west,font=\scriptsize\bfseries,text=CeAtomic]
+        at (rel axis cs:.03,.937) {Atomic};
+      \node[anchor=west,font=\scriptsize\bfseries,text=CeJoint]
+        at (rel axis cs:.03,.462) {Joint};
+    \end{axis}
+  \end{tikzpicture}%
+  \end{minipage}%
+}
+
+\tikzexternalenable
+\begin{figure}[p]
+  \centering
+  \CeRaincloudPanel{BBQ --- GPT-OSS 120B}%
+    {data/appendix/ce_shifts/bbq_gptoss.csv}{bbq-gptoss}{.6}{0,.2,.4,.6}{1}%
+  \hfill
+  \CeRaincloudPanel{BBQ --- Mistral Medium 3.5}%
+    {data/appendix/ce_shifts/bbq_mistral.csv}{bbq-mistral}{.6}{0,.2,.4,.6}{1}%
+
+  \par\vspace{1.2em}
+  \CeRaincloudPanel{MedQA --- GPT-OSS 120B}%
+    {data/appendix/ce_shifts/medqa_gptoss.csv}{medqa-gptoss}{.06}{0,.02,.04,.06}{2}%
+  \hfill
+  \CeRaincloudPanel{MedQA --- Mistral Medium 3.5}%
+    {data/appendix/ce_shifts/medqa_mistral.csv}{medqa-mistral}{.06}{0,.02,.04,.06}{2}%
+
+  \par\vspace{1.2em}
+  \CeRaincloudPanel{New German Credit --- GPT-OSS 120B}%
+    {data/appendix/ce_shifts/new_german_credit_gptoss.csv}{credit-gptoss}{1.5}{0,.5,1,1.5}{1}%
+  \hfill
+  \CeRaincloudPanel{New German Credit --- Mistral Medium 3.5}%
+    {data/appendix/ce_shifts/new_german_credit_mistral.csv}{credit-mistral}{1.5}{0,.5,1,1.5}{1}%
+
+  \caption[Raincloud distributions of atomic and interaction-aware CE]{Distribution of question-averaged causal effects obtained from the atomic and interaction-aware CE vectors of the same joint FELICS runs. Axis scales are shared between models within each dataset but differ across datasets because their CE magnitudes differ substantially.}
+  \label{fig:appendix-ce-shift-rainclouds}
+\end{figure}
+\tikzexternaldisable
