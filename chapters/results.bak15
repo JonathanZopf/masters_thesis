@@ -1,0 +1,108 @@
+\chapter{Results}
+\section{Evolution of Question-Level Faithfulness}
+\input{graphs/results/summary}
+\FloatBarrier
+\section{Descriptive Behavior of the Oracles}
+\label{sec:results-oracle-behavior}
+
+Tables~\ref{tab:oracle-bbq}--\ref{tab:oracle-credit} summarize the partitions produced
+for the joint configurations. Since both evaluated models use \texttt{gpt-oss:120b} as
+the auxiliary model, their independently generated partitions are pooled. The
+counterfactual multiplier is
+$\sum_{s\in\mathcal{S}}(2^{|s|}-1)/|\mathbf{C}|$, relative to one atomic
+counterfactual per concept. Counterfactual counts refer to successfully written files;
+the multiplier instead reflects the complete oracle partitions and is therefore not
+reduced by later generation failures.
+
+\begingroup
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\captionsetup{font=footnotesize,skip=3pt}
+\noindent
+\begin{minipage}[t]{0.485\textwidth}
+  \centering\scriptsize
+  \captionof{table}{BBQ oracle ($n_{\max}=4$).}
+  \label{tab:oracle-bbq}
+  \rowcolors{2}{gray!8}{white}
+  \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
+    \hline
+    \textbf{Measure} & \textbf{Value} \\
+    \hline
+    Valid outputs & $60/60$ \\
+    Mean group size & $1.34$ \\
+    Groups of size $1/2/3$ & $137/66/2$ \\
+    Singleton groups & $66.8\%$ \\
+    Concepts grouped & $50.2\%$ \\
+    Counterfactuals & \shortstack[r]{$342$ total\\$5.70$/run} \\
+    Increase over atomic & $1.27\times$ \\
+    \hline
+  \end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\textwidth}
+  \centering\scriptsize
+  \captionof{table}{MedQA oracle ($n_{\max}=4$).}
+  \label{tab:oracle-medqa}
+  \rowcolors{2}{gray!8}{white}
+  \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
+    \hline
+    \textbf{Measure} & \textbf{Value} \\
+    \hline
+    Valid outputs & $58/60$ \\
+    Mean group size & $1.45$ \\
+    Groups of size $1/2/3$ & $409/38/23$ \\
+    Groups of size $4/5/6$ & $46/1/1$ \\
+    Singleton groups & $79.0\%$ \\
+    Concepts grouped & $45.4\%$ \\
+    Counterfactuals & \shortstack[r]{$1{,}468$ total\\$25.31$/output} \\
+    Increase over atomic & $1.96\times$ \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{0.45em}
+\noindent\hfill
+\begin{minipage}[t]{0.485\textwidth}
+  \centering\scriptsize
+  \captionof{table}{New German Credit oracle ($n_{\max}=3$).}
+  \label{tab:oracle-credit}
+  \rowcolors{2}{gray!8}{white}
+  \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
+    \hline
+    \textbf{Measure} & \textbf{Value} \\
+    \hline
+    Valid outputs & $60/60$ \\
+    Mean group size & $2.40$ \\
+    Groups of size $1/2/3$ & $60/60/180$ \\
+    Singleton groups & $20.0\%$ \\
+    Concepts grouped & $91.7\%$ \\
+    Counterfactuals & \shortstack[r]{$1{,}500$ total\\$25.00$/run} \\
+    Increase over atomic & $2.08\times$ \\
+    \hline
+  \end{tabular}
+\end{minipage}\hfill\null
+\endgroup
+
+The natural-language results contain many more singleton groups than the tabular
+partition, although roughly half of the concepts in both BBQ and MedQA still occur in
+non-singleton groups. MedQA question~362 produced no partition in either model run and
+is excluded rather than counted as an empty output. Two observed MedQA groups contained
+five and six concepts, respectively, exceeding the nominal value of $n_{\max}=4$; the
+table reports the partitions that were actually consumed by the pipeline. BBQ's oracle
+partitions imply 349 counterfactuals, of which 342 were written successfully.
+
+In the tables, \emph{valid outputs} counts runs with a partition; \emph{mean group
+size} averages across pooled groups; and the size rows give their distribution.
+\emph{Singleton groups} is the share of size-one groups; \emph{concepts grouped} is the
+share of concepts in larger groups. \emph{Counterfactuals} counts written files; \emph{increase over
+atomic} divides the count implied by the complete partition by one per concept.
+
+For Figure~\ref{fig:oracle-category-heatmaps}, an OpenAI Codex large language model
+mapped the 46 raw BBQ and 236 raw MedQA labels to 10 and 19 high-level categories. It
+used only the labels, with one fixed mapping across all runs, and did not see group
+membership or calculated rates. Appendix~\ref{app:oracle-category-normalization}
+documents the method and definitions; \texttt{data/oracle\_category\_mapping.csv}
+retains every assignment.
+
+Each cell is the percentage of eligible, within-question concept pairs placed in the
+same group, pooling both models. Gray cells have no eligible pair. This conditional rate
+also prevents frequent categories from dominating merely because they occur more often.

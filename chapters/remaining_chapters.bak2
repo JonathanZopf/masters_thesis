@@ -1,0 +1,20 @@
+\chapter{Discussion}
+This chapter interprets the empirical findings in relation to the research questions and the original design objectives. It also distinguishes limitations of the experimental setup from limitations inherent to the metric and uses both to motivate directions for future work.
+
+\section{Interpretation}
+Look based on the data if research questions can be answered and what the result is. What might have led to these results?
+
+\section{Requirements Revisited}
+Answer based on the results. From a practical standpoints, were the requirements fulfilled? Don't make mathematical proves in this chapter, the mathematical/logical aspects belong in "Modeling".
+
+\section{Limitations in Experimental Setup}
+What was not great about the evaluation (e.g. small sample size, only few combinations tested).
+
+\section{Limitations of Metric}
+Which technical limitations does the metric have? E.g. getting rid of the CE-Normalization (Payout Coefficient) for a Bayesian aproach or even choosing to break compatibility for better results. Be fair, but don't discredit my own work too much since this would pretty much destroy my thesis.
+
+\section{Future Work}
+Discuss what could be addressed in future work and what more needs to be researched?
+
+\chapter{Conclusion}
+Finish the entire thesis off in around 2, max 3 pages.

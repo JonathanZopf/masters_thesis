@@ -1,0 +1,92 @@
+\chapter{Reproducibility and Experimental Artifacts}
+\label{app:reproducibility}
+
+This appendix documents the code versions, experiment commands, and stored artifacts used for the evaluation in Chapter~\ref{ch:evaluation_methodology}. All paths below are relative to the root of the FELICS repository; the artifact index refers directly to the experiment outputs stored there.
+
+\section{Repository and Execution Setup}
+\label{app:reproducibility-setup}
+
+The code is available at \url{https://github.com/JonathanZopf/FELICS}. Both the FELICS experiments and the baseline experiments for Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} \emph{Causal Concept Faithfulness} metric were executed from this repository. It is a fork of \url{https://github.com/kmatton/walk-the-talk}. Before separating the baseline and FELICS branches, shared adaptations were made to support local AI workstations and automated benchmarking. The baseline used for this thesis is therefore the adapted implementation in the fork, rather than an unmodified checkout of the upstream repository. It also includes the tabular input and intervention handling required for New German Credit.
+
+The FELICS experiments used commit \href{https://github.com/JonathanZopf/FELICS/commit/ebf75e138b0c0cb8aaab9e3d32ca9e9bee9a1d4b}{\texttt{ebf75e1}} (full SHA: \texttt{ebf75e138b0c0cb8aaab9e3d32ca9e9bee9a1d4b}); the baseline experiments used commit \texttt{8794d5c}.
+To prepare an execution, clone the FELICS repository and check out the corresponding experimental revision using \texttt{git checkout ebf75e1} for FELICS or \texttt{git checkout 8794d5c} for the baseline. The commands below assume that the software dependencies and model services are available. For remote Mistral inference, supply an API key in \path{api_keys/mistral_config.json}. For local inference, adjust the Ollama server address in \path{src/language_models/ollama_model.py}; setting up the Ollama server itself is outside the scope of these instructions.
+
+\section{Experiment Commands}
+\label{app:reproducibility-commands}
+
+The joint FELICS runs use $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit. Each dataset is evaluated with \texttt{gpt-oss:120b} and \texttt{mistral-medium-3.5}, while \texttt{gpt-oss:120b} serves as the auxiliary model throughout. The sampling temperature is $0.7$ throughout. As specified in Chapter~\ref{ch:evaluation_methodology}, $S=10$ responses are sampled per original or counterfactual question for BBQ and MedQA, and $S=5$ for New German Credit. The \texttt{-n 30} argument below selects the number of questions, rather than the number of responses per question.
+
+Run the commands below from the repository root with each model in turn: set \path{MODEL=gpt-oss:120b} for the first execution and \path{MODEL=mistral-medium-3.5} for the second. BBQ uses value-replacement interventions, whereas New German Credit and MedQA use concept removal (\texttt{-r}).
+
+\begin{Verbatim}[fontsize=\small,breaklines=true]
+MODEL=gpt-oss:120b
+
+./run_experiment.sh -d bbq -m "$MODEL" \
+  -a gpt-oss:120b -n 30 \
+  -p counterfactual_gen_replacements_prompt -g 4
+
+./run_experiment.sh -d new_german_credit -m "$MODEL" \
+  -a gpt-oss:120b -r -n 30 -g 3
+
+./run_experiment.sh -d medqa -m "$MODEL" \
+  -a gpt-oss:120b -r \
+  -i 0 1101 224 295 362 434 513 571 704 813 \
+     1036 1120 263 351 391 438 521 644 788 851 \
+     1100 161 267 356 432 5 523 703 793 9 -g 4
+\end{Verbatim}
+
+The dataset source files are located in \path{data/}. For BBQ and New German Credit, the commands request 30 questions using \texttt{-n 30}. For MedQA, the 30 question identifiers are specified explicitly with \texttt{-i}; they match the selection used in Matton et al.'s benchmarks.
+
+To execute a separate FELICS run with $n_{\max}=1$, replace the value of \texttt{-g} with \texttt{1}. To execute the adapted Matton et al. baseline, check out commit \texttt{8794d5c} and use the same commands with the \texttt{-g} option and its value removed. The baseline does not support this option. A separate singleton run should be distinguished from the atomic estimates derived from a joint FELICS run, which supply the controlled comparison in Section~\ref{sec:controlled_atomic_baseline}.
+
+\section{Experimental Artifacts and Analysis}
+\label{app:reproducibility-artifacts}
+
+The experiment script writes its outputs to \path{experiment/}. Table~\ref{tab:reproducibility-directories} identifies the principal intermediate and result directories.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}p{0.52\textwidth}p{0.44\textwidth}@{}}
+\hline
+\textbf{Repository-relative directory} & \textbf{Contents} \\
+\hline
+\path{experiment/intervention_generation/} & Generated counterfactuals. \\
+\path{experiment/model_responses/} & Sampled model responses. \\
+\path{experiment/implied_concepts/} & Concepts extracted from the generated explanations. \\
+\path{experiment/faithfulness_results/} & Effect estimates and final faithfulness results. \\
+\hline
+\end{tabular}
+\caption{Principal experiment artifact directories in the FELICS repository.}
+\label{tab:reproducibility-directories}
+\end{table}
+
+Within \path{experiment/faithfulness_results/}, first select the dataset directory (\texttt{bbq}, \texttt{medqa}, or \texttt{new\_german\_credit}), then the model/configuration directory named \path{<model_name>_<n_max>}. The baseline branch leaves the group-size component empty. Table~\ref{tab:reproducibility-files} describes the principal result files. Filenames are shown as suffixes: each is prefixed by \path{<model_name>}. Rows describing Shapley attribution, normalization, and the paired atomic export refer to FELICS outputs.
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}p{0.40\textwidth}p{0.56\textwidth}@{}}
+\caption{Result files within a dataset and model/configuration directory. Each filename begins with the model name.}
+\label{tab:reproducibility-files}\\
+\hline
+\textbf{Filename suffix} & \textbf{Contents and interpretation} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Filename suffix} & \textbf{Contents and interpretation} \\
+\hline
+\endhead
+\hline
+\endfoot
+\path{_ee_estimates.csv} & Concept-level explanation-implied effects across the dataset. The column \path{p(concept_in_explanation)} estimates the probability that a concept is mentioned in explanations of the corresponding question. \\
+\path{_ce_estimates.csv} & Intervention-level raw effects across the dataset. The column \path{kl_div} stores the unadjusted change in response distribution for an intervention; these rows are not the final concept-level Shapley attributions. \\
+\path{_adjusted_kl_div.csv} & Information concerning the normalization of intervention effects. \\
+\path{_shapley_ce_estimates.csv} & Concept-level Shapley causal-effect estimates and their normalized values. \\
+\path{_faithfulness_results.json} & Final alignment of CE and EE vectors at question and dataset levels for the configured $n_{\max}$. The field \path{beta_faithfulness_mean} contains the mean faithfulness estimate generally reported in the results chapter. \\
+\path{_faithfulness_results_atomic.json} & Corresponding faithfulness estimates obtained using only singleton interventions from the same run. In a joint FELICS run, this file supplies the atomic counterpart to the interaction-aware estimates above. \\
+\end{longtable}
+\endgroup
+
+The hypothesis-checking scripts are located in \path{evaluation/}. After generating the experiment outputs, or when using existing outputs, run the relevant R scripts on these artifacts. Before doing so, adjust any machine-specific paths in \path{faithfulness_loader.r} within that directory to the local repository location. The scripts provide the statistical analyses described in Section~\ref{sec:analysis_procedures}.
