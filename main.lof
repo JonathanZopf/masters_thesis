@@ -25,18 +25,19 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{115}{figure.caption.78}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{116}{figure.caption.79}%
-\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{118}{figure.caption.80}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{110}{figure.caption.69}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{111}{figure.caption.70}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{113}{figure.caption.71}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{120}{figure.caption.82}%
-\contentsline {figure}{\numberline {D.2}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{122}{figure.caption.83}%
-\contentsline {figure}{\numberline {D.3}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{123}{figure.caption.84}%
-\contentsline {figure}{\numberline {D.4}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{125}{figure.caption.85}%
-\contentsline {figure}{\numberline {D.5}{\ignorespaces Question-level CE agreement for New German Credit}}{126}{figure.caption.86}%
-\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{128}{figure.caption.87}%
-\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{129}{figure.caption.88}%
-\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{130}{figure.caption.89}%
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{115}{figure.caption.73}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{117}{figure.caption.74}%
+\contentsline {figure}{\numberline {D.3}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{118}{figure.caption.75}%
+\contentsline {figure}{\numberline {D.4}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{120}{figure.caption.76}%
+\contentsline {figure}{\numberline {D.5}{\ignorespaces Question-level CE agreement for New German Credit}}{121}{figure.caption.77}%
+\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{123}{figure.caption.78}%
+\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{124}{figure.caption.79}%
+\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{125}{figure.caption.80}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

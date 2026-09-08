@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		AB0FD359304FFA5C0005EE4C /* discussion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = discussion.tex; sourceTree = "<group>"; };
 		AB1F9F042F93A288003D57AE /* build_latex.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_latex.sh; sourceTree = "<group>"; };
 		AB1F9F0C2F93A288003D57AE /* university_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = university_logo.png; sourceTree = "<group>"; };
 		AB1F9F102F93A288003D57AE /* main.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.tex; sourceTree = "<group>"; };
@@ -17,7 +18,6 @@
 		AB1F9F192F990B79003D57AE /* background.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = background.tex; sourceTree = "<group>"; };
 		AB1F9F1A2F990C51003D57AE /* introduction.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = introduction.tex; sourceTree = "<group>"; };
 		AB350DCC30406DE1001A29B5 /* results.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = results.tex; sourceTree = "<group>"; };
-		AB350DCD30406E1D001A29B5 /* discussion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = discussion.tex; sourceTree = "<group>"; };
 		AB350DCE30406E27001A29B5 /* conclusion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = conclusion.tex; sourceTree = "<group>"; };
 		AB350DDB3040816C001A29B5 /* german_credit_grouping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = german_credit_grouping.png; sourceTree = "<group>"; };
 		AB350DEA3040A15C001A29B5 /* oracle.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = oracle.tex; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 		AB1F9F0B2F93A288003D57AE /* chapters */ = {
 			isa = PBXGroup;
 			children = (
+				AB0FD359304FFA5C0005EE4C /* discussion.tex */,
 				AB350DCE30406E27001A29B5 /* conclusion.tex */,
-				AB350DCD30406E1D001A29B5 /* discussion.tex */,
 				AB350DCC30406DE1001A29B5 /* results.tex */,
 				AB923232301A8DF500F3635D /* evaluation.tex */,
 				ABD8FE34300EC6D7003F7187 /* theoretical_conception.tex */,

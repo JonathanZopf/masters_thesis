@@ -2650,25 +2650,22 @@
     <bcf:citekey order="225" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
     <bcf:citekey order="226" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
     <bcf:citekey order="227" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="228" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="229" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
+    <bcf:citekey order="228" intorder="1">parcalabescuMeasuringFaithfulnessSelfconsistency2024</bcf:citekey>
+    <bcf:citekey order="229" intorder="1">jacoviFaithfullyInterpretableNLP2020</bcf:citekey>
     <bcf:citekey order="230" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="231" intorder="1">jacoviFaithfullyInterpretableNLP2020</bcf:citekey>
-    <bcf:citekey order="232" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="233" intorder="1">atanasovaFaithfulnessTestsNatural2023</bcf:citekey>
-    <bcf:citekey order="234" intorder="1">parcalabescuMeasuringFaithfulnessSelfconsistency2024</bcf:citekey>
-    <bcf:citekey order="235" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="236" intorder="1">rozadoPoliticalPreferencesLLMs2024</bcf:citekey>
-    <bcf:citekey order="237" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
-    <bcf:citekey order="238" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
-    <bcf:citekey order="239" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="231" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
+    <bcf:citekey order="232" intorder="1">rozadoPoliticalPreferencesLLMs2024</bcf:citekey>
+    <bcf:citekey order="233" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="234" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="235" intorder="1">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="236" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
+    <bcf:citekey order="237" intorder="1">rozadoPoliticalPreferencesLLMs2024</bcf:citekey>
+    <bcf:citekey order="237" intorder="2">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="238" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
+    <bcf:citekey order="239" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
     <bcf:citekey order="240" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="241" intorder="1">rozadoPoliticalPreferencesLLMs2024</bcf:citekey>
-    <bcf:citekey order="241" intorder="2">rettenbergerAssessingPoliticalBias2025</bcf:citekey>
+    <bcf:citekey order="241" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
     <bcf:citekey order="242" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="243" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="244" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
-    <bcf:citekey order="245" intorder="1">mattonWalkTalkMeasuring2024</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">

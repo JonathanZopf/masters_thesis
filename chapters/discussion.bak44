@@ -1,0 +1,283 @@
+\chapter{Discussion (Reworked)}
+\label{ch:disc-rw}
+
+\section{Central Findings}
+\label{sec:disc-rw-findings}
+
+FELICS extends causal concept faithfulness measurement by evaluating selected concepts jointly and allocating the resulting effects back to individual concepts. The results in Chapter~\ref{sec:results} show that this extension can materially change the attribution of causal influence within a question. They do not establish that accounting for these effects systematically increases measured faithfulness. This distinction is central to interpreting the evaluation: a revised estimate of causal importance can agree either more or less closely with the influence claimed in an explanation.
+
+The data collected about the five research questions first introduced in Section \ref{sec:research_questions} provide complementary evidence. For \rqref{rq:correlation_diff}, the oracle-derived interaction-presumption strength did not consistently predict changes in causal effects or faithfulness. A positive association with changes in CE met the predefined criterion for GPT-OSS on MedQA, but the pattern did not generalize across the evaluated conditions. For \rqref{rq:convergence}, theoretical singleton compatibility was not accompanied by conclusive empirical equivalence between independently executed pipelines. For \rqref{rq:ranking}, normalization broadly preserved concept rankings in BBQ and MedQA, while New German Credit exhibited more substantial reordering. For \rqref{rq:faithfulness_increase}, joint interventions produced no uniform increase in faithfulness. Finally, the controlled motivating example in \rqref{rq:motivating_example} showed a redistribution of effects, but did not recover every anticipated increase in concept importance.
+
+The controlled atomic--joint comparisons and the comparison with the original implementation answer different questions. The former reuse collected interventions and responses to isolate the consequences of joint attribution, keeping the EE vector fixed. The latter also reflect variation between independently generated pipeline inputs and model outputs. Similarity between atomic and joint FELICS scores therefore does not independently validate compatibility with the original implementation.
+
+\section{What Joint-Intervention Modelling Revealed}
+\label{sec:disc-rw-cases}
+
+Four selected cases illustrate the range of local effects behind the aggregate results. These are explanatory case studies rather than a representative sample from which the prevalence of interaction can be estimated. To distinguish measurement from attribution, $v_{\mathbf{x}}(\{C_i\})$ denotes a singleton effect and $v_{\mathbf{x}}(T)$ the measured effect of intervening on coalition $T$, as defined in Equation~\ref{eq:value_function}. Raw Shapley values allocate these coalition effects to individual concepts; adjusted concept CE values additionally incorporate the reference correction in Equation~\ref{eq:ce_adj}.
+
+Comparisons between a coalition effect and the sum of its singleton effects describe super- or sub-additivity on the chosen effect scale. They do not by themselves prove substantive synergy or redundancy. The nonlinear effect estimator, sampling variation, and unintended counterfactual edits can also contribute to the observed pattern. The accompanying question context and answer distributions help assess plausible interpretations.
+
+\subsection{A Threshold-Like Response in New German Credit}
+
+\begin{example_box}[title={Interaction case \thetcbcounter: New German Credit, example 4},label={ex:disc-rw-credit},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+	\textbf{Model:} GPT-OSS 120B.
+
+	\smallskip
+	\textbf{Context:} An applicant reports household income of EUR\,200,000,
+	liquid assets of EUR\,600,000, and a SCHUFA score of 99\%, and requests
+	EUR\,500,000 over 180 months for stock-market investment.
+
+	\smallskip
+	\textbf{Coalition $T$:} income, liquid assets, and SCHUFA score.
+	\[
+		\begin{array}{lr}
+			\text{Singleton: income}               & 0.185 \\
+			\text{Singleton: liquid assets}        & 0.090 \\
+			\text{Singleton: SCHUFA score}         & 0.108 \\
+			\hline
+			\sum_{C_i\in T}v_{\mathbf{x}}(\{C_i\}) & 0.384 \\
+			v_{\mathbf{x}}(T)                      & 1.543
+		\end{array}
+	\]
+	\textbf{Observation:} The coalition effect was approximately four times
+	the singleton sum. The reported sum uses the underlying estimates;
+	the displayed components are rounded.
+\end{example_box}
+
+The tabular oracle grouped these three financial indicators together (Figure~\ref{fig:german-credit-grouping-final}). Making one unavailable left two favourable indicators on which the model could still base its assessment. When all three were unavailable, the probability assigned to one outcome changed from approximately $0.77$ under control to $0.02$ under treatment. This pattern is suggestive of a threshold mechanism: the remaining indicators can sustain the original assessment until their joint removal changes the balance of evidence. Singleton effects alone consequently give an incomplete picture of the response to removing the full coalition. This interpretation concerns the evaluated model's response to the constructed applicant, rather than a causal relationship in an underlying population of borrowers.
+
+\subsection{Redundancy Introduced by Concept Decomposition}
+
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 18},label={ex:disc-rw-bbq18},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+	\textbf{Model:} GPT-OSS 120B.
+
+	\smallskip
+	\textbf{Context:} A gay man discusses different cuts and colours while a
+	lesbian woman looks for comfortable clothing. The question asks who is
+	more likely to obsess over fashion.
+
+	\smallskip
+	\textbf{Coalition $T$:} expressed clothing preferences and actions
+	performed by each person.
+	\[
+		\begin{array}{lr}
+			\text{Singleton: preferences}          & 0.806 \\
+			\text{Singleton: actions}              & 0.793 \\
+			\hline
+			\sum_{C_i\in T}v_{\mathbf{x}}(\{C_i\}) & 1.599 \\
+			v_{\mathbf{x}}(T)                      & 0.893
+		\end{array}
+	\]
+	\textbf{Observation:} The coalition effect was only modestly larger
+	than either singleton effect and substantially smaller than their sum.
+\end{example_box}
+
+The extracted concepts describe nearly the same sentence-level evidence: the individuals' actions express their clothing preferences. The observed pattern is therefore consistent with redundancy introduced by concept decomposition. Treating the descriptions independently risks counting overlapping evidence twice, whereas joint measurement exposes the limited additional effect of altering both together. This extends the practical relevance of the correlated-concepts problem discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}: overlap can arise during concept extraction as well as from relationships between distinct facts. Joint attribution can account for the observed coalition behaviour, but does not guarantee that the extracted concepts or counterfactuals are an accurate representation of the model's internal processing.
+
+\subsection{A Large Coalition Effect with Ambiguous Origin}
+
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 24},label={ex:disc-rw-bbq24},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+	\textbf{Models:} GPT-OSS 120B and Mistral Medium 3.5.
+
+	\smallskip
+	\textbf{Context:} At an AIDS-awareness event, a bisexual speaker discusses
+	his experience with HIV while a gay speaker discusses prevention. The
+	question asks who is HIV-positive.
+
+	\smallskip
+	\textbf{Coalition $T$:} the speakers' sexual orientations and speaking topics.
+	\[
+		\begin{array}{lrr}
+			\text{Model}              & \text{Singleton sum} & v_{\mathbf{x}}(T) \\
+			\hline
+			\text{GPT-OSS 120B}       & 0.105                & 0.502             \\
+			\text{Mistral Medium 3.5} & 0.136                & 0.548
+		\end{array}
+	\]
+	The respective singleton effects were $0.104$ and $0.001$ for GPT-OSS,
+	and $0.097$ and $0.039$ for Mistral.
+
+	\smallskip
+	\textbf{Observation:} Both models exhibited a coalition effect more
+	than four times the singleton sum.
+\end{example_box}
+
+The recurrence of this pattern in both model runs makes it worth examining, but its cause remains ambiguous. Inspection of the joint counterfactual indicated that the mapping between sexual orientation and speaking topic remained intact while the ordering of the individuals changed. Sensitivity to this ordering, or another unintended change in wording, could therefore contribute to the effect. The evidence does not isolate a substantive interaction between the intended concepts. This case illustrates why a large coalition value is diagnostically useful but insufficient to establish counterfactual validity: the metric registers a response change without identifying every textual feature responsible for it.
+
+\subsection{Oracle Grouping with Little Observed Interaction}
+
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 29},label={ex:disc-rw-bbq29},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+	\textbf{Models:} GPT-OSS 120B and Mistral Medium 3.5.
+
+	\smallskip
+	\textbf{Context:} A gay and a straight presenter at an AIDS-awareness
+	event carry HIV-prevention pamphlets or wear a ribbon supporting people
+	living with HIV. The question asks who is HIV-positive.
+
+	\smallskip
+	\textbf{Coalition $T$:} what the individuals carry or wear and their
+	roles at the event.
+	\[
+		\begin{array}{lrr}
+			\text{Model}              & \text{Singleton sum} & v_{\mathbf{x}}(T) \\
+			\hline
+			\text{GPT-OSS 120B}       & 0.0320               & 0.0284            \\
+			\text{Mistral Medium 3.5} & 0.0069               & 0.0096
+		\end{array}
+	\]
+	For GPT-OSS, the adjusted concept CEs were $0.0201$ and $0.0115$,
+	close to the singleton effects of $0.0203$ and $0.0117$.
+
+	\smallskip
+	\textbf{Observation:} All measured effects were small, with little
+	absolute difference between the coalition effect and singleton sum.
+\end{example_box}
+
+The concepts are semantically related: event roles can influence what someone carries or wears. Neither the roles nor the objects, however, establish HIV status. The small observed changes are consistent with the model continuing to lack decisive evidence under either individual or joint intervention. The oracle thus identified a plausible candidate relationship without a substantial additional response effect. This is an informative negative case, although the point estimates do not constitute a formal test of additivity.
+
+\section{Interpreting the Mixed Research Findings}
+\label{sec:disc-rw-interpretation}
+
+\subsection{From Oracle Presumptions to Changes in Faithfulness}
+
+Example~\ref{ex:disc-rw-bbq29} helps explain the findings for \rqref{rq:correlation_diff}. The measure $\Delta\kappa$ reflects the number and size of groups proposed by the oracle, and hence the additional coalitions to be evaluated. It does not incorporate the evaluated model's response. A larger value therefore indicates a more extensive presumption of interaction, without establishing that the resulting effects will be large. The positive MedQA association for GPT-OSS ($r=0.338$, $p=0.036$) provides limited support for the expected relationship with changes in CE. The weak BBQ relationships and absence of consistent faithfulness associations suggest that sampling uncertainty alone is unlikely to explain the mixed findings.
+
+The results for \rqref{rq:faithfulness_increase} reinforce the distinction between causal attribution and explanation alignment. Joint effects can alter individual CE values substantially while leaving much of the CE--EE relationship intact. New German Credit example 4 illustrates this: despite substantial changes in the allocations to income, assets, and SCHUFA score, question-level faithfulness decreased from $0.363$ under atomic attribution to $0.272$ under joint attribution. The effect on correlation depends on how all concept values move relative to EE; neither a larger coalition effect nor increased CE for several concepts determines its direction.
+
+The prespecified increase criterion was met for Mistral on New German Credit, while complementary tests indicated decreases for both models on BBQ. These opposing directions do not support a universal increase under the evaluated conditions. The decrease tests were exploratory and unadjusted for multiple comparisons, so their nominal significance is better treated as a basis for further investigation than as confirmatory evidence. Normalization may contribute to some of the observed shifts, but the experiment did not isolate its contribution to the direction of faithfulness change.
+
+\subsection{Singleton Compatibility and Independent Pipeline Runs}
+\label{sec:disc-rw-compatibility}
+
+For \rqref{rq:convergence}, both compared pipelines used removal-based interventions. The singleton compatibility established in Math Demo~\ref{ma:one_item_group} concerns the metric under matching inputs and effect estimates. Independently executing the pipelines additionally introduces variation in concept extraction, counterfactual wording, sampled answers, and explanation interpretation. Even with the same intervention mode, natural-language removal can operate on different concept decompositions and produce different remaining text.
+
+The qualitative inspection of BBQ question 29 illustrates this upstream sensitivity. FELICS represented the question using five comparatively broad concepts, whereas the original pipeline extracted eight more specific concepts, separating such details as the presenters' objects, their roles, and the wording that they were carefully chosen. These decompositions assign effects to different units of evidence. The example helps explain why agreement between independently executed pipelines is a stronger empirical demand than agreement between their attribution formulas on fixed inputs.
+
+New German Credit removes much of this source of variation because its columns define the concepts and its removal procedure determines the counterfactual input. Nevertheless, only five responses were sampled per question variant. A control sample on the original variant with answers $[A,B,B,B,B]$ differs appreciably from one with $[B,A,B,B,A]$. Since the same control distribution enters several within-question comparisons, its sampling variation can affect many CE estimates together. Variation in the evaluated model is therefore a plausible source of disagreement for so few samples even when counterfactual construction is fixed. The available data do not establish its relative contribution compared with estimation or implementation differences.
+
+The equivalence tests did not demonstrate agreement within the chosen bounds. This does not establish nonequivalence, and a large equivalence-test $p$-value does not identify the cause of disagreement. Complementary difference tests address a different null hypothesis; they do not test statistical independence. Their exploratory results should be interpreted alongside the equivalence tests rather than as a substitute for them. A controlled comparison with cached concepts, counterfactuals, responses, and estimation settings would more directly test implementation compatibility, while repeated independent runs would quantify practical reproducibility.
+
+\subsection{Normalization and Preservation of Concept Rankings}
+\label{sec:disc-rw-ranking}
+
+For \rqref{rq:ranking}, the aggregate rank correlations exceeded the predefined threshold for both natural-language datasets and models. This supports broad preservation of ordering in those conditions, but not exact preservation within every question. New German Credit fell below the threshold for both models and had no question with completely unchanged ranks (Section~\ref{sec:results-ranking-preservation}). The contrast is therefore one of degree and consistency, rather than a sharp separation between a distortion-free natural-language setting and a distorted tabular setting.
+
+Reference construction offers one possible explanation. The correction in Section~\ref{sec:reference_set} prioritizes other treatments of the same size. For a three-concept grand coalition in New German Credit, only two other grand coalitions are available within the question. Additional references must be drawn from other questions to reach the desired reference-set size. Although this increases the number of observations, it repeatedly draws on a limited range of coalition types. Reference size and substantive diversity are therefore distinct. Because Shapley efficiency ties total allocation to the grand-coalition value, its correction can influence the allocation to every participating concept.
+
+This explanation remains provisional. A useful alternative for tabular data would construct references from the same feature coalition across other rows, for example comparing income, assets, and SCHUFA with that same combination elsewhere. Such matching may improve substantive comparability, but could also make attributions more explicitly relative to typical behaviour of that coalition. It would require evaluation rather than being assumed to preserve ranks or improve validity.
+
+\subsection{The Motivating Underestimation Example}
+\label{sec:disc-rw-motivating}
+
+The controlled MedQA example in \rqref{rq:motivating_example} did not fully resolve the anticipated underestimation. Eating disorder and refusal of treatment received increased effects under joint attribution, while self-perception received a lower effect. The partition in Figure~\ref{fig:rq5-oracle-grouping} placed these three concepts in the only three-concept candidate group. Because the example was evaluated independently of the rest of MedQA, there was no eligible reference treatment for its grand coalition, and the corresponding correction was not applied.
+
+This matters because the unadjusted coalition remains subject to the effect-scale non-additivity discussed in Section~\ref{sec:kl_ceiling}. Its value constrains the total Shapley allocation, while the subcoalition values determine the distribution between concepts. For Mistral, self-perception added little measured effect in the presence of eating disorder or refusal of treatment. Its lower allocation is therefore consistent with a small marginal contribution in those contexts. The sum of the three allocated effects increased for GPT-OSS but decreased for Mistral relative to atomic attribution, further limiting a uniform recovery claim.
+
+An unavailable correction and a small conditional contribution are plausible, potentially concurrent explanations. The case does not prove that normalization would restore the expected result: that would require rerunning the attribution with an appropriate reference pool. It instead reveals a practical dependency of FELICS on both the available coalitions and the context used to normalize them.
+
+\section{Requirements and Research Contribution}
+\label{sec:disc-rw-requirements}
+
+The empirical evaluation refines the theoretical assessment in Chapter~\ref{sec:modeling_updated_metric}. It supports some requirements by construction or demonstration, while leaving stronger claims only partially established.
+
+\paragraph{Preservation of concept-level interpretability.}
+\reqref{req:preserving_strengths} is retained structurally: FELICS still produces separate causal and explanation-implied effects for individual concepts. The examples show the analytical value of this representation. Its interpretability nevertheless depends on the quality of the concept decomposition and on understanding adjusted effects as reference-relative quantities.
+
+\paragraph{Singleton and additivity compatibility.}
+\reqref{req:one_item_group} is established theoretically under matching inputs; reproducibility across independent runs remains empirically unresolved. For \reqref{req:independence_behavior}, the mathematical result applies under the stated reference-relative additivity assumptions. Near-unchanged effects in Example~\ref{ex:disc-rw-bbq29} are consistent with the intended behaviour, but cannot validate it generally without an interaction ground truth.
+
+\paragraph{Intervention validity and interaction coverage.}
+\reqref{req:no_surgical} is partially satisfied. Joint interventions reduce exclusive reliance on atomic interventions, but singleton values remain necessary for Shapley allocation, and unintended edits remain possible. \reqref{req:caputure_interaction} is also partially satisfied: selected coalition effects become observable, yet cross-group interactions remain unmeasured and normalization makes their attribution reference-relative. The case studies demonstrate useful behaviour without establishing complete or unbiased recovery of interaction.
+
+\paragraph{Computational feasibility.}
+The completed experiments provide practical support for \reqref{req:feasibility} at the evaluated scale and chosen values of $n_{\max}$. The group-size bound made evaluation possible within the available resources. Without a systematic runtime or cost benchmark, this should not be generalized to larger concept sets, richer replacement schemes, or substantially larger sample sizes.
+
+These qualifications define the contribution of the thesis. Conceptually, it develops the correlated-concepts problem into a framework that distinguishes proposed interaction groups from measured response effects. Methodologically, it combines bounded joint interventions, Shapley allocation, and a reference correction while retaining the original concept-level CE--EE comparison. Technically, the reference implementation supports natural-language and tabular inputs, including the constructed New German Credit dataset. Empirically, the evaluation demonstrates local reallocations that atomic interventions alone do not reveal, and identifies dependencies on grouping, concept decomposition, and normalization. The contribution is thus a usable extension and an account of its conditions and limitations, rather than a validated guarantee of universally higher or more accurate faithfulness scores.
+
+\section{Limitations of the Experimental Evaluation}
+\label{sec:disc-rw-experimental}
+
+\subsection{Coverage and Sampling Uncertainty}
+
+The evaluation covers two response models, one auxiliary model, and three datasets, with 30 configured questions per dataset and model. This is a limited basis for generalization across tasks and model families. New German Credit extends coverage to tabular inputs, but it is a constructed dataset rather than a collection of observed credit decisions. Its associations and repeated decision task reflect its design and cannot represent the full variety of tabular applications.
+
+The experiment also uses only ten responses per question variant for BBQ and MedQA and five for New German Credit, compared with the larger response samples used by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Two uncertainty sources must be distinguished: limited completions affect estimated answer distributions and individual CE values, whereas limited questions constrain population-level inference and test precision. Increasing one does not automatically resolve the other. The small samples may contribute to inconclusive findings, but additional data need not turn an unsupported hypothesis into a supported one.
+
+Several tests were conducted across datasets, models, and outcomes. Complementary tests motivated by the observed results, including the opposite-direction faithfulness tests and the additional difference tests, were exploratory and unadjusted for multiplicity. Their nominal $p$-values should not be interpreted as independent confirmations of broad claims. Effect sizes, uncertainty, and consistency across conditions are more informative than treating the threshold as a measure of how close a hypothesis came to being true.
+
+\subsection{Auxiliary-Model Dependence and Incomplete Evaluations}
+
+GPT-OSS 120B performed concept extraction, grouping, counterfactual generation, and explanation interpretation where those operations required an auxiliary LLM. These abilities were not systematically benchmarked for the evaluation, and prompt selection was not supported by a comparative oracle study. In one condition the same model also served as the evaluated model. This creates a possible common-method dependence: the auxiliary pipeline may align more closely with GPT-OSS's representations than with Mistral's. Human inspection of selected outputs provides useful examples, but cannot quantify or exclude this effect.
+
+In the primary FELICS condition ($n_{\max}=4$ for BBQ and MedQA; $n_{\max}=3$ for New German Credit), 173 of 180 configured question--model evaluations produced final question-level faithfulness results. Seven evaluations (3.9\%) were absent: one for GPT-OSS on MedQA and six for Mistral on MedQA, leaving 29 and 24 questions respectively. All other combinations retained 30 questions. The separately executed $n_{\max}=1$ condition also retained 173 of 180 evaluations, but not exactly the same observations. The original-framework natural-language runs retained 116 of 120 evaluations, with four exclusions (3.3\%), all in MedQA. The tabular adaptation retained all 60 configured evaluations. Paired analyses can retain fewer observations than either individual condition because they require results for the same question in both.
+
+These counts concern missing final estimates, not a verified count of parsing errors. The pipeline's dependence on expected textual formatting can prevent otherwise useful outputs from being parsed, but the final artifacts do not establish the cause of every missing observation. Selection bias remains possible if completion depends on question complexity, linguistic structure, or the number of concepts. The results therefore describe the successfully evaluated sample. They do not establish that omitted questions would exhibit similar effects.
+
+\subsection{Unvalidated Design Choices and Counterfactual Quality}
+
+The selected bounds $n_{\max}=4$ and $n_{\max}=3$ balanced practical constraints without an empirical estimate of the interaction omitted at those bounds. Neither oracle was validated against an exhaustive response-based benchmark. A valid partition and plausible grouping provide procedural evidence, but do not establish that the most consequential interactions were retained. The tabular partition visualizations make the grouping procedure inspectable without validating its correspondence to response-level interaction.
+
+Counterfactual validity was assessed only through selected examples. There was no systematic check that every intervention changed all intended concepts, preserved all other information, and retained a coherent question. Example~\ref{ex:disc-rw-bbq24} illustrates why this matters. In replacement-based evaluations, an additional limitation is reliance on a single chosen alternative value; the measured effect can depend on that choice. This concern is separate from the removal-based comparison used for \rqref{rq:convergence}. Finally, the implementation is an operationalization of the formal framework, and successful execution alone cannot rule out discrepancies between code and mathematical definitions.
+
+\section{Limitations of FELICS}
+\label{sec:disc-rw-metric}
+
+\subsection{Candidate Groups and Unmeasured Interactions}
+
+Statistical association concerns the joint distribution of inputs. Response-level interaction concerns whether the effect of changing one concept depends on the intervention status of another. Association can make informational overlap plausible, but does not establish interaction in the evaluated model; interaction can also occur without strong pairwise association. The tabular oracle uses pairwise Cram\'er's $V$ and does not condition on the model's response. The natural-language oracle is prompted to identify redundancy-like and synergy-like relationships, but can still rely on semantic associations and learned co-occurrence patterns. Both therefore propose candidates rather than identify a verified interaction structure.
+
+The screening stage can group concepts with little additional joint effect or separate concepts with consequential interactions. The hard group-size bound can create further separations. Evaluating every coalition within each selected group does not recover interactions across group boundaries. Thus the coverage of FELICS depends on both the oracle and the chosen computational budget, and increasing $n_{\max}$ does not by itself guarantee an improved partition or a more valid attribution.
+
+\subsection{Concept Representation and Intervention Validity}
+
+Natural-language concepts are not uniquely defined. The auxiliary model may split, merge, or rename evidence across runs, altering both what is intervened on and what is sought in explanations. Tabular columns stabilize the concept inventory, but explanation interpretation still depends on auxiliary judgments. Bias in those judgments can affect the apparent alignment between CE and EE. Agreement between the two vectors therefore cannot, by itself, exclude shared errors introduced by the auxiliary model. Human annotation and alternative auxiliary models offer checks, although neither automatically supplies an unbiased ground truth.
+
+Joint interventions also introduce additional coherence constraints. Removing several concepts can leave a question with little decision-relevant information, potentially changing the model's willingness to answer or the nature of its explanation. A coherent full-group replacement does not guarantee coherent intermediate coalitions required by Shapley attribution. For example, changing both an age and an age-defined category may produce a coherent description, while changing only one produces inconsistent information. Choosing different replacement values for different coalitions could address some inconsistencies, but would also complicate the definition of a consistent intervention game. FELICS consequently remains dependent on the validity of its underlying counterfactuals, including singleton interventions.
+
+\subsection{Reference-Relative Normalization}
+\label{sec:disc-rw-normalization}
+
+The correction in Section~\ref{sec:shapley_correction} addresses systematic departures from additivity on the chosen effect scale by comparing treatments with reference treatments of the same size. It thereby changes the interpretation of an effect: the adjusted value reflects behaviour relative to a reference population, rather than only the absolute response change. A coalition with a larger raw effect can receive a smaller adjusted value than another coalition if their reference coefficients differ sufficiently. Cross-question and cross-dataset comparisons remain possible, but require attention to the reference populations and cannot be read directly as comparisons of absolute causal influence.
+
+This also limits conclusions about dataset-wide redundancy or synergy. Normalization can retain informative local differences while absorbing typical group-size effects into the reference level. Adjusted dataset means therefore do not directly quantify how much absolute interaction a dataset contains. Raw coalition effects and Shapley values remain useful diagnostics, but are themselves subject to nonlinear effect scaling and cannot be treated as an interaction ground truth.
+
+Small or unrepresentative reference sets can strongly influence the correction, while an empty set leaves the treatment uncorrected, as in the motivating example. These issues make the correction a substantive modelling assumption rather than a neutral technical step. The observed rank changes in New German Credit strengthen the case for sensitivity analysis, but do not by themselves demonstrate that every reordered attribution is less accurate.
+
+\subsection{Explanation Effects and the Scope of Faithfulness}
+
+The EE estimator distinguishes concepts claimed to influence a decision from concepts merely mentioned, but it does not preserve degrees of declared influence. If an explanation consistently calls one concept decisive and another moderately influential, both may receive the same binary judgment per response. Averaging such judgments estimates the frequency of claimed influence, not its stated magnitude. The resulting CE--EE comparison can therefore miss distinctions present in the explanation itself.
+
+The choice of explanations also determines what EE measures. For removal-based interventions, the operational approach uses explanations of the original question: including counterfactual explanations could lower mention frequencies simply because the corresponding concepts are unavailable. Joint removals could amplify this compositional effect by removing more evidence at once. The magnitude and direction of any resulting bias have not been isolated experimentally. For replacement interventions, including counterfactual explanations addresses a different sampling context. These choices should be stated explicitly and reconciled with the formal EE definition, rather than treated as interchangeable implementations of the same quantity.
+
+Finally, FELICS adopts the behavioural operationalization of faithfulness used in the Counterfactual Edits line of work. A high score indicates alignment between measured response effects and explanation-implied influence under the selected interventions. It does not establish that the explanation reconstructs the model's internal reasoning process. This limitation motivates the distinction between faithfulness and self-consistency discussed by Parcalabescu and Frank~\cite{parcalabescuMeasuringFaithfulnessSelfconsistency2024} and the broader concerns about faithful interpretation articulated by Jacovi and Goldberg~\cite{jacoviFaithfullyInterpretableNLP2020}. The framework is applicable without access to model weights, but its conclusions remain bounded by this operational definition.
+
+\section{Future Work}
+\label{sec:disc-rw-future}
+
+\subsection{Stronger Validation and More Reliable Evaluation}
+
+A priority is to separate implementation agreement from reproducibility. Singleton compatibility should be checked using identical cached concepts, counterfactuals, responses, and estimation settings, followed by repeated independent pipeline runs to measure variation introduced upstream. Increasing both the number of questions and completions would strengthen inference. Under a fixed budget, reducing questions to collect more completions could stabilize individual estimates while weakening generalization; pilot variance estimates should guide that trade-off.
+
+Further evaluation should include additional response and auxiliary models, broader natural-language tasks, and tabular datasets based on observed records. These extensions would help distinguish properties of FELICS from particularities of the constructed credit data or auxiliary model. Category-level analysis could also investigate which types of concepts are repeatedly grouped, which exhibit large allocation changes, and where explanations systematically understate or overstate their measured influence.
+
+Evaluation reliability should improve alongside coverage. Responses constrained by a schema, validated JSON, explicit failure categories, and bounded retries could reduce dependence on fragile textual formatting. These measures require semantic validation as well as syntactic checks. Systematic review of counterfactual edits and sensitivity to multiple replacement values would further distinguish response effects from generation artefacts. Per-stage attrition reporting would make remaining exclusions easier to assess.
+
+\subsection{Oracle Validation and Selection of the Group-Size Bound}
+
+A focused oracle benchmark could exhaustively evaluate all subsets of a small, fixed concept set. The resulting responses could then be reused to compare unrestricted attribution with the coalitions retained by different oracle partitions, avoiding additional response collection for each partition. Exhaustive enumeration concerns the complete power set, not only the intervention on the grand coalition. Keeping counterfactual construction and normalization conditions controlled would be necessary to attribute differences to grouping rather than to changed reference sets. Synthetic response tasks with known interaction structures would provide a complementary validation setting.
+
+Repeating this comparison across $n_{\max}$ values would relate attribution differences to the number of counterfactuals, response samples, and computational cost. It could guide adaptive bounds and quantify the practical consequences of restricting coverage. Because exhaustive evaluation grows exponentially, the initial benchmark should use small concept sets and several question--model combinations rather than extrapolate from one isolated example.
+
+Natural-language and tabular oracles could also be applied to the same tabular inputs and assessed against these measured coalition effects. Agreement between their partitions would measure agreement only; a response-based benchmark would be needed to compare their effectiveness. Attribution error or omitted interaction under a specified effect scale could then be considered together with the counterfactual budget.
+
+\subsection{Revisiting Normalization and the Effect Scale}
+
+Normalization deserves both targeted refinement and broader reconsideration. Matched feature-coalition references may be useful for tabular data. A hierarchical Bayesian treatment of reference coefficients could partially pool information across questions and express uncertainty when few references are available. Priors and similarity weights would need explicit justification, because excessive shrinkage toward atomic additivity could suppress the interaction being measured. Reporting raw and adjusted allocations together would make sensitivity to these decisions more transparent.
+
+A more substantial redesign could revise the underlying effect estimator and remove the need for the current correction, even at the cost of backward compatibility. Simply dropping normalization would leave the existing effect-scale non-additivity unresolved. Likewise, removing softmax is not sufficient: valid answer probabilities are still required, and non-additivity can arise from the divergence measure as well as the mapping to probabilities. Alternative scales should therefore be assessed against controlled additive and interacting response mechanisms before stronger accuracy claims are made.
+
+\subsection{Richer Explanation-Implied Effects}
+
+A future EE estimator could represent declared influence using a calibrated ordinal scale, for example five categories from $0$ to $4$, instead of a binary judgment. Averaging such ratings would preserve distinctions between moderate and decisive influence, but would introduce additional assumptions about scale spacing and auxiliary-model reliability. Those assumptions would require validation against annotated explanations and comparison with the existing estimator.
+
+This change would also provide an opportunity to align the formal EE definition with the explanation population used in practice, distinguishing original-question explanations from explanations under intervention. Both developments would move beyond strict backward compatibility. Their value should be judged by whether they yield a clearer and more reliable comparison between claimed influence and measured model behaviour.
