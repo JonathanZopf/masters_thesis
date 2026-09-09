@@ -3,6 +3,9 @@
 \usepackage{lmodern}
 \usetikzlibrary{backgrounds}
 
+\begin{document}
+% Define figure-specific colors in the body so they remain available when the
+% standalone source is embedded directly into the main thesis.
 \definecolor{rqFiveGroupOne}{HTML}{E15759}
 \definecolor{rqFiveGroupTwo}{HTML}{76B7B2}
 \definecolor{rqFiveGroupThree}{HTML}{F28E2B}
@@ -11,7 +14,6 @@
 \definecolor{rqFiveGroupSix}{HTML}{B07AA1}
 \definecolor{rqFiveAccepted}{HTML}{17823B}
 
-\begin{document}
 \begin{tikzpicture}[
   x=1cm,y=1cm,
   rq5 node/.style={draw=black!65,rounded corners=2pt,line width=0.55pt,

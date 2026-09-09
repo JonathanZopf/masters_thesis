@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  9 SEP 2026 01:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  9 SEP 2026 01:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1352,7 +1352,7 @@ routines for cosmetic and programming application
 \c@@@matchloc=\count459
 ))
 (/usr/local/texlive/2026/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplo
-ts.statistics.code.tex)
+ts.statistics.code.tex) (|kpsewhich --var-value=HOME)
 (/usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
 meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
@@ -1756,7 +1756,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip116
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 118.
+Package hyperref Info: Option `colorlinks' set `true' on input line 137.
 \c@tcb@cnt@example_box=\count597
 \c@tcb@cnt@motivating_example_box=\count598
 \c@tcb@cnt@math_box=\count599
@@ -1768,8 +1768,8 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'USenglish'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 19
-3.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 21
+2.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1796,24 +1796,24 @@ LaTeX Warning: Label `app:prompts' multiply defined.
 ) (./appendix/reproducibility.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 212.
+LaTeX Font Info:    ... okay on input line 212.
 
 (/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1838,7 +1838,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count608
-Package tocbasic Info: setting babel extension for `lol' on input line 193.
+Package tocbasic Info: setting babel extension for `lol' on input line 212.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1858,7 +1858,7 @@ nslations-basic-dictionary')
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 193.
+loading the todonotes package. on input line 212.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1932,9 +1932,9 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 
 (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 193.
-Package biblatex Info: Reference segment=0 on input line 193.
-Package hyperref Info: Link coloring ON on input line 193.
+Package biblatex Info: Reference section=0 on input line 212.
+Package biblatex Info: Reference segment=0 on input line 212.
+Package hyperref Info: Link coloring ON on input line 212.
  (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
@@ -1945,62 +1945,62 @@ Package hyperref Info: Link coloring ON on input line 193.
 <images/university_logo.png, id=541, 200.8081pt x 59.40573pt>
 File: images/university_logo.png Graphic file (type png)
 <use images/university_logo.png>
-Package pdftex.def Info: images/university_logo.png  used on input line 205.
+Package pdftex.def Info: images/university_logo.png  used on input line 224.
 (pdftex.def)             Requested size: 230.46733pt x 68.18279pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-05.
+24.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-05.
+24.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-205.
+224.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-205.
+224.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 205.
+(Font)              <12> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 205.
+(Font)              <8> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 205.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 205
+(Font)              <6> on input line 224.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 224
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 205
+LaTeX Font Info:    Trying to load font information for U+msb on input line 224
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+esint on input line 2
-05.
+24.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 205.
+(Font)              <14.4> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 205.
+(Font)              <10> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 205.
+(Font)              <7> on input line 224.
  [1
 
 
@@ -2084,11 +2084,6 @@ d
  []
 
 
-Underfull \hbox (badness 7740) in paragraph at lines 64--65
-[]|\T1/lmr/m/n/12 Scalar Causal Con-cept Ef-fect pro-duced by Mat-ton et
- []
-
-
 Underfull \hbox (badness 1852) in paragraph at lines 84--85
 []|\T1/lmr/m/n/12 Numerical tol-er-ance used for de-ter-min-is-tic implementati
 on-
@@ -2142,43 +2137,71 @@ Overfull \hbox (8.4331pt too wide) in paragraph at lines 84--85
 
 [10] [11{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 [12]
-Overfull \hbox (2.48213pt too wide) in paragraph at lines 146--147
+Overfull \hbox (0.30623pt too wide) in paragraph at lines 146--147
 \T1/lmr/m/n/12 Building upon the coun-ter-fac-tual edit method-ol-ogy pi-o-neer
 ed by Atanasova et al. [[][]ACL+23[][]]
  []
 
-[13] [14] [15] [16] [17]
-Package standalone Info: generated file graphs/matton_evaluation_pipeline.pdf n
-ewer then source file graphs/matton_evaluation_pipeline.tex on input line 298.
-<graphs/matton_evaluation_pipeline.pdf, id=1178, 517.34981pt x 620.73103pt>
-File: graphs/matton_evaluation_pipeline.pdf Graphic file (type pdf)
-<use graphs/matton_evaluation_pipeline.pdf>
-Package pdftex.def Info: graphs/matton_evaluation_pipeline.pdf  used on input l
-ine 298.
-(pdftex.def)             Requested size: 436.5444pt x 523.7784pt.
- [18] [19 <./graphs/matton_evaluation_pipeline.pdf>])
+[13]
+Overfull \hbox (12.1352pt too wide) in paragraph at lines 177--178
+\T1/lmr/m/n/12 To es-ti-mate the ac-tual in-flu-ence of a con-cept on the model
+'s pre-dic-tion, Mat-ton et al. [[][]MNG24[][]]
+ []
+
+[14] [15] [16] [17]
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/matton
+_evaluation_pipeline' graphs/matton_evaluation_pipeline)...disabled (restricted
+).
+
+
+
+Package standalone Warning: Graphic 'graphs/matton_evaluation_pipeline.pdf' cou
+ld not be build.
+Shell escape activated? on input line 298.
+
+(./graphs/matton_evaluation_pipeline.tex
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
+4.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 24.
+)
+File: graphs/matton_evaluation_pipeline.tex Graphic file (type tex)
+ [18] [19])
 (./chapters/problem_identification.tex [20]
 Chapter 3.
-Package standalone Info: generated file graphs/matton_dgp.pdf newer then source
- file graphs/matton_dgp.tex on input line 12.
-<graphs/matton_dgp.pdf, id=1286, 353.8008pt x 162.97989pt>
-File: graphs/matton_dgp.pdf Graphic file (type pdf)
-<use graphs/matton_dgp.pdf>
-Package pdftex.def Info: graphs/matton_dgp.pdf  used on input line 12.
-(pdftex.def)             Requested size: 284.52756pt x 131.07542pt.
-[21
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/matton
+_dgp' graphs/matton_dgp)...disabled (restricted).
 
- <./graphs/matton_dgp.pdf>]
-Package standalone Info: generated file graphs/matton_dgp_intervened.pdf newer 
-then source file graphs/matton_dgp_intervened.tex on input line 31.
-<graphs/matton_dgp_intervened.pdf, id=1333, 341.50186pt x 252.00047pt>
-File: graphs/matton_dgp_intervened.pdf Graphic file (type pdf)
-<use graphs/matton_dgp_intervened.pdf>
-Package pdftex.def Info: graphs/matton_dgp_intervened.pdf  used on input line 3
-1.
-(pdftex.def)             Requested size: 455.24408pt x 335.93314pt.
- [22 <./graphs/matton_dgp_intervened.pdf>]
-[23] [24]) (./chapters/theoretical_conception.tex [25] [26]
+
+Package standalone Warning: Graphic 'graphs/matton_dgp.pdf' could not be build.
+
+Shell escape activated? on input line 12.
+
+(./graphs/matton_dgp.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 33.
+)
+File: graphs/matton_dgp.tex Graphic file (type tex)
+ [21
+
+]
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/matton
+_dgp_intervened' graphs/matton_dgp_intervened)...disabled (restricted).
+
+
+
+Package standalone Warning: Graphic 'graphs/matton_dgp_intervened.pdf' could no
+t be build.
+Shell escape activated? on input line 31.
+
+(./graphs/matton_dgp_intervened.tex)
+File: graphs/matton_dgp_intervened.tex Graphic file (type tex)
+ [22] [23] [24])
+(./chapters/theoretical_conception.tex [25] [26]
 Chapter 4.
 [27
 
@@ -2195,15 +2218,17 @@ mm/m/it/12 ; V \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 v\OT1/lmr/m/n/12 )] \OMS/lmsy
 = \OML/lmm/m/it/12 v\OT1/lmr/m/n/12 )]\OML/lmm/m/it/12 :
  []
 
-Package standalone Info: generated file graphs/dgp_joint_intervened.pdf newer t
-hen source file graphs/dgp_joint_intervened.tex on input line 74.
-<graphs/dgp_joint_intervened.pdf, id=1448, 376.08205pt x 325.97786pt>
-File: graphs/dgp_joint_intervened.pdf Graphic file (type pdf)
-<use graphs/dgp_joint_intervened.pdf>
-Package pdftex.def Info: graphs/dgp_joint_intervened.pdf  used on input line 74
-.
-(pdftex.def)             Requested size: 455.24408pt x 394.6085pt.
-) (./chapters/modeling.tex [29] [30 <./graphs/dgp_joint_intervened.pdf>]
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/dgp_jo
+int_intervened' graphs/dgp_joint_intervened)...disabled (restricted).
+
+
+Package standalone Warning: Graphic 'graphs/dgp_joint_intervened.pdf' could not
+ be build.
+Shell escape activated? on input line 74.
+
+(./graphs/dgp_joint_intervened.tex)
+File: graphs/dgp_joint_intervened.tex Graphic file (type tex)
+) (./chapters/modeling.tex [29] [30]
 Chapter 5.
 [31
 
@@ -2216,15 +2241,28 @@ Overfull \hbox (0.39104pt too wide) detected at line 292
  []
 
 [41] [42] [43]
-Package standalone Info: generated file graphs/comparison_matton_felics.pdf new
-er then source file graphs/comparison_matton_felics.tex on input line 375.
-<graphs/comparison_matton_felics.pdf, id=1645, 614.295pt x 794.97pt>
-File: graphs/comparison_matton_felics.pdf Graphic file (type pdf)
-<use graphs/comparison_matton_felics.pdf>
-Package pdftex.def Info: graphs/comparison_matton_felics.pdf  used on input lin
-e 375.
-(pdftex.def)             Requested size: 355.65944pt x 460.2702pt.
- [44] [45 <./graphs/comparison_matton_felics.pdf>]
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/compar
+ison_matton_felics' graphs/comparison_matton_felics)...disabled (restricted).
+
+
+
+Package standalone Warning: Graphic 'graphs/comparison_matton_felics.pdf' could
+ not be build.
+Shell escape activated? on input line 375.
+
+(./graphs/comparison_matton_felics.tex
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 30.
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 30.
+LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
+35.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmss.fd
+File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+))
+File: graphs/comparison_matton_felics.tex Graphic file (type tex)
+ [44] [45]
 Overfull \hbox (17.41667pt too wide) in paragraph at lines 408--409
 \T1/lmr/m/n/12 Requirement [][]R5[][] re-quires the pro-posed frame-work to dis
 -tin-guish be-tween ad-di-tive, redundancy-
@@ -2259,7 +2297,7 @@ Chapter 7.
 \openout2 = `results/summary.aux'.
 
  (./results/summary.tex
-(|kpsewhich --var-value=HOME) (./graphs/results/summary.tex
+(./graphs/results/summary.tex
 PGFPlots: reading {data/summary/dataset_faithfulness_estimates.csv}
 \faithfulnessestimaterow=\count609
 \faithfulnesskderow=\count610
@@ -2289,8 +2327,6 @@ Package pgfplots info on input line 168: boxplot: got lower whisker=-4.63534861
 8030548e-1
 Package pgfplots info on input line 168: boxplot: got upper whisker=4.891530275
 3448486e-1
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 168.
 PGFPlots: reading {data/summary/question_level_faithfulness_bbq_mistral.csv}
 PGFPlots: reading {data/summary/question_level_faithfulness_bbq_mistral.csv}
 PGFPlots: reading {data/summary/question_level_faithfulness_bbq_mistral.csv}
@@ -2434,8 +2470,7 @@ Package pgfplots info on input line 190: boxplot: got upper whisker=2.781818509
 ] [62])
 \openout2 = `results/oracle.aux'.
 
-
-(./results/oracle.tex
+ (./results/oracle.tex
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 20.
@@ -2460,17 +2495,21 @@ See the caption package documentation for explanation.
 
 
 ] [64]
-Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
- then source file graphs/german_credit_grouping.tex on input line 109.
-<graphs/german_credit_grouping.pdf, id=1945, 420.16574pt x 284.17468pt>
-File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
-<use graphs/german_credit_grouping.pdf>
-Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
-109.
-(pdftex.def)             Requested size: 460.93996pt x 311.75189pt.
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/german
+_credit_grouping' graphs/german_credit_grouping)...disabled (restricted).
+
+
+
+Package standalone Warning: Graphic 'graphs/german_credit_grouping.pdf' could n
+ot be build.
+Shell escape activated? on input line 109.
+
+(./graphs/german_credit_grouping.tex (./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex))
+File: graphs/german_credit_grouping.tex Graphic file (type tex)
 ) [65
 
-] [66 <./graphs/german_credit_grouping.pdf>]
+] [66]
 \openout2 = `results/rq1.aux'.
 
  (./results/rq1.tex
@@ -2623,10 +2662,10 @@ Chapter 9.
 ] [95]) [96]
 
 Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 240.
+(biblatex)                Using fallback driver on input line 259.
 
 
-Overfull \hbox (30.2811pt too wide) in paragraph at lines 240--240
+Overfull \hbox (30.2811pt too wide) in paragraph at lines 259--259
 \T1/lmr/m/it/12 (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Di-rec-tiv
 es 2014/90/EU,
  []
@@ -2634,37 +2673,37 @@ es 2014/90/EU,
 [97
 
 ]
-Overfull \hbox (3.75975pt too wide) in paragraph at lines 240--240
+Overfull \hbox (3.75975pt too wide) in paragraph at lines 259--259
 \T1/lmr/m/n/12 2026. [On-line]. Avail-able: [][]$\T1/lmtt/m/n/12 http : / / arx
 iv . org / abs / 2505 . 20305$[][] \T1/lmr/m/n/12 pre-published. 
  []
 
 
-Overfull \hbox (6.74373pt too wide) in paragraph at lines 240--240
+Overfull \hbox (6.74373pt too wide) in paragraph at lines 259--259
 []\T1/lmr/m/n/12 International Or-ga-ni-za-tion for Stan-dard-iza-tion. ^^P  IS
 O/IEC TR 29119-11:2020,^^Q
  []
 
 [98] [99]
-Overfull \hbox (3.87361pt too wide) in paragraph at lines 240--240
+Overfull \hbox (3.87361pt too wide) in paragraph at lines 259--259
 []\T1/lmr/m/n/12 Á. Martínez-Sánchez, G. Ar-ranz, and A. Lozano-Durán, ^^P  De-
 com-pos-ing causal-
  []
 
 [100]
-Overfull \hbox (0.94969pt too wide) in paragraph at lines 240--240
+Overfull \hbox (0.94969pt too wide) in paragraph at lines 259--259
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-consistency
  []
 
 [101]
-Overfull \hbox (13.06743pt too wide) in paragraph at lines 240--240
+Overfull \hbox (13.06743pt too wide) in paragraph at lines 259--259
 \T1/lmr/m/n/12 Learn-ing for Sci-en-tific In-sights and Dis-cov-er-ies,^^Q \T1/
 lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 , vol. 8, pp. 42 200^^U
  []
 
 
-Overfull \hbox (5.1381pt too wide) in paragraph at lines 240--240
+Overfull \hbox (5.1381pt too wide) in paragraph at lines 259--259
 \T1/lmr/m/n/12 plain-able Ar-ti-fi-cial In-tel-li-gence,^^Q \T1/lmr/m/it/12 IEE
 E Ac-cess\T1/lmr/m/n/12 , vol. 9, pp. 11 974^^U12 001, Jan. 1,
  []
@@ -2672,7 +2711,7 @@ E Ac-cess\T1/lmr/m/n/12 , vol. 9, pp. 11 974^^U12 001, Jan. 1,
 [102] [103]
 
 Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 240.
+(biblatex)                Using fallback driver on input line 259.
 
 (./chapters/appendix.tex [104]
 \openout2 = `appendix/motivational_example_setup.aux'.
@@ -2699,13 +2738,7 @@ ignored: Infinite glue shrinkage found in box being split [107
  (./appendix/oracle_partition_details.tex
 Appendix C.
 (./graphs/german_credit_grouping_stages.tex)
-(./graphs/german_credit_grouping_data.tex
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-3.
-
-(/usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
+(./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
@@ -2730,19 +2763,22 @@ File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (./graphs/german_credit_grouping_data.tex) [112
 
 ]
-Package standalone Info: generated file graphs/rq5_oracle_grouping.pdf newer th
-en source file graphs/rq5_oracle_grouping.tex on input line 108.
-<graphs/rq5_oracle_grouping.pdf, id=2478, 325.68474pt x 198.81679pt>
-File: graphs/rq5_oracle_grouping.pdf Graphic file (type pdf)
-<use graphs/rq5_oracle_grouping.pdf>
-Package pdftex.def Info: graphs/rq5_oracle_grouping.pdf  used on input line 108
-.
-(pdftex.def)             Requested size: 359.55634pt x 219.49394pt.
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/rq5_or
+acle_grouping' graphs/rq5_oracle_grouping)...disabled (restricted).
 
-(./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex)
-) [113
 
- <./graphs/rq5_oracle_grouping.pdf>]
+
+Package standalone Warning: Graphic 'graphs/rq5_oracle_grouping.pdf' could not 
+be build.
+Shell escape activated? on input line 108.
+
+(./graphs/rq5_oracle_grouping.tex (./graphs/rq5_oracle_grouping_data.tex)
+(./graphs/rq5_oracle_grouping_data.tex))
+File: graphs/rq5_oracle_grouping.tex Graphic file (type tex)
+ (./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex
+)) [113
+
+]
 \openout2 = `appendix/additional_result_visualizations.aux'.
 
 
@@ -2977,9 +3013,9 @@ tral.csv}
  (./appendix/examples.tex
 Appendix E.
 
-Overfull \hbox (9.98933pt too wide) in paragraph at lines 3--4
+Overfull \hbox (9.741pt too wide) in paragraph at lines 3--4
 \T1/lmr/m/n/12 This ap-pendix col-lects worked ex-am-ples that com-ple-ment the
- for-mal de-vel-op-ment of \T1/lmr/m/it/12 FELICS\T1/lmr/m/n/12 . 
+ for-mal de-vel-op-ment of FELICS. 
  []
 
 [126
@@ -3043,20 +3079,31 @@ File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
  (./appendix/reproducibility.tex
 Appendix H.
+
+Overfull \hbox (109.90399pt too wide) in paragraph at lines 11--13
+[]\T1/lmr/m/n/12 The FELICS ex-per-i-ments used com-mit [][]\T1/lmtt/m/n/12 ebf
+75e1[][] \T1/lmr/m/n/12 (full SHA: \T1/lmtt/m/n/12 ebf75e138b0c0cb8aaab9e3d32ca
+9e9bee9a1d4b\T1/lmr/m/n/12 );
+ []
+
+
+Overfull \hbox (17.47955pt too wide) in paragraph at lines 11--13
+\T1/lmr/m/n/12 FELICS repos-i-tory and check out the cor-re-spond-ing ex-per-i-
+men-tal re-vi-sion us-ing \T1/lmtt/m/n/12 git checkout
+ []
+
 [157
 
 
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 90--90
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|$\T1/lmtt/m/n/10.95 _faithfulness _ results _ atomic .
  []
 
-
-ignored: Infinite glue shrinkage found in box being split [158]) [159]) (./main.aux (./t
-itle_page.aux) (./declaration_of_originality.aux) (./statement_on_generative_ai
-.aux) (./results/summary.aux)
+[158]) [159]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
+(./statement_on_generative_ai.aux) (./results/summary.aux)
 (./results/oracle.aux) (./results/rq1.aux) (./results/rq2.aux)
 (./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
 (./appendix/motivational_example_setup.aux)
@@ -3080,52 +3127,38 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 127120 strings out of 467525
- 2870609 string characters out of 5418982
- 3971699 words of memory out of 5000000
- 153369 multiletter control sequences out of 15000+600000
- 845741 words of font info for 209 fonts, out of 8000000 for 9000
+ 127982 strings out of 467525
+ 2887244 string characters out of 5418982
+ 3983812 words of memory out of 5000000
+ 154200 multiletter control sequences out of 15000+600000
+ 876063 words of font info for 227 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,19n,121p,2519b,3037s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></
-usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></us
-r/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
-local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
-l/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
-texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
-live/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive
-/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2
-026/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/
-2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/202
-6/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2026/
-texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2026/texmf-dist
-/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2026/texmf-dist/fonts/typ
-e1/public/lm/lmbx6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/l
-m/lmbx8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbxi10.p
-fb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/
-local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texl
-ive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2026/t
-exmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2026/texmf-dist/
-fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1
-/public/lm/lmmi6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/
-lmmi7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><
-/usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/
-texlive/2026/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/202
-6/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2026/texmf-dist
-/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1
-/public/lm/lmr7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/l
-mr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr9.pfb></us
-r/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/te
-xlive/2026/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2026
-/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2026/texmf-dist
-/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type
-1/public/lm/lmssbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
+cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
+e/2026/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/local/texlive/2026/texm
+f-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2026/texmf-dist/font
+s/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/p
+ublic/lm/lmcsc10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/
+lmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
+></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/loc
+al/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/
+2026/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2026/texmf-
+dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2026/texmf-dist/fonts/
+type1/public/lm/lmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/publi
+c/lm/lmr12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr17.
+pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/lo
+cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/
+2026/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2026/texmf-d
+ist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/ty
+pe1/public/lm/lmr9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/l
+m/lmri10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri12.p
+fb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/lo
+cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texliv
+e/2026/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2026/texm
+f-dist/fonts/type1/public/lm/lmssbo10.pfb></usr/local/texlive/2026/texmf-dist/f
+onts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/typ
+e1/public/lm/lmsso10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public
 /lm/lmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy6.
 pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/l
 ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texli
@@ -3133,10 +3166,10 @@ ve/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-di
 st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (171 pages, 1815390 bytes).
+Output written on main.pdf (171 pages, 1732369 bytes).
 PDF statistics:
- 3942 PDF objects out of 4296 (max. 8388607)
- 3565 compressed objects within 36 object streams
+ 3769 PDF objects out of 4296 (max. 8388607)
+ 3442 compressed objects within 35 object streams
  1288 named destinations out of 1440 (max. 500000)
- 1194 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

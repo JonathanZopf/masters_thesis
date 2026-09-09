@@ -8,7 +8,20 @@ This appendix provides distributional and observation-level views that complemen
 
 Figure~\ref{fig:appendix-ce-shift-rainclouds} complements the faithfulness distributions in Figure~\ref{fig:question-level-faithfulness-rainclouds}. For each question, the plotted value is the arithmetic mean of the concept-level CE values. The atomic and interaction-aware values originate from the same joint FELICS run: the former averages \texttt{atomic\_kl\_div}, whereas the latter averages \texttt{adjusted\_shapley\_kl\_div}. Thus, concepts, responses, and explanation-implied effects are held fixed within each comparison.
 
-\input{graphs/results/appendix_ce_rainclouds}
+\ifthesislocalbuild
+  \input{graphs/results/appendix_ce_rainclouds}
+\else
+  \typeout{Non-local build detected: skipping graphs/results/appendix_ce_rainclouds.tex}
+  \begin{tcolorbox}[
+    colback=orange!12,
+    colframe=orange!80!black,
+    fonttitle=\bfseries,
+    title={Compilation warning}
+  ]
+    This part of the document cannot be compiled on Overleaf and has therefore
+    been omitted from this build.
+  \end{tcolorbox}
+\fi
 \FloatBarrier
 
 \section{CE Agreement between Implementations}

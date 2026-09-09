@@ -3,12 +3,16 @@
 \usepackage{lmodern}
 \usetikzlibrary{backgrounds}
 
+\begin{document}
 % Set this before including the data to show an intermediate greedy state.
 % At step k, accepted merge edges 1,...,k are highlighted. The default is the
-% final state. Node fills deliberately retain the final partition colors so the
-% file can also be reused as a partition overview.
+% final state. Keeping this figure-specific default in the body makes it
+% available when standalone embeds the figure source into the main thesis.
 \providecommand{\CreditGroupingStep}{7}
 
+% Keep figure-specific colors in the document body so they are available both
+% when this file is compiled independently and when standalone embeds its body
+% into the main thesis after an external build is unavailable.
 \definecolor{creditGroupOne}{HTML}{E15759}
 \definecolor{creditGroupTwo}{HTML}{F28E2B}
 \definecolor{creditGroupThree}{HTML}{76B7B2}
@@ -16,7 +20,6 @@
 \definecolor{creditGroupFive}{HTML}{4E79A7}
 \definecolor{creditAccepted}{HTML}{17823B}
 
-\begin{document}
 \begin{tikzpicture}[
   x=1cm,
   y=1cm,

@@ -6,7 +6,7 @@ This appendix documents the code versions, experiment commands, and stored artif
 \section{Repository and Execution Setup}
 \label{app:reproducibility-setup}
 
-The code is available at \url{https://github.com/JonathanZopf/FELICS}. Both the FELICS experiments and the baseline experiments for Matton et al.'s~\cite{mattonWalkTalkMeasuring2024} \emph{Causal Concept Faithfulness} metric were executed from this repository. It is a fork of \url{https://github.com/kmatton/walk-the-talk}. Before separating the baseline and FELICS branches, shared adaptations were made to support local AI workstations and automated benchmarking. The baseline used for this thesis is therefore the adapted implementation in the fork, rather than an unmodified checkout of the upstream repository. It also includes the tabular input and intervention handling required for New German Credit.
+The code is available at \url{https://github.com/JonathanZopf/FELICS}. Both the FELICS experiments and the baseline experiments for the Causal Concept Faithfulness metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} were executed from this repository. It is a fork of \url{https://github.com/kmatton/walk-the-talk}. Before separating the baseline and FELICS branches, shared adaptations were made to support local AI workstations and automated benchmarking. The baseline used for this thesis is therefore the adapted implementation in the fork, rather than an unmodified checkout of the upstream repository. It also includes the tabular input and intervention handling required for New German Credit.
 
 The FELICS experiments used commit \href{https://github.com/JonathanZopf/FELICS/commit/ebf75e138b0c0cb8aaab9e3d32ca9e9bee9a1d4b}{\texttt{ebf75e1}} (full SHA: \texttt{ebf75e138b0c0cb8aaab9e3d32ca9e9bee9a1d4b}); the baseline experiments used commit \texttt{8794d5c}.
 To prepare an execution, clone the FELICS repository and check out the corresponding experimental revision using \texttt{git checkout ebf75e1} for FELICS or \texttt{git checkout 8794d5c} for the baseline. The commands below assume that the software dependencies and model services are available. For remote Mistral inference, supply an API key in \path{api_keys/mistral_config.json}. For local inference, adjust the Ollama server address in \path{src/language_models/ollama_model.py}; setting up the Ollama server itself is outside the scope of these instructions.
@@ -35,9 +35,9 @@ MODEL=gpt-oss:120b
      1100 161 267 356 432 5 523 703 793 9 -g 4
 \end{Verbatim}
 
-The dataset source files are located in \path{data/}. For BBQ and New German Credit, the commands request 30 questions using \texttt{-n 30}. For MedQA, the 30 question identifiers are specified explicitly with \texttt{-i}; they match the selection used in Matton et al.'s benchmarks.
+The dataset source files are located in \path{data/}. For BBQ and New German Credit, the commands request 30 questions using \texttt{-n 30}. For MedQA, the 30 question identifiers are specified explicitly with \texttt{-i}; they match the benchmark selection used by Matton et al.~\cite{mattonWalkTalkMeasuring2024}.
 
-To execute a separate FELICS run with $n_{\max}=1$, replace the value of \texttt{-g} with \texttt{1}. To execute the adapted Matton et al. baseline, check out commit \texttt{8794d5c} and use the same commands with the \texttt{-g} option and its value removed. The baseline does not support this option. A separate singleton run should be distinguished from the atomic estimates derived from a joint FELICS run, which supply the controlled comparison in Section~\ref{sec:controlled_atomic_baseline}.
+To execute a separate FELICS run with $n_{\max}=1$, replace the value of \texttt{-g} with \texttt{1}. To execute the adapted Matton et al.~\cite{mattonWalkTalkMeasuring2024} baseline, check out commit \texttt{8794d5c} and use the same commands with the \texttt{-g} option and its value removed. The baseline does not support this option. A separate singleton run should be distinguished from the atomic estimates derived from a joint FELICS run, which supply the controlled comparison in Section~\ref{sec:controlled_atomic_baseline}.
 
 \section{Experimental Artifacts and Analysis}
 \label{app:reproducibility-artifacts}
@@ -62,7 +62,7 @@ The experiment script writes its outputs to \path{experiment/}. Table~\ref{tab:r
 \label{tab:reproducibility-directories}
 \end{table}
 
-Within \path{experiment/faithfulness_results/}, first select the dataset directory (\texttt{bbq}, \texttt{medqa}, or \texttt{new\_german\_credit}), then the model/configuration directory named \path{<model_name>_<n_max>}. The baseline branch leaves the group-size component empty. Table~\ref{tab:reproducibility-files} describes the principal result files. Filenames are shown as suffixes: each is prefixed by \path{<model_name>}. Rows describing Shapley attribution, normalization, and the paired atomic export refer to FELICS outputs.
+Within \path{experiment/faithfulness_results/}, first select the dataset directory (\path{bbq}, \path{medqa}, or \path{new_german_credit}), then the model/configuration directory named \path{<model_name>_<n_max>}. The baseline branch leaves the group-size component empty. Table~\ref{tab:reproducibility-files} describes the principal result files. Filenames are shown as suffixes: each is prefixed by \path{<model_name>}. Rows describing Shapley attribution, normalization, and the paired atomic export refer to FELICS outputs.
 
 \begingroup
 \small
