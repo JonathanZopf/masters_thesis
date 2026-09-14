@@ -43,7 +43,7 @@ The corresponding question-level mean CE comparisons are provided in Appendix Fi
   \end{minipage}%
 }
 
-\begin{figure}[p]
+\begin{figure}
   \centering
   \HypFourIdentityPlot{BBQ --- GPT-OSS 120B}%
     {data/rq4/bbq_gptoss.csv}{-1}{1}{30}
@@ -63,7 +63,7 @@ The corresponding question-level mean CE comparisons are provided in Appendix Fi
   \label{fig:hyp4-identity-plots-natural-language}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}
   \ContinuedFloat
   \centering
   \HypFourIdentityPlot{New Ger. Credit --- GPT-OSS 120B}%
@@ -95,7 +95,7 @@ reports these exploratory, unadjusted tests. The paired difference is defined as
 $d=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$, so a negative
 median difference indicates lower interaction-aware faithfulness.
 
-\begin{table}[htbp]
+\begin{table}[htb]
   \centering
   \caption[Complementary tests for lower interaction-aware faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether interaction-aware faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count positive, negative, and zero values of $d$, respectively. Evidence in the specified direction requires $p\leq0.05$.}
   \label{tab:hyp4-lower-tests}

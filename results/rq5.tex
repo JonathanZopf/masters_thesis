@@ -12,7 +12,7 @@ Appendix~\ref{app:rq5-oracle-partition}.
 
 Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} on their benchmarked models with the effects obtained in the controlled FELICS experiment. The blue columns contain the published singleton-intervention values, available only to the two-decimal precision of their Table~9; the green columns contain the controlled experiment conducted in this work. The two motivating concepts are highlighted in bold. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect when interventions with other members of its group are considered.
 
-\begin{table}[p]
+\begin{table}
   \centering
   \caption{Concept-level causal effects for the motivating MedQA example.}
   \label{tab:hyp5-concept-ce-comparison}
@@ -103,7 +103,7 @@ The interaction-aware estimate increases the credited causal effect of the eatin
   \end{minipage}%
 }
 
-\begin{figure}[p]
+\begin{figure}
   \centering
   \HypFiveIdentityPlot{GPT-OSS 120B}{gpt_atomic}{gpt_joint}{0.05}
   \hfill
@@ -126,7 +126,7 @@ Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift 
 
 Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. The published results from Matton et al.~\cite{mattonWalkTalkMeasuring2024} provide one singleton-intervention estimate per model, denoted by $\mathcal{F}_{\mathrm{Matton}}$; this work reports paired atomic and joint estimates. All intervals are 90\% credible intervals, and the paired change is $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
 
-\begin{table}[htbp]
+\begin{table}[htb]
   \centering
   \caption{Question-level faithfulness for the motivating MedQA example.}
   \label{tab:hyp5-faithfulness-comparison}
