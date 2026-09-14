@@ -1,12 +1,11 @@
 \section{Interaction-Presumption Strength and Changes in Causal Effects}
-\label{sec:results-interaction-presumption}
 Research Question~\ref{rq:correlation_diff}, introduced in Section~\ref{sec:research_questions}, examines whether joint interventions have a greater effect when the oracle expresses a stronger presumption of interaction among the concepts within a question. Specifically, it asks whether the differences in question-averaged causal effects and question-level faithfulness between the joint and atomic formulations increase with interaction-presumption strength. As described in Section~\ref{sec:analysis_procedures}, this quantity is operationalized by $\Delta\kappa$, which is derived from the candidate interaction groups and their implied treatments relative to the number of concepts. It is a property of the oracle output rather than a direct measure of statistical association or response-level interaction.
 
 Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} show the relationship between interaction-presumption strength and the differences in causal effects and faithfulness. Each blue point represents one question, and the orange line is the least-squares linear fit. In the BBQ panels, the points exhibit no clear positive pattern; the estimated associations are weak. The MedQA panels suggest a possible positive association for $\Delta\mathrm{CE}$, particularly with \texttt{gpt-oss:120b}.
 
-% RQ1 preset: fixed dimensions, x variable, solid fitted line, and correlation estimate.
-% #1 Pearson r, #2 plot-specific keys.
-\newcommand{\HypOneScatter}[2]{%
+% RQ1 preset: fixed dimensions, x variable, solid fitted line, and test summary.
+% #1 Pearson r, #2 confidence-interval lower bound, #3 plot-specific keys.
+\newcommand{\HypOneScatter}[3]{%
   \ResultScatterPlot{x column=diff_correlation_strength,
     x label={$\Delta\kappa(\mathbf{x})$},
     line style=solid,
@@ -15,14 +14,14 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
     plot height=5.45cm,
     mark size=1.65pt,
     below skip=-0.25em,
-    text below={Pearson $r=#1$},
-    #2
+    text below={Pearson $r=#1$; one-sided 95\% CI $[#2,\,1.000]$},
+    #3
   }%
 }
 
 \begin{figure}[p]
   \centering
-  \HypOneScatter{-0.025}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
+  \HypOneScatter{-0.025}{-0.329}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
     data=data/rq1/bbq_gptoss.csv,
     y column=mean_absolute_ce_diff,
     y label={$\Delta\mathrm{CE}(\mathbf{x})$},
@@ -32,7 +31,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
     ymax=0.26
   }
   \hfill
-  \HypOneScatter{-0.102}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
+  \HypOneScatter{-0.102}{-0.396}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
     data=data/rq1/bbq_gptoss.csv,
     y column=faithfulness_diff,
     y label={$\Delta\mathcal{F}(\mathbf{x})$},
@@ -43,7 +42,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
   }
 
   \par\vspace{1.1em}
-  \HypOneScatter{0.094}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
+  \HypOneScatter{0.094}{-0.219}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
     data=data/rq1/bbq_mistral.csv,
     y column=mean_absolute_ce_diff,
     y label={$\Delta\mathrm{CE}(\mathbf{x})$},
@@ -53,7 +52,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
     ymax=0.26
   }
   \hfill
-  \HypOneScatter{0.119}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
+  \HypOneScatter{0.119}{-0.195}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
     data=data/rq1/bbq_mistral.csv,
     y column=faithfulness_diff,
     y label={$\Delta\mathcal{F}(\mathbf{x})$},
@@ -70,7 +69,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
 
 \begin{figure}[p]
   \centering
-  \HypOneScatter{0.338}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
+  \HypOneScatter{0.338}{0.030}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
     data=data/rq1/medqa_gptoss.csv,
     y column=mean_absolute_ce_diff,
     y label={$\Delta\mathrm{CE}(\mathbf{x})$},
@@ -80,7 +79,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
     ymax=0.025
   }
   \hfill
-  \HypOneScatter{0.236}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
+  \HypOneScatter{0.236}{-0.082}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
     data=data/rq1/medqa_gptoss.csv,
     y column=faithfulness_diff,
     y label={$\Delta\mathcal{F}(\mathbf{x})$},
@@ -91,7 +90,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
   }
 
   \par\vspace{1.1em}
-  \HypOneScatter{0.097}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
+  \HypOneScatter{0.097}{-0.256}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
     data=data/rq1/medqa_mistral.csv,
     y column=mean_absolute_ce_diff,
     y label={$\Delta\mathrm{CE}(\mathbf{x})$},
@@ -101,7 +100,7 @@ Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} sh
     ymax=0.015
   }
   \hfill
-  \HypOneScatter{-0.075}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
+  \HypOneScatter{-0.075}{-0.409}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
     data=data/rq1/medqa_mistral.csv,
     y column=faithfulness_diff,
     y label={$\Delta\mathcal{F}(\mathbf{x})$},

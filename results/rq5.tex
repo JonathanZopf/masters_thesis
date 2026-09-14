@@ -1,20 +1,18 @@
 \section{Resolution of the Motivating Underestimation Example}
 \label{sec:results-motivating-example}
 
-Research Question~\ref{rq:motivating_example} examines whether FELICS resolves the suspected underestimation of the patient's eating disorder and self-perception of weight discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024} for MedQA question 521. These two concepts therefore form the focus of the hypothesis assessment below. To isolate the effect of joint interventions from concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9.
-
-The oracle places the two motivating concepts in a common candidate interaction group, together with the patient's refusal of further treatment as an additional related concept. This grouping is consistent with the reconstruction mechanism discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}: refusal of fluids and hospital meals can provide clues from which the model may infer the patient's eating disorder or self-perception even after the corresponding explicit information is removed. The oracle places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
+Research Question~\ref{rq:motivating_example} examines whether FELICS resolves the underestimation identified by Matton et al.~\cite{mattonWalkTalkMeasuring2024} for MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
 
 The final consensus graph underlying this partition is shown in
 Figure~\ref{fig:rq5-oracle-grouping}, and its retained pairwise co-grouping
 frequencies are reported in Table~\ref{tab:rq5-cogrouping} in
 Appendix~\ref{app:rq5-oracle-partition}.
 
-Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} on their benchmarked models with the effects obtained in the controlled FELICS experiment. The blue columns contain the published singleton-intervention values, available only to the two-decimal precision of their Table~9; the green columns contain the controlled experiment conducted in this work. The two motivating concepts are highlighted in bold. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect when interventions with other members of its group are considered.
+Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
 
 \begin{table}
   \centering
-  \caption{Concept-level causal effects for the motivating MedQA example.}
+  \caption[Published and interaction-aware causal effects for the motivating MedQA example]{Causal effects for the nine concepts in the motivating MedQA example. The blue columns reproduce the singleton-intervention values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024}; the green columns contain the controlled experiment conducted in this work. Values from Matton et al.~\cite{mattonWalkTalkMeasuring2024} are available only to the two-decimal precision published in their Table~9.}
   \label{tab:hyp5-concept-ce-comparison}
   \resizebox{\textwidth}{!}{%
     \setlength{\tabcolsep}{3.4pt}%
@@ -23,15 +21,7 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
       col sep=comma,
       trim cells=true,
       columns={concept,matton_gpt35,matton_gpt4o,matton_claude,gpt_atomic,gpt_joint,gpt_delta,mistral_atomic,mistral_joint,mistral_delta},
-      columns/concept/.style={column name={\textbf{Concept}},string type,column type=l,
-        postproc cell content/.append code={%
-          \ifnum\pgfplotstablerow=2\relax
-            \pgfkeysalso{@cell content={\textbf{Eating disorder}}}%
-          \fi
-          \ifnum\pgfplotstablerow=6\relax
-            \pgfkeysalso{@cell content={\textbf{Self-perception}}}%
-          \fi
-        }},
+      columns/concept/.style={column name={\textbf{Concept}},string type,column type=l},
       columns/matton_gpt35/.style={column name={\textbf{GPT-3.5}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
       columns/matton_gpt4o/.style={column name={\textbf{GPT-4o}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
       columns/matton_claude/.style={column name={\textbf{Claude}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
@@ -118,50 +108,34 @@ The interaction-aware estimate increases the credited causal effect of the eatin
     };
   \end{tikzpicture}
 
-  \caption{Atomic and joint causal effects for the motivating MedQA example.}
+  \caption[Atomic and joint causal effects for the motivating MedQA example]{Atomic and interaction-aware causal effects for every concept in the motivating MedQA example. Points above the identity line receive a larger credited effect under FELICS; colors identify the concepts consistently across both panels.}
   \label{fig:hyp5-concept-identity}
 \end{figure}
 
-Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift all concepts in a common direction. Points above the identity line receive a larger credited effect under joint attribution; colors identify the same concepts in both panels. Note that the two panels deliberately use different axis scales because the GPT-OSS 120B effects are substantially smaller. The largest positive shift occurs for refusal of treatment under Mistral Medium 3.5 ($\Delta\mathrm{CE}=0.070$), whereas self-perception has the largest negative shift ($\Delta\mathrm{CE}=-0.148$). Concepts assigned to singleton groups remain on the identity line by construction.
+Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift all concepts in a common direction. Note that the two panels deliberately use different axis scales because the GPT-OSS 120B effects are substantially smaller: its axes extend to $0.05$, whereas the Mistral Medium 3.5 axes extend to $0.45$. The largest positive shift occurs for refusal of treatment under Mistral Medium 3.5 ($\Delta\mathrm{CE}=0.070$), whereas self-perception has the largest negative shift ($\Delta\mathrm{CE}=-0.148$). Concepts assigned to singleton groups remain on the identity line by construction.
 
-Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. The published results from Matton et al.~\cite{mattonWalkTalkMeasuring2024} provide one singleton-intervention estimate per model, denoted by $\mathcal{F}_{\mathrm{Matton}}$; this work reports paired atomic and joint estimates. All intervals are 90\% credible intervals, and the paired change is $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
+Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5, while every 90\% credible interval contains zero. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
 
 \begin{table}[htb]
   \centering
-  \caption{Question-level faithfulness for the motivating MedQA example.}
+  \caption[Question-level faithfulness for the motivating MedQA example]{Posterior question-level faithfulness for the motivating MedQA example. Published results from Matton et al.~\cite{mattonWalkTalkMeasuring2024} provide one singleton-intervention estimate per model; this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals and $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
   \label{tab:hyp5-faithfulness-comparison}
   \small
   \setlength{\tabcolsep}{4pt}
   \renewcommand{\arraystretch}{1.12}
-  % Published estimates have their own columns; they are not joint estimates.
-  {\bfseries Published results: Matton et al.~\cite{mattonWalkTalkMeasuring2024}\par}
-  \smallskip
   \pgfplotstabletypeset[
     col sep=comma,trim cells=true,
-    row predicate/.code={\ifnum\pgfplotstablerow>2\relax\pgfplotstableuserowfalse\fi},
-    columns={model,matton_f,matton_ci},
+    columns={source,model,atomic_f,atomic_ci,joint_f,joint_ci,delta_f},
+    columns/source/.style={column name={\textbf{Source}},string type,column type=l},
     columns/model/.style={column name={\textbf{Model}},string type,column type=l},
-    columns/matton_f/.style={column name={$\mathcal{F}_{\mathrm{Matton}}$},string type,column type=c},
-    columns/matton_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
-    every head row/.style={before row=\hline,after row=\hline},
-    every last row/.style={after row=\hline},
-  ]{data/rq5/faithfulness_comparison.csv}
-
-  \medskip
-  {\bfseries This work: paired atomic and joint estimates\par}
-  \smallskip
-  \pgfplotstabletypeset[
-    col sep=comma,trim cells=true,
-    row predicate/.code={\ifnum\pgfplotstablerow<3\relax\pgfplotstableuserowfalse\fi},
-    columns={model,atomic_f,atomic_ci,joint_f,joint_ci,delta_f},
-    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
-    columns/atomic_f/.style={column name={$\mathcal{F}_{\mathrm{atomic}}$},string type,column type=c},
+    columns/atomic_f/.style={column name={\textbf{$\mathcal{F}_{\mathrm{atomic}}$}},string type,column type=c},
     columns/atomic_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
-    columns/joint_f/.style={column name={$\mathcal{F}_{\mathrm{joint}}$},string type,column type=c},
+    columns/joint_f/.style={column name={\textbf{$\mathcal{F}_{\mathrm{joint}}$}},string type,column type=c},
     columns/joint_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
-    columns/delta_f/.style={column name={$\Delta\mathcal{F}$},string type,column type=c},
+    columns/delta_f/.style={column name={\textbf{$\Delta\mathcal{F}$}},string type,column type=c},
     every head row/.style={before row=\hline,after row=\hline},
     every last row/.style={after row=\hline},
+    every even row/.style={before row={\rowcolor{gray!8}}},
   ]{data/rq5/faithfulness_comparison.csv}
 \end{table}
 

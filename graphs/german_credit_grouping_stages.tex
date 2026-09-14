@@ -4,53 +4,41 @@
 \definecolor{creditTraceAccepted}{HTML}{17823B}
 \newcommand{\CreditGroupingStage}[2]{%
   \begin{tikzpicture}[
-    x=1cm,
-    y=1cm,
+    x=0.47cm,
+    y=0.47cm,
     credit stage node/.style={
       draw=black!60,
       fill=black!7,
       rounded corners=1.5pt,
       line width=0.45pt,
-      minimum height=4.5mm,
-      text width=12mm,
+      minimum height=5.5mm,
+      text width=15mm,
       align=center,
-      inner sep=1.2pt,
+      inner sep=1.5pt,
       font=\sffamily\tiny\bfseries
     },
-    pending stage edge/.style={draw=black!35,line width=0.4pt},
-    accepted stage edge/.style={draw=creditTraceAccepted,line width=1.15pt},
-    current stage edge/.style={draw=orange!85!black,line width=1.5pt}
+    pending stage edge/.style={draw=black!22,line width=0.35pt},
+    accepted stage edge/.style={draw=creditTraceAccepted,line width=1.35pt},
+    current stage edge/.style={draw=orange!85!black,line width=1.8pt}
   ]
-    \node[font=\small\bfseries,anchor=south] at (0,3.85) {#2};
-
-    % A convex layout keeps unrelated nodes out of the paths of the edges.
-    % Keep these display positions local to the appendix trace.
-    \foreach \id/\angle in {
-      income/90,liquid/57.27,schufa/24.55,amount/-8.18,
-      term/-40.91,purpose/-73.64,realestate/-106.36,ownhouse/-139.09,
-      age/-171.82,job/-204.55,debt/-237.27}{
-      \coordinate (trace-\id) at ({3.0*cos(\angle)},{2.8*sin(\angle)});
-    }
-    \coordinate (trace-householdsize) at (-2.9,3.5);
+    \node[font=\small\bfseries,anchor=south] at (0.6,4.75) {#2};
 
     \newcommand{\CreditNode}[5]{%
-      \node[credit stage node] (##1) at (trace-##1) {##2};%
+      \node[credit stage node] (##1) at (##3,##4) {##2};%
     }
     \newcommand{\CreditEdge}[5]{}%
     \input{graphs/german_credit_grouping_data}
 
     \begin{scope}[on background layer]
       \renewcommand{\CreditNode}[5]{}%
-      % Draw all candidate edges first, then overlay the accepted merges.
       \renewcommand{\CreditEdge}[5]{%
-        \draw[pending stage edge] (##1) -- (##2);%
-      }
-      \input{graphs/german_credit_grouping_data}
-      \renewcommand{\CreditEdge}[5]{%
-        \ifnum##4>0
-          \ifnum##4>#1\relax
+        \ifnum##4=0
+          \draw[pending stage edge] (##1) -- (##2);%
+        \else
+          \ifnum##4>#1
+            \draw[pending stage edge] (##1) -- (##2);%
           \else
-            \ifnum##4=#1\relax
+            \ifnum##4=#1
               \draw[current stage edge] (##1) -- (##2);%
             \else
               \draw[accepted stage edge] (##1) -- (##2);%

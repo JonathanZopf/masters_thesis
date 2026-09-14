@@ -20,7 +20,7 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
     \captionof{table}{BBQ oracle ($n_{\max}=4$).}
     \label{tab:oracle-bbq}
     \rowcolors{2}{gray!8}{white}
-    \begin{tabular}{@{}p{0.56\linewidth}>{\raggedleft\arraybackslash}p{0.38\linewidth}@{}}
+    \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
         \hline
         \textbf{Measure}       & \textbf{Value}                          \\
         \hline
@@ -29,8 +29,8 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
         Groups of size $1/2/3$ & $137/66/2$                              \\
         Singleton groups       & $66.8\%$                                \\
         Concepts grouped       & $50.2\%$                                \\
-        Counterfactuals        & \shortstack[r]{$342$ total\\$5.70$/valid output} \\
-        Counterfactual multiplier   & $1.27\times$                            \\
+        Counterfactuals        & \shortstack[r]{$342$ total\\$5.70$/run} \\
+        Increase over atomic   & $1.27\times$                            \\
         \hline
     \end{tabular}
 \end{minipage}\hfill
@@ -39,7 +39,7 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
     \captionof{table}{MedQA oracle ($n_{\max}=4$).}
     \label{tab:oracle-medqa}
     \rowcolors{2}{gray!8}{white}
-    \begin{tabular}{@{}p{0.56\linewidth}>{\raggedleft\arraybackslash}p{0.38\linewidth}@{}}
+    \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
         \hline
         \textbf{Measure}       & \textbf{Value}                                  \\
         \hline
@@ -49,8 +49,8 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
         Groups of size $4/5/6$ & $46/1/1$                                        \\
         Singleton groups       & $79.0\%$                                        \\
         Concepts grouped       & $45.4\%$                                        \\
-        Counterfactuals        & \shortstack[r]{$1{,}468$ total\\$25.31$/valid output} \\
-        Counterfactual multiplier   & $1.96\times$                                    \\
+        Counterfactuals        & \shortstack[r]{$1{,}468$ total\\$25.31$/output} \\
+        Increase over atomic   & $1.96\times$                                    \\
         \hline
     \end{tabular}
 \end{minipage}
@@ -62,7 +62,7 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
     \captionof{table}{New German Credit oracle ($n_{\max}=3$).}
     \label{tab:oracle-credit}
     \rowcolors{2}{gray!8}{white}
-    \begin{tabular}{@{}p{0.56\linewidth}>{\raggedleft\arraybackslash}p{0.38\linewidth}@{}}
+    \begin{tabular}{@{}p{0.65\linewidth}>{\raggedleft\arraybackslash}p{0.29\linewidth}@{}}
         \hline
         \textbf{Measure}       & \textbf{Value}                               \\
         \hline
@@ -71,13 +71,12 @@ reduced by later generation failures. \emph{Concepts grouped} denotes the percen
         Groups of size $1/2/3$ & $60/60/180$                                  \\
         Singleton groups       & $20.0\%$                                     \\
         Concepts grouped       & $91.7\%$                                     \\
-        Counterfactuals        & \shortstack[r]{$1{,}500$ total\\$25.00$/valid output} \\
-        Counterfactual multiplier   & $2.08\times$                                 \\
+        Counterfactuals        & \shortstack[r]{$1{,}500$ total\\$25.00$/run} \\
+        Increase over atomic   & $2.08\times$                                 \\
         \hline
     \end{tabular}
 \end{minipage}\hfill\null
 \endgroup
-\par\vspace{2cm}
 
 The natural-language results contain many more singleton groups than the tabular
 partition, although roughly half of the concepts in both BBQ and MedQA still occur in
@@ -85,24 +84,24 @@ non-singleton groups. Two anomalous MedQA groups contained
 five and six concepts, respectively, exceeding the imposed value of $n_{\max}=4$. BBQ's oracle
 partitions imply 349 counterfactuals, of which 342 were parsed and written successfully.
 
-Although each concept has a category associated within FELICS and the original metric by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, they are often rather granular. For Figure~\ref{fig:oracle-category-heatmaps}, an OpenAI Codex large language model
+For Figure~\ref{fig:oracle-category-heatmaps}, an OpenAI Codex large language model
 mapped the 46 raw BBQ and 236 raw MedQA labels to 10 and 19 high-level categories. It
-used only the concept names, with one fixed mapping across all runs, and did not see group
+used only the labels, with one fixed mapping across all runs, and did not see group
 membership or calculated rates. Appendix~\ref{app:oracle-category-normalization}
 documents the method and definitions. This aggregation makes the resulting heat map easier to interpret.
 
 Each cell is the percentage of within-question concept pairs placed in the
 same group, pooling both models. Gray denotes that no pair from
-the two categories co-occurred in an evaluated question.
+the two categories co-occurred in an evaluated question. The use of conditional percentages prevents frequent categories from dominating solely because they occur more often.
 \input{graphs/results/oracle_grouping_heatmap}
 Figure~\ref{fig:german-credit-grouping-final} shows the deterministic tabular oracle's
 partition, reused for every New German Credit item: three groups of three concepts, one
-pair, and one singleton. This partition represents the final state of the grouping algorithm in Algorithm~\ref{alg:greedy_merge} introduced as last component of the tabular oracle in Section \ref{sec:oracle_tabular}. Node colors identify the five final groups, thick green edges
+pair, and one singleton. This partition represents the final state of the grouping algorithm in Algorithm~\ref{alg:greedy_merge}. Node colors identify the five final groups, thick green edges
 are the accepted merge edges, and thin gray edges show other statistically retained
 pairwise associations. Edge labels report Cram\'er's $V$.
 The initialization and all seven accepted merge steps are documented in
 Appendix~\ref{app:oracle-partition-details}; the corresponding retained-edge
-strengths are fully reported in Table~\ref{tab:credit-associations}.
+strengths are reported in Table~\ref{tab:credit-associations}.
 
 \begin{figure}
   \centering

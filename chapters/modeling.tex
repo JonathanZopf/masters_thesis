@@ -362,7 +362,6 @@ For example, two concepts may each have only a minor individual influence on the
 Since the EE estimation remains unchanged, the final faithfulness estimation can likewise be adopted without modification. This applies both to the formal definition based on the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}) and to the practical estimation using Bayesian hierarchical modeling, as proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. Furthermore, the computation of dataset-level faithfulness (Equation~\ref{eq:dataset_faithfulness}) is unaffected. By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
 
 \section{Post-Modeling Assessment}
-\label{sec:post_model_assessment}
 With the formal construction of FELICS complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the requirements established earlier in Section \ref{sec:requirements}, and derives the effects expected from the new formulation before empirical evaluation.
 
 \subsection{Reviewing Changes}
@@ -422,6 +421,37 @@ Whether \reqref{req:feasibility} is satisfied ultimately depends on what is cons
 
 \subsection{Anticipated Effects}
 \label{sec:influence}
+Since the original framework by Matton et al.~\cite{mattonWalkTalkMeasuring2024} cannot reliably handle concepts acting in a redundant or synergistic manner, their true causal effect is not captured. The influence exerted by FELICS on CE results relative to the Causal Concept Faithfulness metric is determined by the intervention mode, as discussed in Section~\ref{sec:interaction_effects}.
+
+\subsubsection{Effects on CE Scores}
+The relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ is governed by the payout coefficient $\gamma$ relative to the singleton-weighted reference coefficient $\bar\gamma$. For a pair of concepts $C_i, C_j$ in a group $s = \{C_i, C_j\}$, where
+\begin{equation}
+	\gamma\bigl(\mathbf{x},\{C_i,C_j\}\bigr) = \frac{v_{\mathbf{x}}(\{C_i,C_j\})}{v_{\mathbf{x}}(\{C_i\}) + v_{\mathbf{x}}(\{C_j\})},
+\end{equation}
+three cases can be distinguished.
+
+\noindent\textbf{Reference-relative redundancy ($\gamma(\mathbf{x},\{C_i,C_j\}) < \bar\gamma(\mathbf{x},s,s)$).} The joint effect is smaller relative to its singleton effects than for the reference treatments. When concepts are \emph{added} to a question, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, meaning that the metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} overestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, meaning that the original metric underestimates them.
+
+\noindent\textbf{Reference-relative synergy ($\gamma(\mathbf{x},\{C_i,C_j\}) > \bar\gamma(\mathbf{x},s,s)$).} The joint effect is larger relative to its singleton effects than for the reference treatments. When concepts are \emph{added}, $\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$, so the original metric underestimates their effects. When concepts are \emph{removed}, $\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$, and the original metric instead overestimates them.
+
+\noindent\textbf{Reference-relative additivity ($\gamma(\mathbf{x},\{C_i,C_j\}) = \bar\gamma(\mathbf{x},s,s)$).} The treatment exhibits the level of non-additivity typical of its references; this does not require absolute additivity. Under the compatibility assumptions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}, $\mathrm{CE}_{\text{adj}} = \mathrm{CE}_{\mathrm{Matton}}$ for both concepts, and FELICS matches the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}.
+
+\subsubsection{Value-Replacement Interventions}
+When concept values are \emph{modified} rather than added or removed, the relationship between $\mathrm{CE}_{\text{adj}}$ and $\mathrm{CE}_{\mathrm{Matton}}$ depends on the direction of the effect. If concepts $C_i$ and $C_j$ exhibit minor influence before intervention but major individual influence afterward while also interacting redundantly post-intervention, the metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} overestimates their effect ($\mathrm{CE}_{\text{adj}} < \mathrm{CE}_{\mathrm{Matton}}$). Conversely, if their influence is major before intervention but minor after being changed on their own, again with redundant behavior after intervention, the metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} underestimates ($\mathrm{CE}_{\text{adj}} > \mathrm{CE}_{\mathrm{Matton}}$). This sign inversion mirrors the behavior observed for addition vs. removal interventions.
+
+However, value-based interventions introduce additional complexity: modifying a concept’s value may create contradictory information in the question (e.g., changing nationality from \enquote{Japanese} to \enquote{Indian} while retaining \enquote{Japanese} as the mother tongue). Such inconsistencies can obscure the measurement of causal effects, making it hard to predict the generalized impact of multi-concept modifications.
+
+Despite these intervention-specific variations, the dataset-level average of all CE values is intended to remain approximately equal between both metrics under the simplifying assumptions stated in Math Demo~\ref{ma:dataset_average_preservation} in Appendix~\ref{app:mathematical_demonstrations}.
+
+\subsubsection{Effects on Faithfulness Scores}
+As established in Section~\ref{sec:remaining_pipeline}, the definition of Explanation-Implied Effect (EE) remains entirely unchanged between FELICS and the Causal Concept Faithfulness metric. Consequently, the EE vectors are identical for both metrics.
+
+The faithfulness score, however, is still determined by the Pearson correlation coefficient between the CE and EE vectors. Since Pearson correlation depends on the magnitudes of the data points (unlike rank-based metrics such as Spearman), and the individual CE values may differ between FELICS and the metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, the resulting faithfulness scores are not guaranteed to be equal. In fact, whenever interactions are present, the alignment between CE and EE vectors generally changes, except in the rare case where widening gaps for some concepts are exactly offset by narrowing gaps for others. This behavior is illustrated in example~\ref{ex:payout_normalization_correlation} of Appendix~\ref{app:examples}.
+
+Still, two special cases defined by \reqrefs{req:one_item_group}{req:independence_behavior} in Section~\ref{sec:requirements} yield identical faithfulness scores under their respective assumptions: when every candidate interaction group contains exactly one concept and when every group satisfies the reference-relative additivity conditions stated in Math Demo~\ref{ma:independence_behavior} in Appendix~\ref{app:mathematical_demonstrations}.
+
+\subsection{Anticipated Effects}
+\label{sec:influence}
 
 The effect of FELICS on causal-effect estimates depends on a treatment's payout coefficient relative to comparable reference treatments. These comparisons describe deviations from dataset-typical non-additivity, not absolute redundancy or synergy as defined in Section~\ref{sec:interaction_effects}.
 
@@ -441,8 +471,6 @@ For a two-concept group $s=\{C_i,C_j\}$ with a non-degenerate reference coeffici
 	-1
 	\right).
 \end{equation}
-
-The steps leading to this two-concept expression are presented in Math Demo~\ref{ma:two_concept_ce_difference} in Appendix~\ref{app:mathematical_demonstrations}.
 
 Consequently, $\gamma(\mathbf{x},s)<\bar\gamma(\mathbf{x},s,s)$ produces reference-relative shrinkage, whereas $\gamma(\mathbf{x},s)>\bar\gamma(\mathbf{x},s,s)$ produces reference-relative reinforcement. For larger groups, each concept's result depends on all Shapley marginal contributions and cannot generally be inferred from the grand-coalition coefficient alone.
 

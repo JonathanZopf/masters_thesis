@@ -5,7 +5,7 @@
 \newcommand{\CeShiftIdentityPlot}[5]{%
   \begin{minipage}[t]{0.47\textwidth}
     \centering
-    \adjustbox{max width=\linewidth}{\small\bfseries #1}\par
+    {\small\bfseries #1\par}
     \vspace{0.1em}
     \begin{tikzpicture}
       \begin{axis}[
@@ -92,20 +92,20 @@
 
   \par\vspace{0.7em}
   \CeShiftConceptCountLegend
-  \caption[Question-level CE agreement under atomic and joint attribution]{Question-level mean causal effects under atomic and interaction-aware attribution for BBQ and MedQA}
+  \caption[Question-level CE agreement under atomic and joint attribution]{Question-level mean causal effects under atomic and interaction-aware attribution for BBQ and MedQA. The dashed line denotes equality. Marker area increases with the number of concepts contributing to the question-level mean.}
   \label{fig:appendix-ce-shift-identity-natural-language}
 \end{figure}
 
 \begin{figure}[p]
   \centering
-  \CeShiftIdentityPlot{New Ger. Credit --- GPT-OSS 120B}%
+  \CeShiftIdentityPlot{New German Credit --- GPT-OSS 120B}%
     {data/appendix/ce_shift_identity/new_german_credit_gptoss.csv}{0}{1.5}%
     {$n=30$ questions; $k=12$ concepts}
   \hfill
-  \CeShiftIdentityPlot{New Ger. Credit --- Mistral Medium 3.5}%
+  \CeShiftIdentityPlot{New German Credit --- Mistral Medium 3.5}%
     {data/appendix/ce_shift_identity/new_german_credit_mistral.csv}{0}{1.5}%
     {$n=30$ questions; $k=12$ concepts}
 
-  \caption[Question-level CE agreement for New German Credit]{Question-level mean causal effects under atomic and interaction-aware attribution for New German Credit.}
+  \caption[Question-level CE agreement for New German Credit]{Question-level mean causal effects under atomic and interaction-aware attribution for New German Credit. Every question contains the same 12 concepts, so marker size is constant.}
   \label{fig:appendix-ce-shift-identity-credit}
 \end{figure}

@@ -2338,21 +2338,17 @@
       \strng{authornamehash}{539134de8ffd78af38bb1627d8507ce9}
       \strng{authorfullhash}{539134de8ffd78af38bb1627d8507ce9}
       \strng{authorfullhashraw}{539134de8ffd78af38bb1627d8507ce9}
-      \field{labelalpha}{Mis26}
+      \field{labelalpha}{Mis}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Our frontier-class multimodal model optimized for agentic and coding use cases. Released as open weights under a Modified MIT license.}
-      \field{day}{28}
       \field{langid}{english}
-      \field{month}{4}
       \field{title}{Mistral {{Medium}} 3.5 - {{Mistral AI}}}
       \field{urlday}{3}
       \field{urlmonth}{8}
       \field{urlyear}{2026}
-      \field{year}{2026}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{file}
       \verb /Users/jonathan/Zotero/storage/8RUEXX4E/mistral-medium-3-5-26-04.html

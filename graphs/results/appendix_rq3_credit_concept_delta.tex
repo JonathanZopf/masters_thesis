@@ -31,7 +31,7 @@
         Job Category,
         Household Size
       },
-      xlabel={$\overline{\Delta\mathrm{CE}}=\overline{\mathrm{CE}_{\mathrm{adj}}-\mathrm{CE}_{\mathrm{raw}}}$},
+      xlabel={$\overline{\Delta\mathrm{CE}}=\overline{\mathrm{CE}_{\mathrm{adjusted}}-\mathrm{CE}_{\mathrm{raw}}}$},
       scaled x ticks=false,
       xticklabel style={font=\scriptsize,/pgf/number format/fixed,/pgf/number format/precision=1},
       yticklabel style={font=\scriptsize},
@@ -66,6 +66,6 @@
   \CreditConceptDeltaPlot{Mistral Medium 3.5}%
     {data/appendix/rq3_credit_concept_delta/new_german_credit_mistral.csv}
 
-  \caption[Mean normalization adjustment by New German Credit concept]{Mean normalization adjustment for each New German Credit concept, averaged across the 30 questions.}
+  \caption[Mean normalization adjustment by New German Credit concept]{Mean normalization adjustment for each New German Credit concept, averaged across the 30 questions. Larger bars identify concepts whose assigned causal effect increases more strongly under the adjusted Shapley normalization.}
   \label{fig:appendix-rq3-credit-concept-delta}
 \end{figure}

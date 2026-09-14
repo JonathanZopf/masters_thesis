@@ -1,7 +1,9 @@
 \section{Effect of Interaction Modeling on Faithfulness}
 \label{sec:results-faithfulness-increase}
 
-Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions only on individual concepts. Figure \ref{fig:hyp4-identity-plots-natural-language} shows the paired question-level estimates. For the natural-language datasets BBQ and MedQA, the points are concentrated around the identity line, indicating broadly similar atomic and interaction-aware estimates. The New German Credit panels exhibit a less pronounced correspondence between the two formulations.
+Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. Because the vertical axis of the identity plots represents interaction-aware faithfulness, points above the identity line indicate higher faithfulness under the joint formulation.
+
+Figures~\ref{fig:hyp4-identity-plots-natural-language} and~\ref{fig:hyp4-identity-plots} show the paired question-level estimates. For the natural-language datasets BBQ and MedQA, the points are concentrated around the identity line, indicating broadly similar atomic and interaction-aware estimates. The New German Credit panels exhibit a less pronounced correspondence between the two formulations.
 
 The corresponding question-level mean CE comparisons are provided in Appendix Figures~\ref{fig:appendix-ce-shift-identity-natural-language} and~\ref{fig:appendix-ce-shift-identity-credit}, where marker size also records the number of concepts contributing to each question.
 
@@ -12,7 +14,7 @@ The corresponding question-level mean CE comparisons are provided in Appendix Fi
 \newcommand{\HypFourIdentityPlot}[5]{%
   \begin{minipage}[t]{0.47\textwidth}
     \centering
-    \adjustbox{max width=\linewidth}{\small\bfseries #1}\par
+    {\small\bfseries #1\par}
     \vspace{0.1em}
     \begin{tikzpicture}
       \begin{axis}[
@@ -59,17 +61,18 @@ The corresponding question-level mean CE comparisons are provided in Appendix Fi
     {data/rq4/medqa_mistral.csv}{-1}{1}{24}
 
   \caption[Atomic and joint faithfulness identity plots for BBQ and MedQA]{
-  Question-level atomic and joint faithfulness for BBQ and MedQA.}
+  Question-level atomic and interaction-aware faithfulness for BBQ and MedQA. Points above the identity line favor the
+  joint Shapley-based formulation.}
   \label{fig:hyp4-identity-plots-natural-language}
 \end{figure}
 
 \begin{figure}
   \ContinuedFloat
   \centering
-  \HypFourIdentityPlot{New Ger. Credit --- GPT-OSS 120B}%
+  \HypFourIdentityPlot{New German Credit --- GPT-OSS 120B}%
     {data/rq4/new_german_credit_gptoss.csv}{-1}{1}{30}
   \hfill
-  \HypFourIdentityPlot{New Ger. Credit --- Mistral Medium 3.5}%
+  \HypFourIdentityPlot{New German Credit --- Mistral Medium 3.5}%
     {data/rq4/new_german_credit_mistral.csv}{-1}{1}{30}
 
   \caption[]{Question-level atomic and joint faithfulness for New

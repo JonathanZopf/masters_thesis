@@ -85,27 +85,26 @@
   \input{graphs/german_credit_grouping_data}
 \end{scope}
 
-% Keep each symbol and label in normal text flow so the gap after a label
-% is measured from its actual width, rather than a fixed graph coordinate.
-\newcommand{\CreditLegendGroup}[2]{%
-  \tikz[baseline=-0.5ex]{%
-    \node[draw=black!55, fill=creditGroup#1!72, rounded corners=1pt,
-      minimum width=5mm, minimum height=3mm, inner sep=0pt] {};\relax
-  }\hspace{1.5mm}{\tiny $#2$}%
+% Compact legend. The node swatches denote membership in the final partition,
+% not an additional statistic.
+\node[anchor=west, font=\sffamily\scriptsize] at (-6.0,-5.0) {Final groups:};
+\foreach \x/\group/\label in {
+  -4.05/One/$s_1$,
+  -3.10/Two/$s_2$,
+  -2.15/Three/$s_3$,
+  -1.20/Four/$s_4$,
+  -0.25/Five/$s_5$
+}{
+  \node[draw=black!55, fill=creditGroup\group!72, rounded corners=1pt,
+        minimum width=5mm, minimum height=3mm, inner sep=0pt] at (\x,-5.0) {};
+  \node[anchor=west, font=\sffamily\tiny] at (\x+0.32,-5.0) {\label};
 }
-\newcommand{\CreditLegendLine}[1]{%
-  \tikz[baseline=-0.5ex]{\draw[#1] (0,0) -- (0.8,0);}%
-}
-\node[font=\sffamily\scriptsize, inner sep=0pt] at (0.6,-5.0) {%
-  Final groups:\hspace{3mm}%
-  \CreditLegendGroup{One}{s_1}\hspace{3mm}%
-  \CreditLegendGroup{Two}{s_2}\hspace{3mm}%
-  \CreditLegendGroup{Three}{s_3}\hspace{3mm}%
-  \CreditLegendGroup{Four}{s_4}\hspace{3mm}%
-  \CreditLegendGroup{Five}{s_5}\hspace{5mm}%
-  \CreditLegendLine{accepted edge}\hspace{2mm}accepted merge\hspace{5mm}%
-  \CreditLegendLine{retained edge}\hspace{2mm}other retained association%
-};
+\draw[accepted edge] (1.45,-5.0) -- (2.25,-5.0)
+  node[anchor=west, font=\sffamily\scriptsize, text=black] at (2.42,-5.0)
+  {accepted merge};
+\draw[retained edge] (4.35,-5.0) -- (5.15,-5.0)
+  node[anchor=west, font=\sffamily\scriptsize, text=black] at (5.32,-5.0)
+  {other retained association};
 
 \end{tikzpicture}
 \end{document}
