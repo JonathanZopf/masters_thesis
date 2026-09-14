@@ -4,36 +4,24 @@
 The natural-language oracle returned 46 distinct category labels for BBQ and 236 for
 MedQA. Orthographic normalization alone reduced the MedQA vocabulary only to 222 labels
 and did not reduce the BBQ vocabulary. To obtain interpretable co-grouping heatmaps, an
-\textbf{OpenAI Codex large language model} assigned every raw label to exactly one
+OpenAI Codex large language model assigned every raw label to exactly one
 dataset-specific high-level category. This is an analytical post-processing step and
 not an output of the FELICS auxiliary oracle.
 
-The assignment followed a fixed rubric. First, capitalization, Unicode dash variants,
+The assignment followed a fixed order. First, capitalization, Unicode dash variants,
 spacing, grammatical number, and obvious synonymous forms were treated as equivalent.
 Second, each label was assigned according to its primary semantic role. Composite or
 ambiguous labels were assigned to the most specific applicable family; no label was
-duplicated across families. Third, the resulting mapping was frozen and applied
+duplicated across families. Finally, the resulting mapping was frozen and applied
 identically to both evaluated models and all examples. The large language model saw
 only the raw category label during assignment: concept texts, group memberships,
 model outputs, and calculated co-grouping rates were not used. Consequently, the
 normalization cannot be interpreted as an independently validated clinical or social
-science taxonomy. The complete auditable mapping is stored in
-\path{data/oracle_category_mapping.csv}, and the augmented concept-level data are
-stored in \path{data/oracle_assignments_normalized.csv}.
+science taxonomy.
 
-Let $\pi(x,y)$ denote an unordered pair. For normalized categories $a$ and $b$,
-the displayed co-grouping rate is
-\begin{equation}
-  r_{ab}=
-  \frac{\sum_{q}\sum_{i<j}
-    \mathbb{1}[\pi(A_{qi},A_{qj})=\pi(a,b)]\,
-    \mathbb{1}[G_{qi}=G_{qj}]}
-  {\sum_{q}\sum_{i<j}
-    \mathbb{1}[\pi(A_{qi},A_{qj})=\pi(a,b)]},
-\end{equation}
-where $q$ indexes a question/model run, $A_{qi}$ is the normalized category of concept
-$i$, and $G_{qi}$ is its oracle group. Pairs are never formed across questions or runs. A cell is undefined when
-its denominator is zero and is shown in gray.
+For each pair of normalized categories, the co-grouping rate is the proportion of concept pairs that the oracle assigned to the same group. It is calculated by dividing the number of pairs assigned to the same interaction candidate group by the total number of pairs with those categories. Only distinct concepts from the same question are paired, and the counts are pooled across runs before calculating the rate. Diagonal cells apply the same calculation to pairs of concepts within a single category. If no eligible pairs exist, the cell is undefined and shown in gray. The use of conditional percentages prevents frequent categories from dominating solely because they occur more often.
+
+The resulting heatmaps \ref{fig:oracle-category-heatmaps} appear in Section \ref{sec:results-oracle-behavior}.
 
 \section*{BBQ category families}
 

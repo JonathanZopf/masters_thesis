@@ -5,7 +5,7 @@
   \ResultScatterPlot{x column=matton_ce,
     y column=felics_ce,
     x label={$\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})$},
-    y label={$\overline{\mathrm{CE}}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+    y label={$\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})$},
     line slope=1,
     line intercept=0,
     line style=dashed,
@@ -47,19 +47,19 @@
     ymin=0, ymax=.25
   }
 
-  \caption[CE identity plots for the natural-language RQ2 comparisons]{Question-averaged causal effects produced by FELICS with $n_{\max}=1$ and the original Matton implementation for the natural-language comparisons. The average is taken across the concepts retained for each question in the respective run.}
+  \caption[CE identity plots for the natural-language RQ2 comparisons]{Question-averaged causal effects produced by FELICS with $n_{\max}=1$ and the original Matton implementation for the natural-language comparisons.}
   \label{fig:appendix-rq2-ce-natural-language}
 \end{figure}
 
 \begin{figure}[p]
   \centering
-  \HypTwoCeIdentityPlot{30}{title={New German Credit --- GPT-OSS 120B},
+  \HypTwoCeIdentityPlot{30}{title={New Ger. Credit --- GPT-OSS 120B},
     data=data/rq2/new_german_credit_gptoss_ce.csv,
     xmin=0, xmax=1.1,
     ymin=0, ymax=1.1
   }
   \hfill
-  \HypTwoCeIdentityPlot{30}{title={New German Credit --- Mistral Medium 3.5},
+  \HypTwoCeIdentityPlot{30}{title={New Ger. Credit --- Mistral Medium 3.5},
     data=data/rq2/new_german_credit_mistral_ce.csv,
     xmin=0, xmax=1.1,
     ymin=0, ymax=1.1

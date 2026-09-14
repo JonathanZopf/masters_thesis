@@ -5,7 +5,7 @@
 \newcommand{\NormalizationIdentityPlot}[6]{%
   \begin{minipage}[t]{0.47\textwidth}
     \centering
-    {\small\bfseries #1\par}
+    \adjustbox{max width=\linewidth}{\small\bfseries #1}\par
     \vspace{0.1em}
     \begin{tikzpicture}
       \begin{axis}[
@@ -17,7 +17,7 @@
         ymin=#3,
         ymax=#4,
         xlabel={$\mathrm{CE}_{\mathrm{raw}}$},
-        ylabel={$\mathrm{CE}_{\mathrm{adjusted}}$},
+        ylabel={$\mathrm{CE}_{\mathrm{adj}}$},
         scaled x ticks=false,
         scaled y ticks=false,
         tick label style={font=\scriptsize},
@@ -69,18 +69,18 @@
   \NormalizationIdentityPlot{MedQA --- Mistral Medium 3.5}%
     {data/appendix/rq3_normalization_identity/medqa_mistral.csv}{-0.05}{0.6}{257}{0.963}
 
-  \caption[Concept-level effects before and after normalization]{Concept-level raw and adjusted Shapley causal effects for BBQ and MedQA. Each translucent point represents one concept in one question. The dashed line denotes unchanged CE magnitude; darker regions indicate overlapping observations.}
+  \caption[Concept-level effects before and after normalization]{Concept-level raw and adjusted Shapley causal effects for BBQ and MedQA.}
   \label{fig:appendix-rq3-normalization-natural-language}
 \end{figure}
 
 \begin{figure}[p]
   \centering
-  \NormalizationIdentityPlot{New German Credit --- GPT-OSS 120B}%
+  \NormalizationIdentityPlot{New Ger. Credit --- GPT-OSS 120B}%
     {data/appendix/rq3_normalization_identity/new_german_credit_gptoss.csv}{-1}{2.7}{360}{0.875}
   \hfill
-  \NormalizationIdentityPlot{New German Credit --- Mistral Medium 3.5}%
+  \NormalizationIdentityPlot{New Ger. Credit --- Mistral Medium 3.5}%
     {data/appendix/rq3_normalization_identity/new_german_credit_mistral.csv}{-1}{2.7}{360}{0.821}
 
-  \caption[Concept-level normalization effects for New German Credit]{Concept-level raw and adjusted Shapley causal effects for New German Credit. Broader displacement from the identity line complements the lower rank correlations reported for Research Question~\ref{rq:ranking}.}
+  \caption[Concept-level normalization effects for New German Credit]{Concept-level raw and adjusted Shapley causal effects for New German Credit.}
   \label{fig:appendix-rq3-normalization-credit}
 \end{figure}

@@ -49,6 +49,10 @@
 		ABDE70872FFC0CFC000D7D5D /* matton_dgp.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_dgp.tex; sourceTree = "<group>"; };
 		ABDE70882FFD3C71000D7D5D /* matton_dgp_intervened.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_dgp_intervened.tex; sourceTree = "<group>"; };
 		ABDE70892FFEB849000D7D5D /* dgp_joint_intervened.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = dgp_joint_intervened.tex; sourceTree = "<group>"; };
+		ABE52F1C305462D100946193 /* additional_result_visualizations.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = additional_result_visualizations.tex; sourceTree = "<group>"; };
+		ABE52F1D305462D100946193 /* oracle_partition_details.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = oracle_partition_details.tex; sourceTree = "<group>"; };
+		ABE52F1E305462D100946193 /* reproducibility.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = reproducibility.tex; sourceTree = "<group>"; };
+		ABF529653055501600CE9581 /* list_of_symbols.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = list_of_symbols.tex; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -84,6 +88,7 @@
 				AB1F9F0B2F93A288003D57AE /* chapters */,
 				AB1F9F0D2F93A288003D57AE /* images */,
 				AB1F9F102F93A288003D57AE /* main.tex */,
+				ABF529653055501600CE9581 /* list_of_symbols.tex */,
 				AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */,
 				ABC9C0A130418B8A00D58CF3 /* statement_on_generative_ai.tex */,
 				AB1F9F162F93A31B003D57AE /* title_page.tex */,
@@ -136,6 +141,9 @@
 		AB7367C4302B7A7900166695 /* appendix */ = {
 			isa = PBXGroup;
 			children = (
+				ABE52F1C305462D100946193 /* additional_result_visualizations.tex */,
+				ABE52F1D305462D100946193 /* oracle_partition_details.tex */,
+				ABE52F1E305462D100946193 /* reproducibility.tex */,
 				AB350E343040BED8001A29B5 /* oracle_category_normalization.tex */,
 				AB7367C8302B80D900166695 /* motivational_example_setup.tex */,
 				AB7367C7302B805F00166695 /* mathematical_demonstrations.tex */,

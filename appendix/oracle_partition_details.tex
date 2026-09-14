@@ -18,7 +18,7 @@ order of association strength, provided that merging its components does not exc
 the component-size constraint. Green edges were accepted in an earlier step, the
 orange edge is the edge accepted in the displayed step, and gray edges remain
 unselected. Thus, the seven accepted edges produce the five final components shown
-in Figure~\ref{fig:german-credit-grouping-final}.
+in Figure~\ref{fig:german-credit-grouping-final}. Table \ref{tab:credit-associations} list all edges of the graph exhaustively.
 
 \input{graphs/german_credit_grouping_stages}
 
@@ -94,10 +94,10 @@ in Figure~\ref{fig:german-credit-grouping-final}.
 \section{RQ5 Motivating MedQA Example}
 \label{app:rq5-oracle-partition}
 
-For the controlled version of MedQA question 521, the natural-language oracle was
+For the controlled version of MedQA question 521, following the methodology in Section \ref{sec:motivating_methodology}, the natural-language oracle was
 sampled 50 times. The weight of an edge is the proportion of these valid judgments
 in which its two concepts occurred in the same candidate interaction group. Edges
-with a co-grouping probability of at least $0.50$ were retained and processed by the
+with a co-grouping probability of at least $0.50$ were retained (see Table \ref{tab:rq5-cogrouping}) and processed by the
 same constrained greedy merging procedure used for the tabular oracle. Figure~\ref{fig:rq5-oracle-grouping}
 shows the resulting partition. The edge between refusal of treatment and
 self-perception was retained but did not need to be accepted because both concepts

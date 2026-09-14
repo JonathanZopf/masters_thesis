@@ -1,6 +1,6 @@
 \chapter{Mathematical Demonstrations}
 \label{app:mathematical_demonstrations}
-This appendix provides supporting derivations for properties of FELICS referenced in the main text. The demonstrations address the singleton special case, compatibility under reference-relative additivity, and the intended preservation of the dataset-average causal effect.
+This appendix provides supporting derivations for properties of FELICS referenced in the main text. The demonstrations address the singleton special case, compatibility under reference-relative additivity, the intended preservation of the dataset-average causal effect, and the two-concept specialization used to compare adjusted and atomic effects.
 
 \section*{Equality of Causal Effect between FELICS singleton-groups and Original Metric}
 \begin{math_box}[label=ma:one_item_group]
@@ -87,6 +87,67 @@ This appendix provides supporting derivations for properties of FELICS reference
     \end{equation}
 
     showing that FELICS reduces exactly to the original CE when every candidate interaction group contains only a single concept. Because the definitions of the explanation-implied effect and faithfulness (see Equations~\ref{eq:ee} and \ref{eq:faithfulness}) are unchanged, both metrics are equivalent in this scenario.
+\end{math_box}
+
+\section*{Two-Concept Difference from the Atomic Effect}
+\begin{math_box}[label=ma:two_concept_ce_difference]
+    Consider a two-concept candidate interaction group
+    $s=\{C_i,C_j\}$ and abbreviate the singleton values by
+    \begin{equation}
+        a:=v_{\mathbf{x}}(\{C_i\}),
+        \qquad
+        b:=v_{\mathbf{x}}(\{C_j\}).
+    \end{equation}
+    Singleton payout coefficients and their same-sized reference coefficients are
+    one. Hence, the adjusted singleton values remain $a$ and $b$. For the
+    two-concept coalition, write
+    $\bar\gamma_s:=\bar\gamma(\mathbf{x},s,s)$. Its adjusted value is
+    \begin{equation}
+        v_{\mathrm{adj},\mathbf{x}}(s)
+        =
+        \frac{v_{\mathbf{x}}(s)}{\bar\gamma_s}
+        =
+        \frac{\gamma(\mathbf{x},s)(a+b)}{\bar\gamma_s},
+    \end{equation}
+    where the second equality follows from the definition of the payout
+    coefficient.
+
+    For $C_i$, the two possible predecessor coalitions in the Shapley
+    calculation are $\emptyset$ and $\{C_j\}$, each with weight one half.
+    With $v_{\mathrm{adj},\mathbf{x}}(\emptyset)=0$, this yields
+    \begin{align}
+        \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_i,s)
+        & = \frac{1}{2}
+        \left[
+        v_{\mathrm{adj},\mathbf{x}}(\{C_i\})
+        -v_{\mathrm{adj},\mathbf{x}}(\emptyset)
+        \right]
+        + \frac{1}{2}
+        \left[
+        v_{\mathrm{adj},\mathbf{x}}(s)
+        -v_{\mathrm{adj},\mathbf{x}}(\{C_j\})
+        \right] \\
+        & = \frac{1}{2}
+        \left[
+        a + \frac{\gamma(\mathbf{x},s)(a+b)}{\bar\gamma_s} - b
+        \right].
+    \end{align}
+    The atomic estimate for $C_i$ is
+    $\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_i)=a$. Subtracting it from
+    the adjusted Shapley value gives
+    \begin{equation}
+        \mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_i,s)
+        - \mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_i)
+        =
+        \frac{a+b}{2}
+        \left(
+        \frac{\gamma(\mathbf{x},s)}{\bar\gamma_s}-1
+        \right).
+    \end{equation}
+    The same calculation applies symmetrically to $C_j$. This specialization
+    explains why the two-concept difference can be expressed through the
+    coalition payout coefficient and its reference level; for larger groups,
+    the individual Shapley marginal contributions must be evaluated explicitly.
 \end{math_box}
 
 \section*{Compatibility under Reference-Relative Additivity}

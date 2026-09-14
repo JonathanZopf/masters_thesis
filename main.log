@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  9 SEP 2026 01:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  14 SEP 2026 19:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1779,12 +1779,9 @@ LaTeX Warning: Unused global option(s):
     [a4paperUSenglish].
 
 (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
-(./statement_on_generative_ai.aux)
-
-LaTeX Warning: Label `sec:influence' multiply defined.
-
-(./results/summary.aux) (./results/oracle.aux) (./results/rq1.aux)
-(./results/rq2.aux) (./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
+(./statement_on_generative_ai.aux) (./results/summary.aux)
+(./results/oracle.aux) (./results/rq1.aux) (./results/rq2.aux)
+(./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
 (./appendix/oracle_partition_details.aux)
@@ -1942,7 +1939,7 @@ Package hyperref Info: Link coloring ON on input line 212.
 \openout2 = `title_page.aux'.
 
  (./title_page.tex)
-<images/university_logo.png, id=541, 200.8081pt x 59.40573pt>
+<images/university_logo.png, id=525, 200.8081pt x 59.40573pt>
 File: images/university_logo.png Graphic file (type png)
 <use images/university_logo.png>
 Package pdftex.def Info: images/university_logo.png  used on input line 224.
@@ -2013,7 +2010,7 @@ ogo.png>]
 
 
 (./declaration_of_originality.tex
-<images/signature.jpg, id=550, 1118.1775pt x 363.3575pt>
+<images/signature.jpg, id=534, 1118.1775pt x 363.3575pt>
 File: images/signature.jpg Graphic file (type jpg)
 <use images/signature.jpg>
 Package pdftex.def Info: images/signature.jpg  used on input line 5.
@@ -2039,12 +2036,12 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 
 
-] [5]
-[6])
+] [5])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
- [7] (./main.lof
+
+[6] (./main.lof
 Overfull \hbox (12.93503pt too wide) in paragraph at lines 14--14
  \T1/lmr/m/n/12 aware causal ef-fects from the same joint FELICS run on dif-fer
 -ent dataset/model 
@@ -2062,16 +2059,16 @@ Overfull \hbox (16.20915pt too wide) in paragraph at lines 18--18
 raction-presumption strength 
  []
 
-[8
+)
+\tf@lof=\write8
+\openout8 = `main.lof'.
+
+ [7
 
 
 {/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/loca
 l/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/
-2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}])
-\tf@lof=\write8
-\openout8 = `main.lof'.
-
- [9] (./list_of_symbols.tex
+2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [8] (./list_of_symbols.tex
 Underfull \hbox (badness 1867) in paragraph at lines 19--20
 []|\T1/lmr/m/n/12 Counterfactual ques-tion ob-tained by re-plac-ing the orig-i-
 nal
@@ -2084,17 +2081,17 @@ d
  []
 
 
-Underfull \hbox (badness 1852) in paragraph at lines 84--85
+Underfull \hbox (badness 1852) in paragraph at lines 87--88
 []|\T1/lmr/m/n/12 Numerical tol-er-ance used for de-ter-min-is-tic implementati
 on-
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [10
+ignored: Infinite glue shrinkage found in box being split [9
 
 
 ]
-ignored: Infinite glue shrinkage found in box being split [11]) [12] (./chapters/introd
+ignored: Infinite glue shrinkage found in box being split [10]) [11] (./chapters/introd
 uction.tex
 Chapter 1.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
@@ -2129,26 +2126,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--57
 Chapter 2.
 [5
 
-] [6] [7] [8] [9]
-Overfull \hbox (8.4331pt too wide) in paragraph at lines 84--85
-\T1/lmr/m/n/12 of out-puts rather than gen-uine faith-ful-ness. They there-fore
- pro-pose their own self-consistency
- []
-
-[10] [11{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-[12]
-Overfull \hbox (0.30623pt too wide) in paragraph at lines 146--147
+] [6] [7] [8] [9] [10] [11] [12{/usr/local/texlive/2026/texmf-dist/fonts/enc/dv
+ips/lm/lm-mathex.enc}]
+Overfull \hbox (0.30623pt too wide) in paragraph at lines 145--146
 \T1/lmr/m/n/12 Building upon the coun-ter-fac-tual edit method-ol-ogy pi-o-neer
 ed by Atanasova et al. [[][]ACL+23[][]]
  []
 
-[13]
-Overfull \hbox (12.1352pt too wide) in paragraph at lines 177--178
+[13] [14]
+Overfull \hbox (12.1352pt too wide) in paragraph at lines 176--177
 \T1/lmr/m/n/12 To es-ti-mate the ac-tual in-flu-ence of a con-cept on the model
 's pre-dic-tion, Mat-ton et al. [[][]MNG24[][]]
  []
 
-[14] [15] [16] [17]
+[15] [16] [17]
 runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/matton
 _evaluation_pipeline' graphs/matton_evaluation_pipeline)...disabled (restricted
 ).
@@ -2157,7 +2148,7 @@ _evaluation_pipeline' graphs/matton_evaluation_pipeline)...disabled (restricted
 
 Package standalone Warning: Graphic 'graphs/matton_evaluation_pipeline.pdf' cou
 ld not be build.
-Shell escape activated? on input line 298.
+Shell escape activated? on input line 297.
 
 (./graphs/matton_evaluation_pipeline.tex
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
@@ -2248,7 +2239,7 @@ ison_matton_felics' graphs/comparison_matton_felics)...disabled (restricted).
 
 Package standalone Warning: Graphic 'graphs/comparison_matton_felics.pdf' could
  not be build.
-Shell escape activated? on input line 375.
+Shell escape activated? on input line 376.
 
 (./graphs/comparison_matton_felics.tex
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
@@ -2263,13 +2254,13 @@ File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 File: graphs/comparison_matton_felics.tex Graphic file (type tex)
  [44] [45]
-Overfull \hbox (17.41667pt too wide) in paragraph at lines 408--409
+Overfull \hbox (17.41667pt too wide) in paragraph at lines 409--410
 \T1/lmr/m/n/12 Requirement [][]R5[][] re-quires the pro-posed frame-work to dis
 -tin-guish be-tween ad-di-tive, redundancy-
  []
 
-[46] [47] [48]
-Overfull \hbox (10.03877pt too wide) in paragraph at lines 475--476
+[46]
+Overfull \hbox (10.03877pt too wide) in paragraph at lines 447--448
 []\T1/lmr/m/n/12 Consequently, $\OML/lmm/m/it/12 ^^M\OT1/lmr/m/n/12 (\OT1/lmr/b
 x/n/12 x\OML/lmm/m/it/12 ; s\OT1/lmr/m/n/12 ) \OML/lmm/m/it/12 < []\OT1/lmr/m/n
 /12 (\OT1/lmr/bx/n/12 x\OML/lmm/m/it/12 ; s; s\OT1/lmr/m/n/12 )$ \T1/lmr/m/n/12
@@ -2278,12 +2269,12 @@ x/n/12 x\OML/lmm/m/it/12 ; s\OT1/lmr/m/n/12 ) \OML/lmm/m/it/12 < []\OT1/lmr/m/n
 12 >
  []
 
-) (./chapters/evaluation.tex [49]
+[47]) (./chapters/evaluation.tex [48]
 Chapter 6.
-[50
+[49
 
-] [51] [52] [53] [54] [55]
-Overfull \hbox (3.91664pt too wide) in paragraph at lines 135--136
+] [50] [51] [52] [53] [54] [55]
+Overfull \hbox (3.91664pt too wide) in paragraph at lines 160--161
 \T1/lmr/bx/n/12 Operationalization. \T1/lmr/m/n/12 For ev-ery ques-tion $\OT1/l
 mr/bx/n/12 x$ \T1/lmr/m/n/12 with con-cept set $\OT1/lmr/bx/n/12 C$\T1/lmr/m/n/
 12 , the interaction-presumption
@@ -2502,7 +2493,7 @@ _credit_grouping' graphs/german_credit_grouping)...disabled (restricted).
 
 Package standalone Warning: Graphic 'graphs/german_credit_grouping.pdf' could n
 ot be build.
-Shell escape activated? on input line 109.
+Shell escape activated? on input line 110.
 
 (./graphs/german_credit_grouping.tex (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex))
@@ -2518,7 +2509,7 @@ PGFPlots: reading {data/rq1/bbq_gptoss.csv}
 PGFPlots: reading {data/rq1/bbq_mistral.csv}
 PGFPlots: reading {data/rq1/bbq_mistral.csv}
 
-Underfull \hbox (badness 2080) in paragraph at lines 66--66
+Underfull \hbox (badness 2080) in paragraph at lines 67--67
 []\T1/lmr/m/n/12 Figure 7.4: |Re-la-tion-ship be-tween in-creased oracle-derive
 d interaction-presumption
  []
@@ -2527,13 +2518,13 @@ PGFPlots: reading {data/rq1/medqa_gptoss.csv}
 PGFPlots: reading {data/rq1/medqa_gptoss.csv}
 PGFPlots: reading {data/rq1/medqa_mistral.csv}
 
-Overfull \hbox (4.46571pt too wide) in paragraph at lines 101--101
+Overfull \hbox (4.46571pt too wide) in paragraph at lines 102--102
  [][] 
  []
 
 PGFPlots: reading {data/rq1/medqa_mistral.csv}
 
-Underfull \hbox (badness 2080) in paragraph at lines 114--114
+Underfull \hbox (badness 2080) in paragraph at lines 115--115
 []\T1/lmr/m/n/12 Figure 7.5: |Re-la-tion-ship be-tween in-creased oracle-derive
 d interaction-presumption
  []
@@ -2553,13 +2544,13 @@ PGFPlots: reading {data/rq2/medqa_gptoss.csv}
 PGFPlots: reading {data/rq2/medqa_mistral.csv}
 PGFPlots: reading {data/rq2/new_german_credit_gptoss.csv}
 
-Overfull \hbox (18.80211pt too wide) in paragraph at lines 69--69
+Overfull \hbox (9.44548pt too wide) in paragraph at lines 69--69
  [][] 
  []
 
 PGFPlots: reading {data/rq2/new_german_credit_mistral.csv}
 
-Overfull \hbox (35.52446pt too wide) in paragraph at lines 75--75
+Overfull \hbox (21.12227pt too wide) in paragraph at lines 75--75
  [][] 
  []
 
@@ -2569,7 +2560,7 @@ PGFPlots: reading {data/rq2/difference_test_results.csv}
 
 
 
-] [71]) [72] [73]
+] [71] [72]) [73]
 \openout2 = `results/rq3.aux'.
 
  (./results/rq3.tex
@@ -2642,24 +2633,26 @@ PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
+ [79
+
+
+
+] [80]
 PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
-) [79
-
-
-
-]
-[80] [81]) (./chapters/discussion.tex
+PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
+)
+[81]) (./chapters/discussion.tex
 Chapter 8.
 [82
 
 
 
-] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92])
-(./chapters/conclusion.tex [93]
+] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92] [93])
+(./chapters/conclusion.tex [94] [95]
 Chapter 9.
-[94
+[96
 
-] [95]) [96]
+] [97]) [98]
 
 Package biblatex Warning: No driver for 'legislation'.
 (biblatex)                Using fallback driver on input line 259.
@@ -2670,7 +2663,7 @@ Overfull \hbox (30.2811pt too wide) in paragraph at lines 259--259
 es 2014/90/EU,
  []
 
-[97
+[99
 
 ]
 Overfull \hbox (3.75975pt too wide) in paragraph at lines 259--259
@@ -2684,19 +2677,19 @@ Overfull \hbox (6.74373pt too wide) in paragraph at lines 259--259
 O/IEC TR 29119-11:2020,^^Q
  []
 
-[98] [99]
+[100] [101]
 Overfull \hbox (3.87361pt too wide) in paragraph at lines 259--259
 []\T1/lmr/m/n/12 Á. Martínez-Sánchez, G. Ar-ranz, and A. Lozano-Durán, ^^P  De-
 com-pos-ing causal-
  []
 
-[100]
+[102]
 Overfull \hbox (0.94969pt too wide) in paragraph at lines 259--259
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-consistency
  []
 
-[101]
+[103]
 Overfull \hbox (13.06743pt too wide) in paragraph at lines 259--259
 \T1/lmr/m/n/12 Learn-ing for Sci-en-tific In-sights and Dis-cov-er-ies,^^Q \T1/
 lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 , vol. 8, pp. 42 200^^U
@@ -2708,31 +2701,31 @@ Overfull \hbox (5.1381pt too wide) in paragraph at lines 259--259
 E Ac-cess\T1/lmr/m/n/12 , vol. 9, pp. 11 974^^U12 001, Jan. 1,
  []
 
-[102] [103]
+[104] [105]
 
 Package biblatex Warning: No driver for 'legislation'.
 (biblatex)                Using fallback driver on input line 259.
 
-(./chapters/appendix.tex [104]
+(./chapters/appendix.tex [106]
 \openout2 = `appendix/motivational_example_setup.aux'.
 
  (./appendix/motivational_example_setup.tex
 Appendix A.
-[105
+[107
 
 
-]) [106]
+]) [108]
 \openout2 = `appendix/oracle_category_normalization.aux'.
 
  (./appendix/oracle_category_normalization.tex
 Appendix B.
 
-ignored: Infinite glue shrinkage found in box being split [107
+ignored: Infinite glue shrinkage found in box being split [109
 
 
 
 
-]) [108]
+]) [110]
 \openout2 = `appendix/oracle_partition_details.aux'.
 
  (./appendix/oracle_partition_details.tex
@@ -2753,32 +2746,35 @@ Appendix C.
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [109
-
-
-
-
-] [110] [111]
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [112
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex) [111
 
-]
-runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/rq5_or
-acle_grouping' graphs/rq5_oracle_grouping)...disabled (restricted).
 
 
 
-Package standalone Warning: Graphic 'graphs/rq5_oracle_grouping.pdf' could not 
-be build.
-Shell escape activated? on input line 108.
+] [112] [113]
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex) [114]
+Package standalone Info: generated file graphs/rq5_oracle_grouping.pdf newer th
+en source file graphs/rq5_oracle_grouping.tex on input line 108.
+<graphs/rq5_oracle_grouping.pdf, id=2309, 404.64275pt x 231.53702pt>
+File: graphs/rq5_oracle_grouping.pdf Graphic file (type pdf)
+<use graphs/rq5_oracle_grouping.pdf>
+Package pdftex.def Info: graphs/rq5_oracle_grouping.pdf  used on input line 108
+.
+(pdftex.def)             Requested size: 359.53816pt x 205.72812pt.
 
-(./graphs/rq5_oracle_grouping.tex (./graphs/rq5_oracle_grouping_data.tex)
-(./graphs/rq5_oracle_grouping_data.tex))
-File: graphs/rq5_oracle_grouping.tex Graphic file (type tex)
- (./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex
-)) [113
+(./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex)
+) [115
 
-]
+ <./graphs/rq5_oracle_grouping.pdf>]
 \openout2 = `appendix/additional_result_visualizations.aux'.
 
 
@@ -2944,31 +2940,13 @@ Package pgfplots info on input line 133: boxplot: got lower whisker=2.435340014
 466364e-1
 Package pgfplots info on input line 133: boxplot: got upper whisker=6.765453513
 33394e-1
-) [114
+) [116
 
 
 
 
-] [115]
-(./graphs/results/appendix_rq2_ce_identity.tex
-(./graphs/results/shared_scatter_plot.tex)
-PGFPlots: reading {data/rq2/bbq_gptoss_ce.csv}
-PGFPlots: reading {data/rq2/bbq_mistral_ce.csv}
-PGFPlots: reading {data/rq2/medqa_gptoss_ce.csv}
-PGFPlots: reading {data/rq2/medqa_mistral_ce.csv}
-PGFPlots: reading {data/rq2/new_german_credit_gptoss_ce.csv}
-
-Overfull \hbox (13.70264pt too wide) in paragraph at lines 60--60
- [][] 
- []
-
-PGFPlots: reading {data/rq2/new_german_credit_mistral_ce.csv}
-
-Overfull \hbox (35.52446pt too wide) in paragraph at lines 66--66
- [][] 
- []
-
-) [116] [117] [118] (./graphs/results/appendix_ce_shift_identity.tex
+] [117]
+(./graphs/results/appendix_ce_shift_identity.tex
 PGFPlots: reading {data/appendix/ce_shift_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/bbq_mistral.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/medqa_gptoss.csv}
@@ -2987,9 +2965,27 @@ PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_gptoss.csv
 }
 PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_mistral.cs
 v}
-) [119
+) [118] [119] [120] (./graphs/results/appendix_rq2_ce_identity.tex
+(./graphs/results/shared_scatter_plot.tex)
+PGFPlots: reading {data/rq2/bbq_gptoss_ce.csv}
+PGFPlots: reading {data/rq2/bbq_mistral_ce.csv}
+PGFPlots: reading {data/rq2/medqa_gptoss_ce.csv}
+PGFPlots: reading {data/rq2/medqa_mistral_ce.csv}
+PGFPlots: reading {data/rq2/new_german_credit_gptoss_ce.csv}
 
-] [120] [121] (./graphs/results/appendix_rq3_normalization_identity.tex
+Overfull \hbox (4.34601pt too wide) in paragraph at lines 60--60
+ [][] 
+ []
+
+PGFPlots: reading {data/rq2/new_german_credit_mistral_ce.csv}
+
+Overfull \hbox (16.8112pt too wide) in paragraph at lines 66--66
+ [][] 
+ []
+
+) [121
+
+] [122] [123] (./graphs/results/appendix_rq3_normalization_identity.tex
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_mistral.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_gptoss.csv}
@@ -2999,15 +2995,15 @@ ptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_m
 istral.csv}
 )
-[122
+[124
 
-] [123] [124] (./graphs/results/appendix_rq3_credit_concept_delta.tex
+] [125] [126] (./graphs/results/appendix_rq3_credit_concept_delta.tex
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_gpt
 oss.csv}
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_mis
 tral.csv}
 ))
-[125]
+[127]
 \openout2 = `appendix/examples.aux'.
 
  (./appendix/examples.tex
@@ -3018,23 +3014,23 @@ Overfull \hbox (9.741pt too wide) in paragraph at lines 3--4
  for-mal de-vel-op-ment of FELICS. 
  []
 
-[126
+[128
 
 
 
 
 
-] [127]) [128]
+] [129]) [130]
 \openout2 = `appendix/mathematical_demonstrations.aux'.
 
  (./appendix/mathematical_demonstrations.tex
 Appendix F.
-[129
+[131
 
 
 
 
-] [130] [131] [132]) [133]
+] [132] [133] [134]) [135]
 \openout2 = `appendix/prompts.aux'.
 
  (./appendix/prompts.tex
@@ -3044,55 +3040,46 @@ Appendix G.
 
 (./main.listing
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-70.
+5.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-[134
+[136
 
 
 
 
-] [135]
+]
+\openout9 = `main.listing'.
+
+ (./main.listing) [137] [138]
+\openout9 = `main.listing'.
+
+ (./main.listing) [139]
 \openout9 = `main.listing'.
 
  (./main.listing)
+[140] [141] [142] [143]
 \openout9 = `main.listing'.
 
- (./main.listing) [136] [137] [138] [139]
+ (./main.listing) [144] [145] [146] [147] [148]
 \openout9 = `main.listing'.
 
 
-(./main.listing) [140] [141] [142] [143] [144]
+(./main.listing) [149] [150] [151]
 \openout9 = `main.listing'.
 
- (./main.listing) [145] [146]
-[147] [148]
+ (./main.listing) [152] [153] [154]
 \openout9 = `main.listing'.
 
- (./main.listing) [149] [150] [151]
-\openout9 = `main.listing'.
 
- (./main.listing) [152] [153]
-[154] [155]) [156]
+(./main.listing) [155] [156] [157] [158] [159]) [160]
 \openout2 = `appendix/reproducibility.aux'.
 
- (./appendix/reproducibility.tex
+
+(./appendix/reproducibility.tex
 Appendix H.
-
-Overfull \hbox (109.90399pt too wide) in paragraph at lines 11--13
-[]\T1/lmr/m/n/12 The FELICS ex-per-i-ments used com-mit [][]\T1/lmtt/m/n/12 ebf
-75e1[][] \T1/lmr/m/n/12 (full SHA: \T1/lmtt/m/n/12 ebf75e138b0c0cb8aaab9e3d32ca
-9e9bee9a1d4b\T1/lmr/m/n/12 );
- []
-
-
-Overfull \hbox (17.47955pt too wide) in paragraph at lines 11--13
-\T1/lmr/m/n/12 FELICS repos-i-tory and check out the cor-re-spond-ing ex-per-i-
-men-tal re-vi-sion us-ing \T1/lmtt/m/n/12 git checkout
- []
-
-[157
+[161
 
 
 
@@ -3102,7 +3089,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|$\T1/lmtt/m/n/10.95 _faithfulness _ results _ atomic .
  []
 
-[158]) [159]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
+[162]) [163]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
 (./statement_on_generative_ai.aux) (./results/summary.aux)
 (./results/oracle.aux) (./results/rq1.aux) (./results/rq2.aux)
 (./results/rq3.aux) (./results/rq4.aux) (./results/rq5.aux)
@@ -3121,16 +3108,16 @@ L3 programming layer <2020/03/25>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A764BCBF40A9AE74FD0FD823CCE39175;28076.
+(rerunfilecheck)             Checksum: 919F8828849320011ADE7AB43A791BDE;27239.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 127982 strings out of 467525
- 2887244 string characters out of 5418982
- 3983812 words of memory out of 5000000
- 154200 multiletter control sequences out of 15000+600000
+ 128039 strings out of 467525
+ 2888955 string characters out of 5418982
+ 3983486 words of memory out of 5000000
+ 154211 multiletter control sequences out of 15000+600000
  876063 words of font info for 227 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,19n,121p,2519b,3037s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -3166,10 +3153,10 @@ ve/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-di
 st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (171 pages, 1732369 bytes).
+Output written on main.pdf (174 pages, 1741278 bytes).
 PDF statistics:
- 3769 PDF objects out of 4296 (max. 8388607)
- 3442 compressed objects within 35 object streams
- 1288 named destinations out of 1440 (max. 500000)
- 1159 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3845 PDF objects out of 4296 (max. 8388607)
+ 3515 compressed objects within 36 object streams
+ 1322 named destinations out of 1440 (max. 500000)
+ 1132 words of extra memory for PDF output out of 10000 (max. 10000000)
 

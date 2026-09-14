@@ -148,13 +148,13 @@
       \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,6.80)
         {$\mathcal{F}(\mathbf{X})=
-          \pgfmathprintnumber[fixed,precision=3]{\AtomicDatasetFaithfulness}$};
+          \pgfmathprintnumber[fixed,fixed zerofill,precision=3]{\AtomicDatasetFaithfulness}$};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsJoint]
         at (axis cs:-.95,3.40) {Joint};
       \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,3.40)
         {$\mathcal{F}(\mathbf{X})=
-          \pgfmathprintnumber[fixed,precision=3]{\JointDatasetFaithfulness}$};
+          \pgfmathprintnumber[fixed,fixed zerofill,precision=3]{\JointDatasetFaithfulness}$};
     \end{axis}
   \end{tikzpicture}%
   \end{minipage}%
@@ -181,11 +181,11 @@
     {medqa-mistral}%
 
   \par\vspace{1.2em}
-  \FaithfulnessRaincloudPanel{German Credit --- GPT-OSS 120B}%
+  \FaithfulnessRaincloudPanel{New Ger. Credit --- GPT-OSS 120B}%
     {data/summary/question_level_faithfulness_credit_gptoss.csv}%
     {credit-gptoss}%
   \hfill
-  \FaithfulnessRaincloudPanel{German Credit --- Mistral Medium 3.5}%
+  \FaithfulnessRaincloudPanel{New Ger. Credit --- Mistral Medium 3.5}%
     {data/summary/question_level_faithfulness_credit_mistral.csv}%
     {credit-mistral}%
 
