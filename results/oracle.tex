@@ -94,7 +94,6 @@ Each cell is the percentage of within-question concept pairs placed in the
 same group, pooling both models. Gray denotes that no pair from
 the two categories co-occurred in an evaluated question. The use of conditional percentages prevents frequent categories from dominating solely because they occur more often.
 \input{graphs/results/oracle_grouping_heatmap}
-\FloatBarrier
 Figure~\ref{fig:german-credit-grouping-final} shows the deterministic tabular oracle's
 partition, reused for every New German Credit item: three groups of three concepts, one
 pair, and one singleton. This partition represents the final state of the grouping algorithm in Algorithm~\ref{alg:greedy_merge}. Node colors identify the five final groups, thick green edges
@@ -104,7 +103,7 @@ The initialization and all seven accepted merge steps are documented in
 Appendix~\ref{app:oracle-partition-details}; the corresponding retained-edge
 strengths are reported in Table~\ref{tab:credit-associations}.
 
-\begin{figure}[p]
+\begin{figure}
   \centering
   \includestandalone[mode=buildnew,width=\textwidth,height=0.48\textheight,keepaspectratio]{graphs/german_credit_grouping}
   \caption{Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max}=3$.}

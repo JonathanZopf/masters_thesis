@@ -60,7 +60,7 @@ Appendix Figures~\ref{fig:appendix-rq2-ce-natural-language} and~\ref{fig:appendi
   \label{fig:hyp2-identity-natural-language}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}
   \centering
   \HypTwoIdentityPlot{30}{title={New German Credit --- GPT-OSS 120B},
     data=data/rq2/new_german_credit_gptoss.csv,
@@ -90,7 +90,7 @@ Applying the TOST procedure defined in Section~\ref{sec:analysis_procedures} yie
 
 Failure to establish equivalence does not, by itself, demonstrate that the implementations differ statistically or practically. To examine the complementary hypothesis, two-sided one-sample $t$-tests were applied to the same paired-difference vectors used by the TOST procedure. The null hypothesis for these tests is a mean paired difference of zero. Table~\ref{tab:hyp2-difference-tests} reports the unadjusted results, where positive mean differences indicate larger values for FELICS.
 
-\begin{table}[htbp]
+\begin{table}[htb]
   \centering
   \caption{Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}
   \label{tab:hyp2-difference-tests}

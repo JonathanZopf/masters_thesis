@@ -10,7 +10,7 @@ Appendix~\ref{app:rq5-oracle-partition}.
 
 Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$; positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
 
-\begin{table}[p]
+\begin{table}
   \centering
   \caption[Published and interaction-aware causal effects for the motivating MedQA example]{Causal effects for the nine concepts in the motivating MedQA example. The blue columns reproduce the singleton-intervention values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024}; the green columns contain the controlled experiment conducted in this work. Values from Matton et al.~\cite{mattonWalkTalkMeasuring2024} are available only to the two-decimal precision published in their Table~9.}
   \label{tab:hyp5-concept-ce-comparison}
@@ -93,7 +93,7 @@ The interaction-aware estimate increases the credited causal effect of the eatin
   \end{minipage}%
 }
 
-\begin{figure}[p]
+\begin{figure}
   \centering
   \HypFiveIdentityPlot{GPT-OSS 120B}{gpt_atomic}{gpt_joint}{0.05}
   \hfill
@@ -116,7 +116,7 @@ Figure~\ref{fig:hyp5-concept-identity} shows that the correction does not shift 
 
 Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5, while every 90\% credible interval contains zero. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
 
-\begin{table}[htbp]
+\begin{table}[htb]
   \centering
   \caption[Question-level faithfulness for the motivating MedQA example]{Posterior question-level faithfulness for the motivating MedQA example. Published results from Matton et al.~\cite{mattonWalkTalkMeasuring2024} provide one singleton-intervention estimate per model; this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals and $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
   \label{tab:hyp5-faithfulness-comparison}
