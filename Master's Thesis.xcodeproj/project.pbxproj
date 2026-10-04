@@ -41,6 +41,7 @@
 		AB8F504D3015445C0011161D /* appendix.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = appendix.tex; sourceTree = "<group>"; };
 		AB923232301A8DF500F3635D /* evaluation.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = evaluation.tex; sourceTree = "<group>"; };
 		ABC9C0A130418B8A00D58CF3 /* statement_on_generative_ai.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = statement_on_generative_ai.tex; sourceTree = "<group>"; };
+		ABCEA1A030717607007383AE /* table_of_abbreviations.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = table_of_abbreviations.tex; sourceTree = "<group>"; };
 		ABD435B6303374B5003CE91E /* matton_evaluation_pipeline.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = matton_evaluation_pipeline.tex; sourceTree = "<group>"; };
 		ABD8FE32300EC1ED003F7187 /* problem_identification.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = problem_identification.tex; sourceTree = "<group>"; };
 		ABD8FE34300EC6D7003F7187 /* theoretical_conception.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = theoretical_conception.tex; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 				AB1F9F0D2F93A288003D57AE /* images */,
 				AB1F9F102F93A288003D57AE /* main.tex */,
 				ABF529653055501600CE9581 /* list_of_symbols.tex */,
+				ABCEA1A030717607007383AE /* table_of_abbreviations.tex */,
 				AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */,
 				ABC9C0A130418B8A00D58CF3 /* statement_on_generative_ai.tex */,
 				AB1F9F162F93A31B003D57AE /* title_page.tex */,

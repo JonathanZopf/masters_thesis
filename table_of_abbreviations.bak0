@@ -1,0 +1,24 @@
+\chapter*{List of Abbreviations}
+
+The abbreviations below summarize recurring terms used throughout the thesis.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} p{0.72\textwidth}@{}}
+\textbf{Abbreviation} & \textbf{Meaning} \\
+\hline
+\endfirsthead
+\textbf{Abbreviation} & \textbf{Meaning} \\
+\hline
+\endhead
+
+AI & Artificial intelligence \\
+API & Application programming interface \\
+BBQ & Bias Benchmark for Question Answering \\
+CE & Causal effect \\
+EE & Explanation-Implied Effect \\
+FELICS & Faithfulness Estimation Leveraging Interacting Concept Sets \\
+LIME & Local Interpretable Model-Agnostic Explanations \\
+LLM / LLMs & Large language model / large language models \\
+MedQA & Medical question answering dataset \\
+SHAP & SHapley Additive exPlanations \\
+XAI & Explainable artificial intelligence \\
+\end{longtable}
