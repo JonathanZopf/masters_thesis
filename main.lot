@@ -6,25 +6,25 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces BBQ oracle ($n_{\max }=4$).}}{62}{table.7.1}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces MedQA oracle ($n_{\max }=4$).}}{62}{table.7.2}%
-\contentsline {table}{\numberline {7.3}{\ignorespaces New German Credit oracle ($n_{\max }=3$).}}{62}{table.7.3}%
-\contentsline {table}{\numberline {7.4}{\ignorespaces Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}}{70}{table.caption.56}%
-\contentsline {table}{\numberline {7.5}{\ignorespaces Questions without exact concept-ranking preservation}}{72}{table.caption.57}%
-\contentsline {table}{\numberline {7.6}{\ignorespaces Complementary tests for lower interaction-aware faithfulness}}{75}{table.caption.60}%
-\contentsline {table}{\numberline {7.7}{\ignorespaces Published and interaction-aware causal effects for the motivating MedQA example}}{76}{table.caption.61}%
-\contentsline {table}{\numberline {7.8}{\ignorespaces Question-level faithfulness for the motivating MedQA example}}{77}{table.caption.63}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces BBQ oracle ($n_{\max }=4$).}}{63}{table.7.1}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces MedQA oracle ($n_{\max }=4$).}}{63}{table.7.2}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces New German Credit oracle ($n_{\max }=3$).}}{63}{table.7.3}%
+\contentsline {table}{\numberline {7.4}{\ignorespaces Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}}{71}{table.caption.56}%
+\contentsline {table}{\numberline {7.5}{\ignorespaces Questions without exact concept-ranking preservation}}{73}{table.caption.57}%
+\contentsline {table}{\numberline {7.6}{\ignorespaces Complementary tests for lower interaction-aware faithfulness}}{76}{table.caption.60}%
+\contentsline {table}{\numberline {7.7}{\ignorespaces Published and interaction-aware causal effects for the motivating MedQA example}}{77}{table.caption.61}%
+\contentsline {table}{\numberline {7.8}{\ignorespaces Question-level faithfulness for the motivating MedQA example}}{78}{table.caption.63}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations used for the New German Credit partition.}}{111}{table.C.1}%
-\contentsline {table}{\numberline {C.2}{\ignorespaces Retained co-grouping frequencies for the RQ5 motivating MedQA example.}}{112}{table.caption.72}%
+\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations used for the New German Credit partition.}}{113}{table.C.1}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Retained co-grouping frequencies for the RQ5 motivating MedQA example.}}{114}{table.caption.72}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {H.1}{\ignorespaces Principal experiment artifact directories in the FELICS repository.}}{160}{table.caption.81}%
-\contentsline {table}{\numberline {H.2}{\ignorespaces Result files within a dataset and model/configuration directory. Each filename begins with the model name.}}{161}{table.H.2}%
+\contentsline {table}{\numberline {H.1}{\ignorespaces Principal experiment artifact directories in the FELICS repository.}}{162}{table.caption.81}%
+\contentsline {table}{\numberline {H.2}{\ignorespaces Result files within a dataset and model/configuration directory. Each filename begins with the model name.}}{163}{table.H.2}%

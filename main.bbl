@@ -2472,9 +2472,11 @@
       \strng{authornamehash}{a5a0b74964045327aa2cc38c6cdc755b}
       \strng{authorfullhash}{595aad3bbab4c4ae775905b1f9a4054d}
       \strng{authorfullhashraw}{595aad3bbab4c4ae775905b1f9a4054d}
+      \field{extraname}{1}
       \field{labelalpha}{MNGK25}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extraalpha}{1}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{The Thirteenth International Conference on Learning Representations}
@@ -2486,6 +2488,57 @@
       \endverb
       \verb{url}
       \verb https://openreview.net/forum?id=4ub9gpx9xw
+      \endverb
+    \endentry
+    \entry{matton2025walkthetalk_comment}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=0dd237488f8d9e448a98733c6d25df04}{%
+           family={Matton},
+           familyi={M\bibinitperiod},
+           given={Katie},
+           giveni={K\bibinitperiod}}}%
+        {{hash=631f3a7144959d4ce82e745f6a98dad7}{%
+           family={Ness},
+           familyi={N\bibinitperiod},
+           given={Robert\bibnamedelima Osazuwa},
+           giveni={R\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=f81cd6997c90145de6eca30657467351}{%
+           family={Guttag},
+           familyi={G\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1e4bc52180cca5a898b8c85f95865bdf}{%
+           family={Kıcıman},
+           familyi={K\bibinitperiod},
+           given={Emre},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a5a0b74964045327aa2cc38c6cdc755b}
+      \strng{fullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{fullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{bibnamehash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorbibnamehash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authornamehash}{a5a0b74964045327aa2cc38c6cdc755b}
+      \strng{authorfullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorfullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \field{extraname}{2}
+      \field{labelalpha}{MNGK25}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{OpenReview discussion}
+      \field{month}{1}
+      \field{note}{OpenReview Note ID: IMVu1xRHw0}
+      \field{title}{Comment on “{{Walk}} the {{Talk}}? {{Measuring}} the {{Faithfulness}} of {{Large Language Model Explanations}}”}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=4ub9gpx9xw&noteId=IMVu1xRHw0
+      \endverb
+      \verb{url}
+      \verb https://openreview.net/forum?id=4ub9gpx9xw&noteId=IMVu1xRHw0
       \endverb
     \endentry
     \entry{maityLargeLanguageModels2025}{article}{}{}

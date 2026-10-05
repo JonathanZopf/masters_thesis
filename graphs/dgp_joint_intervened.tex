@@ -1,5 +1,6 @@
 \documentclass[tikz]{standalone}
 \usepackage{amsmath}
+
 \begin{document}
 \begin{tikzpicture}[
 >=Stealth,
@@ -99,5 +100,12 @@ anchor=west] (L2) at (10.0,0.4) {};
 \node[anchor=west,font=\normalsize]
 at ($(L2.east)+(0.3,0)$)
 {Assigned new value};
+\node[observed,
+minimum width=0.8cm,
+minimum height=0.45cm,
+anchor=west] (L3) at (10.0,-0.6) {};
+\node[anchor=west,font=\normalsize]
+at ($(L3.east)+(0.3,0)$)
+{Response Variables};
 \end{tikzpicture}
 \end{document}
