@@ -17,6 +17,7 @@
 		AB1F9F182F93AF02003D57AE /* declaration_of_originality.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = declaration_of_originality.tex; sourceTree = "<group>"; };
 		AB1F9F192F990B79003D57AE /* background.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = background.tex; sourceTree = "<group>"; };
 		AB1F9F1A2F990C51003D57AE /* introduction.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = introduction.tex; sourceTree = "<group>"; };
+		AB23A2743074678E00B4F316 /* research_questions.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = research_questions.tex; sourceTree = "<group>"; };
 		AB350DCC30406DE1001A29B5 /* results.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = results.tex; sourceTree = "<group>"; };
 		AB350DCE30406E27001A29B5 /* conclusion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = conclusion.tex; sourceTree = "<group>"; };
 		AB350DDB3040816C001A29B5 /* german_credit_grouping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = german_credit_grouping.png; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		AB1F9F0B2F93A288003D57AE /* chapters */ = {
 			isa = PBXGroup;
 			children = (
+				AB23A2743074678E00B4F316 /* research_questions.tex */,
 				AB0FD359304FFA5C0005EE4C /* discussion.tex */,
 				AB350DCE30406E27001A29B5 /* conclusion.tex */,
 				AB350DCC30406DE1001A29B5 /* results.tex */,

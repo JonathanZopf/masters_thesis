@@ -2987,6 +2987,7 @@
       \strng{authornamehash}{809f695b398afbb54b544c49e8d1bbbb}
       \strng{authorfullhash}{809f695b398afbb54b544c49e8d1bbbb}
       \strng{authorfullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \field{extraname}{1}
       \field{labelalpha}{Pea09}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -3013,6 +3014,54 @@
       \endverb
       \verb{url}
       \verb https://www.cambridge.org/core/books/causality/B0046844FAE10CBF274D4ACBDAEB5F5B
+      \endverb
+    \endentry
+    \entry{pearlCausalDiagramsEmpirical1995}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=809f695b398afbb54b544c49e8d1bbbb}{%
+           family={Pearl},
+           familyi={P\bibinitperiod},
+           given={Judea},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{fullhash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{fullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{bibnamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorbibnamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authornamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorfullhash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorfullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \field{extraname}{2}
+      \field{labelalpha}{Pea95}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The primary aim of this paper is to show how graphical models can be used as a mathematical language for integrating statistical and subject-matter information. In particular, the paper develops a principled, nonparametric framework for causal inference, in which diagrams are queried to determine if the assumptions available are sufficient for identifying causal effects from nonexperimental data. If so the diagrams can be queried to produce mathematical expressions for causal effects in terms of observed distributions; otherwise, the diagrams can be queried to suggest additional observations or auxiliary experiments from which the desired inferences can be obtained.}
+      \field{day}{1}
+      \field{issn}{0006-3444}
+      \field{journaltitle}{Biometrika}
+      \field{month}{12}
+      \field{number}{4}
+      \field{title}{Causal Diagrams for Empirical Research}
+      \field{urlday}{6}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{82}
+      \field{year}{1995}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{669\bibrangedash 688}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1093/biomet/82.4.669
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/biomet/82.4.669
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/biomet/82.4.669
       \endverb
     \endentry
     \entry{parcalabescuMeasuringFaithfulnessSelfconsistency2024}{inproceedings}{}{}
@@ -3131,8 +3180,8 @@
       \field{labeltitlesource}{title}
       \field{abstract}{We introduce four principles for explainable artificial intelligence (AI) that comprise fundamental properties for explainable AI systems. We propose that explainable AI systems deliver accompanying evidence or reasons for outcomes and processes; provide explanations that are understandable to individual users; provide explanations that correctly reflect the system s process for generating the output; and that a system only operates under conditions for which it was designed and when it reaches sufficient confidence in its output. We have termed these four principles as explanation, meaningful, explanation accuracy, and knowledge limits, respectively. Through significant stakeholder engagement, these four principles were developed to encompass the multidisciplinary nature of explainable AI, including the fields of computer science, engineering, and psychology. Because one-sizefits-all explanations do not exist, different users will require different types of explanations. We present five categories of explanation and summarize theories of explainable AI. We give an overview of the algorithms in the field that cover the major classes of explainable algorithms. As a baseline comparison, we assess how well explanations provided by people follow our four principles. This assessment provides insights to the challenges of designing explainable AI systems.}
       \field{day}{29}
+      \field{eid}{NIST IR 8312}
       \field{month}{9}
-      \field{number}{NIST IR 8312}
       \field{title}{Four Principles of Explainable Artificial Intelligence}
       \field{urlday}{27}
       \field{urlmonth}{4}
@@ -3725,50 +3774,6 @@
       \verb{url}
       \verb https://www.degruyter.com/document/doi/10.1515/9781400881970-018/html
       \endverb
-    \endentry
-    \entry{shpitserIdentificationJointInterventional2006}{inproceedings}{}{}
-      \name{author}{2}{}{%
-        {{hash=9ebb753339d5d0ba2ebfe33a9c7bbb87}{%
-           family={Shpitser},
-           familyi={S\bibinitperiod},
-           given={Ilya},
-           giveni={I\bibinitperiod}}}%
-        {{hash=809f695b398afbb54b544c49e8d1bbbb}{%
-           family={Pearl},
-           familyi={P\bibinitperiod},
-           given={Judea},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Boston, Massachusetts}%
-      }
-      \list{publisher}{1}{%
-        {AAAI Press}%
-      }
-      \strng{namehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{fullhash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{fullhashraw}{3fb93ee220155963590a9e739022d6e5}
-      \strng{bibnamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorbibnamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authornamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorfullhash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorfullhashraw}{3fb93ee220155963590a9e739022d6e5}
-      \field{labelalpha}{SP06}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This paper is concerned with estimating the effects of actions from causal assumptions, represented concisely as a directed graph, and statistical knowledge, given as a probability distribution. We provide a necessary and sufficient graphical condition for the cases when the causal effect of an arbitrary set of variables on another arbitrary set can be determined uniquely from the available information, as well as an algorithm which computes the effect whenever this condition holds. Furthermore, we use our results to prove completeness of do-calculus [Pearl, 1995], and a version of an identification algorithm in [Tian, 2002] for the same identification problem. Finally, we derive a complete characterization of semi-Markovian models in which all causal effects are identifiable.}
-      \field{booktitle}{Proceedings of the 21st National Conference on {{Artificial}} Intelligence - {{Volume}} 2}
-      \field{day}{16}
-      \field{isbn}{978-1-57735-281-5}
-      \field{month}{7}
-      \field{series}{{{AAAI}}'06}
-      \field{title}{Identification of Joint Interventional Distributions in Recursive Semi-{{Markovian}} Causal Models}
-      \field{year}{2006}
-      \field{dateera}{ce}
-      \field{pages}{1219\bibrangedash 1226}
-      \range{pages}{8}
     \endentry
     \entry{suzgunChallengingBIGBenchTasks2023}{inproceedings}{}{}
       \name{author}{11}{}{%
