@@ -3,12 +3,12 @@
 
 Tables~\ref{tab:oracle-bbq}--\ref{tab:oracle-credit} summarize the partitions produced
 for the joint configurations. Since both evaluated models use \texttt{gpt-oss:120b} as
-the auxiliary model $A$, their independently generated partitions are pooled. The
+the auxiliary model $\mathcal{A}$, their independently generated partitions are pooled. The
 counterfactual multiplier is
 $\sum_{s\in\mathcal{S}}(2^{|s|}-1)/|\mathbf{C}|$, relative to one atomic
 counterfactual per concept. Counterfactual counts refer to successfully written files;
 the multiplier instead reflects the complete oracle partitions and is therefore not
-reduced by later generation failures. \emph{Concepts grouped} denotes the percentage of concepts assigned to non-singleton groups. All values are aggregated across the two runs with different evaluation models $M$.
+reduced by later generation failures. \emph{Concepts grouped} denotes the percentage of concepts assigned to non-singleton groups. All values are aggregated across the two runs with different evaluation models $\mathcal{M}$.
 
 \begingroup
 \setlength{\tabcolsep}{3pt}

@@ -445,6 +445,42 @@
       \verb https://www.mdpi.com/2227-7390/11/9/1982
       \endverb
     \endentry
+    \entry{cramer1946mathematical}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=8815262f8ce833f8804c25a5afc1996b}{%
+           family={Cramér},
+           familyi={C\bibinitperiod},
+           given={Harald},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Princeton}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{fullhash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{fullhashraw}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{bibnamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorbibnamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authornamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorfullhash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorfullhashraw}{8815262f8ce833f8804c25a5afc1996b}
+      \field{labelalpha}{Cra46}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-691-08004-6}
+      \field{series}{Princeton Mathematical Series}
+      \field{title}{Mathematical Methods of Statistics}
+      \field{volume}{9}
+      \field{year}{1946}
+      \field{dateera}{ce}
+      \field{pages}{282}
+      \range{pages}{1}
+    \endentry
     \entry{chenModelsExplainThemselves2024}{inproceedings}{}{}
       \name{author}{8}{}{%
         {{hash=8b13bbcb50b70d8c509494ad345e35dc}{%
@@ -616,6 +652,41 @@
       \verb{url}
       \verb http://data.europa.eu/eli/reg/2024/1689/oj
       \endverb
+    \endentry
+    \entry{fieldDiscoveringStatisticsUsing2017}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=e455d44d4062027b5d79a7bf3817371e}{%
+           family={Field},
+           familyi={F\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SAGE}%
+      }
+      \strng{namehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{fullhash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{fullhashraw}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{bibnamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorbibnamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authornamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorfullhash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorfullhashraw}{e455d44d4062027b5d79a7bf3817371e}
+      \field{labelalpha}{Fie17}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{With an exciting new look, new characters to meet, and its unique combination of humour and step-by-step instruction, this award-winning book is the statistics lifesaver for everyone. From initial theory through to regression, factor analysis and multilevel modelling, Andy Field animates statistics and SPSS software with his famously bizarre examples and activities. What’s brand new: A radical new design with original illustrations and even more colour A maths diagnostic tool to help students establish what areas they need to revise and improve on. A revamped online resource that uses video, case studies, datasets, testbanks and more to help students negotiate project work, master data management techniques, and apply key writing and employability skills New sections on replication, open science and Bayesian thinking Now fully up to date with latest versions of IBM SPSS Statistics©. All the online resources above (video, case studies, datasets, testbanks) can be easily integrated into your institution′s virtual learning environment or learning management system. This allows you to customize and curate content for use in module preparation, delivery and assessment. Please note that ISBN: 9781526445780 comprises the paperback edition of the Fifth Edition and the student version of IBM SPSS Statistics.}
+      \field{day}{14}
+      \field{isbn}{978-1-5264-2296-5}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{pagetotal}{1268}
+      \field{title}{Discovering {{Statistics Using IBM SPSS Statistics}}}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \keyw{Psychology / Research & Methodology,Psychology / Statistics,Reference / Research,Social Science / Statistics}
     \endentry
     \entry{farayolaFairnessAIPredicting2023}{inproceedings}{}{}
       \name{author}{5}{}{%

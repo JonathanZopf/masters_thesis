@@ -33,17 +33,17 @@ This appendix collects worked examples that complement the formal development of
         \operatorname{cov}(\mathbf{CE}_{\mathrm{Matton}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)(\mathrm{EE}_i - 1.1) = 0.18, \\
         \operatorname{var}(\mathbf{CE}_{\mathrm{Matton}})              & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)^2 = 0.16, \\
         \operatorname{var}(\mathbf{EE})                                 & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{EE}_i - 1.1)^2 = 0.24, \\
-        \mathrm{PCC}_{\mathrm{Matton}}                                  & = \frac{0.18}{\sqrt{0.16 \cdot 0.24}} \approx 0.919.
+        r_{\mathrm{Matton}}                                  & = \frac{0.18}{\sqrt{0.16 \cdot 0.24}} \approx 0.919.
     \end{align}
     For the assumed normalized FELICS vector,
     \begin{align}
         \operatorname{cov}(\mathbf{CE}_{\mathrm{adj}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{adj},i} - 1.2)(\mathrm{EE}_i - 1.1) = 0.28, \\
         \operatorname{var}(\mathbf{CE}_{\mathrm{adj}})              & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{adj},i} - 1.2)^2 = 0.372, \\
-        \mathrm{PCC}_{\mathrm{adj}}                                 & = \frac{0.28}{\sqrt{0.372 \cdot 0.24}} \approx 0.937.
+        r_{\mathrm{adj}}                                 & = \frac{0.28}{\sqrt{0.372 \cdot 0.24}} \approx 0.937.
     \end{align}
 
     \smallskip
-    \textbf{Conclusion:} Although normalization preserves the sum and mean of the CE values in this example, it changes how the values are distributed around that mean. Consequently, both the CE variance and its covariance with $\mathbf{EE}$ change, yielding $\mathrm{PCC}_{\mathrm{adj}}\approx0.937$ instead of $\mathrm{PCC}_{\mathrm{Matton}}\approx0.919$. Equality of the aggregate CE score therefore does not imply equality of the resulting Pearson faithfulness score.
+    \textbf{Conclusion:} Although normalization preserves the sum and mean of the CE values in this example, it changes how the values are distributed around that mean. Consequently, both the CE variance and its covariance with $\mathbf{EE}$ change, yielding $r_{\mathrm{adj}}\approx0.937$ instead of $r_{\mathrm{Matton}}\approx0.919$. Equality of the aggregate CE score therefore does not imply equality of the resulting Pearson faithfulness score.
 \end{example_box}
 
 \section*{Softmax-Ceiling in FELICS in Practice}

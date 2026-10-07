@@ -1,0 +1,200 @@
+\chapter{Evaluation Methodology}
+\label{ch:evaluation_methodology}
+The preceding chapters have modeled the proposed extension FELICS from a purely theoretical standpoint: not only were the principles guiding its design established in Chapter~\ref{sec:conception}, but its behavior was also formalized and predicted in Chapter~\ref{sec:modeling_updated_metric}. However, it remains to be shown whether the metric behaves in practice as its theoretical construction suggests. Furthermore, empirical data is needed to answer the guiding research questions formulated in Chapter \ref{sec:research_questions}. To this end, an evaluation is conducted against a reference implementation, whose methodology is prepared within this chapter.
+
+\section{Evaluation Settings}
+The research questions are investigated under a common set of implementation and sampling decisions. The following subsections document the exact settings used to make the experiments reproducible and their results comparable.
+
+\subsection{Reference Implementation}
+\label{sec:reference_implementation}
+Thus far, FELICS has only been modeled mathematically, without an accompanying executable implementation. However, an implementation is required to automatically gather empirical data and to allow fellow researchers to use the FELICS pipeline without having to reimplement it themselves. A \emph{reference implementation} was therefore developed, building largely upon the same code base as the original implementation by Matton et al.~\cite{mattonWalkTalkMeasuring2024} and introducing changes only where appropriate and necessary. The repository, available at \url{https://github.com/JonathanZopf/FELICS}, is a fork of the upstream implementation of Matton et al.~\cite{mattonWalkTalkMeasuring2024} at \url{https://github.com/kmatton/walk-the-talk}. Both experimental implementations are maintained in this fork: shared adaptations for local AI workstations and automated benchmarking preceded the separation into a baseline branch and a FELICS branch. Consequently, the baseline experiments use the adapted Matton et al.~\cite{mattonWalkTalkMeasuring2024} implementation in the fork. Appendix~\ref{app:reproducibility} documents the experimental revisions, execution commands, and repository artifacts.
+
+\subsection{Selection of Datasets}
+The evaluation is conducted on three distinct datasets. BBQ and MedQA represent natural-language datasets with their own particular characteristics and enable a direct comparison between FELICS and the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}. New German Credit represents a sample tabular dataset, offering the advantages of reliable and deterministic concept extraction and association-based grouping (see Section~\ref{sec:oracle_tabular}). Because the original implementation does not natively support tabular data, it was extended with the required tabular input and intervention handling for the implementation comparison in \rqref{rq:convergence}.
+
+\subsubsection{BBQ}
+This English-language dataset was developed by Parrish et al.~\cite{parrishBBQHandbuiltBias2022} to expose hidden biases of LLMs against minorities and marginalized groups in a question-answering context. Typically, an ambiguous context with limited additional information is provided, prompting models to rely on hidden cues that often reflect stereotypes. The LLM is required to choose from three answer choices (Person A, Undetermined, Person B), although no objectively correct answer exists. Because this dataset is well suited for exposing biases in LLMs, it was also used by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their own evaluation.
+
+\subsubsection{MedQA}
+Introduced by Jin et al.~\cite{jinWhatDiseaseDoes2021}, this dataset poses medical questions to the LLM, drawn from real licensing exams administered in Chinese and English. Like Matton et al.~\cite{mattonWalkTalkMeasuring2024}, this evaluation only makes use of the subset of English-language questions in which a hypothetical patient is described and the model must select the most likely diagnosis from a set of predetermined answer choices, based on the information provided. Unlike BBQ, MedQA therefore has a clear correct answer; however, this correctness is not used for evaluation, since both metrics are rather concerned with the alignment between decision behavior and explanations than whether its final choice happens to be factually correct.
+
+\subsubsection{New German Credit}
+\label{sec:new_german_credit_dataset}
+The German Credit dataset and its updated version, South German Credit \cite{grompingSouthGermanCredit2019}, are widely used within the machine learning community. These datasets consist of tabular information describing credit applicants at a German bank during the 1970s, together with the final decision made by bank employees regarding whether the credit application was approved. One notable aspect of this data is the correlated nature of several columns. However, the outdated nature of both datasets---for instance, the use of the obsolete \emph{Deutsche Mark} currency, or telephone ownership as a recorded property---may confuse modern LLMs. A synthetic dataset inspired by German Credit was therefore constructed specifically for this evaluation. Several columns where manually defined and specified with their intended meanings and value ranges. DeepSeek R1 was then instructed to generate 200 fictional credit-applicant records with plausible values and associations between related columns. These specifications were generation objectives rather than an empirical calibration to current economic conditions in Germany. DeepSeek R1 was chosen because it is neither of the two evaluated models, reducing the direct overlap between the model generating the data and those evaluated on it. The creation prompt is reproduced in Prompt~\ref{prompt:new_german_credit_generation}. The resulting dataset is available as \texttt{.csv}-file in the FELICS source code, within the \path{/data} subfolder.
+
+The general evaluation pipeline described in Section~\ref{sec:modeling_updated_metric} is applied uniformly across all three datasets: input values are modified to observe whether the model's final decision changes. As with the original metric by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, the prompts used within FELICS still need to be adjusted individually for each dataset; these prompts can likewise be found in the source code, within the \path{/data} subfolder.
+
+\subsection{Selection of Models}
+\label{sec:selection_models}
+Causal Concept Faithfulness, as proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, is designed to be compatible with an arbitrary LLM, a strength that FELICS preserves. Selecting concrete models for evaluation is therefore inherently difficult. This decision was guided by the constraint that a given model must either be hostable on local hardware or accessible via a free API with reasonable usage limits, owing to cost constraints. Based on these criteria, two medium-sized, state-of-the-art LLMs were selected.
+
+Matton et al.~\cite{mattonWalkTalkMeasuring2024} evaluate \texttt{GPT-3.5}, \texttt{GPT-4o}, and \texttt{Claude~3.5 Sonnet}. Although reusing these models would facilitate direct reproduction of their experimental setting, their proprietary, paid API access was not feasible within the resources available for this thesis; the evaluation therefore uses open-weight models that can be executed locally or accessed without comparable usage costs.
+
+\subsubsection{gpt-oss:120b}
+This LLM, introduced by OpenAI as an open-weights model in 2025, employs a mixture-of-experts architecture and comprises 117 billion parameters \cite{Gptoss2026}. According to its developer, its performance is comparable to that of the proprietary \texttt{GPT-4o-mini}. It serves as an example of a current American reasoning model and is executed on local infrastructure.
+
+\subsubsection{Mistral Medium 3.5}
+This model has a similar number of parameters (128 billion) but does not employ a \emph{mixture-of-experts} architecture \cite{MistralMedium35}. It was released by the French company Mistral in 2026 and is likewise available as an open-weights model with strong reasoning capabilities. The API provided by Mistral offers a generous usage policy, which helps conserve local computing resources.
+
+\subsubsection{Auxiliary LLM}
+\texttt{gpt-oss:120b} serves not only as a model under evaluation but also as the auxiliary LLM responsible for concept extraction from questions, interaction presumption, counterfactual generation, and concept extraction from the generated explanations across all experimental runs.
+
+While employing the same model for both generation ($\mathcal{M}$) and auxiliary parsing ($\mathcal{A}$) may raise concerns regarding evaluation circularity and bias transfer, this approach directly mirrors the methodology established by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. In their work, GPT-4o was similarly utilized as the universal auxiliary model, including in runs where it was the model under evaluation. This decision was further supported by pilot experiments, which demonstrated that \texttt{gpt-oss:120b} possessed the highest reliability for these complex extraction tasks. Additionally, beyond practical hardware advantages such as reducing the number of models that must be concurrently loaded on the hosting machine, this configuration provides a unified baseline that enables observations regarding cross-model (mis-)alignment between $\mathcal{M}$ and $\mathcal{A}$.
+
+\subsection{Samples per Question}
+Matton et al.~\cite{mattonWalkTalkMeasuring2024} collected 50 samples per original and counterfactual question in their work ($S = 50$). While a sample size of this scale improves estimate reliability, it is unfeasible within the time and resource constraints of this thesis. Given the available hardware, generating a single complete output for a dataset question response or auxiliary task on a local model (even a smaller variant such as \texttt{mistral-small:24b}) typically requires at least 40 seconds. Because FELICS also requires more completions for both response generation and auxiliary tasks than the original framework (see Equation~\ref{eq:subset_counterfactual_bound}), a reduced sample size is necessary.
+
+Therefore, for both models, \textbf{$S=10$} responses are gathered for BBQ and MedQA. Although this constitutes only a fifth of the sample size used by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, it is deemed sufficient for a first evaluation of the FELICS framework. For New German Credit, the number of samples will be further reduced to \textbf{$S=5$}, since each question is conceptually identical and differs only in its underlying data, suggesting higher statistical stability.
+
+\subsection{Question Selection from Datasets}
+\label{sec:questions_per_dataset}
+The reduced number of samples per question is, in part, a deliberate trade-off: it frees the computational budget to keep the number of evaluated questions per dataset and model combination comparatively high. Matton et al.~\cite{mattonWalkTalkMeasuring2024} evaluate 30 questions per dataset in their work. The same number is therefore adopted here, so that \textbf{30 questions} are evaluated for each combination of dataset and model.
+
+Wherever possible, the questions themselves are selected in the same way as by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, so that results on the natural-language datasets remain directly comparable. For BBQ, Matton et al.~\cite{mattonWalkTalkMeasuring2024} use the first 30 questions in the order in which they appear in the dataset source; the same questions are evaluated here. For MedQA, they instead select specific question indices to obtain a representative set of questions; these indices are adopted unchanged. For New German Credit, which was constructed for this thesis and therefore has no prior selection, the first 30 records (rows) of the generated dataset are evaluated. This deterministic rule avoids any manual selection of records by the author. The exact selection arguments and question identifiers for all datasets are documented in Appendix~\ref{app:reproducibility}.
+
+Matton et al.~\cite{mattonWalkTalkMeasuring2024} further observe that dataset-level faithfulness scores remain stable once approximately 15 questions are included. It is, however, uncertain to what extent this observation transfers to the present evaluation. With fewer responses per question, each question-level estimate is subject to greater sampling variation, so a larger number of questions may be required before dataset-level results stabilize.
+
+An alternative allocation of the same budget would have been to double the number of responses per question while restricting the evaluation to 15 representative questions per dataset. This option was not pursued, because the two sources of uncertainty affect different parts of the analysis: the number of responses per question governs the precision of individual answer distributions and CE estimates, whereas the number of questions determines the basis for population-level inference. Since the hypothesis tests specified in Section~\ref{sec:analysis_procedures} operate on question-level observations, halving the number of questions to 15 would substantially reduce statistical power and widen the uncertainty of every test, whereas the additional responses per question would not compensate for this loss. Retaining 30 questions therefore provides a more reliable foundation for the statistical analyses than a smaller set of more precisely estimated questions.
+
+\subsection{Removal vs.\ Value-Replacement Counterfactuals}
+For MedQA, Matton et al.~\cite{mattonWalkTalkMeasuring2024} use counterfactuals in which the value of the concept under intervention is \emph{removed}. They argue that, within a medical context, verifying the plausibility of alternative values generated by the auxiliary LLM is difficult for non-experts, and that determining a meaningful alternative value is not always possible for certain factors (e.g., blood pressure). Conversely, for the experiments on the BBQ dataset, Matton et al.~\cite{mattonWalkTalkMeasuring2024} use \emph{value replacements}, in which a property takes on \emph{one} new value.
+
+Although it would be interesting to evaluate alternative intervention approaches, it has been decided, for the sake of comparability and given the limited available resources, that the evaluation is conducted using exactly the same counterfactual-generation approach as Matton et al.~\cite{mattonWalkTalkMeasuring2024} for each respective dataset. The newly introduced New German Credit dataset is assessed using \emph{concept removal}, since the absence of potentially conflicting information (as discussed in Section~\ref{sec:influence}) may help to better reveal the interaction effects of certain concepts.
+
+\subsection{Explanations Used to Estimate Explanation-Implied Effects}
+\label{sec:ee_evaluation_setup}
+The source of the explanations used to estimate the explanation-implied-effect (EE) vector depends on the intervention strategy. For the removal-based datasets MedQA and New German Credit, the EE vector is estimated exclusively from explanations generated for the original, unmodified question. Explanations generated for removal counterfactuals are not included in this estimate. For BBQ, which uses value-replacement counterfactuals, explanations from both the original and counterfactual questions are used in accordance with Equation~\ref{eq:ee}.
+
+This dataset-specific choice follows the experimental procedure reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. It is also required by the semantics of concept removal: once a concept has been removed from the question, a valid explanation of the resulting answer cannot generally be expected to identify that concept as influential. Including such counterfactual explanations would therefore reduce the estimated EE for reasons introduced by the intervention itself rather than because the original explanation failed to reflect the model's behavior. This concern is particularly pronounced for FELICS because a joint intervention may remove several concepts simultaneously, thereby mechanically restricting the set of concepts that can legitimately occur in the counterfactual explanation. Counterfactual responses remain necessary for estimating causal effects from changes in the answer distribution; the restriction applies only to the explanations used to construct the EE vector.
+
+\section{Operationalization and Analysis Procedures}
+\label{sec:analysis_procedures}
+
+Whereas Section~\ref{sec:research_questions} specifies what each research question asks and states the corresponding hypothesis, this section operationalizes the relevant constructs and defines the quantitative or qualitative procedure used to assess each hypothesis under the experimental settings established above. Outputs from the Causal Concept Faithfulness metric by Matton et al.~\cite{mattonWalkTalkMeasuring2024} and from FELICS are analyzed in the statistical software \texttt{R}. The corresponding scripts can be found in the \path{/evaluation} subfolder of the FELICS repository introduced in Section~\ref{sec:reference_implementation}.
+
+\subsection{Evaluation Conditions and Causal-Effect Notation}
+\label{sec:controlled_atomic_baseline}
+
+For each dataset and evaluated model, three runs supply the causal-effect results: the original implementation of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, which has no oracle; FELICS with the oracle restricted to $n_{\max}=1$; and a joint FELICS run with $n_{\max}=4$ for BBQ and MedQA or $n_{\max}=3$ for New German Credit. The result paths for these runs are documented in Appendix~\ref{app:reproducibility}. The runs collect their data separately and can therefore differ in their sampled responses, explanations, and counterfactuals. For natural-language inputs, they may also identify different concept sets.
+
+\noindent\textbf{Four causal-effect quantities.} The joint run supports two calculations: one using only singleton effects and one attributing the effects of joint interventions. Together with the other two runs, this gives four quantities. Their dataset and model arguments are omitted because each comparison fixes both.
+
+\begin{center}
+	\small
+	\begin{tabular}{@{}p{0.23\textwidth}p{0.30\textwidth}p{0.40\textwidth}@{}}
+		\hline
+		\textbf{Notation}                  & \textbf{Source run}     & \textbf{Calculation}                            \\
+		\hline
+		$\mathrm{CE}_{\mathrm{Matton}}$    & Original implementation & Original causal-effect estimator                \\
+		$\mathrm{CE}_{\mathrm{singleton}}$ & FELICS, $n_{\max}=1$    & Singleton-only FELICS estimation                \\
+		$\mathrm{CE}_{\mathrm{atomic}}$    & Joint FELICS run        & Singleton effects from that run                 \\
+		$\mathrm{CE}_{\mathrm{joint}}$     & Same joint FELICS run   & Corrected Shapley attribution within its groups \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Here, $\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m)$ denotes the estimate obtained with the original causal-effect formula in Equation~\ref{eq:ce}. The quantity $\mathrm{CE}_{\mathrm{singleton}}(\mathbf{x},C_m)$ is calculated using Equation~\ref{eq:ce_adj} with $s=\{C_m\}$ and the data collected in the separate $n_{\max}=1$ FELICS run. The term \emph{singleton} thus identifies a separately collected condition, whereas \emph{atomic} identifies a calculation within the joint run. Although both use the singleton-effect rule, their numerical estimates need not coincide because their input data differ.
+
+For the joint run, let $\mathbf{S}_{\mathbf{x}}$ be the fixed oracle partition used for question $\mathbf{x}$, and define
+\begin{equation}
+	\label{eq:evaluation_group_lookup}
+	f_{\mathbf{x}}(C_m) := \text{the unique }s\in\mathbf{S}_{\mathbf{x}}\text{ such that }C_m\in s.
+\end{equation}
+This helper retrieves an existing group; it does not query the oracle again. Using the value function in Equation~\ref{eq:value_function} and the adjusted Shapley definition in Equation~\ref{eq:ce_adj}, the two estimates from this run are
+\begin{align}
+	\label{eq:evaluation_ce_atomic}
+	\mathrm{CE}_{\mathrm{atomic}}(\mathbf{x},C_m)
+	 & :=v_{\mathbf{x}}(\{C_m\})
+	=\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,\{C_m\}),                           \\
+	\label{eq:evaluation_ce_joint}
+	\mathrm{CE}_{\mathrm{joint}}(\mathbf{x},C_m)
+	 & :=\mathrm{CE}_{\mathrm{adj}}\bigl(\mathbf{x},C_m,f_{\mathbf{x}}(C_m)\bigr).
+\end{align}
+All quantities on the right-hand sides use data from the joint run. The singleton equality follows from Math Demo~\ref{ma:one_item_group}. Every joint run includes singleton treatments because the Shapley calculation evaluates every nonempty subset of each group. No model responses to multi-concept treatments enter $\mathrm{CE}_{\mathrm{atomic}}$.
+
+\noindent\textbf{Faithfulness notation.} The question-level faithfulness scores are denoted by $\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$ for the original implementation and $\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})$ for the separate FELICS run with $n_{\max}=1$. Each score is the Pearson correlation between the concept-level CE and EE vectors obtained from its respective run.
+
+\noindent\textbf{Controlled atomic--joint comparison.} The vectors $\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C})$ and $\mathbf{CE}_{\mathrm{joint}}(\mathbf{x},\mathbf{C})$ collect these estimates over the same concept set. Both calculations reuse the original-response and singleton-counterfactual samples, and the explanation-implied-effect vector $\mathbf{EE}(\mathbf{x},\mathbf{C})$ is held fixed. Their paired faithfulness estimates are
+\begin{align}
+	\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})
+	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right), \\
+	\mathcal{F}_{\mathrm{joint}}(\mathbf{x})
+	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{joint}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
+\end{align}
+Reusing these data isolates the change in causal-effect estimation from variation between separately sampled runs. Research Questions~\ref{rq:correlation_diff}, \ref{rq:faithfulness_increase}, and~\ref{rq:motivating_example} use this atomic--joint comparison. Research Question~\ref{rq:convergence} compares $\mathrm{CE}_{\mathrm{Matton}}$ with $\mathrm{CE}_{\mathrm{singleton}}$ from the separately executed implementations. Research Question~\ref{rq:ranking} instead examines normalization by comparing raw and adjusted Shapley effects, defined in its own subsection below.
+
+\subsection{Interaction-Presumption Strength and Causal-Effect Changes}
+This subsection operationalizes \rqref{rq:correlation_diff}, introduced in Section~\ref{sec:research_questions}.
+
+\noindent\textbf{Scope and comparison.} The relationship between the strength of the oracle's interaction presumption and the resulting CE difference is assessed separately for each evaluated model on the natural-language datasets BBQ and MedQA. A single joint FELICS run with $n_{\max}=4$ supplies the controlled atomic and interaction-aware quantities defined in Section~\ref{sec:controlled_atomic_baseline}.
+
+\noindent\textbf{Operationalization.} For every question $\mathbf{x}$ with concept set $\mathbf{C}$, the interaction-presumption strength under configuration $n_{\max}$ is defined as
+\begin{equation}
+	\kappa(\mathbf{x}, n_{\max}) := \frac{1}{|\mathbf{C}|} \sum_{s \,\in\, \mathcal{O}(\mathbf{x},\mathbf{C},n_{\max})} \ \sum_{\emptyset \neq T \subseteq s} |T|,
+\end{equation}
+that is, the total number of concept occurrences across all nonempty treatments evaluated for $\mathbf{x}$, normalized by the number of concepts $|\mathbf{C}|$. Thus, $\kappa$ summarizes the extent of joint treatment implied by the oracle partition; it is not an association coefficient and does not establish interaction in the model response. Since every candidate interaction group is a singleton under the atomic configuration, $\kappa(\mathbf{x},1)=1$ analytically for every question; hence only $\kappa(\mathbf{x},4)$ must be calculated from the joint run. The difference in interaction-presumption strength is denoted by $\Delta\kappa(\mathbf{x}) := |\kappa(\mathbf{x},4)-1|$.
+
+Using $\mathrm{CE}_{\mathrm{atomic}}$ and $\mathrm{CE}_{\mathrm{joint}}$ as defined in Equations~\ref{eq:evaluation_ce_atomic} and~\ref{eq:evaluation_ce_joint}, the primary question-level CE difference is
+\begin{equation}
+	\Delta \mathrm{CE}(\mathbf{x}) := \frac{1}{|\mathbf{C}|}\sum_{C_m\in\mathbf{C}}
+	\left|\mathrm{CE}_{\mathrm{joint}}(\mathbf{x},C_m)-\mathrm{CE}_{\mathrm{atomic}}(\mathbf{x},C_m)\right|.
+\end{equation}
+Taking the absolute difference before averaging prevents increases and decreases for different concepts from cancelling. As a sensitivity analysis, the absolute difference between the two question-level CE means is also reported.
+
+\noindent\textbf{Statistical procedure.} A table with one row per question is assembled containing $\Delta\kappa(\mathbf{x})$ and $\Delta \mathrm{CE}(\mathbf{x})$. The relationship between both columns is assessed using a one-sided Pearson correlation test with the alternative hypothesis that the correlation is positive. The procedure is repeated independently for each dataset and model. To evaluate the analogous relationship for faithfulness, the Bayesian faithfulness pipeline is applied separately to $\mathbf{CE}_{\mathrm{atomic}}$ and $\mathbf{CE}_{\mathrm{joint}}$, while holding $\mathbf{EE}$ fixed as specified in Section~\ref{sec:controlled_atomic_baseline}. The absolute difference between the resulting paired question-level scores, $\Delta\mathcal{F}(\mathbf{x}):=|\mathcal{F}_{\mathrm{joint}}(\mathbf{x})-\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})|$, is then correlated with $\Delta\kappa(\mathbf{x})$.
+
+\noindent\textbf{Decision criterion.} Denoting the resulting Pearson correlation coefficient by $\mathrm{PCC}_{\Delta}$, the hypothesis is considered supported for a given dataset and model if $\mathrm{PCC}_{\Delta} \ge 0.10$ and $p \le 0.10$.
+
+\noindent\textbf{Applicability.} Fixing the joint configuration to $n_{\max}=4$ for BBQ and MedQA prevents the oracle's ability to form larger candidate interaction groups from being unnecessarily restricted, while keeping $n_{\max}$ identical across all questions of a dataset ensures that $\Delta\kappa(\mathbf{x})$ remains comparable. The procedure cannot be applied to New German Credit because its oracle produces a single, dataset-wide partition of concepts (Section~\ref{sec:oracle_tabular}) rather than a per-question grouping. Consequently, $\kappa(\mathbf{x},4)$ would be identical for every question, leaving no variance in $\Delta\kappa(\mathbf{x})$ against which to correlate $\Delta \mathrm{CE}(\mathbf{x})$.
+
+\subsection{Equivalence with the Original Metric}
+This subsection operationalizes \rqref{rq:convergence}, introduced in Section~\ref{sec:research_questions}.
+
+\noindent\textbf{Scope and comparison.} The convergence of FELICS with $n_{\max}=1$ to the original Causal Concept Faithfulness metric is evaluated separately for each model on BBQ, MedQA, and New German Credit. The outputs of both pipelines are restricted to the questions present in both. For each shared question $\mathbf{x}$, the mean CE across all its concepts is computed using $\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m)$ for the baseline and $\mathrm{CE}_{\mathrm{singleton}}(\mathbf{x},C_m)$ for FELICS. The corresponding question-level faithfulness scores, $\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$ and $\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})$, follow the notation defined in Section~\ref{sec:controlled_atomic_baseline}.
+
+\noindent\textbf{Empirical agreement test.} Independently sampled runs can differ even when both implementations realize the same estimand. Paired Two One-Sided Tests (TOST) therefore assess whether such differences remain practically negligible. For each shared question, the symmetric relative CE difference with $\eta_{\mathrm{tol}} = 10^{-8}$ is
+\begin{equation}
+	d_{\mathrm{CE}}(\mathbf{x}) :=
+	\frac{2\left(\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})-\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})\right)}
+	{\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})+\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})+\eta_{\mathrm{tol}}},
+\end{equation}
+and the absolute-scale faithfulness difference is $d_{\mathcal{F}}(\mathbf{x}):=\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})-\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$. Equivalence margins of $\delta_{\mathrm{CE}}=0.1$ and $\delta_{\mathcal{F}}=0.1$ are used, corresponding to a symmetric relative CE difference of at most approximately $10\%$ and an absolute faithfulness-score difference of at most $0.1$. Where as faithfulness is bounded within $[-1,1]$ the comparison of causal effect has no such absolute scale.
+
+\noindent\textbf{Decision criterion.} Equivalence is considered supported for a dataset and model if the implementation-agreement test succeeds for both CE and faithfulness. This requires the one-sided TOST $p$-values to be below $0.05$ for $d_{\mathrm{CE}}$ within $[-\delta_{\mathrm{CE}},\delta_{\mathrm{CE}}]$ and for $d_{\mathcal{F}}$ within $[-\delta_{\mathcal{F}},\delta_{\mathcal{F}}]$.
+
+\subsection{Preservation of Within-Question Concept Rankings}
+\label{sec:methodology-preservation}
+This subsection operationalizes \rqref{rq:ranking}, introduced in Section~\ref{sec:research_questions}.
+
+\noindent\textbf{Scope and comparison.} Rank preservation is evaluated on joint interventions for every model on all three datasets: BBQ, MedQA, and New German Credit. $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit are used.
+
+\noindent\textbf{Operationalization.} For every concept-level observation, let $s=f_{\mathbf{x}}(C_m)\in\mathbf{S}_{\mathbf{x}}$ be the group assigned to $C_m$ in the fixed partition for question $\mathbf{x}$, using the lookup defined in Equation~\ref{eq:evaluation_group_lookup}. The raw Shapley causal effect is defined as
+\begin{equation}
+	\mathrm{CE}_{\mathrm{raw}}(\mathbf{x},C_m,s) := \phi_m(v_{\mathbf{x}}),
+\end{equation}
+passing the question-specific unadjusted value function $v_{\mathbf{x}}$ into $\phi_m$ with player set $s$, which corresponds to the Shapley formulation of Equation~\ref{eq:shapley}. The raw value is paired with the adjusted Shapley causal effect $\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)$ from Equation~\ref{eq:ce_adj}. Both estimates use the same assigned group and the same sampled coalition values; only the payout-coefficient normalization differs. Those concepts are then appended to a dataset-level table. Consequently questions with more concepts contribute more observations; there is no equal weighting by question.
+
+\noindent\textbf{Statistical procedure.} The correspondence between the raw and adjusted causal effects is assessed using a one-sided Spearman rank-correlation test with the alternative hypothesis that the correlation is positive.
+
+\noindent\textbf{Decision criterion.} The hypothesis is considered supported for a given dataset and model if $\rho \ge 0.9$ and $p \le 0.05$.
+
+\subsection{Effect of Interaction Modeling on Faithfulness}
+This subsection operationalizes \rqref{rq:faithfulness_increase}, introduced in Section~\ref{sec:research_questions}.
+
+\noindent\textbf{Scope and comparison.} The effect of modeling interactions on faithfulness is evaluated separately for every dataset and model using the controlled comparison defined in Section~\ref{sec:controlled_atomic_baseline}. The Bayesian faithfulness pipeline is applied to $\mathbf{CE}_{\mathrm{atomic}}$ and $\mathbf{CE}_{\mathrm{joint}}$ while the explanation-implied-effect vector and sampled artifacts remain fixed. The joint configuration uses $n_{\max}=4$ for the natural-language datasets BBQ and MedQA and $n_{\max}=3$ for the tabular New German Credit dataset, consistent with the maximum group sizes established for the respective oracle implementations in Section~\ref{sec:joint_counterfactual}.
+
+\noindent\textbf{Statistical procedure.} A paired, one-sided Wilcoxon signed-rank test is conducted with the alternative hypothesis that the interaction-aware faithfulness scores are stochastically \emph{greater} than their atomic counterparts.
+
+\noindent\textbf{Decision criterion.} The hypothesis is considered supported for a given dataset and model if the resulting $p$-value is $\le 0.05$.
+
+\subsection{Resolution of the Motivating Underestimation Case}
+\label{sec:motivating_methodology}
+This subsection operationalizes \rqref{rq:motivating_example}, introduced in Section~\ref{sec:research_questions}.
+
+\noindent\textbf{Case-study design.} MedQA question 521 is evaluated in one joint FELICS run per evaluated model. The concept set and current values are fixed to the nine concepts reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9, so no auxiliary-LLM concept extraction is performed for this case. The analysis focuses on \textit{the patient's eating disorder} and \textit{the patient's self-perception of weight}.
+
+\noindent\textbf{Consensus partitioning.} The auxiliary LLM assigns the fixed concepts to candidate interaction groups using the natural-language oracle. For this case study, the oracle is queried repeatedly to obtain 50 valid partition judgments, instead of adopting a single judgment as in the other experiments with natural-language question. For each pair of concepts, the co-grouping frequency is recorded as the proportion of judgments in which they belong to the same group. These frequencies define the edge weights of an undirected graph whose nodes are the nine concepts. Edges with a co-grouping frequency of at least $0.50$ are retained and processed in descending order of weight by the constrained greedy partitioning procedure introduced for the tabular oracle (Algorithm~\ref{alg:greedy_merge}). Here, the graph weights represent agreement between repeated oracle judgments; they do not use the tabular oracle's statistical association tests. The resulting consensus partition is held fixed across the evaluated models. Its graph and retained co-grouping frequencies are reported in Appendix~\ref{app:rq5-oracle-partition}.
+
+\noindent\textbf{Controlled comparison.} For each evaluated model, $\mathrm{CE}_{\mathrm{atomic}}$ and $\mathrm{CE}_{\mathrm{joint}}$ are derived from the same joint run according to Section~\ref{sec:controlled_atomic_baseline}. The comparison therefore reuses the concept set, partition, sampled artifacts, and explanation-implied-effect vector. However this run got executed independently of all other experiments, so no data is shared. Likewise the number of responses to sample has been increased to \textbf{$S=50$}. A table will report the atomic effect, adjusted effect, and their difference for every concept. The published effects from Matton et al.~\cite{mattonWalkTalkMeasuring2024} are included as contextual reference values for their models; the hypothesis assessment uses the paired estimates for the models evaluated in this thesis.
+
+\noindent\textbf{Assessment criterion.} The case is considered resolved if $\mathrm{CE}_{\mathrm{joint}} > \mathrm{CE}_{\mathrm{atomic}}$ holds for both motivating concepts and for every evaluated model. Because the hypothesis concerns one specific question rather than a distribution of questions, no inferential statistical test is applicable; the results are instead reported as a case study.

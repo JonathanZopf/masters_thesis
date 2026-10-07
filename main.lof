@@ -4,40 +4,40 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Overview of the evaluation pipeline proposed by Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{19}{figure.caption.25}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The data generating process for one single original dataset question and the model response, as assumed by Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{21}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Causal graph under a surgical intervention on concept $C_m$; all other concepts and $V$ remain fixed. Adapted from \blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024}.}}{22}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Causal graph under a surgical intervention on concept $C_m$; all other concepts and $V$ remain fixed. Adapted from \blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} with color distinction.}}{22}{figure.caption.27}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Causal graph under a joint intervention on the concepts $C_i$ with $i \in M_{\Delta }$. All remaining concepts ($i \notin M_{\Delta }$) and the rest-of-question text $V$ remain fixed.}}{31}{figure.caption.28}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Causal graph under a joint intervention on the concept group $\mathcal {C}_{\Delta }=\{C_\ell \mid \ell \in I_{\Delta }\}$. All concepts with indices in $\{1,\dots ,M\}\setminus I_{\Delta }$ and the rest-of-question text $V$ remain fixed. Adapted from \blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} with color distinction and multi-concept intervention.}}{32}{figure.caption.28}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Comparison of the evaluation pipeline between Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} (left) and the proposed FELICS framework (right) with highlighted modifications.}}{47}{figure.caption.34}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}}{64}{figure.caption.49}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Co-grouping rates for the natural-language oracle on LLM-normalized Categories}}{67}{figure.caption.50}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max }=3$.}}{67}{figure.caption.51}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for BBQ.}}{69}{figure.caption.52}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for MedQA.}}{70}{figure.caption.53}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Identity plots for the completed RQ2 comparisons}}{72}{figure.caption.54}%
-\contentsline {figure}{\numberline {8.7}{\ignorespaces Identity plots for the New German Credit RQ2 comparisons}}{73}{figure.caption.55}%
-\contentsline {figure}{\numberline {8.8}{\ignorespaces Atomic and joint faithfulness identity plots for BBQ and MedQA}}{77}{figure.caption.58}%
-\contentsline {figure}{\numberline {8.9}{\ignorespaces Atomic and joint causal effects for the motivating MedQA example}}{80}{figure.caption.62}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}}{62}{figure.caption.47}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Co-grouping rates for the natural-language oracle on LLM-normalized Categories}}{65}{figure.caption.48}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max }=3$.}}{65}{figure.caption.49}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for BBQ.}}{67}{figure.caption.50}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for MedQA.}}{68}{figure.caption.51}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Identity plots for the completed RQ2 comparisons}}{70}{figure.caption.52}%
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Identity plots for the New German Credit RQ2 comparisons}}{71}{figure.caption.53}%
+\contentsline {figure}{\numberline {8.8}{\ignorespaces Atomic and joint faithfulness identity plots for BBQ and MedQA}}{75}{figure.caption.56}%
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Atomic and joint causal effects for the motivating MedQA example}}{78}{figure.caption.60}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{113}{figure.caption.69}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{114}{figure.caption.70}%
-\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{116}{figure.caption.71}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{111}{figure.caption.67}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{112}{figure.caption.68}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{114}{figure.caption.69}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{118}{figure.caption.73}%
-\contentsline {figure}{\numberline {D.2}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{120}{figure.caption.74}%
-\contentsline {figure}{\numberline {D.3}{\ignorespaces Question-level CE agreement for New German Credit}}{121}{figure.caption.75}%
-\contentsline {figure}{\numberline {D.4}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{123}{figure.caption.76}%
-\contentsline {figure}{\numberline {D.5}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{124}{figure.caption.77}%
-\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{126}{figure.caption.78}%
-\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{127}{figure.caption.79}%
-\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{128}{figure.caption.80}%
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{116}{figure.caption.71}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{118}{figure.caption.72}%
+\contentsline {figure}{\numberline {D.3}{\ignorespaces Question-level CE agreement for New German Credit}}{119}{figure.caption.73}%
+\contentsline {figure}{\numberline {D.4}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{121}{figure.caption.74}%
+\contentsline {figure}{\numberline {D.5}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{122}{figure.caption.75}%
+\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{124}{figure.caption.76}%
+\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{125}{figure.caption.77}%
+\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{126}{figure.caption.78}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

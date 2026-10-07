@@ -44,9 +44,9 @@ thick
 \node[fixed] (C1) at (0,4.0) {$C_1$};
 \node[fixed] (C2) at (0,2.8) {$C_2$};
 \node (dots1) at (0,1.7) {$\vdots$};
-\node[intervened] (Ci) at (0,0.6) {$C_i$};
-\node[intervened] (Cj) at (0,-0.6) {$C_j$};
-\node[intervened] (Ck) at (0,-1.8) {$C_k$};
+\node[intervened] (Ca) at (0,0.6) {$C_a$};
+\node[intervened] (Cb) at (0,-0.6) {$C_b$};
+\node[intervened] (Cc) at (0,-1.8) {$C_c$};
 \node (dots2) at (0,-3.0) {$\vdots$};
 \node[fixed] (CM) at (0,-4.1) {$C_M$};
 \node[fixed] (V) at (0,-5.6) {$V$};
@@ -55,7 +55,7 @@ thick
 \node[font=\Large\bfseries, anchor=south] at (0,4.8) {Mediators};
 
 %------------------------------------------------
-% Brace indicating M_Delta
+% Brace indicating the intervened concept group
 %------------------------------------------------
 \draw[
 decorate,
@@ -63,7 +63,7 @@ decoration={brace,mirror,amplitude=8pt},
 thick
 ]
 (-1.0,1.05) -- (-1.0,-2.25)
-node[midway,left=10pt] {$M_{\Delta}$};
+node[midway,left=10pt] {$\mathcal{C}_{\Delta}$};
 %------------------------------------------------
 % Outcome nodes
 %------------------------------------------------
@@ -75,9 +75,9 @@ node[midway,left=10pt] {$M_{\Delta}$};
 %------------------------------------------------
 \draw[->] (C1.east) -- (X.135);
 \draw[->] (C2.east) -- (X.150);
-\draw[->] (Ci.east) -- (X.165);
-\draw[->] (Cj.east) -- (X.180);
-\draw[->] (Ck.east) -- (X.195);
+\draw[->] (Ca.east) -- (X.165);
+\draw[->] (Cb.east) -- (X.180);
+\draw[->] (Cc.east) -- (X.195);
 \draw[->] (CM.east) -- (X.210);
 \draw[->] (V.east) -- (X.225);
 
