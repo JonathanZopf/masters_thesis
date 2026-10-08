@@ -11,7 +11,7 @@ To address this limitation, the thesis introduced FELICS (Faithfulness Estimatio
 
 \section{Answers to the Research Questions}
 
-Five research questions where defined in Section \ref{sec:research_questions} before collecting data with the reference implementation. The evaluation of \rqref{rq:correlation_diff} did not establish a general association between oracle-derived interaction-presumption strength and changes in causal effects or faithfulness. Larger or more numerous candidate groups therefore only indicate greater scope for joint evaluation, rather than demonstrating greater response-level interaction.
+Four research questions were defined in Section \ref{sec:research_questions} before collecting data with the reference implementation; in addition, the MedQA example that motivated this thesis was revisited as a case study. The evaluation of \rqref{rq:correlation_diff} did not establish a general association between oracle-derived interaction-presumption strength and changes in causal effects or faithfulness. Larger or more numerous candidate groups therefore only indicate greater scope for joint evaluation, rather than demonstrating greater response-level interaction.
 
 For \rqref{rq:convergence}, FELICS is theoretically compatible with the original metric when $n_{\max}=1$: under matching inputs and effect estimates, its construction reduces to that of Matton et al.~\cite{mattonWalkTalkMeasuring2024} as shown in Math Demo \ref{ma:independence_behavior}. The independently executed pipelines did not establish empirical equivalence within the predefined bounds. Although both used removal-based interventions, separate runs still varied through concept decomposition, counterfactual wording, sampled answers, and explanation interpretation. Practical reproducibility consequently remains unresolved and should be tested with fixed intermediate inputs and model outputs.
 
@@ -19,7 +19,7 @@ The results for \rqref{rq:ranking} show that the reference correction is more th
 
 For \rqref{rq:faithfulness_increase}, joint interventions did not systematically increase question-level faithfulness. The direction of change varied between dataset--model combinations. FELICS can revise which concepts receive causal credit, but faithfulness increases only when the revised CE vector aligns more closely with the EE vector. Interaction-aware attribution can accordingly reveal greater, lower, or similar explanation--behavior alignment.
 
-Finally, the conjunctive hypothesis for \rqref{rq:motivating_example} was not supported. Joint attribution increased the effects assigned to only one of the two investigated concepts for both evaluated models. The result nevertheless demonstrated that coalition measurements can materially redistribute causal credit.
+Finally, the expectation for the MedQA case study was only partially met. Joint attribution increased the effects assigned to only one of the two investigated concepts for both evaluated models. The result nevertheless demonstrated that coalition measurements can materially redistribute causal credit.
 
 \section{Research Contribution}
 

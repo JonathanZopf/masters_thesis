@@ -1,7 +1,7 @@
-\section{Resolution of the Motivating Underestimation Example}
+\section{Case Study: The MedQA Example of Matton et al.}
 \label{sec:results-motivating-example}
 
-Research Question~\ref{rq:motivating_example} examines whether FELICS resolves the underestimation identified by Matton et al.~\cite{mattonWalkTalkMeasuring2024} for MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
+This case study examines how joint attribution changes the causal effects that Matton et al.~\cite{mattonWalkTalkMeasuring2024} reported as surprisingly low for two concepts of MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
 
 The final consensus graph underlying this partition is shown in
 Figure~\ref{fig:rq5-oracle-grouping}, and its retained pairwise co-grouping
@@ -41,7 +41,7 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
   }
 \end{table}
 
-The interaction-aware estimate increases the credited causal effect of the eating-disorder concept for both evaluated models: from $0.018$ to $0.029$ for GPT-OSS 120B and from $0.129$ to $0.145$ for Mistral Medium 3.5. This is consistent with the direction predicted in \rqref{rq:motivating_example}. The corresponding result for self-perception of weight, however, moves in the opposite direction, decreasing from $0.021$ to $0.017$ for GPT-OSS 120B and from $0.181$ to $0.033$ for Mistral Medium 3.5. The hypothesis requires the corrected estimate to increase for both motivating concepts and across all evaluated models. It is therefore only partially supported and cannot be accepted as stated.
+The interaction-aware estimate increases the credited causal effect of the eating-disorder concept for both evaluated models: from $0.018$ to $0.029$ for GPT-OSS 120B and from $0.129$ to $0.145$ for Mistral Medium 3.5. This is consistent with the expectation stated in Section~\ref{sec:motivating_methodology}. The corresponding result for self-perception of weight, however, moves in the opposite direction, decreasing from $0.021$ to $0.017$ for GPT-OSS 120B and from $0.181$ to $0.033$ for Mistral Medium 3.5. The expectation requires the estimate to increase for both motivating concepts and across all evaluated models. It is therefore only partially met.
 
 \definecolor{HypFiveOne}{HTML}{1B9E77}
 \definecolor{HypFiveTwo}{HTML}{D95F02}
@@ -138,4 +138,4 @@ Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior 
   ]{data/rq5/faithfulness_comparison.csv}
 \end{table}
 
-In summary, FELICS increases the estimated effect of the eating-disorder concept but decreases the estimated effect of self-perception of weight for both evaluated models. The empirical result therefore does not satisfy the conjunctive hypothesis formulated for \rqref{rq:motivating_example}. It nevertheless demonstrates that joint interventions materially redistribute credited causal effect among the correlated concepts, rather than merely applying a uniform increase.
+In summary, FELICS increases the estimated effect of the eating-disorder concept but decreases the estimated effect of self-perception of weight for both evaluated models. The expectation formulated in Section~\ref{sec:motivating_methodology} is therefore only partially met. The case nevertheless demonstrates that joint interventions materially redistribute credited causal effect among the presumably correlated concepts, rather than merely applying a uniform increase.

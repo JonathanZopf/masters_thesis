@@ -98,25 +98,9 @@ in the later chapters.
 	      expected to increase measured faithfulness relative to an evaluation based
 	      solely on singleton interventions.
 
-	\item \label{rq:motivating_example}
-	      \textbf{Resolution of the Motivating Underestimation Example}
-
-	      \noindent\textit{Background.}
-	      The motivating MedQA example discussed in the preceding chapter suggests
-	      that concepts can receive low causal-effect estimates when the information
-	      removed from one concept remains recoverable through another. It provides a
-	      concrete case in which joint intervention is expected to address the
-	      limitation of singleton-based evaluation.
-
-	      \noindent\textit{Research question.}
-	      Does FELICS resolve the specific underestimation identified as motivation
-	      for this thesis by allotting higher causal effect compared to a singleton-only evaluation for the two presumably correlated concepts?
-
-	      \noindent\textit{Hypothesis.}
-	      Evaluating the relevant concepts jointly is expected to produce higher
-	      causal-effect estimates for them than evaluating each concept in isolation.
-
 \end{enumerate}
+
+Beyond these four research questions, the MedQA example of Matton et al.~\cite{mattonWalkTalkMeasuring2024} discussed in Section~\ref{sec:pratical_limit} is revisited as a case study (Section~\ref{sec:motivating_methodology}). It examines how joint attribution changes the causal effects of the two concepts whose low singleton estimates motivated this thesis. Because the case concerns a single question and no ground truth for the presumed interaction is available, it is reported descriptively rather than as a research question with an inferential test.
 
 The following chapter derives the requirements and central design choices of
 FELICS in response to these questions. The subsequent modeling chapter then

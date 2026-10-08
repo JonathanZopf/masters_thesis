@@ -3,8 +3,8 @@
 
 This appendix provides the edge-level evidence and algorithm traces underlying the
 oracle partitions summarized in Chapter~\ref{sec:results}. The New German Credit
-trace uses Cram\'er's $V$ as its edge weight, whereas the natural-language RQ5
-example uses the empirical probability that two concepts were placed in the same
+trace uses Cram\'er's $V$ as its edge weight, whereas the natural-language MedQA
+case study uses the empirical probability that two concepts were placed in the same
 group across repeated auxiliary-LLM judgments.
 
 \section{New German Credit}
@@ -91,7 +91,7 @@ in Figure~\ref{fig:german-credit-grouping-final}. Table \ref{tab:credit-associat
 \endgroup
 \clearpage
 
-\section{RQ5 Motivating MedQA Example}
+\section{MedQA Case Study}
 \label{app:rq5-oracle-partition}
 
 For the controlled version of MedQA question 521, following the methodology in Section \ref{sec:motivating_methodology}, the natural-language oracle was
@@ -106,7 +106,7 @@ already belonged to the component connected through eating disorder.
 \begin{figure}[H]
   \centering
   \includestandalone[mode=buildnew,width=0.78\textwidth,height=0.36\textheight,keepaspectratio]{graphs/rq5_oracle_grouping}
-  \caption{Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}
+  \caption{Final consensus partition for the MedQA case study. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}
   \label{fig:rq5-oracle-grouping}
 \end{figure}
 
@@ -124,7 +124,7 @@ already belonged to the component connected through eating disorder.
 }
 \begin{table}[H]
   \centering
-  \caption{Retained co-grouping frequencies for the RQ5 motivating MedQA example.}
+  \caption{Retained co-grouping frequencies for the MedQA case study.}
   \label{tab:rq5-cogrouping}
   \begin{tabular}{@{}p{0.38\textwidth}p{0.38\textwidth}>{\raggedleft\arraybackslash}p{0.15\textwidth}@{}}
     \hline

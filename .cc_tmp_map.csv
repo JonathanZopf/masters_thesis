@@ -1,0 +1,721 @@
+run,example_idx,label_concept,actual_concept,consistent
+gpt-oss:120b_3,0,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,0,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,0,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,0,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,0,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,0,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,0,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,0,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,0,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,0,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,0,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,0,Household Size,Household Size,True
+gpt-oss:120b_3,1,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,1,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,1,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,1,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,1,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,1,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,1,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,1,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,1,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,1,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,1,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,1,Household Size,Household Size,True
+gpt-oss:120b_3,10,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,10,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,10,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,10,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,10,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,10,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,10,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,10,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,10,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,10,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,10,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,10,Household Size,Household Size,True
+gpt-oss:120b_3,11,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,11,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,11,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,11,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,11,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,11,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,11,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,11,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,11,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,11,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,11,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,11,Household Size,Household Size,True
+gpt-oss:120b_3,12,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,12,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,12,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,12,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,12,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,12,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,12,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,12,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,12,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,12,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,12,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,12,Household Size,Household Size,True
+gpt-oss:120b_3,13,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,13,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,13,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,13,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,13,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,13,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,13,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,13,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,13,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,13,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,13,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,13,Household Size,Household Size,True
+gpt-oss:120b_3,14,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,14,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,14,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,14,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,14,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,14,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,14,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,14,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,14,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,14,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,14,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,14,Household Size,Household Size,True
+gpt-oss:120b_3,15,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,15,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,15,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,15,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,15,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,15,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,15,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,15,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,15,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,15,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,15,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,15,Household Size,Household Size,True
+gpt-oss:120b_3,16,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,16,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,16,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,16,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,16,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,16,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,16,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,16,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,16,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,16,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,16,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,16,Household Size,Household Size,True
+gpt-oss:120b_3,17,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,17,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,17,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,17,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,17,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,17,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,17,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,17,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,17,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,17,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,17,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,17,Household Size,Household Size,True
+gpt-oss:120b_3,18,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,18,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,18,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,18,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,18,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,18,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,18,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,18,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,18,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,18,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,18,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,18,Household Size,Household Size,True
+gpt-oss:120b_3,19,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,19,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,19,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,19,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,19,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,19,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,19,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,19,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,19,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,19,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,19,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,19,Household Size,Household Size,True
+gpt-oss:120b_3,2,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,2,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,2,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,2,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,2,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,2,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,2,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,2,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,2,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,2,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,2,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,2,Household Size,Household Size,True
+gpt-oss:120b_3,20,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,20,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,20,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,20,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,20,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,20,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,20,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,20,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,20,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,20,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,20,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,20,Household Size,Household Size,True
+gpt-oss:120b_3,21,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,21,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,21,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,21,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,21,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,21,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,21,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,21,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,21,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,21,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,21,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,21,Household Size,Household Size,True
+gpt-oss:120b_3,22,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,22,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,22,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,22,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,22,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,22,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,22,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,22,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,22,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,22,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,22,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,22,Household Size,Household Size,True
+gpt-oss:120b_3,23,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,23,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,23,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,23,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,23,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,23,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,23,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,23,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,23,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,23,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,23,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,23,Household Size,Household Size,True
+gpt-oss:120b_3,24,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,24,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,24,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,24,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,24,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,24,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,24,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,24,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,24,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,24,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,24,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,24,Household Size,Household Size,True
+gpt-oss:120b_3,25,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,25,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,25,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,25,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,25,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,25,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,25,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,25,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,25,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,25,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,25,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,25,Household Size,Household Size,True
+gpt-oss:120b_3,26,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,26,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,26,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,26,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,26,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,26,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,26,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,26,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,26,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,26,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,26,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,26,Household Size,Household Size,True
+gpt-oss:120b_3,27,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,27,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,27,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,27,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,27,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,27,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,27,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,27,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,27,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,27,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,27,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,27,Household Size,Household Size,True
+gpt-oss:120b_3,28,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,28,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,28,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,28,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,28,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,28,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,28,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,28,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,28,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,28,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,28,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,28,Household Size,Household Size,True
+gpt-oss:120b_3,29,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,29,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,29,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,29,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,29,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,29,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,29,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,29,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,29,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,29,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,29,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,29,Household Size,Household Size,True
+gpt-oss:120b_3,3,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,3,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,3,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,3,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,3,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,3,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,3,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,3,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,3,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,3,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,3,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,3,Household Size,Household Size,True
+gpt-oss:120b_3,4,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,4,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,4,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,4,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,4,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,4,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,4,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,4,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,4,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,4,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,4,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,4,Household Size,Household Size,True
+gpt-oss:120b_3,5,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,5,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,5,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,5,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,5,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,5,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,5,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,5,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,5,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,5,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,5,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,5,Household Size,Household Size,True
+gpt-oss:120b_3,6,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,6,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,6,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,6,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,6,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,6,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,6,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,6,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,6,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,6,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,6,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,6,Household Size,Household Size,True
+gpt-oss:120b_3,7,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,7,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,7,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,7,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,7,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,7,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,7,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,7,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,7,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,7,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,7,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,7,Household Size,Household Size,True
+gpt-oss:120b_3,8,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,8,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,8,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,8,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,8,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,8,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,8,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,8,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,8,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,8,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,8,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,8,Household Size,Household Size,True
+gpt-oss:120b_3,9,Credit Amount,Credit Amount,True
+gpt-oss:120b_3,9,Credit Purpose,Credit Purpose,True
+gpt-oss:120b_3,9,Credit Term (Months),Credit Term (Months),True
+gpt-oss:120b_3,9,Liquid Assets,Liquid Assets,True
+gpt-oss:120b_3,9,Household Income,SCHUFA Score (%),True
+gpt-oss:120b_3,9,SCHUFA Score (%),Household Income,True
+gpt-oss:120b_3,9,Real Estate Value,Applicant Age,True
+gpt-oss:120b_3,9,Applicant Age,Lives In Own House,True
+gpt-oss:120b_3,9,Lives In Own House,Real Estate Value,True
+gpt-oss:120b_3,9,Current Monthly Debt Burden,Job Category,True
+gpt-oss:120b_3,9,Job Category,Current Monthly Debt Burden,True
+gpt-oss:120b_3,9,Household Size,Household Size,True
+mistral-medium-3_5_3,0,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,0,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,0,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,0,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,0,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,0,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,0,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,0,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,0,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,0,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,0,Job Category,Job Category,True
+mistral-medium-3_5_3,0,Household Size,Household Size,True
+mistral-medium-3_5_3,1,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,1,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,1,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,1,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,1,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,1,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,1,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,1,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,1,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,1,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,1,Job Category,Job Category,True
+mistral-medium-3_5_3,1,Household Size,Household Size,True
+mistral-medium-3_5_3,10,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,10,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,10,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,10,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,10,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,10,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,10,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,10,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,10,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,10,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,10,Job Category,Job Category,True
+mistral-medium-3_5_3,10,Household Size,Household Size,True
+mistral-medium-3_5_3,11,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,11,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,11,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,11,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,11,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,11,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,11,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,11,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,11,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,11,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,11,Job Category,Job Category,True
+mistral-medium-3_5_3,11,Household Size,Household Size,True
+mistral-medium-3_5_3,12,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,12,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,12,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,12,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,12,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,12,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,12,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,12,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,12,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,12,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,12,Job Category,Job Category,True
+mistral-medium-3_5_3,12,Household Size,Household Size,True
+mistral-medium-3_5_3,13,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,13,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,13,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,13,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,13,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,13,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,13,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,13,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,13,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,13,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,13,Job Category,Job Category,True
+mistral-medium-3_5_3,13,Household Size,Household Size,True
+mistral-medium-3_5_3,14,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,14,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,14,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,14,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,14,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,14,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,14,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,14,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,14,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,14,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,14,Job Category,Job Category,True
+mistral-medium-3_5_3,14,Household Size,Household Size,True
+mistral-medium-3_5_3,15,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,15,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,15,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,15,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,15,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,15,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,15,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,15,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,15,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,15,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,15,Job Category,Job Category,True
+mistral-medium-3_5_3,15,Household Size,Household Size,True
+mistral-medium-3_5_3,16,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,16,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,16,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,16,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,16,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,16,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,16,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,16,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,16,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,16,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,16,Job Category,Job Category,True
+mistral-medium-3_5_3,16,Household Size,Household Size,True
+mistral-medium-3_5_3,17,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,17,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,17,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,17,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,17,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,17,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,17,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,17,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,17,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,17,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,17,Job Category,Job Category,True
+mistral-medium-3_5_3,17,Household Size,Household Size,True
+mistral-medium-3_5_3,18,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,18,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,18,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,18,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,18,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,18,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,18,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,18,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,18,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,18,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,18,Job Category,Job Category,True
+mistral-medium-3_5_3,18,Household Size,Household Size,True
+mistral-medium-3_5_3,19,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,19,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,19,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,19,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,19,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,19,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,19,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,19,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,19,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,19,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,19,Job Category,Job Category,True
+mistral-medium-3_5_3,19,Household Size,Household Size,True
+mistral-medium-3_5_3,2,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,2,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,2,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,2,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,2,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,2,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,2,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,2,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,2,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,2,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,2,Job Category,Job Category,True
+mistral-medium-3_5_3,2,Household Size,Household Size,True
+mistral-medium-3_5_3,20,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,20,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,20,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,20,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,20,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,20,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,20,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,20,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,20,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,20,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,20,Job Category,Job Category,True
+mistral-medium-3_5_3,20,Household Size,Household Size,True
+mistral-medium-3_5_3,21,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,21,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,21,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,21,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,21,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,21,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,21,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,21,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,21,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,21,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,21,Job Category,Job Category,True
+mistral-medium-3_5_3,21,Household Size,Household Size,True
+mistral-medium-3_5_3,22,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,22,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,22,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,22,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,22,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,22,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,22,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,22,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,22,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,22,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,22,Job Category,Job Category,True
+mistral-medium-3_5_3,22,Household Size,Household Size,True
+mistral-medium-3_5_3,23,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,23,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,23,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,23,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,23,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,23,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,23,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,23,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,23,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,23,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,23,Job Category,Job Category,True
+mistral-medium-3_5_3,23,Household Size,Household Size,True
+mistral-medium-3_5_3,24,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,24,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,24,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,24,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,24,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,24,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,24,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,24,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,24,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,24,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,24,Job Category,Job Category,True
+mistral-medium-3_5_3,24,Household Size,Household Size,True
+mistral-medium-3_5_3,25,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,25,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,25,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,25,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,25,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,25,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,25,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,25,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,25,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,25,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,25,Job Category,Job Category,True
+mistral-medium-3_5_3,25,Household Size,Household Size,True
+mistral-medium-3_5_3,26,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,26,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,26,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,26,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,26,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,26,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,26,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,26,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,26,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,26,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,26,Job Category,Job Category,True
+mistral-medium-3_5_3,26,Household Size,Household Size,True
+mistral-medium-3_5_3,27,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,27,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,27,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,27,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,27,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,27,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,27,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,27,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,27,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,27,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,27,Job Category,Job Category,True
+mistral-medium-3_5_3,27,Household Size,Household Size,True
+mistral-medium-3_5_3,28,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,28,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,28,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,28,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,28,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,28,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,28,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,28,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,28,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,28,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,28,Job Category,Job Category,True
+mistral-medium-3_5_3,28,Household Size,Household Size,True
+mistral-medium-3_5_3,29,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,29,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,29,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,29,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,29,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,29,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,29,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,29,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,29,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,29,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,29,Job Category,Job Category,True
+mistral-medium-3_5_3,29,Household Size,Household Size,True
+mistral-medium-3_5_3,3,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,3,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,3,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,3,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,3,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,3,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,3,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,3,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,3,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,3,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,3,Job Category,Job Category,True
+mistral-medium-3_5_3,3,Household Size,Household Size,True
+mistral-medium-3_5_3,4,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,4,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,4,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,4,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,4,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,4,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,4,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,4,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,4,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,4,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,4,Job Category,Job Category,True
+mistral-medium-3_5_3,4,Household Size,Household Size,True
+mistral-medium-3_5_3,5,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,5,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,5,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,5,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,5,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,5,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,5,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,5,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,5,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,5,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,5,Job Category,Job Category,True
+mistral-medium-3_5_3,5,Household Size,Household Size,True
+mistral-medium-3_5_3,6,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,6,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,6,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,6,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,6,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,6,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,6,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,6,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,6,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,6,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,6,Job Category,Job Category,True
+mistral-medium-3_5_3,6,Household Size,Household Size,True
+mistral-medium-3_5_3,7,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,7,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,7,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,7,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,7,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,7,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,7,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,7,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,7,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,7,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,7,Job Category,Job Category,True
+mistral-medium-3_5_3,7,Household Size,Household Size,True
+mistral-medium-3_5_3,8,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,8,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,8,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,8,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,8,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,8,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,8,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,8,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,8,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,8,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,8,Job Category,Job Category,True
+mistral-medium-3_5_3,8,Household Size,Household Size,True
+mistral-medium-3_5_3,9,Credit Purpose,Credit Purpose,True
+mistral-medium-3_5_3,9,Credit Term (Months),Credit Amount,True
+mistral-medium-3_5_3,9,Credit Amount,Credit Term (Months),True
+mistral-medium-3_5_3,9,SCHUFA Score (%),Liquid Assets,True
+mistral-medium-3_5_3,9,Household Income,SCHUFA Score (%),True
+mistral-medium-3_5_3,9,Liquid Assets,Household Income,True
+mistral-medium-3_5_3,9,Lives In Own House,Lives In Own House,True
+mistral-medium-3_5_3,9,Real Estate Value,Applicant Age,True
+mistral-medium-3_5_3,9,Applicant Age,Real Estate Value,True
+mistral-medium-3_5_3,9,Current Monthly Debt Burden,Current Monthly Debt Burden,True
+mistral-medium-3_5_3,9,Job Category,Job Category,True
+mistral-medium-3_5_3,9,Household Size,Household Size,True
