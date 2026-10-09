@@ -1,15 +1,17 @@
 \definecolor{CreditDeltaBars}{HTML}{2878B5}
 
-% #1 title, #2 data.
-\newcommand{\CreditConceptDeltaPlot}[2]{%
-  {\small\bfseries #1\par}
-  \vspace{0.2em}
+% Mean normalization adjustment per New German Credit concept. Concepts are
+% ordered by their oracle group, and dotted lines separate the five groups.
+% #1 data file.
+\newcommand{\CreditConceptDeltaPlot}[1]{%
   \begin{tikzpicture}
     \begin{axis}[
-      width=0.77\textwidth,
-      height=6.7cm,
+      % The axis excludes the long concept labels, which take about 3.75cm.
+      scale only axis,
+      width=\linewidth-3.75cm,
+      height=5.3cm,
       xbar,
-      bar width=6pt,
+      bar width=5pt,
       xmin=0,
       xmax=0.4,
       xtick={0,0.1,0.2,0.3,0.4},
@@ -27,7 +29,7 @@
         Real Estate Value,
         Applicant Age,
         Lives In Own House,
-        Current Monthly Debt Burden,
+        Monthly Debt Burden,
         Job Category,
         Household Size
       },
@@ -43,6 +45,11 @@
       axis x line*=bottom,
       clip=false,
     ]
+      \foreach \groupborder in {3.5,6.5,9.5,11.5}{
+        \edef\temp{\noexpand\draw[gray!55,densely dotted]
+          (axis cs:0,\groupborder) -- (axis cs:0.4,\groupborder);}
+        \temp
+      }
       \addplot[
         CreditDeltaBars,
         fill=CreditDeltaBars,
@@ -52,20 +59,7 @@
         col sep=comma,
         x=mean_delta_ce,
         y=concept_id
-      ] {#2};
+      ] {#1};
     \end{axis}
   \end{tikzpicture}%
 }
-
-\begin{figure}[p]
-  \centering
-  \CreditConceptDeltaPlot{GPT-OSS 120B}%
-    {data/appendix/rq3_credit_concept_delta/new_german_credit_gptoss.csv}
-
-  \par\vspace{1.0em}
-  \CreditConceptDeltaPlot{Mistral Medium 3.5}%
-    {data/appendix/rq3_credit_concept_delta/new_german_credit_mistral.csv}
-
-  \caption[Mean normalization adjustment by New German Credit concept]{Mean normalization adjustment for each New German Credit concept, averaged across the 30 questions. Larger bars identify concepts whose assigned causal effect increases more strongly under the adjusted Shapley normalization.}
-  \label{fig:appendix-rq3-credit-concept-delta}
-\end{figure}

@@ -87,23 +87,25 @@
 
 % Compact legend. The node swatches denote membership in the final partition,
 % not an additional statistic.
-\node[anchor=west, font=\sffamily\scriptsize] at (-6.0,-5.0) {Final groups:};
+\node[anchor=west, font=\sffamily\scriptsize] at (-6.3,-5.0) {Final groups:};
+% Each label sits directly right of its swatch, and the gap to the next swatch
+% is wider so that swatch and label read as one pair.
 \foreach \x/\group/\label in {
-  -4.05/One/$s_1$,
+  -4.15/One/$s_1$,
   -3.10/Two/$s_2$,
-  -2.15/Three/$s_3$,
-  -1.20/Four/$s_4$,
-  -0.25/Five/$s_5$
+  -2.05/Three/$s_3$,
+  -1.00/Four/$s_4$,
+  0.05/Five/$s_5$
 }{
   \node[draw=black!55, fill=creditGroup\group!72, rounded corners=1pt,
         minimum width=5mm, minimum height=3mm, inner sep=0pt] at (\x,-5.0) {};
-  \node[anchor=west, font=\sffamily\tiny] at (\x+0.32,-5.0) {\label};
+  \node[anchor=west, font=\sffamily\tiny, inner sep=1pt] at (\x+0.27,-5.0) {\label};
 }
 \draw[accepted edge] (1.45,-5.0) -- (2.25,-5.0)
   node[anchor=west, font=\sffamily\scriptsize, text=black] at (2.42,-5.0)
   {accepted merge};
-\draw[retained edge] (4.35,-5.0) -- (5.15,-5.0)
-  node[anchor=west, font=\sffamily\scriptsize, text=black] at (5.32,-5.0)
+\draw[retained edge] (4.75,-5.0) -- (5.55,-5.0)
+  node[anchor=west, font=\sffamily\scriptsize, text=black] at (5.72,-5.0)
   {other retained association};
 
 \end{tikzpicture}

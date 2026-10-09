@@ -3,7 +3,7 @@
 
 The natural-language oracle returned 46 distinct category labels for BBQ and 236 for
 MedQA. Orthographic normalization alone reduced the MedQA vocabulary only to 222 labels
-and did not reduce the BBQ vocabulary. To obtain interpretable co-grouping heatmaps, an
+and did not reduce the BBQ vocabulary. To obtain interpretable co-grouping heat maps, an
 OpenAI Codex large language model assigned every raw label to exactly one
 dataset-specific high-level category. This is an analytical post-processing step and
 not an output of the FELICS auxiliary oracle.
@@ -21,7 +21,7 @@ science taxonomy.
 
 For each pair of normalized categories, the co-grouping rate is the proportion of concept pairs that the oracle assigned to the same group. It is calculated by dividing the number of pairs assigned to the same interaction candidate group by the total number of pairs with those categories. Only distinct concepts from the same question are paired, and the counts are pooled across runs before calculating the rate. Diagonal cells apply the same calculation to pairs of concepts within a single category. If no eligible pairs exist, the cell is undefined and shown in gray. The use of conditional percentages prevents frequent categories from dominating solely because they occur more often.
 
-The resulting heatmaps \ref{fig:oracle-category-heatmaps} appear in Section \ref{sec:results-oracle-behavior}.
+The resulting heat maps are shown in Figure~\ref{fig:oracle-heatmap-medqa} in Section~\ref{sec:results-oracle-behavior} for MedQA and in Figure~\ref{fig:oracle-heatmap-bbq} in Appendix~\ref{app:oracle-heatmap-bbq} for BBQ.
 
 \section*{BBQ category families}
 

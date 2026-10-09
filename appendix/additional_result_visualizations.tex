@@ -1,16 +1,59 @@
 \chapter{Additional Result Visualizations}
 \label{app:additional-result-visualizations}
+\input{graphs/results/shared_scatter_plot}
+\input{graphs/results/oracle_grouping_heatmap}
+\input{graphs/results/appendix_ce_shift_identity}
+\input{graphs/results/appendix_rq2_ce_identity}
+\input{graphs/results/appendix_rq3_normalization_identity}
 
-This appendix provides distributional and observation-level views that complement the principal result figures.
-\section{Causal-Effect Shifts under Joint Interventions}
-\label{app:ce-shift-rainclouds}
+This appendix provides distributional and observation-level views that complement the selected figures in Chapter~\ref{sec:results}. The sections follow the order of the results chapter, and each figure shows one dataset--model combination.
 
-Figure~\ref{fig:appendix-ce-shift-rainclouds} complements the faithfulness distributions in Figure~\ref{fig:question-level-faithfulness-rainclouds}. For each question, the plotted value is the arithmetic mean of the concept-level CE values. The atomic and interaction-aware values originate from the same joint FELICS run as described in Section \ref{sec:controlled_atomic_baseline}. Thus, extracted concepts and responses are fixed within each comparison.
+\section{Distributions of Question-Level Faithfulness and CE}
+\label{app:distributions}
+
+Figures~\ref{fig:app-dist-f-bbq-gptoss} to~\ref{fig:app-dist-ce-credit-mistral} show the distributions behind the dataset-level values in Table~\ref{tab:results-dataset-overview}. Each panel combines a density estimate (cloud), one point per evaluated question (rain), and a horizontal boxplot (umbrella) whose center line marks the median. The faithfulness panels additionally report the dataset-level estimate $\mathcal{F}(\mathbf{X})$. For CE, the plotted value of each question is the arithmetic mean of its concept-level CE values. The atomic and interaction-aware values originate from the same joint FELICS run as described in Section~\ref{sec:controlled_atomic_baseline}. Thus, extracted concepts and responses are fixed within each comparison. The CE axes are shared between the two models of a dataset but differ across datasets because their CE magnitudes differ substantially.
 
 \ifthesislocalbuild
+  \input{graphs/results/summary}
   \input{graphs/results/appendix_ce_rainclouds}
+  \tikzexternalenable
+
+  % #1 dataset, #2 model, #3 CE file stem, #4 faithfulness file stem,
+  % #5 panel and label id, #6 CE x maximum, #7 CE x ticks, #8 CE tick precision.
+  \newcommand{\AppendixDistributionFigure}[8]{%
+    \begin{figure}[H]
+      \centering
+      \ResultFigureHalf{%
+        \FaithfulnessRaincloudPanel{data/summary/question_level_faithfulness_#4.csv}{#5}}%
+        {Question-level faithfulness for #1 with #2}%
+        {Question-level faithfulness for #1 with #2 under atomic and joint attribution.}%
+        {fig:app-dist-f-#5}%
+      \hfill
+      \ResultFigureHalf{%
+        \CeRaincloudPanel{data/appendix/ce_shifts/#3.csv}{#5}{#6}{#7}{#8}}%
+        {Question-averaged CE for #1 with #2}%
+        {Question-averaged CE for #1 with #2 under atomic and joint attribution.}%
+        {fig:app-dist-ce-#5}%
+    \end{figure}%
+  }
+
+  \AppendixDistributionFigure{BBQ}{GPT-OSS 120B}{bbq_gptoss}{bbq_gptoss}%
+    {bbq-gptoss}{.6}{0,.2,.4,.6}{1}
+  \AppendixDistributionFigure{BBQ}{Mistral Medium 3.5}{bbq_mistral}{bbq_mistral}%
+    {bbq-mistral}{.6}{0,.2,.4,.6}{1}
+  \AppendixDistributionFigure{MedQA}{GPT-OSS 120B}{medqa_gptoss}{medqa_gptoss}%
+    {medqa-gptoss}{.06}{0,.02,.04,.06}{2}
+  \AppendixDistributionFigure{MedQA}{Mistral Medium 3.5}{medqa_mistral}{medqa_mistral}%
+    {medqa-mistral}{.06}{0,.02,.04,.06}{2}
+  \AppendixDistributionFigure{New German Credit}{GPT-OSS 120B}%
+    {new_german_credit_gptoss}{credit_gptoss}%
+    {credit-gptoss}{1.5}{0,.5,1,1.5}{1}
+  \AppendixDistributionFigure{New German Credit}{Mistral Medium 3.5}%
+    {new_german_credit_mistral}{credit_mistral}%
+    {credit-mistral}{1.5}{0,.5,1,1.5}{1}
+  \tikzexternaldisable
 \else
-  \typeout{Non-local build detected: skipping graphs/results/appendix_ce_rainclouds.tex}
+  \typeout{Non-local build detected: skipping the raincloud distributions}
   \begin{tcolorbox}[
     colback=orange!12,
     colframe=orange!80!black,
@@ -21,35 +64,397 @@ Figure~\ref{fig:appendix-ce-shift-rainclouds} complements the faithfulness distr
     been omitted from this build.
   \end{tcolorbox}
 \fi
-\FloatBarrier
 
-\section{Question-Level CE Agreement under Joint Attribution}
-\label{app:ce-shift-identity}
+\section{Oracle Co-Grouping Rates for BBQ}
+\label{app:oracle-heatmap-bbq}
 
-Figures~\ref{fig:appendix-ce-shift-identity-natural-language} and~\ref{fig:appendix-ce-shift-identity-credit} provide a paired robustness view of the CE distributions in Figure~\ref{fig:appendix-ce-shift-rainclouds}. Each point represents one question from the same joint FELICS run. Its coordinates are the atomic and joint question-level means of causal effects assigned to concepts as in Section \ref{sec:controlled_atomic_baseline}, marker area increases with the number of concepts contributing to both means. $k$ in the caption denotes the range of the number of concepts per question within the dataset and model. For New German Credit all questions contains the same 12 concepts, so marker size is constant. The identity line shows whether questions with high atomic CE also retain high interaction-aware CE.
+Figure~\ref{fig:oracle-heatmap-bbq} complements the MedQA heat map in Section~\ref{sec:results-oracle-behavior} and uses the same construction. Most BBQ category combinations rest on fewer than ten eligible pairs, so their rates are only indicative.
 
-The upper-tail questions generally remain comparatively high under both attribution methods. The marker sizes do not reveal a consistent tendency for questions with more concepts to have larger mean CE; for New German Credit, the concept count is fixed and cannot account for the observed variation.
+\begin{figure}[H]
+  \centering
+  \begin{adjustbox}{max width=\textwidth}
+    \OracleHeatmapBBQ
+  \end{adjustbox}
+  \caption[Oracle co-grouping rates for BBQ]{Co-grouping rates of the BBQ oracle on LLM-normalized categories, pooled across both evaluated models.}
+  \label{fig:oracle-heatmap-bbq}
+\end{figure}
 
-\input{graphs/results/appendix_ce_shift_identity}
-\FloatBarrier
+\section{Interaction-Presumption Strength and Attribution Changes}
+\label{app:rq1-scatter}
 
-\section{CE Agreement between Implementations}
-\label{app:rq2-ce-identity}
+Figures~\ref{fig:app-rq1-bbq-gptoss-ce} to~\ref{fig:app-rq1-medqa-mistral-f} show the remaining scatter plots for Research Question~\ref{rq:correlation_diff} (Section~\ref{sec:results-interaction-presumption}). Each point is one question, and the solid line is the least-squares fit. The reported Pearson correlation coefficients $r$ and one-sided confidence intervals belong to the tests in Box~\ref{hyp:hyp1-results}.
 
-Figures~\ref{fig:appendix-rq2-ce-natural-language} and~\ref{fig:appendix-rq2-ce-credit} complement the faithfulness identity plots used to answer Research Question~\ref{rq:convergence}. Each point corresponds to a question available in both independently sampled runs. Its coordinates are the question-level means on all concepts within the question used by the CE equivalence and paired-difference tests for both metrics as in Section \ref{sec:controlled_atomic_baseline}.
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/bbq_gptoss.csv,
+      y column=mean_absolute_ce_diff,
+      y label={$\Delta\mathrm{CE}(\mathbf{x})$},
+      line intercept=0.04781242,
+      line slope=-0.005150228,
+      xmax=2.3,
+      ymax=0.26
+    }}%
+    {RQ1, BBQ with GPT-OSS 120B: $\Delta\kappa$ and $\Delta\mathrm{CE}$}%
+    {Interaction-presumption strength and change in question-averaged CE for BBQ with GPT-OSS 120B ($n=30$). Pearson $r=-0.025$, one-sided 95\% CI $[-0.329,\,1.000]$.}%
+    {fig:app-rq1-bbq-gptoss-ce}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/bbq_gptoss.csv,
+      y column=faithfulness_diff,
+      y label={$\Delta\mathcal{F}(\mathbf{x})$},
+      line intercept=0.108172,
+      line slope=-0.04293996,
+      xmax=2.3,
+      ymax=0.45
+    }}%
+    {RQ1, BBQ with GPT-OSS 120B: $\Delta\kappa$ and $\Delta\mathcal{F}$}%
+    {Interaction-presumption strength and change in question-level faithfulness for BBQ with GPT-OSS 120B ($n=30$). Pearson $r=-0.102$, one-sided 95\% CI $[-0.396,\,1.000]$.}%
+    {fig:app-rq1-bbq-gptoss-f}%
+\end{figure}
 
-\input{graphs/results/appendix_rq2_ce_identity}
-\FloatBarrier
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/bbq_mistral.csv,
+      y column=mean_absolute_ce_diff,
+      y label={$\Delta\mathrm{CE}(\mathbf{x})$},
+      line intercept=0.03854958,
+      line slope=0.01621849,
+      xmax=2.3,
+      ymax=0.26
+    }}%
+    {RQ1, BBQ with Mistral Medium 3.5: $\Delta\kappa$ and $\Delta\mathrm{CE}$}%
+    {Interaction-presumption strength and change in question-averaged CE for BBQ with Mistral Medium 3.5 ($n=30$). Pearson $r=0.094$, one-sided 95\% CI $[-0.219,\,1.000]$.}%
+    {fig:app-rq1-bbq-mistral-ce}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/bbq_mistral.csv,
+      y column=faithfulness_diff,
+      y label={$\Delta\mathcal{F}(\mathbf{x})$},
+      line intercept=0.1011828,
+      line slope=0.03338781,
+      xmax=2.3,
+      ymax=0.36
+    }}%
+    {RQ1, BBQ with Mistral Medium 3.5: $\Delta\kappa$ and $\Delta\mathcal{F}$}%
+    {Interaction-presumption strength and change in question-level faithfulness for BBQ with Mistral Medium 3.5 ($n=30$). Pearson $r=0.119$, one-sided 95\% CI $[-0.195,\,1.000]$.}%
+    {fig:app-rq1-bbq-mistral-f}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/medqa_mistral.csv,
+      y column=mean_absolute_ce_diff,
+      y label={$\Delta\mathrm{CE}(\mathbf{x})$},
+      line intercept=0.001771789,
+      line slope=0.0001623979,
+      xmax=8,
+      ymax=0.015
+    }}%
+    {RQ1, MedQA with Mistral Medium 3.5: $\Delta\kappa$ and $\Delta\mathrm{CE}$}%
+    {Interaction-presumption strength and change in question-averaged CE for MedQA with Mistral Medium 3.5 ($n=24$). Pearson $r=0.097$, one-sided 95\% CI $[-0.256,\,1.000]$.}%
+    {fig:app-rq1-medqa-mistral-ce}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/medqa_mistral.csv,
+      y column=faithfulness_diff,
+      y label={$\Delta\mathcal{F}(\mathbf{x})$},
+      line intercept=0.04718424,
+      line slope=-0.001921023,
+      xmax=8,
+      ymax=0.18
+    }}%
+    {RQ1, MedQA with Mistral Medium 3.5: $\Delta\kappa$ and $\Delta\mathcal{F}$}%
+    {Interaction-presumption strength and change in question-level faithfulness for MedQA with Mistral Medium 3.5 ($n=24$). Pearson $r=-0.075$, one-sided 95\% CI $[-0.409,\,1.000]$.}%
+    {fig:app-rq1-medqa-mistral-f}%
+\end{figure}
+
+\section{Agreement between Implementations}
+\label{app:rq2-identity}
+
+Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} complement Section~\ref{sec:results-original-validation} with the identity plots of FELICS at $n_{\max}=1$ and the original implementation. Each point corresponds to a question available in both independently sampled runs, and the dashed line denotes exact agreement. The CE coordinates are the question-level means over the concepts retained in the respective run, as used by the equivalence and paired-difference tests. Faithfulness estimates outside the plotted range are drawn as triangles on the border.
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypTwoIdentityPlot{data=data/rq2/bbq_gptoss.csv,
+      extra code={\ResultScatterClippedPoints{180}{(0.50,-0.96)}}
+    }}%
+    {RQ2, BBQ with GPT-OSS 120B: faithfulness}%
+    {Question-level faithfulness of both implementations for BBQ with GPT-OSS 120B ($n=28$). The triangle marks question 8, whose FELICS estimate is $-1.03$.}%
+    {fig:app-rq2-f-bbq-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypTwoCeIdentityPlot{data=data/rq2/bbq_gptoss_ce.csv,
+      xmin=0, xmax=.8,
+      ymin=0, ymax=.8
+    }}%
+    {RQ2, BBQ with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged causal effects of both implementations for BBQ with GPT-OSS 120B ($n=28$).}%
+    {fig:app-rq2-ce-bbq-gptoss}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypTwoIdentityPlot{data=data/rq2/bbq_mistral.csv}}%
+    {RQ2, BBQ with Mistral Medium 3.5: faithfulness}%
+    {Question-level faithfulness of both implementations for BBQ with Mistral Medium 3.5 ($n=30$).}%
+    {fig:app-rq2-f-bbq-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypTwoCeIdentityPlot{data=data/rq2/bbq_mistral_ce.csv,
+      xmin=0, xmax=.8,
+      ymin=0, ymax=.8
+    }}%
+    {RQ2, BBQ with Mistral Medium 3.5: question-averaged CE}%
+    {Question-averaged causal effects of both implementations for BBQ with Mistral Medium 3.5 ($n=30$).}%
+    {fig:app-rq2-ce-bbq-mistral}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypTwoIdentityPlot{data=data/rq2/medqa_gptoss.csv}}%
+    {RQ2, MedQA with GPT-OSS 120B: faithfulness}%
+    {Question-level faithfulness of both implementations for MedQA with GPT-OSS 120B ($n=29$).}%
+    {fig:app-rq2-f-medqa-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypTwoCeIdentityPlot{data=data/rq2/medqa_gptoss_ce.csv,
+      xmin=0, xmax=.25,
+      ymin=0, ymax=.25
+    }}%
+    {RQ2, MedQA with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged causal effects of both implementations for MedQA with GPT-OSS 120B ($n=29$).}%
+    {fig:app-rq2-ce-medqa-gptoss}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypTwoIdentityPlot{data=data/rq2/medqa_mistral.csv}}%
+    {RQ2, MedQA with Mistral Medium 3.5: faithfulness}%
+    {Question-level faithfulness of both implementations for MedQA with Mistral Medium 3.5 ($n=24$).}%
+    {fig:app-rq2-f-medqa-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypTwoCeIdentityPlot{data=data/rq2/medqa_mistral_ce.csv,
+      xmin=0, xmax=.25,
+      ymin=0, ymax=.25
+    }}%
+    {RQ2, MedQA with Mistral Medium 3.5: question-averaged CE}%
+    {Question-averaged causal effects of both implementations for MedQA with Mistral Medium 3.5 ($n=24$).}%
+    {fig:app-rq2-ce-medqa-mistral}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypTwoIdentityPlot{data=data/rq2/new_german_credit_mistral.csv,
+      extra code={\ResultScatterClippedPoints{90}{(-0.96,-0.09) (-0.96,-0.15)}}
+    }}%
+    {RQ2, New German Credit with Mistral Medium 3.5: faithfulness}%
+    {Question-level faithfulness of FELICS and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
+    {fig:app-rq2-f-credit-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypTwoCeIdentityPlot{data=data/rq2/new_german_credit_gptoss_ce.csv,
+      xmin=0, xmax=1.1,
+      ymin=0, ymax=1.1
+    }}%
+    {RQ2, New German Credit with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged causal effects of FELICS and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$).}%
+    {fig:app-rq2-ce-credit-gptoss}%
+\end{figure}
 
 \section{Concept-Level Effects of Shapley Normalization}
 \label{app:rq3-normalization-identity}
 
-Figures~\ref{fig:appendix-rq3-normalization-natural-language} and~\ref{fig:appendix-rq3-normalization-credit} complement the rank-correlation analysis for Research Question~\ref{rq:ranking} from Section \ref{sec:results-ranking-preservation}. Each point is one concept in one question, with the raw Shapley CE on the horizontal axis and the adjusted Shapley CE after normalization on the vertical axis. The two variables are defined in Section~\ref{sec:methodology-preservation}; arguments are omitted here to save space. These identity plots visualize changes in CE magnitude rather than constituting additional rank-preservation tests. Each translucent point represents one concept in one question. The dashed line denotes unchanged CE magnitude; darker regions indicate overlapping observations.
+Figures~\ref{fig:app-rq3-bbq-gptoss} to~\ref{fig:app-rq3-credit-mistral} complement the rank-correlation analysis of Section~\ref{sec:results-ranking-preservation}. Each translucent point is one concept in one question, with the raw Shapley CE on the horizontal axis and the adjusted Shapley CE after normalization on the vertical axis. The two variables are defined in Section~\ref{sec:methodology-preservation}, and their arguments are omitted here to save space. The dashed line denotes unchanged CE magnitude, and darker regions indicate overlapping observations. These identity plots visualize changes in CE magnitude rather than constituting additional rank-preservation tests. Each caption reports the number of concept-level values and the aggregate Spearman correlation $\rho$ from Box~\ref{hyp:hyp3-results}.
 
-Figure~\ref{fig:appendix-rq3-credit-concept-delta} summarizes the New German Credit adjustments by concept. For each of the 12 shared concepts, $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{adj}}-\mathrm{CE}_{\mathrm{raw}}$ is averaged across the 30 evaluated questions. Larger bars identify concepts whose assigned causal effect increases more strongly under the adjusted Shapley normalization. This aggregation identifies concepts that are affected disproportionately on average.
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/bbq_gptoss.csv}{-0.3}{1.1}}%
+    {RQ3, BBQ with GPT-OSS 120B: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for BBQ with GPT-OSS 120B (137 concept-level values, $\rho=0.937$).}%
+    {fig:app-rq3-bbq-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/bbq_mistral.csv}{-0.3}{1.1}}%
+    {RQ3, BBQ with Mistral Medium 3.5: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for BBQ with Mistral Medium 3.5 (137 concept-level values, $\rho=0.903$).}%
+    {fig:app-rq3-bbq-mistral}%
+\end{figure}
 
-For GPT-OSS 120B, the largest mean increases occur for Household Income, Liquid Assets, and SCHUFA Score. For Mistral Medium 3.5, the positive adjustment is distributed more broadly across the concepts.
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/medqa_gptoss.csv}{-0.05}{0.6}}%
+    {RQ3, MedQA with GPT-OSS 120B: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for MedQA with GPT-OSS 120B (435 concept-level values, $\rho=0.938$).}%
+    {fig:app-rq3-medqa-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/medqa_mistral.csv}{-0.05}{0.6}}%
+    {RQ3, MedQA with Mistral Medium 3.5: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for MedQA with Mistral Medium 3.5 (257 concept-level values, $\rho=0.963$).}%
+    {fig:app-rq3-medqa-mistral}%
+\end{figure}
 
-\input{graphs/results/appendix_rq3_normalization_identity}
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/new_german_credit_gptoss.csv}{-1}{2.7}}%
+    {RQ3, New German Credit with GPT-OSS 120B: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for New German Credit with GPT-OSS 120B (360 concept-level values, $\rho=0.875$).}%
+    {fig:app-rq3-credit-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/new_german_credit_mistral.csv}{-1}{2.7}}%
+    {RQ3, New German Credit with Mistral Medium 3.5: raw and adjusted CE}%
+    {Raw and adjusted concept-level CE for New German Credit with Mistral Medium 3.5 (360 concept-level values, $\rho=0.821$).}%
+    {fig:app-rq3-credit-mistral}%
+\end{figure}
+
+\section{Atomic and Joint Attribution per Question}
+\label{app:rq4-identity}
+
+Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} show the faithfulness and CE identity plots of the four combinations that are not shown in Section~\ref{sec:results-faithfulness-increase}. Each point is one question of the joint FELICS run, the vertical axis represents the joint formulation, and the dashed line denotes equality. In the CE plots, marker area increases with the number of concepts contributing to the question-level mean, and $k$ in the caption denotes the range of this number.
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/bbq_gptoss.csv}{-1}{1}}%
+    {RQ4, BBQ with GPT-OSS 120B: faithfulness}%
+    {Question-level atomic and joint faithfulness for BBQ with GPT-OSS 120B ($n=30$).}%
+    {fig:app-rq4-f-bbq-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/bbq_gptoss.csv}{0}{0.6}}%
+    {RQ4, BBQ with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for BBQ with GPT-OSS 120B ($n=30$, $k=4$ to $6$).}%
+    {fig:app-rq4-ce-bbq-gptoss}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/medqa_gptoss.csv}{-1}{1}}%
+    {RQ4, MedQA with GPT-OSS 120B: faithfulness}%
+    {Question-level atomic and joint faithfulness for MedQA with GPT-OSS 120B ($n=29$).}%
+    {fig:app-rq4-f-medqa-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/medqa_gptoss.csv}{0}{0.06}}%
+    {RQ4, MedQA with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for MedQA with GPT-OSS 120B ($n=29$, $k=8$ to $31$).}%
+    {fig:app-rq4-ce-medqa-gptoss}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/medqa_mistral.csv}{-1}{1}}%
+    {RQ4, MedQA with Mistral Medium 3.5: faithfulness}%
+    {Question-level atomic and joint faithfulness for MedQA with Mistral Medium 3.5 ($n=24$).}%
+    {fig:app-rq4-f-medqa-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/medqa_mistral.csv}{0}{0.06}}%
+    {RQ4, MedQA with Mistral Medium 3.5: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for MedQA with Mistral Medium 3.5 ($n=24$, $k=6$ to $16$).}%
+    {fig:app-rq4-ce-medqa-mistral}%
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/new_german_credit_gptoss.csv}{-1}{1}}%
+    {RQ4, New German Credit with GPT-OSS 120B: faithfulness}%
+    {Question-level atomic and joint faithfulness for New German Credit with GPT-OSS 120B ($n=30$).}%
+    {fig:app-rq4-f-credit-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/new_german_credit_gptoss.csv}{0}{1.5}}%
+    {RQ4, New German Credit with GPT-OSS 120B: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for New German Credit with GPT-OSS 120B ($n=30$, 12 concepts per question).}%
+    {fig:app-rq4-ce-credit-gptoss}%
+\end{figure}
+
+\section{Concept-Level Effects in the Case Study}
+\label{app:case-study-identity}
+
+Figure~\ref{fig:case-study-concept-identity} plots the atomic and joint causal effects of Table~\ref{tab:hyp5-concept-ce-comparison} for every concept of the case study in Section~\ref{sec:results-motivating-example}. Points above the identity line receive a larger credited effect under FELICS. The axis ranges differ between the two models because their effects differ by an order of magnitude.
+
+\definecolor{HypFiveOne}{HTML}{1B9E77}
+\definecolor{HypFiveTwo}{HTML}{D95F02}
+\definecolor{HypFiveThree}{HTML}{7570B3}
+\definecolor{HypFiveFour}{HTML}{E7298A}
+\definecolor{HypFiveFive}{HTML}{66A61E}
+\definecolor{HypFiveSix}{HTML}{E6AB02}
+\definecolor{HypFiveSeven}{HTML}{A6761D}
+\definecolor{HypFiveEight}{HTML}{1F78B4}
+\definecolor{HypFiveNine}{HTML}{6A3D9A}
+
+\newcommand{\HypFivePoint}[4]{%
+  \addplot[only marks,mark=*,mark size=2.5pt,draw=#2,fill=#2]
+    table[col sep=comma,x=#3,y=#4,
+      restrict expr to domain={\thisrow{concept_id}}{#1:#1}]
+    {data/rq5/concept_ce_identity.csv};%
+}
+
+% #1 title, #2 atomic column, #3 joint column, #4 upper axis limit.
+\newcommand{\HypFiveIdentityPlot}[4]{%
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    {\small\bfseries #1\par}
+    \vspace{0.1em}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=5.55cm,height=5.55cm,scale only axis,
+        xmin=0,xmax=#4,ymin=0,ymax=#4,
+        scaled ticks=false,
+        xlabel={$\mathrm{CE}_{\mathrm{atomic}}$},
+        ylabel={$\mathrm{CE}_{\mathrm{joint}}$},
+        tick label style={font=\scriptsize,/pgf/number format/fixed,/pgf/number format/precision=2},
+        label style={font=\scriptsize},
+        grid=major,grid style={gray!18},axis line style={gray!60},
+      ]
+        \addplot[ResultScatterLine,very thick,dashed,domain=0:#4,samples=2] {x};
+        \HypFivePoint{1}{HypFiveOne}{#2}{#3}
+        \HypFivePoint{2}{HypFiveTwo}{#2}{#3}
+        \HypFivePoint{3}{HypFiveThree}{#2}{#3}
+        \HypFivePoint{4}{HypFiveFour}{#2}{#3}
+        \HypFivePoint{5}{HypFiveFive}{#2}{#3}
+        \HypFivePoint{6}{HypFiveSix}{#2}{#3}
+        \HypFivePoint{7}{HypFiveSeven}{#2}{#3}
+        \HypFivePoint{8}{HypFiveEight}{#2}{#3}
+        \HypFivePoint{9}{HypFiveNine}{#2}{#3}
+      \end{axis}
+    \end{tikzpicture}
+  \end{minipage}%
+}
+
+\begin{figure}[H]
+  \centering
+  \HypFiveIdentityPlot{GPT-OSS 120B}{gpt_atomic}{gpt_joint}{0.05}
+  \hfill
+  \HypFiveIdentityPlot{Mistral Medium 3.5}{mistral_atomic}{mistral_joint}{0.45}
+
+  \vspace{0.8em}
+  \begin{tikzpicture}
+    \matrix[column sep=0.9em,row sep=0.35em,nodes={anchor=west,font=\scriptsize}] {
+      \node[draw=HypFiveOne,fill=HypFiveOne,circle,inner sep=1.6pt] {}; & \node {Age}; & \node[draw=HypFiveTwo,fill=HypFiveTwo,circle,inner sep=1.6pt] {}; & \node {Gender}; & \node[draw=HypFiveThree,fill=HypFiveThree,circle,inner sep=1.6pt] {}; & \node {Eating disorder}; \\
+      \node[draw=HypFiveFour,fill=HypFiveFour,circle,inner sep=1.6pt] {}; & \node {Mental status}; & \node[draw=HypFiveFive,fill=HypFiveFive,circle,inner sep=1.6pt] {}; & \node {Reason for visit}; & \node[draw=HypFiveSix,fill=HypFiveSix,circle,inner sep=1.6pt] {}; & \node {Refusal of treatment}; \\
+      \node[draw=HypFiveSeven,fill=HypFiveSeven,circle,inner sep=1.6pt] {}; & \node {Self-perception}; & \node[draw=HypFiveEight,fill=HypFiveEight,circle,inner sep=1.6pt] {}; & \node {Vital signs}; & \node[draw=HypFiveNine,fill=HypFiveNine,circle,inner sep=1.6pt] {}; & \node {EMS treatment}; \\
+    };
+  \end{tikzpicture}
+
+  \caption[Atomic and joint causal effects in the case study]{Atomic and interaction-aware causal effects for every concept in the MedQA case study. Colors identify the concepts consistently across both panels.}
+  \label{fig:case-study-concept-identity}
+\end{figure}
 \FloatBarrier
-\input{graphs/results/appendix_rq3_credit_concept_delta}

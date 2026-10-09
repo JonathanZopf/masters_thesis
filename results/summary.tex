@@ -1,23 +1,41 @@
-\section{Evolution of Question-Level Faithfulness}
+\section{Overview of Dataset-Level Results}
+\label{sec:results-overview}
 
-As an introduction to the results chapter, Figure~\ref{fig:question-level-faithfulness-rainclouds} shows how the distribution of question-level faithfulness changes when interaction effects are incorporated into FELICS. Each panel combines a density estimate (cloud), one point per evaluated question (rain), and a horizontal boxplot (umbrella). The data are drawn from a joint FELICS run with $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit. The atomic and interaction-aware estimates form the controlled comparison defined in Section~\ref{sec:controlled_atomic_baseline}: both use the same identified concepts, sampled responses, and explanation-implied-effect vector, but differ in whether the CE vector is constructed exclusively from singleton treatments or through the adjusted Shapley attribution of joint effects.
+As an introduction to the results chapter, Table~\ref{tab:results-dataset-overview} summarizes how dataset-level causal effects and faithfulness change when interaction effects are incorporated into FELICS. The data are drawn from a joint FELICS run with $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit. Of the 30 configured questions per dataset and model, one MedQA question for GPT-OSS 120B and six for Mistral Medium 3.5 did not yield final question-level results, for example because an intermediate output could not be parsed (Section~\ref{sec:incomplete_evaluations}). All other combinations comprise 30 questions. The atomic and interaction-aware estimates form the controlled comparison defined in Section~\ref{sec:controlled_atomic_baseline}: both use the same identified concepts, sampled responses, and EE vector, but differ in whether the CE vector is constructed exclusively from singleton treatments or through the adjusted Shapley attribution of joint effects.
 
-The value $\mathcal{F}(\mathbf{X})$ printed beside each distribution is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the plotted question-level estimates. This is the global regression-coefficient estimate described in the evaluation pipeline of Matton et al.~\cite{mattonWalkTalkMeasuring2024}; see Section~\ref{sec:matton_evaluation_pipeline}. The center line of each boxplot, by contrast, denotes the median of the displayed question-level posterior estimates.
+The value $\mathcal{F}(\mathbf{X})$ is the posterior dataset-level faithfulness estimate obtained through the Bayesian hierarchical sampling procedure, rather than the arithmetic mean of the question-level estimates. This is the global regression-coefficient estimate described in the evaluation pipeline of Matton et al.~\cite{mattonWalkTalkMeasuring2024} (Section~\ref{sec:matton_evaluation_pipeline}).
 
-The analogous raincloud distributions of question-averaged CE are provided in Appendix~\ref{app:ce-shift-rainclouds}. Their centers change only modestly relative to the scale of each dataset, although the distributional spread changes visibly for BBQ and New German Credit. The limited shifts in faithfulness shown here therefore do not imply that the underlying concept-level causal effects remain unchanged.
+\begin{table}[htb]
+  \centering
+  \caption[Dataset-level CE and faithfulness under atomic and joint attribution]{Dataset-level results of the joint FELICS run under atomic and joint attribution. Mean CE averages all concept-level CE values of a combination. $\mathcal{F}(\mathbf{X})$ is the posterior dataset-level faithfulness with its 90\% credible interval, and $n$ is the number of evaluated questions.}
+  \label{tab:results-dataset-overview}
+  \resizebox{\textwidth}{!}{%
+    \setlength{\tabcolsep}{4pt}%
+    \renewcommand{\arraystretch}{1.12}%
+    \pgfplotstabletypeset[
+      col sep=comma,
+      trim cells=true,
+      columns={dataset,model,n,ce_atomic,ce_joint,f_atomic,f_atomic_ci,f_joint,f_joint_ci},
+      columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
+      columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+      columns/n/.style={column name={\textbf{$n$}},column type=r,fixed,precision=0},
+      columns/ce_atomic/.style={column name={\textbf{Atomic}},column type=r,fixed,fixed zerofill,precision=4},
+      columns/ce_joint/.style={column name={\textbf{Joint}},column type=r,fixed,fixed zerofill,precision=4},
+      columns/f_atomic/.style={column name={\textbf{Atomic}},column type=r,fixed,fixed zerofill,precision=3},
+      columns/f_atomic_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
+      columns/f_joint/.style={column name={\textbf{Joint}},column type=r,fixed,fixed zerofill,precision=3},
+      columns/f_joint_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
+      every head row/.style={before row={
+        \hline
+        & & & \multicolumn{2}{c}{\textbf{Mean CE}} &
+        \multicolumn{4}{c}{\textbf{Dataset-level faithfulness $\mathcal{F}(\mathbf{X})$}}\\
+      },after row=\hline},
+      every last row/.style={after row=\hline},
+      every even row/.style={before row={\rowcolor{gray!8}}},
+    ]{data/summary/dataset_level_overview.csv}%
+  }
+\end{table}
 
-\ifthesislocalbuild
-  \input{graphs/results/summary}
-\else
-  \typeout{Non-local build detected: skipping graphs/results/summary.tex}
-  \begin{tcolorbox}[
-    colback=orange!12,
-    colframe=orange!80!black,
-    fonttitle=\bfseries,
-    title={Compilation warning}
-  ]
-    This part of the document cannot be compiled on Overleaf and has therefore
-    been omitted from this build.
-  \end{tcolorbox}
-\fi
-\FloatBarrier
+Joint attribution changes the dataset-level faithfulness by at most $0.131$. Five of the six changes are smaller than $0.1$, and every joint estimate lies within the 90\% credible interval of its atomic counterpart. The largest change occurs for New German Credit with Mistral Medium 3.5, which also has the lowest estimate under both attributions ($-0.271$ and $-0.140$). Both BBQ combinations show lower joint estimates, with the larger decrease for Mistral Medium 3.5 ($0.435$ to $0.345$), while MedQA with GPT-OSS 120B remains close to zero. Mean CE is roughly ten times smaller for MedQA (about $0.01$) than for BBQ ($0.09$ to $0.13$) and New German Credit ($0.19$ to $0.52$), so CE values are compared within rather than across datasets. Under joint attribution, it remains nearly constant for MedQA and for New German Credit with Mistral Medium 3.5, decreases by $14\%$ and $13\%$ for the two BBQ combinations, and increases by $23\%$ for New German Credit with GPT-OSS 120B.
+
+The question-level estimates that enter the subsequent tests are far less precise than these dataset-level values. Across the twelve sets of atomic and joint question-level estimates, the median width of the 90\% credible intervals lies between $2.40$ and $2.46$. Only BBQ with GPT-OSS 120B contains a question whose interval excludes zero, with one such question under each attribution. The distributions of question-level faithfulness and question-averaged CE for all six combinations are shown in Figures~\ref{fig:app-dist-f-bbq-gptoss} to~\ref{fig:app-dist-ce-credit-mistral} in Appendix~\ref{app:distributions}.

@@ -1,0 +1,26 @@
+\chapter{Results}
+\label{sec:results}
+\input{graphs/results/shared_scatter_plot}
+\input{graphs/results/appendix_ce_shift_identity}
+\input{graphs/results/appendix_rq3_credit_concept_delta}
+\input{graphs/results/oracle_grouping_heatmap}
+\input{graphs/results/appendix_rq2_ce_identity}
+The results were obtained using the FELICS reference implementation and the adapted baseline implementation of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, following the methodology specified in Chapter~\ref{ch:evaluation_methodology}. The evaluation covers three datasets and two models. The code versions, experiment commands, and locations of the stored experiment outputs are documented in Appendix~\ref{app:reproducibility}. The results provide an overview of the empirical behavior of both metrics and address the four research questions introduced in Section~\ref{sec:research_questions}, followed by the case study on the MedQA example. The corresponding hypothesis tests were conducted as specified in Section~\ref{sec:analysis_procedures}, and their outcomes are summarized in research-hypothesis boxes.
+
+The chapter begins with an overview of how dataset-level causal effects and faithfulness change when joint interventions are introduced. It then examines the oracle behavior on natural-language and tabular datasets before addressing each research question through statistical tests and selected figures. Four selected coalition effects and the case study conclude the chapter. Figures for the dataset--model combinations that are not shown in this chapter are collected in Appendix~\ref{app:additional-result-visualizations}.
+\input{results/summary}
+\FloatBarrier
+\input{results/oracle}
+\FloatBarrier
+\input{results/rq1}
+\FloatBarrier
+\input{results/rq2}
+\FloatBarrier
+\input{results/rq3}
+\FloatBarrier
+\input{results/rq4}
+\FloatBarrier
+\input{results/examples}
+\FloatBarrier
+\input{results/rq5}
+\FloatBarrier

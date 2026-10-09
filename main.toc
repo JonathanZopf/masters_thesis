@@ -62,99 +62,104 @@
 \contentsline {section}{\numberline {6.2}Shapley-Based Causal Effect Calculation}{39}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Motivation}{40}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Implementing Shapley Values into the Causal Effect}{40}{subsection.6.2.2}%
-\contentsline {section}{\numberline {6.3}Normalizing the Causal Effect}{41}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Systematic Shrinkage of Joint Effects}{41}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.3}Normalizing the Causal Effect}{42}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Systematic Shrinkage of Joint Effects}{42}{subsection.6.3.1}%
 \contentsline {subsection}{\numberline {6.3.2}Introducing the Payout Coefficient}{43}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}Constructing a Reference Set}{43}{subsection.6.3.3}%
 \contentsline {subsection}{\numberline {6.3.4}Correcting the Causal Effect Value Function}{44}{subsection.6.3.4}%
 \contentsline {section}{\numberline {6.4}Remaining Evaluation Pipeline}{45}{section.6.4}%
 \contentsline {section}{\numberline {6.5}Post-Modeling Assessment}{46}{section.6.5}%
 \contentsline {subsection}{\numberline {6.5.1}Reviewing Changes}{46}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Reexamination of Requirements}{46}{subsection.6.5.2}%
-\contentsline {subsubsection}{\ref {req:preserving_strengths} Preserving the strengths of the Causal Concept Faithfulness Metric}{46}{subsubsection*.35}%
+\contentsline {subsection}{\numberline {6.5.2}Reexamination of Requirements}{48}{subsection.6.5.2}%
+\contentsline {subsubsection}{\ref {req:preserving_strengths} Preserving the Strengths of the Causal Concept Faithfulness Metric}{48}{subsubsection*.35}%
 \contentsline {subsubsection}{\ref {req:one_item_group} Singleton-Group Compatibility}{48}{subsubsection*.36}%
 \contentsline {subsubsection}{\ref {req:independence_behavior} Additivity Compatibility}{48}{subsubsection*.37}%
 \contentsline {subsubsection}{\ref {req:no_surgical} Avoiding the Assumption of Surgical Interventions}{48}{subsubsection*.38}%
-\contentsline {subsubsection}{\ref {req:caputure_interaction} Correctly Capturing Interaction Effects}{48}{subsubsection*.39}%
+\contentsline {subsubsection}{\ref {req:caputure_interaction} Correctly Capturing Interaction Effects}{49}{subsubsection*.39}%
 \contentsline {subsubsection}{\ref {req:feasibility} Maintaining Computational Feasibility}{49}{subsubsection*.40}%
-\contentsline {chapter}{\numberline {7}Evaluation Methodology}{50}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Evaluation Settings}{50}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Reference Implementation}{50}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Selection of Datasets}{50}{subsection.7.1.2}%
-\contentsline {subsubsection}{BBQ}{51}{subsubsection*.41}%
-\contentsline {subsubsection}{MedQA}{51}{subsubsection*.42}%
-\contentsline {subsubsection}{New German Credit}{51}{subsubsection*.43}%
-\contentsline {subsection}{\numberline {7.1.3}Selection of Models}{52}{subsection.7.1.3}%
-\contentsline {subsubsection}{gpt-oss:120b}{52}{subsubsection*.44}%
-\contentsline {subsubsection}{Mistral Medium 3.5}{52}{subsubsection*.45}%
-\contentsline {subsubsection}{Auxiliary LLM}{52}{subsubsection*.46}%
-\contentsline {subsection}{\numberline {7.1.4}Samples per Question}{53}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Question Selection from Datasets}{53}{subsection.7.1.5}%
-\contentsline {subsection}{\numberline {7.1.6}Removal vs.\ Value-Replacement Counterfactuals}{54}{subsection.7.1.6}%
-\contentsline {subsection}{\numberline {7.1.7}Explanations Used to Estimate Explanation-Implied Effects}{54}{subsection.7.1.7}%
-\contentsline {section}{\numberline {7.2}Operationalization and Analysis Procedures}{55}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Evaluation Conditions and Causal-Effect Notation}{55}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Interaction-Presumption Strength and Causal-Effect Changes}{56}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Equivalence with the Original Metric}{57}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Preservation of Within-Question Concept Rankings}{58}{subsection.7.2.4}%
-\contentsline {subsection}{\numberline {7.2.5}Effect of Interaction Modeling on Faithfulness}{58}{subsection.7.2.5}%
-\contentsline {subsection}{\numberline {7.2.6}Resolution of the Motivating Underestimation Case}{59}{subsection.7.2.6}%
-\contentsline {chapter}{\numberline {8}Results}{60}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Evolution of Question-Level Faithfulness}{61}{section.8.1}%
+\contentsline {chapter}{\numberline {7}Evaluation Methodology}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Evaluation Settings}{51}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Reference Implementation}{51}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Selection of Datasets}{51}{subsection.7.1.2}%
+\contentsline {subsubsection}{BBQ}{52}{subsubsection*.41}%
+\contentsline {subsubsection}{MedQA}{52}{subsubsection*.42}%
+\contentsline {subsubsection}{New German Credit}{52}{subsubsection*.43}%
+\contentsline {subsection}{\numberline {7.1.3}Selection of Models}{53}{subsection.7.1.3}%
+\contentsline {subsubsection}{GPT-OSS 120B}{53}{subsubsection*.44}%
+\contentsline {subsubsection}{Mistral Medium 3.5}{53}{subsubsection*.45}%
+\contentsline {subsubsection}{Auxiliary LLM}{53}{subsubsection*.46}%
+\contentsline {subsection}{\numberline {7.1.4}Samples per Question}{54}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Question Selection from Datasets}{54}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}Removal vs.\ Value-Replacement Counterfactuals}{55}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Explanations Used to Estimate Explanation-Implied Effects}{55}{subsection.7.1.7}%
+\contentsline {section}{\numberline {7.2}Operationalization and Analysis Procedures}{56}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Evaluation Conditions and Causal-Effect Notation}{56}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Interaction-Presumption Strength and Causal-Effect Changes}{58}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Equivalence with the Original Metric}{59}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Preservation of Within-Question Concept Rankings}{59}{subsection.7.2.4}%
+\contentsline {subsection}{\numberline {7.2.5}Effect of Interaction Modeling on Faithfulness}{60}{subsection.7.2.5}%
+\contentsline {subsection}{\numberline {7.2.6}Case Study: The MedQA Example of Matton et al.}{60}{subsection.7.2.6}%
+\contentsline {chapter}{\numberline {8}Results}{62}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Overview of Dataset-Level Results}{62}{section.8.1}%
 \contentsline {section}{\numberline {8.2}Descriptive Behavior of the Oracles}{63}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Interaction-Presumption Strength and Changes in Causal Effects}{66}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Validation against the Original Implementation}{69}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Preservation of Concept Rankings}{72}{section.8.5}%
-\contentsline {section}{\numberline {8.6}Effect of Interaction Modeling on Faithfulness}{74}{section.8.6}%
-\contentsline {section}{\numberline {8.7}Resolution of the Motivating Underestimation Example}{77}{section.8.7}%
-\contentsline {chapter}{\numberline {9}Discussion}{80}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Central Findings}{80}{section.9.1}%
-\contentsline {section}{\numberline {9.2}What Joint-Intervention Modeling Revealed}{80}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}A Threshold-Like Response in New German Credit}{81}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Concept Decomposition with an Ambiguous Removal Effect}{82}{subsection.9.2.2}%
-\contentsline {subsection}{\numberline {9.2.3}A Large Coalition Effect with Ambiguous Origin}{83}{subsection.9.2.3}%
-\contentsline {subsection}{\numberline {9.2.4}Oracle Grouping with Little Observed Interaction}{83}{subsection.9.2.4}%
-\contentsline {section}{\numberline {9.3}Interpreting the Mixed Research Findings}{84}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}From Oracle Presumptions to Changes in Faithfulness}{84}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Singleton Compatibility and Independent Pipeline Runs}{84}{subsection.9.3.2}%
-\contentsline {subsection}{\numberline {9.3.3}Normalization and Preservation of Concept Rankings}{85}{subsection.9.3.3}%
-\contentsline {subsection}{\numberline {9.3.4}The Motivating Underestimation Example}{86}{subsection.9.3.4}%
-\contentsline {section}{\numberline {9.4}Requirements Revisited}{86}{section.9.4}%
-\contentsline {paragraph}{Preservation of concept-level interpretability.}{86}{paragraph*.62}%
-\contentsline {paragraph}{Singleton and additivity compatibility.}{86}{paragraph*.63}%
-\contentsline {paragraph}{Intervention validity and interaction coverage.}{87}{paragraph*.64}%
-\contentsline {paragraph}{Computational feasibility.}{87}{paragraph*.65}%
-\contentsline {section}{\numberline {9.5}Limitations of the Experimental Evaluation}{87}{section.9.5}%
-\contentsline {subsection}{\numberline {9.5.1}Coverage and Sampling Uncertainty}{87}{subsection.9.5.1}%
-\contentsline {subsection}{\numberline {9.5.2}Auxiliary-Model Dependence and Incomplete Evaluations}{88}{subsection.9.5.2}%
-\contentsline {subsection}{\numberline {9.5.3}Unvalidated Design Choices and Counterfactual Quality}{89}{subsection.9.5.3}%
-\contentsline {section}{\numberline {9.6}Limitations of FELICS}{89}{section.9.6}%
-\contentsline {subsection}{\numberline {9.6.1}Candidate Groups and Unmeasured Interactions}{89}{subsection.9.6.1}%
-\contentsline {subsection}{\numberline {9.6.2}Concept Representation and Intervention Validity}{90}{subsection.9.6.2}%
-\contentsline {subsection}{\numberline {9.6.3}Reference-Relative Normalization}{90}{subsection.9.6.3}%
-\contentsline {subsection}{\numberline {9.6.4}Explanation Effects and the Scope of Faithfulness}{91}{subsection.9.6.4}%
-\contentsline {section}{\numberline {9.7}Future Work}{91}{section.9.7}%
-\contentsline {subsection}{\numberline {9.7.1}Stronger Validation and More Reliable Evaluation}{91}{subsection.9.7.1}%
-\contentsline {subsection}{\numberline {9.7.2}Oracle Validation and Selection of the Group-Size Bound}{92}{subsection.9.7.2}%
-\contentsline {subsection}{\numberline {9.7.3}Revisiting Normalization and the Effect Scale}{92}{subsection.9.7.3}%
-\contentsline {subsection}{\numberline {9.7.4}Richer Explanation-Implied Effects}{93}{subsection.9.7.4}%
-\contentsline {chapter}{\numberline {10}Conclusion}{94}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Summary of the Thesis}{94}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Answers to the Research Questions}{94}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Research Contribution}{95}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Outlook}{95}{section.10.4}%
-\contentsline {chapter}{Bibliography}{97}{chapter*.66}%
-\contentsline {chapter}{\numberline {A}Introduction Examples Setup}{106}{appendix.A}%
-\contentsline {chapter}{\numberline {B}LLM-Based Oracle Category Normalization}{108}{appendix.B}%
-\contentsline {chapter}{\numberline {C}Detailed Oracle Partitioning Traces}{110}{appendix.C}%
-\contentsline {section}{\numberline {C.1}New German Credit}{110}{section.C.1}%
-\contentsline {section}{\numberline {C.2}RQ5 Motivating MedQA Example}{114}{section.C.2}%
-\contentsline {chapter}{\numberline {D}Additional Result Visualizations}{115}{appendix.D}%
-\contentsline {section}{\numberline {D.1}Causal-Effect Shifts under Joint Interventions}{115}{section.D.1}%
-\contentsline {section}{\numberline {D.2}Question-Level CE Agreement under Joint Attribution}{117}{section.D.2}%
-\contentsline {section}{\numberline {D.3}CE Agreement between Implementations}{120}{section.D.3}%
-\contentsline {section}{\numberline {D.4}Concept-Level Effects of Shapley Normalization}{123}{section.D.4}%
-\contentsline {chapter}{\numberline {E}Examples}{127}{appendix.E}%
-\contentsline {chapter}{\numberline {F}Mathematical Demonstrations}{130}{appendix.F}%
-\contentsline {chapter}{\numberline {G}Prompts}{136}{appendix.G}%
-\contentsline {chapter}{\numberline {H}Reproducibility and Experimental Artifacts}{161}{appendix.H}%
+\contentsline {section}{\numberline {8.3}Interaction-Presumption Strength and Changes in Causal Effects}{65}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Validation against the Original Implementation}{67}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Preservation of Concept Rankings}{69}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Effect of Interaction Modeling on Faithfulness}{71}{section.8.6}%
+\contentsline {section}{\numberline {8.7}Selected Coalition Effects}{74}{section.8.7}%
+\contentsline {section}{\numberline {8.8}Case Study: The MedQA Example of Matton et al.}{76}{section.8.8}%
+\contentsline {chapter}{\numberline {9}Discussion}{79}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Central Findings}{79}{section.9.1}%
+\contentsline {section}{\numberline {9.2}What Joint-Intervention Modeling Revealed}{79}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}A Threshold-Like Response in New German Credit}{80}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Concept Decomposition with an Ambiguous Removal Effect}{80}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.2.3}A Large Coalition Effect with Ambiguous Origin}{80}{subsection.9.2.3}%
+\contentsline {subsection}{\numberline {9.2.4}Oracle Grouping with Little Observed Interaction}{81}{subsection.9.2.4}%
+\contentsline {section}{\numberline {9.3}Interpreting the Mixed Research Findings}{81}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}From Oracle Presumptions to Changes in Faithfulness}{81}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Singleton Compatibility and Independent Pipeline Runs}{82}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}Normalization and Preservation of Concept Rankings}{83}{subsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.3.4}The MedQA Case Study}{83}{subsection.9.3.4}%
+\contentsline {section}{\numberline {9.4}Requirements Revisited}{84}{section.9.4}%
+\contentsline {paragraph}{Preservation of concept-level interpretability.}{84}{paragraph*.61}%
+\contentsline {paragraph}{Singleton and additivity compatibility.}{84}{paragraph*.62}%
+\contentsline {paragraph}{Intervention validity and interaction coverage.}{84}{paragraph*.63}%
+\contentsline {paragraph}{Computational feasibility.}{85}{paragraph*.64}%
+\contentsline {section}{\numberline {9.5}Limitations of the Experimental Evaluation}{85}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Dataset and Model Coverage}{85}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Sampling and Statistical Uncertainty}{85}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}Auxiliary-Model Dependence and Incomplete Evaluations}{86}{subsection.9.5.3}%
+\contentsline {subsection}{\numberline {9.5.4}Unvalidated Design Choices and Counterfactual Quality}{87}{subsection.9.5.4}%
+\contentsline {section}{\numberline {9.6}Limitations of FELICS}{87}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}Candidate Groups and Unmeasured Interactions}{87}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Concept Representation and Intervention Validity}{88}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Reference-Relative Normalization}{88}{subsection.9.6.3}%
+\contentsline {subsection}{\numberline {9.6.4}Explanation Effects and the Scope of Faithfulness}{89}{subsection.9.6.4}%
+\contentsline {section}{\numberline {9.7}Future Work}{89}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Stronger Validation and More Reliable Evaluation}{89}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}Oracle Validation and Selection of the Group-Size Bound}{90}{subsection.9.7.2}%
+\contentsline {subsection}{\numberline {9.7.3}Revisiting Normalization and the Effect Scale}{90}{subsection.9.7.3}%
+\contentsline {subsection}{\numberline {9.7.4}Richer Explanation-Implied Effects}{91}{subsection.9.7.4}%
+\contentsline {chapter}{\numberline {10}Conclusion}{92}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Summary of the Thesis}{92}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Answers to the Research Questions}{92}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Research Contribution}{93}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Outlook}{93}{section.10.4}%
+\contentsline {chapter}{Bibliography}{95}{chapter*.65}%
+\contentsline {chapter}{\numberline {A}Introduction Examples Setup}{104}{appendix.A}%
+\contentsline {chapter}{\numberline {B}LLM-Based Oracle Category Normalization}{106}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Detailed Oracle Partitioning Traces}{108}{appendix.C}%
+\contentsline {section}{\numberline {C.1}New German Credit}{108}{section.C.1}%
+\contentsline {section}{\numberline {C.2}MedQA Case Study}{112}{section.C.2}%
+\contentsline {chapter}{\numberline {D}Additional Result Visualizations}{113}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Distributions of Question-Level Faithfulness and CE}{113}{section.D.1}%
+\contentsline {section}{\numberline {D.2}Oracle Co-Grouping Rates for BBQ}{115}{section.D.2}%
+\contentsline {section}{\numberline {D.3}Interaction-Presumption Strength and Attribution Changes}{115}{section.D.3}%
+\contentsline {section}{\numberline {D.4}Agreement between Implementations}{117}{section.D.4}%
+\contentsline {section}{\numberline {D.5}Concept-Level Effects of Shapley Normalization}{119}{section.D.5}%
+\contentsline {section}{\numberline {D.6}Atomic and Joint Attribution per Question}{121}{section.D.6}%
+\contentsline {section}{\numberline {D.7}Concept-Level Effects in the Case Study}{123}{section.D.7}%
+\contentsline {chapter}{\numberline {E}Examples}{124}{appendix.E}%
+\contentsline {chapter}{\numberline {F}Mathematical Demonstrations}{127}{appendix.F}%
+\contentsline {chapter}{\numberline {G}Prompts}{133}{appendix.G}%
+\contentsline {chapter}{\numberline {H}Reproducibility and Experimental Artifacts}{158}{appendix.H}%

@@ -48,8 +48,8 @@
 \node[data, anchor=east] at (-1.15,-11.45) {Answers};
 \node[data, anchor=west] at (1.15,-11.45) {Explanations};
 
-\node[node branch, phase3] (ce) at (-3.5,-14.95) {Compare original and counterfactual distributions\\[-1pt] \scriptsize Average $D_{\mathrm{KL}}$ $\rightarrow$ Causal Effect (CE)};
-\node[node branch, phase3] (ee) at (3.5,-14.95) {Aggregate attributed concept importance\\[-1pt] \scriptsize Explanation-Implied Effect (EE)};
+\node[node branch, phase3] (ce) at (-3.5,-14.95) {Compare original and counterfactual distributions\\[-1pt] \scriptsize Average $D_{\mathrm{KL}}$ $\rightarrow$ Causal concept effect (CE)};
+\node[node branch, phase3] (ee) at (3.5,-14.95) {Aggregate attributed concept importance\\[-1pt] \scriptsize Explanation-implied effect (EE)};
 \draw[flow] (mentions) -- (ee);
 \draw[flow] (probability) -- (ce);
 

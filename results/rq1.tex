@@ -1,122 +1,43 @@
 \section{Interaction-Presumption Strength and Changes in Causal Effects}
-Research Question~\ref{rq:correlation_diff}, introduced in Section~\ref{sec:research_questions}, examines whether joint interventions have a greater effect when the oracle expresses a stronger presumption of interaction among the concepts within a question. Specifically, it asks whether the differences in question-averaged causal effects and question-level faithfulness between the joint and atomic formulations increase with interaction-presumption strength. As described in Section~\ref{sec:analysis_procedures}, this quantity is operationalized by $\Delta\kappa$, which is derived from the candidate interaction groups and their implied treatments relative to the number of concepts. It is a property of the oracle output rather than a direct measure of statistical association or response-level interaction.
+\label{sec:results-interaction-presumption}
+Research Question~\ref{rq:correlation_diff} (Chapter~\ref{sec:research_questions}) asks whether the differences in question-averaged causal effects and question-level faithfulness between the joint and atomic formulations increase with the oracle's presumption of interaction among the concepts of a question. This interaction-presumption strength is operationalized by $\Delta\kappa$ (Section~\ref{sec:analysis_procedures}). It is a property of the oracle partition rather than a measure of statistical association or response-level interaction.
 
-Figures~\ref{fig:hyp1-bbq-scatterplots} and~\ref{fig:hyp1-medqa-scatterplots} show the relationship between interaction-presumption strength and the differences in causal effects and faithfulness. Each blue point represents one question, and the orange line is the least-squares linear fit. In the BBQ panels, the points exhibit no clear positive pattern; the estimated associations are weak. The MedQA panels suggest a possible positive association for $\Delta\mathrm{CE}$, particularly with \texttt{gpt-oss:120b}.
+The correlation tests in Box~\ref{hyp:hyp1-results} identify only one supported association: for MedQA evaluated with GPT-OSS 120B, $\Delta\kappa$ is significantly positively correlated with the difference in question-averaged causal effects. None of the other dataset--model and outcome combinations meet the prespecified decision criterion. Figures~\ref{fig:rq1-medqa-gptoss-ce} and~\ref{fig:rq1-medqa-gptoss-f} show the supported combination for both outcomes. Each point represents one question, and the orange line is the least-squares linear fit. The remaining six combinations are shown in Figures~\ref{fig:app-rq1-bbq-gptoss-ce} to~\ref{fig:app-rq1-medqa-mistral-f} in Appendix~\ref{app:rq1-scatter}.
 
-% RQ1 preset: fixed dimensions, x variable, solid fitted line, and test summary.
-% #1 Pearson r, #2 confidence-interval lower bound, #3 plot-specific keys.
-\newcommand{\HypOneScatter}[3]{%
-  \ResultScatterPlot{x column=diff_correlation_strength,
-    x label={$\Delta\kappa(\mathbf{x})$},
-    line style=solid,
-    minipage width=0.485\textwidth,
-    plot width=\linewidth,
-    plot height=5.45cm,
-    mark size=1.65pt,
-    below skip=-0.25em,
-    text below={Pearson $r=#1$; one-sided 95\% CI $[#2,\,1.000]$},
-    #3
-  }%
-}
-
-\begin{figure}[p]
-  \centering
-  \HypOneScatter{-0.025}{-0.329}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
-    data=data/rq1/bbq_gptoss.csv,
-    y column=mean_absolute_ce_diff,
-    y label={$\Delta\mathrm{CE}(\mathbf{x})$},
-    line intercept=0.04781242,
-    line slope=-0.005150228,
-    xmax=2.3,
-    ymax=0.26
-  }
-  \hfill
-  \HypOneScatter{-0.102}{-0.396}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
-    data=data/rq1/bbq_gptoss.csv,
-    y column=faithfulness_diff,
-    y label={$\Delta\mathcal{F}(\mathbf{x})$},
-    line intercept=0.108172,
-    line slope=-0.04293996,
-    xmax=2.3,
-    ymax=0.45
-  }
-
-  \par\vspace{1.1em}
-  \HypOneScatter{0.094}{-0.219}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
-    data=data/rq1/bbq_mistral.csv,
-    y column=mean_absolute_ce_diff,
-    y label={$\Delta\mathrm{CE}(\mathbf{x})$},
-    line intercept=0.03854958,
-    line slope=0.01621849,
-    xmax=2.3,
-    ymax=0.26
-  }
-  \hfill
-  \HypOneScatter{0.119}{-0.195}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
-    data=data/rq1/bbq_mistral.csv,
-    y column=faithfulness_diff,
-    y label={$\Delta\mathcal{F}(\mathbf{x})$},
-    line intercept=0.1011828,
-    line slope=0.03338781,
-    xmax=2.3,
-    ymax=0.36
-  }
-
-  \caption{Relationship between increased oracle-derived interaction-presumption strength and
-  changes in causal effects or question-level faithfulness for BBQ.}
-  \label{fig:hyp1-bbq-scatterplots}
-\end{figure}
-
-\begin{figure}[p]
-  \centering
-  \HypOneScatter{0.338}{0.030}{title={GPT-OSS 120B --- $\Delta\mathrm{CE}$},
-    data=data/rq1/medqa_gptoss.csv,
-    y column=mean_absolute_ce_diff,
-    y label={$\Delta\mathrm{CE}(\mathbf{x})$},
-    line intercept=-0.0007759744,
-    line slope=0.001300082,
-    xmax=8,
-    ymax=0.025
-  }
-  \hfill
-  \HypOneScatter{0.236}{-0.082}{title={GPT-OSS 120B --- $\Delta\mathcal{F}$},
-    data=data/rq1/medqa_gptoss.csv,
-    y column=faithfulness_diff,
-    y label={$\Delta\mathcal{F}(\mathbf{x})$},
-    line intercept=0.01957124,
-    line slope=0.004748344,
-    xmax=8,
-    ymax=0.18
-  }
-
-  \par\vspace{1.1em}
-  \HypOneScatter{0.097}{-0.256}{title={Mistral Medium 3.5 --- $\Delta\mathrm{CE}$},
-    data=data/rq1/medqa_mistral.csv,
-    y column=mean_absolute_ce_diff,
-    y label={$\Delta\mathrm{CE}(\mathbf{x})$},
-    line intercept=0.001771789,
-    line slope=0.0001623979,
-    xmax=8,
-    ymax=0.015
-  }
-  \hfill
-  \HypOneScatter{-0.075}{-0.409}{title={Mistral Medium 3.5 --- $\Delta\mathcal{F}$},
-    data=data/rq1/medqa_mistral.csv,
-    y column=faithfulness_diff,
-    y label={$\Delta\mathcal{F}(\mathbf{x})$},
-    line intercept=0.04718424,
-    line slope=-0.001921023,
-    xmax=8,
-    ymax=0.18
-  }
-
-  \caption{Relationship between increased oracle-derived interaction-presumption strength and
-  changes in causal effects or question-level faithfulness for MedQA.}
-  \label{fig:hyp1-medqa-scatterplots}
-\end{figure}
-
-As expected from the graphs, the correlation tests in Box~\ref{hyp:hyp1-results} identify only one supported association: for MedQA evaluated with \texttt{gpt-oss:120b}, $\Delta\kappa$ is significantly positively correlated with the difference in question-averaged causal effects. None of the other dataset--model and outcome combinations meet the prespecified decision criterion. The results therefore do not provide consistent evidence that stronger oracle presumptions of interaction are associated with greater changes in causal effects or faithfulness when joint interventions replace atomic interventions.
-\HypothesisTestResults[label=hyp:hyp1-results]
-  {One-sided Pearson tests for \rqref{rq:correlation_diff}. A combination
+\HypothesisTestResults[label=hyp:hyp1-results,unbreakable]
+  {One-sided Pearson correlation tests for \rqref{rq:correlation_diff}. A combination
   supports the hypothesis when $r\geq0.10$ and $p\leq0.10$.}
   {data/rq1/hypothesis_test_results.csv}
+
+\begin{figure}[htb]
+  \centering
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/medqa_gptoss.csv,
+      y column=mean_absolute_ce_diff,
+      y label={$\Delta\mathrm{CE}(\mathbf{x})$},
+      line intercept=-0.0007759744,
+      line slope=0.001300082,
+      xmax=8,
+      ymax=0.025
+    }}%
+    {RQ1, MedQA with GPT-OSS 120B: $\Delta\kappa$ and $\Delta\mathrm{CE}$}%
+    {Interaction-presumption strength and change in question-averaged CE for MedQA with GPT-OSS 120B ($n=29$). Pearson $r=0.338$, one-sided 95\% CI $[0.030,\,1.000]$.}%
+    {fig:rq1-medqa-gptoss-ce}%
+  \hfill
+  \ResultFigureHalf{%
+    \HypOneScatter{data=data/rq1/medqa_gptoss.csv,
+      y column=faithfulness_diff,
+      y label={$\Delta\mathcal{F}(\mathbf{x})$},
+      line intercept=0.01957124,
+      line slope=0.004748344,
+      xmax=8,
+      ymax=0.18
+    }}%
+    {RQ1, MedQA with GPT-OSS 120B: $\Delta\kappa$ and $\Delta\mathcal{F}$}%
+    {Interaction-presumption strength and change in question-level faithfulness for MedQA with GPT-OSS 120B ($n=29$). Pearson $r=0.236$, one-sided 95\% CI $[-0.082,\,1.000]$.}%
+    {fig:rq1-medqa-gptoss-f}%
+\end{figure}
+
+The supported association depends strongly on single questions. Question 434 has by far the largest change in CE ($\Delta\mathrm{CE}=0.023$ at $\Delta\kappa=4.67$). Without it, the Pearson correlation coefficient falls to $r=0.167$ (one-sided $p=0.198$). Question 1120 has the largest interaction-presumption strength ($\Delta\kappa=6.0$) but almost no change in CE ($\Delta\mathrm{CE}=0.002$), which lowers the linear correlation. An exploratory rank correlation, which is less sensitive to such individual values, indicates a stronger monotone association (Spearman $\rho=0.581$, one-sided $p=0.0005$). For the change in faithfulness of the same combination, the rank correlation is weaker and borderline ($\rho=0.309$, $p=0.051$). For MedQA with Mistral Medium 3.5, question 161 shows both the largest change in CE ($0.010$) and the largest change in faithfulness ($0.172$), at an intermediate $\Delta\kappa=3.0$ (Figures~\ref{fig:app-rq1-medqa-mistral-ce} and~\ref{fig:app-rq1-medqa-mistral-f}).
+
+In BBQ, the oracle forms mostly pairs and singletons (Table~\ref{tab:oracle-summary}), so $\Delta\kappa$ varies little between questions (Figures~\ref{fig:app-rq1-bbq-gptoss-ce} to~\ref{fig:app-rq1-bbq-mistral-f}). It takes only eight distinct values between $0.33$ and $1.80$ for GPT-OSS 120B and six distinct values between $0$ and $2.20$ for Mistral Medium 3.5. For Mistral Medium 3.5, the sign of the faithfulness correlation is determined by question 8, the only question with $\Delta\kappa=2.2$: omitting it changes $r$ from $0.119$ to $-0.262$. At the same time, the largest changes in CE are considerably larger in BBQ than in MedQA ($0.21$ and $0.24$ compared with $0.023$ and $0.010$), in line with the smaller CE scale of MedQA (Table~\ref{tab:results-dataset-overview}). The results therefore do not provide consistent evidence that stronger oracle presumptions of interaction are associated with greater changes in causal effects or faithfulness when joint interventions replace atomic interventions.

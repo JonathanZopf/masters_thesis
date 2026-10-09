@@ -1,0 +1,7 @@
+dataset,model,n,exact,median_rho,min_rho
+BBQ,GPT-OSS 120B,30,21,1.000,0.400
+BBQ,Mistral Medium 3.5,30,21,1.000,0.200
+MedQA,GPT-OSS 120B,29,6,0.976,0.685
+MedQA,Mistral Medium 3.5,24,7,0.988,0.806
+New German Credit,GPT-OSS 120B,30,0,0.923,0.483
+New German Credit,Mistral Medium 3.5,30,0,0.671,-0.077

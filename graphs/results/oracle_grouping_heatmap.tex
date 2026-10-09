@@ -6,6 +6,8 @@
 \definecolor{OracleHeatMissing}{HTML}{E3E3E3}
 
 \ExplSyntaxOn
+\cs_if_exist:NF \oracle_heatmap_draw_cells:nn
+  {
 \ior_new:N \g_oracle_heatmap_ior
 \int_new:N \l_oracle_heatmap_row_int
 \int_new:N \l_oracle_heatmap_x_int
@@ -59,71 +61,66 @@
       }
     \ior_close:N \g_oracle_heatmap_ior
   }
-\NewDocumentCommand{\OracleHeatmapCells}{mm}
+  }
+\DeclareDocumentCommand{\OracleHeatmapCells}{mm}
   { \oracle_heatmap_draw_cells:nn {#1}{#2} }
 \ExplSyntaxOff
 
-\newcommand{\OracleHeatmapGrid}[1]{%
+\providecommand{\OracleHeatmapGrid}[1]{%
   \draw[gray!25,thin] (0,0) rectangle (#1,#1);%
 }
 
-\begin{figure}[p]
-  \centering
-  \begin{minipage}[c]{.38\textwidth}
-    \centering
-    {\small\bfseries BBQ\par}
-    \vspace{.35em}
-    \begin{adjustbox}{max width=\linewidth}
-    \begin{tikzpicture}[x=.37cm,y=-.37cm,
-      every node/.style={font=\fontsize{5.4}{6.2}\selectfont}]
-      \OracleHeatmapCells{0}{10}
-      \OracleHeatmapGrid{10}
-      \foreach \heatlabel [count=\i from 0] in {
-        {Actions \& behavior},{Demographics},{Emotions \& reactions},
-        {Events \& situations},{Identity \& roles},{Intentions \& attitudes},
-        {Other details},{Relationships \& family},{Setting \& time},
-        {Topics \& communication}}
-        {
-          \node[anchor=east] at (-.18,\i+.5) {\heatlabel};
-          \node[anchor=east,rotate=55] at (\i+.55,10.22) {\heatlabel};
-        }
-    \end{tikzpicture}
-    \end{adjustbox}
-  \end{minipage}\hfill
-  \begin{minipage}[c]{.60\textwidth}
-    \centering
-    {\small\bfseries MedQA\par}
-    \vspace{.35em}
-    \begin{adjustbox}{max width=\linewidth}
-    \begin{tikzpicture}[x=.255cm,y=-.255cm,
-      every node/.style={font=\fontsize{4.4}{5.1}\selectfont}]
-      \OracleHeatmapCells{100}{19}
-      \OracleHeatmapGrid{19}
-      \foreach \heatlabel [count=\i from 0] in {
-        {Anatomy \& localization},{Care context},{Demographics},
-        {Diagnosis \& reasoning},{Diagnostic tests},
-        {Family, social \& lifestyle},{Imaging},{Laboratory \& pathology},
-        {Medical history},{Medication \& adherence},
-        {Mental health \& cognition},{Neurologic function},
-        {Physical examination},{Reproductive history},
-        {Risk, exposure \& trauma},{Symptoms},{Timing \& course},
-        {Treatment \& response},{Vitals \& anthropometrics}}
-        {
-          \node[anchor=east] at (-.20,\i+.5) {\heatlabel};
-          \node[anchor=east,rotate=55] at (\i+.55,19.25) {\heatlabel};
-        }
-      % Shared percentage legend.
-      \foreach \p in {0,...,99}
-        \fill[OracleHeatHigh!\p!OracleHeatLow]
-          (21,{6.5+\p/18}) rectangle (21.75,{6.5+(\p+1)/18});
-      \draw[gray!25,thin] (21,6.5) rectangle (21.75,12.0556);
-      \node[anchor=south west,align=left] at (20.85,6.2)
-        {Co-grouping\\rate (\%)};
-      \foreach \p in {0,25,50,75,100}
-        \node[anchor=west] at (21.95,{6.5+\p/18}) {\p};
-    \end{tikzpicture}
-    \end{adjustbox}
-  \end{minipage}
-  \caption{Co-grouping rates for the natural-language oracle on LLM-normalized Categories}
-  \label{fig:oracle-category-heatmaps}
-\end{figure}
+
+% Shared percentage legend. #1 x position, #2 y position, both in cell units.
+\providecommand{\OracleHeatmapLegend}[2]{%
+  \foreach \p in {0,...,99}
+    \fill[OracleHeatHigh!\p!OracleHeatLow]
+      (#1,{#2+\p/18}) rectangle (#1+0.75,{#2+(\p+1)/18});
+  \draw[gray!25,thin] (#1,#2) rectangle (#1+0.75,#2+5.5556);
+  \node[anchor=south west,align=left] at (#1-0.15,#2-0.3)
+    {Co-grouping\\rate (\%)};
+  \foreach \p in {0,25,50,75,100}
+    \node[anchor=west] at (#1+0.95,{#2+\p/18}) {\p};
+}
+
+% BBQ heat map with its 10 normalized categories.
+\providecommand{\OracleHeatmapBBQ}{%
+  \begin{tikzpicture}[x=.52cm,y=-.52cm,
+    every node/.style={font=\fontsize{7}{8}\selectfont}]
+    \OracleHeatmapCells{0}{10}
+    \OracleHeatmapGrid{10}
+    \foreach \heatlabel [count=\i from 0] in {
+      {Actions \& behavior},{Demographics},{Emotions \& reactions},
+      {Events \& situations},{Identity \& roles},{Intentions \& attitudes},
+      {Other details},{Relationships \& family},{Setting \& time},
+      {Topics \& communication}}
+      {
+        \node[anchor=east] at (-.18,\i+.5) {\heatlabel};
+        \node[anchor=east,rotate=55] at (\i+.55,10.22) {\heatlabel};
+      }
+    \OracleHeatmapLegend{11.2}{2.2}
+  \end{tikzpicture}%
+}
+
+% MedQA heat map with its 19 normalized categories.
+\providecommand{\OracleHeatmapMedQA}{%
+  \begin{tikzpicture}[x=.40cm,y=-.40cm,
+    every node/.style={font=\fontsize{6.4}{7.4}\selectfont}]
+    \OracleHeatmapCells{100}{19}
+    \OracleHeatmapGrid{19}
+    \foreach \heatlabel [count=\i from 0] in {
+      {Anatomy \& localization},{Care context},{Demographics},
+      {Diagnosis \& reasoning},{Diagnostic tests},
+      {Family, social \& lifestyle},{Imaging},{Laboratory \& pathology},
+      {Medical history},{Medication \& adherence},
+      {Mental health \& cognition},{Neurologic function},
+      {Physical examination},{Reproductive history},
+      {Risk, exposure \& trauma},{Symptoms},{Timing \& course},
+      {Treatment \& response},{Vitals \& anthropometrics}}
+      {
+        \node[anchor=east] at (-.20,\i+.5) {\heatlabel};
+        \node[anchor=east,rotate=55] at (\i+.55,19.25) {\heatlabel};
+      }
+    \OracleHeatmapLegend{20.2}{6.5}
+  \end{tikzpicture}%
+}

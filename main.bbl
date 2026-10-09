@@ -1606,6 +1606,58 @@
       \verb https://pmc.ncbi.nlm.nih.gov/articles/PMC8947370/
       \endverb
     \endentry
+    \entry{kruskalShortestSpanningSubtree1956}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=569f9ff2dff516524ca08370ba81ba29}{%
+           family={Kruskal},
+           familyi={K\bibinitperiod},
+           given={Joseph\bibnamedelima B.},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{fullhash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{fullhashraw}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{bibnamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorbibnamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authornamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorfullhash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorfullhashraw}{569f9ff2dff516524ca08370ba81ba29}
+      \field{labelalpha}{Kru56}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{jstor}
+      \field{issn}{0002-9939}
+      \field{journaltitle}{Proceedings of the American Mathematical Society}
+      \field{number}{1}
+      \field{shortjournal}{Proc. Am. Math. Soc.}
+      \field{title}{On the {{Shortest Spanning Subtree}} of a {{Graph}} and the {{Traveling Salesman Problem}}}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{7}
+      \field{year}{1956}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{48\bibrangedash 50}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.2307/2033241
+      \endverb
+      \verb{eprint}
+      \verb 2033241
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/2033241
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/2033241
+      \endverb
+    \endentry
     \entry{lanhamMeasuringFaithfulnessChainofThought2023}{online}{}{}
       \name{author}{30}{}{%
         {{hash=bd7ae123bfe2a360986c5a2af88c76ec}{%

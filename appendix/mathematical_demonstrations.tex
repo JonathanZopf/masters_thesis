@@ -1,6 +1,6 @@
 \chapter{Mathematical Demonstrations}
 \label{app:mathematical_demonstrations}
-This appendix provides supporting derivations for properties of FELICS referenced in the main text. The demonstrations address the singleton special case, compatibility under reference-relative additivity, the intended preservation of the dataset-average causal effect, and the two-concept specialization used to compare adjusted and atomic effects. Instead of being comprehensive proofs, they rather aim at outlaying the design rationale of the metric.
+This appendix provides supporting derivations for properties of FELICS referenced in the main text. The demonstrations address the singleton special case, compatibility under reference-relative additivity, the intended preservation of the dataset-average causal effect, and the two-concept specialization used to compare adjusted and atomic effects. Instead of being comprehensive proofs, they rather aim at outlining the design rationale of the metric.
 
 \section*{Equality of Causal Effect between FELICS singleton-groups and Original Metric}
 \begin{math_box}[label=ma:one_item_group]
@@ -158,7 +158,7 @@ This appendix provides supporting derivations for properties of FELICS reference
     of the same size,
 
     \begin{equation}
-        \bar\gamma(\mathbf{x},s,T)=\gamma(\mathbf{x},T)>\varepsilon,
+        \bar\gamma(\mathbf{x},s,T)=\gamma(\mathbf{x},T)>\eta,
         \qquad \forall\,\emptyset\neq T\subseteq s.
     \end{equation}
 
@@ -239,7 +239,7 @@ This appendix provides supporting derivations for properties of FELICS reference
 \section*{CE Dataset-Average Preservation}
 \begin{math_box}[label=ma:dataset_average_preservation]
     \textbf{Claim:} The singleton-weighted reference coefficient, formed as a
-    ratio of aggregate joint effects to aggregate singleton effects, preserves the dataset-level average Causal Effect
+    ratio of aggregate joint effects to aggregate singleton effects, preserves the dataset-level average causal effect
     exactly when it is computed over the complete population of equally sized
     candidate interaction groups. A finite, target-excluding reference set provides an approximate
     estimator of this coefficient under the assumptions stated below. Consequently,
@@ -279,7 +279,7 @@ This appendix provides supporting derivations for properties of FELICS reference
         \gamma_q:=\frac{a_q}{b_q},
     \end{equation}
     where $b_q>0$. The demonstration concerns non-degenerate group sizes $k$ for
-    which the coefficient defined below also satisfies $g_k>\varepsilon$. The
+    which the coefficient defined below also satisfies $g_k>\eta$. The
     size-specific coefficient that preserves the aggregate is
     \begin{equation}
         \label{eq:aggregate_preserving_gamma}
@@ -389,7 +389,7 @@ This appendix provides supporting derivations for properties of FELICS reference
         \item The aggregate singleton-effect
         denominator in Equation~\ref{eq:aggregate_reference_estimator} is positive
         and sufficiently far from zero, and the resulting coefficient exceeds
-        $\varepsilon$ from Section~\ref{sec:corrected_value_function}. Degenerate size groups and reference sets invoke the
+        $\eta$ from Section~\ref{sec:corrected_value_function}. Degenerate size groups and reference sets invoke the
         unadjusted-value fallback and lie outside the preservation claim.
 
         \item The selected references provide enough

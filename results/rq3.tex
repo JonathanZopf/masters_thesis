@@ -1,78 +1,57 @@
 \section{Preservation of Concept Rankings}
 \label{sec:results-ranking-preservation}
 
-One major departure of FELICS from the original metric by Matton et al.~\cite{mattonWalkTalkMeasuring2024} is the normalization of the Shapley causal effects described in Section~\ref{sec:shapley_correction}. Research Question~\ref{rq:ranking}, introduced in Section~\ref{sec:research_questions}, evaluates whether this normalization substantially changes the relative ranking of concepts. For each dataset--model combination, the rankings before and after normalization are compared using Spearman's rank-correlation coefficient $\rho$. Table~\ref{tab:hyp3-question-exceptions} lists questions for which the rankings are not identical, indicated by $\rho<1$.
+One major departure of FELICS from the original metric by Matton et al.~\cite{mattonWalkTalkMeasuring2024} is the normalization of the Shapley causal effects described in Section~\ref{sec:shapley_correction}. Research Question~\ref{rq:ranking}, introduced in Chapter~\ref{sec:research_questions}, evaluates whether this normalization substantially changes the relative ranking of concepts. For each dataset--model combination, the rankings before and after normalization are compared using Spearman's rank-correlation coefficient $\rho$.
 
-Figures~\ref{fig:appendix-rq3-normalization-natural-language} and~\ref{fig:appendix-rq3-normalization-credit} visualize the corresponding concept-level changes in CE magnitude. Figure~\ref{fig:appendix-rq3-credit-concept-delta} additionally shows which New German Credit concepts receive the largest mean adjustments across questions.
+The four natural-language dataset--model combinations retain aggregate correlations above the prespecified threshold of $\rho\geq0.90$, as documented in Box~\ref{hyp:hyp3-results}. Both New German Credit combinations fall below that threshold, with $\rho=0.875$ for GPT-OSS 120B and $\rho=0.821$ for Mistral Medium 3.5.
 
-% #1 title, #2 CSV file, #3 exact count, #4 total count, #5 exact percentage.
-\newcommand{\HypThreeExceptionTable}[5]{%
-  \begin{minipage}[t]{0.315\textwidth}
-    \centering
-    {\scriptsize\bfseries #1\par}
-    {\fontsize{6.5}{7.0}\selectfont
-      Exact: $#3/#4$ questions ($#5\%$)\par}
-    \vspace{0.2em}
-    {\fontsize{6.2}{6.8}\selectfont
-      \setlength{\tabcolsep}{3.2pt}
-      \renewcommand{\arraystretch}{0.88}
-      \pgfplotstabletypeset[
-        col sep=comma,
-        columns={index,rho,p_value},
-        columns/index/.style={
-          column name={\textbf{Index}},
-          column type={r},
-          string type,
-        },
-        columns/rho/.style={
-          column name={\textbf{$\rho$}},
-          column type={S[table-format=1.3,round-mode=places,round-precision=3]},
-          string type,
-        },
-        columns/p_value/.style={
-          column name={\textbf{one-sided $p$}},
-          column type={S[table-format=1.3e-2]},
-          string type,
-        },
-        every head row/.style={before row=\hline,after row=\hline},
-        every last row/.style={after row=\hline},
-      ]{#2}\par}
-  \end{minipage}%
-}
-
-\begin{table}[p]
-  \centering
-  \HypThreeExceptionTable{BBQ\\GPT-OSS 120B}%
-    {data/rq3/bbq_gptoss_imperfect_rows.csv}{21}{30}{70.0}
-  \hfill
-  \HypThreeExceptionTable{BBQ\\Mistral Medium 3.5}%
-    {data/rq3/bbq_mistral_imperfect_rows.csv}{21}{30}{70.0}
-  \hfill
-  \HypThreeExceptionTable{MedQA\\GPT-OSS 120B}%
-    {data/rq3/medqa_gptoss_imperfect_rows.csv}{6}{29}{20.7}
-
-  \par\vspace{1.2em}
-  \HypThreeExceptionTable{MedQA\\Mistral Medium 3.5}%
-    {data/rq3/medqa_mistral_imperfect_rows.csv}{7}{24}{29.2}
-  \hfill
-  \HypThreeExceptionTable{New German Credit\\GPT-OSS 120B}%
-    {data/rq3/new_german_credit_gptoss_imperfect_rows.csv}{0}{30}{0.0}
-  \hfill
-  \HypThreeExceptionTable{New German Credit\\Mistral Medium 3.5}%
-    {data/rq3/new_german_credit_mistral_imperfect_rows.csv}{0}{30}{0.0}
-
-  \caption[Questions without exact concept-ranking preservation]{Questions for
-  which raw and adjusted concept rankings are not identical. Only questions
-  with $\rho<1$ are included; the percentages report exact preservation over
-  all questions in the respective combination.}
-  \label{tab:hyp3-question-exceptions}
-\end{table}
-
-Table~\ref{tab:hyp3-question-exceptions} contains several questions without exact rank preservation. The four natural-language dataset--model combinations retain aggregate correlations above the prespecified threshold of $\rho\geq0.90$, as documented in Box~\ref{hyp:hyp3-results}. Both New German Credit combinations fall below that threshold, with $\rho=0.875$ for GPT-OSS 120B and $\rho=0.821$ for Mistral Medium 3.5, and no question preserves its ranking exactly. The results therefore support strong aggregate rank preservation for BBQ and MedQA, but not for New German Credit, where the corrected normalization produces a broader reordering of the concepts.
-
-\HypothesisTestResults[label=hyp:hyp3-results]
+\HypothesisTestResults[label=hyp:hyp3-results,unbreakable]
   {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
   hypothesis when $\rho\geq0.90$ and $p\leq0.05$. All computed $p$-values
-  underflowed to zero; $2.23\times10^{-308}$ denotes that numerical underflow
+  underflowed to zero, and $2.23\times10^{-308}$ denotes that numerical underflow
   bound rather than an exact value.}
   {data/rq3/hypothesis_test_results.csv}
+
+Table~\ref{tab:rq3-ranking-summary} summarizes the rank preservation within individual questions. In BBQ, 21 of 30 questions keep their exact concept ranking for both models. The lowest values occur in question 2 for GPT-OSS 120B ($\rho=0.400$) and question 14 for Mistral Medium 3.5 ($\rho=0.200$), which contain only four and five concepts. In MedQA, exact preservation is less frequent, but the per-question correlations remain high, with minima of $0.685$ and $0.806$. In New German Credit, no question preserves its ranking exactly. For Mistral Medium 3.5, the median per-question correlation drops to $0.671$, and questions 28 and 23 reach $\rho=-0.077$ and $\rho=0.000$, so their rankings before and after normalization are essentially unrelated.
+
+\begin{table}[htb]
+  \centering
+  \caption[Per-question preservation of concept rankings]{Per-question preservation of concept rankings. \textit{Exact} counts questions whose raw and adjusted rankings are identical ($\rho=1$). The median and minimum refer to the per-question Spearman correlations.}
+  \label{tab:rq3-ranking-summary}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.1}
+  \pgfplotstabletypeset[
+    col sep=comma,
+    trim cells=true,
+    columns={dataset,model,n,exact,median_rho,min_rho},
+    columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
+    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+    columns/n/.style={column name={\textbf{Questions}},column type=r,fixed,precision=0},
+    columns/exact/.style={column name={\textbf{Exact}},column type=r,fixed,precision=0},
+    columns/median_rho/.style={column name={\textbf{Median $\rho$}},column type=r,fixed,fixed zerofill,precision=3},
+    columns/min_rho/.style={column name={\textbf{Minimum $\rho$}},column type=r,fixed,fixed zerofill,precision=3},
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+    every even row/.style={before row={\rowcolor{gray!8}}},
+  ]{data/rq3/ranking_summary.csv}
+\end{table}
+
+The magnitude of the adjustment differs between the dataset types even more clearly than the rankings. In BBQ and MedQA, roughly half of all concept-level CE values remain unchanged, and raw and adjusted values are nearly proportional, with Pearson correlation coefficients between $0.93$ and $0.99$. In New German Credit, only the singleton \textit{Household Size} remains unchanged. The median relative change of a concept-level CE value is $34\%$ for GPT-OSS 120B and $133\%$ for Mistral Medium 3.5, and for GPT-OSS 120B, 21 of the 360 concept-level CE values change their sign. Concept-level identity plots of raw and adjusted values for all six combinations are shown in Figures~\ref{fig:app-rq3-bbq-gptoss} to~\ref{fig:app-rq3-credit-mistral} in Appendix~\ref{app:rq3-normalization-identity}.
+
+\begin{figure}[htb]
+  \centering
+  \ResultFigureHalf{%
+    \CreditConceptDeltaPlot{data/appendix/rq3_credit_concept_delta/new_german_credit_gptoss.csv}}%
+    {RQ3, New German Credit with GPT-OSS 120B: mean adjustment per concept}%
+    {Mean normalization adjustment per concept for New German Credit with GPT-OSS 120B, averaged across 30 questions. Dotted lines separate the oracle groups.}%
+    {fig:rq3-delta-credit-gptoss}%
+  \hfill
+  \ResultFigureHalf{%
+    \CreditConceptDeltaPlot{data/appendix/rq3_credit_concept_delta/new_german_credit_mistral.csv}}%
+    {RQ3, New German Credit with Mistral Medium 3.5: mean adjustment per concept}%
+    {Mean normalization adjustment per concept for New German Credit with Mistral Medium 3.5, averaged across 30 questions. Dotted lines separate the oracle groups.}%
+    {fig:rq3-delta-credit-mistral}%
+\end{figure}
+
+Figures~\ref{fig:rq3-delta-credit-gptoss} and~\ref{fig:rq3-delta-credit-mistral} show which New German Credit concepts receive the largest adjustments, ordered by the oracle groups of Figure~\ref{fig:german-credit-grouping-final}. For Mistral Medium 3.5, the mean adjustment is nearly constant within each group. Every concept of the three three-concept groups gains between $0.31$ and $0.37$, both concepts of the pair gain $0.165$, and the singleton remains unchanged. For GPT-OSS 120B, only the group of \textit{Liquid Assets}, \textit{Household Income}, and \textit{SCHUFA Score} receives a large adjustment of $0.23$ to $0.26$, while every other concept gains at most $0.021$. The results therefore support strong aggregate rank preservation for BBQ and MedQA, but not for New German Credit, where the corrected normalization produces a broader reordering of the concepts.

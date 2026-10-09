@@ -1,91 +1,14 @@
 \section{Effect of Interaction Modeling on Faithfulness}
 \label{sec:results-faithfulness-increase}
 
-Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. Because the vertical axis of the identity plots represents interaction-aware faithfulness, points above the identity line indicate higher faithfulness under the joint formulation.
+Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. In the identity plots of this section, the vertical axis represents the joint formulation, so points above the identity line indicate higher values under joint attribution.
 
-Figures~\ref{fig:hyp4-identity-plots-natural-language} and~\ref{fig:hyp4-identity-plots} show the paired question-level estimates. For the natural-language datasets BBQ and MedQA, the points are concentrated around the identity line, indicating broadly similar atomic and interaction-aware estimates. The New German Credit panels exhibit a less pronounced correspondence between the two formulations.
+The paired one-sided Wilcoxon signed-rank tests did not provide evidence of systematically higher interaction-aware faithfulness for five of the six dataset--model combinations. Only New German Credit evaluated with Mistral Medium 3.5 yielded a statistically significant result. Overall, the results therefore do not reveal a consistent improvement in faithfulness across datasets and models when joint interventions are considered.
 
-The corresponding question-level mean CE comparisons are provided in Figures~\ref{fig:appendix-ce-shift-identity-natural-language} and~\ref{fig:appendix-ce-shift-identity-credit}, where marker size also records the number of concepts contributing to each question.
-
-\definecolor{HypFourPoints}{HTML}{2878B5}
-\definecolor{HypFourIdentity}{HTML}{E37A26}
-
-% #1 title, #2 data, #3 axis minimum, #4 axis maximum, #5 sample size.
-\newcommand{\HypFourIdentityPlot}[5]{%
-  \begin{minipage}[t]{0.47\textwidth}
-    \centering
-    {\small\bfseries #1\par}
-    \vspace{0.1em}
-    \begin{tikzpicture}
-      \begin{axis}[
-        width=5.55cm,
-        height=5.55cm,
-        scale only axis,
-        xmin=#3,
-        xmax=#4,
-        ymin=#3,
-        ymax=#4,
-        xlabel={$\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})$},
-        ylabel={$\mathcal{F}_{\mathrm{joint}}(\mathbf{x})$},
-        tick label style={font=\scriptsize},
-        label style={font=\scriptsize},
-        grid=major,
-        grid style={gray!18},
-        axis line style={gray!60},
-      ]
-        \addplot[
-          only marks,mark=*,mark size=1.8pt,
-          draw=HypFourPoints,fill=HypFourPoints,fill opacity=0.68,
-        ] table[col sep=comma,x=atomic_faithfulness,y=joint_faithfulness] {#2};
-        \addplot[HypFourIdentity,very thick,dashed,domain=#3:#4,samples=2] {x};
-      \end{axis}
-    \end{tikzpicture}
-    \vspace{-0.2em}
-    {\scriptsize Paired questions: $n=#5$\par}
-  \end{minipage}%
-}
-
-\begin{figure}
-  \centering
-  \HypFourIdentityPlot{BBQ --- GPT-OSS 120B}%
-    {data/rq4/bbq_gptoss.csv}{-1}{1}{30}
-  \hfill
-  \HypFourIdentityPlot{BBQ --- Mistral Medium 3.5}%
-    {data/rq4/bbq_mistral.csv}{-1}{1}{30}
-
-  \par\vspace{1.1em}
-  \HypFourIdentityPlot{MedQA --- GPT-OSS 120B}%
-    {data/rq4/medqa_gptoss.csv}{-1}{1}{29}
-  \hfill
-  \HypFourIdentityPlot{MedQA --- Mistral Medium 3.5}%
-    {data/rq4/medqa_mistral.csv}{-1}{1}{24}
-
-  \caption[Atomic and joint faithfulness identity plots for BBQ and MedQA]{
-  Question-level atomic and interaction-aware faithfulness for BBQ and MedQA. Points above the identity line favor the
-  joint Shapley-based formulation.}
-  \label{fig:hyp4-identity-plots-natural-language}
-\end{figure}
-
-\begin{figure}
-  \ContinuedFloat
-  \centering
-  \HypFourIdentityPlot{New German Credit --- GPT-OSS 120B}%
-    {data/rq4/new_german_credit_gptoss.csv}{-1}{1}{30}
-  \hfill
-  \HypFourIdentityPlot{New German Credit --- Mistral Medium 3.5}%
-    {data/rq4/new_german_credit_mistral.csv}{-1}{1}{30}
-
-  \caption[]{Question-level atomic and joint faithfulness for New
-  German Credit (continued).}
-  \label{fig:hyp4-identity-plots}
-\end{figure}
-
-The paired one-sided Wilcoxon signed-rank tests did not provide evidence of systematically higher interaction-aware faithfulness for five of the six dataset–model combinations. Only New German Credit evaluated with Mistral Medium 3.5 yielded a statistically significant result. Overall, the results therefore do not reveal a consistent improvement in faithfulness across datasets and models when joint interventions are considered.
-
-\HypothesisTestResults[label=hyp:hyp4-results]
+\HypothesisTestResults[label=hyp:hyp4-results,unbreakable]
   {Paired one-sided Wilcoxon signed-rank tests for
   \rqref{rq:faithfulness_increase}. The alternative is
-  $\mathcal{F}_{\mathrm{joint}}>\mathcal{F}_{\mathrm{atomic}}$; support requires
+  $\mathcal{F}_{\mathrm{joint}}>\mathcal{F}_{\mathrm{atomic}}$, and support requires
   $p\leq0.05$. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count questions with
   positive, negative, and zero paired differences, respectively.}
   {data/rq4/hypothesis_test_results.csv}
@@ -135,3 +58,39 @@ combinations supports this directional alternative. In particular, the result
 for New German Credit with GPT-OSS 120B is no longer significant ($p=0.2022$).
 The complementary results therefore indicate a dataset-specific decrease for
 BBQ, not a general decrease across the evaluation.
+
+\begin{figure}[htb]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/new_german_credit_mistral.csv}{-1}{1}}%
+    {RQ4, New German Credit with Mistral Medium 3.5: faithfulness}%
+    {Question-level atomic and joint faithfulness for New German Credit with Mistral Medium 3.5 ($n=30$).}%
+    {fig:rq4-f-credit-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/new_german_credit_mistral.csv}{0}{1.5}}%
+    {RQ4, New German Credit with Mistral Medium 3.5: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for New German Credit with Mistral Medium 3.5 ($n=30$, 12 concepts per question).}%
+    {fig:rq4-ce-credit-mistral}%
+\end{figure}
+
+Figures~\ref{fig:rq4-f-credit-mistral} and~\ref{fig:rq4-ce-credit-mistral} show the only combination with a significant increase. Joint attribution raises faithfulness for 21 of 30 questions, and 17 questions change by more than $0.1$ in either direction. The dataset-level estimate rises from $-0.271$ to $-0.140$ but remains negative (Table~\ref{tab:results-dataset-overview}). The question-averaged CE, in contrast, barely moves. Its mean changes from $0.514$ to $0.518$, atomic and joint values correlate at Pearson $r=0.964$, and the change in faithfulness is unrelated to the change in question-averaged CE (Pearson $r=-0.10$). Because EE is fixed in this comparison, the changes in faithfulness arise from how CE is distributed across the concepts of a question rather than from its overall level. Already under atomic attribution, Mistral Medium 3.5 distributes CE almost evenly across concepts. The mean atomic CE per concept ranges only from $0.36$ to $0.63$, and the concepts \textit{Applicant Age}, \textit{Household Size}, and \textit{Credit Amount}, which are mentioned in only $0.7\%$, $2.0\%$, and $3.3\%$ of explanations, still receive mean values above $0.5$. For GPT-OSS 120B, whose atomic dataset-level faithfulness is $0.490$, the largest mean atomic CE values belong to \textit{Household Income} ($0.70$) and \textit{SCHUFA Score} ($0.47$), and both concepts are mentioned in every explanation.
+
+\begin{figure}[htb]
+  \centering
+  \ResultFigureHalf{%
+    \HypFourIdentityPlot{data/rq4/bbq_mistral.csv}{-1}{1}}%
+    {RQ4, BBQ with Mistral Medium 3.5: faithfulness}%
+    {Question-level atomic and joint faithfulness for BBQ with Mistral Medium 3.5 ($n=30$).}%
+    {fig:rq4-f-bbq-mistral}%
+  \hfill
+  \ResultFigureHalf{%
+    \CeShiftIdentityPlot{data/appendix/ce_shift_identity/bbq_mistral.csv}{0}{0.6}}%
+    {RQ4, BBQ with Mistral Medium 3.5: question-averaged CE}%
+    {Question-averaged atomic and joint causal effects for BBQ with Mistral Medium 3.5 ($n=30$). Marker area increases with the number of concepts per question (4 to 6).}%
+    {fig:rq4-ce-bbq-mistral}%
+\end{figure}
+
+BBQ shows the opposite tendency. Joint faithfulness is lower for 20 of 30 questions with both models. Unlike in New German Credit, these changes follow the question-averaged CE (Figures~\ref{fig:rq4-f-bbq-mistral} and~\ref{fig:rq4-ce-bbq-mistral}). Joint attribution lowers the question-averaged CE for 23 of 30 questions with GPT-OSS 120B (Figure~\ref{fig:app-rq4-ce-bbq-gptoss}) and for 17 of 30 with Mistral Medium 3.5, and the changes in faithfulness and in question-averaged CE correlate at $0.43$ and $0.67$. For Mistral Medium 3.5, faithfulness falls from $0.27$ to $-0.06$ for question 19 and from $0.34$ to $0.06$ for question 28, whose question-averaged CE drops from $0.224$ to $0.132$. Question 24 shows a large increase in question-averaged CE for both models, from $0.044$ to $0.283$ with Mistral Medium 3.5 and from $0.076$ to $0.200$ with GPT-OSS 120B, together with higher faithfulness ($-0.06$ to $0.23$ and $-0.24$ to $0.17$). Its coalition effect is examined in \caseref{ex:bbq_ambiguous_coalition_effect}.
+
+MedQA changes little under joint attribution. For GPT-OSS 120B, the question-averaged CE is practically identical under both attributions (Pearson $r=0.998$, largest change $0.006$), and no question changes its faithfulness by more than $0.103$ (Figures~\ref{fig:app-rq4-f-medqa-gptoss} and~\ref{fig:app-rq4-ce-medqa-gptoss}). Question 523, for which joint attribution leaves every concept-level CE value unchanged, has identical faithfulness under both attributions. Across the four natural-language combinations, the size of the faithfulness change tracks the mean absolute change of the concept-level CE values (exploratory Spearman correlations between $0.52$ and $0.69$). For New German Credit with GPT-OSS 120B, the median change is close to zero ($-0.018$), but the atomic and joint question-level estimates correlate only at Pearson $r=0.24$ (Figure~\ref{fig:app-rq4-f-credit-gptoss}). The faithfulness and CE identity plots of the remaining combinations are shown in Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} in Appendix~\ref{app:rq4-identity}.

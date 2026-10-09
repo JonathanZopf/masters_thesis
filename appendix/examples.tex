@@ -2,9 +2,9 @@
 \label{app:examples}
 This appendix collects worked examples that complement the formal development of FELICS.
 
-\section*{Effects of Normalization on Pearson Correlation}
+\section*{Effects of Normalization on the Pearson Correlation Coefficient}
 \begin{example_box}[label=ex:payout_normalization_correlation]
-    \textbf{Demonstration:} Payout normalization can alter the Pearson correlation between CE and EE vectors.
+    \textbf{Demonstration:} Payout normalization can alter the Pearson correlation coefficient between the CE and EE vectors.
 
     \smallskip
     \textbf{Setup:} Consider five concepts evaluated using the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} and using FELICS. The underlying answer-distribution changes are held fixed. To isolate the statistical consequence of normalization, the adjusted values are assumed directly rather than derived from particular joint interventions, reference sets, or payout coefficients. Suppose the two methods produce
@@ -28,7 +28,7 @@ This appendix collects worked examples that complement the formal development of
     \end{equation}
 
     \smallskip
-    \textbf{Pearson Correlation Computation:} The explanation-effect vector has mean $\mu_{\mathbf{EE}}=1.1$. For the original metric,
+    \textbf{Computation of the Pearson Correlation Coefficient:} The explanation-effect vector has mean $\mu_{\mathbf{EE}}=1.1$. For the original metric,
     \begin{align}
         \operatorname{cov}(\mathbf{CE}_{\mathrm{Matton}}, \mathbf{EE}) & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)(\mathrm{EE}_i - 1.1) = 0.18, \\
         \operatorname{var}(\mathbf{CE}_{\mathrm{Matton}})              & = \frac{1}{5}\sum_{i=1}^5 (\mathrm{CE}_{\mathrm{Matton},i} - 1.2)^2 = 0.16, \\
@@ -43,7 +43,7 @@ This appendix collects worked examples that complement the formal development of
     \end{align}
 
     \smallskip
-    \textbf{Conclusion:} Although normalization preserves the sum and mean of the CE values in this example, it changes how the values are distributed around that mean. Consequently, both the CE variance and its covariance with $\mathbf{EE}$ change, yielding $r_{\mathrm{adj}}\approx0.937$ instead of $r_{\mathrm{Matton}}\approx0.919$. Equality of the aggregate CE score therefore does not imply equality of the resulting Pearson faithfulness score.
+    \textbf{Conclusion:} Although normalization preserves the sum and mean of the CE values in this example, it changes how the values are distributed around that mean. Consequently, both the CE variance and its covariance with $\mathbf{EE}$ change, yielding $r_{\mathrm{adj}}\approx0.937$ instead of $r_{\mathrm{Matton}}\approx0.919$. Equality of the aggregate CE score therefore does not imply equality of the resulting faithfulness score.
 \end{example_box}
 
 \section*{Softmax-Ceiling in FELICS in Practice}

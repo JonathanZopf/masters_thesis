@@ -12,32 +12,71 @@
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Comparison of the evaluation pipeline between Matton et al.~\blx@tocontentsinit {0}\cite {mattonWalkTalkMeasuring2024} (left) and the proposed FELICS framework (right) with highlighted modifications.}}{47}{figure.caption.34}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}}{62}{figure.caption.47}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Co-grouping rates for the natural-language oracle on LLM-normalized Categories}}{65}{figure.caption.48}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max }=3$.}}{65}{figure.caption.49}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for BBQ.}}{67}{figure.caption.50}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Relationship between increased oracle-derived interaction-presumption strength and changes in causal effects or question-level faithfulness for MedQA.}}{68}{figure.caption.51}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Identity plots for the completed RQ2 comparisons}}{70}{figure.caption.52}%
-\contentsline {figure}{\numberline {8.7}{\ignorespaces Identity plots for the New German Credit RQ2 comparisons}}{71}{figure.caption.53}%
-\contentsline {figure}{\numberline {8.8}{\ignorespaces Atomic and joint faithfulness identity plots for BBQ and MedQA}}{75}{figure.caption.56}%
-\contentsline {figure}{\numberline {8.9}{\ignorespaces Atomic and joint causal effects for the motivating MedQA example}}{78}{figure.caption.60}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Oracle co-grouping rates for MedQA}}{64}{figure.caption.49}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Final state of the constrained greedy grouping algorithm for New German Credit at $n_{\max }=3$.}}{65}{figure.caption.50}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces RQ1, MedQA with GPT-OSS 120B: $\Delta \kappa $ and $\Delta \mathrm {CE}$}}{66}{figure.caption.51}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces RQ1, MedQA with GPT-OSS 120B: $\Delta \kappa $ and $\Delta \mathcal {F}$}}{66}{figure.caption.51}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces RQ2, New German Credit with GPT-OSS 120B: faithfulness}}{69}{figure.caption.53}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces RQ2, New German Credit with Mistral Medium 3.5: question-averaged CE}}{69}{figure.caption.53}%
+\contentsline {figure}{\numberline {8.7}{\ignorespaces RQ3, New German Credit with GPT-OSS 120B: mean adjustment per concept}}{71}{figure.caption.55}%
+\contentsline {figure}{\numberline {8.8}{\ignorespaces RQ3, New German Credit with Mistral Medium 3.5: mean adjustment per concept}}{71}{figure.caption.55}%
+\contentsline {figure}{\numberline {8.9}{\ignorespaces RQ4, New German Credit with Mistral Medium 3.5: faithfulness}}{73}{figure.caption.57}%
+\contentsline {figure}{\numberline {8.10}{\ignorespaces RQ4, New German Credit with Mistral Medium 3.5: question-averaged CE}}{73}{figure.caption.57}%
+\contentsline {figure}{\numberline {8.11}{\ignorespaces RQ4, BBQ with Mistral Medium 3.5: faithfulness}}{74}{figure.caption.58}%
+\contentsline {figure}{\numberline {8.12}{\ignorespaces RQ4, BBQ with Mistral Medium 3.5: question-averaged CE}}{74}{figure.caption.58}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{111}{figure.caption.67}%
-\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{112}{figure.caption.68}%
-\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the RQ5 motivating MedQA example. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{114}{figure.caption.69}%
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}}{109}{figure.caption.66}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}}{110}{figure.caption.67}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Final consensus partition for the MedQA case study. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}}{112}{figure.caption.68}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {D.1}{\ignorespaces Raincloud distributions of atomic and interaction-aware CE}}{116}{figure.caption.71}%
-\contentsline {figure}{\numberline {D.2}{\ignorespaces Question-level CE agreement under atomic and joint attribution}}{118}{figure.caption.72}%
-\contentsline {figure}{\numberline {D.3}{\ignorespaces Question-level CE agreement for New German Credit}}{119}{figure.caption.73}%
-\contentsline {figure}{\numberline {D.4}{\ignorespaces CE identity plots for the natural-language RQ2 comparisons}}{121}{figure.caption.74}%
-\contentsline {figure}{\numberline {D.5}{\ignorespaces CE identity plots for the New German Credit RQ2 comparisons}}{122}{figure.caption.75}%
-\contentsline {figure}{\numberline {D.6}{\ignorespaces Concept-level effects before and after normalization}}{124}{figure.caption.76}%
-\contentsline {figure}{\numberline {D.7}{\ignorespaces Concept-level normalization effects for New German Credit}}{125}{figure.caption.77}%
-\contentsline {figure}{\numberline {D.8}{\ignorespaces Mean normalization adjustment by New German Credit concept}}{126}{figure.caption.78}%
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Question-level faithfulness for BBQ with GPT-OSS 120B}}{113}{figure.caption.70}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces Question-averaged CE for BBQ with GPT-OSS 120B}}{113}{figure.caption.70}%
+\contentsline {figure}{\numberline {D.3}{\ignorespaces Question-level faithfulness for BBQ with Mistral Medium 3.5}}{113}{figure.caption.71}%
+\contentsline {figure}{\numberline {D.4}{\ignorespaces Question-averaged CE for BBQ with Mistral Medium 3.5}}{113}{figure.caption.71}%
+\contentsline {figure}{\numberline {D.5}{\ignorespaces Question-level faithfulness for MedQA with GPT-OSS 120B}}{114}{figure.caption.72}%
+\contentsline {figure}{\numberline {D.6}{\ignorespaces Question-averaged CE for MedQA with GPT-OSS 120B}}{114}{figure.caption.72}%
+\contentsline {figure}{\numberline {D.7}{\ignorespaces Question-level faithfulness for MedQA with Mistral Medium 3.5}}{114}{figure.caption.73}%
+\contentsline {figure}{\numberline {D.8}{\ignorespaces Question-averaged CE for MedQA with Mistral Medium 3.5}}{114}{figure.caption.73}%
+\contentsline {figure}{\numberline {D.9}{\ignorespaces Question-level faithfulness for New German Credit with GPT-OSS 120B}}{114}{figure.caption.74}%
+\contentsline {figure}{\numberline {D.10}{\ignorespaces Question-averaged CE for New German Credit with GPT-OSS 120B}}{114}{figure.caption.74}%
+\contentsline {figure}{\numberline {D.11}{\ignorespaces Question-level faithfulness for New German Credit with Mistral Medium 3.5}}{115}{figure.caption.75}%
+\contentsline {figure}{\numberline {D.12}{\ignorespaces Question-averaged CE for New German Credit with Mistral Medium 3.5}}{115}{figure.caption.75}%
+\contentsline {figure}{\numberline {D.13}{\ignorespaces Oracle co-grouping rates for BBQ}}{115}{figure.caption.76}%
+\contentsline {figure}{\numberline {D.14}{\ignorespaces RQ1, BBQ with GPT-OSS 120B: $\Delta \kappa $ and $\Delta \mathrm {CE}$}}{116}{figure.caption.77}%
+\contentsline {figure}{\numberline {D.15}{\ignorespaces RQ1, BBQ with GPT-OSS 120B: $\Delta \kappa $ and $\Delta \mathcal {F}$}}{116}{figure.caption.77}%
+\contentsline {figure}{\numberline {D.16}{\ignorespaces RQ1, BBQ with Mistral Medium 3.5: $\Delta \kappa $ and $\Delta \mathrm {CE}$}}{116}{figure.caption.78}%
+\contentsline {figure}{\numberline {D.17}{\ignorespaces RQ1, BBQ with Mistral Medium 3.5: $\Delta \kappa $ and $\Delta \mathcal {F}$}}{116}{figure.caption.78}%
+\contentsline {figure}{\numberline {D.18}{\ignorespaces RQ1, MedQA with Mistral Medium 3.5: $\Delta \kappa $ and $\Delta \mathrm {CE}$}}{116}{figure.caption.79}%
+\contentsline {figure}{\numberline {D.19}{\ignorespaces RQ1, MedQA with Mistral Medium 3.5: $\Delta \kappa $ and $\Delta \mathcal {F}$}}{116}{figure.caption.79}%
+\contentsline {figure}{\numberline {D.20}{\ignorespaces RQ2, BBQ with GPT-OSS 120B: faithfulness}}{117}{figure.caption.80}%
+\contentsline {figure}{\numberline {D.21}{\ignorespaces RQ2, BBQ with GPT-OSS 120B: question-averaged CE}}{117}{figure.caption.80}%
+\contentsline {figure}{\numberline {D.22}{\ignorespaces RQ2, BBQ with Mistral Medium 3.5: faithfulness}}{117}{figure.caption.81}%
+\contentsline {figure}{\numberline {D.23}{\ignorespaces RQ2, BBQ with Mistral Medium 3.5: question-averaged CE}}{117}{figure.caption.81}%
+\contentsline {figure}{\numberline {D.24}{\ignorespaces RQ2, MedQA with GPT-OSS 120B: faithfulness}}{118}{figure.caption.82}%
+\contentsline {figure}{\numberline {D.25}{\ignorespaces RQ2, MedQA with GPT-OSS 120B: question-averaged CE}}{118}{figure.caption.82}%
+\contentsline {figure}{\numberline {D.26}{\ignorespaces RQ2, MedQA with Mistral Medium 3.5: faithfulness}}{118}{figure.caption.83}%
+\contentsline {figure}{\numberline {D.27}{\ignorespaces RQ2, MedQA with Mistral Medium 3.5: question-averaged CE}}{118}{figure.caption.83}%
+\contentsline {figure}{\numberline {D.28}{\ignorespaces RQ2, New German Credit with Mistral Medium 3.5: faithfulness}}{119}{figure.caption.84}%
+\contentsline {figure}{\numberline {D.29}{\ignorespaces RQ2, New German Credit with GPT-OSS 120B: question-averaged CE}}{119}{figure.caption.84}%
+\contentsline {figure}{\numberline {D.30}{\ignorespaces RQ3, BBQ with GPT-OSS 120B: raw and adjusted CE}}{120}{figure.caption.85}%
+\contentsline {figure}{\numberline {D.31}{\ignorespaces RQ3, BBQ with Mistral Medium 3.5: raw and adjusted CE}}{120}{figure.caption.85}%
+\contentsline {figure}{\numberline {D.32}{\ignorespaces RQ3, MedQA with GPT-OSS 120B: raw and adjusted CE}}{120}{figure.caption.86}%
+\contentsline {figure}{\numberline {D.33}{\ignorespaces RQ3, MedQA with Mistral Medium 3.5: raw and adjusted CE}}{120}{figure.caption.86}%
+\contentsline {figure}{\numberline {D.34}{\ignorespaces RQ3, New German Credit with GPT-OSS 120B: raw and adjusted CE}}{121}{figure.caption.87}%
+\contentsline {figure}{\numberline {D.35}{\ignorespaces RQ3, New German Credit with Mistral Medium 3.5: raw and adjusted CE}}{121}{figure.caption.87}%
+\contentsline {figure}{\numberline {D.36}{\ignorespaces RQ4, BBQ with GPT-OSS 120B: faithfulness}}{121}{figure.caption.88}%
+\contentsline {figure}{\numberline {D.37}{\ignorespaces RQ4, BBQ with GPT-OSS 120B: question-averaged CE}}{121}{figure.caption.88}%
+\contentsline {figure}{\numberline {D.38}{\ignorespaces RQ4, MedQA with GPT-OSS 120B: faithfulness}}{122}{figure.caption.89}%
+\contentsline {figure}{\numberline {D.39}{\ignorespaces RQ4, MedQA with GPT-OSS 120B: question-averaged CE}}{122}{figure.caption.89}%
+\contentsline {figure}{\numberline {D.40}{\ignorespaces RQ4, MedQA with Mistral Medium 3.5: faithfulness}}{122}{figure.caption.90}%
+\contentsline {figure}{\numberline {D.41}{\ignorespaces RQ4, MedQA with Mistral Medium 3.5: question-averaged CE}}{122}{figure.caption.90}%
+\contentsline {figure}{\numberline {D.42}{\ignorespaces RQ4, New German Credit with GPT-OSS 120B: faithfulness}}{123}{figure.caption.91}%
+\contentsline {figure}{\numberline {D.43}{\ignorespaces RQ4, New German Credit with GPT-OSS 120B: question-averaged CE}}{123}{figure.caption.91}%
+\contentsline {figure}{\numberline {D.44}{\ignorespaces Atomic and joint causal effects in the case study}}{123}{figure.caption.92}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

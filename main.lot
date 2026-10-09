@@ -7,25 +7,24 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces BBQ oracle ($n_{\max }=4$).}}{63}{table.8.1}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces MedQA oracle ($n_{\max }=4$).}}{63}{table.8.2}%
-\contentsline {table}{\numberline {8.3}{\ignorespaces New German Credit oracle ($n_{\max }=3$).}}{63}{table.8.3}%
-\contentsline {table}{\numberline {8.4}{\ignorespaces Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}}{71}{table.caption.54}%
-\contentsline {table}{\numberline {8.5}{\ignorespaces Questions without exact concept-ranking preservation}}{73}{table.caption.55}%
-\contentsline {table}{\numberline {8.6}{\ignorespaces Complementary tests for lower interaction-aware faithfulness}}{76}{table.caption.58}%
-\contentsline {table}{\numberline {8.7}{\ignorespaces Published and interaction-aware causal effects for the motivating MedQA example}}{77}{table.caption.59}%
-\contentsline {table}{\numberline {8.8}{\ignorespaces Question-level faithfulness for the motivating MedQA example}}{78}{table.caption.61}%
+\contentsline {table}{\numberline {8.1}{\ignorespaces Dataset-level CE and faithfulness under atomic and joint attribution}}{63}{table.caption.47}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Oracle partitions for the joint configurations}}{63}{table.caption.48}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}}{68}{table.caption.52}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Per-question preservation of concept rankings}}{70}{table.caption.54}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Complementary tests for lower interaction-aware faithfulness}}{72}{table.caption.56}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces Published and interaction-aware causal effects for the motivating MedQA example}}{77}{table.caption.59}%
+\contentsline {table}{\numberline {8.7}{\ignorespaces Question-level faithfulness for the motivating MedQA example}}{78}{table.caption.60}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations used for the New German Credit partition.}}{113}{table.C.1}%
-\contentsline {table}{\numberline {C.2}{\ignorespaces Retained co-grouping frequencies for the RQ5 motivating MedQA example.}}{114}{table.caption.70}%
+\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations used for the New German Credit partition.}}{111}{table.C.1}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Retained co-grouping frequencies for the MedQA case study.}}{112}{table.caption.69}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {H.1}{\ignorespaces Principal experiment artifact directories in the FELICS repository.}}{162}{table.caption.79}%
-\contentsline {table}{\numberline {H.2}{\ignorespaces Result files within a dataset and model/configuration directory. Each filename begins with the model name.}}{163}{table.H.2}%
+\contentsline {table}{\numberline {H.1}{\ignorespaces Principal experiment artifact directories in the FELICS repository.}}{159}{table.caption.93}%
+\contentsline {table}{\numberline {H.2}{\ignorespaces Result files within a dataset and model/configuration directory. Each filename begins with the model name.}}{160}{table.H.2}%

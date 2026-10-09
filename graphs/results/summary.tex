@@ -59,21 +59,19 @@
 }
 \makeatother
 
-% #1 panel title, #2 project-local CSV, #3 file-safe panel id.
-\newcommand{\FaithfulnessRaincloudPanel}[3]{%
-  \begin{minipage}[t]{.495\textwidth}
+% #1 project-local CSV, #2 file-safe panel id.
+\newcommand{\FaithfulnessRaincloudPanel}[2]{%
+  \begin{minipage}[t]{\linewidth}
   \centering
-  {\small\bfseries #1\par}
-  \vspace{.35em}
   % A CSV content change produces a new externalized filename. pgf/TikZ's
   % own MD5 check additionally invalidates the panel when its drawing code changes.
-  \edef\FaithfulnessDataHash{\pdfmdfivesum file {#2}}%
+  \edef\FaithfulnessDataHash{\pdfmdfivesum file {#1}}%
   \edef\FaithfulnessEstimateHash{\pdfmdfivesum file {\FaithfulnessDatasetEstimateFile}}%
-  \tikzsetnextfilename{faithfulness-#3-\FaithfulnessDataHash-\FaithfulnessEstimateHash}%
+  \tikzsetnextfilename{faithfulness-#2-\FaithfulnessDataHash-\FaithfulnessEstimateHash}%
   \begin{tikzpicture}
     % Keep table processing inside the externalized picture. Cached panels
     % therefore skip both estimate lookup and KDE generation on later passes.
-    \FaithfulnessDatasetEstimates{#3}%
+    \FaithfulnessDatasetEstimates{#2}%
       {\AtomicDatasetFaithfulness}{\JointDatasetFaithfulness}%
     % Use tikzviolinplots only for its native TeX KDE calculation.  The package
     % always draws a violin after computing \violin@kde, so clip those helper
@@ -81,7 +79,7 @@
     \begin{scope}
     \clip (0,0) rectangle (0,0);
     \violinsetoptions[scaled,reverseaxis]{
-      width=8.55cm,
+      width=7.8cm,
       height=5.40cm,
       overlay,
       xmin=-1,
@@ -90,9 +88,9 @@
       ymax=7.25,
       axis lines=none,
     }
-    \violinplot[col sep=comma,index=atomic_faithfulness,relative position=5.05,color=white,label={},samples=30]{#2}
+    \violinplot[col sep=comma,index=atomic_faithfulness,relative position=5.05,color=white,label={},samples=30]{#1}
     \FaithfulnessCaptureCurrentKDE{\AtomicFaithfulnessKDE}
-    \violinplot[col sep=comma,index=interaction_faithfulness,relative position=1.65,color=white,label={},samples=30]{#2}
+    \violinplot[col sep=comma,index=interaction_faithfulness,relative position=1.65,color=white,label={},samples=30]{#1}
     \FaithfulnessCaptureCurrentKDE{\JointFaithfulnessKDE}
     \end{scope}
     \FaithfulnessMaterializeKDE{\AtomicFaithfulnessKDE}{\AtomicFaithfulnessKDETable}
@@ -100,7 +98,7 @@
     
     \pgfresetboundingbox
     \begin{axis}[
-      width=8.55cm,
+      width=7.8cm,
       height=5.55cm,
       xmin=-1,
       xmax=1,
@@ -124,12 +122,12 @@
         draw=FelicsAtomic,fill=FelicsAtomic,fill opacity=.62,
         y filter/.expression={4.35+.16*(mod(\coordindex*7,11)/10-.5)}]
         table[col sep=comma,x=atomic_faithfulness,y expr=4.35]
-          {#2};
+          {#1};
       \addplot+[boxplot={draw direction=x,draw position=4.02},
         mark=none,draw=FelicsAtomic,fill=FelicsAtomic,fill opacity=.32,
         thick,boxplot/box extend=.18]
         table[col sep=comma,y=atomic_faithfulness]
-          {#2};
+          {#1};
       \addplot[draw=FelicsJoint,fill=FelicsJoint,fill opacity=.48]
         table[x=list,y expr=1.75+1.6*(\thisrow{kdecol}-1.65)]
           {\JointFaithfulnessKDETable};
@@ -137,59 +135,25 @@
         draw=FelicsJoint,fill=FelicsJoint,fill opacity=.66,
         y filter/.expression={.92+.16*(mod(\coordindex*7,11)/10-.5)}]
         table[col sep=comma,x=interaction_faithfulness,y expr=.92]
-          {#2};
+          {#1};
       \addplot+[boxplot={draw direction=x,draw position=.55},
         mark=none,draw=FelicsJoint,fill=FelicsJoint,fill opacity=.34,
         thick,solid,boxplot/box extend=.18]
         table[col sep=comma,y=interaction_faithfulness]
-          {#2};
+          {#1};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsAtomic]
         at (axis cs:-.95,6.80) {Atomic};
       \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,6.80)
         {$\mathcal{F}(\mathbf{X})=
-          \pgfmathprintnumber[fixed,precision=3]{\AtomicDatasetFaithfulness}$};
+          \pgfmathprintnumber[fixed,fixed zerofill,precision=3]{\AtomicDatasetFaithfulness}$};
       \node[anchor=west,font=\scriptsize\bfseries,text=FelicsJoint]
         at (axis cs:-.95,3.40) {Joint};
       \node[anchor=west,font=\scriptsize,text=black]
         at (axis cs:-.55,3.40)
         {$\mathcal{F}(\mathbf{X})=
-          \pgfmathprintnumber[fixed,precision=3]{\JointDatasetFaithfulness}$};
+          \pgfmathprintnumber[fixed,fixed zerofill,precision=3]{\JointDatasetFaithfulness}$};
     \end{axis}
   \end{tikzpicture}%
   \end{minipage}%
 }
-
-\tikzexternalenable
-\begin{figure}[p]
-  \centering
-  \FaithfulnessRaincloudPanel{BBQ --- GPT-OSS 120B}%
-    {data/summary/question_level_faithfulness_bbq_gptoss.csv}%
-    {bbq-gptoss}%
-  \hfill
-  \FaithfulnessRaincloudPanel{BBQ --- Mistral Medium 3.5}%
-    {data/summary/question_level_faithfulness_bbq_mistral.csv}%
-    {bbq-mistral}%
-
-  \par\vspace{1.2em}
-  \FaithfulnessRaincloudPanel{MedQA --- GPT-OSS 120B}%
-    {data/summary/question_level_faithfulness_medqa_gptoss.csv}%
-    {medqa-gptoss}%
-  \hfill
-  \FaithfulnessRaincloudPanel{MedQA --- Mistral Medium 3.5}%
-    {data/summary/question_level_faithfulness_medqa_mistral.csv}%
-    {medqa-mistral}%
-
-  \par\vspace{1.2em}
-  \FaithfulnessRaincloudPanel{German Credit --- GPT-OSS 120B}%
-    {data/summary/question_level_faithfulness_credit_gptoss.csv}%
-    {credit-gptoss}%
-  \hfill
-  \FaithfulnessRaincloudPanel{German Credit --- Mistral Medium 3.5}%
-    {data/summary/question_level_faithfulness_credit_mistral.csv}%
-    {credit-mistral}%
-
-  \caption{Distribution of question-level faithfulness based on atomic and interaction-aware causal effects from the same joint FELICS run on different dataset/model combinations.}
-  \label{fig:question-level-faithfulness-rainclouds}
-\end{figure}
-\tikzexternaldisable
