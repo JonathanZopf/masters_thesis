@@ -39,9 +39,9 @@
 \contentsline {section}{\numberline {3.1}Assumptions in the Observational Graph}{21}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Disentanglement Assumption for Interventions}{22}{section.3.2}%
 \contentsline {section}{\numberline {3.3}The Practical Limit}{23}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Interaction between Concepts}{23}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Interaction between Concepts}{24}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Additivity}{24}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Redundancy}{24}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.2}Redundancy}{25}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}Synergy}{25}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Implications for Causal Concept Effects}{25}{subsection.3.4.4}%
 \contentsline {chapter}{\numberline {4}Research Questions}{27}{chapter.4}%
@@ -105,7 +105,7 @@
 \contentsline {section}{\numberline {8.4}Validation against the Original Implementation}{66}{section.8.4}%
 \contentsline {section}{\numberline {8.5}Preservation of Concept Rankings}{68}{section.8.5}%
 \contentsline {section}{\numberline {8.6}Effect of Interaction Modeling on Faithfulness}{70}{section.8.6}%
-\contentsline {section}{\numberline {8.7}Selected Coalition Effects}{73}{section.8.7}%
+\contentsline {section}{\numberline {8.7}Selected Coalition Effects}{74}{section.8.7}%
 \contentsline {section}{\numberline {8.8}Case Study: The MedQA Example of Matton et al.}{75}{section.8.8}%
 \contentsline {chapter}{\numberline {9}Discussion}{78}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Central Findings}{78}{section.9.1}%
@@ -149,15 +149,15 @@
 \contentsline {chapter}{\numberline {B}LLM-Based Oracle Category Normalization}{105}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Detailed Oracle Partitioning Traces}{107}{appendix.C}%
 \contentsline {section}{\numberline {C.1}New German Credit}{107}{section.C.1}%
-\contentsline {section}{\numberline {C.2}MedQA Case Study}{111}{section.C.2}%
-\contentsline {chapter}{\numberline {D}Additional Result Visualizations}{112}{appendix.D}%
-\contentsline {section}{\numberline {D.1}Distributions of Question-Level Faithfulness and CE}{112}{section.D.1}%
-\contentsline {section}{\numberline {D.2}Oracle Co-Grouping Rates for BBQ}{114}{section.D.2}%
-\contentsline {section}{\numberline {D.3}Interaction-Presumption Strength and Attribution Changes}{114}{section.D.3}%
-\contentsline {section}{\numberline {D.4}Agreement between Implementations}{116}{section.D.4}%
-\contentsline {section}{\numberline {D.5}Concept-Level Effects of Shapley Normalization}{118}{section.D.5}%
-\contentsline {section}{\numberline {D.6}Atomic and Joint Attribution per Question}{120}{section.D.6}%
-\contentsline {section}{\numberline {D.7}Concept-Level Effects in the Case Study}{122}{section.D.7}%
-\contentsline {chapter}{\numberline {E}Examples}{123}{appendix.E}%
-\contentsline {chapter}{\numberline {F}Prompts}{126}{appendix.F}%
-\contentsline {chapter}{\numberline {G}Reproducibility and Experimental Artifacts}{151}{appendix.G}%
+\contentsline {section}{\numberline {C.2}MedQA Case Study}{110}{section.C.2}%
+\contentsline {chapter}{\numberline {D}Additional Result Visualizations}{111}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Distributions of Question-Level Faithfulness and CE}{111}{section.D.1}%
+\contentsline {section}{\numberline {D.2}Oracle Co-Grouping Rates for BBQ}{113}{section.D.2}%
+\contentsline {section}{\numberline {D.3}Interaction-Presumption Strength and Attribution Changes}{113}{section.D.3}%
+\contentsline {section}{\numberline {D.4}Agreement between Implementations}{115}{section.D.4}%
+\contentsline {section}{\numberline {D.5}Concept-Level Effects of Shapley Normalization}{117}{section.D.5}%
+\contentsline {section}{\numberline {D.6}Atomic and Joint Attribution per Question}{119}{section.D.6}%
+\contentsline {section}{\numberline {D.7}Concept-Level Effects in the Case Study}{121}{section.D.7}%
+\contentsline {chapter}{\numberline {E}Examples}{122}{appendix.E}%
+\contentsline {chapter}{\numberline {F}Prompts}{125}{appendix.F}%
+\contentsline {chapter}{\numberline {G}Reproducibility and Experimental Artifacts}{150}{appendix.G}%

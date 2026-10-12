@@ -38,7 +38,7 @@ in Figure~\ref{fig:german-credit-grouping-final}. Table \ref{tab:credit-associat
   \begin{minipage}[t]{0.49\textwidth}\centering
     \CreditGroupingStage{3}{Step 3: Amount--Term}
   \end{minipage}
-  \caption{Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}
+  \caption[New German Credit partitioning: initialization and first three merges]{Initialization and the first three accepted merges of the New German Credit partitioning algorithm.}
   \label{fig:credit-grouping-steps-a}
 \end{figure}
 
@@ -58,7 +58,7 @@ in Figure~\ref{fig:german-credit-grouping-final}. Table \ref{tab:credit-associat
   \begin{minipage}[t]{0.49\textwidth}\centering
     \CreditGroupingStage{7}{Step 7: Age--Own House}
   \end{minipage}
-  \caption{The final four accepted merges of the New German Credit partitioning algorithm. The last panel is the completed maximum spanning forest.}
+  \caption[New German Credit partitioning: final four merges]{Final four accepted merges of the New German Credit partitioning algorithm. The last panel shows the completed maximum spanning forest.}
   \label{fig:credit-grouping-steps-b}
 \end{figure}
 \FloatBarrier
@@ -76,7 +76,7 @@ in Figure~\ref{fig:german-credit-grouping-final}. Table \ref{tab:credit-associat
   \csname CreditAppendixNodeLabel@#2\endcsname & #3\tabularnewline
 }
 \begin{longtable}{@{}p{0.40\textwidth}p{0.40\textwidth}>{\raggedleft\arraybackslash}p{0.10\textwidth}@{}}
-  \caption{Retained pairwise associations used for the New German Credit partition.}
+  \caption[Retained pairwise associations for the New German Credit partition]{Retained pairwise associations used for the New German Credit partition, measured by Cram\'er's V.}
   \label{tab:credit-associations}\\
   \hline
   \textbf{Node 1} & \textbf{Node 2} & \textbf{$V$}\\
@@ -106,7 +106,7 @@ already belonged to the component connected through eating disorder.
 \begin{figure}[H]
   \centering
   \includestandalone[mode=buildnew,width=0.78\textwidth,height=0.36\textheight,keepaspectratio]{graphs/rq5_oracle_grouping}
-  \caption{Final consensus partition for the MedQA case study. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}
+  \caption[Case study: final consensus partition for MedQA]{Final consensus partition for the MedQA case study. Edge labels are empirical co-grouping probabilities across 50 auxiliary-LLM judgments.}
   \label{fig:rq5-oracle-grouping}
 \end{figure}
 
@@ -124,7 +124,7 @@ already belonged to the component connected through eating disorder.
 }
 \begin{table}[H]
   \centering
-  \caption{Retained co-grouping frequencies for the MedQA case study.}
+  \caption[Case study: retained co-grouping frequencies for MedQA]{Retained co-grouping frequencies across 50 auxiliary-LLM judgments for the MedQA case study.}
   \label{tab:rq5-cogrouping}
   \begin{tabular}{@{}p{0.38\textwidth}p{0.38\textwidth}>{\raggedleft\arraybackslash}p{0.15\textwidth}@{}}
     \hline

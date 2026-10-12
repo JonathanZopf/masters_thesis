@@ -10,13 +10,25 @@ Matton et al.~\cite{mattonWalkTalkMeasuring2024} discuss the data generating pro
 \begin{figure}[ht]
 	\centering
 	\includestandalone[mode=buildnew, width=12cm]{graphs/matton_dgp}
-	\caption{The data generating process for one single original dataset question and the model response, as assumed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}.}
+	\caption[Data generating process assumed by Matton et al.]{Data generating process for a single dataset question and the model response, as assumed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}.}
 	\label{fig:matton_dgp}
 \end{figure}
 
 Critically, the authors permit all mediating variables to exhibit mutual influences. Concepts $C_1,\dots,C_M$ may affect one another and may also influence the rest of the question text $V$, e.g. by making adaptions to surrounding non-concept words for coherent grammar. Moreover, the confounder $U$ can introduce correlations among the mediators. To indicate this layer of mutual dependence, the mediators are enclosed by a dotted boundary in Figure~\ref{fig:matton_dgp}.
 
 On a practical level, this means that in the observational data (the given questions) concepts are often correlated and not independent. For instance, a person's name may causally influence their gender or the confounder $U$ may cause age and experience level to appear jointly within a question.
+
+Example~\ref{ex:concept_v_boundary} illustrates how a concept can influence $V$. Changing the \textit{number of applicants} also changes the highlighted verbs and pronouns. Whether these words belong to the concept or to $V$ is not clear-cut, since a concept may be expressed by several words that do not have to appear together (Section~\ref{sec:mathematical_foundation}). In practice, this boundary is drawn by the auxiliary model $\mathcal{A}$ when it generates counterfactuals.
+
+\begin{example_box}[label=ex:concept_v_boundary]
+	\textbf{Original:} The applicant is self-employed. She runs her own bakery and pays herself a salary.
+
+	\smallskip
+	\textbf{Intervention:} \textit{number of applicants}, \enquote{one} $\rightarrow$ \enquote{two}
+
+	\smallskip
+	\textbf{Counterfactual:} The \hlword{applicants} \hlword{are} self-employed. \hlword{They} \hlword{run} \hlword{their} own bakery and \hlword{pay} \hlword{themselves} a salary.
+\end{example_box}
 
 \section{Disentanglement Assumption for Interventions}
 
@@ -29,7 +41,7 @@ The effect of a surgical intervention on the causal graph is illustrated in Figu
 \begin{figure}[ht]
 	\centering
 	\includestandalone[mode=buildnew, width=16cm]{graphs/matton_dgp_intervened}
-	\caption{Causal graph under a surgical intervention on concept $C_m$; all other concepts and $V$ remain fixed. Adapted from \cite{mattonWalkTalkMeasuring2024} with color distinction.}
+	\caption[Causal graph under a surgical intervention on a single concept]{Causal graph under a surgical intervention on concept $C_m$. All other concepts and $V$ remain fixed. Adapted from Matton et al.~\cite{mattonWalkTalkMeasuring2024} with color distinction.}
 	\label{fig:matton_dgp_intervened}
 \end{figure}
 

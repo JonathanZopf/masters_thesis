@@ -25,13 +25,13 @@ Figures~\ref{fig:app-dist-f-bbq-gptoss} to~\ref{fig:app-dist-ce-credit-mistral} 
       \centering
       \ResultFigureHalf{%
         \FaithfulnessRaincloudPanel{data/summary/question_level_faithfulness_#4.csv}{#5}}%
-        {Question-level faithfulness for #1 with #2}%
+        {Faithfulness distribution for #1 with #2}%
         {Question-level faithfulness for #1 with #2 under atomic and joint attribution.}%
         {fig:app-dist-f-#5}%
       \hfill
       \ResultFigureHalf{%
         \CeRaincloudPanel{data/appendix/ce_shifts/#3.csv}{#5}{#6}{#7}{#8}}%
-        {Question-averaged CE for #1 with #2}%
+        {CE distribution for #1 with #2}%
         {Question-averaged CE for #1 with #2 under atomic and joint attribution.}%
         {fig:app-dist-ce-#5}%
     \end{figure}%
@@ -183,7 +183,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       extra code={\ResultScatterClippedPoints{180}{(0.50,-0.96)}}
     }}%
     {RQ2, BBQ with GPT-OSS 120B: faithfulness}%
-    {Question-level faithfulness of both implementations for BBQ with GPT-OSS 120B ($n=28$). The triangle marks question 8, whose FELICS estimate is $-1.03$.}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the original implementation for BBQ with GPT-OSS 120B ($n=28$). The triangle marks question 8, whose FELICS estimate is $-1.03$.}%
     {fig:app-rq2-f-bbq-gptoss}%
   \hfill
   \ResultFigureHalf{%
@@ -192,7 +192,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       ymin=0, ymax=.8
     }}%
     {RQ2, BBQ with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged causal effects of both implementations for BBQ with GPT-OSS 120B ($n=28$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the original implementation for BBQ with GPT-OSS 120B ($n=28$).}%
     {fig:app-rq2-ce-bbq-gptoss}%
 \end{figure}
 
@@ -201,7 +201,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
   \ResultFigureHalf{%
     \HypTwoIdentityPlot{data=data/rq2/bbq_mistral.csv}}%
     {RQ2, BBQ with Mistral Medium 3.5: faithfulness}%
-    {Question-level faithfulness of both implementations for BBQ with Mistral Medium 3.5 ($n=30$).}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the original implementation for BBQ with Mistral Medium 3.5 ($n=30$).}%
     {fig:app-rq2-f-bbq-mistral}%
   \hfill
   \ResultFigureHalf{%
@@ -210,7 +210,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       ymin=0, ymax=.8
     }}%
     {RQ2, BBQ with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged causal effects of both implementations for BBQ with Mistral Medium 3.5 ($n=30$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the original implementation for BBQ with Mistral Medium 3.5 ($n=30$).}%
     {fig:app-rq2-ce-bbq-mistral}%
 \end{figure}
 
@@ -219,7 +219,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
   \ResultFigureHalf{%
     \HypTwoIdentityPlot{data=data/rq2/medqa_gptoss.csv}}%
     {RQ2, MedQA with GPT-OSS 120B: faithfulness}%
-    {Question-level faithfulness of both implementations for MedQA with GPT-OSS 120B ($n=29$).}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the original implementation for MedQA with GPT-OSS 120B ($n=29$).}%
     {fig:app-rq2-f-medqa-gptoss}%
   \hfill
   \ResultFigureHalf{%
@@ -228,7 +228,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       ymin=0, ymax=.25
     }}%
     {RQ2, MedQA with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged causal effects of both implementations for MedQA with GPT-OSS 120B ($n=29$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the original implementation for MedQA with GPT-OSS 120B ($n=29$).}%
     {fig:app-rq2-ce-medqa-gptoss}%
 \end{figure}
 
@@ -237,7 +237,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
   \ResultFigureHalf{%
     \HypTwoIdentityPlot{data=data/rq2/medqa_mistral.csv}}%
     {RQ2, MedQA with Mistral Medium 3.5: faithfulness}%
-    {Question-level faithfulness of both implementations for MedQA with Mistral Medium 3.5 ($n=24$).}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the original implementation for MedQA with Mistral Medium 3.5 ($n=24$).}%
     {fig:app-rq2-f-medqa-mistral}%
   \hfill
   \ResultFigureHalf{%
@@ -246,7 +246,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       ymin=0, ymax=.25
     }}%
     {RQ2, MedQA with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged causal effects of both implementations for MedQA with Mistral Medium 3.5 ($n=24$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the original implementation for MedQA with Mistral Medium 3.5 ($n=24$).}%
     {fig:app-rq2-ce-medqa-mistral}%
 \end{figure}
 
@@ -257,7 +257,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       extra code={\ResultScatterClippedPoints{90}{(-0.96,-0.09) (-0.96,-0.15)}}
     }}%
     {RQ2, New German Credit with Mistral Medium 3.5: faithfulness}%
-    {Question-level faithfulness of FELICS and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
     {fig:app-rq2-f-credit-mistral}%
   \hfill
   \ResultFigureHalf{%
@@ -266,7 +266,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
       ymin=0, ymax=1.1
     }}%
     {RQ2, New German Credit with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged causal effects of FELICS and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$).}%
     {fig:app-rq2-ce-credit-gptoss}%
 \end{figure}
 
@@ -280,13 +280,13 @@ Figures~\ref{fig:app-rq3-bbq-gptoss} to~\ref{fig:app-rq3-credit-mistral} complem
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/bbq_gptoss.csv}{-0.3}{1.1}}%
     {RQ3, BBQ with GPT-OSS 120B: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for BBQ with GPT-OSS 120B (137 concept-level values, $\rho=0.937$).}%
+    {Raw and adjusted concept-level CE for BBQ with GPT-OSS 120B (137 concept-level values, Spearman $\rho=0.937$).}%
     {fig:app-rq3-bbq-gptoss}%
   \hfill
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/bbq_mistral.csv}{-0.3}{1.1}}%
     {RQ3, BBQ with Mistral Medium 3.5: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for BBQ with Mistral Medium 3.5 (137 concept-level values, $\rho=0.903$).}%
+    {Raw and adjusted concept-level CE for BBQ with Mistral Medium 3.5 (137 concept-level values, Spearman $\rho=0.903$).}%
     {fig:app-rq3-bbq-mistral}%
 \end{figure}
 
@@ -295,13 +295,13 @@ Figures~\ref{fig:app-rq3-bbq-gptoss} to~\ref{fig:app-rq3-credit-mistral} complem
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/medqa_gptoss.csv}{-0.05}{0.6}}%
     {RQ3, MedQA with GPT-OSS 120B: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for MedQA with GPT-OSS 120B (435 concept-level values, $\rho=0.938$).}%
+    {Raw and adjusted concept-level CE for MedQA with GPT-OSS 120B (435 concept-level values, Spearman $\rho=0.938$).}%
     {fig:app-rq3-medqa-gptoss}%
   \hfill
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/medqa_mistral.csv}{-0.05}{0.6}}%
     {RQ3, MedQA with Mistral Medium 3.5: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for MedQA with Mistral Medium 3.5 (257 concept-level values, $\rho=0.963$).}%
+    {Raw and adjusted concept-level CE for MedQA with Mistral Medium 3.5 (257 concept-level values, Spearman $\rho=0.963$).}%
     {fig:app-rq3-medqa-mistral}%
 \end{figure}
 
@@ -310,13 +310,13 @@ Figures~\ref{fig:app-rq3-bbq-gptoss} to~\ref{fig:app-rq3-credit-mistral} complem
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/new_german_credit_gptoss.csv}{-1}{2.7}}%
     {RQ3, New German Credit with GPT-OSS 120B: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for New German Credit with GPT-OSS 120B (360 concept-level values, $\rho=0.875$).}%
+    {Raw and adjusted concept-level CE for New German Credit with GPT-OSS 120B (360 concept-level values, Spearman $\rho=0.875$).}%
     {fig:app-rq3-credit-gptoss}%
   \hfill
   \ResultFigureHalf{%
     \NormalizationIdentityPlot{data/appendix/rq3_normalization_identity/new_german_credit_mistral.csv}{-1}{2.7}}%
     {RQ3, New German Credit with Mistral Medium 3.5: raw and adjusted CE}%
-    {Raw and adjusted concept-level CE for New German Credit with Mistral Medium 3.5 (360 concept-level values, $\rho=0.821$).}%
+    {Raw and adjusted concept-level CE for New German Credit with Mistral Medium 3.5 (360 concept-level values, Spearman $\rho=0.821$).}%
     {fig:app-rq3-credit-mistral}%
 \end{figure}
 
@@ -336,7 +336,7 @@ Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} sho
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/bbq_gptoss.csv}{0}{0.6}}%
     {RQ4, BBQ with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for BBQ with GPT-OSS 120B ($n=30$, $k=4$ to $6$).}%
+    {Question-averaged atomic and joint CE for BBQ with GPT-OSS 120B ($n=30$, 4 to 6 concepts per question).}%
     {fig:app-rq4-ce-bbq-gptoss}%
 \end{figure}
 
@@ -351,7 +351,7 @@ Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} sho
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/medqa_gptoss.csv}{0}{0.06}}%
     {RQ4, MedQA with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for MedQA with GPT-OSS 120B ($n=29$, $k=8$ to $31$).}%
+    {Question-averaged atomic and joint CE for MedQA with GPT-OSS 120B ($n=29$, 8 to 31 concepts per question).}%
     {fig:app-rq4-ce-medqa-gptoss}%
 \end{figure}
 
@@ -366,7 +366,7 @@ Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} sho
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/medqa_mistral.csv}{0}{0.06}}%
     {RQ4, MedQA with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for MedQA with Mistral Medium 3.5 ($n=24$, $k=6$ to $16$).}%
+    {Question-averaged atomic and joint CE for MedQA with Mistral Medium 3.5 ($n=24$, 6 to 16 concepts per question).}%
     {fig:app-rq4-ce-medqa-mistral}%
 \end{figure}
 
@@ -381,7 +381,7 @@ Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} sho
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/new_german_credit_gptoss.csv}{0}{1.5}}%
     {RQ4, New German Credit with GPT-OSS 120B: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for New German Credit with GPT-OSS 120B ($n=30$, 12 concepts per question).}%
+    {Question-averaged atomic and joint CE for New German Credit with GPT-OSS 120B ($n=30$, 12 concepts per question).}%
     {fig:app-rq4-ce-credit-gptoss}%
 \end{figure}
 
@@ -454,7 +454,7 @@ Figure~\ref{fig:case-study-concept-identity} plots the atomic and joint causal e
     };
   \end{tikzpicture}
 
-  \caption[Atomic and joint causal effects in the case study]{Atomic and interaction-aware causal effects for every concept in the MedQA case study. Colors identify the concepts consistently across both panels.}
+  \caption[Case study: atomic and joint CE per concept]{Atomic and joint CE for every concept in the MedQA case study. Colors identify the concepts consistently across both panels.}
   \label{fig:case-study-concept-identity}
 \end{figure}
 \FloatBarrier

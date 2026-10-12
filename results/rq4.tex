@@ -23,7 +23,7 @@ median difference indicates lower interaction-aware faithfulness.
 
 \begin{table}[htb]
   \centering
-  \caption[Complementary tests for lower interaction-aware faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether interaction-aware faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count positive, negative, and zero values of $d$, respectively. Evidence in the specified direction requires $p\leq0.05$.}
+  \caption[RQ4: complementary tests for lower joint faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether joint faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count positive, negative, and zero values of $d=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$. Evidence in the specified direction requires $p\leq0.05$.}
   \label{tab:hyp4-lower-tests}
   \small
   \setlength{\tabcolsep}{3.2pt}
@@ -70,7 +70,7 @@ BBQ, not a general decrease across the evaluation.
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/new_german_credit_mistral.csv}{0}{1.5}}%
     {RQ4, New German Credit with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for New German Credit with Mistral Medium 3.5 ($n=30$, 12 concepts per question).}%
+    {Question-averaged atomic and joint CE for New German Credit with Mistral Medium 3.5 ($n=30$, 12 concepts per question).}%
     {fig:rq4-ce-credit-mistral}%
 \end{figure}
 
@@ -87,7 +87,7 @@ Figures~\ref{fig:rq4-f-credit-mistral} and~\ref{fig:rq4-ce-credit-mistral} show 
   \ResultFigureHalf{%
     \CeShiftIdentityPlot{data/appendix/ce_shift_identity/bbq_mistral.csv}{0}{0.6}}%
     {RQ4, BBQ with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged atomic and joint causal effects for BBQ with Mistral Medium 3.5 ($n=30$). Marker area increases with the number of concepts per question (4 to 6).}%
+    {Question-averaged atomic and joint CE for BBQ with Mistral Medium 3.5 ($n=30$). Marker area increases with the number of concepts per question (4 to 6).}%
     {fig:rq4-ce-bbq-mistral}%
 \end{figure}
 

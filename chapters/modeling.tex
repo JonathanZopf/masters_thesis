@@ -134,7 +134,7 @@ Recall that $\mathbf{C}_{\mathrm{tab}} = \{C_1, \ldots, C_M\}$ is the static, da
 The partitioning of $\mathbf{C}_{\mathrm{tab}}$ is modeled as finding a \textbf{Constrained Maximum Spanning Forest} on the undirected weighted graph $G = (\mathbf{C}_{\mathrm{tab}}, \mathcal{L})$. Each element $(C_i,C_j,A_{i,j})\in\mathcal{L}$ represents an edge between $C_i$ and $C_j$ whose weight is their association strength $A_{i,j}=A(C_i,C_j)$. This partitioning is resolved via a modified Kruskal's algorithm~\cite{kruskalShortestSpanningSubtree1956} constrained by a maximum component size $n_{\max}$:
 
 \begin{algorithm}[H]
-	\caption{Constrained Greedy Partitioning of Strongest Associations}\label{alg:greedy_merge}
+	\caption[Constrained greedy partitioning of strongest associations]{Constrained greedy partitioning of strongest associations.}\label{alg:greedy_merge}
 	\begin{algorithmic}[1]
 		\State \textbf{Initialize} partition $\mathcal{P} \gets \{ \{C_i\} \mid C_i \in \mathbf{C}_{\mathrm{tab}} \}$ \Comment{All concepts start as singletons}
 		\State \textbf{Sort} $\mathcal{L}$ descending by weight $A_{i,j}$
@@ -395,7 +395,7 @@ The diagram is organized into three columns. The left column contains the origin
 \begin{figure}
 	\centering
 	\includestandalone[mode=buildnew, width=12.5cm]{graphs/comparison_matton_felics}
-	\caption{Comparison of the evaluation pipeline between Matton et al.~\cite{mattonWalkTalkMeasuring2024} (left) and the proposed FELICS framework (right) with highlighted modifications.}
+	\caption[Evaluation pipelines of Matton et al. and FELICS compared]{Evaluation pipeline of Matton et al.~\cite{mattonWalkTalkMeasuring2024} (left) and of the proposed FELICS framework (right), with the modifications highlighted.}
 	\label{fig:comparison_matton_felics}
 \end{figure}
 

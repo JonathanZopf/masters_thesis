@@ -16,7 +16,7 @@ Table~\ref{tab:rq3-ranking-summary} summarizes the rank preservation within indi
 
 \begin{table}[htb]
   \centering
-  \caption[Per-question preservation of concept rankings]{Per-question preservation of concept rankings. \textit{Exact} counts questions whose raw and adjusted rankings are identical ($\rho=1$). The median and minimum refer to the per-question Spearman correlations.}
+  \caption[RQ3: per-question preservation of concept rankings]{Per-question preservation of concept rankings. \textit{Exact} counts questions whose raw and adjusted rankings are identical ($\rho=1$). The median and minimum refer to the per-question Spearman correlations.}
   \label{tab:rq3-ranking-summary}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -43,13 +43,13 @@ The magnitude of the adjustment differs between the dataset types even more clea
   \centering
   \ResultFigureHalf{%
     \CreditConceptDeltaPlot{data/appendix/rq3_credit_concept_delta/new_german_credit_gptoss.csv}}%
-    {RQ3, New German Credit with GPT-OSS 120B: mean adjustment per concept}%
+    {RQ3, New German Credit with GPT-OSS 120B: mean CE adjustment}%
     {Mean normalization adjustment per concept for New German Credit with GPT-OSS 120B, averaged across 30 questions. Dotted lines separate the oracle groups.}%
     {fig:rq3-delta-credit-gptoss}%
   \hfill
   \ResultFigureHalf{%
     \CreditConceptDeltaPlot{data/appendix/rq3_credit_concept_delta/new_german_credit_mistral.csv}}%
-    {RQ3, New German Credit with Mistral Medium 3.5: mean adjustment per concept}%
+    {RQ3, New German Credit with Mistral Medium 3.5: mean CE adjustment}%
     {Mean normalization adjustment per concept for New German Credit with Mistral Medium 3.5, averaged across 30 questions. Dotted lines separate the oracle groups.}%
     {fig:rq3-delta-credit-mistral}%
 \end{figure}

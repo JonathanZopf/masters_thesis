@@ -1,0 +1,223 @@
+% Reusable two-dimensional result plot.
+% Callers provide data and presentation details through named keys so that
+% result sections only need to define their local conventions.
+\definecolor{ResultScatterPoints}{HTML}{2878B5}
+\definecolor{ResultScatterLine}{HTML}{E37A26}
+
+\newif\ifResultScatterScaleOnlyAxis
+
+\pgfkeys{
+  /result scatter/.is family,
+  /result scatter/.cd,
+  title/.store in=\ResultScatterTitle,
+  data/.store in=\ResultScatterData,
+  x column/.store in=\ResultScatterXColumn,
+  y column/.store in=\ResultScatterYColumn,
+  x label/.store in=\ResultScatterXLabel,
+  y label/.store in=\ResultScatterYLabel,
+  text below/.store in=\ResultScatterTextBelow,
+  xmin/.store in=\ResultScatterXMin,
+  xmax/.store in=\ResultScatterXMax,
+  ymin/.store in=\ResultScatterYMin,
+  ymax/.store in=\ResultScatterYMax,
+  line slope/.store in=\ResultScatterLineSlope,
+  line intercept/.store in=\ResultScatterLineIntercept,
+  line style/.store in=\ResultScatterLineStyle,
+  minipage width/.store in=\ResultScatterMinipageWidth,
+  plot width/.store in=\ResultScatterPlotWidth,
+  plot height/.store in=\ResultScatterPlotHeight,
+  mark size/.store in=\ResultScatterMarkSize,
+  below skip/.store in=\ResultScatterBelowSkip,
+  title gap/.store in=\ResultScatterTitleGap,
+  x tick precision/.store in=\ResultScatterXTickPrecision,
+  y tick precision/.store in=\ResultScatterYTickPrecision,
+  extra code/.store in=\ResultScatterExtraCode,
+  scale only axis/.is if=ResultScatterScaleOnlyAxis,
+}
+
+\newcommand{\ResultScatterPlot}[1]{%
+  \begingroup
+  \pgfkeys{/result scatter/.cd,
+    title={},
+    data={},
+    x column={},
+    y column={},
+    x label={},
+    y label={},
+    text below={},
+    xmin=0,
+    xmax=1,
+    ymin=0,
+    ymax=1,
+    line slope=1,
+    line intercept=0,
+    line style=solid,
+    minipage width=0.485\textwidth,
+    plot width=\linewidth,
+    plot height=5.45cm,
+    mark size=1.65pt,
+    below skip=-0.25em,
+    title gap=2mm,
+    x tick precision=3,
+    y tick precision=3,
+    extra code={},
+    scale only axis=false,#1
+  }%
+  \begin{minipage}[t]{\ResultScatterMinipageWidth}
+    \centering
+    \ifResultScatterScaleOnlyAxis
+      \pgfplotsset{result scatter sizing/.style={scale only axis}}
+    \else
+      \pgfplotsset{result scatter sizing/.style={}}
+    \fi
+    % An empty title would still reserve vertical space above the axis.
+    \ifx\ResultScatterTitle\empty
+      \pgfplotsset{result scatter title/.style={}}
+    \else
+      \pgfplotsset{result scatter title/.style={title={\ResultScatterTitle}}}
+    \fi
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=\ResultScatterPlotWidth,
+        height=\ResultScatterPlotHeight,
+        result scatter sizing,
+        result scatter title,
+        title style={
+          at={(axis description cs:0.5,1)},
+          anchor=south,
+          yshift=\ResultScatterTitleGap,
+          font=\small\bfseries,
+        },
+        xmin=\ResultScatterXMin,
+        xmax=\ResultScatterXMax,
+        ymin=\ResultScatterYMin,
+        ymax=\ResultScatterYMax,
+        xlabel={\ResultScatterXLabel},
+        ylabel={\ResultScatterYLabel},
+        scaled x ticks=false,
+        scaled y ticks=false,
+        xticklabel style={
+          font=\scriptsize,
+          /pgf/number format/fixed,
+          /pgf/number format/precision=\ResultScatterXTickPrecision,
+        },
+        yticklabel style={
+          font=\scriptsize,
+          /pgf/number format/fixed,
+          /pgf/number format/precision=\ResultScatterYTickPrecision,
+        },
+        label style={font=\scriptsize},
+        grid=major,
+        grid style={gray!18},
+        axis line style={gray!60},
+        clip=true,
+      ]
+        \addplot[
+          only marks,
+          mark=*,
+          mark size=\ResultScatterMarkSize,
+          draw=ResultScatterPoints,
+          fill=ResultScatterPoints,
+          fill opacity=0.68,
+        ] table[
+          col sep=comma,
+          x=\ResultScatterXColumn,
+          y=\ResultScatterYColumn
+        ] {\ResultScatterData};
+        \addplot[
+          ResultScatterLine,
+          very thick,
+          \ResultScatterLineStyle,
+          domain=\ResultScatterXMin:\ResultScatterXMax,
+          samples=2
+        ] {\ResultScatterLineIntercept + \ResultScatterLineSlope*x};
+        \ResultScatterExtraCode
+      \end{axis}
+    \end{tikzpicture}
+    \ifx\ResultScatterTextBelow\empty\else
+      \vspace{\ResultScatterBelowSkip}
+      {\scriptsize \ResultScatterTextBelow\par}
+    \fi
+  \end{minipage}%
+  \endgroup
+}
+
+% Points outside an identity plot's axis range are drawn as triangles on the
+% border instead of disappearing through clipping.
+% #1 rotation of the triangle, #2 list of border coordinates.
+\newcommand{\ResultScatterClippedPoints}[2]{%
+  \addplot[only marks,mark=triangle*,mark size=2.6pt,
+    mark options={rotate=#1},
+    draw=ResultScatterPoints,fill=ResultScatterPoints,fill opacity=0.68]
+    coordinates {#2};%
+}
+
+% RQ1 preset: fixed dimensions, x variable and solid fitted line.
+% #1 plot-specific keys.
+\newcommand{\HypOneScatter}[1]{%
+  \ResultScatterPlot{x column=diff_correlation_strength,
+    x label={$\Delta\kappa(\mathbf{x})$},
+    line style=solid,
+    minipage width=\linewidth,
+    plot width=.96\linewidth,
+    plot height=5.45cm,
+    mark size=1.65pt,
+    #1
+  }%
+}
+
+% RQ2 preset: square axes, fixed faithfulness columns and dashed identity line.
+% #1 plot-specific keys.
+\newcommand{\HypTwoIdentityPlot}[1]{%
+  \ResultScatterPlot{x column=matton_faithfulness,
+    y column=felics_faithfulness,
+    x label={$\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$},
+    y label={$\mathcal{F}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+    line slope=1,
+    line intercept=0,
+    line style=dashed,
+    minipage width=\linewidth,
+    plot width=5.55cm,
+    plot height=5.55cm,
+    mark size=1.8pt,
+    scale only axis=true,
+    xmin=-1, xmax=1,
+    ymin=-1, ymax=1,
+    #1
+  }%
+}
+
+% RQ4 preset: paired atomic and joint question-level faithfulness.
+% #1 data file, #2 axis minimum, #3 axis maximum.
+\newcommand{\HypFourIdentityPlot}[3]{%
+  \ResultScatterPlot{x column=atomic_faithfulness,
+    y column=joint_faithfulness,
+    x label={$\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})$},
+    y label={$\mathcal{F}_{\mathrm{joint}}(\mathbf{x})$},
+    data={#1},
+    xmin=#2, xmax=#3,
+    ymin=#2, ymax=#3,
+    line slope=1,
+    line intercept=0,
+    line style=dashed,
+    minipage width=\linewidth,
+    plot width=5.55cm,
+    plot height=5.55cm,
+    mark size=1.8pt,
+    scale only axis=true,
+  }%
+}
+
+% Side-by-side result figures. Each half carries its own caption and label so
+% that every plot can be referenced individually.
+% #1 content, #2 short caption, #3 caption, #4 label.
+\newcommand{\ResultFigureHalf}[4]{%
+  \begin{minipage}[t]{0.485\textwidth}
+    \vspace{0pt}
+    \centering
+    #1
+    \captionsetup{font=small,skip=4pt,justification=raggedright}
+    \caption[#2]{#3}
+    \label{#4}
+  \end{minipage}%
+}

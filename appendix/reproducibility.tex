@@ -47,6 +47,8 @@ The experiment script writes its outputs to \path{experiment/}. Table~\ref{tab:r
 \begin{table}[htbp]
 \centering
 \small
+\caption[Experiment artifact directories in the FELICS repository]{Principal experiment artifact directories in the FELICS repository.}
+\label{tab:reproducibility-directories}
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}p{0.52\textwidth}p{0.44\textwidth}@{}}
 \hline
@@ -58,8 +60,6 @@ The experiment script writes its outputs to \path{experiment/}. Table~\ref{tab:r
 \path{experiment/faithfulness_results/} & Effect estimates and final faithfulness results. \\
 \hline
 \end{tabular}
-\caption{Principal experiment artifact directories in the FELICS repository.}
-\label{tab:reproducibility-directories}
 \end{table}
 
 Within \path{experiment/faithfulness_results/}, first select the dataset directory (\path{bbq}, \path{medqa}, or \path{new_german_credit}), then the model/configuration directory named \path{<model_name>_<n_max>}. The baseline branch leaves the group-size component empty. Table~\ref{tab:reproducibility-files} describes the principal result files. Filenames are shown as suffixes: each is prefixed by \path{<model_name>}. Rows describing Shapley attribution, normalization, and the paired atomic export refer to FELICS outputs.
@@ -68,7 +68,7 @@ Within \path{experiment/faithfulness_results/}, first select the dataset directo
 \small
 \renewcommand{\arraystretch}{1.15}
 \begin{longtable}{@{}p{0.40\textwidth}p{0.56\textwidth}@{}}
-\caption{Result files within a dataset and model/configuration directory. Each filename begins with the model name.}
+\caption[Result files within a dataset and model directory]{Result files within a dataset and model/configuration directory. Each filename begins with the model name.}
 \label{tab:reproducibility-files}\\
 \hline
 \textbf{Filename suffix} & \textbf{Contents and interpretation} \\

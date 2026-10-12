@@ -146,6 +146,7 @@ Building upon the counterfactual edit methodology pioneered by Atanasova et al.~
 
 Consistent with the terminology established in Section~\ref{sec:applying_definitions}, the authors define faithfulness as the alignment between the concepts that truly influence a model's prediction and the importance the model assigns to those same concepts within its own explanation. To estimate causal influence, an auxiliary LLM $\mathcal{A}$ generates counterfactuals by replacing or removing concept values in the original input. $\mathcal{A}$ need not be the same model as $\mathcal{M}$, and for the reasons discussed in Section~\ref{sec:matton_limitations} it should preferably differ from it. Following the correlational approach of Siegel et al.~\cite{siegelProbabilitiesAlsoMatter2024}, prediction distributions of the LLM under evaluation $\mathcal{M}$ are then collected for both original and counterfactual questions to estimate the true causal effect. Subsequently, helper model $\mathcal{A}$ extracts the concepts identified as important in the explanation, enabling the calculation of the explanation-implied effect. The Pearson correlation coefficient between these true causal effects and explanation-implied effects serves as the final faithfulness score.
 \subsection{Mathematical Foundation}
+\label{sec:mathematical_foundation}
 The following subsections introduce the problem setting and notation before defining both effects and combining them into question- and dataset-level faithfulness scores.
 
 \subsubsection{Problem Setting}
@@ -301,7 +302,7 @@ Figure~\ref{fig:matton_evaluation_pipeline} consolidates the individual stages d
 \begin{figure}[p]
 	\centering
 	\includestandalone[mode=buildnew, width=0.95\textwidth, height=0.78\textheight, keepaspectratio]{graphs/matton_evaluation_pipeline}
-	\caption{Overview of the evaluation pipeline proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}.}
+	\caption[Evaluation pipeline proposed by Matton et al.]{Overview of the evaluation pipeline proposed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}.}
 	\label{fig:matton_evaluation_pipeline}
 \end{figure}
 \FloatBarrier

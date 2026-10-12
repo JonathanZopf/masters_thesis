@@ -14,7 +14,7 @@ Failure to establish equivalence does not, by itself, demonstrate that the imple
 
 \begin{table}[htb]
   \centering
-  \caption{Complementary two-sided paired-difference tests for the RQ2 comparisons. The CE outcome uses the symmetric relative difference, whereas faithfulness uses the absolute-scale difference.}
+  \caption[RQ2: paired-difference tests of CE and faithfulness]{Complementary two-sided paired-difference tests for the RQ2 comparisons. $\bar d$ is the mean paired difference, taken as the symmetric relative difference for CE and on the absolute scale for faithfulness.}
   \label{tab:hyp2-difference-tests}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -49,7 +49,7 @@ As a reference for this disagreement, two FELICS runs that both rely only on sin
       extra code={\ResultScatterClippedPoints{90}{(-0.96,0.21) (-0.96,0.23)}}
     }}%
     {RQ2, New German Credit with GPT-OSS 120B: faithfulness}%
-    {Question-level faithfulness of FELICS with $n_{\max}=1$ and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
+    {Question-level faithfulness of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
     {fig:rq2-f-credit-gptoss}%
   \hfill
   \ResultFigureHalf{%
@@ -58,7 +58,7 @@ As a reference for this disagreement, two FELICS runs that both rely only on sin
       ymin=0, ymax=1.1
     }}%
     {RQ2, New German Credit with Mistral Medium 3.5: question-averaged CE}%
-    {Question-averaged causal effects of FELICS with $n_{\max}=1$ and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$).}%
+    {Question-averaged CE of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$).}%
     {fig:rq2-ce-credit-mistral}%
 \end{figure}
 

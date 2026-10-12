@@ -752,9 +752,9 @@ OUTPUT main.toc
 INPUT ./main.lof
 INPUT ./main.lof
 INPUT main.lof
+INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
-INPUT /usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 OUTPUT main.lof
 INPUT ./main.lot
 INPUT ./main.lot
