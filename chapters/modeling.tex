@@ -10,7 +10,7 @@ Accounting for concept interactions first requires deciding which concepts shoul
 
 \subsection{Motivation for Interaction Presumption}
 \label{sec:correlation_identification_motivation}
-In principle, all concepts of a question could be treated as candidates for interaction and grouped into a single set. In particular, \reqref{req:independence_behavior}, introduced in Section~\ref{sec:requirements}, demands that their individual causal effects remain identical to those obtained when they are treated as singletons if their effects are additive. Consequently, even a single joint-intervention group spanning all concepts of a question would, in the absence of response-level interaction, yield a faithfulness score identical to that of the original Causal Concept Faithfulness Metric, thereby fulfilling this additivity-compatibility requirement.
+In principle, all concepts of a question could be treated as candidates for interaction and grouped into a single set, so that no interaction would be missed.
 
 Pursuing this argument to its conclusion, however, conflicts with \reqref{req:feasibility}, also introduced in Section~\ref{sec:requirements}: for questions with many concepts, jointly intervening on the entire set at once is computationally infeasible. To still attribute the resulting effects at the level of individual concepts, subgroups ranging from each concept in isolation up to the full set would additionally need to be tested. Generating counterfactuals and collecting responses for the entire power set of concepts naturally leads to a runtime complexity of $O(2^M)$, where $M$ again denotes the number of concepts present in the question. This quickly exhausts computational resources, motivating the need to partition the concept set into smaller subsets prior to evaluation.
 
@@ -199,7 +199,7 @@ Naive approaches exist, such as computing the average effect of a concept across
 
 With the general Shapley formulation for allotting payout between players already defined in Equation~\ref{eq:shapley}, two application-specific questions remain: how the value function $v$ should be defined for causal effects, and how the resulting allocation can be integrated into FELICS.
 
-It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so supports \reqrefs{req:one_item_group}{req:independence_behavior}, formulated in Section~\ref{sec:requirements}. However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $\mathrm{CE}(\mathbf{x},C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
+It is natural to build on Equation~\ref{eq:ce} for estimating the causal effect, as doing so supports \reqref{req:one_item_group}, formulated in Section~\ref{sec:requirements}. However, this equation has so far only been defined for a single intervened concept. Moreover, Section~\ref{sec:shapley_motivation} already established the decision not to change the method signature $\mathrm{CE}(\mathbf{x},C_m)$: the causal effect should remain defined for a single concept. The solution is therefore to split the equation into two parts: the right-hand side of Equation~\ref{eq:ce} is repurposed as the value function of the Shapley game, and the resulting CE value is obtained as the payout allotted to the concept by the Shapley function.
 
 The value function must be adapted slightly to support joint interventions on multiple concepts. First, let $T$ be a set of concepts, and let $\mathbb{C}_i$ denote the set of all possible values for a concept $C_i \in T$. The corresponding \emph{joint-value domain}, denoted by $\mathbb{T}$, is the Cartesian product of these individual value sets, $\mathbb{T} = \prod_{C_i \in T} \mathbb{C}_i$. Thus, $t \in \mathbb{T}$ denotes the tuple of the original values of the concepts in $T$, i.e., $t = (c_i)_{C_i \in T}$. The counterfactual joint-value domain is defined as
 \begin{equation}
@@ -359,7 +359,7 @@ Substituting $v_{\mathrm{adj},\mathbf{x}}$ for $v_{\mathbf{x}}$ in Equation~\ref
 \end{equation}
 which replaces $\mathrm{CE}(\mathbf{x},C_m,s)$ from this point onward in populating the causal-effect vector $\mathbf{CE}(\mathbf{x},\mathbf{C})$ of Equation~\ref{eq:new_ce_vector}.
 
-In summary, the correction is designed to reduce the systematic, reference-relative scale distortion observed for multi-concept treatments while retaining deviations that may reflect interaction effects (Section~\ref{sec:interaction_effects}). Provided that same-sized references adequately represent the population's joint and aggregate singleton effects and yield non-degenerate coefficients, the correction is additionally intended to approximately preserve the original metric's dataset-average CE score, as established in Math Demo~\ref{ma:dataset_average_preservation}.
+In summary, the correction is designed to reduce the systematic, reference-relative scale distortion observed for multi-concept treatments while retaining deviations that may reflect interaction effects (Section~\ref{sec:interaction_effects}).
 
 \section{Remaining Evaluation Pipeline}
 \label{sec:remaining_pipeline}
@@ -381,7 +381,7 @@ and that of FELICS, which populates the CE vector of Equation~\ref{eq:new_ce_vec
 	\label{eq:faithfulness_felics}
 	\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x}) := \mathrm{PCC}\left(\mathbf{CE}_{\mathrm{adj}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
 \end{equation}
-Because the Pearson correlation coefficient depends on the magnitudes of the CE values, both scores generally differ whenever FELICS alters individual effects (see Example~\ref{ex:payout_normalization_correlation}). They coincide under the singleton-group and reference-relative additivity conditions of \reqrefs{req:one_item_group}{req:independence_behavior}. By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
+Because the Pearson correlation coefficient depends on the magnitudes of the CE values, both scores generally differ whenever FELICS alters individual effects (see Example~\ref{ex:payout_normalization_correlation}). They coincide when every candidate interaction group is a singleton (\reqref{req:one_item_group}). By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
 
 \section{Post-Modeling Assessment}
 With the formal construction of FELICS complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the requirements established earlier in Section \ref{sec:requirements}, and derives the effects expected from the new formulation before empirical evaluation.
@@ -401,7 +401,7 @@ The diagram is organized into three columns. The left column contains the origin
 
 \subsection{Reexamination of Requirements}
 \label{sec:requirements_reexamination}
-Section~\ref{sec:requirements} introduced six requirements that the proposed extension should satisfy. They cover preservation of the original metric's strengths (\reqref{req:preserving_strengths}), backward compatibility for singleton groups and additive effects (\reqrefs{req:one_item_group}{req:independence_behavior}), the two central aspects of the Correlated Concepts Problem (\reqrefs{req:no_surgical}{req:caputure_interaction}), and practical computational feasibility (\reqref{req:feasibility}).
+Section~\ref{sec:requirements} introduced five requirements that the proposed extension should satisfy. They cover preservation of the original metric's strengths (\reqref{req:preserving_strengths}), backward compatibility with the original metric (\reqref{req:one_item_group}), the two central aspects of the Correlated Concepts Problem (\reqrefs{req:no_surgical}{req:caputure_interaction}), and practical computational feasibility (\reqref{req:feasibility}).
 
 At this stage, the conceptual design of FELICS is complete, whereas its empirical evaluation using a reference implementation is presented in the following chapter. It is therefore appropriate to revisit these requirements and assess whether they are satisfied by the theoretical construction of the proposed framework.
 
@@ -411,13 +411,19 @@ At this stage, the conceptual design of FELICS is complete, whereas its empirica
 
 \subsubsection{\ref{req:one_item_group} Singleton-Group Compatibility}
 
-\reqref{req:one_item_group} states that whenever every candidate interaction group contains exactly one concept, the resulting causal-effect estimates should be identical to those obtained by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. This follows directly from the properties of the normalization factor and the Shapley-value formulation, as established extensively in Math Demo~\ref{ma:one_item_group}.
+\reqref{req:one_item_group} states that whenever every candidate interaction group contains exactly one concept, the resulting causal-effect estimates should be identical to those obtained by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. This follows directly from the payout coefficient and the Shapley-value formulation, as Math Demo~\ref{ma:one_item_group} shows.
 
-\subsubsection{\ref{req:independence_behavior} Additivity Compatibility}
-
-\reqref{req:independence_behavior} considers the more general case in which concepts are grouped together but have no substantive response-level interaction. The nonlinear mapping from logits to probabilities discussed in Section~\ref{sec:kl_ceiling} means that even such concepts need not satisfy $v_{\mathbf{x}}(s)=\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ exactly on the probability-based effect scale.
-
-The normalization proposed in Section~\ref{sec:shapley_correction} therefore uses \emph{reference-relative additivity}: a candidate interaction group is neutral relative to the dataset when its payout coefficient equals the singleton-weighted reference coefficient of equally sized treatments. This condition is distinct from absolute additivity, which would require a payout coefficient of exactly $1$. Under additional reference-relative additivity and other assumptions, Math Demo~\ref{ma:independence_behavior} indicates that no additional interaction effect is attributed to the group and the resulting causal-effect estimates coincide with those of the original metric.
+\begin{math_box}[label=ma:one_item_group]
+	Let every candidate interaction group consist of a single concept, $s=\{C_m\}$. Its only non-empty treatment is $T=s$, so the payout coefficient of Equation~\ref{eq:payout_coefficient} is $\gamma(\mathbf{x},s)=v_{\mathbf{x}}(\{C_m\})/v_{\mathbf{x}}(\{C_m\})=1$. All reference treatments have the same size and therefore also a coefficient of $1$, so $\bar\gamma(\mathbf{x},s,s)=1$ and $v_{\mathrm{adj},\mathbf{x}}(\{C_m\})=v_{\mathbf{x}}(\{C_m\})$. In the Shapley sum of Equation~\ref{eq:ce_adj}, the only coalition is $T=\emptyset$ with weight $0!\,0!/1!=1$, and $v_{\mathrm{adj},\mathbf{x}}(\emptyset)=0$. Hence
+	\begin{equation}
+		\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,\{C_m\})
+		=
+		v_{\mathbf{x}}(\{C_m\})
+		=
+		\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m),
+	\end{equation}
+	which is the causal effect of Matton et al.~\cite{mattonWalkTalkMeasuring2024} in Equation~\ref{eq:ce}. Because the EE vector and the faithfulness definition (Equations~\ref{eq:ee} and~\ref{eq:faithfulness}) are unchanged, both metrics coincide in this case.
+\end{math_box}
 
 \subsubsection{\ref{req:no_surgical} Avoiding the Assumption of Surgical Interventions}
 

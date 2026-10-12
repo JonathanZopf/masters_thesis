@@ -579,9 +579,6 @@ INPUT appendix/additional_result_visualizations.aux
 INPUT ./appendix/examples.aux
 INPUT ./appendix/examples.aux
 INPUT appendix/examples.aux
-INPUT ./appendix/mathematical_demonstrations.aux
-INPUT ./appendix/mathematical_demonstrations.aux
-INPUT appendix/mathematical_demonstrations.aux
 INPUT ./appendix/prompts.aux
 INPUT ./appendix/prompts.aux
 INPUT appendix/prompts.aux
@@ -1520,14 +1517,6 @@ INPUT ./appendix/examples.tex
 INPUT appendix/examples.tex
 INPUT appendix/examples.tex
 INPUT appendix/examples.tex
-INPUT ./appendix/mathematical_demonstrations.tex
-INPUT ./appendix/mathematical_demonstrations.tex
-OUTPUT appendix/mathematical_demonstrations.aux
-INPUT ./appendix/mathematical_demonstrations.tex
-INPUT ./appendix/mathematical_demonstrations.tex
-INPUT appendix/mathematical_demonstrations.tex
-INPUT appendix/mathematical_demonstrations.tex
-INPUT appendix/mathematical_demonstrations.tex
 INPUT ./appendix/prompts.tex
 INPUT ./appendix/prompts.tex
 OUTPUT appendix/prompts.aux
@@ -1640,9 +1629,6 @@ INPUT appendix/additional_result_visualizations.aux
 INPUT ./appendix/examples.aux
 INPUT ./appendix/examples.aux
 INPUT appendix/examples.aux
-INPUT ./appendix/mathematical_demonstrations.aux
-INPUT ./appendix/mathematical_demonstrations.aux
-INPUT appendix/mathematical_demonstrations.aux
 INPUT ./appendix/prompts.aux
 INPUT ./appendix/prompts.aux
 INPUT appendix/prompts.aux
