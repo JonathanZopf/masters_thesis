@@ -1,6 +1,6 @@
 INFO:  latexindent version 4.0, 2026-03-15, a script to indent .tex files
        latexindent lives here: /usr/local/texlive/2026/texmf-dist/scripts/latexindent/
-       Mon Oct 12 20:42:47 2026
+       Mon Oct 12 22:21:26 2026
        Filenames:
           declaration_of_originality.tex
           list_of_symbols.tex
@@ -127,7 +127,8 @@ INFO:  Backup procedure (-w flag active):
        ./declaration_of_originality.bak103 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./declaration_of_originality.bak104 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./declaration_of_originality.bak105 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up declaration_of_originality.tex to ./declaration_of_originality.bak106...
+       ./declaration_of_originality.bak106 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up declaration_of_originality.tex to ./declaration_of_originality.bak107...
        declaration_of_originality.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file declaration_of_originality.tex
@@ -238,7 +239,8 @@ INFO:  Backup procedure (-w flag active):
        ./list_of_symbols.bak102 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./list_of_symbols.bak103 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./list_of_symbols.bak104 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up list_of_symbols.tex to ./list_of_symbols.bak105...
+       ./list_of_symbols.bak105 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up list_of_symbols.tex to ./list_of_symbols.bak106...
        list_of_symbols.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file list_of_symbols.tex
@@ -347,7 +349,8 @@ INFO:  Backup procedure (-w flag active):
        ./main.bak100 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./main.bak101 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./main.bak102 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up main.tex to ./main.bak103...
+       ./main.bak103 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up main.tex to ./main.bak104...
        main.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file main.tex
@@ -438,7 +441,8 @@ INFO:  Backup procedure (-w flag active):
        ./statement_on_generative_ai.bak82 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./statement_on_generative_ai.bak83 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./statement_on_generative_ai.bak84 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up statement_on_generative_ai.tex to ./statement_on_generative_ai.bak85...
+       ./statement_on_generative_ai.bak85 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up statement_on_generative_ai.tex to ./statement_on_generative_ai.bak86...
        statement_on_generative_ai.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file statement_on_generative_ai.tex
@@ -473,7 +477,8 @@ INFO:  Backup procedure (-w flag active):
        ./table_of_abbreviations.bak26 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./table_of_abbreviations.bak27 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./table_of_abbreviations.bak28 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up table_of_abbreviations.tex to ./table_of_abbreviations.bak29...
+       ./table_of_abbreviations.bak29 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up table_of_abbreviations.tex to ./table_of_abbreviations.bak30...
        table_of_abbreviations.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file table_of_abbreviations.tex
@@ -582,7 +587,8 @@ INFO:  Backup procedure (-w flag active):
        ./title_page.bak100 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./title_page.bak101 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./title_page.bak102 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up title_page.tex to ./title_page.bak103...
+       ./title_page.bak103 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up title_page.tex to ./title_page.bak104...
        title_page.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file title_page.tex

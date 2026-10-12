@@ -1,6 +1,6 @@
 INFO:  latexindent version 4.0, 2026-03-15, a script to indent .tex files
        latexindent lives here: /usr/local/texlive/2026/texmf-dist/scripts/latexindent/
-       Mon Oct 12 20:43:23 2026
+       Mon Oct 12 22:22:02 2026
        Filenames:
           chapters/appendix 2.tex
           chapters/appendix.tex
@@ -161,7 +161,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/appendix 2.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/appendix 2.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/appendix 2.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/appendix 2.tex to chapters/appendix 2.bak131...
+       chapters/appendix 2.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/appendix 2.tex to chapters/appendix 2.bak132...
        chapters/appendix 2.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/appendix 2.tex
@@ -298,7 +299,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/appendix.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/appendix.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/appendix.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/appendix.tex to chapters/appendix.bak131...
+       chapters/appendix.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/appendix.tex to chapters/appendix.bak132...
        chapters/appendix.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/appendix.tex
@@ -435,7 +437,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/background.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/background.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/background.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/background.tex to chapters/background.bak131...
+       chapters/background.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/background.tex to chapters/background.bak132...
        chapters/background.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/background.tex
@@ -554,7 +557,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/conclusion 2.bak110 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/conclusion 2.bak111 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/conclusion 2.bak112 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/conclusion 2.tex to chapters/conclusion 2.bak113...
+       chapters/conclusion 2.bak113 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/conclusion 2.tex to chapters/conclusion 2.bak114...
        chapters/conclusion 2.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/conclusion 2.tex
@@ -689,7 +693,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/conclusion.bak126 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/conclusion.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/conclusion.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/conclusion.tex to chapters/conclusion.bak129...
+       chapters/conclusion.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/conclusion.tex to chapters/conclusion.bak130...
        chapters/conclusion.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/conclusion.tex
@@ -808,7 +813,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/discussion 2.bak110 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/discussion 2.bak111 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/discussion 2.bak112 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/discussion 2.tex to chapters/discussion 2.bak113...
+       chapters/discussion 2.bak113 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/discussion 2.tex to chapters/discussion 2.bak114...
        chapters/discussion 2.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/discussion 2.tex
@@ -943,7 +949,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/discussion.bak126 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/discussion.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/discussion.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/discussion.tex to chapters/discussion.bak129...
+       chapters/discussion.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/discussion.tex to chapters/discussion.bak130...
        chapters/discussion.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/discussion.tex
@@ -1079,7 +1086,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/evaluation.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/evaluation.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/evaluation.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/evaluation.tex to chapters/evaluation.bak130...
+       chapters/evaluation.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/evaluation.tex to chapters/evaluation.bak131...
        chapters/evaluation.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/evaluation.tex
@@ -1215,7 +1223,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/introduction.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/introduction.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/introduction.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/introduction.tex to chapters/introduction.bak130...
+       chapters/introduction.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/introduction.tex to chapters/introduction.bak131...
        chapters/introduction.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/introduction.tex
@@ -1348,7 +1357,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/modeling.bak124 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/modeling.bak125 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/modeling.bak126 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/modeling.tex to chapters/modeling.bak127...
+       chapters/modeling.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/modeling.tex to chapters/modeling.bak128...
        chapters/modeling.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/modeling.tex
@@ -1456,7 +1466,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/problem_identification.bak99 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/problem_identification.bak100 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/problem_identification.bak101 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/problem_identification.tex to chapters/problem_identification.bak102...
+       chapters/problem_identification.bak102 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/problem_identification.tex to chapters/problem_identification.bak103...
        chapters/problem_identification.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/problem_identification.tex
@@ -1479,7 +1490,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/research_questions.bak14 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/research_questions.bak15 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/research_questions.bak16 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/research_questions.tex to chapters/research_questions.bak17...
+       chapters/research_questions.bak17 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/research_questions.tex to chapters/research_questions.bak18...
        chapters/research_questions.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/research_questions.tex
@@ -1569,7 +1581,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/results 2.bak81 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/results 2.bak82 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/results 2.bak83 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/results 2.tex to chapters/results 2.bak84...
+       chapters/results 2.bak84 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/results 2.tex to chapters/results 2.bak85...
        chapters/results 2.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/results 2.tex
@@ -1675,7 +1688,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/results.bak97 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/results.bak98 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/results.bak99 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/results.tex to chapters/results.bak100...
+       chapters/results.bak100 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/results.tex to chapters/results.bak101...
        chapters/results.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/results.tex
@@ -1783,7 +1797,8 @@ INFO:  Backup procedure (-w flag active):
        chapters/theoretical_conception.bak99 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/theoretical_conception.bak100 already exists, incrementing by 1 (see maxNumberOfBackUps)
        chapters/theoretical_conception.bak101 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up chapters/theoretical_conception.tex to chapters/theoretical_conception.bak102...
+       chapters/theoretical_conception.bak102 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up chapters/theoretical_conception.tex to chapters/theoretical_conception.bak103...
        chapters/theoretical_conception.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file chapters/theoretical_conception.tex

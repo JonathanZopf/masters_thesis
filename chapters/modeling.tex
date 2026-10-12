@@ -263,9 +263,9 @@ Equations~\ref{eq:new_ce} and \ref{eq:new_ce_vector} technically complete the ev
 
 The Shapley Efficiency axiom (Section~\ref{sec:shapley_fundamentals}) makes the scale of the joint value relevant to every allocated effect: the sum of payouts to all concepts in $s$ equals $v_{\mathbf{x}}(s)$, the joint effect of intervening on the entire group at once. Whenever this joint value is smaller than the sum of the corresponding singleton values, the shortfall is distributed across the individual payouts $\mathrm{CE}(\mathbf{x},C_m,s)$. Empirically, this pattern occurs systematically on average in the considered setting, although its direction and magnitude may differ for individual groups, particularly when genuine redundancy or synergy is present.
 
-Intuitively, probability space does not permit direct addition of separately normalized outputs. Suppose that intervening on Concept A alone shifts the model's predicted probability of outcome $b$ from $50\%$ to $80\%$, and that intervening on Concept B alone produces the same shift. Adding the two resulting probabilities would yield $160\%$, while adding the two isolated shifts to the baseline would yield $110\%$; neither is a valid probability. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space.
+Intuitively, probability space does not permit direct addition of separately normalized outputs. The actual joint intervention must instead produce a newly normalized distribution. This establishes non-additivity in probability space.
 
-One major structural source of this non-additivity is the Bayesian hierarchical modeling step presented by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in Appendix C.2 of their work. To reconstruct a probability distribution vector from sampled realizations of the answer variable $Y$, they employ a softmax function. Let $I$ denote the intervention condition under which responses are sampled, and let $\theta_{y\mid I}$ denote the logit assigned to answer option $y$ under that condition. Each scalar probability component is assembled as
+One major structural source of this non-additivity is the Bayesian hierarchical modeling step presented by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their work. To reconstruct a probability distribution vector from sampled realizations of the answer variable $Y$, they employ a softmax function. Let $I$ denote the intervention condition under which responses are sampled, and let $\theta_{y\mid I}$ denote the logit assigned to answer option $y$ under that condition. Each scalar probability component is assembled as
 \begin{equation}\label{eq:culprit_softmax}
 	p_{y\mid I} = \frac{e^{\theta_{y\mid I}}}{\sum_{y' \in \mathcal{Y}} e^{\theta_{y'\mid I}}}, \qquad y \in \mathcal{Y},
 \end{equation}
@@ -273,7 +273,21 @@ and the complete vector is $\mathbf{p}_{I}:=(p_{y\mid I})_{y\in\mathcal{Y}}$. It
 
 Because of this strict normalization, the probability distribution resulting from a joint intervention cannot equal the sum of the distributions from individual interventions. If one were to naively add the isolated resulting distributions of an intervention on Concept A and an intervention on Concept B, the sum over the prediction space would equal $2$. Since any valid probability distribution must sum to exactly $1$, the joint intervention is inherently non-additive in probability space.
 
-Beyond this extreme case of distributions summing to $2$, the nonlinear mapping from logits to probabilities means that additive changes in logit space need not remain additive in probability space. Example~\ref{ex:softmax_ceiling} illustrates one subadditive instance of this mechanism, in which two concepts with additive logit contributions that individually shift a prediction by $+20\%$ and $+30\%$ yield a joint probability shift of only $+44\%$, rather than the naive additive sum of $+50\%$. This example does not establish universal subadditivity: depending on the intervention and on genuine concept interactions, a joint effect may also equal or exceed the sum of singleton effects.
+Beyond this extreme case of distributions summing to $2$, the nonlinear mapping from logits to probabilities means that additive changes in logit space need not remain additive in probability space. Example~\ref{ex:softmax_ceiling} illustrates one subadditive instance of this mechanism. It does not establish universal subadditivity: depending on the intervention and on genuine concept interactions, a joint effect may also equal or exceed the sum of singleton effects.
+
+\begin{example_box}[label=ex:softmax_ceiling]
+	\textbf{Setup:} Two answer options $\mathcal{Y}=\{y_1,y_2\}$ have the baseline logits $\theta_{y_1}=\ln 4$ and $\theta_{y_2}=\ln 6$, so Equation~\ref{eq:culprit_softmax} gives $p_{y_1}=4/(4+6)=40\%$. Interventions act additively in logit space. An intervention on concept $C_1$ adds $\ln 2.25$ to $\theta_{y_1}$, and one on $C_2$ adds $\ln 3.5$.
+
+	\smallskip
+	\textbf{Effects on $p_{y_1}$:}
+	\begin{align*}
+		C_1 \text{ alone:}    & \quad \tfrac{4\cdot 2.25}{4\cdot 2.25+6}=\tfrac{9}{15}=60\%,        &  & +20\%, \\
+		C_2 \text{ alone:}    & \quad \tfrac{4\cdot 3.5}{4\cdot 3.5+6}=\tfrac{14}{20}=70\%,         &  & +30\%, \\
+		C_1 \text{ and } C_2: & \quad \tfrac{4\cdot 7.875}{4\cdot 7.875+6}=\tfrac{31.5}{37.5}=84\%, &  & +44\%.
+	\end{align*}
+
+	\textbf{Conclusion:} The two logit contributions add up exactly, yet the joint shift of $+44\%$ falls short of the additive sum of $+50\%$, because the softmax denominator grows with the joint logit.
+\end{example_box}
 
 Because the joint effect serves as the basis for calculating individual payouts, systematic non-additivity can create a reference-relative scale difference between singleton and multi-concept treatments. The observed average tendency $v_{\mathbf{x}}(s)<\sum_{C_m\in s}v_{\mathbf{x}}(\{C_m\})$ motivates a normalization, but is not imposed as a universal inequality. Rather than removing the softmax function or altering the Bayesian sampling process, the proposed normalization estimates the typical non-additivity of comparable treatments and adjusts against that reference level.
 
@@ -382,6 +396,24 @@ and that of FELICS, which populates the CE vector of Equation~\ref{eq:new_ce_vec
 	\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x}) := \mathrm{PCC}\left(\mathbf{CE}_{\mathrm{adj}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
 \end{equation}
 Because the Pearson correlation coefficient depends on the magnitudes of the CE values, both scores generally differ whenever FELICS alters individual effects (see Example~\ref{ex:payout_normalization_correlation}). They coincide when every candidate interaction group is a singleton (\reqref{req:one_item_group}). By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
+
+\begin{example_box}[label=ex:payout_normalization_correlation]
+	\textbf{Setup:} Five concepts have the same answer-distribution changes under both methods. To isolate the effect of normalization, the adjusted values are assumed directly rather than derived from joint interventions:
+	\begin{gather*}
+		\mathbf{CE}_{\mathrm{Matton}}=[1,\,1,\,1,\,1,\,2], \qquad \mathbf{CE}_{\mathrm{adj}}=[1.1,\,0.8,\,0.9,\,0.8,\,2.4], \\
+		\mathbf{EE}=[1.0,\,0.5,\,1.0,\,1.0,\,2.0].
+	\end{gather*}
+	Both CE vectors sum to $6$ and therefore share the mean $1.2$.
+
+	\smallskip
+	\textbf{Result:} The covariances with $\mathbf{EE}$ are $0.18$ and $0.28$, the CE variances are $0.16$ and $0.372$, and the EE variance is $0.24$. Hence
+	\begin{equation*}
+		\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})=\frac{0.18}{\sqrt{0.16\cdot 0.24}}\approx 0.919, \qquad
+		\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x})=\frac{0.28}{\sqrt{0.372\cdot 0.24}}\approx 0.937.
+	\end{equation*}
+
+	\textbf{Conclusion:} Normalization keeps the mean CE but changes how the values spread around it, so the faithfulness score changes as well.
+\end{example_box}
 
 \section{Post-Modeling Assessment}
 With the formal construction of FELICS complete, this section consolidates the proposed changes and assesses their theoretical consequences. It compares the updated and original pipelines, revisits the requirements established earlier in Section \ref{sec:requirements}, and derives the effects expected from the new formulation before empirical evaluation.
