@@ -97,12 +97,7 @@ For each dataset and evaluated model, three runs supply the causal-effect result
 
 Here, $\mathrm{CE}_{\mathrm{Matton}}(\mathbf{x},C_m)$ denotes the estimate obtained with the original causal-effect formula in Equation~\ref{eq:ce}. The quantity $\mathrm{CE}_{\mathrm{singleton}}(\mathbf{x},C_m)$ is calculated using Equation~\ref{eq:ce_adj} with $s=\{C_m\}$ and the data collected in the separate $n_{\max}=1$ FELICS run. The term \emph{singleton} thus identifies a separately collected condition, whereas \emph{atomic} identifies a calculation within the joint run. Although both use the singleton-effect rule, their numerical estimates need not coincide because their input data differ.
 
-For the joint run, let $\mathbf{S}_{\mathbf{x}}$ be the fixed oracle partition used for question $\mathbf{x}$, and define
-\begin{equation}
-	\label{eq:evaluation_group_lookup}
-	f_{\mathbf{x}}(C_m) := \text{the unique }s\in\mathbf{S}_{\mathbf{x}}\text{ such that }C_m\in s.
-\end{equation}
-This helper retrieves an existing group; it does not query the oracle again. Using the value function in Equation~\ref{eq:value_function} and the adjusted Shapley definition in Equation~\ref{eq:ce_adj}, the two estimates from this run are
+For the joint run, the oracle partition $\mathbf{S}(\mathbf{x})$ of each question $\mathbf{x}$ is fixed. The helper $f_{\mathbf{x}}(C_m)$ from Equation~\ref{eq:group_lookup} returns the group of $C_m$ in this fixed partition and does not query the oracle again. Using the value function in Equation~\ref{eq:value_function} and the adjusted Shapley definition in Equation~\ref{eq:ce_adj}, the two estimates from this run are
 \begin{align}
 	\label{eq:evaluation_ce_atomic}
 	\mathrm{CE}_{\mathrm{atomic}}(\mathbf{x},C_m)
@@ -120,12 +115,12 @@ All quantities on the right-hand sides use data from the joint run. The singleto
 \begin{align}
 	\label{eq:evaluation_f_atomic}
 	\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})
-	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right), \\
+	 & :=\mathrm{PCC}\left(\mathbf{CE}_{\mathrm{atomic}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right), \\
 	\label{eq:evaluation_f_joint}
 	\mathcal{F}_{\mathrm{joint}}(\mathbf{x})
-	 & :=\operatorname{PCC}\!\left(\mathbf{CE}_{\mathrm{joint}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
+	 & :=\mathrm{PCC}\left(\mathbf{CE}_{\mathrm{joint}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
 \end{align}
-Both are instances of $\mathcal{F}_{\mathrm{FELICS}}$: $\mathcal{F}_{\mathrm{atomic}}$ restricts every concept to its singleton group, whereas $\mathcal{F}_{\mathrm{joint}}$ uses the oracle partition $\mathbf{S}_{\mathbf{x}}$. As for all quantities in this section, the reported values are Bayesian posterior estimates of these definitions, obtained with $\mathbf{EE}(\mathbf{x},\mathbf{C})$ held fixed.
+Both are instances of $\mathcal{F}_{\mathrm{FELICS}}$: $\mathcal{F}_{\mathrm{atomic}}$ restricts every concept to its singleton group, whereas $\mathcal{F}_{\mathrm{joint}}$ uses the oracle partition $\mathbf{S}(\mathbf{x})$. As for all quantities in this section, the reported values are Bayesian posterior estimates of these definitions, obtained with $\mathbf{EE}(\mathbf{x},\mathbf{C})$ held fixed.
 Reusing these data isolates the change in causal-effect estimation from variation between separately sampled runs. Research Questions~\ref{rq:correlation_diff} and~\ref{rq:faithfulness_increase}, as well as the case study in Section~\ref{sec:motivating_methodology}, use this atomic--joint comparison. Research Question~\ref{rq:convergence} compares $\mathrm{CE}_{\mathrm{Matton}}$ with $\mathrm{CE}_{\mathrm{singleton}}$ from the separately executed implementations. Research Question~\ref{rq:ranking} instead examines normalization by comparing raw and adjusted Shapley effects, defined in its own subsection below.
 
 \subsection{Interaction-Presumption Strength and Causal-Effect Changes}
@@ -135,9 +130,9 @@ This subsection operationalizes \rqref{rq:correlation_diff}, introduced in Chapt
 
 \noindent\textbf{Operationalization.} For every question $\mathbf{x}$ with concept set $\mathbf{C}$, the interaction-presumption strength under configuration $n_{\max}$ is defined as
 \begin{equation}
-	\kappa(\mathbf{x}, n_{\max}) := \frac{1}{|\mathbf{C}|} \sum_{s \,\in\, \mathcal{O}(\mathbf{x},\mathbf{C},n_{\max})} \ \sum_{\emptyset \neq T \subseteq s} |T|,
+	\kappa(\mathbf{x}, n_{\max}) := \frac{1}{|\mathbf{C}|} \sum_{s \,\in\, \mathbf{S}(\mathbf{x})} \ \sum_{\emptyset \neq T \subseteq s} |T|,
 \end{equation}
-that is, the total number of concept occurrences across all non-empty treatments evaluated for $\mathbf{x}$, normalized by the number of concepts $|\mathbf{C}|$. Thus, $\kappa$ summarizes the extent of joint treatment implied by the oracle partition; it is not an association coefficient and does not establish interaction in the model response. Since every candidate interaction group is a singleton under the atomic configuration, $\kappa(\mathbf{x},1)=1$ analytically for every question; hence only $\kappa(\mathbf{x},4)$ must be calculated from the joint run. The difference in interaction-presumption strength is denoted by $\Delta\kappa(\mathbf{x}) := |\kappa(\mathbf{x},4)-1|$.
+where $\mathbf{S}(\mathbf{x})=\mathcal{O}(\mathbf{x},\mathbf{C},n_{\max})$ is the partition from a single oracle invocation for $\mathbf{x}$, which is stored and reused instead of querying the oracle again. The value $\kappa(\mathbf{x},n_{\max})$ is the total number of concept occurrences across all non-empty treatments evaluated for $\mathbf{x}$, normalized by the number of concepts $|\mathbf{C}|$. Thus, $\kappa$ summarizes the extent of joint treatment implied by the oracle partition; it is not an association coefficient and does not establish interaction in the model response. Since every candidate interaction group is a singleton under the atomic configuration, $\kappa(\mathbf{x},1)=1$ analytically for every question; hence only $\kappa(\mathbf{x},4)$ must be calculated from the joint run. The difference in interaction-presumption strength is denoted by $\Delta\kappa(\mathbf{x}) := |\kappa(\mathbf{x},4)-1|$.
 
 Using $\mathrm{CE}_{\mathrm{atomic}}$ and $\mathrm{CE}_{\mathrm{joint}}$ as defined in Equations~\ref{eq:evaluation_ce_atomic} and~\ref{eq:evaluation_ce_joint}, the question-level CE difference averaged across all concepts $\mathbf{C}$ in $\mathbf{x}$ is
 \begin{equation}
@@ -148,7 +143,7 @@ Taking the absolute difference before averaging prevents increases and decreases
 
 \noindent\textbf{Statistical procedure.} A table with one row per question is assembled containing $\Delta\kappa(\mathbf{x})$ and $\Delta \mathrm{CE}(\mathbf{x})$. The relationship between both columns is assessed using a one-sided Pearson correlation test with the alternative hypothesis that the correlation is positive. The procedure is repeated independently for each dataset and model. To evaluate the analogous relationship for faithfulness, the Bayesian faithfulness pipeline is applied separately to $\mathbf{CE}_{\mathrm{atomic}}$ and $\mathbf{CE}_{\mathrm{joint}}$, while holding $\mathbf{EE}$ fixed as specified in Section~\ref{sec:controlled_atomic_baseline}. The absolute difference between the resulting paired question-level scores, $\Delta\mathcal{F}(\mathbf{x}):=|\mathcal{F}_{\mathrm{joint}}(\mathbf{x})-\mathcal{F}_{\mathrm{atomic}}(\mathbf{x})|$, is then correlated with $\Delta\kappa(\mathbf{x})$.
 
-\noindent\textbf{Decision criterion.} Denoting the resulting Pearson correlation coefficient by $r_{\Delta}$, the hypothesis is considered supported for a given dataset and model if $r_{\Delta} \ge 0.10$ and $p \le 0.10$.
+\noindent\textbf{Decision criterion.} The hypothesis is considered supported for a given dataset and model if the resulting Pearson correlation coefficient satisfies $r \ge 0.10$ and $p \le 0.10$.
 
 \noindent\textbf{Applicability.} Fixing the joint configuration to $n_{\max}=4$ for BBQ and MedQA prevents the oracle's ability to form larger candidate interaction groups from being unnecessarily restricted, while keeping $n_{\max}$ identical across all questions of a dataset ensures that $\Delta\kappa(\mathbf{x})$ remains comparable. The procedure cannot be applied to New German Credit because its oracle produces a single, dataset-wide partition of concepts (Section~\ref{sec:oracle_tabular}) rather than a per-question grouping. Consequently, $\kappa(\mathbf{x},4)$ would be identical for every question, leaving no variance in $\Delta\kappa(\mathbf{x})$ against which to correlate $\Delta \mathrm{CE}(\mathbf{x})$.
 
@@ -161,15 +156,15 @@ This subsection operationalizes \rqref{rq:convergence}, introduced in Chapter~\r
 \end{equation}
 and analogously $\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})$, where $\mathbf{C}$ denotes the concept set identified for $\mathbf{x}$ in the respective run. The corresponding question-level faithfulness scores, $\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$ and $\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})$, follow the notation defined in Section~\ref{sec:controlled_atomic_baseline}.
 
-\noindent\textbf{Empirical agreement test.} Independently sampled runs can differ even when both implementations realize the same estimand. Paired Two One-Sided Tests (TOST) therefore assess whether such differences remain practically negligible. For each shared question, the symmetric relative CE difference with $\eta_{\mathrm{tol}} = 10^{-8}$ is
+\noindent\textbf{Empirical agreement test.} Independently sampled runs can differ even when both implementations realize the same estimand. Paired Two One-Sided Tests (TOST) therefore assess whether such differences remain practically negligible. For each shared question, the symmetric relative CE difference with $\nu = 10^{-8}$ is
 \begin{equation}
 	d_{\mathrm{CE}}(\mathbf{x}) :=
 	\frac{2\left(\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})-\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})\right)}
-	{\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})+\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})+\eta_{\mathrm{tol}}},
+	{\overline{\mathrm{CE}}_{\mathrm{singleton}}(\mathbf{x})+\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})+\nu},
 \end{equation}
 and the absolute-scale faithfulness difference is $d_{\mathcal{F}}(\mathbf{x}):=\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})-\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$. Equivalence margins of $\delta_{\mathrm{CE}}=0.1$ and $\delta_{\mathcal{F}}=0.1$ are used, corresponding to a symmetric relative CE difference of at most approximately $10\%$ and an absolute faithfulness-score difference of at most $0.1$. Whereas faithfulness is bounded within $[-1,1]$, causal effects have no such absolute scale, which motivates the relative CE difference.
 
-\noindent\textbf{Decision criterion.} Equivalence is considered supported for a dataset and model if the implementation-agreement test succeeds for both CE and faithfulness. This requires the one-sided TOST $p$-values to be below $0.05$ for $d_{\mathrm{CE}}$ within $[-\delta_{\mathrm{CE}},\delta_{\mathrm{CE}}]$ and for $d_{\mathcal{F}}$ within $[-\delta_{\mathcal{F}},\delta_{\mathcal{F}}]$.
+\noindent\textbf{Decision criterion.} Equivalence is considered supported for a dataset and model if the implementation-agreement test succeeds for both CE and faithfulness. This requires the one-sided TOST $p$-values to be at most $0.05$ for $d_{\mathrm{CE}}$ within $[-\delta_{\mathrm{CE}},\delta_{\mathrm{CE}}]$ and for $d_{\mathcal{F}}$ within $[-\delta_{\mathcal{F}},\delta_{\mathcal{F}}]$.
 
 \subsection{Preservation of Within-Question Concept Rankings}
 \label{sec:methodology-preservation}
@@ -177,11 +172,11 @@ This subsection operationalizes \rqref{rq:ranking}, introduced in Chapter~\ref{s
 
 \noindent\textbf{Scope and comparison.} Rank preservation is evaluated on joint interventions for every model on all three datasets: BBQ, MedQA, and New German Credit. $n_{\max}=4$ for BBQ and MedQA and $n_{\max}=3$ for New German Credit are used.
 
-\noindent\textbf{Operationalization.} For every concept-level observation, let $s=f_{\mathbf{x}}(C_m)\in\mathbf{S}_{\mathbf{x}}$ be the group assigned to $C_m$ in the fixed partition for question $\mathbf{x}$, using the lookup defined in Equation~\ref{eq:evaluation_group_lookup}. The raw Shapley causal effect is defined as
+\noindent\textbf{Operationalization.} For every concept-level observation, let $s=f_{\mathbf{x}}(C_m)\in\mathbf{S}(\mathbf{x})$ be the group assigned to $C_m$ in the fixed partition for question $\mathbf{x}$, using the lookup defined in Equation~\ref{eq:group_lookup}. The raw Shapley causal effect is defined as
 \begin{equation}
-	\mathrm{CE}_{\mathrm{raw}}(\mathbf{x},C_m,s) := \phi_m(v_{\mathbf{x}}),
+	\mathrm{CE}_{\mathrm{raw}}(\mathbf{x},C_m,s) := \mathrm{CE}(\mathbf{x},C_m,s),
 \end{equation}
-passing the question-specific unadjusted value function $v_{\mathbf{x}}$ into $\phi_m$ with player set $s$, which corresponds to the Shapley formulation of Equation~\ref{eq:shapley}. The raw value is paired with the adjusted Shapley causal effect $\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)$ from Equation~\ref{eq:ce_adj}. Both estimates use the same assigned group and the same sampled coalition values; only the payout-coefficient normalization differs. Those concepts are then appended to a dataset-level table. Consequently questions with more concepts contribute more observations; there is no equal weighting by question.
+the unadjusted Shapley effect of Equation~\ref{eq:new_ce}, which applies the Shapley formulation of Equation~\ref{eq:shapley} to the question-specific value function $v_{\mathbf{x}}$ with player set $s$. The raw value is paired with the adjusted Shapley causal effect $\mathrm{CE}_{\mathrm{adj}}(\mathbf{x},C_m,s)$ from Equation~\ref{eq:ce_adj}. Both estimates use the same assigned group and the same sampled coalition values; only the payout-coefficient normalization differs. Those concepts are then appended to a dataset-level table. Consequently questions with more concepts contribute more observations; there is no equal weighting by question.
 
 \noindent\textbf{Statistical procedure.} The correspondence between the raw and adjusted causal effects is assessed using a one-sided Spearman rank-correlation test with the alternative hypothesis that the correlation is positive.
 

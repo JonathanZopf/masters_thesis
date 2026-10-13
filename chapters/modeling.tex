@@ -17,14 +17,14 @@ Pursuing this argument to its conclusion, however, conflicts with \reqref{req:fe
 This partitioning cannot happen randomly, however, since concepts may interact; if plausible interaction candidates are not intervened upon jointly, their interaction effect cannot be measured. This motivates the introduction of an \emph{oracle} $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ that identifies concepts for which interaction is considered plausible and therefore prioritizes them for joint intervention. This judgment is an \emph{interaction presumption}, not a measurement of response-level interaction. The oracle takes as input a question $\mathbf{x} \in \mathbf{X}$ and the set of concepts $\mathbf{C}$ identified within $\mathbf{x}$, and returns a set of concept subsets $\mathbf{S}$. In addition, the oracle receives a parameter $n_{\max}$, the maximum number of concepts permitted within a single subset, which bounds the number of intervention combinations that the remainder of the evaluation pipeline must handle. Specifically, given $n_{\max}$ and the number of concepts $M$ present in $\mathbf{x}$, the number of counterfactuals to be generated and evaluated is bounded by
 \begin{equation}
 	\label{eq:subset_counterfactual_bound}
-	\sum_{i=1}^{\lceil M/n_{\max} \rceil} 2^{\min(n_{\max},\, M - (i-1)n_{\max})} - 1.
+	\sum_{i=1}^{\lceil M/n_{\max} \rceil} \left(2^{\min(n_{\max},\, M - (i-1)n_{\max})} - 1\right).
 \end{equation}
 
 The resulting set $\mathbf{S}$ produced by $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ contains subsets $s \in \mathbf{S}$, each grouping concepts $C_m \in s$ that are deemed plausible candidates for interaction. Each $s$ is hereafter called a \emph{candidate interaction group}. This term deliberately distinguishes the oracle's screening decision from an interaction actually observed in the answer distribution. Formally, $\mathbf{S}$ is a partition of $\mathbf{C}$ and therefore satisfies
 \begin{equation}
 	\bigcup_{s\in\mathbf{S}}s=\mathbf{C},
 	\qquad
-	s_i\cap s_j=\emptyset\ \text{for all }s_i,s_j\in\mathbf{S},
+	s_i\cap s_j=\emptyset\ \text{for all }s_i,s_j\in\mathbf{S}\text{ with }s_i\neq s_j,
 	\qquad
 	1\leq |s|\leq n_{\max}\ \text{for every }s\in\mathbf{S}.
 \end{equation}
@@ -105,9 +105,9 @@ Following \cite{ben-shacharPhiFeiFo2023}, an $R_i \times R_j$ contingency table 
 
 Under the null hypothesis $H_0$ of independence, the expected frequency $E_{u,v}$ for cell $(u,v)$ is computed as
 \begin{equation}
-	E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{n},
+	E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{|Z|},
 \end{equation}
-where $n:=\sum_{u=1}^{R_i}\sum_{v=1}^{R_j}O_{u,v}$ denotes the number of rows represented in the contingency table. Under the completeness assumption stated above, both concept columns contain a value in every row, so $n$ equals the total number of rows in the dataset. The Pearson chi-squared ($\chi^2$) statistic is then defined as
+where $|Z|$ is the number of rows in the dataset. Under the completeness assumption stated above, both concept columns contain a value in every row, so $|Z|$ also equals the total count $\sum_{u=1}^{R_i}\sum_{v=1}^{R_j}O_{u,v}$ of the contingency table. The Pearson chi-squared ($\chi^2$) statistic is then defined as
 \begin{equation}
 	\chi^2 = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} \frac{(O_{u,v} - E_{u,v})^2}{E_{u,v}}.
 \end{equation}
@@ -115,7 +115,7 @@ The statistical significance $p_{i,j}$ is derived from the $\chi^2$ cumulative d
 
 To quantify the strength of association independently of sample size and table dimensions, Cramér's $V$ is calculated, denoted $A$ to signify association strength:
 \begin{equation}
-	A(C_i, C_j) = \sqrt{\frac{\chi^2}{n \cdot (\min(R_i, R_j) - 1)}},
+	A(C_i, C_j) = \sqrt{\frac{\chi^2}{|Z| \cdot (\min(R_i, R_j) - 1)}},
 \end{equation}
 where $A(C_i, C_j) \in [0, 1]$, with $0$ indicating independence and $1$ indicating perfect association.
 
@@ -138,7 +138,7 @@ The partitioning of $\mathbf{C}_{\mathrm{tab}}$ is modeled as finding a \textbf{
 	\begin{algorithmic}[1]
 		\State \textbf{Initialize} partition $\mathcal{P} \gets \{ \{C_i\} \mid C_i \in \mathbf{C}_{\mathrm{tab}} \}$ \Comment{All concepts start as singletons}
 		\State \textbf{Sort} $\mathcal{L}$ descending by weight $A_{i,j}$
-		\For{each edge $e = (C_i, C_j, A_{i,j}) \in \mathcal{L}$}
+		\For{each edge $(C_i, C_j, A_{i,j}) \in \mathcal{L}$}
 		\State Find sets $P_a, P_b \in \mathcal{P}$ containing $C_i$ and $C_j$
 		\If{$P_a \neq P_b \land |P_a \cup P_b| \le n_{\max}$}
 		\State $\mathcal{P} \gets \left( \mathcal{P} \setminus \{P_a, P_b\} \right) \cup \{P_a \cup P_b\}$ \Comment{Merge groups}
@@ -238,16 +238,17 @@ With the value function now defined, the equation for estimating the causal effe
 Recall, however, that Matton et al.~\cite{mattonWalkTalkMeasuring2024} estimate faithfulness via the Pearson correlation coefficient (Equation~\ref{eq:faithfulness}), in which the causal effect is invoked as the vector $\mathbf{CE}(\mathbf{x},\mathbf{C})$. A version without $s$ as an explicit parameter must therefore be constructed, receiving instead the set of concepts $\mathbf{C}$ present in the question. The question-level CE vector no longer depends explicitly on $C_m$ and $s$. As in Matton et al.~\cite{mattonWalkTalkMeasuring2024}, let $\mathbf{C}$ denote the set of concepts present in the question $\mathbf{x}$. A helper function is introduced in which $n_{\max}$ for $\mathcal{O}$ is fixed to a constant value:
 
 \begin{equation}
-	\label{eq:new_ce_vector}
-	f_{\mathbf{C}}(C_m) = s \in \mathcal{O}(\mathbf{x}, \mathbf{C}, 5) \quad \text{such that} \quad C_m \in s
+	\label{eq:group_lookup}
+	f_{\mathbf{x}}(C_m) = s \in \mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max}) \quad \text{such that} \quad C_m \in s
 \end{equation}
 
-Depending on the experimental setting, the value for $n_{\max}$ (currently set to 5) can be hardcoded to another value.
+Keeping $n_{\max}$ fixed per experimental setting, instead of passing it as an argument, leaves the signature $\mathbf{CE}(\mathbf{x},\mathbf{C})$ of the CE vector identical to that of the original metric.
 
 Querying this helper yields the set $s$ to which concept $C_m$ belongs:
 
 \begin{equation}
-	\mathbf{CE}(\mathbf{x}, \mathbf{C}) = \Big( \mathrm{CE}\big(\mathbf{x}, C_m, f_{\mathbf{C}}(C_m)\big) \Big)_{m=1}^{|\mathbf{C}|}
+	\label{eq:new_ce_vector}
+	\mathbf{CE}(\mathbf{x}, \mathbf{C}) = \Big( \mathrm{CE}\big(\mathbf{x}, C_m, f_{\mathbf{x}}(C_m)\big) \Big)_{m=1}^{|\mathbf{C}|}
 \end{equation}
 
 This construction therefore yields a causal-effect definition compatible with the Pearson correlation coefficient used in the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024}. In summary, even though the CE scalar definition in Equation~\ref{eq:new_ce} has introduced $s$ as an extra parameter, the vector definition in Equation~\ref{eq:new_ce_vector} does not and integrates into the framework seamlessly.
@@ -269,7 +270,7 @@ One major structural source of this non-additivity is the Bayesian hierarchical 
 \begin{equation}\label{eq:culprit_softmax}
 	p_{y\mid I} = \frac{e^{\theta_{y\mid I}}}{\sum_{y' \in \mathcal{Y}} e^{\theta_{y'\mid I}}}, \qquad y \in \mathcal{Y},
 \end{equation}
-and the complete vector is $\mathbf{p}_{I}:=(p_{y\mid I})_{y\in\mathcal{Y}}$. Its key property is that the components are strictly confined to $[0,1]$ and sum to exactly $1$ across all possible predictions in $\mathcal{Y}$. This preserves the fundamental axiom that no set of mutually exclusive events can have a combined probability exceeding $100\%$.
+and the complete vector is $\mathbf{p}_{I}:=(p_{y\mid I})_{y\in\mathcal{Y}}$. Its key property is that the components are strictly confined to $(0,1)$ and sum to exactly $1$ across all possible predictions in $\mathcal{Y}$. This preserves the fundamental axiom that no set of mutually exclusive events can have a combined probability exceeding $100\%$.
 
 Because of this strict normalization, the probability distribution resulting from a joint intervention cannot equal the sum of the distributions from individual interventions. If one were to naively add the isolated resulting distributions of an intervention on Concept A and an intervention on Concept B, the sum over the prediction space would equal $2$. Since any valid probability distribution must sum to exactly $1$, the joint intervention is inherently non-additive in probability space.
 

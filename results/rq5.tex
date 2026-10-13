@@ -7,7 +7,7 @@ The final consensus graph underlying this partition is shown in
 Figure~\ref{fig:rq5-oracle-grouping}, and its retained pairwise co-grouping
 frequencies are reported in Table~\ref{tab:rq5-cogrouping}.
 
-Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\Delta\mathrm{CE}=\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$. Positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
+Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} with the effects obtained in the controlled FELICS experiment. For the two newly evaluated models, the atomic and joint columns use the paired CE constructions defined in Section~\ref{sec:controlled_atomic_baseline}. The shift is defined as $\mathrm{CE}_{\mathrm{joint}}-\mathrm{CE}_{\mathrm{atomic}}$. Positive values therefore indicate that FELICS credits a concept with a larger effect after accounting for its candidate interaction group.
 
 \begin{table}
   \centering
@@ -26,10 +26,10 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
       columns/matton_claude/.style={column name={\textbf{Claude}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
       columns/gpt_atomic/.style={column name={\textbf{Atomic}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
       columns/gpt_joint/.style={column name={\textbf{Joint}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
-      columns/gpt_delta/.style={column name={\textbf{$\Delta$CE}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
+      columns/gpt_delta/.style={column name={\textbf{Shift}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
       columns/mistral_atomic/.style={column name={\textbf{Atomic}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
       columns/mistral_joint/.style={column name={\textbf{Joint}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
-      columns/mistral_delta/.style={column name={\textbf{$\Delta$CE}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
+      columns/mistral_delta/.style={column name={\textbf{Shift}},column type={>{\columncolor{ForestGreen!9}}r},fixed,fixed zerofill,precision=3},
       every head row/.style={before row={
         \hline
         & \multicolumn{3}{c}{\cellcolor{RoyalBlue!18}\textbf{Matton et al.~\cite{mattonWalkTalkMeasuring2024}}} &
@@ -44,13 +44,13 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
 The interaction-aware estimate increases the credited causal effect of the eating-disorder concept for both evaluated models: from $0.018$ to $0.029$ for GPT-OSS 120B and from $0.129$ to $0.145$ for Mistral Medium 3.5. This is consistent with the expectation stated in Section~\ref{sec:motivating_methodology}. The corresponding result for self-perception of weight, however, moves in the opposite direction, decreasing from $0.021$ to $0.017$ for GPT-OSS 120B and from $0.181$ to $0.033$ for Mistral Medium 3.5. The expectation requires the estimate to increase for both motivating concepts and across all evaluated models. It is therefore only partially met.
 
 
-The shifts do not point in a common direction. The largest positive shift occurs for \textit{Refusal of treatment} under Mistral Medium 3.5 ($\Delta\mathrm{CE}=0.070$), whereas \textit{Self-perception} has the largest negative shift ($\Delta\mathrm{CE}=-0.148$). The four concepts in singleton groups keep their atomic values by construction. Both members of the pair, \textit{Vital signs} and \textit{EMS treatment}, receive identical shifts of $-0.005$ for GPT-OSS 120B and $0.030$ for Mistral Medium 3.5. Within the three-concept group, the summed CE rises from $0.067$ to $0.088$ for GPT-OSS 120B but falls from $0.640$ to $0.579$ for Mistral Medium 3.5. Figure~\ref{fig:case-study-concept-identity} in Appendix~\ref{app:case-study-identity} visualizes these shifts as identity plots.
+The shifts do not point in a common direction. The largest positive shift occurs for \textit{Refusal of treatment} under Mistral Medium 3.5 ($0.070$), whereas \textit{Self-perception} has the largest negative shift ($-0.148$). The four concepts in singleton groups keep their atomic values by construction. Both members of the pair, \textit{Vital signs} and \textit{EMS treatment}, receive identical shifts of $-0.005$ for GPT-OSS 120B and $0.030$ for Mistral Medium 3.5. Within the three-concept group, the summed CE rises from $0.067$ to $0.088$ for GPT-OSS 120B but falls from $0.640$ to $0.579$ for Mistral Medium 3.5. Figure~\ref{fig:case-study-concept-identity} in Appendix~\ref{app:case-study-identity} visualizes these shifts as identity plots.
 
 Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior question-level faithfulness estimate $\mathcal{F}(\mathbf{x})$. For the two models evaluated in this work, the same Bayesian faithfulness pipeline and fixed EE vector were applied to the atomic and interaction-aware CE vectors, respectively, following Section~\ref{sec:controlled_atomic_baseline}. The posterior estimate increases by $0.131$ for GPT-OSS 120B and decreases by $0.033$ for Mistral Medium 3.5, while every 90\% credible interval contains zero. These results do not indicate a clear question-level faithfulness improvement, although the single-question setting necessarily produces substantial posterior uncertainty.
 
 \begin{table}[htb]
   \centering
-  \caption[Case study: question-level faithfulness for MedQA]{Posterior question-level faithfulness for the MedQA case study. Matton et al.~\cite{mattonWalkTalkMeasuring2024} published one singleton-intervention estimate per model, whereas this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals and $\Delta\mathcal{F}=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
+  \caption[Case study: question-level faithfulness for MedQA]{Posterior question-level faithfulness for the MedQA case study. Matton et al.~\cite{mattonWalkTalkMeasuring2024} published one singleton-intervention estimate per model, whereas this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals, and the shift is $\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
   \label{tab:hyp5-faithfulness-comparison}
   \small
   \setlength{\tabcolsep}{4pt}
@@ -64,7 +64,7 @@ Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior 
     columns/atomic_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
     columns/joint_f/.style={column name={\textbf{$\mathcal{F}_{\mathrm{joint}}$}},string type,column type=c},
     columns/joint_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
-    columns/delta_f/.style={column name={\textbf{$\Delta\mathcal{F}$}},string type,column type=c},
+    columns/delta_f/.style={column name={\textbf{Shift}},string type,column type=c},
     every head row/.style={before row=\hline,after row=\hline},
     every last row/.style={after row=\hline},
     every even row/.style={before row={\rowcolor{gray!8}}},

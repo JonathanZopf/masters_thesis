@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  12 OCT 2026 22:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  13 OCT 2026 21:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2071,20 +2071,14 @@ nal
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 44--45
+Underfull \hbox (badness 1087) in paragraph at lines 45--46
 []|\T1/lmr/m/n/12 Fixed dataset-wide con-cept set for tab-u-lar data, sat-is-fy
 -ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
 []|\T1/lmr/m/n/12 Absolute dif-fer-ence be-tween the joint-run interaction-
- []
-
-
-Underfull \hbox (badness 1852) in paragraph at lines 149--150
-[]|\T1/lmr/m/n/12 Numerical tol-er-ance used for de-ter-min-is-tic implementati
-on-
  []
 
 
@@ -2250,7 +2244,7 @@ gh the down-stream eval-u-a-tion pipeline
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 137.
  [37] [38] [39] [40] [41] [42] [43]
-Overfull \hbox (0.39104pt too wide) detected at line 317
+Overfull \hbox (0.39104pt too wide) detected at line 318
 []
  []
 
@@ -2262,7 +2256,7 @@ ison_matton_felics' graphs/comparison_matton_felics)...disabled (restricted).
 
 Package standalone Warning: Graphic 'graphs/comparison_matton_felics.pdf' could
  not be build.
-Shell escape activated? on input line 429.
+Shell escape activated? on input line 430.
 
 (./graphs/comparison_matton_felics.tex
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
@@ -2277,7 +2271,7 @@ File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 File: graphs/comparison_matton_felics.tex Graphic file (type tex)
  [47] [48]
-Overfull \hbox (17.41667pt too wide) in paragraph at lines 468--469
+Overfull \hbox (17.41667pt too wide) in paragraph at lines 469--470
 \T1/lmr/m/n/12 Requirement [][]R4[][] re-quires the pro-posed frame-work to dis
 -tin-guish be-tween ad-di-tive, redundancy-
  []
@@ -2287,7 +2281,7 @@ Chapter 7.
 [51
 
 ] [52] [53] [54] [55] [56] [57]
-Overfull \hbox (3.91664pt too wide) in paragraph at lines 136--137
+Overfull \hbox (3.91664pt too wide) in paragraph at lines 131--132
 \T1/lmr/bx/n/12 Operationalization. \T1/lmr/m/n/12 For ev-ery ques-tion $\OT1/l
 mr/bx/n/12 x$ \T1/lmr/m/n/12 with con-cept set $\OT1/lmr/bx/n/12 C$\T1/lmr/m/n/
 12 , the interaction-presumption
@@ -2311,7 +2305,7 @@ PGFPlots: reading {data/summary/dataset_level_overview.csv}
 (./results/oracle.tex [63] [64]
 Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
  then source file graphs/german_credit_grouping.tex on input line 51.
-<graphs/german_credit_grouping.pdf, id=1867, 438.53035pt x 284.17468pt>
+<graphs/german_credit_grouping.pdf, id=1868, 438.53035pt x 284.17468pt>
 File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
 <use graphs/german_credit_grouping.pdf>
 Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
@@ -3006,9 +3000,9 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 127792 strings out of 467525
- 2882868 string characters out of 5418982
- 4078908 words of memory out of 5000000
+ 127791 strings out of 467525
+ 2882844 string characters out of 5418982
+ 4077861 words of memory out of 5000000
  154047 multiletter control sequences out of 15000+600000
  820828 words of font info for 169 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -3044,10 +3038,10 @@ ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texli
 ve/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/202
 6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (167 pages, 1724148 bytes).
+Output written on main.pdf (167 pages, 1721357 bytes).
 PDF statistics:
- 3865 PDF objects out of 4296 (max. 8388607)
- 3541 compressed objects within 36 object streams
- 1286 named destinations out of 1440 (max. 500000)
+ 3863 PDF objects out of 4296 (max. 8388607)
+ 3540 compressed objects within 36 object streams
+ 1285 named destinations out of 1440 (max. 500000)
  1156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

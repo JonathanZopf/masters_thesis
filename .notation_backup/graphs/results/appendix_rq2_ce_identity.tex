@@ -1,0 +1,18 @@
+% Question-averaged CE of both implementations for Research Question 2.
+% Requires graphs/results/shared_scatter_plot. #1 plot-specific keys.
+\newcommand{\HypTwoCeIdentityPlot}[1]{%
+  \ResultScatterPlot{x column=matton_ce,
+    y column=felics_ce,
+    x label={$\overline{\mathrm{CE}}_{\mathrm{Matton}}(\mathbf{x})$},
+    y label={$\overline{\mathrm{CE}}_{\mathrm{FELICS},\,n_{\max}=1}(\mathbf{x})$},
+    line slope=1,
+    line intercept=0,
+    line style=dashed,
+    minipage width=\linewidth,
+    plot width=5.55cm,
+    plot height=5.55cm,
+    mark size=1.8pt,
+    scale only axis=true,
+    #1
+  }%
+}
