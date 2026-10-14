@@ -1,0 +1,111 @@
+\documentclass[tikz]{standalone}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{tikzpicture}[
+>=Stealth,
+font=\Large,
+observed/.style={
+draw,
+rounded corners=3pt,
+minimum width=1.6cm,
+minimum height=0.9cm,
+fill=blue!8,
+thick
+},
+fixed/.style={
+draw,
+rounded corners=3pt,
+minimum width=1.6cm,
+minimum height=0.9cm,
+fill=green!20,
+thick
+},
+intervened/.style={
+draw,
+rounded corners=3pt,
+minimum width=1.6cm,
+minimum height=0.9cm,
+fill=orange!35,
+thick
+},
+latent/.style={
+draw,
+diamond,
+aspect=1.4,
+dashed,
+minimum size=1.2cm,
+thick
+}
+]
+%------------------------------------------------
+% Mediators
+%------------------------------------------------
+\node[fixed] (C1) at (0,4.0) {$C_1$};
+\node[fixed] (C2) at (0,2.8) {$C_2$};
+\node (dots1) at (0,1.7) {$\vdots$};
+\node[intervened] (Ca) at (0,0.6) {$C_a$};
+\node[intervened] (Cb) at (0,-0.6) {$C_b$};
+\node[intervened] (Cc) at (0,-1.8) {$C_c$};
+\node (dots2) at (0,-3.0) {$\vdots$};
+\node[fixed] (CM) at (0,-4.1) {$C_M$};
+\node[fixed] (V) at (0,-5.6) {$V$};
+
+% Prominent label above the mediator layer (Fixed anchor here)
+\node[font=\Large\bfseries, anchor=south] at (0,4.8) {Mediators};
+
+%------------------------------------------------
+% Brace indicating the intervened concept group
+%------------------------------------------------
+\draw[
+decorate,
+decoration={brace,mirror,amplitude=8pt},
+thick
+]
+(-1.0,1.05) -- (-1.0,-2.25)
+node[midway,left=10pt] {$\mathcal{C}_{\Delta}$};
+%------------------------------------------------
+% Outcome nodes
+%------------------------------------------------
+\node[observed] (X) at (4.5,-0.8) {$X$};
+\node[observed] (Y) at (7.8,-0.8) {$Y$};
+\node[latent] (E) at (7.8,1.5) {$\mathcal{E}$};
+%------------------------------------------------
+% Edges (Distributed targets to prevent overlap)
+%------------------------------------------------
+\draw[->] (C1.east) -- (X.135);
+\draw[->] (C2.east) -- (X.150);
+\draw[->] (Ca.east) -- (X.165);
+\draw[->] (Cb.east) -- (X.180);
+\draw[->] (Cc.east) -- (X.195);
+\draw[->] (CM.east) -- (X.210);
+\draw[->] (V.east) -- (X.225);
+
+\draw[->] (X) -- (Y);
+\draw[->] (E) -- (Y);
+%------------------------------------------------
+% Legend
+%------------------------------------------------
+\node[fixed,
+minimum width=0.8cm,
+minimum height=0.45cm,
+anchor=west] (L1) at (10.0,1.4) {};
+\node[anchor=west,font=\normalsize]
+at ($(L1.east)+(0.3,0)$)
+{Kept at original value};
+\node[intervened,
+minimum width=0.8cm,
+minimum height=0.45cm,
+anchor=west] (L2) at (10.0,0.4) {};
+\node[anchor=west,font=\normalsize]
+at ($(L2.east)+(0.3,0)$)
+{Assigned new value};
+\node[observed,
+minimum width=0.8cm,
+minimum height=0.45cm,
+anchor=west] (L3) at (10.0,-0.6) {};
+\node[anchor=west,font=\normalsize]
+at ($(L3.east)+(0.3,0)$)
+{Response Variables};
+\end{tikzpicture}
+\end{document}

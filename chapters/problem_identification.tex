@@ -67,7 +67,7 @@ For illustration, consider an initially masked question $\mathbf{x}$ into which 
 	J_{\mathbf{x}}(\{C_m\}) := \mathrm{CE}(\mathbf{x},C_m).
 \end{equation}
 
-Thus, $J_{\mathbf{x}}(\{C_i,C_j\})$ denotes the joint effect obtained by replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously, while $J_{\mathbf{x}}(\{C_i\})$ and $J_{\mathbf{x}}(\{C_j\})$ denote the corresponding individual effects. At this point, $J_{\mathbf{x}}$ is an abstract joint-intervention effect used only to describe response-level interaction directions. The formal construction of joint interventions is deferred to Section~\ref{sec:joint_effect}, and FELICS's corresponding question-specific value function is defined later in Equation~\ref{eq:value_function}. The classifications in this section use an absolute baseline on the raw joint-intervention effect scale. Depending on the relationship between these quantities, three directions can be distinguished.
+Thus, $J_{\mathbf{x}}(\{C_i,C_j\})$ denotes the joint effect obtained by replacing $(c_i,c_j)$ with $(c_i',c_j')$ simultaneously, while $J_{\mathbf{x}}(\{C_i\})$ and $J_{\mathbf{x}}(\{C_j\})$ denote the corresponding individual effects. At this point, $J_{\mathbf{x}}$ is an abstract joint-intervention effect used only to describe response-level interaction directions. The formal construction of joint interventions is deferred to Section~\ref{sec:joint_effect}, and FELICS's corresponding question-specific value function is defined later in Equation~\ref{eq:value_function}. The classifications in this section use an absolute baseline on the raw joint-intervention effect scale. Depending on the relationship between these quantities, three directions can be distinguished, each illustrated in Example~\ref{ex:interaction_directions}.
 
 \subsection{Additivity}
 Under \emph{additivity}, the joint intervention effect equals the sum of the individual intervention effects,
@@ -76,15 +76,11 @@ Under \emph{additivity}, the joint intervention effect equals the sum of the ind
 \end{equation}
 This equality expresses an absence of interaction on a raw effect scale. It does not imply that $C_i$ and $C_j$ are statistically independent in the data; associated inputs may have additive effects on the response, and statistically independent inputs may nevertheless exhibit a non-additive response-level interaction.
 
-As a simplified credit-scoring example, the number of recent credit inquiries and the requested loan duration could contribute approximately independent evidence.
-
 \subsection{Redundancy}
 In the mapped, response-level sense used here, concepts exhibit \emph{redundancy-like} behavior when their individual effects overlap. Introducing information that is already provided by the other concept has only a limited additional effect, so the combined intervention is smaller than the sum of the individual interventions,
 \begin{equation}
 	J_{\mathbf{x}}(\{C_i,C_j\}) < J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
-
-In the credit-scoring example, homeownership and the absence of monthly rent may provide redundant information about housing expenses.
 
 \subsection{Synergy}
 In a \emph{synergy-like} interaction, an additional effect emerges only when both concepts are considered jointly. Consequently, the combined intervention produces a larger effect than expected from the sum of the individual interventions,
@@ -92,7 +88,18 @@ In a \emph{synergy-like} interaction, an additional effect emerges only when bot
 	J_{\mathbf{x}}(\{C_i,C_j\}) > J_{\mathbf{x}}(\{C_i\})+J_{\mathbf{x}}(\{C_j\}).
 \end{equation}
 
-High income and low existing debt may exhibit synergy within the credit-scoring example when their combination provides stronger evidence of repayment capacity than either property provides separately.
+\begin{example_box}[label=ex:interaction_directions]
+	Consider the candidate profiles of Introduction Examples~\ref{moe:unfaithfulness} and~\ref{moe:interacting_concepts}. Effects are stated as changes in the share of recommendations for \textit{Candidate A}.
+
+	\smallskip
+	\textbf{Additivity:} \textit{Age} and \textit{Party} could contribute approximately independent evidence.
+
+	\smallskip
+	\textbf{Redundancy:} Starting from profiles without \textit{Party} and \textit{Political Priorities} (6\%), adding \textit{Party} alone yields 32\%, adding \textit{Political Priorities} alone 99\%, and adding both 100\%. The joint effect of 94 percentage points is smaller than the sum of 26 and 93.
+
+	\smallskip
+	\textbf{Synergy:} Experience in \enquote{urban and mobility planning} may become stronger evidence of competence in combination with a seat as \enquote{City Council Member}, where it can be applied directly.
+\end{example_box}
 
 \subsection{Implications for Causal Concept Effects}
 The examples above are restricted to the interaction of two concepts for simplicity. In practice, multiple concepts may interact simultaneously, giving rise to substantially more complex information-sharing structures. Williams and Beer \cite{williamsNonnegativeDecompositionMultivariate2010} generalize Partial Information Decomposition to arbitrary numbers of variables and introduce corresponding partial information diagrams to represent these relationships.
@@ -114,7 +121,7 @@ whereas removing one of two synergistic concepts is presumed to remove large par
 
 Consequently, the MedQA example discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, in which one removed concept is presumed to be reconstructable from another, is consistent with redundancy-like behavior under the removal interpretation.
 
-Statistical association and response-level interaction must be distinguished. Association concerns the joint distribution of the concepts: observing one concept may make the value of another more predictable. Interaction, as used in this thesis, concerns their effects on a response variable: the effect of intervening on one concept may depend on whether or how another concept is intervened upon, with the evaluated model's answer distribution serving as the response. Strong association between concepts can indicate the possibility of redundant information and may therefore serve as a useful screening proxy for redundancy-like effects. It does not, however, establish redundancy or interaction with respect to the model output. Conversely, response-level interaction, particularly synergy, may occur without observable pairwise association between the concepts \cite{picaInvariantComponentsSynergy2017}.
+Statistical association and response-level interaction must be distinguished. Association concerns the joint distribution of the concepts: observing one concept may make the value of another more predictable. Interaction, as used in this thesis, concerns their effects on the evaluated model's answer distribution: the effect of intervening on one concept may depend on whether or how another concept is intervened upon. Strong association between concepts can indicate the possibility of redundant information and may therefore serve as a useful screening proxy for redundancy-like effects. It does not, however, establish redundancy or interaction with respect to the model output. Conversely, response-level interaction, particularly synergy, may occur without observable pairwise association between the concepts \cite{picaInvariantComponentsSynergy2017}.
 
 To recapitulate, the original Causal Concept Faithfulness Metric assumes that each concept can be intervened upon surgically while the remaining input is held fixed and evaluates only singleton intervention effects. Redundancy-like relationships can undermine the intended intervention because the removed information may be reconstructed from another concept, while synergy-like effects may become observable only when multiple concepts are modified jointly. Consequently, singleton interventions may not reliably characterize causal concept effects when such response-level interactions are present.
 

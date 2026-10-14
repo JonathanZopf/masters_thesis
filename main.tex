@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[USenglish]{babel}
+\babelprovide[import]{ngerman} % for the German Kurzfassung
 \usepackage{standalone}
 
 \usepackage{graphicx}
@@ -17,6 +18,7 @@
 \newcommand{\hlword}[1]{{\setlength{\fboxsep}{1pt}\colorbox{yellow!60}{\vphantom{Tg}#1}}}
 % Thesis style: named methods and systems are set upright; italics are reserved
 % for introduced terms, exact concept labels, and deliberate local emphasis.
+\usepackage{etoolbox}
 \usepackage{caption}
 \captionsetup{font=small}
 % Widen the number column in the List of Figures and Tables so that appendix
@@ -24,6 +26,10 @@
 \makeatletter
 \renewcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.8em}}
 \let\l@table\l@figure
+% Slightly tighter gap above chapter entries in the table of contents
+% (report default: 1.0em) so that the last appendix entry does not
+% spill onto a page of its own.
+\patchcmd{\l@chapter}{1.0em}{0.7em}{}{\PackageWarning{main}{ToC chapter spacing patch failed}}
 \makeatother
 \usepackage{subfiles}
 \usepackage[table,dvipsnames]{xcolor}
@@ -242,6 +248,8 @@
 
 % Disclosure of supporting generative-AI use
 \include{statement_on_generative_ai}
+
+\include{kurzfassung}
 
 % Table of contents
 \pagestyle{plain}

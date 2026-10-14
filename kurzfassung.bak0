@@ -1,0 +1,60 @@
+% German summary of the main points, required by §21 Abs. 6 of the
+% examination regulations. Needs \babelprovide[import]{ngerman} in main.tex.
+
+\section*{Kurzfassung (Abstract)}
+
+\begin{otherlanguage}{ngerman}
+\begingroup
+\small
+\setlength{\parskip}{0.35em}
+
+Große Sprachmodelle (LLMs) können ihre Antworten in natürlicher Sprache
+begründen. Die Faithfulness (Treue) solcher Erklärungen ist jedoch nicht
+garantiert. Sie können plausibel klingen und dennoch die Faktoren verschweigen, die die Antwort
+tatsächlich bestimmt haben. Die Causal Concept Faithfulness Metric von Matton
+et al.~\cite{mattonWalkTalkMeasuring2024} misst diese Faithfulness, indem sie jeweils
+ein Konzept der Eingabe kontrafaktisch verändert und den gemessenen kausalen
+Effekt mit dem Effekt vergleicht, den die Erklärung nahelegt. Weil
+immer nur ein Konzept auf einmal verändert wird, kann die Metrik den Einfluss
+zusammenwirkender Konzepte unterschätzen oder falsch zuordnen. Das geschieht
+etwa, wenn ein entferntes Konzept aus einem anderen rekonstruiert werden kann
+oder wenn erst die Kombination mehrerer Konzepte die Antwort verändert.
+
+Als Lösung wird FELICS (Faithfulness Estimation Leveraging Interacting Concept
+Sets) entwickelt. Ein Orakel fasst Konzepte, bei denen eine Interaktion
+plausibel ist, zu begrenzten Kandidatengruppen zusammen. Innerhalb jeder Gruppe
+wird jede nichtleere Kombination von Konzepten gemeinsam verändert.
+Shapley-Werte verteilen die gemessenen Koalitionseffekte auf die einzelnen
+Konzepte, sodass der Vergleich mit der Erklärung weiterhin auf Konzeptebene
+erfolgt. Eine referenzbasierte Korrektur macht Effekte aus Einzel- und
+gemeinsamen Interventionen vergleichbar, und die maximale Gruppengröße
+$n_{\max}$ begrenzt die Zahl der benötigten Kontrafaktika. Für $n_{\max}=1$
+reduziert sich FELICS formal auf die ursprüngliche Metrik.
+
+FELICS wurde implementiert und auf den Datensätzen BBQ, MedQA und dem neu
+erstellten tabellarischen Datensatz New German Credit evaluiert. Untersucht
+wurden die Modelle GPT-OSS 120B und Mistral Medium 3.5 mit je 30 Fragen pro
+Datensatz. Die Evaluation umfasst vier Forschungsfragen sowie eine Fallstudie
+zum MedQA-Beispiel von Matton
+et al.~\cite{mattonWalkTalkMeasuring2024}, das diese Arbeit motiviert hat.
+
+Die Ergebnisse zeigen keinen allgemeinen Zusammenhang zwischen der Stärke der
+vom Orakel vermuteten Interaktion und der Veränderung der kausalen Effekte.
+Die theoretische Kompatibilität mit der ursprünglichen Metrik ließ sich in
+getrennt ausgeführten Läufen empirisch nicht innerhalb der vorab festgelegten
+Grenzen bestätigen. Die Korrektur erhielt die Rangfolge der Konzepte in BBQ und
+MedQA weitgehend, ordnete sie in New German Credit jedoch deutlich um.
+Gemeinsame Interventionen erhöhten die gemessene Faithfulness nicht systematisch. Die
+Richtung der Veränderung hing von Datensatz und Modell ab, und auf
+Datensatzebene veränderte sich die Faithfulness nur geringfügig. In der Fallstudie
+erhielt nur eines der beiden untersuchten Konzepte einen höheren kausalen
+Effekt.
+
+Der Beitrag der Arbeit besteht darin, gemeinsame Interventionen in die Messung
+der Faithfulness einzuführen. Damit macht FELICS sichtbar, wie
+gemeinsame Interventionen kausalen Einfluss zwischen Konzepten umverteilen. Es
+versteht sich als praktisches, interaktionsbewusstes Diagnosewerkzeug und nicht
+als Verfahren, das eine eindeutige wahre Interaktionsstruktur bestimmt.
+
+\endgroup
+\end{otherlanguage}

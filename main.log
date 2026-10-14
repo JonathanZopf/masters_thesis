@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  13 OCT 2026 21:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  14 OCT 2026 00:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -109,6 +109,11 @@ Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
 (babel)             (\language22). Reported on input line 108.
 )))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/invalid/babel-nger
+man.tex)
+Package babel Info: Importing data for ngerman
+(babel)             from babel-de.ini. Reported on input line 6.
+
 (/usr/local/texlive/2026/texmf-dist/tex/latex/standalone/standalone.sty
 Package: standalone 2025/02/22 v1.5a Package to include TeX sub-files with prea
 mbles
@@ -277,6 +282,10 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@count@id=\count298
 \enitdp@description=\count299
 )
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count300
+)
 (/usr/local/texlive/2026/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
@@ -292,8 +301,8 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@hangindent=\dimen178
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count300
-\c@continuedfloat=\count301
+\c@caption@flags=\count301
+\c@continuedfloat=\count302
 Package caption Info: listings package is loaded.
 )
 (/usr/local/texlive/2026/texmf-dist/tex/latex/subfiles/subfiles.sty
@@ -308,16 +317,12 @@ Package: expl3 2026-01-19 L3 programming layer (loader)
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count302
+\l__color_backend_stack_int=\count303
 ))
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2025-10-09 L3 Experimental document command parser
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count303
 )))
 (/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
@@ -1756,7 +1761,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip116
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 150.
+Package hyperref Info: Option `colorlinks' set `true' on input line 156.
 \c@tcb@cnt@example_box=\count597
 \c@tcb@cnt@motivating_example_box=\count598
 \c@tcb@cnt@math_box=\count599
@@ -1768,8 +1773,8 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'USenglish'.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 22
-5.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 23
+1.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1779,31 +1784,32 @@ LaTeX Warning: Unused global option(s):
     [a4paperUSenglish].
 
 (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
-(./statement_on_generative_ai.aux) (./appendix/motivational_example_setup.aux)
+(./statement_on_generative_ai.aux) (./kurzfassung.aux)
+(./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
 (./appendix/oracle_partition_details.aux)
 (./appendix/additional_result_visualizations.aux) (./appendix/prompts.aux)
 (./appendix/reproducibility.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 225.
-LaTeX Font Info:    ... okay on input line 225.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 231.
+LaTeX Font Info:    ... okay on input line 231.
 
 (/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1828,7 +1834,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count608
-Package tocbasic Info: setting babel extension for `lol' on input line 225.
+Package tocbasic Info: setting babel extension for `lol' on input line 231.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1848,7 +1854,7 @@ nslations-basic-dictionary')
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 225.
+loading the todonotes package. on input line 231.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1913,6 +1919,23 @@ Package biblatex Info: ... file 'english.lbx' found.
 (/usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
 )))
+Package biblatex Info: Trying to load language 'ngerman'...
+Package biblatex Info: ... file 'ngerman.lbx' found.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+File: ngerman.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'german'...
+Package biblatex Info: ... file 'german.lbx' found.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/german.lbx
+File: german.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'german'...
+Package biblatex Info: ... file 'german.lbx' found.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/lbx/german.lbx
+File: german.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+))
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
@@ -1922,9 +1945,9 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 
 (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 225.
-Package biblatex Info: Reference segment=0 on input line 225.
-Package hyperref Info: Link coloring ON on input line 225.
+Package biblatex Info: Reference section=0 on input line 231.
+Package biblatex Info: Reference segment=0 on input line 231.
+Package hyperref Info: Link coloring ON on input line 231.
  (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
@@ -1935,62 +1958,62 @@ Package hyperref Info: Link coloring ON on input line 225.
 <images/university_logo.png, id=537, 200.8081pt x 59.40573pt>
 File: images/university_logo.png Graphic file (type png)
 <use images/university_logo.png>
-Package pdftex.def Info: images/university_logo.png  used on input line 237.
+Package pdftex.def Info: images/university_logo.png  used on input line 243.
 (pdftex.def)             Requested size: 230.46733pt x 68.18279pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-37.
+43.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-37.
+43.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-237.
+243.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-237.
+243.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 237.
+(Font)              <12> on input line 243.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 237.
+(Font)              <8> on input line 243.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 237.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 237
+(Font)              <6> on input line 243.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 243
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 237
+LaTeX Font Info:    Trying to load font information for U+msb on input line 243
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+esint on input line 2
-37.
+43.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 237.
+(Font)              <14.4> on input line 243.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 237.
+(Font)              <10> on input line 243.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 237.
+(Font)              <7> on input line 243.
  [1
 
 
@@ -2024,12 +2047,23 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 
 
-{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] (./main.toc
- [4
+{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+\openout2 = `kurzfassung.aux'.
+
+ (./kurzfassung.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 31.
+)
+[4
 
 
 
-] [5]
+{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/loca
+l/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] (./main.toc [5
+
+
+
+]
 [6])
 \tf@toc=\write7
 \openout7 = `main.toc'.
@@ -2037,14 +2071,11 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
  [7] (./main.lof [8
 
 
-{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/te
-xlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2026
-/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}])
+{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}])
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
- [9]
-(./main.lot)
+ [9] (./main.lot)
 \tf@lot=\write9
 \openout9 = `main.lot'.
 
@@ -2108,8 +2139,6 @@ Underfull \hbox (badness 4582) in paragraph at lines 26--27
 -ships with
  []
 
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 37.
 [1
 
 
@@ -2129,9 +2158,9 @@ Chapter 2.
 [5
 
 ] [6] [7] [8] [9] [10] [11] [12]
-Overfull \hbox (11.34921pt too wide) in paragraph at lines 142--143
+Overfull \hbox (12.00221pt too wide) in paragraph at lines 142--143
 []\T1/lmr/m/n/12 This pre-sen-ta-tion is an abridged ver-sion of the orig-i-nal
- pa-per by Mat-ton et al. [[][]MNGK25a[][]].
+ pa-per by Mat-ton et al. [[][]MNGK25b[][]].
  []
 
 
@@ -2141,9 +2170,9 @@ ed by Atanasova et al. [[][]ACL+23[][]]
  []
 
 [13] [14]
-Overfull \hbox (27.14517pt too wide) in paragraph at lines 179--180
+Overfull \hbox (27.79817pt too wide) in paragraph at lines 179--180
 \T1/lmr/m/n/12 To es-ti-mate the ac-tual in-flu-ence of a con-cept on the model
-'s pre-dic-tion, Mat-ton et al. [[][]MNGK25a[][]]
+'s pre-dic-tion, Mat-ton et al. [[][]MNGK25b[][]]
  []
 
 [15] [16] [17]
@@ -2305,7 +2334,7 @@ PGFPlots: reading {data/summary/dataset_level_overview.csv}
 (./results/oracle.tex [63] [64]
 Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
  then source file graphs/german_credit_grouping.tex on input line 51.
-<graphs/german_credit_grouping.pdf, id=1868, 438.53035pt x 284.17468pt>
+<graphs/german_credit_grouping.pdf, id=1874, 438.53035pt x 284.17468pt>
 File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
 <use graphs/german_credit_grouping.pdf>
 Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
@@ -2355,7 +2384,7 @@ Chapter 10.
 [92
 
 ] [93])
-Overfull \hbox (0.83635pt too wide) in paragraph at lines 40--278
+Overfull \hbox (0.83635pt too wide) in paragraph at lines 40--286
 []\T1/lmr/m/n/12 Measuring ex-pla-na-tion faith-ful-ness re-quires at-ten-tion 
 to how con-cepts (or, more broadly,
  []
@@ -2363,62 +2392,57 @@ to how con-cepts (or, more broadly,
 [94]
 
 Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 279.
+(biblatex)                Using fallback driver on input line 287.
 
 
-Overfull \hbox (34.59662pt too wide) in paragraph at lines 279--279
+Overfull \hbox (34.59662pt too wide) in paragraph at lines 287--287
 \T1/lmr/m/it/12 (EU) 2018/858, (EU) 2018/1139 and (EU) 2019/2144 and Di-rec-tiv
 es 2014/90/EU,
  []
 
 [95
 
-] [96]
-Overfull \hbox (11.05925pt too wide) in paragraph at lines 279--279
+]
+Overfull \hbox (7.03218pt too wide) in paragraph at lines 287--287
+\T1/lmr/m/n/12 cessed: Oct. 13, 2026. [On-line]. Avail-able: [][]$\T1/lmtt/m/n/
+12 https : / / www1 . beuth -[] hochschule .
+ []
+
+[96]
+Overfull \hbox (2.25647pt too wide) in paragraph at lines 287--287
 []\T1/lmr/m/n/12 International Or-ga-ni-za-tion for Stan-dard-iza-tion. ^^P  IS
-O/IEC TR 29119-11:2020,^^Q
+O/IEC TR 29119-11:2020
  []
 
 [97]
-Overfull \hbox (10.04192pt too wide) in paragraph at lines 279--279
-\T1/lmr/m/n/12 vol. 12, no. 19, p. 9423, Jan. 2022, \T1/lmr/m/sc/12 issn\T1/lmr
-/m/n/12 : 2076-3417. \T1/lmr/m/sc/12 doi\T1/lmr/m/n/12 : [][]$\T1/lmtt/m/n/12 1
-0 . 3390 / app12199423$[][]
- []
-
-
-Overfull \hbox (8.18913pt too wide) in paragraph at lines 279--279
+Overfull \hbox (8.18913pt too wide) in paragraph at lines 287--287
 []\T1/lmr/m/n/12 Á. Martínez-Sánchez, G. Ar-ranz, and A. Lozano-Durán, ^^P  De-
 com-pos-ing causal-
  []
 
 [98] [99]
-Overfull \hbox (5.26521pt too wide) in paragraph at lines 279--279
+Overfull \hbox (5.26521pt too wide) in paragraph at lines 287--287
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-consistency
  []
 
 
-Overfull \hbox (17.38295pt too wide) in paragraph at lines 279--279
+Overfull \hbox (17.38295pt too wide) in paragraph at lines 287--287
 \T1/lmr/m/n/12 Learn-ing for Sci-en-tific In-sights and Dis-cov-er-ies,^^Q \T1/
 lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 , vol. 8, pp. 42 200^^U
  []
 
 [100]
-Overfull \hbox (30.9524pt too wide) in paragraph at lines 279--279
+Overfull \hbox (30.9524pt too wide) in paragraph at lines 287--287
 \T1/lmr/m/n/12 Toronto, Canada: As-so-ci-a-tion for Com-pu-ta-tional Lin-guis-t
 ics, Jul. 2023, pp. 13 003^^U
  []
 
 [101]
-Overfull \hbox (1.49911pt too wide) in paragraph at lines 279--279
+Overfull \hbox (1.49911pt too wide) in paragraph at lines 287--287
 []\T1/lmr/m/n/12 G. Vilone and L. Longo, ^^P  No-tions of ex-plain-abil-ity and
  eval-u-a-tion ap-proaches
  []
-
-
-Package biblatex Warning: No driver for 'legislation'.
-(biblatex)                Using fallback driver on input line 279.
 
 [102] (./chapters/appendix.tex [103]
 \openout2 = `appendix/motivational_example_setup.aux'.
@@ -2984,7 +3008,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--88
  []
 
 [149]) [150]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
-(./statement_on_generative_ai.aux) (./appendix/motivational_example_setup.aux)
+(./statement_on_generative_ai.aux) (./kurzfassung.aux)
+(./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
 (./appendix/oracle_partition_details.aux)
 (./appendix/additional_result_visualizations.aux) (./appendix/prompts.aux)
@@ -3000,13 +3025,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 127791 strings out of 467525
- 2882844 string characters out of 5418982
- 4077861 words of memory out of 5000000
- 154047 multiletter control sequences out of 15000+600000
+ 128033 strings out of 467525
+ 2888786 string characters out of 5418982
+ 4121884 words of memory out of 5000000
+ 154266 multiletter control sequences out of 15000+600000
  820828 words of font info for 169 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 125i,19n,121p,2519b,3091s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 1143 hyphenation exceptions out of 8191
+ 125i,19n,121p,2519b,3268s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
 e/2026/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/local/texlive/2026/texm
@@ -3038,10 +3063,10 @@ ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texli
 ve/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/202
 6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (167 pages, 1721357 bytes).
+Output written on main.pdf (167 pages, 1726822 bytes).
 PDF statistics:
- 3863 PDF objects out of 4296 (max. 8388607)
- 3540 compressed objects within 36 object streams
- 1285 named destinations out of 1440 (max. 500000)
+ 3872 PDF objects out of 4296 (max. 8388607)
+ 3549 compressed objects within 36 object streams
+ 1286 named destinations out of 1440 (max. 500000)
  1156 words of extra memory for PDF output out of 10000 (max. 10000000)
 
