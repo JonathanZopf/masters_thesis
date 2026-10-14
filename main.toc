@@ -160,5 +160,6 @@
 \contentsline {section}{\numberline {D.5}Concept-Level Effects of Shapley Normalization}{118}{section.D.5}%
 \contentsline {section}{\numberline {D.6}Atomic and Joint Attribution per Question}{120}{section.D.6}%
 \contentsline {section}{\numberline {D.7}Concept-Level Effects in the Case Study}{122}{section.D.7}%
-\contentsline {chapter}{\numberline {E}Prompts}{123}{appendix.E}%
-\contentsline {chapter}{\numberline {F}Reproducibility and Experimental Artifacts}{148}{appendix.F}%
+\contentsline {section}{\numberline {D.8}Questions Discussed Individually}{123}{section.D.8}%
+\contentsline {chapter}{\numberline {E}Prompts}{125}{appendix.E}%
+\contentsline {chapter}{\numberline {F}Reproducibility and Experimental Artifacts}{150}{appendix.F}%

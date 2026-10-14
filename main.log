@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  14 OCT 2026 00:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  14 OCT 2026 13:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1955,7 +1955,7 @@ Package hyperref Info: Link coloring ON on input line 231.
 \openout2 = `title_page.aux'.
 
  (./title_page.tex)
-<images/university_logo.png, id=537, 200.8081pt x 59.40573pt>
+<images/university_logo.png, id=541, 200.8081pt x 59.40573pt>
 File: images/university_logo.png Graphic file (type png)
 <use images/university_logo.png>
 Package pdftex.def Info: images/university_logo.png  used on input line 243.
@@ -2026,7 +2026,7 @@ ogo.png>]
 
 
 (./declaration_of_originality.tex
-<images/signature.jpg, id=546, 1118.1775pt x 363.3575pt>
+<images/signature.jpg, id=550, 1118.1775pt x 363.3575pt>
 File: images/signature.jpg Graphic file (type jpg)
 <use images/signature.jpg>
 Package pdftex.def Info: images/signature.jpg  used on input line 5.
@@ -2334,7 +2334,7 @@ PGFPlots: reading {data/summary/dataset_level_overview.csv}
 (./results/oracle.tex [63] [64]
 Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
  then source file graphs/german_credit_grouping.tex on input line 51.
-<graphs/german_credit_grouping.pdf, id=1874, 438.53035pt x 284.17468pt>
+<graphs/german_credit_grouping.pdf, id=1885, 438.53035pt x 284.17468pt>
 File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
 <use graphs/german_credit_grouping.pdf>
 Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
@@ -2948,7 +2948,7 @@ PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
-) [122]
+ [122] [123] [124])
 \openout2 = `appendix/prompts.aux'.
 
  (./appendix/prompts.tex
@@ -2962,7 +2962,7 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-[123
+[125
 
 
 
@@ -2970,34 +2970,34 @@ File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ]
 \openout11 = `main.listing'.
 
- (./main.listing) [124] [125]
+ (./main.listing) [126] [127]
 \openout11 = `main.listing'.
 
- (./main.listing) [126]
+ (./main.listing) [128]
 \openout11 = `main.listing'.
 
  (./main.listing)
-[127] [128] [129] [130]
+[129] [130] [131] [132]
 \openout11 = `main.listing'.
 
- (./main.listing) [131] [132] [133] [134] [135]
-\openout11 = `main.listing'.
-
-
-(./main.listing) [136] [137] [138]
-\openout11 = `main.listing'.
-
- (./main.listing) [139] [140] [141]
+ (./main.listing) [133] [134] [135] [136] [137]
 \openout11 = `main.listing'.
 
 
-(./main.listing) [142] [143] [144] [145] [146]) [147]
+(./main.listing) [138] [139] [140]
+\openout11 = `main.listing'.
+
+ (./main.listing) [141] [142] [143]
+\openout11 = `main.listing'.
+
+
+(./main.listing) [144] [145] [146] [147] [148]) [149]
 \openout2 = `appendix/reproducibility.aux'.
 
 
 (./appendix/reproducibility.tex
 Appendix F.
-[148
+[150
 
 
 
@@ -3007,7 +3007,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|$\T1/lmtt/m/n/10.95 _faithfulness _ results _ atomic .
  []
 
-[149]) [150]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
+[151]) [152]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
 (./statement_on_generative_ai.aux) (./kurzfassung.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
@@ -3019,16 +3019,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: FA2CE247FE226E352F2DF1234768122E;28138.
+(rerunfilecheck)             Checksum: 06FCEE6764101795C1B939769E09A712;28361.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 128033 strings out of 467525
- 2888786 string characters out of 5418982
- 4121884 words of memory out of 5000000
- 154266 multiletter control sequences out of 15000+600000
+ 128042 strings out of 467525
+ 2888946 string characters out of 5418982
+ 4124085 words of memory out of 5000000
+ 154270 multiletter control sequences out of 15000+600000
  820828 words of font info for 169 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  125i,19n,121p,2519b,3268s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -3063,10 +3063,10 @@ ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texli
 ve/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/202
 6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (167 pages, 1726822 bytes).
+Output written on main.pdf (169 pages, 1738879 bytes).
 PDF statistics:
- 3872 PDF objects out of 4296 (max. 8388607)
- 3549 compressed objects within 36 object streams
- 1286 named destinations out of 1440 (max. 500000)
- 1156 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3922 PDF objects out of 4296 (max. 8388607)
+ 3597 compressed objects within 36 object streams
+ 1291 named destinations out of 1440 (max. 500000)
+ 1164 words of extra memory for PDF output out of 10000 (max. 10000000)
 
