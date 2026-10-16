@@ -99,7 +99,7 @@
     \pgfresetboundingbox
     \begin{axis}[
       width=7.8cm,
-      height=5.55cm,
+      height=5.0cm,
       xmin=-1,
       xmax=1,
       ymin=.10,
@@ -107,6 +107,9 @@
       axis x line*=bottom,
       axis y line=none,
       xtick={-1,-.5,0,.5,1},
+      xlabel={$\mathcal{F}(\mathbf{x})$},
+      label style={font=\scriptsize},
+      tick label style={font=\scriptsize},
       xmajorgrids=true,
       grid style={gray!18},
       % Faithfulness is bounded by [-1,1]. Clipping prevents the KDE tails

@@ -15,7 +15,7 @@
 \newcommand{\rqrefs}[2]{Research Questions~\ref{#1} and~\ref{#2}}
 \newcommand{\caseref}[1]{Interaction case~\ref{#1}}
 % Yellow marker for words highlighted inside example boxes
-\newcommand{\hlword}[1]{{\setlength{\fboxsep}{1pt}\colorbox{yellow!60}{\vphantom{Tg}#1}}}
+\newcommand{\hlword}[1]{{\setlength{\fboxsep}{1pt}\colorbox{BoxHighlight}{\vphantom{Tg}#1}}}
 % Thesis style: named methods and systems are set upright; italics are reserved
 % for introduced terms, exact concept labels, and deliberate local emphasis.
 \usepackage{etoolbox}
@@ -33,6 +33,11 @@
 \makeatother
 \usepackage{subfiles}
 \usepackage[table,dvipsnames]{xcolor}
+% Box colors derived from the result figure palette (blue 2878B5, orange E37A26)
+\definecolor{BoxResultBlue}{HTML}{2878B5}
+\definecolor{BoxResultOrange}{HTML}{E37A26}
+\definecolor{BoxHighlight}{HTML}{FFD966}
+\definecolor{BoxExampleGreen}{HTML}{3B6E2A}
 \usepackage{longtable}
 \usepackage{fancyvrb}
 \usepackage{fvextra}
@@ -159,8 +164,8 @@
 % Custom tcolorbox environments
 \newtcolorbox[auto counter,number within=chapter]{example_box}[1][]{
   breakable,
-  colback=gray!5!white,
-  colframe=gray!75!black,
+  colback=BoxExampleGreen!5!white,
+  colframe=BoxExampleGreen,
   fonttitle=\bfseries,
   arc=4mm,
   boxrule=0.5mm,
@@ -183,7 +188,7 @@
 \newtcolorbox[auto counter,number within=chapter]{math_box}[1][]{
   breakable,
   colback=cyan!5!white,
-  colframe=cyan!75!black,
+  colframe=cyan!45!black,
   fonttitle=\bfseries,
   arc=4mm,
   boxrule=0.5mm,

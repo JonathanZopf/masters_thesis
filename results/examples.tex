@@ -3,7 +3,7 @@
 
 Four selected cases illustrate the range of local effects behind the aggregate results. After manual review, these were picked from several notable examples an OpenAI Codex LLM identified in the experiment data. The chosen instances are therefore explanatory cases rather than a representative sample from which the prevalence of interaction can be estimated. To distinguish measurement from attribution, $v_{\mathbf{x}}(\{C_i\})$ denotes a singleton effect and $v_{\mathbf{x}}(T)$ the measured effect (without normalization) of intervening on coalition $T$, as defined in Equation~\ref{eq:value_function}. Where denoted, adjusted values additionally incorporate the reference correction in Equation~\ref{eq:ce_adj}. The cases are interpreted in Section~\ref{sec:joint_intervention_examples}.
 
-\begin{example_box}[title={Interaction case \thetcbcounter: New German Credit, question 4},label={ex:new_german_credit_threshold},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+\begin{example_box}[title={Interaction case \thetcbcounter: New German Credit, question 4},label={ex:new_german_credit_threshold},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false,colframe=BoxResultBlue!75!black,colback=BoxResultBlue!5!white]
 	\textbf{Model:} GPT-OSS 120B.
 
 	\smallskip
@@ -30,7 +30,7 @@ Four selected cases illustrate the range of local effects behind the aggregate r
 
 The tabular oracle grouped these three financial indicators together (Figure~\ref{fig:german-credit-grouping-final}). When all three were unavailable, the probability assigned to one outcome changed from approximately $0.77$ under control to $0.02$ under treatment. The question-level faithfulness of this question decreased from $0.363$ under atomic attribution to $0.272$ under joint attribution.
 
-\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 18},label={ex:bbq_concept_decomposition},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 18},label={ex:bbq_concept_decomposition},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false,colframe=BoxResultBlue!75!black,colback=BoxResultBlue!5!white]
 	\textbf{Model:} GPT-OSS 120B.
 
 	\smallskip
@@ -57,7 +57,7 @@ The tabular oracle grouped these three financial indicators together (Figure~\re
 
 The reference-relative correction raised the joint value from $0.893$ to $0.988$, using a reference coefficient $\bar\gamma$ of $0.904$, which leaves it well below the singleton sum of $1.599$. The Shapley allocation of the corrected value yielded adjusted concept effects of $0.488$ for actions and $0.500$ for preferences.
 
-\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 24},label={ex:bbq_ambiguous_coalition_effect},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 24},label={ex:bbq_ambiguous_coalition_effect},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false,colframe=BoxResultBlue!75!black,colback=BoxResultBlue!5!white]
 	\textbf{Models:} GPT-OSS 120B and Mistral Medium 3.5.
 
 	\smallskip
@@ -85,7 +85,7 @@ The reference-relative correction raised the joint value from $0.893$ to $0.988$
 
 Inspection of the joint counterfactual showed that the mapping between sexual orientation and speaking topic remained intact, while the ordering of the individuals changed. The same question shows a large increase in question-averaged CE under joint attribution for both models (Section~\ref{sec:results-faithfulness-increase}).
 
-\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 29},label={ex:bbq_low_interaction},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false]
+\begin{example_box}[title={Interaction case \thetcbcounter: BBQ, question 29},label={ex:bbq_low_interaction},fontupper=\small,arc=2mm,boxrule=0.3mm,breakable=false,colframe=BoxResultBlue!75!black,colback=BoxResultBlue!5!white]
 	\textbf{Models:} GPT-OSS 120B and Mistral Medium 3.5.
 
 	\smallskip

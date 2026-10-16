@@ -263,7 +263,7 @@ For each question $\mathbf{x} \in \mathbf{X}$, the first step of the evaluation 
 
 The extraction procedure is performed in two stages. In the first prompt, $\mathcal{A}$ is instructed to identify all concepts contained in the question and to assign each concept to a semantic category from the dataset-wide category set $\mathbf{K}$. Notably, the possible categories are not provided explicitly; instead, the model is expected to infer appropriate category names consistently across the dataset.
 
-In a second prompt, the auxiliary model extracts the current value $c_m$ of every identified concept $C_m$ together with at least one plausible alternative value $c'_m$. These values define the intervention set $\mathbb{C}_m$ required for subsequent counterfactual generation. To improve quality and robustness, every prompt in the pipeline contains several few-shot examples that guide the auxiliary model towards the desired output format. The extracted information is then parsed and stored by the evaluation framework before the pipeline proceeds to the generation of counterfactual questions.
+In a second prompt, the auxiliary model extracts the current value $c_m$ of every identified concept $C_m$ together with at least one plausible alternative value $c'_m$. These values define the intervention set $\mathbb{C}_m$ required for subsequent counterfactual generation. To improve quality and robustness, every prompt in the pipeline contains several few-shot examples that guide the auxiliary model toward the desired output format. The extracted information is then parsed and stored by the evaluation framework before the pipeline proceeds to the generation of counterfactual questions.
 
 \subsubsection{Generating Counterfactual Questions}
 

@@ -72,15 +72,17 @@
 
 
 % Shared percentage legend. #1 x position, #2 y position, both in cell units.
+% The y axis of the heat maps points downward, so the legend is drawn from
+% 100 at its top edge to 0 at its bottom edge.
 \providecommand{\OracleHeatmapLegend}[2]{%
   \foreach \p in {0,...,99}
     \fill[OracleHeatHigh!\p!OracleHeatLow]
-      (#1,{#2+\p/18}) rectangle (#1+0.75,{#2+(\p+1)/18});
+      (#1,{#2+(99-\p)/18}) rectangle (#1+0.75,{#2+(100-\p)/18});
   \draw[gray!25,thin] (#1,#2) rectangle (#1+0.75,#2+5.5556);
   \node[anchor=south west,align=left] at (#1-0.15,#2-0.3)
     {Co-grouping\\rate (\%)};
   \foreach \p in {0,25,50,75,100}
-    \node[anchor=west] at (#1+0.95,{#2+\p/18}) {\p};
+    \node[anchor=west] at (#1+0.95,{#2+(100-\p)/18}) {\p};
 }
 
 % BBQ heat map with its 10 normalized categories.

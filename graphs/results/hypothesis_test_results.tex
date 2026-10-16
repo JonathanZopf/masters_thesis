@@ -13,8 +13,8 @@
 \newtcolorbox[auto counter,number within=chapter]{hypothesis_test_results_box}[1][]{
   enhanced,
   breakable,
-  colback=Goldenrod!7!white,
-  colframe=Goldenrod!70!black,
+  colback=BoxResultOrange!6!white,
+  colframe=BoxResultOrange!70!black,
   fonttitle=\bfseries,
   title={Hypothesis Test Results \thetcbcounter},
   arc=2mm,
@@ -34,7 +34,7 @@
     trim cells=true,
     every head row/.style={before row=\hline,after row=\hline},
     every last row/.style={after row=\hline},
-    every even row/.style={before row={\rowcolor{Goldenrod!9!white}}},
+    every even row/.style={before row={\rowcolor{BoxResultOrange!9!white}}},
     columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
     columns/model/.style={column name={\textbf{Model}},string type,column type=l},
     columns/outcome/.style={

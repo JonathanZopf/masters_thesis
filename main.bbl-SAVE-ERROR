@@ -302,7 +302,9 @@
       \field{booktitle}{The {{Semantic Web}} – {{ISWC}} 2024}
       \field{isbn}{978-3-031-77847-6}
       \field{langid}{english}
+      \field{series}{Lecture {{Notes}} in {{Computer Science}}}
       \field{title}{Increasing the~{{Accuracy}} of~{{LLM Question-Answering Systems}} with~{{Ontologies}}}
+      \field{volume}{15233}
       \field{year}{2025}
       \field{dateera}{ce}
       \field{pages}{324\bibrangedash 339}
@@ -445,6 +447,40 @@
       \verb https://www.mdpi.com/2227-7390/11/9/1982
       \endverb
     \endentry
+    \entry{cramer1946mathematical}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=8815262f8ce833f8804c25a5afc1996b}{%
+           family={Cramér},
+           familyi={C\bibinitperiod},
+           given={Harald},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Princeton}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{fullhash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{fullhashraw}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{bibnamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorbibnamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authornamehash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorfullhash}{8815262f8ce833f8804c25a5afc1996b}
+      \strng{authorfullhashraw}{8815262f8ce833f8804c25a5afc1996b}
+      \field{labelalpha}{Cra46}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-691-08004-6}
+      \field{series}{Princeton Mathematical Series}
+      \field{title}{Mathematical Methods of Statistics}
+      \field{volume}{9}
+      \field{year}{1946}
+      \field{dateera}{ce}
+    \endentry
     \entry{chenModelsExplainThemselves2024}{inproceedings}{}{}
       \name{author}{8}{}{%
         {{hash=8b13bbcb50b70d8c509494ad345e35dc}{%
@@ -534,7 +570,7 @@
            giveni={R\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {[The University of Chicago Press, Philosophy of Science Association]}%
+        {University of Chicago Press}%
       }
       \strng{namehash}{5b239833157a697f8d020bc372e2b92f}
       \strng{fullhash}{5b239833157a697f8d020bc372e2b92f}
@@ -550,7 +586,6 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The literature on causal discovery has focused on interventions that involve randomly assigning values to a single variable. But such a randomized intervention is not the only possibility, nor is it always optimal. In some cases it is impossible or it would be unethical to perform such an intervention. We provide an account of ‘hard’ and ‘soft’ interventions and discuss what they can contribute to causal discovery. We also describe how the choice of the optimal intervention(s) depends heavily on the particular experimental setup and the assumptions that can be made.}
-      \field{eprinttype}{jstor}
       \field{issn}{0031-8248}
       \field{journaltitle}{Philosophy of Science}
       \field{number}{5}
@@ -566,9 +601,6 @@
       \field{pages}{981\bibrangedash 995}
       \range{pages}{15}
       \verb{doi}
-      \verb 10.1086/525638
-      \endverb
-      \verb{eprint}
       \verb 10.1086/525638
       \endverb
       \verb{urlraw}
@@ -617,6 +649,45 @@
       \verb http://data.europa.eu/eli/reg/2024/1689/oj
       \endverb
     \endentry
+    \entry{fieldDiscoveringStatisticsUsing2017}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=e455d44d4062027b5d79a7bf3817371e}{%
+           family={Field},
+           familyi={F\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {London}%
+      }
+      \list{publisher}{1}{%
+        {SAGE Publications}%
+      }
+      \strng{namehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{fullhash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{fullhashraw}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{bibnamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorbibnamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authornamehash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorfullhash}{e455d44d4062027b5d79a7bf3817371e}
+      \strng{authorfullhashraw}{e455d44d4062027b5d79a7bf3817371e}
+      \field{labelalpha}{Fie17}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{With an exciting new look, new characters to meet, and its unique combination of humour and step-by-step instruction, this award-winning book is the statistics lifesaver for everyone. From initial theory through to regression, factor analysis and multilevel modelling, Andy Field animates statistics and SPSS software with his famously bizarre examples and activities. What’s brand new: A radical new design with original illustrations and even more colour A maths diagnostic tool to help students establish what areas they need to revise and improve on. A revamped online resource that uses video, case studies, datasets, testbanks and more to help students negotiate project work, master data management techniques, and apply key writing and employability skills New sections on replication, open science and Bayesian thinking Now fully up to date with latest versions of IBM SPSS Statistics©. All the online resources above (video, case studies, datasets, testbanks) can be easily integrated into your institution′s virtual learning environment or learning management system. This allows you to customize and curate content for use in module preparation, delivery and assessment. Please note that ISBN: 9781526445780 comprises the paperback edition of the Fifth Edition and the student version of IBM SPSS Statistics.}
+      \field{day}{14}
+      \field{edition}{5}
+      \field{isbn}{978-1-5264-2296-5}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{pagetotal}{1268}
+      \field{title}{Discovering {{Statistics Using IBM SPSS Statistics}}}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \keyw{Psychology / Research & Methodology,Psychology / Statistics,Reference / Research,Social Science / Statistics}
+    \endentry
     \entry{farayolaFairnessAIPredicting2023}{inproceedings}{}{}
       \name{author}{5}{}{%
         {{hash=90047edc145d4df5b994b458c20b10f0}{%
@@ -629,11 +700,11 @@
            familyi={T\bibinitperiod},
            given={Irina},
            giveni={I\bibinitperiod}}}%
-        {{hash=cd4c85c609eb101d6b6ede6257c55a9b}{%
-           family={Malika},
-           familyi={M\bibinitperiod},
-           given={Bendechache},
-           giveni={B\bibinitperiod}}}%
+        {{hash=cc1c8a1ae9b8cf5def47a679c8eeddde}{%
+           family={Bendechache},
+           familyi={B\bibinitperiod},
+           given={Malika},
+           giveni={M\bibinitperiod}}}%
         {{hash=770404cbe8ebb88661cd218d7ebd67a7}{%
            family={Saber},
            familyi={S\bibinitperiod},
@@ -652,14 +723,14 @@
         {Association for Computing Machinery}%
       }
       \strng{namehash}{bd5849147824d16518cc0244d31b5425}
-      \strng{fullhash}{98d6251ff3cbbe1a785d110430dd8aa6}
-      \strng{fullhashraw}{98d6251ff3cbbe1a785d110430dd8aa6}
-      \strng{bibnamehash}{98d6251ff3cbbe1a785d110430dd8aa6}
-      \strng{authorbibnamehash}{98d6251ff3cbbe1a785d110430dd8aa6}
+      \strng{fullhash}{528c16a334ff6ff51b94488c4c2b427e}
+      \strng{fullhashraw}{528c16a334ff6ff51b94488c4c2b427e}
+      \strng{bibnamehash}{528c16a334ff6ff51b94488c4c2b427e}
+      \strng{authorbibnamehash}{528c16a334ff6ff51b94488c4c2b427e}
       \strng{authornamehash}{bd5849147824d16518cc0244d31b5425}
-      \strng{authorfullhash}{98d6251ff3cbbe1a785d110430dd8aa6}
-      \strng{authorfullhashraw}{98d6251ff3cbbe1a785d110430dd8aa6}
-      \field{labelalpha}{FTM+23}
+      \strng{authorfullhash}{528c16a334ff6ff51b94488c4c2b427e}
+      \strng{authorfullhashraw}{528c16a334ff6ff51b94488c4c2b427e}
+      \field{labelalpha}{FTB+23}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{labelnamesource}{author}
@@ -667,6 +738,7 @@
       \field{abstract}{Artificial Intelligence (AI) is applied in almost every public sector because of its positive impacts. However, AI’s ethical aspects and trustworthiness constitute a significant uproar and concern among different AI stakeholders due to AI’s adverse effect on users when the AI system lacks cautionary measures. AI is used in the criminal justice system for predicting recidivism risk. However, AI’s negative impact translates into bias and high incarceration towards a group of defendants in a population assessed for recidivism risk. This paper focuses on fairness as a requirement of a trustworthy AI framework previously proposed to ascertain the appropriate application of AI systems in predicting recidivism. This paper aims to raise awareness about the fairness of AI models and stimulate further research and deployment of efficient and effective exploitation of fair and trustworthy AI models in the criminal justice system when predicting recidivism. Fairness has been a significant concern for criminal justice system stakeholders and has received considerable attention with more theoretical and practical studies than other trustworthy AI requirements. Hence, this paper reviews state-of-the-art fairness, outlines valuable findings, and proposes future directions to achieve fair AI systems for predicting recidivism risk. In addition, this paper ensures mapping existing technical works in the literature to the fairness pipeline corresponding to the criminal justice system’s AI development phases.}
       \field{booktitle}{Proceedings of the 18th {{International Conference}} on {{Availability}}, {{Reliability}} and {{Security}}}
       \field{day}{29}
+      \field{eid}{76}
       \field{isbn}{979-8-4007-0772-8}
       \field{month}{8}
       \field{series}{{{ARES}} '23}
@@ -762,13 +834,19 @@
       \verb https://ieeexplore.ieee.org/document/10849387/
       \endverb
     \endentry
-    \entry{grompingSouthGermanCredit2019}{misc}{}{}
+    \entry{grompingSouthGermanCredit2019}{report}{}{}
       \name{author}{1}{}{%
         {{hash=fb7665cbb74f4ebc72a8c21cefe13ab1}{%
            family={Grömping},
            familyi={G\bibinitperiod},
            given={Ulrike},
            giveni={U\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Department II, Beuth University of Applied Sciences Berlin}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
       }
       \strng{namehash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
       \strng{fullhash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
@@ -784,12 +862,23 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{*Report 4/2019, Reports in Mathematics, Physics and Chemistry, Department II, Beuth University of Applied Sciences Berlin. Downloadable at http://www1.beuth-hochschule.de/FB\_II/reports/Report-2019-004.pdf.* The widely used German credit dataset from the UCI Machine Learning Repository, donated by the German professor Hans Hofmann via the European Statlog project, comes with an incorrect code table. Many variables are wrongly represented, which implies that the data cannot be adequately used for experimenting with methods for interpretable machine learning. This note provides details on data generation and a correction of the code table, derived from German language literature. Correct data have been provided to the UCI Machine Learning Repository under the name “South German Credit” (https://archive.ics.uci.edu/ml/datasets/South+German+Credit).}
-      \field{day}{1}
       \field{month}{11}
+      \field{number}{04/2019}
       \field{shorttitle}{South {{German Credit Data}}}
       \field{title}{South {{German Credit Data}}: {{Correcting}} a {{Widely Used Data Set}}}
+      \field{type}{Reports in {{Mathematics}}, {{Physics}} and {{Chemistry}}}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
       \field{year}{2019}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www1.beuth-hochschule.de/FB_II/reports/Report-2019-004.pdf
+      \endverb
+      \verb{url}
+      \verb https://www1.beuth-hochschule.de/FB_II/reports/Report-2019-004.pdf
+      \endverb
     \endentry
     \entry{hungWalkingTightropeEvaluating2023}{inproceedings}{}{}
       \name{author}{5}{}{%
@@ -1245,6 +1334,7 @@
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{The purpose of the Stakeholder Playbook is to enable the developers of explainable AI systems to take into account the different ways in which different stakeholders or role-holders need to 'look inside' of the AI/XAI systems. We conducted structured cognitive interviews with senior and midcareer professionals having had direct experience either developing or using AI and/or autonomous systems. The results show that role holders need access to others (e.g., trusted engineers, trusted vendors) in order for them to be able to develop satisfying mental models of AI systems. They need to know How it fails and How it misleads as much as they need to know How it works. Some stakeholders need to develop an understanding that enables them to explain the AI to someone else and not just satisfy their own sensemaking requirements. Only about half of our interviewees said they always wanted explanations, or even needed better explanations than the ones that were provided. This and other findings seem surprising if not paradoxical, but they can be resolved by acknowledging that different role holders have differing skill sets and have different sensemaking desirements. Individuals often serve in multiple roles and therefore can have different immediate goals. Based on our empirical evidence, we created a "Playbook" that lists Explanation Desirements, Explanation Challenges, and Explanation Cautions for a variety of stakeholder groups and roles. The goal is to help XAI developers by providing guidance for the development process and for creating explanations that support the different roles.}
       \field{day}{17}
+      \field{eid}{1117848}
       \field{issn}{2624-9898}
       \field{journaltitle}{Frontiers in Computer Science}
       \field{langid}{english}
@@ -1298,7 +1388,7 @@
       \field{abstract}{Software and systems engineering — Software testing — Part 11: Guidelines on the testing of AI-based systems}
       \field{langid}{english}
       \field{shorttitle}{{{ISO}}/{{IEC TR}} 29119-11}
-      \field{title}{{{ISO}}/{{IEC TR}} 29119-11:2020}
+      \field{title}{{{ISO}}/{{IEC TR}} 29119-11:2020 {{Software}} and Systems Engineering. {{Software}} Testing. {{Part}} 11: {{Guidelines}} on the Testing of {{AI-based}} Systems}
       \field{urlday}{26}
       \field{urlmonth}{4}
       \field{urlyear}{2026}
@@ -1450,10 +1540,11 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{Open domain question answering (OpenQA) tasks have been recently attracting more and more attention from the natural language processing (NLP) community. In this work, we present the first free-form multiple-choice OpenQA dataset for solving medical problems, MedQA, collected from the professional medical board exams. It covers three languages: English, simplified Chinese, and traditional Chinese, and contains 12,723, 34,251, and 14,123 questions for the three languages, respectively. We implement both rule-based and popular neural methods by sequentially combining a document retriever and a machine comprehension model. Through experiments, we find that even the current best method can only achieve 36.7\%, 42.0\%, and 70.1\% of test accuracy on the English, traditional Chinese, and simplified Chinese questions, respectively. We expect MedQA to present great challenges to existing OpenQA systems and hope that it can serve as a platform to promote much stronger OpenQA models from the NLP community in the future.}
+      \field{day}{12}
       \field{issn}{2076-3417}
       \field{journaltitle}{Applied Sciences}
       \field{langid}{english}
-      \field{month}{1}
+      \field{month}{7}
       \field{number}{14}
       \field{shortjournal}{Appl. Sci.}
       \field{shorttitle}{What {{Disease Does This Patient Have}}?}
@@ -1533,6 +1624,58 @@
       \endverb
       \verb{url}
       \verb https://pmc.ncbi.nlm.nih.gov/articles/PMC8947370/
+      \endverb
+    \endentry
+    \entry{kruskalShortestSpanningSubtree1956}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=569f9ff2dff516524ca08370ba81ba29}{%
+           family={Kruskal},
+           familyi={K\bibinitperiod},
+           given={Joseph\bibnamedelima B.},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{fullhash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{fullhashraw}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{bibnamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorbibnamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authornamehash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorfullhash}{569f9ff2dff516524ca08370ba81ba29}
+      \strng{authorfullhashraw}{569f9ff2dff516524ca08370ba81ba29}
+      \field{labelalpha}{Kru56}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{jstor}
+      \field{issn}{0002-9939}
+      \field{journaltitle}{Proceedings of the American Mathematical Society}
+      \field{number}{1}
+      \field{shortjournal}{Proc. Am. Math. Soc.}
+      \field{title}{On the {{Shortest Spanning Subtree}} of a {{Graph}} and the {{Traveling Salesman Problem}}}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{volume}{7}
+      \field{year}{1956}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{48\bibrangedash 50}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.2307/2033241
+      \endverb
+      \verb{eprint}
+      \verb 2033241
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/2033241
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/2033241
       \endverb
     \endentry
     \entry{lanhamMeasuringFaithfulnessChainofThought2023}{online}{}{}
@@ -1965,7 +2108,7 @@
       \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language}
     \endentry
     \entry{lopesXAISystemsEvaluation2022}{article}{}{}
-      \name{author}{4}{}{%
+      \name{author}{5}{}{%
         {{hash=38beb185a96fc01642c288e635abb005}{%
            family={Lopes},
            familyi={L\bibinitperiod},
@@ -1986,28 +2129,34 @@
            familyi={O\bibinitperiod},
            given={Tiago},
            giveni={T\bibinitperiod}}}%
+        {{hash=7940920c2c8f47409de7ed7ffaa19da3}{%
+           family={Rosado},
+           familyi={R\bibinitperiod},
+           given={Luís},
+           giveni={L\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
         {Multidisciplinary Digital Publishing Institute}%
       }
       \strng{namehash}{57107ac488954d7a9e1c8fa0a15fd819}
-      \strng{fullhash}{1c6e2d85577036768795835181421714}
-      \strng{fullhashraw}{1c6e2d85577036768795835181421714}
-      \strng{bibnamehash}{1c6e2d85577036768795835181421714}
-      \strng{authorbibnamehash}{1c6e2d85577036768795835181421714}
+      \strng{fullhash}{4c6cf8a82e81d9eebaefa2b48422771d}
+      \strng{fullhashraw}{4c6cf8a82e81d9eebaefa2b48422771d}
+      \strng{bibnamehash}{4c6cf8a82e81d9eebaefa2b48422771d}
+      \strng{authorbibnamehash}{4c6cf8a82e81d9eebaefa2b48422771d}
       \strng{authornamehash}{57107ac488954d7a9e1c8fa0a15fd819}
-      \strng{authorfullhash}{1c6e2d85577036768795835181421714}
-      \strng{authorfullhashraw}{1c6e2d85577036768795835181421714}
-      \field{labelalpha}{LSBO22}
+      \strng{authorfullhash}{4c6cf8a82e81d9eebaefa2b48422771d}
+      \strng{authorfullhashraw}{4c6cf8a82e81d9eebaefa2b48422771d}
+      \field{labelalpha}{LSB+22}
       \field{sortinit}{L}
       \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{The lack of transparency of powerful Machine Learning systems paired with their growth in popularity over the last decade led to the emergence of the eXplainable Artificial Intelligence (XAI) field. Instead of focusing solely on obtaining highly performing models, researchers also develop explanation techniques that help better understand the system’s reasoning for a particular output. An explainable system can be designed, developed, and evaluated from different perspectives, which enables researchers from different disciplines to work together on this topic. However, the multidisciplinary nature of XAI systems creates new challenges for condensing and structuring adequate methodologies to design and evaluate such systems. This paper presents a survey of Human-centred and Computer-centred methods to evaluate XAI systems. We propose a new taxonomy to categorize XAI evaluation methods more clearly and intuitively. This categorization gathers knowledge from different disciplines and organizes the evaluation methods according to a set of categories that represent key properties of XAI systems. Possible ways to use the proposed taxonomy in the design and evaluation of XAI systems are also discussed, alongside with some concluding remarks and future directions of research.}
+      \field{day}{20}
       \field{issn}{2076-3417}
       \field{journaltitle}{Applied Sciences}
       \field{langid}{english}
-      \field{month}{1}
+      \field{month}{9}
       \field{number}{19}
       \field{shortjournal}{Appl. Sci.}
       \field{shorttitle}{{{XAI Systems Evaluation}}}
@@ -2214,11 +2363,9 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Game-theoretic attribution techniques based on Shapley values are used to interpret black-box machine learning models, but their exact calculation is generally NP-hard, requiring approximation methods for non-trivial models. As the computation of Shapley values can be expressed as a summation over a set of permutations, a common approach is to sample a subset of these permutations for approximation. Unfortunately, standard Monte Carlo sampling methods can exhibit slow convergence, and more sophisticated quasi-Monte Carlo methods have not yet been applied to the space of permutations. To address this, we investigate new approaches based on two classes of approximation methods and compare them empirically. First, we demonstrate quadrature techniques in a RKHS containing functions of permutations, using the Mallows kernel in combination with kernel herding and sequential Bayesian quadrature. The RKHS perspective also leads to quasi-Monte Carlo type error bounds, with a tractable discrepancy measure defined on permutations. Second, we exploit connections between the hypersphere \$\textbackslash mathbb\{S\}\textasciicircum\{d-2\}\$ and permutations to create practical algorithms for generating permutation samples with good properties. Experiments show the above techniques provide significant improvements for Shapley value estimates over existing methods, converging to a smaller RMSE in the same number of model evaluations.}
-      \field{day}{1}
       \field{issn}{1532-4435}
       \field{journaltitle}{The Journal of Machine Learning Research}
-      \field{month}{1}
-      \field{number}{1}
+      \field{number}{43}
       \field{shortjournal}{J. Mach. Learn. Res.}
       \field{title}{Sampling Permutations for {{Shapley}} Value Estimation}
       \field{urlday}{15}
@@ -2228,16 +2375,16 @@
       \field{year}{2022}
       \field{dateera}{ce}
       \field{urldateera}{ce}
-      \field{pages}{43:2082\bibrangedash 43:2127}
-      \range{pages}{-1}
+      \field{pages}{1\bibrangedash 46}
+      \range{pages}{46}
       \verb{file}
       \verb /Users/jonathan/Zotero/storage/UZBPP4Z3/Mitchell et al. - 2022 - Sampling permutations for Shapley value estimation.pdf
       \endverb
       \verb{urlraw}
-      \verb https://dl.acm.org/doi/10.5555/3586589.3586632
+      \verb https://www.jmlr.org/papers/v23/21-0439.html
       \endverb
       \verb{url}
-      \verb https://dl.acm.org/doi/10.5555/3586589.3586632
+      \verb https://www.jmlr.org/papers/v23/21-0439.html
       \endverb
     \endentry
     \entry{madsenAreSelfexplanationsLarge2024}{inproceedings}{}{}
@@ -2326,18 +2473,18 @@
     \endentry
     \entry{MistralMedium35}{online}{}{}
       \name{author}{1}{}{%
-        {{hash=539134de8ffd78af38bb1627d8507ce9}{%
-           family={{Mistral}},
+        {{hash=5f46782611de55f109003b4dac1b83e0}{%
+           family={{Mistral AI}},
            familyi={M\bibinitperiod}}}%
       }
-      \strng{namehash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{fullhash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{fullhashraw}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{bibnamehash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{authorbibnamehash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{authornamehash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{authorfullhash}{539134de8ffd78af38bb1627d8507ce9}
-      \strng{authorfullhashraw}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{namehash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{fullhash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{fullhashraw}{5f46782611de55f109003b4dac1b83e0}
+      \strng{bibnamehash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{authorbibnamehash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{authornamehash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{authorfullhash}{5f46782611de55f109003b4dac1b83e0}
+      \strng{authorfullhashraw}{5f46782611de55f109003b4dac1b83e0}
       \field{labelalpha}{Mis26}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
@@ -2347,7 +2494,7 @@
       \field{day}{28}
       \field{langid}{english}
       \field{month}{4}
-      \field{title}{Mistral {{Medium}} 3.5 - {{Mistral AI}}}
+      \field{title}{Mistral {{Medium}} 3.5}
       \field{urlday}{3}
       \field{urlmonth}{8}
       \field{urlyear}{2026}
@@ -2441,6 +2588,57 @@
       \endverb
       \keyw{Computer Science - Artificial Intelligence,Computer Science - Human-Computer Interaction}
     \endentry
+    \entry{matton2025walkthetalk_comment}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=0dd237488f8d9e448a98733c6d25df04}{%
+           family={Matton},
+           familyi={M\bibinitperiod},
+           given={Katie},
+           giveni={K\bibinitperiod}}}%
+        {{hash=631f3a7144959d4ce82e745f6a98dad7}{%
+           family={Ness},
+           familyi={N\bibinitperiod},
+           given={Robert\bibnamedelima Osazuwa},
+           giveni={R\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=f81cd6997c90145de6eca30657467351}{%
+           family={Guttag},
+           familyi={G\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1e4bc52180cca5a898b8c85f95865bdf}{%
+           family={Kıcıman},
+           familyi={K\bibinitperiod},
+           given={Emre},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a5a0b74964045327aa2cc38c6cdc755b}
+      \strng{fullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{fullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{bibnamehash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorbibnamehash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authornamehash}{a5a0b74964045327aa2cc38c6cdc755b}
+      \strng{authorfullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorfullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \field{extraname}{1}
+      \field{labelalpha}{MNGK25}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{OpenReview discussion}
+      \field{month}{1}
+      \field{note}{OpenReview Note ID: IMVu1xRHw0}
+      \field{title}{Comment on “{{Walk}} the {{Talk}}? {{Measuring}} the {{Faithfulness}} of {{Large Language Model Explanations}}”}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=4ub9gpx9xw&noteId=IMVu1xRHw0
+      \endverb
+      \verb{url}
+      \verb https://openreview.net/forum?id=4ub9gpx9xw&noteId=IMVu1xRHw0
+      \endverb
+    \endentry
     \entry{mattonWalkTalkMeasuring2024}{inproceedings}{}{}
       \name{author}{4}{}{%
         {{hash=0dd237488f8d9e448a98733c6d25df04}{%
@@ -2448,44 +2646,50 @@
            familyi={M\bibinitperiod},
            given={Katie},
            giveni={K\bibinitperiod}}}%
-        {{hash=f7f806b4b495f5141cda6a1499d5fb4f}{%
+        {{hash=631f3a7144959d4ce82e745f6a98dad7}{%
            family={Ness},
            familyi={N\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod}}}%
+           given={Robert\bibnamedelima Osazuwa},
+           giveni={R\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
         {{hash=f81cd6997c90145de6eca30657467351}{%
            family={Guttag},
            familyi={G\bibinitperiod},
            given={John},
            giveni={J\bibinitperiod}}}%
-        {{hash=62ef108f731f13738a37da8b832c9927}{%
-           family={Kiciman},
+        {{hash=1e4bc52180cca5a898b8c85f95865bdf}{%
+           family={Kıcıman},
            familyi={K\bibinitperiod},
            given={Emre},
            giveni={E\bibinitperiod}}}%
       }
       \strng{namehash}{a5a0b74964045327aa2cc38c6cdc755b}
-      \strng{fullhash}{595aad3bbab4c4ae775905b1f9a4054d}
-      \strng{fullhashraw}{595aad3bbab4c4ae775905b1f9a4054d}
-      \strng{bibnamehash}{595aad3bbab4c4ae775905b1f9a4054d}
-      \strng{authorbibnamehash}{595aad3bbab4c4ae775905b1f9a4054d}
+      \strng{fullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{fullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{bibnamehash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorbibnamehash}{903db1c0de92a81b41466ca25dcb700a}
       \strng{authornamehash}{a5a0b74964045327aa2cc38c6cdc755b}
-      \strng{authorfullhash}{595aad3bbab4c4ae775905b1f9a4054d}
-      \strng{authorfullhashraw}{595aad3bbab4c4ae775905b1f9a4054d}
+      \strng{authorfullhash}{903db1c0de92a81b41466ca25dcb700a}
+      \strng{authorfullhashraw}{903db1c0de92a81b41466ca25dcb700a}
+      \field{extraname}{2}
       \field{labelalpha}{MNGK25}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extraalpha}{2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{The Thirteenth International Conference on Learning Representations}
+      \field{booktitle}{The {{Thirteenth International Conference}} on {{Learning Representations}} ({{ICLR}})}
       \field{title}{Walk the Talk? {{Measuring}} the Faithfulness of Large Language Model Explanations}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
       \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
       \verb{urlraw}
-      \verb https://openreview.net/forum?id=4ub9gpx9xw
+      \verb https://proceedings.iclr.cc/paper_files/paper/2025/hash/b5ec50eb177908f21f78ed0d76ed525c-Abstract-Conference.html
       \endverb
       \verb{url}
-      \verb https://openreview.net/forum?id=4ub9gpx9xw
+      \verb https://proceedings.iclr.cc/paper_files/paper/2025/hash/b5ec50eb177908f21f78ed0d76ed525c-Abstract-Conference.html
       \endverb
     \endentry
     \entry{maityLargeLanguageModels2025}{article}{}{}
@@ -2624,7 +2828,7 @@
       \endverb
       \keyw{Computer Science - Artificial Intelligence,Computer Science - Computation and Language,Computer Science - Machine Learning}
     \endentry
-    \entry{nisevicExplainableAICan2024}{online}{}{}
+    \entry{nisevicExplainableAICan2024}{inproceedings}{}{}
       \name{author}{3}{}{%
         {{hash=f85ca61be662481dcf9b564857252d6f}{%
            family={Nisevic},
@@ -2643,7 +2847,10 @@
            giveni={J\bibinitperiod}}}%
       }
       \list{location}{1}{%
-        {Rochester, NY}%
+        {Yokohama, Japan}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
       }
       \strng{namehash}{56c79881e3dbd683a98e826250343192}
       \strng{fullhash}{56c79881e3dbd683a98e826250343192}
@@ -2659,37 +2866,33 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{This paper explores the potential complementarity and overlap between the Artificial Intelligence Act (AI Act) and the General Data Protection Regulation (GDPR), explicitly examining safeguarding individual interests in the context of explainable AI systems. The authors make two novel contributions. Firstly, the paper comprehensively outlines the rules for explainable AI as stipulated in the GDPR and the AI Act. Secondly, it delves into the interaction between these legal acts, thereby analysing the types of explanations recognised under both the AI Act and the GDPR, the interpretation of legal requirements, and the implications for high-risk AI systems through the lens of a right to an explanation. Additionally, this paper examines other emerging frameworks in the European Union (EU) that focus on protecting individuals while integrating AI systems into the EU market. The development and deployment of AI systems raise significant concerns regarding the necessity for additional regulatory frameworks within the EU's legal landscape. Consequently, this paper posits that legal requirements for explainable AI likely extend beyond the current GDPR and AI Act regulations, necessitating a broader application of legal rules relevant to a particular sector.}
-      \field{day}{15}
-      \field{eprinttype}{Social Science Research Network}
-      \field{langid}{english}
-      \field{month}{1}
-      \field{number}{5056022}
-      \field{pubstate}{prepublished}
+      \field{booktitle}{2024 {{International Joint Conference}} on {{Neural Networks}} ({{IJCNN}})}
+      \field{eventtitle}{2024 {{International Joint Conference}} on {{Neural Networks}} ({{IJCNN}})}
+      \field{issn}{2161-4407}
+      \field{month}{6}
       \field{shorttitle}{Explainable {{AI}}}
-      \field{title}{Explainable {{AI}}: {{Can}} the {{AI Act}} and the {{GDPR}} Go out for a {{Date}}?}
-      \field{type}{SSRN Scholarly Paper}
-      \field{urlday}{26}
-      \field{urlmonth}{4}
+      \field{title}{Explainable {{AI}}: {{Can}} the {{AI Act}} and the {{GDPR}} Go out for a Date?}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
       \field{urlyear}{2026}
       \field{year}{2024}
       \field{dateera}{ce}
       \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
       \verb{doi}
-      \verb 10.2139/ssrn.5056022
-      \endverb
-      \verb{eprint}
-      \verb 5056022
+      \verb 10.1109/IJCNN60899.2024.10649994
       \endverb
       \verb{file}
-      \verb /Users/jonathan/Zotero/storage/WMMQM5IS/Nisevic et al. - 2024 - Explainable AI Can the AI Act and the GDPR go out for a Date.pdf
+      \verb /Users/jonathan/Zotero/storage/QBCM9I7Z/10649994.html
       \endverb
       \verb{urlraw}
-      \verb https://papers.ssrn.com/abstract=5056022
+      \verb https://ieeexplore.ieee.org/document/10649994
       \endverb
       \verb{url}
-      \verb https://papers.ssrn.com/abstract=5056022
+      \verb https://ieeexplore.ieee.org/document/10649994
       \endverb
-      \keyw{AI Act,EU regulations,right to explanation,the GDPR,XAI}
+      \keyw{AI Act,Ethics,EU regulations,Explainable AI,Law,Law enforcement,Medical services,right to explanation,Shape,Technological innovation,the GDPR,XAI}
     \endentry
     \entry{nazirSurveyFeatureAttribution2025}{article}{}{}
       \name{author}{4}{}{%
@@ -2776,20 +2979,20 @@
       \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhashraw}{0523b13262b12c215d8009938f5c14f1}
-      \field{labelalpha}{Ope26}
+      \field{labelalpha}{Ope25}
       \field{sortinit}{O}
       \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We’re releasing gpt-oss-120b and gpt-oss-20b—two state-of-the-art open-weight language models that deliver strong real-world performance at low cost. Available under the flexible Apache 2.0 license, these models outperform similarly sized open models on reasoning tasks, demonstrate strong tool use capabilities, and are optimized for efficient deployment on consumer hardware.}
-      \field{day}{30}
+      \field{day}{5}
       \field{langid}{american}
-      \field{month}{7}
-      \field{title}{Introducing Gpt-Oss}
+      \field{month}{8}
+      \field{title}{Introducing {gpt-oss}}
       \field{urlday}{3}
       \field{urlmonth}{8}
       \field{urlyear}{2026}
-      \field{year}{2026}
+      \field{year}{2025}
       \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{file}
@@ -2934,6 +3137,7 @@
       \strng{authornamehash}{809f695b398afbb54b544c49e8d1bbbb}
       \strng{authorfullhash}{809f695b398afbb54b544c49e8d1bbbb}
       \strng{authorfullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \field{extraname}{1}
       \field{labelalpha}{Pea09}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -2962,6 +3166,54 @@
       \verb https://www.cambridge.org/core/books/causality/B0046844FAE10CBF274D4ACBDAEB5F5B
       \endverb
     \endentry
+    \entry{pearlCausalDiagramsEmpirical1995}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=809f695b398afbb54b544c49e8d1bbbb}{%
+           family={Pearl},
+           familyi={P\bibinitperiod},
+           given={Judea},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{fullhash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{fullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{bibnamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorbibnamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authornamehash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorfullhash}{809f695b398afbb54b544c49e8d1bbbb}
+      \strng{authorfullhashraw}{809f695b398afbb54b544c49e8d1bbbb}
+      \field{extraname}{2}
+      \field{labelalpha}{Pea95}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The primary aim of this paper is to show how graphical models can be used as a mathematical language for integrating statistical and subject-matter information. In particular, the paper develops a principled, nonparametric framework for causal inference, in which diagrams are queried to determine if the assumptions available are sufficient for identifying causal effects from nonexperimental data. If so the diagrams can be queried to produce mathematical expressions for causal effects in terms of observed distributions; otherwise, the diagrams can be queried to suggest additional observations or auxiliary experiments from which the desired inferences can be obtained.}
+      \field{day}{1}
+      \field{issn}{0006-3444}
+      \field{journaltitle}{Biometrika}
+      \field{month}{12}
+      \field{number}{4}
+      \field{title}{Causal Diagrams for Empirical Research}
+      \field{urlday}{6}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{82}
+      \field{year}{1995}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{669\bibrangedash 688}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1093/biomet/82.4.669
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/biomet/82.4.669
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/biomet/82.4.669
+      \endverb
+    \endentry
     \entry{parcalabescuMeasuringFaithfulnessSelfconsistency2024}{inproceedings}{}{}
       \name{author}{2}{}{%
         {{hash=7daa9a2382125a13ebc036e18800436f}{%
@@ -2974,6 +3226,23 @@
            familyi={F\bibinitperiod},
            given={Anette},
            giveni={A\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=1bcfba9c9362ce7af988775a8d5e1b80}{%
+           family={Ku},
+           familyi={K\bibinitperiod},
+           given={Lun-Wei},
+           giveni={L\bibinithyphendelim W\bibinitperiod}}}%
+        {{hash=5545e7248fbadb25de1f672f6cd846dc}{%
+           family={Martins},
+           familyi={M\bibinitperiod},
+           given={Andre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d353c169cbdb6171b51ab4026427e690}{%
+           family={Srikumar},
+           familyi={S\bibinitperiod},
+           given={Vivek},
+           giveni={V\bibinitperiod}}}%
       }
       \list{location}{1}{%
         {Bangkok, Thailand}%
@@ -2989,14 +3258,19 @@
       \strng{authornamehash}{d81a0d6cd31d4e375ca8d3eedba9b80d}
       \strng{authorfullhash}{d81a0d6cd31d4e375ca8d3eedba9b80d}
       \strng{authorfullhashraw}{d81a0d6cd31d4e375ca8d3eedba9b80d}
+      \strng{editorbibnamehash}{62d396a0f210c1554518cd993b9e4997}
+      \strng{editornamehash}{62d396a0f210c1554518cd993b9e4997}
+      \strng{editorfullhash}{62d396a0f210c1554518cd993b9e4997}
+      \strng{editorfullhashraw}{62d396a0f210c1554518cd993b9e4997}
       \field{labelalpha}{PF24}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 62nd {{Annual Meeting}} of the {{Association}} for {{Computational Linguistics}} ({{Volume}} 1: {{Long Papers}})}
-      \field{eventtitle}{Proceedings of the 62nd {{Annual Meeting}} of the {{Association}} for {{Computational Linguistics}} ({{Volume}} 1: {{Long Papers}})}
+      \field{eventtitle}{{{ACL}} 2024}
       \field{langid}{english}
+      \field{month}{8}
       \field{title}{On {{Measuring Faithfulness}} or {{Self}}-Consistency of {{Natural Language Explanations}}}
       \field{urlday}{6}
       \field{urlmonth}{5}
@@ -3079,16 +3353,15 @@
       \field{abstract}{We introduce four principles for explainable artificial intelligence (AI) that comprise fundamental properties for explainable AI systems. We propose that explainable AI systems deliver accompanying evidence or reasons for outcomes and processes; provide explanations that are understandable to individual users; provide explanations that correctly reflect the system s process for generating the output; and that a system only operates under conditions for which it was designed and when it reaches sufficient confidence in its output. We have termed these four principles as explanation, meaningful, explanation accuracy, and knowledge limits, respectively. Through significant stakeholder engagement, these four principles were developed to encompass the multidisciplinary nature of explainable AI, including the fields of computer science, engineering, and psychology. Because one-sizefits-all explanations do not exist, different users will require different types of explanations. We present five categories of explanation and summarize theories of explainable AI. We give an overview of the algorithms in the field that cover the major classes of explainable algorithms. As a baseline comparison, we assess how well explanations provided by people follow our four principles. This assessment provides insights to the challenges of designing explainable AI systems.}
       \field{day}{29}
       \field{month}{9}
-      \field{number}{NIST IR 8312}
+      \field{number}{8312}
       \field{title}{Four Principles of Explainable Artificial Intelligence}
+      \field{type}{{NIST} Interagency/Internal Report}
       \field{urlday}{27}
       \field{urlmonth}{4}
       \field{urlyear}{2026}
       \field{year}{2021}
       \field{dateera}{ce}
       \field{urldateera}{ce}
-      \field{pages}{NIST IR 8312}
-      \range{pages}{-1}
       \verb{doi}
       \verb 10.6028/NIST.IR.8312
       \endverb
@@ -3539,9 +3812,11 @@
            familyi={H\bibinitperiod},
            given={Nicolas},
            giveni={N\bibinitperiod}}}%
-        {{hash=f977460d1968c6afeb4c348d0232b2e0}{%
-           family={{Maria Perez-Ortiz}},
-           familyi={M\bibinitperiod}}}%
+        {{hash=4a2017f1d98daa57a6a681fa0fbca260}{%
+           family={Perez-Ortiz},
+           familyi={P\bibinithyphendelim O\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
       }
       \name{editor}{3}{}{%
         {{hash=1bcfba9c9362ce7af988775a8d5e1b80}{%
@@ -3567,18 +3842,18 @@
         {Association for Computational Linguistics}%
       }
       \strng{namehash}{f0f08e117044e063f098d09318c34192}
-      \strng{fullhash}{9fcdc34d3e9f5bac13ec872e4568129e}
-      \strng{fullhashraw}{9fcdc34d3e9f5bac13ec872e4568129e}
-      \strng{bibnamehash}{9fcdc34d3e9f5bac13ec872e4568129e}
-      \strng{authorbibnamehash}{9fcdc34d3e9f5bac13ec872e4568129e}
+      \strng{fullhash}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
+      \strng{fullhashraw}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
+      \strng{bibnamehash}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
+      \strng{authorbibnamehash}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
       \strng{authornamehash}{f0f08e117044e063f098d09318c34192}
-      \strng{authorfullhash}{9fcdc34d3e9f5bac13ec872e4568129e}
-      \strng{authorfullhashraw}{9fcdc34d3e9f5bac13ec872e4568129e}
+      \strng{authorfullhash}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
+      \strng{authorfullhashraw}{3bae99d9bfd8ea5dfdde8cba14e7ef1b}
       \strng{editorbibnamehash}{62d396a0f210c1554518cd993b9e4997}
       \strng{editornamehash}{62d396a0f210c1554518cd993b9e4997}
       \strng{editorfullhash}{62d396a0f210c1554518cd993b9e4997}
       \strng{editorfullhashraw}{62d396a0f210c1554518cd993b9e4997}
-      \field{labelalpha}{SCHM24}
+      \field{labelalpha}{SCHP24}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -3672,50 +3947,6 @@
       \verb{url}
       \verb https://www.degruyter.com/document/doi/10.1515/9781400881970-018/html
       \endverb
-    \endentry
-    \entry{shpitserIdentificationJointInterventional2006}{inproceedings}{}{}
-      \name{author}{2}{}{%
-        {{hash=9ebb753339d5d0ba2ebfe33a9c7bbb87}{%
-           family={Shpitser},
-           familyi={S\bibinitperiod},
-           given={Ilya},
-           giveni={I\bibinitperiod}}}%
-        {{hash=809f695b398afbb54b544c49e8d1bbbb}{%
-           family={Pearl},
-           familyi={P\bibinitperiod},
-           given={Judea},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Boston, Massachusetts}%
-      }
-      \list{publisher}{1}{%
-        {AAAI Press}%
-      }
-      \strng{namehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{fullhash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{fullhashraw}{3fb93ee220155963590a9e739022d6e5}
-      \strng{bibnamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorbibnamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authornamehash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorfullhash}{3fb93ee220155963590a9e739022d6e5}
-      \strng{authorfullhashraw}{3fb93ee220155963590a9e739022d6e5}
-      \field{labelalpha}{SP06}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This paper is concerned with estimating the effects of actions from causal assumptions, represented concisely as a directed graph, and statistical knowledge, given as a probability distribution. We provide a necessary and sufficient graphical condition for the cases when the causal effect of an arbitrary set of variables on another arbitrary set can be determined uniquely from the available information, as well as an algorithm which computes the effect whenever this condition holds. Furthermore, we use our results to prove completeness of do-calculus [Pearl, 1995], and a version of an identification algorithm in [Tian, 2002] for the same identification problem. Finally, we derive a complete characterization of semi-Markovian models in which all causal effects are identifiable.}
-      \field{booktitle}{Proceedings of the 21st National Conference on {{Artificial}} Intelligence - {{Volume}} 2}
-      \field{day}{16}
-      \field{isbn}{978-1-57735-281-5}
-      \field{month}{7}
-      \field{series}{{{AAAI}}'06}
-      \field{title}{Identification of Joint Interventional Distributions in Recursive Semi-{{Markovian}} Causal Models}
-      \field{year}{2006}
-      \field{dateera}{ce}
-      \field{pages}{1219\bibrangedash 1226}
-      \range{pages}{8}
     \endentry
     \entry{suzgunChallengingBIGBenchTasks2023}{inproceedings}{}{}
       \name{author}{11}{}{%
@@ -4071,9 +4302,11 @@
            familyi={M\bibinitperiod},
            given={Julian},
            giveni={J\bibinitperiod}}}%
-        {{hash=1253d1c2dc150b6035d0f4b73c4152ee}{%
-           family={{Ethan Perez}},
-           familyi={E\bibinitperiod}}}%
+        {{hash=79978685fd7b37606022b06c0f6419a1}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={Ethan},
+           giveni={E\bibinitperiod}}}%
         {{hash=fc3587de57b6b9868eab5cb9c8efc3fb}{%
            family={Bowman},
            familyi={B\bibinitperiod},
@@ -4087,14 +4320,14 @@
         {Curran Associates Inc.}%
       }
       \strng{namehash}{923f14cf87c45b41a9f6fe60631442c7}
-      \strng{fullhash}{62ad11d41f31215fd5b2b2a4863d0ea7}
-      \strng{fullhashraw}{62ad11d41f31215fd5b2b2a4863d0ea7}
-      \strng{bibnamehash}{62ad11d41f31215fd5b2b2a4863d0ea7}
-      \strng{authorbibnamehash}{62ad11d41f31215fd5b2b2a4863d0ea7}
+      \strng{fullhash}{4f95676677a4e585f941ba054904e151}
+      \strng{fullhashraw}{4f95676677a4e585f941ba054904e151}
+      \strng{bibnamehash}{4f95676677a4e585f941ba054904e151}
+      \strng{authorbibnamehash}{4f95676677a4e585f941ba054904e151}
       \strng{authornamehash}{923f14cf87c45b41a9f6fe60631442c7}
-      \strng{authorfullhash}{62ad11d41f31215fd5b2b2a4863d0ea7}
-      \strng{authorfullhashraw}{62ad11d41f31215fd5b2b2a4863d0ea7}
-      \field{labelalpha}{TMEB23}
+      \strng{authorfullhash}{4f95676677a4e585f941ba054904e151}
+      \strng{authorfullhashraw}{4f95676677a4e585f941ba054904e151}
+      \field{labelalpha}{TMPB23}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -4224,11 +4457,18 @@
       \endverb
       \keyw{Computer Science - Information Theory,Mathematical Physics,Physics - Biological Physics,Physics - Data Analysis Statistics and Probability,Quantitative Biology - Neurons and Cognition,Quantitative Biology - Quantitative Methods}
     \endentry
-    \entry{BlueprintAIBill}{legislation}{}{}
+    \entry{BlueprintAIBill}{report}{}{}
       \name{author}{1}{}{%
         {{hash=dc494561d1c1d3d22abf8f437216d174}{%
            family={{White House Office of Science and Technology Policy}},
            familyi={W\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {White House Office of Science}%
+        {Technology Policy}%
+      }
+      \list{location}{1}{%
+        {Washington, DC}%
       }
       \strng{namehash}{dc494561d1c1d3d22abf8f437216d174}
       \strng{fullhash}{dc494561d1c1d3d22abf8f437216d174}
@@ -4245,7 +4485,8 @@
       \field{labeltitlesource}{title}
       \field{langid}{english}
       \field{month}{10}
-      \field{title}{Blueprint for an {{AI Bill}} of {{Rights}}}
+      \field{title}{Blueprint for an {{AI Bill}} of {{Rights}}: {{Making Automated Systems Work}} for the {{American People}}}
+      \field{type}{White paper}
       \field{urlday}{25}
       \field{urlmonth}{4}
       \field{urlyear}{2026}
@@ -4406,9 +4647,10 @@
       \field{abstract}{Large language models (LLMs) have demonstrated impressive capabilities in natural language processing. However, their internal mechanisms are still unclear and this lack of transparency poses unwanted risks for downstream applications. Therefore, understanding and explaining these models is crucial for elucidating their behaviors, limitations, and social impacts. In this article, we introduce a taxonomy of explainability techniques and provide a structured overview of methods for explaining Transformer-based language models. We categorize techniques based on the training paradigms of LLMs: traditional fine-tuning-based paradigm and prompting-based paradigm. For each paradigm, we summarize the goals and dominant approaches for generating local explanations of individual predictions and global explanations of overall model knowledge. We also discuss metrics for evaluating generated explanations and discuss how explanations can be leveraged to debug models and improve performance. Lastly, we examine key challenges and emerging opportunities for explanation techniques in the era of LLMs in comparison to conventional deep learning models.}
       \field{day}{22}
       \field{issn}{2157-6904}
-      \field{journaltitle}{ACM Trans. Intell. Syst. Technol.}
+      \field{journaltitle}{ACM Transactions on Intelligent Systems and Technology}
       \field{month}{2}
       \field{number}{2}
+      \field{shortjournal}{ACM Trans. Intell. Syst. Technol.}
       \field{shorttitle}{Explainability for {{Large Language Models}}}
       \field{title}{Explainability for {{Large Language Models}}: {{A Survey}}}
       \field{urlday}{27}
@@ -4450,9 +4692,11 @@
            familyi={Y\bibinitperiod},
            given={Xi},
            giveni={X\bibinitperiod}}}%
-        {{hash=9e2734d337f1fb3e027f45bcc39fe623}{%
-           family={{Qing Lyu}},
-           familyi={Q\bibinitperiod}}}%
+        {{hash=caaee38ddc34c2f0b402a7328963c87c}{%
+           family={Lyu},
+           familyi={L\bibinitperiod},
+           given={Qing},
+           giveni={Q\bibinitperiod}}}%
         {{hash=f28958af092cc402e768f5989866a3e7}{%
            family={Tan},
            familyi={T\bibinitperiod},
@@ -4493,13 +4737,13 @@
         {Association for Computational Linguistics}%
       }
       \strng{namehash}{fa282095476545823e3af8c7890a9b95}
-      \strng{fullhash}{76fdb3c3bd75a0b418ef2a3a65fdb138}
-      \strng{fullhashraw}{76fdb3c3bd75a0b418ef2a3a65fdb138}
+      \strng{fullhash}{a00668697e08746c8241176fd190a180}
+      \strng{fullhashraw}{a00668697e08746c8241176fd190a180}
       \strng{bibnamehash}{fa282095476545823e3af8c7890a9b95}
       \strng{authorbibnamehash}{fa282095476545823e3af8c7890a9b95}
       \strng{authornamehash}{fa282095476545823e3af8c7890a9b95}
-      \strng{authorfullhash}{76fdb3c3bd75a0b418ef2a3a65fdb138}
-      \strng{authorfullhashraw}{76fdb3c3bd75a0b418ef2a3a65fdb138}
+      \strng{authorfullhash}{a00668697e08746c8241176fd190a180}
+      \strng{authorfullhashraw}{a00668697e08746c8241176fd190a180}
       \strng{editorbibnamehash}{0734957fa637833e6098fbfc95a4f704}
       \strng{editornamehash}{0734957fa637833e6098fbfc95a4f704}
       \strng{editorfullhash}{0734957fa637833e6098fbfc95a4f704}

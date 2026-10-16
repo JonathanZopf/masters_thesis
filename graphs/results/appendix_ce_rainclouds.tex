@@ -61,7 +61,7 @@
     \pgfresetboundingbox
     \begin{axis}[
       width=7.8cm,
-      height=5.55cm,
+      height=5.0cm,
       xmin=0,
       xmax=#3,
       ymin=.10,
@@ -69,8 +69,10 @@
       axis x line*=bottom,
       axis y line=none,
       xtick={#4},
+      xlabel={$\overline{\mathrm{CE}}(\mathbf{x})$},
+      label style={font=\scriptsize},
       scaled ticks=false,
-      tick label style={/pgf/number format/fixed,
+      tick label style={font=\scriptsize,/pgf/number format/fixed,
         /pgf/number format/precision=#5},
       xmajorgrids=true,
       grid style={gray!18},

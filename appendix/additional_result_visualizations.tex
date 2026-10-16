@@ -75,7 +75,7 @@ Figure~\ref{fig:oracle-heatmap-bbq} complements the MedQA heat map in Section~\r
   \begin{adjustbox}{max width=\textwidth}
     \OracleHeatmapBBQ
   \end{adjustbox}
-  \caption[Oracle co-grouping rates for BBQ]{Co-grouping rates of the BBQ oracle on LLM-normalized categories, pooled across both evaluated models.}
+  \caption[Oracle co-grouping rates for BBQ]{Co-grouping rates of the BBQ oracle on LLM-normalized categories, pooled across both evaluated models. Gray cells mark category combinations that never occurred together in an evaluated question.}
   \label{fig:oracle-heatmap-bbq}
 \end{figure}
 
@@ -174,7 +174,7 @@ Figures~\ref{fig:app-rq1-bbq-gptoss-ce} to~\ref{fig:app-rq1-medqa-mistral-f} sho
 \section{Agreement between Implementations}
 \label{app:rq2-identity}
 
-Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} complement Section~\ref{sec:results-original-validation} with the identity plots of FELICS at $n_{\max}=1$ and the original implementation. Each point corresponds to a question available in both independently sampled runs, and the dashed line denotes exact agreement. The CE coordinates are the question-level means over the concepts retained in the respective run, as used by the equivalence and paired-difference tests. Faithfulness estimates outside the plotted range are drawn as triangles on the border.
+Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} complement Section~\ref{sec:results-original-validation} with the identity plots of FELICS at $n_{\max}=1$ and the original implementation. Each point corresponds to a question available in both independently sampled runs, the vertical axis represents FELICS, and the dashed line denotes exact agreement. The CE coordinates are the question-level means over the concepts retained in the respective run, as used by the equivalence and paired-difference tests. Faithfulness estimates outside the plotted range are drawn as triangles on the border.
 
 \begin{figure}[H]
   \centering
