@@ -1,0 +1,108 @@
+\chapter{Research Questions}
+\label{sec:research_questions}
+
+The preceding chapter identified a limitation of evaluating causal concept
+faithfulness exclusively through interventions on individual concepts: when
+concepts contribute to a model's response jointly, singleton interventions may
+not fully represent their causal influence. This thesis therefore develops and
+evaluates FELICS, an extension of the Causal Concept Faithfulness Metric that
+accounts for plausible interactions between concepts.
+
+The following research questions define the empirical and methodological
+objectives of this work. They guide the conception and modeling of FELICS and
+structure the subsequent evaluation. The concrete implementation, formal
+properties, and statistical procedures used to investigate them are introduced
+in the later chapters.
+
+\begin{enumerate}[
+		label=\textbf{Q\arabic*},
+		ref=Q\arabic*,
+		wide=0pt,
+		leftmargin=0pt
+	]
+
+	\item \label{rq:correlation_diff}
+	      \textbf{Impact of Interaction-Presumption Strength on Causal Effect Estimates}
+
+	      \noindent\textit{Background.}
+	      The extent to which concepts are treated jointly can differ between
+	      questions. If broader presumed interactions represent cases in which
+	      singleton interventions are less adequate, accounting for them should have
+	      a more pronounced effect on the resulting causal-effect estimates.
+
+	      \noindent\textit{Research question.}
+	      Are stronger presumptions of interaction between concepts associated with
+	      larger changes in causal effect estimates when concepts are evaluated
+	      jointly?
+
+	      \noindent\textit{Hypothesis.}
+	      Stronger presumed interactions are expected to be associated with larger
+	      differences between causal effects estimated from singleton and
+	      interaction-aware interventions.
+
+	\item \label{rq:convergence}
+	      \textbf{Compatibility with the Baseline Metric}
+
+	      \noindent\textit{Background.}
+	      FELICS is intended to extend rather than replace the Causal Concept
+	      Faithfulness Metric. When no concepts are evaluated jointly, the extension
+	      should retain the behavior of the original approach.
+
+	      \noindent\textit{Research question.}
+	      Does FELICS reproduce the results of the original Causal Concept
+	      Faithfulness Metric when it is restricted to interventions on individual
+	      concepts?
+
+	      \noindent\textit{Hypothesis.}
+	      Under singleton-only interventions, FELICS is expected to yield equivalent
+	      causal-effect estimates and faithfulness scores to the original metric.
+
+	\item \label{rq:ranking}
+	      \textbf{Preservation of Within-Question Concept Rankings}
+
+	      \noindent\textit{Background.}
+	      Joint interventions measure an effect that must subsequently be allocated
+	      to the concepts involved. However, values obtained from singleton and joint
+	      interventions may not be directly comparable on the probability-based
+	      causal-effect scale. The proposed framework therefore requires an
+	      adjustment that accounts for potential systematic scale differences while
+	      retaining concept-level attributions. Such an adjustment may change the
+	      magnitude assigned to individual concepts and could, in principle, alter
+	      their relative ordering.
+
+	      \noindent\textit{Research question.}
+	      Does the adjustment required to make causal effects from singleton and
+	      joint interventions comparable preserve the within-question ranking of
+	      concept-level causal effects?
+
+	      \noindent\textit{Hypothesis.}
+	      The adjustment is expected to affect the magnitudes of causal-effect
+	      estimates without substantially changing which concepts are ranked as more
+	      or less causally influential within a question.
+
+	\item \label{rq:faithfulness_increase}
+	      \textbf{Effect of Interaction Modeling on Faithfulness}
+
+	      \noindent\textit{Background.}
+	      The Correlated Concepts Problem can cause the original metric to
+	      underestimate the causal influence of concepts whose information overlaps
+	      or interacts. This may widen the discrepancy between a concept's measured
+	      causal effect and the importance attributed to it in a model's explanation.
+
+	      \noindent\textit{Research question.}
+	      Does accounting for interactions between concepts yield higher measured
+	      faithfulness for the evaluated models?
+
+	      \noindent\textit{Hypothesis.}
+	      By more adequately representing jointly influential concepts, FELICS is
+	      expected to increase measured faithfulness relative to an evaluation based
+	      solely on singleton interventions.
+
+\end{enumerate}
+
+Beyond these four research questions, the MedQA example of Matton et al.~\cite{mattonWalkTalkMeasuring2024} discussed in Section~\ref{sec:pratical_limit} is revisited as a case study (Section~\ref{sec:motivating_methodology}). It examines how joint attribution changes the causal effects of the two concepts whose low singleton estimates motivated this thesis. Because the case concerns a single question and no ground truth for the presumed interaction is available, it is reported descriptively rather than as a research question with an inferential test.
+
+The following chapter derives the requirements and central design choices of
+FELICS in response to these questions. The subsequent modeling chapter then
+formalizes the framework before the evaluation methodology specifies how each
+question is investigated empirically.

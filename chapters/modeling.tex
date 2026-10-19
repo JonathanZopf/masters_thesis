@@ -42,7 +42,7 @@ BBQ \cite{parrishBBQHandbuiltBias2022} and MedQA \cite{jinWhatDiseaseDoes2021}, 
 
 \noindent\textbf{Partitioning constraints.} To prevent the model from over-grouping concepts into a single, oversized cluster, the strict upper-bound parameter ($n_{\max}$) is passed dynamically to the prompt. The model is further instructed that every provided concept must appear exactly once across the output, contained in exactly one group, and that no additional concepts may be invented.
 
-\noindent\textbf{Forced Chain-of-Thought explanations.} Although the downstream evaluation pipeline only parses the structured list of groups, the prompt forces the model to output a one-line explanation before returning the partitioned groups. Generating this explanation serves as a localized Chain-of-Thought step, which has been shown to improve reasoning quality \cite{weiChainofthoughtPromptingElicits2022}.
+\noindent\textbf{Forced Chain-of-Thought explanations.} While the downstream evaluation pipeline only parses the structured list of groups, the prompt forces the model to output a one-line explanation before returning the partitioned groups. Generating this explanation serves as a localized Chain-of-Thought step, which has been shown to improve reasoning quality \cite{weiChainofthoughtPromptingElicits2022}.
 
 By distilling the grouping task into these precise rules, the auxiliary LLM is turned into a consistent surrogate for the oracle. The complete, dataset-specific prompt templates, which include few-shot examples demonstrating these rules on the BBQ and MedQA datasets, are provided in Appendix~\ref{app:prompts}.
 
@@ -462,7 +462,7 @@ FELICS reduces its exclusive reliance on surgical singleton interventions by add
 
 \subsubsection{\ref{req:caputure_interaction} Correctly Capturing Interaction Effects}
 
-\reqref{req:caputure_interaction} requires the proposed framework to distinguish between additive, redundancy-like, and synergy-like response-level directions and to attribute their causal effects accordingly, based on the operational mapping established in Section~\ref{sec:interaction_effects}.
+\reqref{req:caputure_interaction} requires the framework to distinguish between additive, redundancy-like, and synergy-like response-level directions and to attribute their causal effects accordingly, based on the operational mapping established in Section~\ref{sec:interaction_effects}.
 
 FELICS extends the original metric by evaluating joint interventions and distributing their effects through Shapley values. It can therefore represent coalition effects that cannot be observed from singleton interventions alone. However, the subsequent normalization compares a treatment's payout coefficient $\gamma(\mathbf{x},T)$ with the coefficient $\bar\gamma(\mathbf{x},s,T)$ of comparable reference treatments rather than with the absolute-additivity baseline $1$. Consequently, the resulting categories are reference-relative: an absolutely redundant treatment with $\gamma(\mathbf{x},T)<1$ may appear synergistic relative to a still more redundant reference population, while an absolutely synergistic treatment may analogously appear redundant relative to more synergistic references.
 

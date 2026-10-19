@@ -254,6 +254,8 @@
 % Disclosure of supporting generative-AI use
 \include{statement_on_generative_ai}
 
+% English abstract, followed by the German Kurzfassung
+\include{abstract}
 \include{kurzfassung}
 
 % Table of contents
@@ -289,7 +291,14 @@
 \subfile{chapters/discussion}
 \subfile{chapters/conclusion}
 
+% Local line-breaking help for long titles and URLs in the bibliography only
+\begingroup
+\setlength{\emergencystretch}{2em}
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
 \printbibliography[heading=bibintoc]
+\endgroup
 \subfile{chapters/appendix}
 
 \end{document}

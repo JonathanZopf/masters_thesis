@@ -139,7 +139,7 @@ Adopting this causal perspective decouples the evaluation from the model's unobs
 \label{sec:causal_concept_metric}
 The preceding review of several contemporary evaluation approaches motivates a closer examination of the metric on which this thesis builds. This chapter provides a detailed technical and mathematical account of its design. Starting with a review of its fundamental idea, the mathematical aspects of the framework are presented, preserving the notation of the original authors. This is followed by a walkthrough of the evaluation pipeline that produces the final metric. The chapter concludes by discussing the promising potential of the Causal Concept Faithfulness Metric for quantifying the faithfulness of LLM-generated explanations, while also examining its existing limitations. This analysis specifically leads to the challenge of handling correlated concepts in the following chapter, which lays the foundation for the remainder of this thesis.
 
-This presentation is an abridged version of the original paper by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. The interested reader is referred to the original work for further details.
+This presentation abridges the original paper by Matton et al.~\cite{mattonWalkTalkMeasuring2024}. The interested reader is referred to the original work for further details.
 
 \subsection{Fundamental Idea}
 Building upon the counterfactual edit methodology pioneered by Atanasova et al.~\cite{atanasovaFaithfulnessTestsNatural2023} and Siegel et al.~\cite{siegelProbabilitiesAlsoMatter2024}, Matton et al.~\cite{mattonWalkTalkMeasuring2024} proposed an updated evaluation metric in their work. In contrast to prior token-level approaches, their method, the Causal Concept Faithfulness Metric, operates on higher-level concepts such as \textit{gender}, \textit{race}, or \textit{time of day}. Beyond producing a quantitative score, the metric also exposes semantic patterns linked to unfaithful behavior.
@@ -176,7 +176,7 @@ for example \emph{gender}, \emph{ethnicity}, or \emph{medical symptoms}. Besides
 
 \subsubsection{Causal Concept Effects (CE)}
 
-To estimate the actual influence of a concept on the model's prediction, Matton et al.~\cite{mattonWalkTalkMeasuring2024} generate counterfactual questions. A counterfactual,
+To estimate a concept's actual effect on the model's prediction, Matton et al.~\cite{mattonWalkTalkMeasuring2024} generate counterfactual questions. A counterfactual,
 \begin{equation}
 	\mathbf{x}_{c_m \rightarrow c'_m},
 \end{equation}

@@ -50,17 +50,18 @@ The notation corresponds to the mathematical framework introduced by Matton et a
 
 This formulation can be generalized to support interventions on multiple concepts simultaneously. Let $I_{\Delta} \subseteq \{1,\dots,M\}$ denote the index set of concepts whose values are replaced by alternative values, and let $\mathcal{C}_{\Delta}:=\{C_\ell \mid \ell \in I_{\Delta}\}$ denote the corresponding concept group. The resulting joint effect on the model's answer distribution, while keeping all remaining concepts and the rest-of-question text $V$ fixed at their original values, is defined as
 
-\begin{equation}
+\begin{multline}
 	\label{eq:matton_multi_direct_effect}
 	\mathbb{E}_{\mathcal{E}}[Y \mid
 		\text{do}(\{C_\ell = c'_\ell\}_{\ell \in I_{\Delta}},
 		\{C_r = c_r\}_{r \in \{1,\dots,M\}\setminus I_{\Delta}},
 		V = v)]
+	\\
 	-
 	\mathbb{E}_{\mathcal{E}}[Y \mid
 		\text{do}(\{C_i = c_i\}_{i \in \{1,\dots,M\}},
 		V = v)].
-\end{equation}
+\end{multline}
 
 Since the \emph{do}-operator is defined for arbitrary sets of intervention variables, this expression represents a direct generalization of Equation~\ref{eq:matton_direct_effect}. The original formulation is recovered as the special case $I_{\Delta}=\{m\}$, thereby satisfying the singleton-intervention compatibility specified by \reqref{req:one_item_group}, introduced in Section~\ref{sec:requirements}.
 

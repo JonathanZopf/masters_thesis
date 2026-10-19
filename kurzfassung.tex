@@ -1,7 +1,7 @@
 % German summary of the main points, required by §21 Abs. 6 of the
 % examination regulations. Needs \babelprovide[import]{ngerman} in main.tex.
 
-\section*{Kurzfassung (Abstract)}
+\section*{Kurzfassung}
 
 \begin{otherlanguage}{ngerman}
 	\begingroup
@@ -27,9 +27,9 @@
 	Shapley-Werte verteilen die gemessenen Koalitionseffekte auf die einzelnen
 	Konzepte, sodass der Vergleich mit der Erklärung weiterhin auf Konzeptebene
 	erfolgt. Eine referenzbasierte Korrektur macht Effekte aus Einzel- und
-	gemeinsamen Interventionen vergleichbar, und die maximale Gruppengröße
-	$n_{\max}$ begrenzt die Zahl der benötigten Kontrafaktika. Für $n_{\max}=1$
-	reduziert sich FELICS formal auf die ursprüngliche Metrik.
+	gemeinsamen Interventionen vergleichbar, und eine Obergrenze für die
+	Gruppengröße begrenzt die Zahl der benötigten Kontrafaktika. Bei einer
+	Obergrenze von 1 reduziert sich FELICS formal auf die ursprüngliche Metrik.
 
 	FELICS wurde implementiert und auf den Datensätzen BBQ, MedQA und dem neu
 	erstellten tabellarischen Datensatz New German Credit evaluiert. Untersucht
@@ -47,8 +47,11 @@
 	Gemeinsame Interventionen erhöhten die gemessene Faithfulness nicht systematisch. Die
 	Richtung der Veränderung hing von Datensatz und Modell ab, und auf
 	Datensatzebene veränderte sich die Faithfulness nur geringfügig. In der Fallstudie
-	erhielt nur eines der beiden untersuchten Konzepte einen höheren kausalen
-	Effekt.
+	erhielt entgegen der Erwartung nur eines der beiden untersuchten Konzepte einen höheren kausalen
+	Effekt. Gleichzeitig zeigen einzelne Beispiele, dass gemeinsame Interventionen
+	schwellenartiges Verhalten sichtbar machen können, das Einzelinterventionen
+	verbergen, und dass sie Mehrfachzählungen begrenzen können, wenn dieselbe
+	Information auf überlappende Konzepte verteilt ist.
 
 	Der Beitrag der Arbeit besteht darin, gemeinsame Interventionen in die Messung
 	der Faithfulness einzuführen. Damit macht FELICS sichtbar, wie

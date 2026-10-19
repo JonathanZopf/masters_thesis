@@ -254,7 +254,7 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
   \centering
   \ResultFigureHalf{%
     \HypTwoIdentityPlot{data=data/rq2/new_german_credit_mistral.csv,
-      extra code={\ResultScatterClippedPoints{90}{(-0.96,-0.09) (-0.96,-0.15)}}
+      extra code={\ResultScatterClippedPoints{90}{(-0.96,0.27) (-0.96,0.27)}}
     }}%
     {RQ2, New German Credit with Mistral Medium 3.5: faithfulness}%
     {Question-level faithfulness of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with Mistral Medium 3.5 ($n=30$). Triangles mark questions 12 and 25, whose original estimates lie below $-1$.}%
@@ -262,8 +262,8 @@ Figures~\ref{fig:app-rq2-f-bbq-gptoss} to~\ref{fig:app-rq2-ce-credit-gptoss} com
   \hfill
   \ResultFigureHalf{%
     \HypTwoCeIdentityPlot{data=data/rq2/new_german_credit_gptoss_ce.csv,
-      xmin=0, xmax=1.1,
-      ymin=0, ymax=1.1
+      xmin=0, xmax=0.32,
+      ymin=0, ymax=0.32
     }}%
     {RQ2, New German Credit with GPT-OSS 120B: question-averaged CE}%
     {Question-averaged CE of FELICS ($n_{\max}=1$) and the tabular adaptation of the original implementation for New German Credit with GPT-OSS 120B ($n=30$).}%
