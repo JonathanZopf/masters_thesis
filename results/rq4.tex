@@ -17,13 +17,11 @@ Because failure to establish an increase does not imply a decrease, a
 complementary directional analysis tests the opposite alternative,
 $\mathcal{F}_{\mathrm{joint}}<\mathcal{F}_{\mathrm{atomic}}$, using the same
 paired one-sided Wilcoxon signed-rank procedure. Table~\ref{tab:hyp4-lower-tests}
-reports these exploratory, unadjusted tests. The paired difference is defined as
-$d=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$, so a negative
-median difference indicates lower interaction-aware faithfulness.
+reports these exploratory, unadjusted tests.
 
 \begin{table}[htb]
   \centering
-  \caption[RQ4: complementary tests for lower joint faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether joint faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count positive, negative, and zero values of $d=\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$. Evidence in the specified direction requires $p\leq0.05$.}
+  \caption[RQ4: complementary tests for lower joint faithfulness]{Complementary one-sided Wilcoxon signed-rank tests of whether joint faithfulness is lower than atomic faithfulness. The columns $n_{+}$, $n_{-}$, and $n_{0}$ count questions with positive, negative, and zero paired differences $\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$. Evidence in the specified direction requires $p\leq0.05$.}
   \label{tab:hyp4-lower-tests}
   \small
   \setlength{\tabcolsep}{3.2pt}
@@ -31,11 +29,10 @@ median difference indicates lower interaction-aware faithfulness.
   \pgfplotstabletypeset[
     col sep=comma,
     trim cells=true,
-    columns={dataset,model,n,median_difference,n_positive,n_negative,n_zero,p,supported},
+    columns={dataset,model,n,n_positive,n_negative,n_zero,p,supported},
     columns/dataset/.style={column name={\textbf{Dataset}},string type,column type=l},
     columns/model/.style={column name={\textbf{Model}},string type,column type=l},
     columns/n/.style={column name={\textbf{$n$}},column type=r,fixed,precision=0},
-    columns/median_difference/.style={column name={\textbf{$\widetilde d$}},column type=r,fixed,fixed zerofill,precision=3},
     columns/n_positive/.style={column name={\textbf{$n_{+}$}},column type=r,fixed,precision=0},
     columns/n_negative/.style={column name={\textbf{$n_{-}$}},column type=r,fixed,precision=0},
     columns/n_zero/.style={column name={\textbf{$n_{0}$}},column type=r,fixed,precision=0},
@@ -54,8 +51,7 @@ median difference indicates lower interaction-aware faithfulness.
 At the nominal $0.05$ level, the analysis provides evidence of lower
 interaction-aware faithfulness for BBQ with both GPT-OSS 120B ($p=0.0402$) and
 Mistral Medium 3.5 ($p=0.0288$). None of the other four dataset--model
-combinations supports this directional alternative. In particular, the result
-for New German Credit with GPT-OSS 120B is no longer significant ($p=0.2022$).
+combinations supports this directional alternative.
 The complementary results therefore indicate a dataset-specific decrease for
 BBQ, not a general decrease across the evaluation.
 
@@ -91,6 +87,6 @@ Figures~\ref{fig:rq4-f-credit-mistral} and~\ref{fig:rq4-ce-credit-mistral} show 
     {fig:rq4-ce-bbq-mistral}%
 \end{figure}
 
-BBQ shows the opposite tendency. Joint faithfulness is lower for 20 of 30 questions with both models. Unlike in New German Credit, these changes follow the question-averaged CE (Figures~\ref{fig:rq4-f-bbq-mistral} and~\ref{fig:rq4-ce-bbq-mistral}). Joint attribution lowers the question-averaged CE for 23 of 30 questions with GPT-OSS 120B (Figure~\ref{fig:app-rq4-ce-bbq-gptoss}) and for 17 of 30 with Mistral Medium 3.5, and the changes in faithfulness and in question-averaged CE correlate at $0.43$ and $0.67$. For Mistral Medium 3.5, faithfulness falls from $0.27$ to $-0.06$ for question 19 and from $0.34$ to $0.06$ for question 28, whose question-averaged CE drops from $0.224$ to $0.132$. Question 24 shows a large increase in question-averaged CE for both models, from $0.044$ to $0.283$ with Mistral Medium 3.5 and from $0.076$ to $0.200$ with GPT-OSS 120B, together with higher faithfulness ($-0.06$ to $0.23$ and $-0.24$ to $0.17$). Its coalition effect is examined in \caseref{ex:bbq_ambiguous_coalition_effect}.
+BBQ shows the opposite tendency. Joint faithfulness is lower for 20 of 30 questions with both models. Unlike in New German Credit, these changes follow the question-averaged CE (Figures~\ref{fig:rq4-f-bbq-mistral} and~\ref{fig:rq4-ce-bbq-mistral}). Joint attribution lowers the question-averaged CE for 23 of 30 questions with GPT-OSS 120B (Figure~\ref{fig:app-rq4-ce-bbq-gptoss}) and for 17 of 30 with Mistral Medium 3.5, and the changes in faithfulness and in question-averaged CE correlate at $0.43$ and $0.67$. For Mistral Medium 3.5, faithfulness falls from $0.27$ to $-0.06$ for question 19 and from $0.34$ to $0.06$ for question 28, whose question-averaged CE drops from $0.224$ to $0.132$. Question 24 shows a large increase in question-averaged CE for both models, from $0.044$ to $0.283$ with Mistral Medium 3.5 and from $0.076$ to $0.200$ with GPT-OSS 120B, together with higher faithfulness ($-0.06$ to $0.23$ and $-0.24$ to $0.17$). Its coalition effect is later examined in \caseref{ex:bbq_ambiguous_coalition_effect} in Section~\ref{sec:results-coalition-examples}.
 
 MedQA changes little under joint attribution. For GPT-OSS 120B, the question-averaged CE is practically identical under both attributions (Pearson $r=0.998$, largest change $0.006$), and no question changes its faithfulness by more than $0.103$ (Figures~\ref{fig:app-rq4-f-medqa-gptoss} and~\ref{fig:app-rq4-ce-medqa-gptoss}). Question 523, for which joint attribution leaves every concept-level CE value unchanged, has identical faithfulness under both attributions. Across the four natural-language combinations, the size of the faithfulness change tracks the mean absolute change of the concept-level CE values (exploratory Spearman correlations between $0.52$ and $0.69$). For New German Credit with GPT-OSS 120B, the median change is close to zero ($-0.018$), but the atomic and joint question-level estimates correlate only at Pearson $r=0.24$ (Figure~\ref{fig:app-rq4-f-credit-gptoss}). The faithfulness and CE identity plots of the remaining combinations are shown in Figures~\ref{fig:app-rq4-f-bbq-gptoss} to~\ref{fig:app-rq4-ce-credit-gptoss} in Appendix~\ref{app:rq4-identity}.

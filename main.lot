@@ -8,25 +8,26 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Causal-effect quantities of the evaluation}}{57}{table.caption.46}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {8.1}{\ignorespaces Dataset-level CE and faithfulness under atomic and joint attribution}}{63}{table.caption.46}%
-\contentsline {table}{\numberline {8.2}{\ignorespaces Oracle partitions for the joint configurations}}{63}{table.caption.47}%
-\contentsline {table}{\numberline {8.3}{\ignorespaces RQ2: paired-difference tests of CE and faithfulness}}{68}{table.caption.51}%
-\contentsline {table}{\numberline {8.4}{\ignorespaces RQ3: per-question preservation of concept rankings}}{70}{table.caption.53}%
-\contentsline {table}{\numberline {8.5}{\ignorespaces RQ4: complementary tests for lower joint faithfulness}}{72}{table.caption.55}%
-\contentsline {table}{\numberline {8.6}{\ignorespaces Case study: published, atomic and joint CE of the MedQA concepts}}{77}{table.caption.58}%
-\contentsline {table}{\numberline {8.7}{\ignorespaces Case study: question-level faithfulness for MedQA}}{77}{table.caption.59}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Dataset-level CE and faithfulness under atomic and joint attribution}}{63}{table.caption.47}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Oracle partitions for the joint configurations}}{63}{table.caption.48}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces RQ2: paired-difference tests of CE and faithfulness}}{68}{table.caption.52}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces RQ3: per-question preservation of concept rankings}}{70}{table.caption.54}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces RQ4: complementary tests for lower joint faithfulness}}{72}{table.caption.56}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces Case study: published, atomic and joint CE of the MedQA concepts}}{77}{table.caption.59}%
+\contentsline {table}{\numberline {8.7}{\ignorespaces Case study: question-level faithfulness for MedQA}}{77}{table.caption.60}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations for the New German Credit partition}}{109}{table.C.1}%
-\contentsline {table}{\numberline {C.2}{\ignorespaces Case study: retained co-grouping frequencies for MedQA}}{110}{table.caption.68}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Discussed New German Credit questions}}{122}{table.caption.92}%
-\contentsline {table}{\numberline {D.2}{\ignorespaces Discussed BBQ and MedQA questions}}{123}{table.caption.93}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {F.1}{\ignorespaces Experiment artifact directories in the FELICS repository}}{150}{table.caption.94}%
-\contentsline {table}{\numberline {F.2}{\ignorespaces Result files within a dataset and model directory}}{151}{table.F.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Retained pairwise associations for the New German Credit partition}}{110}{table.C.1}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Case study: retained co-grouping frequencies for MedQA}}{111}{table.caption.69}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Discussed New German Credit questions}}{123}{table.caption.93}%
+\contentsline {table}{\numberline {D.2}{\ignorespaces Discussed BBQ and MedQA questions}}{124}{table.caption.94}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {F.1}{\ignorespaces Experiment artifact directories in the FELICS repository}}{151}{table.caption.95}%
+\contentsline {table}{\numberline {F.2}{\ignorespaces Result files within a dataset and model directory}}{152}{table.F.2}%

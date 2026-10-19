@@ -1,0 +1,10 @@
+% Legacy appendix entry point retained for compatibility.
+% The canonical appendix sources below prevent this file from duplicating
+% outdated examples or mathematical demonstrations.
+\appendix
+\begin{appendix}
+	\include{appendix/motivational_example_setup}
+	\include{appendix/examples}
+	\include{appendix/mathematical_demonstrations}
+	\include{appendix/prompts}
+\end{appendix}

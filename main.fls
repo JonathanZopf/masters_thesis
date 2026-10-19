@@ -1152,6 +1152,7 @@ INPUT results/rq5.tex
 INPUT results/rq5.tex
 INPUT data/rq5/concept_ce_comparison.csv
 INPUT data/rq5/faithfulness_comparison.csv
+INPUT data/rq5/faithfulness_comparison.csv
 INPUT ./chapters/discussion.tex
 INPUT ./chapters/discussion.tex
 INPUT chapters/discussion.tex

@@ -144,7 +144,7 @@ This presentation abridges the original paper by Matton et al.~\cite{mattonWalkT
 \subsection{Fundamental Idea}
 Building upon the counterfactual edit methodology pioneered by Atanasova et al.~\cite{atanasovaFaithfulnessTestsNatural2023} and Siegel et al.~\cite{siegelProbabilitiesAlsoMatter2024}, Matton et al.~\cite{mattonWalkTalkMeasuring2024} proposed an updated evaluation metric in their work. In contrast to prior token-level approaches, their method, the Causal Concept Faithfulness Metric, operates on higher-level concepts such as \textit{gender}, \textit{race}, or \textit{time of day}. Beyond producing a quantitative score, the metric also exposes semantic patterns linked to unfaithful behavior.
 
-Consistent with the terminology established in Section~\ref{sec:applying_definitions}, the authors define faithfulness as the alignment between the concepts that truly influence a model's prediction and the importance the model assigns to those same concepts within its own explanation. To estimate causal influence, an auxiliary LLM $\mathcal{A}$ generates counterfactuals by replacing or removing concept values in the original input. $\mathcal{A}$ need not be the same model as $\mathcal{M}$, and for the reasons discussed in Section~\ref{sec:matton_limitations} it should preferably differ from it. Following the correlational approach of Siegel et al.~\cite{siegelProbabilitiesAlsoMatter2024}, prediction distributions of the LLM under evaluation $\mathcal{M}$ are then collected for both original and counterfactual questions to estimate the true causal effect. Subsequently, helper model $\mathcal{A}$ extracts the concepts identified as important in the explanation, enabling the calculation of the explanation-implied effect. The Pearson correlation coefficient between these true causal effects and explanation-implied effects serves as the final faithfulness score.
+Consistent with the terminology established in Section~\ref{sec:applying_definitions}, the authors define faithfulness as the alignment between the concepts that truly influence a model's prediction and the importance the model assigns to those same concepts within its own explanation. To estimate causal influence, an auxiliary LLM $\mathcal{A}$ generates counterfactuals by replacing or removing concept values in the original input. $\mathcal{A}$ need not be the same model as $\mathcal{M}$, and should preferably differ from it in most cases due to circularity concerns (further discussed in Section~\ref{sec:matton_limitations}). Following the correlational approach of Siegel et al.~\cite{siegelProbabilitiesAlsoMatter2024}, prediction distributions of the LLM under evaluation $\mathcal{M}$ are then collected for both original and counterfactual questions to estimate the true causal effect. Subsequently, helper model $\mathcal{A}$ extracts the concepts identified as important in the explanation, enabling the calculation of the explanation-implied effect. The Pearson correlation coefficient between these true causal effects and explanation-implied effects serves as the final faithfulness score.
 \subsection{Mathematical Foundation}
 \label{sec:mathematical_foundation}
 The following subsections introduce the problem setting and notation before defining both effects and combining them into question- and dataset-level faithfulness scores.
@@ -186,11 +186,11 @@ is obtained by replacing the original value $c_m$ of concept $C_m$ with an alter
 \end{equation}
 denote the set of all alternative values of concept $C_m$.
 
-In addition to the original question $\mathbf{x}$, the answer distribution of $\mathcal{M}$ for every possible counterfactual question
+In addition to the original question $\mathbf{x}$, for every possible counterfactual question
 \begin{equation}
 	\{\mathbf{x}_{c_m \rightarrow c'_m} : c'_m \in \mathbb{C}'_m\}
 \end{equation}
-is estimated by repeated sampling.
+the answer distribution of $\mathcal{M}$ is estimated by repeated sampling.
 
 The causal concept effect, in the following also called causal effect, is then defined as the average Kullback--Leibler divergence between the distributions for the original question and each corresponding counterfactual:
 
@@ -213,7 +213,7 @@ Intuitively, concepts whose modification substantially changes the model's outpu
 
 While the causal concept effect measures the actual influence of a concept on the model's prediction, the explanation-implied effect estimates how influential the model itself claims the concept to be within its explanation. If the explanations are faithful, concepts with large causal effects should be mentioned more frequently implicitly or explicitly than concepts with only a negligible influence.
 
-Matton et al.~\cite{mattonWalkTalkMeasuring2024} therefore define the explanation-implied effect as the probability that the model's explanations for both the original question and its counterfactuals identify concept $C_m$ as being causally relevant. Let $E$ denote the set-valued random variable containing the concepts judged causally relevant in a generated explanation. The explanation-implied effect is then
+Matton et al.~\cite{mattonWalkTalkMeasuring2024} therefore define the explanation-implied effect as the probability that the model's explanations for both the original question and its counterfactuals identify concept $C_m$ as being causally relevant. Let $E$ denote the random variable containing the concepts judged causally relevant in a generated explanation. The explanation-implied effect is then
 
 \begin{equation}
 	\label{eq:ee}

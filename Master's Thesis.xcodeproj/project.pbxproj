@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		AB0ED8683086D8DF0011A006 /* examples.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = examples.tex; sourceTree = "<group>"; };
 		AB0FD359304FFA5C0005EE4C /* discussion.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = discussion.tex; sourceTree = "<group>"; };
 		AB1F9F042F93A288003D57AE /* build_latex.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_latex.sh; sourceTree = "<group>"; };
 		AB1F9F0C2F93A288003D57AE /* university_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = university_logo.png; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		AB350DEF3040A15C001A29B5 /* results */ = {
 			isa = PBXGroup;
 			children = (
+				AB0ED8683086D8DF0011A006 /* examples.tex */,
 				AB350E1F3040AA1E001A29B5 /* rq5.tex */,
 				AB350E1E3040AA16001A29B5 /* rq4.tex */,
 				AB350E043040A5BB001A29B5 /* rq3.tex */,

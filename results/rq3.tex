@@ -8,8 +8,7 @@ The four natural-language dataset--model combinations retain aggregate correlati
 \HypothesisTestResults[label=hyp:hyp3-results,unbreakable]
   {One-sided Spearman tests for \rqref{rq:ranking}. A combination supports the
   hypothesis when $\rho\geq0.90$ and $p\leq0.05$. All computed $p$-values
-  underflowed to zero, and $2.23\times10^{-308}$ denotes that numerical underflow
-  bound rather than an exact value.}
+  underflowed to zero.}
   {data/rq3/hypothesis_test_results.csv}
 
 Table~\ref{tab:rq3-ranking-summary} summarizes the rank preservation within individual questions. In BBQ, 21 of 30 questions keep their exact concept ranking for both models. The lowest values occur in question 2 for GPT-OSS 120B ($\rho=0.400$) and question 14 for Mistral Medium 3.5 ($\rho=0.200$), which contain only four and five concepts. In MedQA, exact preservation is less frequent, but the per-question correlations remain high, with minima of $0.685$ and $0.806$. In New German Credit, no question preserves its ranking exactly. For Mistral Medium 3.5, the median per-question correlation drops to $0.671$, and questions 28 and 23 reach $\rho=-0.077$ and $\rho=0.000$, so their rankings before and after normalization are essentially unrelated.

@@ -78,7 +78,7 @@ Unlike natural language datasets, which require an LLM-based oracle, tabular dat
 
 \subsubsection{Assumptions about Tabular Datasets}
 
-The tabular setting assumes a fixed and complete dataset schema. Each feature column corresponds to exactly one concept $C_m$, and every concept corresponds to exactly one feature column. Each row represents one dataset instance and provides the structured information from which one natural-language question is generated. Because all rows contain all feature columns and no values are missing, every generated question has the same dataset-wide concept set $\mathbf{C}_{\mathrm{tab}}=\{C_1,\ldots,C_M\}$; equivalently, $\mathbf{C}(\mathbf{x})=\mathbf{C}_{\mathrm{tab}}$ for every instance $\mathbf{x}$. The subscript distinguishes this fixed tabular schema from the generally question-specific concept set $\mathbf{C}(\mathbf{x})$. Pairwise associations between concepts are therefore estimated across all rows of the complete table. Consequently, the association graph and the resulting partition of $\mathbf{C}_{\mathrm{tab}}$ are computed once for the entire dataset rather than separately for each question.
+The tabular setting assumes a fixed and complete dataset schema. Each feature column corresponds to exactly one concept $C_m$, and every concept corresponds to exactly one feature column. Each row represents one dataset instance and provides the structured information from which one natural-language question is generated. Because all rows contain all feature columns and no values are missing, every generated question has the same dataset-wide concept set $\mathbf{C}_{\mathrm{tab}}=\{C_1,\ldots,C_M\}$; equivalently, $\mathbf{C}(\mathbf{x})=\mathbf{C}_{\mathrm{tab}}$ for every instance $\mathbf{x}$. The subscript distinguishes this fixed tabular schema from the generally question-specific concept set $\mathbf{C}(\mathbf{x})$. Pairwise associations between concepts are therefore estimated across all rows of the complete table. Consequently, the association graph and the resulting partition of $\mathbf{C}_{\mathrm{tab}}$ are computed once for the entire dataset rather than separately for each question. For a concept $C_m$, let $\mathrm{col}(C_m)$ denote its column, the vector of the values $C_m$ takes in all $N_{\mathrm{tab}}$ rows of the table, repeated values included.
 
 While classical correlation measures such as Pearson's $r$, Spearman's $\rho$, or Kendall's $\tau$ \cite{fieldDiscoveringStatisticsUsing2017} assume continuous or ordinal data, tabular features often include nominal variables, such as gender or birthplace, that lack a natural ordering. To uniformly assess associations across mixed-type tabular columns, Cramér's $V$ \cite[p.~282]{cramer1946mathematical} is used, a measure specifically designed for nominal data. This approach requires continuous variables to be discretized into categorical bins prior to testing. The procedure is executed in four sequential phases.
 
@@ -86,7 +86,7 @@ While classical correlation measures such as Pearson's $r$, Spearman's $\rho$, o
 
 To evaluate continuous and categorical variables uniformly, each continuous numerical feature is discretized into ordinal bins using equal-frequency (quantile) binning. Categorical features are retained as nominal categories, irrespective of their number of distinct values.
 
-Let $Z$ be a continuous numeric vector representing all values a concept $C_m$ takes within the rows of the dataset, with size $|Z|$, the number of rows in the tabular dataset. The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ denotes the set of unique values of $Z$. Using the empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as
+For a continuous concept $C_m$, let $Z := \mathrm{col}(C_m)$. The domain of $Z$ is partitioned into $q = \min(4, |\mathcal{U}(Z)|)$ disjoint intervals, where $\mathcal{U}(Z)$ denotes the set of unique entries of $Z$. Using the empirical quantiles $Q_0, \dots, Q_q$, where $Q_0 := \min(Z)$ and $Q_q := \max(Z)$, the bins $I_r$ are defined as
 \begin{equation}
 I_r =
 \begin{cases}
@@ -94,16 +94,17 @@ I_r =
 [Q_{q-1}, Q_q] & \text{for } r = q.
 \end{cases}
 \end{equation}
+From here on, $\mathrm{col}(C_m)$ refers to the discretized column, in which each value of $Z$ is replaced by its bin $I_r$. Categorical columns are unchanged.
 
 \subsubsection{Phase 2: Pairwise Association Testing via Cramér's $V$}
 
-Following \cite{ben-shacharPhiFeiFo2023}, an $R_i \times R_j$ contingency table $\mathbf{O}$ is constructed for every pair of discretized concepts $(C_i, C_j)$, where $R_i := |\mathcal{U}(C_i)|$ and $R_j := |\mathcal{U}(C_j)|$. The entry $O_{u,v}$ represents the observed joint frequency of category $u$ of $C_i$ and category $v$ of $C_j$.
+Following \cite{ben-shacharPhiFeiFo2023}, an $R_i \times R_j$ contingency table $\mathbf{O}$ is constructed for every pair of discretized concepts $(C_i, C_j)$, where $R_i := |\mathcal{U}(\mathrm{col}(C_i))|$ and $R_j := |\mathcal{U}(\mathrm{col}(C_j))|$. The entry $O_{u,v}$ represents the observed joint frequency of category $u$ of $C_i$ and category $v$ of $C_j$.
 
 Under the null hypothesis $H_0$ of independence, the expected frequency $E_{u,v}$ for cell $(u,v)$ is computed as
 \begin{equation}
-	E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{|Z|},
+	E_{u,v} = \frac{\left( \sum_{b=1}^{R_j} O_{u,b} \right) \left( \sum_{a=1}^{R_i} O_{a,v} \right)}{N_{\mathrm{tab}}},
 \end{equation}
-where $|Z|$ is the number of rows in the dataset. Under the completeness assumption stated above, both concept columns contain a value in every row, so $|Z|$ also equals the total count $\sum_{u=1}^{R_i}\sum_{v=1}^{R_j}O_{u,v}$ of the contingency table. The Pearson chi-squared ($\chi^2$) statistic is then defined as
+where $N_{\mathrm{tab}}$ is the number of rows. Because no values are missing and the bins $I_r$ cover the whole range of $Z$, every row adds exactly one count to $\mathbf{O}$, so $N_{\mathrm{tab}} = \sum_{u=1}^{R_i}\sum_{v=1}^{R_j}O_{u,v}$. The Pearson chi-squared ($\chi^2$) statistic is then defined as
 \begin{equation}
 	\chi^2 = \sum_{u=1}^{R_i} \sum_{v=1}^{R_j} \frac{(O_{u,v} - E_{u,v})^2}{E_{u,v}}.
 \end{equation}
@@ -111,7 +112,7 @@ The statistical significance $p_{i,j}$ is derived from the $\chi^2$ cumulative d
 
 To quantify the strength of association independently of sample size and table dimensions, Cramér's $V$ is calculated, denoted $A$ to signify association strength:
 \begin{equation}
-	A(C_i, C_j) = \sqrt{\frac{\chi^2}{|Z| \cdot (\min(R_i, R_j) - 1)}},
+	A(C_i, C_j) = \sqrt{\frac{\chi^2}{N_{\mathrm{tab}} \cdot (\min(R_i, R_j) - 1)}},
 \end{equation}
 where $A(C_i, C_j) \in [0, 1]$, with $0$ indicating independence and $1$ indicating perfect association.
 
@@ -153,7 +154,7 @@ The resulting partition $\mathcal{P}$ is computed once for the dataset. Since $\
 Downstream steps, namely joint counterfactual generation and Shapley-based redistribution (Section~\ref{sec:shapley}), then proceed identically to the natural-language pipeline, with each group $s \in \mathcal{P}$ used as a candidate interaction group $s \in \mathbf{S}$. Pairwise association provides an observable screening heuristic for prioritizing joint interventions, but association alone neither establishes interaction in the model's response nor captures every possible interaction.
 
 \subsection{Putting Joint Interventions into Practice}
-
+\label{sec:joint_in_practice}
 With an oracle $\mathcal{O}(\mathbf{x}, \mathbf{C}, n_{\max})$ established that groups concepts into a set $\mathbf{S}$ based either on an LLM's judgment or on statistical evidence derived from the dataset, it becomes possible to intervene on the selected concepts jointly. Because the original metric of Matton et al.~\cite{mattonWalkTalkMeasuring2024} already contains the procedures required to intervene on a single concept, only minimal adaptation of the existing implementation is required. Most notably, the counterfactual generator must be updated to support interventions on multiple concepts simultaneously, enabling the measurement of the joint effect that these concepts have, as introduced in Section~\ref{sec:joint_effect}. In order to do so, the counterfactual generation prompts for the auxiliary LLM $\mathcal{A}$ have been slightly adapted from the original by Matton et al.~\cite{mattonWalkTalkMeasuring2024} to feature examples where multiple concepts are requested to be changed or removed. They can be found in Appendix~\ref{app:prompts}.
 
 It is, however, not sufficient to simply intervene on all concepts within a candidate interaction group $s \in \mathbf{S}$ together: doing so alone would make it impossible to distinguish the individual contributions, discussed further in Section~\ref{sec:shapley}, of each concept to the joint effect. Measuring only the effect of all concepts in a set acting together (the grand coalition) alongside the effect of each individual concept on its own is likewise insufficient. If a set contains more than two concepts, an individual concept may, for instance, behave differently on its own or within the grand coalition than when combined with only one other concept, as illustrated in Example~\ref{ex:all_combinations_motivation} for a hypothetical setting.
@@ -175,10 +176,11 @@ It is, however, not sufficient to simply intervene on all concepts within a cand
 	Thus, the contribution of high fever depends strongly on whether neck stiffness is still present, even though this dependence is much weaker in the grand coalition of $s$. Consequently, the effect of intervening on $C_1$ differs substantially depending on whether it occurs within $\{C_1\}$ (alone), $\{C_1, C_2\}$, or the full candidate group $\{C_1, C_2, C_3\}$.
 \end{example_box}
 
-
 It is therefore necessary to investigate the shift in the model's predictions for all $2^{|s|}$ possible combinations of concepts within a candidate interaction group $s$. Using the slightly adapted procedures established by Matton et al.~\cite{mattonWalkTalkMeasuring2024}, a counterfactual is created for each of these combinations.
 
 The evaluation pipeline then continues by collecting model responses $\mathbf{r}=(y,e)$, consisting of the prediction $y$ and the explanation $e$; the response-collection step itself requires no modification from the original presented before in Section \ref{sec:collecting_model_responses}.
+
+The collected responses are then passed to the Bayesian hierarchical model of Matton et al.~\cite{mattonWalkTalkMeasuring2024} (Section~\ref{sec:matton_evaluation_pipeline}), which FELICS fits once per run to all treatments of a dataset, including those that intervene on several concepts at once. For such a treatment, the prior scale of the treatment effect is the square root of the summed squared category scales of all intervened concepts. This choice follows from viewing the joint effect as a sum of independent atomic effects. Independent effects add up in their variances rather than in their scales, so the scale of their sum is the square root of the summed squared scales~\cite[Theorem~4.5.6, p.~171]{casellaStatisticalInference2002}. Adding the scales directly would assume that all intervened concepts always shift the answer in the same direction and thus fully reinforce each other. The joint effect itself is still estimated as a separate coefficient.
 
 \section{Shapley-Based Causal Effect Calculation}
 \label{sec:shapley}
@@ -219,7 +221,7 @@ Consequently, every tuple $t'=(c_i')_{C_i\in T}\in\mathbb{T}'$ changes the value
 	\end{cases}
 \end{equation}
 
-As in Equation~\ref{eq:ce}, the distributions in Equation~\ref{eq:value_function} denote the model's true answer distributions. In the implementation, they are estimated with the Bayesian hierarchical model of Matton et al.~\cite{mattonWalkTalkMeasuring2024} (Section~\ref{sec:matton_evaluation_pipeline}), which FELICS fits once per run to all treatments of a dataset, including those that intervene on several concepts at once. For such a treatment, the prior scale of the treatment effect is the square root of the summed squared category scales of all intervened concepts. The Kullback--Leibler divergence is computed for every posterior draw and then averaged, so every $v_{\mathbf{x}}(T)$ is a posterior mean. The normalization in Section~\ref{sec:shapley_correction} and the Shapley payouts in Equation~\ref{eq:new_ce} are applied to these posterior means and add no further statistical model.
+As in Equation~\ref{eq:ce}, the distributions in Equation~\ref{eq:value_function} denote the model's true answer distributions. In the implementation, they are estimated with the hierarchical model described in Section~\ref{sec:joint_in_practice}. The Kullback--Leibler divergence is computed for every posterior draw and then averaged, so every $v_{\mathbf{x}}(T)$ is a posterior mean. The normalization in Section~\ref{sec:shapley_correction} and the Shapley payouts in Equation~\ref{eq:new_ce} are applied to these posterior means and add no further statistical model.
 
 Note that the Shapley function depends on the value function being called with an empty set of players, which is formalized in the equation above for clarity.
 
@@ -392,7 +394,7 @@ and that of FELICS, which populates the CE vector of Equation~\ref{eq:new_ce_vec
 	\label{eq:faithfulness_felics}
 	\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x}) := \mathrm{PCC}\left(\mathbf{CE}_{\mathrm{adj}}(\mathbf{x},\mathbf{C}),\mathbf{EE}(\mathbf{x},\mathbf{C})\right).
 \end{equation}
-Because the Pearson correlation coefficient depends on the magnitudes of the CE values, both scores generally differ whenever FELICS alters individual effects (see Example~\ref{ex:payout_normalization_correlation}). They coincide when every candidate interaction group is a singleton (\reqref{req:one_item_group}). By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
+Because the Pearson correlation coefficient depends on the magnitudes of the CE values, both scores generally differ whenever FELICS alters individual effects (see Example~\ref{ex:payout_normalization_correlation}). By restricting all modifications to the estimation of causal effects, FELICS builds upon the validated components of the original framework while minimizing the number of changes required throughout the remaining evaluation pipeline.
 
 \begin{example_box}[label=ex:payout_normalization_correlation]
 	\textbf{Setup:} Five concepts have the same answer-distribution changes under both methods. To isolate the effect of normalization, the adjusted values are assumed directly rather than derived from joint interventions:
@@ -409,7 +411,7 @@ Because the Pearson correlation coefficient depends on the magnitudes of the CE 
 		\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x})=\frac{0.28}{\sqrt{0.372\cdot 0.24}}\approx 0.937.
 	\end{equation*}
 
-	\textbf{Conclusion:} Normalization keeps the mean CE but changes how the values spread around it, so the faithfulness score changes as well.
+	\textbf{Conclusion:} Despite the mean of both CE vectors being the same, the faithfulness score changes due to different variances.
 \end{example_box}
 
 \section{Post-Modeling Assessment}
@@ -466,7 +468,7 @@ FELICS reduces its exclusive reliance on surgical singleton interventions by add
 
 FELICS extends the original metric by evaluating joint interventions and distributing their effects through Shapley values. It can therefore represent coalition effects that cannot be observed from singleton interventions alone. However, the subsequent normalization compares a treatment's payout coefficient $\gamma(\mathbf{x},T)$ with the coefficient $\bar\gamma(\mathbf{x},s,T)$ of comparable reference treatments rather than with the absolute-additivity baseline $1$. Consequently, the resulting categories are reference-relative: an absolutely redundant treatment with $\gamma(\mathbf{x},T)<1$ may appear synergistic relative to a still more redundant reference population, while an absolutely synergistic treatment may analogously appear redundant relative to more synergistic references.
 
-The framework can thus identify whether a treatment behaves in a more redundancy-like or synergy-like manner than the dataset-specific reference level, but it cannot generally recover the absolute response-level directions defined in Section~\ref{sec:interaction_effects}. Consequently, \reqref{req:caputure_interaction} is only partially satisfied.
+The framework can thus identify whether a treatment behaves in a more redundancy-like or synergy-like manner than the dataset-specific reference level, but it cannot generally recover the absolute response-level directions as defined in Section~\ref{sec:interaction_effects}. Since \reqref{req:caputure_interaction} never required measurement on the absolute scale, it is formally considered satisfied despite this limitation.
 
 \subsubsection{\ref{req:feasibility} Maintaining Computational Feasibility}
 

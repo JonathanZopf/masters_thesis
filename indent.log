@@ -1,6 +1,6 @@
 INFO:  latexindent version 4.0, 2026-03-15, a script to indent .tex files
        latexindent lives here: /usr/local/texlive/2026/texmf-dist/scripts/latexindent/
-       Mon Oct 19 16:17:31 2026
+       Tue Oct 20 00:45:25 2026
        Filenames:
           abstract.tex
           declaration_of_originality.tex
@@ -24,7 +24,13 @@ INFO:  YAML reading settings
 INFO:  Filename: abstract.tex (1 of 8)
 INFO:  Backup procedure (-w flag active):
        ./abstract.bak0 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up abstract.tex to ./abstract.bak1...
+       ./abstract.bak1 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./abstract.bak2 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./abstract.bak3 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./abstract.bak4 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./abstract.bak5 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./abstract.bak6 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up abstract.tex to ./abstract.bak7...
        abstract.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file abstract.tex
@@ -161,7 +167,13 @@ INFO:  Backup procedure (-w flag active):
        ./declaration_of_originality.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./declaration_of_originality.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./declaration_of_originality.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up declaration_of_originality.tex to ./declaration_of_originality.bak131...
+       ./declaration_of_originality.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./declaration_of_originality.bak132 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./declaration_of_originality.bak133 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./declaration_of_originality.bak134 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./declaration_of_originality.bak135 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./declaration_of_originality.bak136 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up declaration_of_originality.tex to ./declaration_of_originality.bak137...
        declaration_of_originality.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file declaration_of_originality.tex
@@ -185,7 +197,13 @@ INFO:  Backup procedure (-w flag active):
        ./kurzfassung.bak15 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./kurzfassung.bak16 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./kurzfassung.bak17 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up kurzfassung.tex to ./kurzfassung.bak18...
+       ./kurzfassung.bak18 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./kurzfassung.bak19 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./kurzfassung.bak20 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./kurzfassung.bak21 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./kurzfassung.bak22 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./kurzfassung.bak23 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up kurzfassung.tex to ./kurzfassung.bak24...
        kurzfassung.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file kurzfassung.tex
@@ -321,7 +339,13 @@ INFO:  Backup procedure (-w flag active):
        ./list_of_symbols.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./list_of_symbols.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./list_of_symbols.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up list_of_symbols.tex to ./list_of_symbols.bak130...
+       ./list_of_symbols.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./list_of_symbols.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./list_of_symbols.bak132 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./list_of_symbols.bak133 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./list_of_symbols.bak134 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./list_of_symbols.bak135 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up list_of_symbols.tex to ./list_of_symbols.bak136...
        list_of_symbols.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file list_of_symbols.tex
@@ -455,7 +479,13 @@ INFO:  Backup procedure (-w flag active):
        ./main.bak125 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./main.bak126 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./main.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up main.tex to ./main.bak128...
+       ./main.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./main.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./main.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./main.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./main.bak132 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./main.bak133 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up main.tex to ./main.bak134...
        main.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file main.tex
@@ -571,7 +601,13 @@ INFO:  Backup procedure (-w flag active):
        ./statement_on_generative_ai.bak107 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./statement_on_generative_ai.bak108 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./statement_on_generative_ai.bak109 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up statement_on_generative_ai.tex to ./statement_on_generative_ai.bak110...
+       ./statement_on_generative_ai.bak110 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./statement_on_generative_ai.bak111 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./statement_on_generative_ai.bak112 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./statement_on_generative_ai.bak113 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./statement_on_generative_ai.bak114 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./statement_on_generative_ai.bak115 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up statement_on_generative_ai.tex to ./statement_on_generative_ai.bak116...
        statement_on_generative_ai.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file statement_on_generative_ai.tex
@@ -631,7 +667,13 @@ INFO:  Backup procedure (-w flag active):
        ./table_of_abbreviations.bak51 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./table_of_abbreviations.bak52 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./table_of_abbreviations.bak53 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up table_of_abbreviations.tex to ./table_of_abbreviations.bak54...
+       ./table_of_abbreviations.bak54 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./table_of_abbreviations.bak55 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./table_of_abbreviations.bak56 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./table_of_abbreviations.bak57 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./table_of_abbreviations.bak58 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./table_of_abbreviations.bak59 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up table_of_abbreviations.tex to ./table_of_abbreviations.bak60...
        table_of_abbreviations.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file table_of_abbreviations.tex
@@ -765,7 +807,13 @@ INFO:  Backup procedure (-w flag active):
        ./title_page.bak125 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./title_page.bak126 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./title_page.bak127 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up title_page.tex to ./title_page.bak128...
+       ./title_page.bak128 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./title_page.bak129 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./title_page.bak130 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./title_page.bak131 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./title_page.bak132 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./title_page.bak133 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up title_page.tex to ./title_page.bak134...
        title_page.tex will be overwritten after indentation
 INFO:  Output routine:
        Overwriting file title_page.tex

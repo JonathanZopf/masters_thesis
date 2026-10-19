@@ -1,7 +1,9 @@
 \section{Case Study: The MedQA Example of Matton et al.}
 \label{sec:results-motivating-example}
 
-This case study examines how joint attribution changes the causal effects that Matton et al.~\cite{mattonWalkTalkMeasuring2024} reported as surprisingly low for two concepts of MedQA question 521. To isolate the effect of joint interventions from stochastic concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9. The oracle places the patient's eating disorder, refusal of further treatment, and self-perception of weight in one candidate interaction group, and places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
+This case study examines how joint attribution changes the causal effects that Matton et al.~\cite{mattonWalkTalkMeasuring2024} reported as surprisingly low for two concepts of MedQA question 521, the patient's eating disorder and self-perception of weight. These two concepts therefore form the focus of the analysis below. To isolate the effect of joint interventions from concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9.
+
+The oracle places the two motivating concepts in a common candidate interaction group, together with the patient's refusal of further treatment as an additional related concept. This grouping is consistent with the reconstruction mechanism discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}: refusal of fluids and hospital meals can provide clues from which the model may infer the patient's eating disorder or self-perception even after the corresponding explicit information is removed. The oracle places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
 
 The final consensus graph underlying this partition is shown in
 Figure~\ref{fig:rq5-oracle-grouping}, and its retained pairwise co-grouping
@@ -11,7 +13,7 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
 
 \begin{table}
   \centering
-  \caption[Case study: published, atomic and joint CE of the MedQA concepts]{Causal effects of the nine concepts in the MedQA case study. The blue columns reproduce the singleton-intervention values of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, which are published with two decimals in their Table~9. The green columns contain the atomic and joint CE of the controlled experiment in this work.}
+  \caption[Case study: published, atomic and joint CE of the MedQA concepts]{Causal effects of the nine concepts in the MedQA case study. The blue columns reproduce the singleton-intervention values of Matton et al.~\cite{mattonWalkTalkMeasuring2024}, which are published with two decimals in their Table~9. The green columns contain the atomic and joint CE of the controlled experiment in this work. The two motivating concepts are shown in bold.}
   \label{tab:hyp5-concept-ce-comparison}
   \resizebox{\textwidth}{!}{%
     \setlength{\tabcolsep}{3.4pt}%
@@ -20,7 +22,15 @@ Table~\ref{tab:hyp5-concept-ce-comparison} compares the causal effects reported 
       col sep=comma,
       trim cells=true,
       columns={concept,matton_gpt35,matton_gpt4o,matton_claude,gpt_atomic,gpt_joint,gpt_delta,mistral_atomic,mistral_joint,mistral_delta},
-      columns/concept/.style={column name={\textbf{Concept}},string type,column type=l},
+      columns/concept/.style={column name={\textbf{Concept}},string type,column type=l,
+        postproc cell content/.append code={%
+          \ifnum\pgfplotstablerow=2\relax
+            \pgfkeysalso{@cell content={\textbf{Eating disorder}}}%
+          \fi
+          \ifnum\pgfplotstablerow=6\relax
+            \pgfkeysalso{@cell content={\textbf{Self-perception}}}%
+          \fi
+        }},
       columns/matton_gpt35/.style={column name={\textbf{GPT-3.5}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
       columns/matton_gpt4o/.style={column name={\textbf{GPT-4o}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
       columns/matton_claude/.style={column name={\textbf{Claude}},column type={>{\columncolor{RoyalBlue!10}}r},fixed,fixed zerofill,precision=2},
@@ -50,15 +60,32 @@ Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior 
 
 \begin{table}[htb]
   \centering
-  \caption[Case study: question-level faithfulness for MedQA]{Posterior question-level faithfulness for the MedQA case study. Matton et al.~\cite{mattonWalkTalkMeasuring2024} published one singleton-intervention estimate per model, whereas this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals, and the shift is $\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
+  \caption[Case study: question-level faithfulness for MedQA]{Posterior question-level faithfulness for the MedQA case study. Matton et al.~\cite{mattonWalkTalkMeasuring2024} published one singleton-intervention estimate per model, denoted by $\mathcal{F}_{\mathrm{Matton}}$, whereas this work reports paired atomic and joint estimates. The intervals are 90\% credible intervals, and the shift is $\mathcal{F}_{\mathrm{joint}}-\mathcal{F}_{\mathrm{atomic}}$.}
   \label{tab:hyp5-faithfulness-comparison}
   \small
   \setlength{\tabcolsep}{4pt}
   \renewcommand{\arraystretch}{1.12}
+  % Published estimates get their own columns because they are not joint estimates.
+  {\bfseries Published results: Matton et al.~\cite{mattonWalkTalkMeasuring2024}\par}
+  \smallskip
   \pgfplotstabletypeset[
     col sep=comma,trim cells=true,
-    columns={source,model,atomic_f,atomic_ci,joint_f,joint_ci,delta_f},
-    columns/source/.style={column name={\textbf{Source}},string type,column type=l},
+    row predicate/.code={\ifnum\pgfplotstablerow>2\relax\pgfplotstableuserowfalse\fi},
+    columns={model,matton_f,matton_ci},
+    columns/model/.style={column name={\textbf{Model}},string type,column type=l},
+    columns/matton_f/.style={column name={\textbf{$\mathcal{F}_{\mathrm{Matton}}$}},string type,column type=c},
+    columns/matton_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+  ]{data/rq5/faithfulness_comparison.csv}
+
+  \medskip
+  {\bfseries This work: paired atomic and joint estimates\par}
+  \smallskip
+  \pgfplotstabletypeset[
+    col sep=comma,trim cells=true,
+    row predicate/.code={\ifnum\pgfplotstablerow<3\relax\pgfplotstableuserowfalse\fi},
+    columns={model,atomic_f,atomic_ci,joint_f,joint_ci,delta_f},
     columns/model/.style={column name={\textbf{Model}},string type,column type=l},
     columns/atomic_f/.style={column name={\textbf{$\mathcal{F}_{\mathrm{atomic}}$}},string type,column type=c},
     columns/atomic_ci/.style={column name={\textbf{90\% CI}},string type,column type=c},
@@ -67,7 +94,6 @@ Table~\ref{tab:hyp5-faithfulness-comparison} additionally reports the posterior 
     columns/delta_f/.style={column name={\textbf{Shift}},string type,column type=c},
     every head row/.style={before row=\hline,after row=\hline},
     every last row/.style={after row=\hline},
-    every even row/.style={before row={\rowcolor{gray!8}}},
   ]{data/rq5/faithfulness_comparison.csv}
 \end{table}
 

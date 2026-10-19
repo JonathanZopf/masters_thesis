@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  19 OCT 2026 16:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  20 OCT 2026 00:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2249,9 +2249,9 @@ Chapter 6.
 
 ] [34] [35] [36]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 133.
+put line 134.
  [37] [38] [39] [40] [41] [42] [43]
-Overfull \hbox (0.39104pt too wide) detected at line 314
+Overfull \hbox (0.39104pt too wide) detected at line 316
 []
  []
 
@@ -2263,7 +2263,7 @@ ison_matton_felics' graphs/comparison_matton_felics)...disabled (restricted).
 
 Package standalone Warning: Graphic 'graphs/comparison_matton_felics.pdf' could
  not be build.
-Shell escape activated? on input line 426.
+Shell escape activated? on input line 428.
 
 (./graphs/comparison_matton_felics.tex
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
@@ -2301,7 +2301,7 @@ PGFPlots: reading {data/summary/dataset_level_overview.csv}
 (./results/oracle.tex [63] [64]
 Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
  then source file graphs/german_credit_grouping.tex on input line 51.
-<graphs/german_credit_grouping.pdf, id=1891, 438.53035pt x 284.17468pt>
+<graphs/german_credit_grouping.pdf, id=1901, 438.53035pt x 284.17468pt>
 File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
 <use graphs/german_credit_grouping.pdf>
 Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
@@ -2313,21 +2313,19 @@ PGFPlots: reading {data/rq1/medqa_gptoss.csv}
 PGFPlots: reading {data/rq1/medqa_gptoss.csv}
 ) [66] (./results/rq2.tex
 PGFPlots: reading {data/rq2/hypothesis_test_results.csv}
- [67]
 PGFPlots: reading {data/rq2/difference_test_results.csv}
- [68]
+ [67] [68]
 PGFPlots: reading {data/rq2/new_german_credit_gptoss.csv}
 PGFPlots: reading {data/rq2/new_german_credit_mistral_ce.csv}
 ) (./results/rq3.tex [69]
 PGFPlots: reading {data/rq3/hypothesis_test_results.csv}
 PGFPlots: reading {data/rq3/ranking_summary.csv}
-
-[70]
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_gpt
 oss.csv}
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_mis
 tral.csv}
-) (./results/rq4.tex
+)
+[70] (./results/rq4.tex
 PGFPlots: reading {data/rq4/hypothesis_test_results.csv}
  [71]
 PGFPlots: reading {data/rq4/lower_faithfulness_test_results.csv}
@@ -2342,35 +2340,36 @@ PGFPlots: reading {data/appendix/ce_shift_identity/bbq_mistral.csv}
 PGFPlots: reading {data/rq5/concept_ce_comparison.csv}
  [76]
 PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
-)) (./chapters/discussion.tex [77]
+PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
+) [77]) (./chapters/discussion.tex [78]
 Chapter 9.
-[78
+[79
 
-] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89])
-(./chapters/conclusion.tex [90]
+] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90])
+(./chapters/conclusion.tex [91]
 Chapter 10.
-[91
+[92
 
-] [92])
+] [93])
 Overfull \hbox (0.83635pt too wide) in paragraph at lines 40--293
 []\T1/lmr/m/n/12 Measuring ex-pla-na-tion faith-ful-ness re-quires at-ten-tion 
 to how con-cepts (or, more broadly,
  []
 
-[93]
+[94]
 
 Package biblatex Warning: No driver for 'legislation'.
 (biblatex)                Using fallback driver on input line 300.
 
-[94
+[95
 
-] [95]
+] [96]
 Underfull \hbox (badness 1412) in paragraph at lines 300--300
 []\T1/lmr/m/n/12 International Or-ga-ni-za-tion for Stan-dard-iza-tion. ^^P  IS
 O/IEC TR 29119-
  []
 
-[96] [97] [98]
+[97] [98] [99]
 Underfull \hbox (badness 1242) in paragraph at lines 300--300
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-
@@ -2382,27 +2381,27 @@ Underfull \hbox (badness 1112) in paragraph at lines 300--300
 Q \T1/lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 ,
  []
 
-[99] [100] [101] (./chapters/appendix.tex [102]
+[100] [101] [102] (./chapters/appendix.tex [103]
 \openout2 = `appendix/motivational_example_setup.aux'.
 
 
 (./appendix/motivational_example_setup.tex
 Appendix A.
-[103
+[104
 
 
-]) [104]
+]) [105]
 \openout2 = `appendix/oracle_category_normalization.aux'.
 
  (./appendix/oracle_category_normalization.tex
 Appendix B.
 
-ignored: Infinite glue shrinkage found in box being split [105
+ignored: Infinite glue shrinkage found in box being split [106
 
 
 
 
-]) [106]
+]) [107]
 \openout2 = `appendix/oracle_partition_details.aux'.
 
  (./appendix/oracle_partition_details.tex
@@ -2423,14 +2422,14 @@ Appendix C.
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [107
+(./graphs/german_credit_grouping_data.tex) [108
 
 
 
 
-] [108]
+] [109]
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [109]
+(./graphs/german_credit_grouping_data.tex) [110]
 runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/rq5_or
 acle_grouping' graphs/rq5_oracle_grouping)...disabled (restricted).
 
@@ -2444,7 +2443,7 @@ Shell escape activated? on input line 108.
 (./graphs/rq5_oracle_grouping_data.tex))
 File: graphs/rq5_oracle_grouping.tex Graphic file (type tex)
  (./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex
-)) [110
+)) [111
 
 ]
 \openout2 = `appendix/additional_result_visualizations.aux'.
@@ -2677,7 +2676,7 @@ Package pgfplots info on input line 47: boxplot: got lower whisker=2.5897291813
 Package pgfplots info on input line 47: boxplot: got upper whisker=1.3472165326
 812701e-2
 
-[111
+[112
 
 
 
@@ -2793,15 +2792,15 @@ Package pgfplots info on input line 53: boxplot: got lower whisker=2.4353400144
 66364e-1
 Package pgfplots info on input line 53: boxplot: got upper whisker=6.7654535133
 3394e-1
- [112]
-PGFPlots: reading {data/rq1/bbq_gptoss.csv}
-PGFPlots: reading {data/rq1/bbq_gptoss.csv}
  [113]
-PGFPlots: reading {data/rq1/bbq_mistral.csv}
-PGFPlots: reading {data/rq1/bbq_mistral.csv}
-PGFPlots: reading {data/rq1/medqa_mistral.csv}
-PGFPlots: reading {data/rq1/medqa_mistral.csv}
+PGFPlots: reading {data/rq1/bbq_gptoss.csv}
+PGFPlots: reading {data/rq1/bbq_gptoss.csv}
  [114]
+PGFPlots: reading {data/rq1/bbq_mistral.csv}
+PGFPlots: reading {data/rq1/bbq_mistral.csv}
+PGFPlots: reading {data/rq1/medqa_mistral.csv}
+PGFPlots: reading {data/rq1/medqa_mistral.csv}
+ [115]
 PGFPlots: reading {data/rq2/bbq_gptoss.csv}
 PGFPlots: reading {data/rq2/bbq_gptoss_ce.csv}
 
@@ -2831,7 +2830,7 @@ recoverable errors. on input line 223.
 
 PGFPlots: reading {data/rq2/medqa_gptoss.csv }
 PGFPlots: reading {data/rq2/medqa_gptoss_ce.csv}
-[115]
+[116]
 Missing character: There is no . in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -2847,28 +2846,28 @@ PGFPlots: reading {data/rq2/medqa_mistral.csv }
 PGFPlots: reading {data/rq2/medqa_mistral_ce.csv}
 PGFPlots: reading {data/rq2/new_german_credit_mistral.csv}
 PGFPlots: reading {data/rq2/new_german_credit_gptoss_ce.csv}
-[116]
+[117]
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_mistral.csv}
- [117]
+ [118]
 PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_gptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_mistral.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_g
 ptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_m
 istral.csv}
- [118]
+ [119]
 PGFPlots: reading {data/rq4/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/rq4/medqa_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/medqa_gptoss.csv}
- [119]
+ [120]
 PGFPlots: reading {data/rq4/medqa_mistral.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/medqa_mistral.csv}
 PGFPlots: reading {data/rq4/new_german_credit_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_gptoss.csv
 }
- [120]
+ [121]
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
@@ -2887,7 +2886,7 @@ PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
- [121] [122] [123])
+ [122] [123] [124])
 \openout2 = `appendix/prompts.aux'.
 
  (./appendix/prompts.tex
@@ -2901,7 +2900,7 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-[124
+[125
 
 
 
@@ -2909,34 +2908,34 @@ File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ]
 \openout11 = `main.listing'.
 
- (./main.listing) [125] [126]
+ (./main.listing) [126] [127]
 \openout11 = `main.listing'.
 
- (./main.listing) [127]
+ (./main.listing) [128]
 \openout11 = `main.listing'.
 
  (./main.listing)
-[128] [129] [130] [131]
+[129] [130] [131] [132]
 \openout11 = `main.listing'.
 
- (./main.listing) [132] [133] [134] [135] [136]
-\openout11 = `main.listing'.
-
-
-(./main.listing) [137] [138] [139]
-\openout11 = `main.listing'.
-
- (./main.listing) [140] [141] [142]
+ (./main.listing) [133] [134] [135] [136] [137]
 \openout11 = `main.listing'.
 
 
-(./main.listing) [143] [144] [145] [146] [147]) [148]
+(./main.listing) [138] [139] [140]
+\openout11 = `main.listing'.
+
+ (./main.listing) [141] [142] [143]
+\openout11 = `main.listing'.
+
+
+(./main.listing) [144] [145] [146] [147] [148]) [149]
 \openout2 = `appendix/reproducibility.aux'.
 
 
 (./appendix/reproducibility.tex
 Appendix F.
-[149
+[150
 
 
 
@@ -2946,7 +2945,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|$\T1/lmtt/m/n/10.95 _faithfulness _ results _ atomic .
  []
 
-[150]) [151]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
+[151]) [152]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
 (./statement_on_generative_ai.aux) (./abstract.aux) (./kurzfassung.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
@@ -2958,16 +2957,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 06FCEE6764101795C1B939769E09A712;28361.
+(rerunfilecheck)             Checksum: 5C408FA21B99BEB758155689166B751F;28361.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 128011 strings out of 467525
- 2888649 string characters out of 5418982
- 4142813 words of memory out of 5000000
- 154233 multiletter control sequences out of 15000+600000
+ 128031 strings out of 467525
+ 2889559 string characters out of 5418982
+ 4145253 words of memory out of 5000000
+ 154249 multiletter control sequences out of 15000+600000
  820828 words of font info for 169 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  125i,19n,121p,2519b,3268s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -3002,10 +3001,10 @@ ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texli
 ve/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/202
 6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (169 pages, 1744446 bytes).
+Output written on main.pdf (170 pages, 1746929 bytes).
 PDF statistics:
- 3928 PDF objects out of 4296 (max. 8388607)
- 3602 compressed objects within 37 object streams
- 1291 named destinations out of 1440 (max. 500000)
+ 3945 PDF objects out of 4296 (max. 8388607)
+ 3618 compressed objects within 37 object streams
+ 1295 named destinations out of 1440 (max. 500000)
  1164 words of extra memory for PDF output out of 10000 (max. 10000000)
 
