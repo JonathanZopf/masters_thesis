@@ -1,0 +1,40 @@
+# LaTeX auxiliary and build files
+*.aux
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.listing
+*.loa
+*.lof
+*.lot
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nlo
+*.nls
+*.ilg
+*.auxlock
+*.dpth
+*.md5
+
+# latexindent backups (created by build_latex.sh)
+*.bak[0-9]*
+indent.log
+
+# Backup and scratch folders
+.*_backup*/
+.audit_tmp/
+
+# macOS duplicate copies ("file 2.tex") and Finder metadata
+* [0-9].*
+* [0-9][0-9].*
+.DS_Store
+
+# Xcode build caches and per-user state
+27.*/
+xcuserdata/

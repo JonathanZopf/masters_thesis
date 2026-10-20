@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper USenglish, oneside]{report}
+\documentclass[12pt, a4paper USenglish, twoside, openright]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -63,6 +63,10 @@
 \usepackage{bm}
 \usepackage{geometry}
 \usepackage{fancyhdr}
+% Two-sided printing: pages inserted by \cleardoublepage stay completely empty
+\usepackage{emptypage}
+% Keep the one-sided vertical spacing (twoside would switch to \flushbottom)
+\raggedbottom
 \usepackage{nomencl}
 \usepackage{chngcntr}
 \usepackage{pgfplots}
@@ -247,21 +251,26 @@
 % sequence with the declaration as page ii.
 \setcounter{page}{2}
 \newpage
+% Back of the title page stays blank
+\null\thispagestyle{empty}\clearpage
 
 % Declaration of originality
 \include{declaration_of_originality}
 
-% Disclosure of supporting generative-AI use
+% Disclosure of supporting generative-AI use, on a right-hand page
+\cleardoublepage
 \include{statement_on_generative_ai}
 
-% English abstract, followed by the German Kurzfassung
+% English abstract (left) and German Kurzfassung (right) form a facing pair
 \include{abstract}
 \include{kurzfassung}
 
-% Table of contents
+% Table of contents, on a right-hand page. The lists that follow run on
+% without blank pages.
 \pagestyle{plain}
 \tableofcontents
 \clearpage
+\makeatletter\@openrightfalse\makeatother
 
 % Lists and notation overview
 \listoffigures
@@ -276,7 +285,11 @@
 \input{table_of_abbreviations}
 \clearpage
 
-% Main matter starts with Arabic page 1, as is conventional for a thesis.
+% Main matter starts with Arabic page 1 on a right-hand page, as is
+% conventional for a thesis. Chapters, the bibliography, and Appendix A
+% start on right-hand pages.
+\cleardoublepage
+\makeatletter\@openrighttrue\makeatother
 \pagenumbering{arabic}
 \pagestyle{fancy}
 

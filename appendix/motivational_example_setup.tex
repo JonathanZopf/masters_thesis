@@ -19,7 +19,7 @@ The code used for the experiment can be found within the repository of the FELIC
 \section*{Explanation Extraction}
 Causal Concept Faithfulness by Matton et al.~\cite{mattonWalkTalkMeasuring2024} and FELICS both extract the concepts described as influential for the decision from the natural language explanation via an auxiliary LLM. However, to reduce the effort in setting up this simple experiment, the evaluated LLM itself was asked to provide a list of the influential concepts in conjunction with the explanation, making it possible to parse it directly from the response. The alignment of the list and the explanation was verified by human reviewers.
 
-Only the list of influential concepts for the original samples were used for further processing, because all concepts can only be mentioned in the original version of the prompt.
+Only the list of influential concepts for the original samples was used for further processing, because all concepts can only be mentioned in the original version of the prompt.
 
 \section*{Second Run}
 Beyond showing the appearance of unfaithful explanations, the experiment was modified by introducing \textit{Political Priorities}. Both candidates were assigned a short list of main points such as \enquote{Climate Preservation} for the left-center and \enquote{Tax Cuts} for the center-right candidate which closely align with the main ideologies of the two parties. By doing so, a practical example was crafted where intervening on one concept alone is not sufficient to measure its effect because a second still present concept is hinting at it.
