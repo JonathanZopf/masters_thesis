@@ -31,7 +31,7 @@ Table~\ref{tab:oracle-summary} summarizes the partitions produced for the joint 
 
 The natural-language results contain many more singleton groups than the tabular partition, although roughly half of the concepts in both BBQ and MedQA still occur in non-singleton groups. Two anomalous MedQA groups contained five and six concepts, respectively, exceeding the imposed value of $n_{\max}=4$. BBQ's oracle partitions imply 349 counterfactuals, of which 342 were parsed and written successfully.
 
-For the co-grouping heat maps, an OpenAI Codex large language model mapped the 46 raw BBQ and 236 raw MedQA labels to 10 and 19 high-level categories. It used only the labels, with one fixed mapping across all runs, and did not see group membership or calculated rates. Appendix~\ref{app:oracle-category-normalization} documents the method and definitions. This aggregation makes the resulting heat maps easier to interpret. Each cell is the percentage of within-question concept pairs placed in the same group, pooling both models. Gray denotes that no pair from the two categories co-occurred in an evaluated question.
+For the co-grouping heat maps, an OpenAI Codex large language model mapped the 46 raw BBQ and 236 raw MedQA labels to 10 and 19 high-level categories. It used only the labels, with one fixed mapping across all runs, and did not see group membership or calculated rates. Appendix~\ref{app:oracle-category-normalization} documents the method and definitions. Each cell is the percentage of within-question concept pairs placed in the same group, pooling both models. Gray denotes that no pair from the two categories co-occurred in an evaluated question.
 
 \begin{figure}[htb]
   \centering

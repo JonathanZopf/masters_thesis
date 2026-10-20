@@ -1,7 +1,7 @@
 \section{Case Study: The MedQA Example of Matton et al.}
 \label{sec:results-motivating-example}
 
-This case study examines how joint attribution changes the causal effects that Matton et al.~\cite{mattonWalkTalkMeasuring2024} reported as surprisingly low for two concepts of MedQA question 521, the patient's eating disorder and self-perception of weight. These two concepts therefore form the focus of the analysis below. To isolate the effect of joint interventions from concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9.
+This case study examines how joint attribution changes the causal effects that Matton et al.~\cite{mattonWalkTalkMeasuring2024} reported as surprisingly low for two concepts of MedQA question 521, the patient's eating disorder and self-perception of weight. To isolate the effect of joint interventions from concept extraction, the experiment uses exactly the nine concepts and current values reported by Matton et al.~\cite{mattonWalkTalkMeasuring2024} in their Table~9.
 
 The oracle places the two motivating concepts in a common candidate interaction group, together with the patient's refusal of further treatment as an additional related concept. This grouping is consistent with the reconstruction mechanism discussed by Matton et al.~\cite{mattonWalkTalkMeasuring2024}: refusal of fluids and hospital meals can provide clues from which the model may infer the patient's eating disorder or self-perception even after the corresponding explicit information is removed. The oracle places the vital signs and treatment administered by EMS in a second group. The remaining four concepts form singleton groups.
 

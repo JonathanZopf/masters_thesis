@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  20 OCT 2026 00:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.10)  20 OCT 2026 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2126,8 +2126,7 @@ ignored: Infinite glue shrinkage found in box being split [14]
 ignored: Infinite glue shrinkage f
 ound in box being split [15]
 ignored: Infinite glue shrinkage found in box being split [1
-6]) [17{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] (
-./table_of_abbreviations.tex) [18
+6]) [17] (./table_of_abbreviations.tex) [18
 
 
 ]
@@ -2164,7 +2163,8 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 Chapter 2.
 [5
 
-] [6] [7] [8] [9] [10] [11] [12]
+] [6] [7] [8] [9] [10] [11{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/l
+m/lm-mathex.enc}] [12]
 Overfull \hbox (0.30623pt too wide) in paragraph at lines 145--146
 \T1/lmr/m/n/12 Building upon the coun-ter-fac-tual edit method-ol-ogy pi-o-neer
 ed by Atanasova et al. [[][]ACL+23[][]]
@@ -2239,23 +2239,23 @@ int_intervened' graphs/dgp_joint_intervened)...disabled (restricted).
 
 Package standalone Warning: Graphic 'graphs/dgp_joint_intervened.pdf' could not
  be build.
-Shell escape activated? on input line 72.
+Shell escape activated? on input line 69.
 
 (./graphs/dgp_joint_intervened.tex)
 File: graphs/dgp_joint_intervened.tex Graphic file (type tex)
-) (./chapters/modeling.tex [31] [32]
+) (./chapters/modeling.tex [31]
 Chapter 6.
-[33
+[32
 
-] [34] [35] [36]
+] [33] [34] [35]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 134.
- [37] [38] [39] [40] [41] [42] [43]
+ [36] [37] [38] [39] [40] [41] [42]
 Overfull \hbox (0.39104pt too wide) detected at line 316
 []
  []
 
-[44] [45] [46]
+[43] [44] [45]
 runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/compar
 ison_matton_felics' graphs/comparison_matton_felics)...disabled (restricted).
 
@@ -2277,13 +2277,13 @@ LaTeX Font Info:    Trying to load font information for TS1+lmss on input line
 File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 File: graphs/comparison_matton_felics.tex Graphic file (type tex)
- [47] [48]
-[49]) (./chapters/evaluation.tex [50]
+ [46] [47]
+[48]) (./chapters/evaluation.tex [49]
 Chapter 7.
-[51
+[50
 
-] [52] [53] [54] [55] [56] [57] [58] [59] [60]) (./chapters/results.tex
-[61]
+] [51] [52] [53] [54] [55] [56] [57] [58] [59]) (./chapters/results.tex
+[60]
 Chapter 8.
 (./graphs/results/shared_scatter_plot.tex)
 (./graphs/results/appendix_ce_shift_identity.tex)
@@ -2295,81 +2295,88 @@ Chapter 8.
 )
 (./graphs/results/appendix_rq2_ce_identity.tex) (./results/summary.tex
 PGFPlots: reading {data/summary/dataset_level_overview.csv}
- [62
+)
+[61
 
-])
-(./results/oracle.tex [63] [64]
-Package standalone Info: generated file graphs/german_credit_grouping.pdf newer
- then source file graphs/german_credit_grouping.tex on input line 51.
-<graphs/german_credit_grouping.pdf, id=1901, 438.53035pt x 284.17468pt>
-File: graphs/german_credit_grouping.pdf Graphic file (type pdf)
-<use graphs/german_credit_grouping.pdf>
-Package pdftex.def Info: graphs/german_credit_grouping.pdf  used on input line 
-51.
-(pdftex.def)             Requested size: 460.95894pt x 298.70876pt.
-) (./results/rq1.tex [65 <./graphs/german_credit_grouping.pdf>]
+] (./results/oracle.tex [62] [63]
+runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/german
+_credit_grouping' graphs/german_credit_grouping)...disabled (restricted).
+
+
+
+Package standalone Warning: Graphic 'graphs/german_credit_grouping.pdf' could n
+ot be build.
+Shell escape activated? on input line 51.
+
+(./graphs/german_credit_grouping.tex (./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex))
+File: graphs/german_credit_grouping.tex Graphic file (type tex)
+) (./results/rq1.tex
 PGFPlots: reading {data/rq1/hypothesis_test_results.csv}
+ [64]
 PGFPlots: reading {data/rq1/medqa_gptoss.csv}
 PGFPlots: reading {data/rq1/medqa_gptoss.csv}
-) [66] (./results/rq2.tex
+) [65]
+(./results/rq2.tex
 PGFPlots: reading {data/rq2/hypothesis_test_results.csv}
 PGFPlots: reading {data/rq2/difference_test_results.csv}
- [67] [68]
+ [66]
 PGFPlots: reading {data/rq2/new_german_credit_gptoss.csv}
 PGFPlots: reading {data/rq2/new_german_credit_mistral_ce.csv}
-) (./results/rq3.tex [69]
+ [67]) (./results/rq3.tex
 PGFPlots: reading {data/rq3/hypothesis_test_results.csv}
+ [68]
 PGFPlots: reading {data/rq3/ranking_summary.csv}
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_gpt
 oss.csv}
 PGFPlots: reading {data/appendix/rq3_credit_concept_delta/new_german_credit_mis
 tral.csv}
-)
-[70] (./results/rq4.tex
+) [69] (./results/rq4.tex
 PGFPlots: reading {data/rq4/hypothesis_test_results.csv}
- [71]
+
+[70]
 PGFPlots: reading {data/rq4/lower_faithfulness_test_results.csv}
 PGFPlots: reading {data/rq4/new_german_credit_mistral.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_mistral.cs
 v}
- [72]
+ [71]
 PGFPlots: reading {data/rq4/bbq_mistral.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/bbq_mistral.csv}
-) (./results/examples.tex [73] [74]) [75]
-(./results/rq5.tex
+) (./results/examples.tex [72] [73]) (./results/rq5.tex [74]
 PGFPlots: reading {data/rq5/concept_ce_comparison.csv}
- [76]
+ [75]
 PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
 PGFPlots: reading {data/rq5/faithfulness_comparison.csv}
-) [77]) (./chapters/discussion.tex [78]
+))
+(./chapters/discussion.tex [76]
 Chapter 9.
-[79
+[77
 
-] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90])
-(./chapters/conclusion.tex [91]
+] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88])
+(./chapters/conclusion.tex [89]
 Chapter 10.
-[92
+[90
 
-] [93])
+] [91])
 Overfull \hbox (0.83635pt too wide) in paragraph at lines 40--293
 []\T1/lmr/m/n/12 Measuring ex-pla-na-tion faith-ful-ness re-quires at-ten-tion 
 to how con-cepts (or, more broadly,
  []
 
-[94]
+[92]
 
 Package biblatex Warning: No driver for 'legislation'.
 (biblatex)                Using fallback driver on input line 300.
 
-[95
+[93
 
-] [96]
+] [94]
 Underfull \hbox (badness 1412) in paragraph at lines 300--300
 []\T1/lmr/m/n/12 International Or-ga-ni-za-tion for Stan-dard-iza-tion. ^^P  IS
 O/IEC TR 29119-
  []
 
-[97] [98] [99]
+[95] [96] [97]
 Underfull \hbox (badness 1242) in paragraph at lines 300--300
 []\T1/lmr/m/n/12 L. Par-cal-abescu and A. Frank, ^^P  On Mea-sur-ing Faith-ful-
 ness or Self-
@@ -2381,27 +2388,27 @@ Underfull \hbox (badness 1112) in paragraph at lines 300--300
 Q \T1/lmr/m/it/12 IEEE Ac-cess\T1/lmr/m/n/12 ,
  []
 
-[100] [101] [102] (./chapters/appendix.tex [103]
+[98] [99] [100] (./chapters/appendix.tex [101]
 \openout2 = `appendix/motivational_example_setup.aux'.
 
 
 (./appendix/motivational_example_setup.tex
 Appendix A.
-[104
+[102
 
 
-]) [105]
+]) [103]
 \openout2 = `appendix/oracle_category_normalization.aux'.
 
  (./appendix/oracle_category_normalization.tex
 Appendix B.
 
-ignored: Infinite glue shrinkage found in box being split [106
+ignored: Infinite glue shrinkage found in box being split [104
 
 
 
 
-]) [107]
+]) [105]
 \openout2 = `appendix/oracle_partition_details.aux'.
 
  (./appendix/oracle_partition_details.tex
@@ -2422,14 +2429,22 @@ Appendix C.
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [108
-
-
-
-
-] [109]
 (./graphs/german_credit_grouping_data.tex)
-(./graphs/german_credit_grouping_data.tex) [110]
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex) [106
+
+
+
+
+] [107]
+(./graphs/german_credit_grouping_data.tex)
+(./graphs/german_credit_grouping_data.tex) [108]
 runsystem(pdflatex -interaction=batchmode -shell-escape -jobname 'graphs/rq5_or
 acle_grouping' graphs/rq5_oracle_grouping)...disabled (restricted).
 
@@ -2443,7 +2458,7 @@ Shell escape activated? on input line 108.
 (./graphs/rq5_oracle_grouping_data.tex))
 File: graphs/rq5_oracle_grouping.tex Graphic file (type tex)
  (./graphs/rq5_oracle_grouping_data.tex) (./graphs/rq5_oracle_grouping_data.tex
-)) [111
+)) [109
 
 ]
 \openout2 = `appendix/additional_result_visualizations.aux'.
@@ -2676,7 +2691,7 @@ Package pgfplots info on input line 47: boxplot: got lower whisker=2.5897291813
 Package pgfplots info on input line 47: boxplot: got upper whisker=1.3472165326
 812701e-2
 
-[112
+[110
 
 
 
@@ -2792,15 +2807,15 @@ Package pgfplots info on input line 53: boxplot: got lower whisker=2.4353400144
 66364e-1
 Package pgfplots info on input line 53: boxplot: got upper whisker=6.7654535133
 3394e-1
+ [111]
+PGFPlots: reading {data/rq1/bbq_gptoss.csv}
+PGFPlots: reading {data/rq1/bbq_gptoss.csv}
+ [112]
+PGFPlots: reading {data/rq1/bbq_mistral.csv}
+PGFPlots: reading {data/rq1/bbq_mistral.csv}
+PGFPlots: reading {data/rq1/medqa_mistral.csv}
+PGFPlots: reading {data/rq1/medqa_mistral.csv}
  [113]
-PGFPlots: reading {data/rq1/bbq_gptoss.csv}
-PGFPlots: reading {data/rq1/bbq_gptoss.csv}
- [114]
-PGFPlots: reading {data/rq1/bbq_mistral.csv}
-PGFPlots: reading {data/rq1/bbq_mistral.csv}
-PGFPlots: reading {data/rq1/medqa_mistral.csv}
-PGFPlots: reading {data/rq1/medqa_mistral.csv}
- [115]
 PGFPlots: reading {data/rq2/bbq_gptoss.csv}
 PGFPlots: reading {data/rq2/bbq_gptoss_ce.csv}
 
@@ -2830,7 +2845,7 @@ recoverable errors. on input line 223.
 
 PGFPlots: reading {data/rq2/medqa_gptoss.csv }
 PGFPlots: reading {data/rq2/medqa_gptoss_ce.csv}
-[116]
+[114]
 Missing character: There is no . in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -2846,28 +2861,28 @@ PGFPlots: reading {data/rq2/medqa_mistral.csv }
 PGFPlots: reading {data/rq2/medqa_mistral_ce.csv}
 PGFPlots: reading {data/rq2/new_german_credit_mistral.csv}
 PGFPlots: reading {data/rq2/new_german_credit_gptoss_ce.csv}
-[117]
+[115]
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/bbq_mistral.csv}
- [118]
+ [116]
 PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_gptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/medqa_mistral.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_g
 ptoss.csv}
 PGFPlots: reading {data/appendix/rq3_normalization_identity/new_german_credit_m
 istral.csv}
- [119]
+ [117]
 PGFPlots: reading {data/rq4/bbq_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/bbq_gptoss.csv}
 PGFPlots: reading {data/rq4/medqa_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/medqa_gptoss.csv}
- [120]
+ [118]
 PGFPlots: reading {data/rq4/medqa_mistral.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/medqa_mistral.csv}
 PGFPlots: reading {data/rq4/new_german_credit_gptoss.csv}
 PGFPlots: reading {data/appendix/ce_shift_identity/new_german_credit_gptoss.csv
 }
- [121]
+ [119]
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
@@ -2886,7 +2901,7 @@ PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
 PGFPlots: reading {data/rq5/concept_ce_identity.csv}
- [122] [123] [124])
+ [120] [121] [122])
 \openout2 = `appendix/prompts.aux'.
 
  (./appendix/prompts.tex
@@ -2900,7 +2915,7 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
  (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
-[125
+[123
 
 
 
@@ -2908,34 +2923,33 @@ File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ]
 \openout11 = `main.listing'.
 
- (./main.listing) [126] [127]
+ (./main.listing) [124] [125]
 \openout11 = `main.listing'.
 
- (./main.listing) [128]
+ (./main.listing) [126]
 \openout11 = `main.listing'.
 
  (./main.listing)
-[129] [130] [131] [132]
+[127] [128] [129] [130]
 \openout11 = `main.listing'.
 
- (./main.listing) [133] [134] [135] [136] [137]
-\openout11 = `main.listing'.
-
-
-(./main.listing) [138] [139] [140]
-\openout11 = `main.listing'.
-
- (./main.listing) [141] [142] [143]
+ (./main.listing) [131] [132] [133] [134] [135]
 \openout11 = `main.listing'.
 
 
-(./main.listing) [144] [145] [146] [147] [148]) [149]
+(./main.listing) [136] [137] [138]
+\openout11 = `main.listing'.
+
+ (./main.listing) [139] [140] [141]
+\openout11 = `main.listing'.
+
+
+(./main.listing) [142] [143] [144] [145]) [146]
 \openout2 = `appendix/reproducibility.aux'.
 
-
-(./appendix/reproducibility.tex
+ (./appendix/reproducibility.tex
 Appendix F.
-[150
+[147
 
 
 
@@ -2945,7 +2959,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|$\T1/lmtt/m/n/10.95 _faithfulness _ results _ atomic .
  []
 
-[151]) [152]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
+[148]) [149]) (./main.aux (./title_page.aux) (./declaration_of_originality.aux)
 (./statement_on_generative_ai.aux) (./abstract.aux) (./kurzfassung.aux)
 (./appendix/motivational_example_setup.aux)
 (./appendix/oracle_category_normalization.aux)
@@ -2963,10 +2977,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 128031 strings out of 467525
- 2889559 string characters out of 5418982
- 4145253 words of memory out of 5000000
- 154249 multiletter control sequences out of 15000+600000
+ 128232 strings out of 467525
+ 2894422 string characters out of 5418982
+ 4146234 words of memory out of 5000000
+ 154439 multiletter control sequences out of 15000+600000
  820828 words of font info for 169 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  125i,19n,121p,2519b,3268s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2978,33 +2992,32 @@ s/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/p
 ublic/lm/lmcsc10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/
 lmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/loc
-al/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/
-2026/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2026/texmf-
-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2026/texmf-dist/fonts/
-type1/public/lm/lmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/publi
-c/lm/lmr12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr17.
-pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/lo
-cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/
-2026/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2026/texmf-d
-ist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/ty
-pe1/public/lm/lmr9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/l
-m/lmri10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri12.p
-fb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/lo
-cal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texliv
-e/2026/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2026/texm
-f-dist/fonts/type1/public/lm/lmssbo10.pfb></usr/local/texlive/2026/texmf-dist/f
-onts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/typ
-e1/public/lm/lmsso10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public
-/lm/lmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy6.
-pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/l
-ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texli
-ve/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2026/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/202
-6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (170 pages, 1746929 bytes).
+al/texlive/2026/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/
+2026/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2026/texmf-
+dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/
+type1/public/lm/lmr12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/publi
+c/lm/lmr17.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr5.p
+fb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/loc
+al/texlive/2026/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2
+026/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2026/texmf-di
+st/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2026/texmf-dist/fonts/typ
+e1/public/lm/lmri10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/
+lm/lmri12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmri8.p
+fb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/l
+ocal/texlive/2026/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texliv
+e/2026/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb></usr/local/texlive/2026/t
+exmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2026/texmf-dis
+t/fonts/type1/public/lm/lmsso10.pfb></usr/local/texlive/2026/texmf-dist/fonts/t
+ype1/public/lm/lmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/publi
+c/lm/lmsy6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmsy8.
+pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/
+local/texlive/2026/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texl
+ive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/
+texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (167 pages, 1738076 bytes).
 PDF statistics:
- 3945 PDF objects out of 4296 (max. 8388607)
- 3618 compressed objects within 37 object streams
- 1295 named destinations out of 1440 (max. 500000)
- 1164 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3906 PDF objects out of 4296 (max. 8388607)
+ 3588 compressed objects within 36 object streams
+ 1284 named destinations out of 1440 (max. 500000)
+ 1159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

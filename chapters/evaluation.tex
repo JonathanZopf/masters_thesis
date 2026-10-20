@@ -110,7 +110,7 @@ For the joint run, the oracle partition $\mathbf{S}(\mathbf{x})$ of each questio
 	\mathrm{CE}_{\mathrm{joint}}(\mathbf{x},C_m)
 	 & :=\mathrm{CE}_{\mathrm{adj}}\bigl(\mathbf{x},C_m,f_{\mathbf{x}}(C_m)\bigr).
 \end{align}
-All quantities on the right-hand sides use data from the joint run. The singleton equality follows from Math Demo~\ref{ma:one_item_group}. Every joint run includes singleton treatments because the Shapley calculation evaluates every non-empty subset of each group. No model responses to multi-concept treatments enter $\mathrm{CE}_{\mathrm{atomic}}$.
+All quantities on the right-hand sides use data from the joint run. The singleton equality follows from Math Demo~\ref{ma:one_item_group} (Section~\ref{sec:requirements_reexamination}). Every joint run includes singleton treatments because the Shapley calculation evaluates every non-empty subset of each group. No model responses to multi-concept treatments enter $\mathrm{CE}_{\mathrm{atomic}}$.
 
 \noindent\textbf{Faithfulness notation.} The question-level faithfulness scores are denoted by $\mathcal{F}_{\mathrm{Matton}}(\mathbf{x})$ (Equation~\ref{eq:faithfulness_matton}) for the original implementation and $\mathcal{F}_{\mathrm{singleton}}(\mathbf{x})$ for the separate FELICS run with $n_{\max}=1$, which corresponds to $\mathcal{F}_{\mathrm{FELICS}}(\mathbf{x})$ (Equation~\ref{eq:faithfulness_felics}) evaluated on the data of that run.
 

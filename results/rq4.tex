@@ -1,9 +1,9 @@
 \section{Effect of Interaction Modeling on Faithfulness}
 \label{sec:results-faithfulness-increase}
 
-Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. In the identity plots of this section, the vertical axis represents the joint formulation, so points above the identity line indicate higher values under joint attribution.
+Research Question~\ref{rq:faithfulness_increase} examines whether the joint interventions introduced by FELICS increase question-level faithfulness relative to interventions on individual concepts. In this section's identity plots, points above the identity line indicate higher values under joint attribution.
 
-The paired one-sided Wilcoxon signed-rank tests did not provide evidence of systematically higher interaction-aware faithfulness for five of the six dataset--model combinations. Only New German Credit evaluated with Mistral Medium 3.5 yielded a statistically significant result. Overall, the results therefore do not reveal a consistent improvement in faithfulness across datasets and models when joint interventions are considered.
+The paired one-sided Wilcoxon signed-rank tests in Box~\ref{hyp:hyp4-results} show significantly higher interaction-aware faithfulness only for New German Credit with Mistral Medium 3.5. The results therefore do not reveal a consistent improvement in faithfulness across datasets and models when joint interventions are considered.
 
 \HypothesisTestResults[label=hyp:hyp4-results,unbreakable]
   {Paired one-sided Wilcoxon signed-rank tests for

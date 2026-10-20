@@ -55,7 +55,7 @@ More importantly, in many real-world datasets concepts are correlated in the tra
 
 Matton et al.~\cite{mattonWalkTalkMeasuring2024} illustrate the issue with a question from the MedQA dataset. They observe that the concepts \textit{the patient’s eating disorder} and \textit{the patient’s self-perception of weight} each receive a surprisingly low causal concept effect. They hypothesize that this occurs because the LLM reconstructs one concept from the other when only one is removed, effectively turning the intended surgical intervention into a non-surgical modification that leaves traces in the input.
 
-More generally, such reconstruction can cause the causal effect of a concept to be falsely estimated. This, in turn, may artificially widen the gap between the causal concept effect and the explanation-implied effect, potentially penalizing an otherwise faithful LLM with an unfairly low faithfulness score. Although the degree of correlation varies across questions and datasets, this would constitute a significant limitation of the metric. In fact, in a discussion on OpenReview.net \cite{matton2025walkthetalk_comment},  Matton et al. point out that they plan to address this issue by experimenting with \enquote{multi-concept interventions}.
+More generally, such reconstruction can cause the causal effect of a concept to be falsely estimated. This, in turn, may artificially widen the gap between the causal concept effect and the explanation-implied effect, potentially penalizing an otherwise faithful LLM with an unfairly low faithfulness score. Although the degree of correlation varies by question and dataset, this would be a significant limitation of the metric. On OpenReview \cite{matton2025walkthetalk_comment}, Matton et al. state that they plan to address it with \enquote{multi-concept interventions}.
 
 \section{Interaction between Concepts}
 \label{sec:interaction_effects}
@@ -89,7 +89,7 @@ In a \emph{synergy-like} interaction, an additional effect emerges only when bot
 \end{equation}
 
 \begin{example_box}[label=ex:interaction_directions]
-	Consider the candidate profiles of Introduction Examples~\ref{moe:unfaithfulness} and~\ref{moe:interacting_concepts}. Effects are stated as changes in the share of recommendations for \textit{Candidate A}.
+	Consider the candidate profiles of Introduction Examples~\ref{moe:unfaithfulness} and~\ref{moe:interacting_concepts} (Chapter~\ref{ch:introduction}). Effects are stated as changes in the share of recommendations for \textit{Candidate A}.
 
 	\smallskip
 	\textbf{Additivity:} \textit{Age} and \textit{Party} could contribute approximately independent evidence.
